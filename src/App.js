@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 const languages = {
   en: {nativeName: 'English'},
   pl: {nativeName: 'Polish'},
-  uk: {nativeName: 'Ukrainian'},
+  ua: {nativeName: 'Ukrainian'},
   ru: {nativeName: 'Russian'}
 };
 
