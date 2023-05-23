@@ -1,3 +1,8 @@
 {
-    "hello":"Hello, world"
+    "hello":"Hello, world",
+    "allEvents":"All Events",
+    "calendar":"Calendar",
+    "forVolunteers":"For Volunteers",
+    "theyNeedYou":"They Need You",
+    "login":"Login"
 }

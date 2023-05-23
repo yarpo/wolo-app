@@ -1,30 +1,47 @@
-import { Component } from "react";
-import "./Navbar.css";
-class Navbar extends Component {
-  state = { clicked: false };
-  handleClick = () => {
-    this.setState({clicked: !this.state.clicked});
-  }
-  render(){
-    return (
-      <>
-        <nav>
-          <a href="/#" id="logo">LOGO</a>
-          <ul id="navbar" className={this.state.clicked ? "#navbar active" : "navbar"}>
-            <li><a href="/#">All Events</a></li>
-            <li><a href="/#">Calendar</a></li>
-            <li><a href="/#">For Volunteers</a></li>
-            <li><a href="/#">They Need You</a></li>
-            <li><a href="/#">Login</a></li>
-          </ul>  
-          <div id="mobile"onClick={this.handleClick} >
-            <i id="bar"
-            className={this.state.clicked ? "fas fa-times" : "fas fa-bars"}></i>
-          </div>
-        </nav>
-      </>
-    );
-  }
-}
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import './Navbar.css';
+
+const Navbar = () => {
+  const [clicked, setClicked] = useState(false);
+  const { t, i18n } = useTranslation();
+
+  const handleLanguageChange = (language) => {
+    i18n.changeLanguage(language);
+  };
+
+  const handleClick = () => {
+    setClicked(!clicked);
+  };
+
+  return (
+    <>
+      <nav>
+        <a href="/#" id="logo">logo</a>
+        <ul id="navbar" className={clicked ? "#navbar active" : "navbar"}>
+          <li><a href="/#">{t('allEvents')}</a></li>
+          <li><a href="/#">{t('calendar')}</a></li>
+          <li><a href="/#">{t('forVolunteers')}</a></li>
+          <li><a href="/#">{t('theyNeedYou')}</a></li>
+          <li>
+            <select onChange={(e) => handleLanguageChange(e.target.value)}>
+              <option value="en">English</option>
+              <option value="pl">Polish</option>
+              <option value="ua">Ukrainian</option>
+              <option value="ru">Russian</option>
+            </select>
+          </li>
+          <li><a href="/#">{t('login')}</a></li>
+        </ul>
+        <div id="mobile" onClick={handleClick}>
+          <i
+            id="bar"
+            className={clicked ? "fas fa-times" : "fas fa-bars"}
+          ></i>
+        </div>
+      </nav>
+    </>
+  );
+};
 
 export default Navbar;
