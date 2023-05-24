@@ -25,7 +25,7 @@ const Navbar = () => {
   return (
     <>
       <nav>
-        <a href="/#" id="logo">logo</a>
+        <a href="/#" id="logo">LOGO</a>
         <ul id="navbar" className={clicked ? "#navbar active" : "navbar"}>
           <li><a href="/#">{t('allEvents')}</a></li>
           <li><a href="/#">{t('calendar')}</a></li>

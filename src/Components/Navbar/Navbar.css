@@ -1,4 +1,4 @@
-nav{
+nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -10,41 +10,55 @@ nav{
   width: 100%;
 }
 
-#logo{
+#logo {
   text-decoration: none;
+  font-weight: 600;
+  font-size: 24px;
+  color: #282c34;
 }
 
-#navbar{
+#navbar {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-#navbar li{
-list-style: none;
-padding: 0 20px;
-position: relative;
+#navbar li {
+  list-style: none;
+  padding: 0 20px;
+  position: relative;
 }
 
-#navbar li a{
-text-decoration: none;
-}
-
-#navbar li a:hover{
-text-decoration: none;
-background-color: aqua;
-}
-
-#mobile{
-  display: none;
-}
-
-#mobile i{
+#navbar li a {
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 16px;
   color: #282c34;
 }
 
-@media screen and (max-width: 768px){
-  #navbar{
+#navbar li select {
+  border: 0px;
+  outline: 0px;
+  background-color: whitesmoke;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+#navbar li a:hover {
+  text-decoration: none;
+  background-color: aqua;
+}
+
+#mobile {
+  display: none;
+}
+
+#mobile i {
+  color: #282c34;
+}
+
+@media screen and (max-width: 768px) {
+  #navbar {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -59,19 +73,27 @@ background-color: aqua;
     transition: 0.3s ease-in-out;
   }
 
-  #navbar.active{
+  #navbar.active {
     right: 0px;
   }
 
-  #navbar li{
+  #navbar li {
     margin-bottom: 20px;
   }
 
-  #mobile{
+  #navbar li select {
+    border: 0px;
+    outline: 0px;
+    background-color: gold;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  #mobile {
     display: block;
   }
 
-  #mobile i{
+  #mobile i {
     font-size: 24px;
     cursor: pointer;
   }
