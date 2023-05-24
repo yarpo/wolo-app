@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import './Navbar.css';
 
@@ -6,8 +6,16 @@ const Navbar = () => {
   const [clicked, setClicked] = useState(false);
   const { t, i18n } = useTranslation();
 
+  useEffect(() => {
+    const storedLanguage = localStorage.getItem('language');
+    if (storedLanguage) {
+      i18n.changeLanguage(storedLanguage);
+    }
+  }, [i18n]);
+
   const handleLanguageChange = (language) => {
     i18n.changeLanguage(language);
+    localStorage.setItem('language', language);
   };
 
   const handleClick = () => {
@@ -24,7 +32,10 @@ const Navbar = () => {
           <li><a href="/#">{t('forVolunteers')}</a></li>
           <li><a href="/#">{t('theyNeedYou')}</a></li>
           <li>
-            <select onChange={(e) => handleLanguageChange(e.target.value)}>
+            <select
+              onChange={(e) => handleLanguageChange(e.target.value)}
+              defaultValue={i18n.language}
+            >
               <option value="en">English</option>
               <option value="pl">Polish</option>
               <option value="ua">Ukrainian</option>
