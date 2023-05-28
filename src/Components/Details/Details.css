@@ -1,9 +1,17 @@
 #container {
+    padding-top: 65px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 5vh 5vw 0 5vw;
-    gap: 10px 30px;
+    margin: 40px;
+    gap: 20px 30px;
+}
+
+#column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
 }
 
 #back {
@@ -14,21 +22,42 @@ a:visited {
     color: inherit;
 }
 
-#column {
-    display: flex;
-    flex-direction: column;
-    flex-basis: 100%;
-    flex: 1;
-}
-
 #volunteers_numbers {
     list-style: none;
+    padding-bottom: 15px;
+}
+
+#description {
+    width: 100%;
+}
+
+#information, #location {
+    margin-left: 20px;
+}
+
+#location {
+    display: list-item;
+    list-style-type: disc;
 }
 
 img {
     background-color: rgb(170, 139, 240);
 }
 
-#description {
-    width: 100%;
+@media screen and (max-width: 768px) {
+    #column {
+        flex-basis: 200%;
+    }
+
+    .photo {
+        order: 1;
+    }
+
+    .location {
+        order: 2;
+    }
+
+    .signin {
+        order: 2;
+    }
 }
