@@ -42,7 +42,25 @@ const Details = () => {
                     <p id="location">{t('location')}: </p>
                 </div>
                 <div id="column" class="signin">
-                    <button>{t('signIn')}</button>
+                    <form action='#'>
+                        <div id="shift-btn">
+                                <label for="shift1">
+                                    <input type="checkbox" id="shift1" name="checkbox" class="checkbox-round"/>
+                                    00:00-00:00
+                                </label>
+
+                                <label for="shift2">
+                                    <input type="checkbox" id="shift2" name="checkbox" class="checkbox-round"/>
+                                    00:00-00:00
+                                </label>
+
+                                <label for="shift3">
+                                    <input type="checkbox" id="shift3" name="checkbox" class="checkbox-round"/>
+                                    00:00-00:00
+                                </label>
+                        </div>
+                        <button type='submit' id="sign-in">{t('signIn')}</button>
+                    </form>
                 </div>
             </div>
         </div>
