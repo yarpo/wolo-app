@@ -4,5 +4,15 @@
     "calendar":"Calendar",
     "forVolunteers":"For Volunteers",
     "theyNeedYou":"They Need You",
-    "login":"Login"
+    "login":"Login",
+
+    "back":"Back",
+    "haveBeenSignedIn":"volunteers have been signed in",
+    "moreIsNeeded": "more is needed",
+    "date": "Date",
+    "time": "Time",
+    "category": "Category",
+    "organizer":"Ogranizer",
+    "location": "Location",
+    "signIn": "Sign In"
 }

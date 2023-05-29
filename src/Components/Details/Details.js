@@ -1,25 +1,36 @@
+import { useTranslation } from 'react-i18next';
+import { useEffect } from 'react';
 import './Details.css';
 
 const Details = () => {
+    const { t, i18n } = useTranslation();
+
+    useEffect(() => {
+        const storedLanguage = localStorage.getItem('language');
+        if (storedLanguage) {
+          i18n.changeLanguage(storedLanguage);
+        }
+    }, [i18n]);
+
     return (
         <div>
             <div id="container">
                 <div id="column">
-                    <a href="/#" id="back">Back</a>
+                    <a href="/#" id="back">{t('back')}</a>
                     <h1 id="title">Event details will show up here...</h1>
                     <ul id="volunteers_numbers">
-                        <li><strong>X</strong> have been signed in</li>
-                        <li><strong>X</strong> more is needed</li>
+                        <li><strong>X</strong> {t('haveBeenSignedIn')}</li>
+                        <li><strong>X</strong> {t('moreIsNeeded')}</li>
                     </ul>
                     <ul id="information">
-                        <li>Date: </li>
-                        <li>Time: </li>
-                        <li>Category: </li>
-                        <li>Organizer: </li>
+                        <li>{t('date')}: </li>
+                        <li>{t('time')}: </li>
+                        <li>{t('category')}: </li>
+                        <li>{t('organizer')}: </li>
                     </ul>
                 </div>
                 <div id="column" class="photo">
-                    <img alt="photo" />
+                    <img src="#"/>
                 </div>
                 <p id="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris fringilla est sit amet ultricies tempus. 
                 Praesent ultricies, arcu at lobortis porttitor, risus erat porta purus, at imperdiet sapien turpis vitae dolor. 
@@ -28,10 +39,10 @@ const Details = () => {
                  Morbi pellentesque vehicula sem et tempus. In sapien leo, tincidunt at nisl sit amet, luctus venenatis quam. Maecenas malesuada 
                  at erat eu viverra.</p>
                 <div id="column" class="location">
-                    <p id="location">Location: </p>
+                    <p id="location">{t('location')}: </p>
                 </div>
                 <div id="column" class="signin">
-                    <button>Sign in</button>
+                    <button>{t('signIn')}</button>
                 </div>
             </div>
         </div>

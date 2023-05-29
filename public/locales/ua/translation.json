@@ -4,5 +4,15 @@
     "calendar":"Календар",
     "forVolunteers":"Для волонтерів",
     "theyNeedYou":"Ви їм потрібні",
-    "login": "Вхід"
+    "login": "Вхід",
+
+    "back":"Назад",
+    "haveBeenSignedIn":"зареєстровано волонтерів",
+    "moreIsNeeded": "потрібно більше",
+    "date": "Дата",
+    "time": "час",
+    "category": "Категорія",
+    "organizer":"Організатор",
+    "location": "Місцезнаходження",
+    "signIn": "Увійти"
 }
