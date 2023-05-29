@@ -1,5 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
+import { VscArrowLeft, VscBrowser, VscOrganization, VscLocation } from "react-icons/vsc";
+import { BiTime, BiBorderAll } from "react-icons/bi";
 import './Details.css';
 
 const Details = () => {
@@ -16,17 +18,17 @@ const Details = () => {
         <div>
             <div id="container">
                 <div id="column">
-                    <a href="/#" id="back">{t('back')}</a>
+                    <a href="/#" id="back"><VscArrowLeft class="icons"/> {t('back')}</a>
                     <h1 id="title">Event details will show up here...</h1>
                     <ul id="volunteers_numbers">
                         <li><strong>X</strong> {t('haveBeenSignedIn')}</li>
                         <li><strong>X</strong> {t('moreIsNeeded')}</li>
                     </ul>
                     <ul id="information">
-                        <li>{t('date')}: </li>
-                        <li>{t('time')}: </li>
-                        <li>{t('category')}: </li>
-                        <li>{t('organizer')}: </li>
+                        <li><VscBrowser class="icons"/> <strong>{t('date')}:</strong> </li>
+                        <li><BiTime class="icons"/> <strong>{t('time')}:</strong> </li>
+                        <li><BiBorderAll class="icons"/> <strong>{t('category')}:</strong> </li>
+                        <li><VscOrganization class="icons"/> <strong>{t('organizer')}:</strong> </li>
                     </ul>
                 </div>
                 <div id="column" class="photo">
@@ -39,7 +41,7 @@ const Details = () => {
                  Morbi pellentesque vehicula sem et tempus. In sapien leo, tincidunt at nisl sit amet, luctus venenatis quam. Maecenas malesuada 
                  at erat eu viverra.</p>
                 <div id="column" class="location">
-                    <p id="location">{t('location')}: </p>
+                    <p id="location"><VscLocation class="icons"/> <strong>{t('location')}:</strong> </p>
                 </div>
                 <div id="column" class="signin">
                     <form action='#'>

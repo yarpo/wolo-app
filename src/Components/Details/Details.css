@@ -7,6 +7,19 @@
     gap: 30px 40px;
 }
 
+.icons {
+    position:relative;
+    top: 2px;
+}
+
+#information, #location {
+    line-height: 1.8;
+}
+
+#information li {
+    list-style: none;
+}
+
 #column {
     display: flex;
     flex-direction: column;
@@ -29,16 +42,6 @@ a:visited {
 
 #description {
     width: 100%;
-}
-
-#information, #location {
-    margin-left: 20px;
-    line-height: 1.8;
-}
-
-#location {
-    display: list-item;
-    list-style-type: disc;
 }
 
 img {
@@ -71,6 +74,7 @@ img {
     height: 1.3vw;
     background-color: white;
     border-radius: 50%;
+    aspect-ratio: 1;
     vertical-align: middle;
     border: 1px solid #ddd;
     appearance: none;
