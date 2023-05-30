@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
+import './MoreEvents.css';
 
 const MoreEvents = () => {
     const { t, i18n } = useTranslation();
@@ -14,8 +15,9 @@ const MoreEvents = () => {
     return (
         <div>
             <h3>{t('moreEventsFromThisOrganizer')}</h3>
-
-            {/* There will be card components with events from WOLO-35 */}
+            <div id="container">
+                {/* There will be card components with events from WOLO-35 */}
+            </div>
         </div>
     )
 };

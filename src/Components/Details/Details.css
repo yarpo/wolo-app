@@ -109,4 +109,8 @@ img {
     .signin {
         order: 2;
     }
+
+    #more-events {
+        order: 3;
+    }
 }
