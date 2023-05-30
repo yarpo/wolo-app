@@ -7,11 +7,6 @@
     gap: 30px 40px;
 }
 
-.icons {
-    position:relative;
-    top: 2px;
-}
-
 #information, #location {
     line-height: 1.8;
 }
