@@ -62,16 +62,15 @@ img {
     margin: 5px;
     padding: 5px 5px 5px 15px;
     border-radius: 20px;
-    max-width: auto;
 }
 
 #shift-btn input[type="checkbox"] {
-    margin: 3px 10px 0 0;
+    margin: 0.2vh 10px 0 0;
 }
 
 .checkbox-round {
-    width: 1.3vw;
-    height: 1.3vw;
+    width: 20px;
+    height: 20px;
     background-color: white;
     border-radius: 50%;
     aspect-ratio: 1;
@@ -114,14 +113,5 @@ img {
 
     .signin {
         order: 2;
-    }
-
-    #shift-btn input[type="checkbox"] {
-        margin: 13px 10px 0 0;
-    }
-
-    .checkbox-round {
-        width: 3vw;
-        height: 3vw;
     }
 }

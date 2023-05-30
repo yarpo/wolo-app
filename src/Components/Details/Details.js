@@ -42,6 +42,7 @@ const Details = () => {
                  at erat eu viverra.</p>
                 <div id="column" class="location">
                     <p id="location"><VscLocation class="icons"/> <strong>{t('location')}:</strong> </p>
+                    <div>Map incoming...</div>
                 </div>
                 <div id="column" class="signin">
                     <form action='#'>
