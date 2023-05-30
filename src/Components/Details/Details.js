@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
 import { VscArrowLeft, VscBrowser, VscOrganization, VscLocation } from "react-icons/vsc";
 import { BiTime, BiBorderAll } from "react-icons/bi";
+import MoreEvents from '../MoreEventsFromOrganizer/MoreEvents';
 import './Details.css';
 
 const Details = () => {
@@ -64,6 +65,9 @@ const Details = () => {
                         </div>
                         <button type='submit' id="sign-in">{t('signIn')}</button>
                     </form>
+                </div>
+                <div id="more-events">
+                    <MoreEvents />
                 </div>
             </div>
         </div>

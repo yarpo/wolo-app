@@ -14,5 +14,6 @@
     "category": "Категория",
     "organizer":"Организатор",
     "location": "Расположение",
-    "signIn": "Войти"
+    "signIn": "Войти",
+    "moreEventsFromThisOrganizer": "Еще события от этого организатора"
 }

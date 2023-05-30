@@ -14,5 +14,6 @@
     "category": "Category",
     "organizer":"Ogranizer",
     "location": "Location",
-    "signIn": "Sign In"
+    "signIn": "Sign In",
+    "moreEventsFromThisOrganizer": "More events from this organizer"
 }

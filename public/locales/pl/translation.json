@@ -14,5 +14,6 @@
     "category": "Kategoria",
     "organizer":"Organizator",
     "location": "Lokalizacja",
-    "signIn": "Zapisz się"
+    "signIn": "Zapisz się",
+    "moreEventsFromThisOrganizer": "Więcej wydarzeń od tego organizatora"
 }
