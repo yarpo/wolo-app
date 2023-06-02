@@ -1,9 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
 .card {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     border-radius: 5px;
-    width: 250px;
-    margin: 20px;
+    width: 275px;
+    margin: 15px;
+    background-color: #F5F5F5;
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+    ;
+}
+
+h2{
+    font-size: 32px;
+    font-weight: normal;
+    padding-bottom: 10px;
 }
 
 .card:hover {
@@ -11,14 +23,23 @@
 }
 
 img {
-    height: auto;
-    background-color: rgb(255, 156, 255);
+    object-fit: cover;
+    width: 275px;
+    height: 175px;
+    background-color: #3c3c3c;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 5px 5px 0px 0px;
+    border-radius: 5px 5px 0px 0px; 
 }
 
 #information {
-    padding: 15px;
+    padding: 5px 15px 15px 15px;
 }
 
 #information ul li {
     list-style-type: none;
+}
+
+#information ul li:nth-last-child(2), #information ul li:last-child {
+    padding-left: 21px;
 }

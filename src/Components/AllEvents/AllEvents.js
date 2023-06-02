@@ -3,8 +3,10 @@ import EventCard from '../EventCard/EventCard';
 
 const AllEvents = () => {
     return (
-        <div>
-            All events
+        <div id="container">
+            
+
+            <EventCard />
             <EventCard />
             <EventCard />
             <EventCard />
