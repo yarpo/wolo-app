@@ -4,5 +4,16 @@
     "calendar":"Календарь",
     "forVolunteers":"Для волонтеров",
     "theyNeedYou":"Ты им нужен",
-    "login": "Войти"
+    "login": "Войти",
+
+    "back":"Назад",
+    "haveBeenSignedIn":"волонтеры были зарегистрированы в",
+    "moreIsNeeded": "нужно больше",
+    "date": "Дата",
+    "time": "Время",
+    "category": "Категория",
+    "organizer":"Организатор",
+    "location": "Расположение",
+    "signIn": "Войти",
+    "moreEventsFromThisOrganizer": "Еще события от этого организатора"
 }

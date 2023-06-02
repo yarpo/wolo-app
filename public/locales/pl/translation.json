@@ -4,5 +4,16 @@
     "calendar":"Kalendarz",
     "forVolunteers":"Dla Wolontariuszy",
     "theyNeedYou":"Potrzebują cię",
-    "login":"Zaloguj Się"
+    "login":"Zaloguj Się",
+    
+    "back":"Wróć",
+    "haveBeenSignedIn":"już zapisanych wolontariuszy",
+    "moreIsNeeded": "jeszcze potrzebnych",
+    "date": "Data",
+    "time": "Czas",
+    "category": "Kategoria",
+    "organizer":"Organizator",
+    "location": "Lokalizacja",
+    "signIn": "Zapisz się",
+    "moreEventsFromThisOrganizer": "Więcej wydarzeń od tego organizatora"
 }
