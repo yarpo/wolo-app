@@ -1,13 +1,14 @@
+import { VscLocation } from "react-icons/vsc";
 import './EventCard.css';
 
 const EventCard = () => {
     return (
         <div className="card">
             <img src="#" />
-            <div>
+            <div id="information">
                 <h2>Event title will go there...</h2>
                 <ul>
-                    <li>Location: </li>
+                    <li><VscLocation className="icon"/> Location: </li>
                     <li>Date: </li>
                     <li>Time: </li>
                     <li>Organized by: </li>
