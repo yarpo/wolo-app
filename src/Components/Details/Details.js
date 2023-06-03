@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { VscArrowLeft, VscBrowser, VscOrganization, VscLocation } from "react-icons/vsc";
 import { BiTime, BiBorderAll } from "react-icons/bi";
 import MoreEvents from '../MoreEventsFromOrganizer/MoreEvents';
-import './Details.css';
+import '../../Styles/Details.sass';
 
 const Details = () => {
     const { t, i18n } = useTranslation();

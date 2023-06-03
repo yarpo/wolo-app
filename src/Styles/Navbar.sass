@@ -1,0 +1,84 @@
+nav
+  display: flex
+  align-items: center
+  justify-content: space-between
+  padding: 20px 40px
+  background-color: whitesmoke
+  height: 65px
+  position: fixed
+  top: 0
+  width: 100%
+
+#logo
+  text-decoration: none
+  font-weight: 600
+  font-size: 24px
+  color: #282c34
+
+#navbar
+  display: flex
+  align-items: center
+  justify-content: center
+
+  li
+    list-style: none
+    padding: 0 20px
+    position: relative
+
+    a
+      text-decoration: none
+      font-weight: 500
+      font-size: 16px
+      color: #282c34
+
+    select
+      border: 0px
+      outline: 0px
+      background-color: whitesmoke
+      font-size: 16px
+      font-weight: 500
+
+    a:hover
+      text-decoration: none
+      background-color: aqua
+
+#mobile
+  display: none
+
+  i
+    color: #282c34
+
+@media screen and (max-width: 768px)
+  #navbar
+    display: flex
+    flex-direction: column
+    align-items: flex-start
+    justify-content: flex-start
+    position: fixed
+    top: 65px
+    right: -300px
+    width: 300px
+    height: 100vh
+    background-color: gold
+    padding: 40px 0 0 10px
+    transition: 0.3s ease-in-out
+
+    &.active
+      right: 0px
+
+    li
+      margin-bottom: 20px
+
+      select
+        border: 0px
+        outline: 0px
+        background-color: gold
+        font-size: 16px
+        font-weight: 500
+
+  #mobile
+    display: block
+
+    i
+      font-size: 24px
+      cursor: pointer

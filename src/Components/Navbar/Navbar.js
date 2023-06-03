@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import './Navbar.css';
+import '../../Styles/Navbar.sass';
 
 const Navbar = () => {
   const [clicked, setClicked] = useState(false);
