@@ -1,10 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+* {
+    box-sizing: border-box;
+  }
+
 #container {
     padding-top: 65px;
     display: flex;
     flex-wrap: wrap;
-    margin: 20px 9vw 20px 9vw;
+    flex-direction: row;
+    margin: 0 9vw 0 9vw;
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
 }
 
 #filters {
     width: 100%;
+    padding-left: 1%;
+}
+
+#options {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+}
+
+#options:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+#selectInput, #datePicker{
+    float: left;
+    padding: 10px;
+    height: 50px;
+    width: 23%;
+    min-width: 175px;
+    padding: 20px;
+    background-color: #F5F5F5;
+    cursor: pointer;
+    padding: 5px 5px 5px 15px;
+    border-radius: 5px;
+    border: 0px;
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#datePicker {
+    width: 100%;
+}
+
+.react-datepicker-wrapper {
+    min-width: 175px;
+    width: 23%;
+}
+
+@media screen and (max-width: 768px) {
+    #container {
+        justify-content: left;
+    }
 }
