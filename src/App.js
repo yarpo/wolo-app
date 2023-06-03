@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import './App.css';
+import './Styles/App.sass';
 import Navbar from './Components/Navbar/Navbar';
 import Details from './Components/Details/Details';
 
