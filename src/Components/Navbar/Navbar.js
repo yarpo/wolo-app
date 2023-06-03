@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import './Navbar.css';
+import logo from '../../images/logo.svg';
+
 
 const Navbar = () => {
   const [clicked, setClicked] = useState(false);
@@ -25,7 +27,7 @@ const Navbar = () => {
   return (
     <>
       <nav>
-        <a href="/#" id="logo">LOGO</a>
+        <a href="/#" id="logo"><img src={logo} alt="Logo" /></a>
         <ul id="navbar" className={clicked ? "#navbar active" : "navbar"}>
           <li><a href="/#">{t('allEvents')}</a></li>
           <li><a href="/#">{t('calendar')}</a></li>
