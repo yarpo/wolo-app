@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { VscChevronDown, VscChevronUp, VscClose } from "react-icons/vsc";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -7,6 +8,7 @@ import './AllEvents.css';
 
 const AllEvents = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const { t, i18n } = useTranslation();
 
     const chosenTags = ['Chełm', 'Wrzeszcz', 'Education', 'Sport'];
 
@@ -18,6 +20,13 @@ const AllEvents = () => {
     const handleToggle = () => {
         setIsOpen(!isOpen);
     };
+
+    useEffect(() => {
+        const storedLanguage = localStorage.getItem('language');
+        if (storedLanguage) {
+          i18n.changeLanguage(storedLanguage);
+        }
+      }, [i18n]);
 
     const [selectedDate, setSelectedDate] = useState(null);
 
@@ -37,11 +46,11 @@ const AllEvents = () => {
                                 selected={selectedDate}
                                 onChange={handleDateChange}
                                 dateFormat="dd/MM/yyyy"
-                                placeholderText="Select a date"
+                                placeholderText={t('date')}
                             />
                             
                             <select id="selectInput">
-                                <option value="" disabled selected>Location</option>
+                                <option value="" disabled selected>{t('location')}</option>
                                 {locations.map((location, index) => (
                                 <option key={index} value={location}>
                                     {location}
@@ -50,7 +59,7 @@ const AllEvents = () => {
                             </select>
 
                             <select id="selectInput">
-                                <option value="" disabled selected>Category</option>
+                                <option value="" disabled selected>{t('category')}</option>
                                 {categories.map((category, index) => (
                                 <option key={index} value={category}>
                                     {category}
@@ -59,7 +68,7 @@ const AllEvents = () => {
                             </select>
 
                             <select id="selectInput">
-                                <option value="" disabled selected>Organisations</option>
+                                <option value="" disabled selected>{t('organisations')}</option>
                                 {organisations.map((organisation, index) => (
                                 <option key={index} value={organisation}>
                                     {organisation}
@@ -68,7 +77,7 @@ const AllEvents = () => {
                             </select>
 
                             <select id="selectInput">
-                                <option value="" disabled selected>Age restrictions</option>
+                                <option value="" disabled selected>{t('ageRestrictions')}</option>
                                 {ages.map((age, index) => (
                                 <option key={index} value={age}>
                                     {age}
@@ -79,11 +88,11 @@ const AllEvents = () => {
                         </div>
                         <div className='checkbox-container'>
                             <label className='select-boolean'>
-                                    No volunteer verification required 
+                                    {t('noVolunteerVerificationRequired')}
                                      <input type='checkbox' className='checkbox-round'/> 
                             </label>
                             <label className='select-boolean' for='booked'>
-                                    Hide fully booked events 
+                                    {t('hideFullyBookedEvents')} 
                                      <input type='checkbox' className='checkbox-round' id="booked"/> 
                             </label>
                         </div>
@@ -99,11 +108,11 @@ const AllEvents = () => {
                 <p id="toggle-filters" onClick={handleToggle}> 
                 {isOpen ? (
                     <>
-                        Schowaj Menu <VscChevronUp />
+                        {t('hideFilters')} <VscChevronUp />
                     </>
                 ) : (
                     <>
-                        Rozwiń Menu <VscChevronDown />
+                        {t('showFilters')} <VscChevronDown />
                     </>
                 )}
                 </p>

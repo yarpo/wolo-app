@@ -15,5 +15,15 @@
     "organizer":"Ogranizer",
     "location": "Location",
     "signIn": "Sign In",
-    "moreEventsFromThisOrganizer": "More events from this organizer"
+    "moreEventsFromThisOrganizer": "More events from this organizer",
+    
+    "organizedBy":"Organized By",
+    "needed":"Needed",
+    "signedIn": "Signed In",
+    "organisations":"Organisations", 
+    "ageRestrictions": "Age Restrictions",
+    "noVolunteerVerificationRequired": "No volunteer verification required",
+    "hideFullyBookedEvents": "Hide fully booked events",
+    "showFilters": "Show Filters",
+    "hideFilters": "Hide Filters"
 }

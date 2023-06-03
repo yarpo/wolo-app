@@ -15,5 +15,15 @@
     "organizer":"Организатор",
     "location": "Расположение",
     "signIn": "Войти",
-    "moreEventsFromThisOrganizer": "Еще события от этого организатора"
+    "moreEventsFromThisOrganizer": "Еще события от этого организатора",
+
+    "organizedBy":"Организованный",
+    "needed":"Нужный",
+    "signedIn": "Вошел",
+    "organisations":"Организации", 
+    "ageRestrictions": "Возрастные ограничения",
+    "noVolunteerVerificationRequired": "Подтверждение добровольца не требуется",
+    "hideFullyBookedEvents": "Скрыть полностью забронированные мероприятия",
+    "showFilters": "Показать фильтры",
+    "hideFilters": "Скрыть фильтры"
 }

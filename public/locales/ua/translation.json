@@ -15,5 +15,15 @@
     "organizer":"Організатор",
     "location": "Місцезнаходження",
     "signIn": "Увійти",
-    "moreEventsFromThisOrganizer": "Більше подій від цього організатора"
+    "moreEventsFromThisOrganizer": "Більше подій від цього організатора",
+
+    "organizedBy":"Організовано",
+    "needed":"Потрібний",
+    "signedIn": "Ви ввійшли",
+    "organisations":"організації", 
+    "ageRestrictions": "Вікові обмеження",
+    "noVolunteerVerificationRequired": "Волонтерська перевірка не потрібна",
+    "hideFullyBookedEvents": "Сховати повністю заброньовані події",
+    "showFilters": "Показати фільтри",
+    "hideFilters": "Приховати фільтри"
 }
