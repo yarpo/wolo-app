@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import './App.css';
 import Navbar from './Components/Navbar/Navbar';
-import Details from './Components/Details/Details';
+import AllEvents from './Components/AllEvents/AllEvents';
 
 function App() {
   const {t, i18n} = useTranslation()
@@ -17,7 +17,7 @@ function App() {
             {t('hello')}
           </p>
         </header>
-        <Details />
+        <AllEvents />
       </div>
     </>
   );

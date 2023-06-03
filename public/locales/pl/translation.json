@@ -15,5 +15,15 @@
     "organizer":"Organizator",
     "location": "Lokalizacja",
     "signIn": "Zapisz się",
-    "moreEventsFromThisOrganizer": "Więcej wydarzeń od tego organizatora"
+    "moreEventsFromThisOrganizer": "Więcej wydarzeń od tego organizatora",
+
+    "organizedBy":"Organizowany przez",
+    "needed":"Potrzebnych wolonatriuszy",
+    "signedIn": "Zapisanych wolontariuszy",
+    "organisations":"Organizacje", 
+    "ageRestrictions": "Ograniczenia wiekowe",
+    "noVolunteerVerificationRequired": "Nie potrzebują porozumienia wolontariuszy",
+    "hideFullyBookedEvents": "Ukryj zapełnione wydarzenia",
+    "showFilters": "Pokaż filtry",
+    "hideFilters": "Ukryj filtry"
 }
