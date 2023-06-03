@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { VscChevronDown, VscChevronUp } from "react-icons/vsc";
+import { VscChevronDown, VscChevronUp, VscClose } from "react-icons/vsc";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import EventCard from '../EventCard/EventCard';
@@ -7,6 +7,8 @@ import './AllEvents.css';
 
 const AllEvents = () => {
     const [isOpen, setIsOpen] = useState(false);
+
+    const chosenTags = ['Chełm', 'Wrzeszcz', 'Education', 'Sport'];
 
     const locations = ['Zaspa', 'Chełm', 'Wrzeszcz'];
     const categories = ['Edukacja', 'Sport', 'Kultura', 'Pomoc'];
@@ -73,7 +75,23 @@ const AllEvents = () => {
                                 </option>
                                 ))}
                             </select>
+                            <br/>
                         </div>
+                        <div className='checkbox-container'>
+                            <label className='select-boolean'>
+                                    No volunteer verification required 
+                                     <input type='checkbox' className='checkbox-round'/> 
+                            </label>
+                            <label className='select-boolean' for='booked'>
+                                    Hide fully booked events 
+                                     <input type='checkbox' className='checkbox-round' id="booked"/> 
+                            </label>
+                        </div>
+                        <ul class="chosen-tags-container">
+                            {chosenTags.map((tag, index) => (
+                                <li key={index} className="chosen-tags">{tag} <VscClose class="icon"/></li>
+                            ))}
+                        </ul>
                     </>
                 )
                 }

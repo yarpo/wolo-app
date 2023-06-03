@@ -45,12 +45,12 @@ img {
 
 @media screen and (max-width: 768px) {
     .card {
-        width: 400px;
+        width: 69vw;
         margin: 15px;
     }
 
     img {
-        width: 400px;
+        width: 69vw;
         height: 175px;
     }
 }

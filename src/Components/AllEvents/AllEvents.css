@@ -16,7 +16,6 @@
 
 #filters {
     width: 100%;
-    padding-left: 1%;
 }
 
 #options {
@@ -57,8 +56,72 @@
     width: 23%;
 }
 
+.checkbox-round {
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    aspect-ratio: 1;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.checkbox-round:checked {
+    background-color: rgb(170, 139, 240);
+}
+
+.chosen-tags-container, .checkbox-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 20px;
+}
+
+.chosen-tags, .select-boolean {
+    display: flex;
+    width: auto;
+    background-color: rgb(197, 197, 197);
+    cursor: pointer;
+    margin: 5px;
+    padding: 5px 5px 5px 15px;
+    border-radius: 20px;
+}
+
+.select-boolean {
+    background-color: rgb(142, 142, 142);
+    height: 40px;
+    padding-top: 9px;
+}
+
+.checkbox-container input {
+    margin: 0.5px 0 0 5px;
+}
+
+.icon {
+    width: 1.4em;
+    height: 1.4em;
+    margin-top: 0.5px;
+}
+
 @media screen and (max-width: 768px) {
     #container {
         justify-content: left;
+    }
+
+    #filters {
+        padding-left: 2vw;
+    }
+
+    #selectInput, #datePicker{
+        width: 69vw;
+    }
+}
+
+@media screen and (min-width: 767px) {
+    #filters {
+        padding-left: 1%;
     }
 }
