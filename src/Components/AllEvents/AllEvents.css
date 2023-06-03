@@ -4,3 +4,7 @@
     flex-wrap: wrap;
     margin: 20px 9vw 20px 9vw;
 }
+
+#filters {
+    width: 100%;
+}
