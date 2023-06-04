@@ -1,0 +1,232 @@
+#containerHero {
+  flex-grow: 1;
+  margin: 5px 10vw;
+  padding-bottom: 30px;
+}
+
+h2 {
+  text-align: center;
+  font-size: 30px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 40px;
+}
+
+#mainContainer {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+  flex-wrap: flex;
+  padding-top: 200px;
+  height: auto;
+  width: auto;
+  padding-bottom: 20px;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: cover;
+  background-image: url("https://media.discordapp.net/attachments/1098162238411509825/1114838280152817695/pexels-trung-nguyen-5108999.jpg?width=1057&height=705");
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+#subtext {
+  flex-grow: 1;
+  justify-content: center;
+  margin: 5px 10vw;
+  padding-bottom: 60px;
+}
+
+
+
+#row {
+  display: flex;
+  justify-content: center;
+
+  flex-direction: row;
+
+
+}
+
+#button {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-right: 300px;
+
+}
+
+
+input[type="submit"] {
+  background-color: rgb(65, 65, 65);
+  color: white;
+  font-size: 20px;
+  padding: 10px 30px;
+  text-align: center;
+  border-radius: 5px;
+  margin: 60px 0px;
+  border: 0px;
+  cursor: pointer;
+  width: 20%;
+  min-width: 150px;
+  height: 80px;
+
+  font-family: 'Open Sans', sans-serif;
+}
+
+
+
+#selectInput,
+#datePicker {
+
+
+  padding: 10px;
+  height: 80px;
+  width: 50%;
+  min-width: 300px;
+  padding: 20px;
+  background-color: #F5F5F5;
+  cursor: pointer;
+  padding: 5px 5px 5px 15px;
+  border-radius: 5px;
+  border: 0px;
+  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
+  margin: 10px;
+}
+
+a:hover {
+  color: rgb(11, 89, 233);
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+
+  justify-content: center;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 768px) {
+  #containerHero {
+    flex-grow: 1;
+    margin: 5px 10vw;
+    padding-bottom: 30px;
+  }
+
+  h2 {
+    text-align: center;
+    font-size: 30px;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 40px;
+  }
+
+  #mainContainer {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(145, 145, 145);
+    justify-content: center;
+    align-items: center;
+    flex-wrap: flex;
+    padding-top: 300px;
+    height: auto;
+    width: auto;
+    padding-bottom: 60px;
+
+    width: 100%;
+
+    margin-left: auto;
+    margin-right: auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-image: url("https://media.discordapp.net/attachments/1098162238411509825/1114838280152817695/pexels-trung-nguyen-5108999.jpg?width=1057&height=705");
+  }
+
+  #subtext {
+    flex-grow: 1;
+    justify-content: center;
+    margin: 5px 10vw;
+    padding-bottom: 30px;
+  }
+
+
+
+  #row {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+
+  }
+
+
+
+  input[type="submit"] {
+    background-color: rgb(65, 65, 65);
+    color: white;
+    font-size: 20px;
+    padding: 10px 30px;
+    text-align: center;
+    border-radius: 5px;
+    margin: 60px 0px;
+    border: 0px;
+    cursor: pointer;
+    width: 20%;
+    min-width: 200px;
+    height: 80px;
+    align-items: center;
+
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  #button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-right: 0px;
+
+
+  }
+
+
+
+  #selectInput,
+  #datePicker {
+
+    margin: 10px 25px;
+    height: 80px;
+    width: 80%;
+    min-width: 200px;
+    padding-bottom: 10px;
+    background-color: #F5F5F5;
+    cursor: pointer;
+
+    border-radius: 5px;
+    border: 0px;
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  a:hover {
+    color: rgb(11, 89, 233);
+  }
+
+  form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+}
