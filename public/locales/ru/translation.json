@@ -1,19 +1,23 @@
 {
-    "hello":"Привет, мир",
-    "allEvents":"Все события",
-    "calendar":"Календарь",
-    "forVolunteers":"Для волонтеров",
-    "theyNeedYou":"Ты им нужен",
+    "hello": "Привет, мир",
+    "allEvents": "Все события",
+    "calendar": "Календарь",
+    "forVolunteers": "Для волонтеров",
+    "theyNeedYou": "Ты им нужен",
     "login": "Войти",
-
-    "back":"Назад",
-    "haveBeenSignedIn":"волонтеры были зарегистрированы в",
+    "back": "Назад",
+    "haveBeenSignedIn": "волонтеры были зарегистрированы в",
     "moreIsNeeded": "нужно больше",
     "date": "Дата",
     "time": "Время",
     "category": "Категория",
-    "organizer":"Организатор",
+    "organizer": "Организатор",
     "location": "Расположение",
     "signIn": "Войти",
-    "moreEventsFromThisOrganizer": "Еще события от этого организатора"
+    "moreEventsFromThisOrganizer": "Еще события от этого организатора",
+    "welcome": "Вы готовы изменить мир?",
+    "signInToday": "Войти сегодня",
+    "or": "или",
+    "findEvent": "найти событие для себя",
+    "MainSearch": "Поиск"
 }
