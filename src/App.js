@@ -9,14 +9,6 @@ function App() {
     <>
       <div className="App">
         <Navbar/>
-        <header className="App-header">
-          <p>
-            WoloApp
-          </p>
-          <p>
-            {t('hello')}
-          </p>
-        </header>
         <AllEvents />
       </div>
     </>

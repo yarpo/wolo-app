@@ -1,9 +1,11 @@
+@import "../../Styles/common.css";
+
 nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 20px 40px;
-  background-color: whitesmoke;
+  background-color: #F5F5F5;
   height: 65px;
   position: fixed;
   top: 0;
@@ -20,6 +22,12 @@ img {
   font-weight: 600;
   font-size: 24px;
   color: #282c34;
+}
+
+#langauges-select:hover{
+  font-weight: bold;
+  color: #3769CB;
+  cursor: pointer;
 }
 
 #navbar {
@@ -51,7 +59,8 @@ img {
 
 #navbar li a:hover {
   text-decoration: none;
-  background-color: aqua;
+  font-weight: bold;
+  color: #3769CB;
 }
 
 #mobile {

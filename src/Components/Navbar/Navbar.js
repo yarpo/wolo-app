@@ -35,6 +35,7 @@ const Navbar = () => {
           <li><a href="/#">{t('theyNeedYou')}</a></li>
           <li>
             <select
+              id="langauges-select"
               onChange={(e) => handleLanguageChange(e.target.value)}
               defaultValue={i18n.language}
             >
