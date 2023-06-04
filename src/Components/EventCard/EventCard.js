@@ -2,6 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { VscLocation, VscBrowser, VscOrganization } from 'react-icons/vsc';
 import { BiTime } from 'react-icons/bi';
+import logo from '../../images/event-img.jpg';
 import './EventCard.css';
 
 const EventCard = ({ event }) => {
@@ -9,7 +10,9 @@ const EventCard = ({ event }) => {
 
     return (
         <div className="card">
-            <img src="#" alt={event.title} />
+            <div id="card-img">
+                <img src={logo} alt={event.title} />
+            </div>
             <div id="information">
                 <h2>{event.title}</h2>
                 <ul>

@@ -14,7 +14,6 @@ function App() {
           <Route path="/" />
           <Route path="/events" element={<AllEvents />} />
         </Routes>
-
       </div>
     </>
   );
