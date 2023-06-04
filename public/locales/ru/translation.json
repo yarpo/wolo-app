@@ -15,9 +15,19 @@
     "location": "Расположение",
     "signIn": "Войти",
     "moreEventsFromThisOrganizer": "Еще события от этого организатора",
+
     "welcome": "Вы готовы изменить мир?",
     "signInToday": "Войти сегодня",
     "or": "или",
     "findEvent": "найти событие для себя",
     "MainSearch": "Поиск"
-}
+
+    "organizedBy":"Организованный",
+    "needed":"Нужный",
+    "signedIn": "Вошел",
+    "organisations":"Организации", 
+    "ageRestrictions": "Возрастные ограничения",
+    "noVolunteerVerificationRequired": "Подтверждение добровольца не требуется",
+    "hideFullyBookedEvents": "Скрыть полностью забронированные мероприятия",
+    "showFilters": "Показать фильтры",
+    "hideFilters": "Скрыть фильтры"

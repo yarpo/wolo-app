@@ -1,0 +1,93 @@
+[
+  {
+    "id": 1,
+    "title": "Event 1",
+    "location": "Location 1",
+    "date": "2023-06-10",
+    "time": "10:00",
+    "organizedBy": "Organization 1",
+    "participantsNeeded": 5,
+    "participantsSignedIn": 3,
+    "category": "Category 1",
+    "ageRestrictions": "18+",
+    "requiresVerification": true
+  },
+  {
+    "id": 2,
+    "title": "Event 2",
+    "location": "Location 2",
+    "date": "2023-06-15",
+    "time": "14:30",
+    "organizedBy": "Organization 2",
+    "participantsNeeded": 10,
+    "participantsSignedIn": 8,
+    "category": "Category 2",
+    "ageRestrictions": "16+",
+    "requiresVerification": true
+  },
+  {
+    "id": 3,
+    "title": "Event 3",
+    "location": "Location 3",
+    "date": "2023-06-20",
+    "time": "09:00",
+    "organizedBy": "Organization 3",
+    "participantsNeeded": 8,
+    "participantsSignedIn": 8,
+    "category": "Category 1",
+    "ageRestrictions": "21+",
+    "requiresVerification": true
+  },
+  {
+    "id": 4,
+    "title": "Event 4",
+    "location": "Location 1",
+    "date": "2023-06-25",
+    "time": "16:30",
+    "organizedBy": "Organization 2",
+    "participantsNeeded": 12,
+    "participantsSignedIn": 12,
+    "category": "Category 3",
+    "ageRestrictions": "16+",
+    "requiresVerification": true
+  },
+  {
+    "id": 5,
+    "title": "Event 5",
+    "location": "Location 2",
+    "date": "2023-07-01",
+    "time": "11:00",
+    "organizedBy": "Organization 1",
+    "participantsNeeded": 6,
+    "participantsSignedIn": 4,
+    "category": "Category 2",
+    "ageRestrictions": "18+",
+    "requiresVerification": false
+  },
+  {
+    "id": 6,
+    "title": "Event 6",
+    "location": "Location 3",
+    "date": "2023-07-05",
+    "time": "13:30",
+    "organizedBy": "Organization 3",
+    "participantsNeeded": 15,
+    "participantsSignedIn": 12,
+    "category": "Category 1",
+    "ageRestrictions": "21+",
+    "requiresVerification": false
+  },
+  {
+    "id": 7,
+    "title": "Event 7",
+    "location": "Location 1",
+    "date": "2023-07-10",
+    "time": "10:30",
+    "organizedBy": "Organization 2",
+    "participantsNeeded": 8,
+    "participantsSignedIn": 6,
+    "category": "Category 3",
+    "ageRestrictions": "16+",
+    "requiresVerification": false
+  }
+]

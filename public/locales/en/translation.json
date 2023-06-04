@@ -15,9 +15,20 @@
     "location": "Location",
     "signIn": "Sign In",
     "moreEventsFromThisOrganizer": "More events from this organizer",
+
     "welcome": "Are you ready to change the world ?",
     "signInToday": "Sign in today",
     "or": "or",
     "findEvent": " find event to join",
     "MainSearch": "Search"
-}
+
+    "organizedBy":"Organized By",
+    "needed":"Needed",
+    "signedIn": "Signed In",
+    "organisations":"Organisations", 
+    "ageRestrictions": "Age Restrictions",
+    "noVolunteerVerificationRequired": "No volunteer verification required",
+    "hideFullyBookedEvents": "Hide fully booked events",
+    "showFilters": "Show Filters",
+    "hideFilters": "Hide Filters"
+

@@ -15,9 +15,19 @@
     "location": "Місцезнаходження",
     "signIn": "Увійти",
     "moreEventsFromThisOrganizer": "Більше подій від цього організатора",
+
     "welcome": "Чи готові ви змінити світ?",
     "signInToday": "Увійдіть сьогодні",
     "or": "або",
     "findEvent": "знайти подію для себе",
     "MainSearch": "Пошук"
-}
+
+    "organizedBy":"Організовано",
+    "needed":"Потрібний",
+    "signedIn": "Ви ввійшли",
+    "organisations":"організації", 
+    "ageRestrictions": "Вікові обмеження",
+    "noVolunteerVerificationRequired": "Волонтерська перевірка не потрібна",
+    "hideFullyBookedEvents": "Сховати повністю заброньовані події",
+    "showFilters": "Показати фільтри",
+    "hideFilters": "Приховати фільтри"
