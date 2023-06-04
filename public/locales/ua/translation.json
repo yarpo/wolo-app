@@ -1,26 +1,21 @@
 {
-    "hello": "Привіт, світ",
-    "allEvents": "Усі події",
-    "calendar": "Календар",
-    "forVolunteers": "Для волонтерів",
-    "theyNeedYou": "Ви їм потрібні",
+    "hello":"Привіт, світ",
+    "allEvents":"Усі події",
+    "calendar":"Календар",
+    "forVolunteers":"Для волонтерів",
+    "theyNeedYou":"Ви їм потрібні",
     "login": "Вхід",
-    "back": "Назад",
-    "haveBeenSignedIn": "зареєстровано волонтерів",
+
+    "back":"Назад",
+    "haveBeenSignedIn":"зареєстровано волонтерів",
     "moreIsNeeded": "потрібно більше",
     "date": "Дата",
     "time": "час",
     "category": "Категорія",
-    "organizer": "Організатор",
+    "organizer":"Організатор",
     "location": "Місцезнаходження",
     "signIn": "Увійти",
     "moreEventsFromThisOrganizer": "Більше подій від цього організатора",
-
-    "welcome": "Чи готові ви змінити світ?",
-    "signInToday": "Увійдіть сьогодні",
-    "or": "або",
-    "findEvent": "знайти подію для себе",
-    "MainSearch": "Пошук"
 
     "organizedBy":"Організовано",
     "needed":"Потрібний",
@@ -31,3 +26,4 @@
     "hideFullyBookedEvents": "Сховати повністю заброньовані події",
     "showFilters": "Показати фільтри",
     "hideFilters": "Приховати фільтри"
+}
