@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import './Navbar.css';
 import logo from '../../images/logo.svg';
 
@@ -27,12 +28,22 @@ const Navbar = () => {
   return (
     <>
       <nav>
-        <a href="/#" id="logo"><img src={logo} alt="Logo" /></a>
+        <Link to="/" id="logo">
+          <img src={logo} alt="Logo" />
+        </Link>
         <ul id="navbar" className={clicked ? "#navbar active" : "navbar"}>
-          <li><a href="/#">{t('allEvents')}</a></li>
-          <li><a href="/#">{t('calendar')}</a></li>
-          <li><a href="/#">{t('forVolunteers')}</a></li>
-          <li><a href="/#">{t('theyNeedYou')}</a></li>
+          <li>
+            <Link to="/events">{t('allEvents')}</Link>
+          </li>
+          <li>
+            <Link to="/calendar">{t('calendar')}</Link>
+          </li>
+          <li>
+            <Link to="/volunteers">{t('forVolunteers')}</Link>
+          </li>
+          <li>
+            <Link to="/needyou">{t('theyNeedYou')}</Link>
+          </li>
           <li>
             <select
               onChange={(e) => handleLanguageChange(e.target.value)}
@@ -44,7 +55,9 @@ const Navbar = () => {
               <option value="ru">Russian</option>
             </select>
           </li>
-          <li><a href="/#">{t('login')}</a></li>
+          <li>
+            <Link to="/login">{t('login')}</Link>
+          </li>
         </ul>
         <div id="mobile" onClick={handleClick}>
           <i
