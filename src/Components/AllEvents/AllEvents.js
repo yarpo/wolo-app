@@ -104,7 +104,6 @@ const AllEvents = () => {
                                 dateFormat="dd/MM/yyyy"
                                 placeholderText={t('date')}
                             />
-
                             {[
                                 { label: t('location'), options: locations },
                                 { label: t('category'), options: categories },
