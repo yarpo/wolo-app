@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import "../../Styles/common.css";
 
 * {
     box-sizing: border-box;
@@ -10,8 +10,6 @@
     flex-wrap: wrap;
     flex-direction: row;
     margin: 0 9vw 0 9vw;
-    font-size: 16px;
-    font-family: 'Open Sans', sans-serif;
 }
 
 #filters {
@@ -72,7 +70,8 @@
 }
 
 .checkbox-round:checked {
-    background-color: rgb(170, 139, 240);
+    background-color: #3769CB;
+    border: 3px solid white;
 }
 
 .chosen-tags-container, .checkbox-container {
@@ -84,15 +83,20 @@
 .chosen-tags, .select-boolean {
     display: flex;
     width: auto;
-    background-color: rgb(197, 197, 197);
+    background-color: #FBF79C;
     cursor: pointer;
     margin: 5px;
     padding: 5px 5px 5px 15px;
     border-radius: 20px;
 }
 
+#toggle-filters {
+    color: #3769CB;
+    cursor: pointer;
+}
+
 .select-boolean {
-    background-color: rgb(142, 142, 142);
+    background-color: #F5F5F5;
     height: 40px;
     padding-top: 9px;
 }

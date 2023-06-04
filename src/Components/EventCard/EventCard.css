@@ -9,6 +9,7 @@
     background-color: #F5F5F5;
     font-size: 16px;
     font-family: 'Open Sans', sans-serif;
+    cursor: pointer;
 }
 
 h2{
@@ -18,14 +19,13 @@ h2{
 }
 
 .card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 10px 24px 0 rgba(18, 18, 18, 0.247);
 }
 
-img {
-    object-fit: cover;
+.card img {
     width: 275px;
-    height: 175px;
-    background-color: #777777;
+    height: 275px;
+    background-size: contain;
     -moz-border-radius: 0px;
     -webkit-border-radius: 7px 7px 0px 0px;
     border-radius: 7px 7px 0px 0px; 
@@ -49,8 +49,8 @@ img {
         margin: 15px;
     }
 
-    img {
+    .card img {
         width: 69vw;
-        height: 175px;
+        background-size: contain;
     }
 }
