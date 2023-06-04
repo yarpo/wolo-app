@@ -98,7 +98,7 @@ const AllEvents = () => {
                     <>
                         <div id="options">
                             <DatePicker
-                                id="datePicker"
+                                id="datePickerr"
                                 selected={filters.selectedDate}
                                 onChange={handleDateChange}
                                 dateFormat="dd/MM/yyyy"
@@ -111,7 +111,7 @@ const AllEvents = () => {
                             ].map((filter, index) => (
                                 <select
                                     key={index}
-                                    id="selectInput"
+                                    id="selectInputt"
                                     onChange={handleTagChange}
                                     value=""
                                     disabled={!isOpen}
@@ -128,7 +128,7 @@ const AllEvents = () => {
                             ))}
 
                             <select
-                                id="selectInput"
+                                id="selectInputt"
                                 onChange={handleAgeChange}
                                 value={filters.selectedAge}
                                 disabled={!isOpen}

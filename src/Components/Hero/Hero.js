@@ -31,7 +31,7 @@ const Hero = () => {
 
     return (
         <div>
-            <form>
+            <form id="form_hero">
                 <div id="mainContainer">
                     <div id="background">
                         <div id="containerHero">
