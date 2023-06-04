@@ -4,6 +4,7 @@ import { VscArrowLeft, VscBrowser, VscOrganization, VscLocation } from "react-ic
 import { BiTime, BiBorderAll } from "react-icons/bi";
 import { Link } from 'react-router-dom';
 import MoreEvents from '../MoreEventsFromOrganizer/MoreEvents';
+import image from "../../images/event-img.jpg"
 import './Details.css';
 
 const Details = () => {
@@ -34,7 +35,7 @@ const Details = () => {
                     </ul>
                 </div>
                 <div id="column" class="photo">
-                    <img src="#" />
+                    <img id="img_details" src={image} />
                 </div>
                 <p id="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris fringilla est sit amet ultricies tempus.
                     Praesent ultricies, arcu at lobortis porttitor, risus erat porta purus, at imperdiet sapien turpis vitae dolor.
