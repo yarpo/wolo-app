@@ -1,10 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
 .card {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.1s;
     border-radius: 7px;
     width: 275px;
+    height: 600px;
     margin: 15px;
     background-color: #F5F5F5;
     font-size: 16px;
@@ -12,7 +13,7 @@
     cursor: pointer;
 }
 
-h2{
+h2 {
     font-size: 32px;
     font-weight: normal;
     padding-bottom: 10px;
@@ -29,7 +30,7 @@ h2{
     background-size: contain;
     -moz-border-radius: 0px;
     -webkit-border-radius: 7px 7px 0px 0px;
-    border-radius: 7px 7px 0px 0px; 
+    border-radius: 7px 7px 0px 0px;
 }
 
 #information {
@@ -40,18 +41,20 @@ h2{
     list-style-type: none;
 }
 
-#information ul li:nth-last-child(2), #information ul li:last-child {
+#information ul li:nth-last-child(2),
+#information ul li:last-child {
     padding-left: 21px;
 }
 
 @media screen and (max-width: 768px) {
     .card {
-        width: 69vw;
-        margin: 15px;
+        width: 275px;
+        height: 600px;
     }
 
     .card img {
-        width: 69vw;
+        width: 275px;
+        height: 275px;
         background-size: contain;
     }
 }

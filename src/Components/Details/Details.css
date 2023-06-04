@@ -1,4 +1,4 @@
-#container {
+#container_details {
     padding-top: 65px;
     display: flex;
     flex-wrap: wrap;
@@ -7,7 +7,8 @@
     gap: 30px 40px;
 }
 
-#information, #location {
+#information,
+#location {
     line-height: 1.8;
 }
 
@@ -35,11 +36,12 @@ a:visited {
     padding-bottom: 15px;
 }
 
-#description, #more-events {
+#description,
+#more-events {
     width: 100%;
 }
 
-img {
+#details img {
     background-color: rgb(170, 139, 240);
     max-height: 35vh;
     margin: 5px;
