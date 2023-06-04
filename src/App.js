@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom"
 import './App.css';
 import Navbar from './Components/Navbar/Navbar';
 import AllEvents from './Components/AllEvents/AllEvents';
+import Details from './Components/Details/Details';
 
 function App() {
   const { t, i18n } = useTranslation()
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" />
           <Route path="/events" element={<AllEvents />} />
+          <Route path="/details" element={<Details />} />
         </Routes>
       </div>
     </>

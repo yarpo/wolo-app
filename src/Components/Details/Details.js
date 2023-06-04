@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
 import { VscArrowLeft, VscBrowser, VscOrganization, VscLocation } from "react-icons/vsc";
 import { BiTime, BiBorderAll } from "react-icons/bi";
+import { Link } from 'react-router-dom';
 import MoreEvents from '../MoreEventsFromOrganizer/MoreEvents';
 import './Details.css';
 
@@ -16,10 +17,10 @@ const Details = () => {
     }, [i18n]);
 
     return (
-        <div>
-            <div id="container">
+        <div id="details">
+            <div id="container_details">
                 <div id="column">
-                    <a href="/#" id="back"><VscArrowLeft /> {t('back')}</a>
+                    <Link to="/events" id="back"><VscArrowLeft /> {t('back')}</Link>
                     <h1 id="title">Event details will show up here...</h1>
                     <ul id="volunteers_numbers">
                         <li><strong>X</strong> {t('haveBeenSignedIn')}</li>
