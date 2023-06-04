@@ -1,26 +1,21 @@
 {
-    "hello": "Witaj świecie",
-    "allEvents": "Wszystkie wydarzenia",
-    "calendar": "Kalendarz",
-    "forVolunteers": "Dla Wolontariuszy",
-    "theyNeedYou": "Potrzebują cię",
-    "login": "Zaloguj Się",
-    "back": "Wróć",
-    "haveBeenSignedIn": "już zapisanych wolontariuszy",
+    "hello":"Witaj świecie",
+    "allEvents":"Wszystkie wydarzenia",
+    "calendar":"Kalendarz",
+    "forVolunteers":"Dla Wolontariuszy",
+    "theyNeedYou":"Potrzebują cię",
+    "login":"Zaloguj Się",
+    
+    "back":"Wróć",
+    "haveBeenSignedIn":"już zapisanych wolontariuszy",
     "moreIsNeeded": "jeszcze potrzebnych",
     "date": "Data",
     "time": "Czas",
     "category": "Kategoria",
-    "organizer": "Organizator",
+    "organizer":"Organizator",
     "location": "Lokalizacja",
     "signIn": "Zapisz się",
     "moreEventsFromThisOrganizer": "Więcej wydarzeń od tego organizatora",
-
-    "welcome": "Czy jesteś gotów zmienić świat ?",
-    "signInToday": "Zaloguj się już dziś",
-    "or": "lub",
-    "findEvent": "znadź wydarzenie dla siebie",
-    "MainSearch": "Wyszukaj"
 
     "organizedBy":"Organizowany przez",
     "needed":"Potrzebnych wolonatriuszy",
@@ -31,4 +26,4 @@
     "hideFullyBookedEvents": "Ukryj zapełnione wydarzenia",
     "showFilters": "Pokaż filtry",
     "hideFilters": "Ukryj filtry"
-
+}
