@@ -64,6 +64,12 @@ const AllEvents = () => {
         setFilters({ ...filters, selectedAge: value });
     };
 
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            handleToggle();
+        }
+    };
+
     const filteredEvents = eventData.filter((event) => {
         const isMatchingTag = filters.chosenTags.some((tag) =>
             [event.location, event.category, event.organizedBy, event.age].includes(tag)
@@ -183,17 +189,17 @@ const AllEvents = () => {
                     </>
                 )}
                 <br />
-                <p id="toggle-filters" onClick={handleToggle}>
+                <button id="toggle-filters" onClick={handleToggle} onKeyDown={handleKeyDown}>
                     {isOpen ? (
                         <>
-                            {t('hideFilters')} <VscChevronUp />
+                        {t('hideFilters')} <VscChevronUp />
                         </>
                     ) : (
                         <>
-                            {t('showFilters')} <VscChevronDown />
+                        {t('showFilters')} <VscChevronDown />
                         </>
                     )}
-                </p>
+                </button>
             </div>
 
             {/* Generate event cards */}

@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import './Navbar.css';
 import logo from '../../images/logo.svg';
 
-
 const Navbar = () => {
   const [clicked, setClicked] = useState(false);
   const { t, i18n } = useTranslation();
@@ -25,13 +24,19 @@ const Navbar = () => {
     setClicked(!clicked);
   };
 
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      handleClick();
+    }
+  };
+
   return (
     <>
       <nav>
         <Link to="/" id="logo">
           <img src={logo} alt="Logo" />
         </Link>
-        <ul id="navbar" className={clicked ? "#navbar active" : "navbar"}>
+        <ul id="navbar" className={clicked ? '#navbar active' : 'navbar'}>
           <li>
             <Link to="/events">{t('allEvents')}</Link>
           </li>
@@ -60,12 +65,15 @@ const Navbar = () => {
             <Link to="/login">{t('login')}</Link>
           </li>
         </ul>
-        <div id="mobile" onClick={handleClick}>
-          <i
-            id="bar"
-            className={clicked ? "fas fa-times" : "fas fa-bars"}
-          ></i>
-        </div>
+        <button
+          id="mobile"
+          onClick={handleClick}
+          onKeyPress={handleKeyPress}
+          tabIndex={0}
+          aria-label="Toggle Menu"
+        >
+          <i id="bar" className={clicked ? 'fas fa-times' : 'fas fa-bars'}></i>
+        </button>
       </nav>
     </>
   );
