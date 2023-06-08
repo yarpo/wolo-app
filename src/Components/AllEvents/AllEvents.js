@@ -4,7 +4,7 @@ import { VscChevronDown, VscChevronUp, VscClose } from 'react-icons/vsc';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import EventCard from '../EventCard/EventCard';
-import './AllEvents.css';
+import '../../styles/all-events.scss';
 
 import eventData from '../../eventsData.json';
 

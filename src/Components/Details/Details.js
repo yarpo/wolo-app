@@ -4,7 +4,7 @@ import { VscArrowLeft, VscBrowser, VscOrganization, VscLocation } from "react-ic
 import { BiTime, BiBorderAll } from "react-icons/bi";
 import { Link } from 'react-router-dom';
 import MoreEvents from '../MoreEventsFromOrganizer/MoreEvents';
-import './Details.css';
+import '../../styles/details.scss';
 
 const Details = () => {
     const { t, i18n } = useTranslation();
