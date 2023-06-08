@@ -4,7 +4,7 @@ import { VscLocation, VscBrowser, VscOrganization } from 'react-icons/vsc';
 import { BiTime } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 import logo from '../../images/event-img.jpg';
-import './EventCard.css';
+import '../../styles/event-card.scss';
 
 const EventCard = ({ event }) => {
     const { t, i18n } = useTranslation();

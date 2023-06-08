@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
-import './MoreEvents.css';
+import '../../styles/more-events.scss';
 
 const MoreEvents = () => {
     const { t, i18n } = useTranslation();

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import './Navbar.css';
+import '../../styles/navbar.scss';
 import logo from '../../images/logo.svg';
 
 

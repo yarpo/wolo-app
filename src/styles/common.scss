@@ -1,0 +1,19 @@
+// colours
+$color-text: #282c34;
+$color-backgroud: #F5F5F5;
+$color-1-blue: #3769CB;
+$color-2-orange: #FBCC71;
+$color-3-yellow: #FBF79C;
+
+// fonts
+$font-family-default: 'Open Sans', sans-serif;
+$font-size-normall: 16px;
+$font-size-large: 32px;
+
+@import "https://fonts.googleapis.com/css2?family=Open+Sans&display=swap";
+
+* {
+	font-size: $font-size-normall;
+	font-family: $font-family_default;
+	color: $color-text;
+}
