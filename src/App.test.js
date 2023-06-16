@@ -1,6 +1,13 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 
-test('1 is equal to 1', () => {
-  expect(1).toBe(1);
+describe('App', () => {
+  it('renders without errors', () => {
+    render(
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    );
+  });
 });

@@ -7,7 +7,7 @@ import logo from '../../images/event-img.jpg';
 import '../../styles/event-card.scss';
 
 const EventCard = ({ event }) => {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     return (
         <Link to="/details" style={{ textDecoration: 'none' }}>

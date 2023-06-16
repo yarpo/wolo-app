@@ -11,6 +11,10 @@
 # production
 /build
 
+# dependency check
+/dependency-check-bin
+/dependency-check-reports
+
 # misc
 .DS_Store
 .env.local
