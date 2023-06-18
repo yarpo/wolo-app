@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import Navbar from './Components/Navbar/Navbar';
 import AllEvents from './Components/AllEvents/AllEvents';
