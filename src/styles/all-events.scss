@@ -1,147 +1,147 @@
-$color_1: #3769CB;
+$color_1: #3769cb;
 $font-family_1: 'Open Sans', sans-serif;
-$background-color_1: #F5F5F5;
+$background-color_1: #f5f5f5;
 $background-color_2: white;
-$background-color_3: #FBCC71;
-$background-color_4: #FBF79C;
+$background-color_3: #fbcc71;
+$background-color_4: #fbf79c;
 
-@import "./common.scss";
+@import './common.scss';
 * {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 #container {
-	padding-top: 65px;
-	display: flex;
-	flex-wrap: wrap;
-	flex-direction: row;
-	margin: 0 9vw 0 9vw;
+  padding-top: 65px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin: 0 9vw 0 9vw;
 }
 #filters {
-	width: 100%;
-	padding-top: 25px;
+  width: 100%;
+  padding-top: 25px;
 }
 #options {
-	width: 100%;
-	display: flex;
-	flex-wrap: wrap;
-	gap: 10px 20px;
-	&:after {
-		content: "";
-		display: table;
-		clear: both;
-	}
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  &:after {
+    content: '';
+    display: table;
+    clear: both;
+  }
 }
 #selectInput {
-	float: left;
-	padding: 10px;
-	height: 50px;
-	width: 23%;
-	min-width: 175px;
-	padding: 20px;
-	background-color: $background-color_1;
-	cursor: pointer;
-	padding: 5px 5px 5px 15px;
-	border-radius: 5px;
-	border: 0px;
-	font-size: 16px;
-	font-family: $font-family_1;
+  float: left;
+  padding: 10px;
+  height: 50px;
+  width: 23%;
+  min-width: 175px;
+  padding: 20px;
+  background-color: $background-color_1;
+  cursor: pointer;
+  padding: 5px 5px 5px 15px;
+  border-radius: 5px;
+  border: 0px;
+  font-size: 16px;
+  font-family: $font-family_1;
 }
 #datePicker {
-	float: left;
-	padding: 10px;
-	height: 50px;
-	width: 23%;
-	min-width: 175px;
-	padding: 20px;
-	background-color: $background-color_1;
-	cursor: pointer;
-	padding: 5px 5px 5px 15px;
-	border-radius: 5px;
-	border: 0px;
-	font-size: 16px;
-	font-family: $font-family_1;
-	width: 100%;
+  float: left;
+  padding: 10px;
+  height: 50px;
+  width: 23%;
+  min-width: 175px;
+  padding: 20px;
+  background-color: $background-color_1;
+  cursor: pointer;
+  padding: 5px 5px 5px 15px;
+  border-radius: 5px;
+  border: 0px;
+  font-size: 16px;
+  font-family: $font-family_1;
+  width: 100%;
 }
 .react-datepicker-wrapper {
-	min-width: 175px;
-	width: 23%;
+  min-width: 175px;
+  width: 23%;
 }
 .checkbox-round {
-	width: 20px;
-	height: 20px;
-	background-color: $background-color_2;
-	border-radius: 50%;
-	aspect-ratio: 1;
-	vertical-align: middle;
-	border: 1px solid #ddd;
-	appearance: none;
-	-webkit-appearance: none;
-	outline: none;
-	cursor: pointer;
-	&:checked {
-		background-color: $background-color_3;
-		border: 3px solid white;
-	}
+  width: 20px;
+  height: 20px;
+  background-color: $background-color_2;
+  border-radius: 50%;
+  aspect-ratio: 1;
+  vertical-align: middle;
+  border: 1px solid #ddd;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
+  &:checked {
+    background-color: $background-color_3;
+    border: 3px solid white;
+  }
 }
 .chosen-tags-container {
-	display: flex;
-	flex-wrap: wrap;
-	padding-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 20px;
 }
 .checkbox-container {
-	display: flex;
-	flex-wrap: wrap;
-	padding-top: 20px;
-	input {
-		margin: 0.5px 0 0 5px;
-	}
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 20px;
+  input {
+    margin: 0.5px 0 0 5px;
+  }
 }
 .chosen-tags {
-	display: flex;
-	width: auto;
-	background-color: $background-color_4;
-	cursor: pointer;
-	margin: 5px;
-	padding: 5px 5px 5px 15px;
-	border-radius: 20px;
+  display: flex;
+  width: auto;
+  background-color: $background-color_4;
+  cursor: pointer;
+  margin: 5px;
+  padding: 5px 5px 5px 15px;
+  border-radius: 20px;
 }
 .select-boolean {
-	display: flex;
-	width: auto;
-	background-color: $background-color_4;
-	cursor: pointer;
-	margin: 5px;
-	padding: 5px 5px 5px 15px;
-	border-radius: 20px;
-	background-color: $background-color_1;
-	height: 40px;
-	padding-top: 9px;
+  display: flex;
+  width: auto;
+  background-color: $background-color_4;
+  cursor: pointer;
+  margin: 5px;
+  padding: 5px 5px 5px 15px;
+  border-radius: 20px;
+  background-color: $background-color_1;
+  height: 40px;
+  padding-top: 9px;
 }
 #toggle-filters {
-	color: $color_1;
-	cursor: pointer;
+  color: $color_1;
+  cursor: pointer;
 }
 .icon {
-	width: 1.4em;
-	height: 1.4em;
-	margin-top: 0.5px;
+  width: 1.4em;
+  height: 1.4em;
+  margin-top: 0.5px;
 }
 @media screen and (max-width: 768px) {
-	#container {
-		justify-content: left;
-	}
-	#filters {
-		padding-left: 2vw;
-	}
-	#selectInput {
-		width: 69vw;
-	}
-	#datePicker {
-		width: 69vw;
-	}
+  #container {
+    justify-content: left;
+  }
+  #filters {
+    padding-left: 2vw;
+  }
+  #selectInput {
+    width: 69vw;
+  }
+  #datePicker {
+    width: 69vw;
+  }
 }
 @media screen and (min-width: 767px) {
-	#filters {
-		padding-left: 1%;
-	}
+  #filters {
+    padding-left: 1%;
+  }
 }

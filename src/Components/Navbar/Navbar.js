@@ -15,7 +15,7 @@ const Navbar = () => {
     }
   }, [i18n]);
 
-  const handleLanguageChange = (language) => {
+  const handleLanguageChange = language => {
     i18n.changeLanguage(language);
     localStorage.setItem('language', language);
   };
@@ -24,7 +24,7 @@ const Navbar = () => {
     setClicked(!clicked);
   };
 
-  const handleKeyPress = (event) => {
+  const handleKeyPress = event => {
     if (event.key === 'Enter') {
       handleClick();
     }
@@ -52,7 +52,7 @@ const Navbar = () => {
           <li>
             <select
               id="langauges-select"
-              onChange={(e) => handleLanguageChange(e.target.value)}
+              onChange={e => handleLanguageChange(e.target.value)}
               defaultValue={i18n.language}
             >
               <option value="en">English</option>
