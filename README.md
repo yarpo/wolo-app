@@ -1,7 +1,8 @@
-# Wolo-app
 
+![Logo](https://github.com/yarpo/wolo-app/blob/main/src/images/logo.svg)
+##
 Web Application for Regional Volunteer Centre in Gdańsk, which helps volunteers find and partake in events.
-![Logo](https://lh3.googleusercontent.com/u/0/drive-viewer/AFGJ81pDUC-p27-JgkYha-SJLH3VCntUJGGnNXBSmvo_K8iBFZYgmUJsGL7wPyqGyQoMokWFDQWM735seWNP3NsM9PqEeHGV_w=w1920-h941)
+
 
 ## Run Locally
 
