@@ -25,5 +25,11 @@
   "noVolunteerVerificationRequired": "Nie potrzebują porozumienia wolontariuszy",
   "hideFullyBookedEvents": "Ukryj zapełnione wydarzenia",
   "showFilters": "Pokaż filtry",
-  "hideFilters": "Ukryj filtry"
+  "hideFilters": "Ukryj filtry",
+
+  "welcome": "Czy jesteś gotów zmienić świat ?",
+  "signInToday": "Zaloguj się",
+  "or": "już dziś lub",
+  "findEvent": "znadź wydarzenie dla siebie",
+  "MainSearch": "Wyszukaj"
 }

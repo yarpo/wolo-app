@@ -25,5 +25,11 @@
   "noVolunteerVerificationRequired": "Волонтерська перевірка не потрібна",
   "hideFullyBookedEvents": "Сховати повністю заброньовані події",
   "showFilters": "Показати фільтри",
-  "hideFilters": "Приховати фільтри"
+  "hideFilters": "Приховати фільтри",
+
+  "welcome": "Чи готові ви змінити світ?",
+  "signInToday": "Увійдіть",
+  "or": "сьогодні або",
+  "findEvent": "знайти подію для себе",
+  "MainSearch": "Пошук"
 }
