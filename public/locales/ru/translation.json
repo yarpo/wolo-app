@@ -25,5 +25,11 @@
   "noVolunteerVerificationRequired": "Подтверждение добровольца не требуется",
   "hideFullyBookedEvents": "Скрыть полностью забронированные мероприятия",
   "showFilters": "Показать фильтры",
-  "hideFilters": "Скрыть фильтры"
+  "hideFilters": "Скрыть фильтры",
+
+  "welcome": "Вы готовы изменить мир?",
+  "signInToday": "Войти",
+  "or": "сегодня или",
+  "findEvent": "найти событие для себя",
+  "MainSearch": "Поиск"
 }

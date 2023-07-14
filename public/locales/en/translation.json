@@ -4,7 +4,7 @@
   "calendar": "Calendar",
   "forVolunteers": "For Volunteers",
   "theyNeedYou": "They Need You",
-  "login": "Login",
+  "login": "Sing in",
 
   "back": "Back",
   "haveBeenSignedIn": "volunteers have been signed in",
@@ -25,5 +25,11 @@
   "noVolunteerVerificationRequired": "No volunteer verification required",
   "hideFullyBookedEvents": "Hide fully booked events",
   "showFilters": "Show Filters",
-  "hideFilters": "Hide Filters"
+  "hideFilters": "Hide Filters",
+
+  "welcome": "Are you ready to change the world ?",
+  "signInToday": "Sign in",
+  "or": "today or",
+  "findEvent": " find event to join",
+  "MainSearch": "Search"
 }
