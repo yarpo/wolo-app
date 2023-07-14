@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Filters from '../Filters/Filters';
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -10,6 +11,7 @@ const Hero = () => {
     const { t, i18n } = useTranslation();
     const locations = ['Zaspa', 'Chełm', 'Wrzeszcz'];
     const [selectedDate, setSelectedDate] = useState(null);
+    const [  , setFilteredEvents] = useState([]);
 
     useEffect(() => {
         const storedLanguage = localStorage.getItem('language');
@@ -41,7 +43,7 @@ const Hero = () => {
                             onChange={handleDateChange}
                             dateFormat="dd/MM/yyyy"
                             placeholderText="Select a date"
-                            class="MainInput"
+                            className="MainInput"
                         />
                         <select id="selectInput_hero" className="MainInput">
                             <option value="" disabled selected>Location</option>
@@ -59,6 +61,7 @@ const Hero = () => {
                     </Link>
                 </div>
             </form>
+            <Filters setFilteredEvents={setFilteredEvents} />
         </div>
     )
 };
