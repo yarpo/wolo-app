@@ -20,10 +20,16 @@
     "organizedBy":"Організатор",
     "needed":"Потрібно ще",
     "signedIn": "Записалось",
-    "organisations":"Організатори", 
+    "organisations":"Організатори",
     "ageRestrictions": "Вікові обмеження",
     "noVolunteerVerificationRequired": "Перевірка персональних даних не потрібна",
     "hideFullyBookedEvents": "Тільки події з відкритим набором",
     "showFilters": "Показати фільтри",
-    "hideFilters": "Приховати фільтри"
+    "hideFilters": "Приховати фільтри",
+
+    "welcome": "Чи готові ви змінити світ?",
+    "signInToday": "Увійдіть",
+    "or": "сьогодні або",
+    "findEvent": "знайти подію для себе",
+    "MainSearch": "Пошук"
 }

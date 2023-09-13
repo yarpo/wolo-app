@@ -20,10 +20,16 @@
     "organizedBy":"Организатор",
     "needed":"Нужный ещё",
     "signedIn": "Записалось",
-    "organisations":"Организаторы", 
+    "organisations":"Организаторы",
     "ageRestrictions": "Возрастные ограничения",
     "noVolunteerVerificationRequired": "Проверка персональных данных не требуется",
     "hideFullyBookedEvents": "Скрыть мероприятия с закрытым набором",
     "showFilters": "Показать фильтры",
-    "hideFilters": "Скрыть фильтры"
+    "hideFilters": "Скрыть фильтры",
+
+    "welcome": "Вы готовы изменить мир?",
+    "signInToday": "Войти",
+    "or": "сегодня или",
+    "findEvent": "найти событие для себя",
+    "MainSearch": "Поиск"
 }
