@@ -2,11 +2,11 @@ import React, { createContext, useContext, useState } from 'react';
 
 const FiltersContext = createContext();
 
-export const useFilterContext = () => {
+export const useFiltersContext = () => {
   return useContext(FiltersContext);
 };
 
-export const FilterProvider = ({ children }) => {
+export const FiltersProvider = ({ children }) => {
   const [filters, setFilters] = useState({
     selectedDate: null,
     chosenTags: [],

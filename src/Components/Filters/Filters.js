@@ -2,14 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { VscChevronDown, VscChevronUp, VscClose } from 'react-icons/vsc';
 import DatePicker from 'react-datepicker';
-import { useFilterContext } from './FiltersContext'; // Importuj kontekst
-
+import { useFiltersContext } from './FiltersContext';
 import eventData from '../../eventsData.json';
 
 const Filters = ({ setFilteredEvents }) => {
   const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
-  const { filters, setFilters } = useFilterContext(); // Użyj kontekstu
+  const { filters, setFilters } = useFiltersContext();
 
   const locations = [...new Set(eventData.map(event => event.location))];
   const categories = [...new Set(eventData.map(event => event.category))];
@@ -55,7 +54,7 @@ const Filters = ({ setFilteredEvents }) => {
       );
     });
 
-    setFilteredEvents(filteredEvents); // Aktualizacja wartości filteredEvents w komponencie nadrzędnym
+    setFilteredEvents(filteredEvents);
   }, [filters, setFilteredEvents]);
 
   const handleToggle = () => {
