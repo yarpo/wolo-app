@@ -8,21 +8,22 @@ import 'react-datepicker/dist/react-datepicker.css';
 import '../../styles/hero.scss';
 
 const Hero = () => {
+  
     const { t, i18n } = useTranslation();
-    const locations = ['Zaspa', 'Chełm', 'Wrzeszcz'];
+    const locations = ['Zaspa', 'Chełm', 'Wrzeszcz']; //TODO: Move locations to another file
     const [selectedDate, setSelectedDate] = useState(null);
-    const [  , setFilteredEvents] = useState([]);
+    const [setFilteredEvents] = useState([]);
 
-    useEffect(() => {
-        const storedLanguage = localStorage.getItem('language');
-        if (storedLanguage) {
-            i18n.changeLanguage(storedLanguage);
-        }
-    }, [i18n]);
+  useEffect(() => {
+    const storedLanguage = localStorage.getItem('language');
+    if (storedLanguage) {
+      i18n.changeLanguage(storedLanguage);
+    }
+  }, [i18n]);
 
-    const handleDateChange = (date) => {
-        setSelectedDate(date);
-    };
+  const handleDateChange = date => {
+    setSelectedDate(date);
+  };
 
     return (
         <div>
@@ -62,8 +63,16 @@ const Hero = () => {
                 </div>
             </form>
             <Filters setFilteredEvents={setFilteredEvents} />
+
         </div>
-    )
+        <div id="button_hero">
+          <Link to="/events">
+            <input type="submit" value={t('mainSearch')} />
+          </Link>
+        </div>
+      </form>
+    </div>
+  );
 };
 
 export default Hero;
