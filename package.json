@@ -30,7 +30,7 @@
     "eject": "react-scripts eject",
     "owasp": "owasp-dependency-check --project ./package.json -f HTML",
     "lint": "eslint src/**/*.js",
-    "prepare": "husky install"
+    "prepare": "git config --local core.hooksPath .githooks"
   },
   "eslintConfig": {
     "extends": [
@@ -51,7 +51,6 @@
     ]
   },
   "devDependencies": {
-    "husky": "^8.0.3",
     "lint-staged": "^13.2.2",
     "prettier": "2.8.8"
   },
