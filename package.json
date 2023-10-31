@@ -18,7 +18,6 @@
     "react-i18next": "^12.2.2",
     "react-icons": "^4.9.0",
     "react-router-dom": "^6.11.2",
-    "react-scripts": "5.0.1",
     "react-test-renderer": "^18.2.0",
     "sass": "^1.63.2",
     "web-vitals": "^2.1.4"
@@ -51,6 +50,7 @@
     ]
   },
   "devDependencies": {
+    "react-scripts": "5.0.1",
     "lint-staged": "^13.2.2",
     "prettier": "2.8.8"
   },
