@@ -45,7 +45,7 @@ const Hero = () => {
                             placeholderText="Select a date"
                             className="MainInput"
                         />
-                        <select id="selectInput_hero" className="MainInput">
+                        <select id="selectInput_hero" className="MainInput" data-testid="location-select">
                             <option value="" disabled selected>Location</option>
                             {locations.map((location, index) => (
                                 <option key={index} value={location}>

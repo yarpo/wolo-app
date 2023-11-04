@@ -3,11 +3,11 @@
   "allEvents": "Wszystkie wydarzenia",
   "calendar": "Kalendarz",
   "forVolunteers": "Dla Wolontariuszy",
-  "theyNeedYou": "Potrzebują cię",
-  "login": "Zaloguj Się",
+  "theyNeedYou": "Potrzebują Ciebie",
+  "login": "Zaloguj się",
 
   "back": "Wróć",
-  "haveBeenSignedIn": "już zapisanych wolontariuszy",
+  "haveBeenSignedIn": "zapisanych wolontariuszy",
   "moreIsNeeded": "jeszcze potrzebnych",
   "date": "Data",
   "time": "Czas",
@@ -30,6 +30,6 @@
   "welcome": "Czy jesteś gotów zmienić świat ?",
   "signInToday": "Zaloguj się",
   "or": "już dziś lub",
-  "findEvent": "znadź wydarzenie dla siebie",
+  "findEvent": "znajdź wydarzenie dla siebie",
   "mainSearch": "Wyszukaj"
 }
