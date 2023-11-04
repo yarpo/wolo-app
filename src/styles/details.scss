@@ -1,112 +1,119 @@
-$color_1: inherit;
-$background-color_1: rgb(170, 139, 240);
-$background-color_2: rgb(197, 197, 197);
-$background-color_3: white;
+@import './common.scss';
 
-#container_details {
+$background-color_1: rgb(170, 139, 240); // to be removed when fetching photos will be implemented
+
+.details_container {
   padding-top: 65px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   margin: 20px 10vw 20px 10vw;
   gap: 30px 40px;
-}
-#information {
-  line-height: 1.8;
-  li {
-    list-style: none;
+
+  #column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
   }
-}
-#location {
-  line-height: 1.8;
-}
-#column {
-  display: flex;
-  flex-direction: column;
-  flex-basis: 100%;
-  flex: 1;
-}
-#back {
-  text-decoration: none;
-}
-a {
-  &:visited {
-    color: $color_1;
-  }
-}
-#volunteers_numbers {
-  list-style: none;
-  padding-bottom: 15px;
-}
-#description {
-  width: 100%;
-}
-#more-events {
-  width: 100%;
-}
-#details {
+
+  // to be tested when fetching photos will be implemented
   img {
     background-color: $background-color_1;
     max-height: 35vh;
     margin: 5px;
   }
-}
-#shift-btn {
-  display: flex;
-  label {
-    display: flex;
-    flex: 1;
-    background-color: $background-color_2;
-    cursor: pointer;
-    margin: 5px;
-    padding: 5px 5px 5px 15px;
-    border-radius: 20px;
+
+  #back {
+    font-size: $font-size-normall;
+    text-decoration: none;
   }
-  input[type='checkbox'] {
-    margin: 0.2vh 10px 0 0;
+
+  #back_arrow {
+    margin: -1px;
   }
-}
-.checkbox-round {
-  width: 20px;
-  height: 20px;
-  background-color: $background-color_3;
-  border-radius: 50%;
-  aspect-ratio: 1;
-  vertical-align: middle;
-  border: 1px solid #ddd;
-  appearance: none;
-  -webkit-appearance: none;
-  outline: none;
-  cursor: pointer;
-  &:checked {
-    background-color: $background-color_1;
+
+  a {
+    &:hover, &:visited {
+      color: inherit;
+    }
   }
-}
-#sign-in {
-  cursor: pointer;
-  background-color: $background-color_2;
-  padding: 5px;
-  margin: 10px 0 10px 0;
-  border: 0;
-  border-radius: 10px;
-  width: 100%;
-  height: 10vh;
-  font-size: x-large;
-}
-@media screen and (max-width: 768px) {
-  #column {
-    flex-basis: 200%;
+
+  #title {
+    font-size: $font-size-large;
+    text-align: left;
   }
-  .photo {
-    order: 1;
+
+  #volunteers_numbers {
+    list-style: none;
+    padding-bottom: 15px;
+    padding-top: 10px;
   }
-  .location {
-    order: 2;
+
+  #information {
+    line-height: 2;
+    padding: 0px;
+    li {
+      list-style: none;
+    }
+
+    #icon {
+      margin: -2.3px;
+      margin-right: 5px;
+    }
   }
-  .signin {
-    order: 2;
+
+  #extra_information{
+    width: 100%;
   }
+
+  #description {
+    width: 100%;
+  }
+
+  iframe {
+    width: 90%;
+    height: 35vh;
+    border: none;
+  }
+
   #more-events {
-    order: 3;
+    width: 100%;
+  }
+
+  #sign-in {
+    cursor: pointer;
+    font-size: $font-size-large;
+    background-color: $color-2-orange;
+    padding: 5px;
+    margin: 10px 0 10px 0;
+    border: 0;
+    border-radius: 10px;
+    width: 100%;
+    height: 10vh;
+    font-size: x-large;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .details_container {
+    #column {
+      flex-basis: 200%;
+    }
+    .photo {
+      order: 1;
+    }
+    .location {
+      order: 2;
+    }
+    .signin {
+      order: 2;
+    }
+    #more-events {
+      order: 3;
+    }
+    iframe {
+      width: 100%;
+    }
   }
 }
