@@ -83,9 +83,10 @@ input[type="submit"] {
   cursor: pointer;
   border-radius: 5px;
   border: 0px;
-  font-size: 16px;
+  font-size: 30px;
   font-family: 'Open Sans', sans-serif;
   margin: 10px;
+  text-align: center;
 }
 
 #button_hero {
@@ -101,7 +102,7 @@ input[type="submit"] {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 780px) {
   form {
     align-items: center;
   }
@@ -132,5 +133,8 @@ input[type="submit"] {
   #selectInput_hero,
   #datePicker_hero {
     min-width: 200px;
+    margin: 2px;
+
   }
+
 }

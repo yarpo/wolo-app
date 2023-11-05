@@ -37,6 +37,7 @@ const Hero = () => {
                         </div>
                     </div>
                     <div id="MainRow_hero">
+                        <div>
                         <DatePicker
                             id="datePicker_hero"
                             selected={selectedDate}
@@ -45,8 +46,9 @@ const Hero = () => {
                             placeholderText="Select a date"
                             className="MainInput"
                         />
+                        </div>
                         <select id="selectInput_hero" className="MainInput">
-                            <option value="" disabled selected>Location</option>
+                            <option value="" disabled selected>{t('location')}</option>
                             {locations.map((location, index) => (
                                 <option key={index} value={location}>
                                     {location}
@@ -57,7 +59,7 @@ const Hero = () => {
                 </div>
                 <div id="button_hero">
                     <Link to="/events">
-                        <input type="submit" value={t('MainSearch')} />
+                        <input type="submit" value={t('mainSearch')} />
                     </Link>
                 </div>
             </form>
