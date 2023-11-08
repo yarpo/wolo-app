@@ -2,7 +2,7 @@
 
 $background-color_1: rgb(170, 139, 240); // to be removed when fetching photos will be implemented
 
-.organizer_container {
+.details_container {
   padding-top: 65px;
   display: flex;
   flex-wrap: wrap;
@@ -66,6 +66,16 @@ $background-color_1: rgb(170, 139, 240); // to be removed when fetching photos w
     }
   }
 
+  #icons_under_map {
+    display: flex;
+    gap: 10px;
+  }
+
+  #icon {
+    font-size: 24px;
+    margin-right: 10px;
+  }
+
   #extra_information {
     width: 100%;
   }
@@ -80,7 +90,7 @@ $background-color_1: rgb(170, 139, 240); // to be removed when fetching photos w
     border: none;
   }
 
-  #more-events {
+  #more_events {
     width: 100%;
   }
 
