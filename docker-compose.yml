@@ -1,0 +1,10 @@
+
+services:
+
+  frontend:
+    build: .
+    container_name: wolo-app
+    ports:
+      - "3000:3000"
+
+    restart: always
