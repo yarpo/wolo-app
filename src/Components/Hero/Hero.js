@@ -61,9 +61,9 @@ const Hero = () => {
             <div id="filters_hero">
                 <Filters setFilteredEvents={setFilteredEvents} />
                 <div id="button_hero">
-                        <Link to="/events">
-                            <input type="submit" value={t('mainSearch')} />
-                        </Link>
+                    <Link to="/events">
+                        <input type="submit" value={t('mainSearch')} />
+                    </Link>
                 </div>
             </div>
         </div>
