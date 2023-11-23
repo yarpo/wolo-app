@@ -37,16 +37,18 @@ const Hero = () => {
                         </div>
                     </div>
                     <div id="MainRow_hero">
+                        <div>
                         <DatePicker
                             id="datePicker_hero"
                             selected={selectedDate}
                             onChange={handleDateChange}
                             dateFormat="dd/MM/yyyy"
-                            placeholderText="Select a date"
+                            placeholderText={t('selectDate')}
                             className="MainInput"
                         />
+                        </div>
                         <select id="selectInput_hero" className="MainInput" data-testid="location-select">
-                            <option value="" disabled selected>Location</option>
+                            <option value="" disabled selected>{t('location')}</option>
                             {locations.map((location, index) => (
                                 <option key={index} value={location}>
                                     {location}
@@ -55,13 +57,15 @@ const Hero = () => {
                         </select>
                     </div>
                 </div>
-                <div id="button_hero">
-                    <Link to="/events">
-                        <input type="submit" value={t('MainSearch')} />
-                    </Link>
-                </div>
             </form>
-            <Filters setFilteredEvents={setFilteredEvents} />
+            <div id="filters_hero">
+                <Filters setFilteredEvents={setFilteredEvents} />
+                <div id="button_hero">
+                        <Link to="/events">
+                            <input type="submit" value={t('mainSearch')} />
+                        </Link>
+                </div>
+            </div>
         </div>
     )
 };

@@ -13,6 +13,7 @@
     "time": "Время",
     "category": "Категория",
     "organizer":"Организатор",
+    "selectDate":"Выберите дату",
     "location": "Место проведения",
     "signIn": "Записаться",
     "moreEventsFromThisOrganizer": "Еще мероприятия от этого организатора",
