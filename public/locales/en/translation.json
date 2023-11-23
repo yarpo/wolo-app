@@ -4,7 +4,7 @@
   "calendar": "Calendar",
   "forVolunteers": "For Volunteers",
   "theyNeedYou": "They Need You",
-  "login": "Sing in",
+  "login": "Sign in",
 
   "back": "Back",
   "haveBeenSignedIn": "volunteers have been signed in",
@@ -12,13 +12,14 @@
   "date": "Date",
   "time": "Time",
   "category": "Category",
+
   "organizer": "Ogranizer",
   "selectDate":"Select a date",
   "location": "Location",
   "signIn": "Sign In",
-  "moreEventsFromThisOrganizer": "More events from this organizer",
+  "moreEventsFromThisOrganizer": "More events from this organiser",
 
-  "organizedBy": "Organized By",
+  "organizedBy": "Organised By",
   "needed": "Needed",
   "signedIn": "Signed In",
   "organisations": "Organisations",
@@ -28,9 +29,9 @@
   "showFilters": "Show Filters",
   "hideFilters": "Hide Filters",
 
-  "welcome": "Are you ready to change the world ?",
+  "welcome": "Are you ready to change the world?",
   "signInToday": "Sign in",
   "or": "today or",
-  "findEvent": " find event to join",
+  "findEvent": "find an event to join",
   "mainSearch": "Search"
 }

@@ -46,9 +46,11 @@ const Hero = () => {
                             placeholderText={t('selectDate')}
                             className="MainInput"
                         />
+
                         </div>
                         <select id="selectInput_hero" className="MainInput">
                             <option value="" disabled selected>{t('location')}</option>
+
                             {locations.map((location, index) => (
                                 <option key={index} value={location}>
                                     {location}

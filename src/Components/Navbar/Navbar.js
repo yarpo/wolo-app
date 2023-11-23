@@ -51,9 +51,10 @@ const Navbar = () => {
           </li>
           <li>
             <select
-              id="langauges-select"
+              id="languages-select"
               onChange={e => handleLanguageChange(e.target.value)}
               defaultValue={i18n.language}
+              data-testid="languages-select"
             >
               <option value="en">English</option>
               <option value="pl">Polish</option>
@@ -71,8 +72,9 @@ const Navbar = () => {
           onKeyPress={handleKeyPress}
           tabIndex={0}
           aria-label="Toggle Menu"
+          data-testid="mobile"
         >
-          <i id="bar" className={clicked ? 'fas fa-times' : 'fas fa-bars'}></i>
+          <i id="bar" className={clicked ? 'fas fa-times' : 'fas fa-bars'} data-testid="bar"></i>
         </button>
       </nav>
     </>

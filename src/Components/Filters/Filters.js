@@ -9,11 +9,20 @@ const Filters = ({ setFilteredEvents }) => {
   const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const { filters, setFilters } = useFiltersContext();
-
   const locations = [...new Set(eventData.map(event => event.location))];
   const categories = [...new Set(eventData.map(event => event.category))];
   const organisations = [...new Set(eventData.map(event => event.organizedBy))];
   const ages = [...new Set(eventData.map(event => event.ageRestrictions))];
+
+  useEffect(() => {
+    fetch('http://localhost:8080/events')
+      .then(res =>{
+        return res.json()
+      })
+      .then (data =>{
+        console.log(data)
+      })
+  }, []);
 
   useEffect(() => {
     const storedLanguage = localStorage.getItem('language');
