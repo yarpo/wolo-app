@@ -43,7 +43,7 @@ const Hero = () => {
                             selected={selectedDate}
                             onChange={handleDateChange}
                             dateFormat="dd/MM/yyyy"
-                            placeholderText="Select a date"
+                            placeholderText={t('selectDate')}
                             className="MainInput"
                         />
                         </div>

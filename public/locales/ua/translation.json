@@ -13,6 +13,7 @@
     "time": "Час",
     "category": "Категорія",
     "organizer":"Організатор",
+    "selectDate":"Виберіть дату",
     "location": "Місце проведення",
     "signIn": "Записатись",
     "moreEventsFromThisOrganizer": "Інші подіЇ від цього організатора",

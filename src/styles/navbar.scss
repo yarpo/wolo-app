@@ -36,11 +36,13 @@ img {
 #navbar {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: right;
+
   li {
     list-style: none;
     padding: 0 20px;
     position: relative;
+    text-align: center;
     a {
       text-decoration: none;
       font-weight: 500;
@@ -67,7 +69,7 @@ img {
     color: $color_1;
   }
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1065px) {
   #navbar {
     display: flex;
     flex-direction: column;
@@ -82,6 +84,7 @@ img {
     padding: 40px 0 0 10px;
     transition: 0.3s ease-in-out;
     li {
+      text-align: center;
       margin-bottom: 20px;
       select {
         border: 0px;
