@@ -40,7 +40,7 @@ input[type="submit"] {
   flex-wrap: wrap;
   padding-top: 100px;
   width: 100%;
-  height: 600px;
+  height: 520px;
   background: url("../images/hero.jpg") no-repeat 100% 40% / cover;
   margin: 0 auto;
 }
@@ -78,7 +78,7 @@ input[type="submit"] {
 #datePicker_hero {
   padding: 10px;
   height: 100px;
-  min-width: 500px;
+  min-width: 400px;
   background-color: rgba(255, 255, 255, 0.8);
   cursor: pointer;
   border-radius: 5px;
@@ -89,10 +89,13 @@ input[type="submit"] {
   text-align: center;
 }
 
+#filters_hero{
+  padding-inline: 350px;
+}
+
 #button_hero {
   display: flex;
   justify-content: flex-end;
-  padding-right: 300px;
 }
 
 @media screen and (max-width: 1268px) {
@@ -135,6 +138,9 @@ input[type="submit"] {
     min-width: 200px;
     margin: 2px;
 
+  }
+  #filters_hero{
+    justify-content: center;
   }
 
 }
