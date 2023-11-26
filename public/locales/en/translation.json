@@ -13,6 +13,7 @@
   "time": "Time",
   "category": "Category",
   "organizer": "Organiser",
+  "selectDate":"Select a date",
   "location": "Location",
   "signIn": "Sign In",
   "moreEventsFromThisOrganizer": "More events from this organiser",
