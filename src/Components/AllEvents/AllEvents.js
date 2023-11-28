@@ -20,7 +20,6 @@ const AllEvents = () => {
     <div id="container">
       <Filters setFilteredEvents={setFilteredEvents} />
 
-      {/* Generate event cards */}
       {filteredEvents.map(event => (
         <EventCard key={event.id} event={event} />
       ))}
