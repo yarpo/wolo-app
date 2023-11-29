@@ -2,7 +2,6 @@ import React from "react";
 import { Formik } from "formik";
 import { Link } from "react-router-dom";
 
-
 const Login = () => {
   return (
     <div className="login-Div" style={{ textAlign: 'center', marginTop: '50px' }}>
