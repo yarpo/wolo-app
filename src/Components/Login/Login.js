@@ -29,7 +29,7 @@ const Login = () => {
           isSubmitting,
         }) => (
           <form onSubmit={handleSubmit}>
-            <ha1>Login</ha1>
+            <h1>Login</h1>
             <p>Continue your journey as a volunteer</p>
             <button type="submit">G-Continue with Google</button>
             <p>Or continue with your email address</p>
