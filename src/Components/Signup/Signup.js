@@ -1,7 +1,6 @@
 import React from "react";
 // import { Formik } from "formik";
 
-
 const Signup = () => {
   return (
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
