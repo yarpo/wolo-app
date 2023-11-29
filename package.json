@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "formik": "^2.4.5",
     "i18next": "^22.4.15",
     "i18next-browser-languagedetector": "^7.0.1",
     "i18next-http-backend": "^2.2.0",
@@ -50,9 +51,9 @@
     ]
   },
   "devDependencies": {
-    "react-scripts": "5.0.1",
     "lint-staged": "^13.2.2",
-    "prettier": "2.8.8"
+    "prettier": "2.8.8",
+    "react-scripts": "5.0.1"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
