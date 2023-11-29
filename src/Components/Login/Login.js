@@ -1,12 +1,12 @@
 import React from "react";
-import { Formik } from "formik";
+// import { Formik } from "formik";
 
 
 const Login = () => {
   return (
-    <>
-      <h1>Login</h1>
-    </>
+    <div style={{ textAlign: 'center', marginTop: '50px' }}>
+      <ha1>Login</ha1>
+    </div>
   )
 }
 
