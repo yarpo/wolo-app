@@ -16,7 +16,15 @@ const Login = () => {
           ) {
             errors.email = 'Invalid email address';
           }
+          if (!values.password) {
+            errors.password = 'Required';
+          }
           return errors;
+        }}
+        onSubmit={(values, { setSubmitting }) => {
+          // Handle form submission here
+          console.log(values);
+          setSubmitting(false);
         }}
       >
         {({
@@ -40,7 +48,7 @@ const Login = () => {
               onBlur={handleBlur}
               value={values.email}
             />
-            {errors.email && touched.email && errors.email}
+            {errors.email && touched.email && <div>{errors.email}</div>}
             <br />
             <input
               type="password"
@@ -49,7 +57,7 @@ const Login = () => {
               onBlur={handleBlur}
               value={values.password}
             />
-            {errors.password && touched.password && errors.password}
+            {errors.password && touched.password && <div>{errors.password}</div>}
             <br />
             <input
               type="checkbox"
@@ -69,13 +77,13 @@ const Login = () => {
               Log in
             </button>
             <p>
-              Dont have an account? <Link to="/signup">Register now</Link >
+              Dont have an account? <Link to="/signup">Register now</Link>
             </p>
           </form>
         )}
       </Formik>
     </div>
-  )
+  );
 }
 
-export default Login; 
+export default Login;
