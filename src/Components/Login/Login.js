@@ -99,7 +99,7 @@ const Login = () => {
         )}
       </Formik>
     </div>
-  )
+  );
 }
 
 export default Login;
