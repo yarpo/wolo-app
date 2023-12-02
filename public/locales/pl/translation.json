@@ -1,5 +1,5 @@
 {
-  "hello": "Witaj świecie",
+  "hello": "Witaj",
   "allEvents": "Wszystkie wydarzenia",
   "calendar": "Kalendarz",
   "forVolunteers": "Dla Wolontariuszy",
@@ -32,5 +32,15 @@
   "signInToday": "Zaloguj się",
   "or": "już dziś lub",
   "findEvent": "znajdź wydarzenie dla siebie",
-  "mainSearch": "Wyszukaj"
+  "mainSearch": "Wyszukaj",
+
+  "yourOrganisation": "Twoja organizacja",
+  "createNewEvent": "Stwórz nowe wydarzenie",
+  "yourOngoingEvents": "Twoje trwające wydarzenia",
+  "showAll": "Więcej",
+  "eventsInModeration": "Wydarzenia w moderacji",
+  "volunteers": "Wolontariusze",
+  "details": "Szczegóły",
+  "edit": "Edytuj",
+  "delete": "Usuń"
 }
