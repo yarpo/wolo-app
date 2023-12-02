@@ -3,7 +3,6 @@ import { Formik } from "formik";
 import { Link } from "react-router-dom";
 import '../../styles/login.scss';
 
-
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -103,4 +102,4 @@ const Login = () => {
   )
 }
 
-export default Login; 
+export default Login;
