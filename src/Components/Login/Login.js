@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik } from "formik";
 import { Link } from "react-router-dom";
+import '../../styles/login.scss';
 
 const Login = () => {
+  const [showPassword, setShowPassword] = useState(false);
+
+   const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleGoogleLogin = (event) => {
+  event.preventDefault();
+  // Handle Google login here
+}
   return (
-    <div className="login-Div" style={{ textAlign: 'center', marginTop: '50px' }}>
+    <div className="login-form" >
       <Formik
         initialValues={{ email: '', password: '' }}
         validate={values => {
@@ -16,15 +27,7 @@ const Login = () => {
           ) {
             errors.email = 'Invalid email address';
           }
-          if (!values.password) {
-            errors.password = 'Required';
-          }
           return errors;
-        }}
-        onSubmit={(values, { setSubmitting }) => {
-          // Handle form submission here
-          console.log(values);
-          setSubmitting(false);
         }}
       >
         {({
@@ -37,47 +40,60 @@ const Login = () => {
           isSubmitting,
         }) => (
           <form onSubmit={handleSubmit}>
-            <h1>Login</h1>
-            <p>Continue your journey as a volunteer</p>
-            <button type="submit">G-Continue with Google</button>
-            <p>Or continue with your email address</p>
+            <h1 className="login-form__title">Log In</h1>
+            <p className="login-form_subtitle" >Continue your journey as a volunteer</p>
+            <button className="login-form__button" type="button" onClick={handleGoogleLogin}>G - Continue with Google</button>
+           <div className="login-form_paragraph-container">
+              <hr />
+                <p className="login-form_paragraph">Or continue with your email address</p>
+              <hr />
+           </div>
             <input
+              className="login-form__input"
+              placeholder="Email"
               type="email"
               name="email"
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.email}
             />
-            {errors.email && touched.email && <div>{errors.email}</div>}
+            {errors.email && touched.email && <span className="error">{errors.email} *</span>}
             <br />
+            <Link className="login-form_forgot-password">Forgot password</Link>
             <input
-              type="password"
+              className="login-form__input"
+              placeholder="Password"
+              type={showPassword ? "text" : "password"}
               name="password"
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.password}
             />
-            {errors.password && touched.password && <div>{errors.password}</div>}
+            {errors.password && touched.password && <span className="error">{errors.password} *</span>}
             <br />
-            <input
-              type="checkbox"
-              id="showPassword"
-              name="showPassword"
-            />
-            <label htmlFor="showPassword">Show my password</label>
+            <div className="checkbox-container">
+              <input
+                onClick={toggleShowPassword}
+                type="checkbox"
+                id="showPassword"
+                name="showPassword"
+              />
+              <span className="checkbox-text" >Show my password</span>
+            </div>
+            <div className="checkbox-container">
+              <input
+                type="checkbox"
+                id="keepMeLoggedIn"
+                name="keepMeLoggedIn"
+              />
+              <span className="checkbox-text">Keep me logged in</span>
+            </div>
             <br />
-            <input
-              type="checkbox"
-              id="keepMeLoggedIn"
-              name="keepMeLoggedIn"
-            />
-            <label htmlFor="keepMeLoggedIn">Keep me logged in</label>
-            <br />
-            <button type="submit" disabled={isSubmitting}>
+            <button className="login-form__button" type="submit" disabled={isSubmitting}>
               Log in
             </button>
-            <p>
-              Dont have an account? <Link to="/signup">Register now</Link>
+            <p className="login-form_register-text">
+              {`Don't have an account?`} <Link className="login-form_register-text" to="/signup">Register now</Link>
             </p>
           </form>
         )}
