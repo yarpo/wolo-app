@@ -14,7 +14,6 @@
     .column {
         width: 18vw;
         margin: 1px;
-        background-color: lightblue;
         padding: 10px;
     }
 
@@ -25,7 +24,19 @@
         cursor: pointer;
     }
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1268px) {
+        .column:first-child {
+            width: 100%;
+        }
+    
+        .column {
+            width: 48%;
+            margin: 1px;
+            padding: 10px;
+        }
+    }
+
+    @media screen and (max-width: 700px) {
         .column, .column:first-child {
             width: 100%;
         }

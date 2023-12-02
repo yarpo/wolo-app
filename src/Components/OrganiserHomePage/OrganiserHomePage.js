@@ -36,10 +36,16 @@ const OrganiserHomePage = () => {
                 <strong>Your ongoing events</strong>
                 <OrganiserEventListDisplay />
                 <OrganiserEventListDisplay />
+                <div id="show_all_button">
+                    <strong>Show all</strong>
+                </div>
             </div>
             <div id="events_in_moderation">
                 <strong>Events in moderation</strong>
                 <OrganiserEventListDisplay />
+                <div id="show_all_button">
+                    <strong>Show all</strong>
+                </div>
             </div>
         </div>
     )
