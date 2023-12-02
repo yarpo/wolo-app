@@ -1,3 +1,4 @@
+@import './common.scss';
 
 .organiser_home_page_container {
     #background_photo {
@@ -13,8 +14,57 @@
     }
 
     #welcome_text {
-        flex-grow: 1;
-        margin: 5px 10vw;
+        margin: 35vh 10vw;
         text-align: center;
+    }
+
+    #button_div {
+        margin-top: -40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    #button_create_event {
+        background-color: $color-1-blue;
+        color: white;
+        font-size: $font-size-large;
+        padding: 15px 60px;
+        text-align: center;
+        border-radius: 5px;
+        border: 0px;
+        cursor: pointer;
+        width: 10%;
+        height: 80px;
+        width: fit-content;
+    }
+
+    @media screen and (max-width: 1268px) {
+        #welcome_text {
+            margin: 15vh 10vw;
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        #welcome_text {
+            margin: 5vh 10vw;
+        }
+
+        #button_create_event{
+            padding: 15px 30px;
+        }
+    }
+
+    @media screen and (max-width: 300px) {
+        #welcome_text {
+            margin: 0vh 10vw;
+        }
+
+        #button_create_event{
+            padding: 15px 15px;
+            margin: 2px;
+            height: 120px;
+        }
     }
 }

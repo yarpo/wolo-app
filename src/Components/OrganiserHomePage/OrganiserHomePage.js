@@ -23,11 +23,13 @@ const OrganiserHomePage = () => {
                         <h2>Your organisation: schronisko przyjazna łapa</h2>
                     </div>
                 </div>
-                <div>
-                    <form>
-                        create event
-                    </form>
-                </div>
+            </div>
+            <div id="button_div">
+                <form>
+                    <div id="button_create_event">
+                        Create new Event
+                    </div>
+                </form>
             </div>
             <div>
                 Your events
