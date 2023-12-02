@@ -1,0 +1,94 @@
+.login-form {
+  width: 400px;
+  margin: 100px auto;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.login-form__title {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.login-form_subtitle{
+  font-size: 12px;
+  font-weight: normal;
+  margin-bottom: 20px;
+}
+
+.login-form_paragraph{
+  font-size: 14px;
+}
+
+.login-form__input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.error {
+  margin-top: -10px;
+  color: red;
+  font-size: 12px;
+  margin-left: 5px;
+}
+
+.login-form_forgot-password { 
+  display: flex;
+  justify-content: flex-end;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.login-form__button {
+  margin-bottom: 20px;
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.login-form__button:hover {
+  background-color: #0056b3;
+}
+
+.login-form_register-text {
+  font-size: 14px;
+  text-align: center;
+}
+
+.checkbox-container {
+  margin-left: 10px;
+  margin-bottom: -10px;
+}
+
+.checkbox-text {
+  font-size: 14px; 
+  margin-left: 5px;
+}
+
+.login-form_paragraph-container {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.login-form_paragraph-container hr {
+  flex-grow: 1;
+  margin: 0 10px;
+}
+
+.login-form_paragraph {
+  font-size: 12px;
+  margin: 0 10px;
+}
