@@ -1,0 +1,98 @@
+@import './common.scss';
+
+.organiser_home_page_container {
+    #background_photo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: wrap;
+        padding-top: 100px;
+        width: 100%;
+        background: url("../images/hero.jpg") no-repeat 100% 40% / cover;
+        margin: 0 auto;
+        height: fit-content;
+    }
+
+    #welcome_text {
+        margin: 10vh 10vw;
+        text-align: center;
+        padding-bottom: 20px;
+    }
+
+    #button_div {
+        padding-top: 10px;
+        margin-top: -50px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    #button_create_event {
+        background-color: $color-1-blue;
+        color: white;
+        font-size: $font-size-large;
+        padding: 15px 60px;
+        text-align: center;
+        border-radius: 5px;
+        border: 0px;
+        cursor: pointer;
+        width: 10%;
+        height: 80px;
+        width: fit-content;
+    }
+
+    #ongoing_events, #events_in_moderation {
+        font-size: $font-size-normall;
+        max-width: 100%;
+        margin: 5vh 5vw;
+    }
+
+    #show_all_button {
+        width: fit-content;
+        margin-left: 82vw;
+        cursor: pointer;
+    }
+
+    @media screen and (max-width: 1268px) {
+        #welcome_text {
+            margin: 15vh 10vw;
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        #welcome_text {
+            margin: 5vh 10vw;
+        }
+
+        #button_create_event{
+            padding: 15px 30px;
+        }
+
+        #show_all_button {
+            margin-left: 80vw;
+        }
+    }
+
+    @media screen and (max-width: 570px) {
+        #show_all_button {
+            margin-left: 70vw;
+        }
+    }
+
+    @media screen and (max-width: 300px) {
+        #welcome_text {
+            margin: 0vh 10vw;
+        }
+
+        #button_create_event{
+            padding: 15px 15px;
+            margin: 2px;
+            height: 120px;
+        }
+
+        #show_all_button {
+            margin-left: 60vw;
+        }
+    }
+}

@@ -8,6 +8,7 @@ import Organizer from './Components/Organizer/Organizer.js';
 import PageNotFound from './Components/PageNotFound/PageNotFound.js';
 import Login from './Components/Login/Login.js';
 import Signup from './Components/Signup/Signup.js';
+import OrganiserHomePage from './Components/OrganiserHomePage/OrganiserHomePage.js';
 import { FiltersProvider } from './Components/Filters/FiltersContext';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
             <Route path="/organizer" element={<Organizer />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/organiser" element={<OrganiserHomePage />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </FiltersProvider>

@@ -1,5 +1,5 @@
 {
-    "hello":"Привет, мир",
+    "hello":"Привет",
     "allEvents":"Все события",
     "calendar":"Календарь",
     "forVolunteers":"Волонтерам",
@@ -32,5 +32,15 @@
     "signInToday": "Войти",
     "or": "сегодня или",
     "findEvent": "найти событие для себя",
-    "mainSearch": "Поиск"
+    "mainSearch": "Поиск",
+
+    "yourOrganisation": "Ваша организация",
+    "createNewEvent": "Создать новое событие",
+    "yourOngoingEvents": "Ваши текущие события",
+    "showAll": "Более",
+    "eventsInModeration": "Мероприятия в модерации",
+    "volunteers": "Волонтёры",
+    "details": "Подробности",
+    "edit": "Редактировать",
+    "delete": "Удалить"
 }

@@ -1,0 +1,49 @@
+@import './common.scss';
+
+.organiser_event_list_display_content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 3px 20px;
+    padding-bottom: 15px;
+
+    .column:first-child {
+        width: 25vw;
+    }
+
+    .column {
+        width: 18vw;
+        margin: 1px;
+        padding: 10px;
+    }
+
+    .column:nth-child(n+4){
+        height: fit-content;
+        width: 8vw;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    @media screen and (max-width: 1268px) {
+        .column:first-child {
+            width: 100%;
+        }
+    
+        .column {
+            width: 48%;
+            margin: 1px;
+            padding: 10px;
+        }
+    }
+
+    @media screen and (max-width: 700px) {
+        .column, .column:first-child {
+            width: 100%;
+        }
+
+        .column:nth-child(n+4){
+            margin: 3px;
+            width: 30%;
+        }
+    }
+}
