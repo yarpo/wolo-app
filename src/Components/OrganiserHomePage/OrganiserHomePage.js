@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
 import '../../styles/organiser-home-page.scss';
+import OrganiserEventListDisplay from '../OrganiserEventListDisplay/OrganiserEventListDisplay.js';
 
 const OrganiserHomePage = () => {
     const { i18n } = useTranslation();
@@ -31,11 +32,14 @@ const OrganiserHomePage = () => {
                     </div>
                 </form>
             </div>
-            <div>
-                Your events
+            <div id="ongoing_events">
+                <strong>Your ongoing events</strong>
+                <OrganiserEventListDisplay />
+                <OrganiserEventListDisplay />
             </div>
-            <div>
-                Events in moderation
+            <div id="events_in_moderation">
+                <strong>Events in moderation</strong>
+                <OrganiserEventListDisplay />
             </div>
         </div>
     )

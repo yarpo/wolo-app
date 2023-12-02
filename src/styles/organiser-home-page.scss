@@ -40,6 +40,12 @@
         width: fit-content;
     }
 
+    #ongoing_events, #events_in_moderation {
+        font-size: $font-size-normall;
+        max-width: 100%;
+        margin: 5vh 5vw;
+    }
+
     @media screen and (max-width: 1268px) {
         #welcome_text {
             margin: 15vh 10vw;
