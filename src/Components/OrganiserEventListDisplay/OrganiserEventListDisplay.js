@@ -4,7 +4,7 @@ import '../../styles/organiser-event-list-display.scss';
 
 
 const OrganiserEventListDisplay = () => {
-    const { i18n } = useTranslation();
+    const { t, i18n } = useTranslation();
 
     useEffect(() => {
         const storedLanguage = localStorage.getItem('language');
@@ -19,7 +19,7 @@ const OrganiserEventListDisplay = () => {
                 Name
             </div>
             <div className="column">
-                <p><strong>Volunteers:</strong> 3 / 8</p>
+                <p><strong>{t('volunteers')}:</strong> 3 / 8</p>
                 <p>Address</p>
             </div>
             <div className="column">
@@ -27,13 +27,13 @@ const OrganiserEventListDisplay = () => {
                 <p>Time</p>
             </div>
             <div className="column">
-                <strong>Detials</strong>
+                <strong>{t('details')}</strong>
             </div>
             <div className="column">
-                <strong>Edit</strong>
+                <strong>{t('edit')}</strong>
             </div>
             <div className="column">
-                <strong>Delete</strong>
+                <strong>{t('delete')}</strong>
             </div>
         </div>
     )

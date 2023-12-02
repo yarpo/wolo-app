@@ -1,5 +1,5 @@
 {
-  "hello": "Hello, world",
+  "hello": "Hello",
   "allEvents": "All Events",
   "calendar": "Calendar",
   "forVolunteers": "For Volunteers",
@@ -32,5 +32,15 @@
   "signInToday": "Sign in",
   "or": "today or",
   "findEvent": "find an event to join",
-  "mainSearch": "Search"
+  "mainSearch": "Search",
+
+  "yourOrganisation": "Your Organisation",
+  "createNewEvent": "Create new event",
+  "yourOngoingEvents": "Your ongoing events",
+  "showAll": "Show All",
+  "eventsInModeration": "Events in moderation",
+  "volunteers": "Volunteers",
+  "details": "Details",
+  "edit": "Edit",
+  "delete": "Delete"
 }

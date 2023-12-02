@@ -4,7 +4,7 @@ import '../../styles/organiser-home-page.scss';
 import OrganiserEventListDisplay from '../OrganiserEventListDisplay/OrganiserEventListDisplay.js';
 
 const OrganiserHomePage = () => {
-    const { i18n } = useTranslation();
+    const { t, i18n } = useTranslation();
 
     useEffect(() => {
         const storedLanguage = localStorage.getItem('language');
@@ -18,33 +18,33 @@ const OrganiserHomePage = () => {
             <div id="background_photo">
                 <div id="welcome_text">
                     <div>
-                        <h1>Hello user, are you ready to change the world?</h1>
+                        <h1>{t('hello')} user. {t('welcome')}</h1>
                     </div>
                     <div>
-                        <h2>Your organisation: schronisko przyjazna łapa</h2>
+                        <h2>{t('yourOrganisation')}: schronisko przyjazna łapa</h2>
                     </div>
                 </div>
             </div>
             <div id="button_div">
                 <form>
                     <div id="button_create_event">
-                        Create new Event
+                        {t('createNewEvent')}
                     </div>
                 </form>
             </div>
             <div id="ongoing_events">
-                <strong>Your ongoing events</strong>
+                <strong>{t('yourOngoingEvents')}</strong>
                 <OrganiserEventListDisplay />
                 <OrganiserEventListDisplay />
                 <div id="show_all_button">
-                    <strong>Show all</strong>
+                    <strong>{t('showAll')}</strong>
                 </div>
             </div>
             <div id="events_in_moderation">
-                <strong>Events in moderation</strong>
+                <strong>{t('eventsInModeration')}</strong>
                 <OrganiserEventListDisplay />
                 <div id="show_all_button">
-                    <strong>Show all</strong>
+                    <strong>{t('showAll')}</strong>
                 </div>
             </div>
         </div>
