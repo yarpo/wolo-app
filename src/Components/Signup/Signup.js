@@ -98,7 +98,7 @@ const Signup = () => {
               <label htmlFor="password">Password</label>
               <Field className="signup-from_input" type={showPassword ? "text" : "password"} name="password" placeholder="Password" />
               <ErrorMessage className="error" name="password" component="div" />
-              <div className="checkbox-container">
+              <div className="checkbox_signup-container">
                 <input id="showPassword" type="checkbox" onChange={() => setShowPassword(!showPassword)} />
                 <label htmlFor="showPassword">Show Password</label>
               </div>
@@ -108,14 +108,14 @@ const Signup = () => {
               <label htmlFor="confirmPassword">Confirm Password</label>
               <Field className="signup-from_input" type={showConfirmPassword ? "text" : "password"} name="confirmPassword" placeholder="confirm password" />
               <ErrorMessage className="error" name="confirmPassword" component="div" />
-              <div className="checkbox-container">
+              <div className="checkbox_signup-container">
                 <input id="showConfirmPassword" type="checkbox" onChange={() => setShowConfirmPassword(!showConfirmPassword)} />
                 <label htmlFor="showConfirmPassword">Show Password</label>
               </div>
             </div>
              <br/>
 
-            <div className="checkbox-group">
+            <div className="checkbox_signup-group">
               <label htmlFor="adultConfirmation">
                 <Field type="checkbox" name="adultConfirmation" />
                 I confirm that I am an adult (over 18 years old)

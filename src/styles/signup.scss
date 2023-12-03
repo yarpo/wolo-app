@@ -57,23 +57,22 @@ label {
   align-items: flex-start;
 }
 
-.checkbox-container {
+.checkbox_signup-container {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  width: 100%;
-  margin-top: -20px; 
+  width: 100%; 
 }
 
-.checkbox-container input {
+.checkbox_signup-container input {
   margin-right: 10px; 
 }
 
-.checkbox-container label {
+.checkbox_signup-container label {
   font-size: 1em; 
 }
 
-.checkbox-group {
+.checkbox_signup-group {
   display: flex;
   flex-direction: column;
   label {
