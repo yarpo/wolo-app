@@ -36,13 +36,25 @@ const OrganiserCreateEvent = () => {
     errors.categories = 'At least one category is required';
   }
   
+  if (!values.addressStreet) {
+    errors.categories = 'At least one category is required';
+  }
+  
+  if (!values.addressNumber) {
+    errors.categories = 'At least one category is required';
+  }
+  
+  if (!values.addressDescription) {
+    errors.categories = 'At least one category is required';
+  }
+  
   return errors;
 };
 
   return (
-    <div className="create_event_div">
-      <h1 className="create_event_title">Create Event</h1>
-      <p className="create_event_sub-title">Inputs marked with * are required</p>
+    <div className="organiser_create_event_div">
+      <h1 className="organiser_create_event_title">Create Event</h1>
+      <p className="organiser_create_event_sub-title_disclaimer">Inputs marked with * are required</p>
       <Formik
         initialValues={initialValues}
         validate={validate}
@@ -53,53 +65,63 @@ const OrganiserCreateEvent = () => {
       >
         {({ isSubmitting }) => (
           <Form>
-            <div className="name-container">
-              
-                <label htmlFor="title">Title*</label>
-                <Field className="create_event-from_input" type="text" name="title" placeholder="Title" />
-                <ErrorMessage className="error" name="title" component="div" />
-              </div>
 
-              <div className="description">
-                <label htmlFor="description">Description*</label>
-                <textarea className="create_event-from_input_textbox" type="text" maxLength="255" name="description"  placeholder="Description"/>
-              </div>
-            
-
-            <label htmlFor="picture">Picture</label>
-            <Field className="signup-from_input" type="file" name="picture" />
-            <ErrorMessage className="error" name="file" component="div" />
-            <br/>
-
-            <label htmlFor="address">Address*</label>
-            <div name="create_event_address-form">
-            <Field className="signup-from_input" type="text" name="addressStreet" placeholder="Street" />
-            <ErrorMessage className="error" name="addressStreet" component="div" />
-            <Field className="signup-from_input" type="text" name="addressNumber"  placeholder="Number"/>
-            <ErrorMessage className="error" name="addressNumber" component="div" />
+          <div className="organiser_create_event_row_div">
+            <label htmlFor="title">Title*</label>
+            <Field className="organiser_create_event-from_input" type="text" name="title" placeholder="Title" />
             </div>
-            <textarea className="create_event-from_input_textbox" type="text" name="addressDescription" placeholder="Describe how to get there" />
-            <ErrorMessage className="error" name="addressDescription" maxLength="255" component="div" />
+            <ErrorMessage className="error" name="title" component="div" />
+            
+            <div className="organiser_create_event_row_div">
+              <label htmlFor="description">Description*</label>
+              <textarea className="organiser_create_event-from_input_textbox" type="text" maxLength="255" name="description"  placeholder="Description"/>
+            </div>
+            <ErrorMessage className="error" name="description" component="div" />
+            <div className="organiser_create_event_row_div">
+            <label htmlFor="picture">Picture</label>
+            <Field className="organiser_create_event-from_input" type="file" name="picture" />
+            <ErrorMessage className="error" name="file" component="div" />
+            </div>
+            <br/>
+            <div className="organiser_create_event_address-form">
+              <label htmlFor="address">Address*</label>
+              <div className="organiser_create_event_address-form_top">
+                <div className="organiser_create_event_row_div_address">
+                <Field className="organiser_create_event-from_input" type="text" name="addressStreet" placeholder="Street" />
+                <ErrorMessage className="error" name="addressStreet" component="div" />
+                <Field className="organiser_create_event-from_input" type="text" name="addressNumber"  placeholder="Number"/>
+                <ErrorMessage className="error" name="addressNumber" component="div" />
+                </div>
+              
+              <textarea className="organiser_create_event-from_input_textbox" type="text" name="addressDescription"  maxLength="255" placeholder="Describe how to get there" />
+              <ErrorMessage className="error" name="addressDescription" component="div" />
+              </div>
+            </div>
             <br/>
 
+            <div className="organiser_create_event_row_div">
             <label htmlFor="district">District*</label>
-            <select className="create_event-from_input_dropdown" type="text" name="district"  placeholder="District">
-              <option value="volvo">Chełm</option>
-              <option value="saab">Zaspa</option>
-              <option value="fiat">Śródmieście</option>
-            </select>
+            <Field as="select" className="organiser_create_event-from_input_dropdown" type="text" name="district"  placeholder="District">
+              <option value="place_1">Chełm</option>
+              <option value="place_2">Zaspa</option>
+              <option value="place_3">Śródmieście</option>
+            </Field>
+            </div>
             <ErrorMessage className="error" name="district" component="div" />
             <br/>
+
+            <div className="organiser_create_event_row_div">
             <label htmlFor="categories">Categories*</label>
-            <select className="create_event-from_input_dropdown" type="text" name="categories"  placeholder="Category">
-              <option value="volvo">Pomoc Bezdomnym</option>
-              <option value="saab">Wyprowadzanie</option>
-            </select>
-            <ErrorMessage className="error" name="district" component="div" />
+            <Field as="select" className="organiser_create_event-from_input_dropdown" type="text" name="categories"  placeholder="Category">
+              <option value="help_1">Pomoc Bezdomnym</option>
+              <option value="help_2">Wyprowadzanie</option>
+            </Field>
+            <ErrorMessage className="error" name="category" component="div" />
+            </div>
             <br/>
 
-
-            <div className="checkbox_signup-group">
+            
+            <div className="checkbox_organiser_create_event-group">
               <label htmlFor="peselVerification">
                 <Field type="checkbox" name="peselVerification" />
                 Pesel verification needed
@@ -110,15 +132,55 @@ const OrganiserCreateEvent = () => {
                 Volunteer agreement needed
               </label>
             </div>
+            
             <br/>
+            <br/>
+            
+            <p className="organiser_create_event_sub-title">Shifts</p>
+            <div className="organiser_create_event_shifts">
+              <div className="organiser_create_event_shifts_column">
+                <div>31.02.2024</div>
+                <div>07:00-14:00</div>
+                <div>ul. Wrót Baldura 666</div>
+              </div>
+              <div>
+                <div><b>Volunteers needed</b>: 4</div> 
+                <div><b>Minimum age required</b>: 2</div>
+                <div><b>Leader required</b>: No</div>
+              </div>
+              <div className="organiser_create_event_shifts_manage">
+                <button className="organiser_create_event-form_button">Edit</button>
+                <button className="organiser_create_event-form_button">Delete</button>
+              </div>
+            </div>
+
+            <div className="organiser_create_event_shifts">
+              <div className="organiser_create_event_shifts_column">
+                <div>31.02.2024</div>
+                <div>07:00-14:00</div>
+                <div>ul. Wrót Baldura 666</div>
+              </div>
+              <div>
+                <div><b>Volunteers needed</b>: 4</div> 
+                <div><b>Minimum age required</b>: 2</div>
+                <div><b>Leader required</b>: No</div>
+              </div>
+              <div className="organiser_create_event_shifts_manage">
+                <button className="organiser_create_event-form_button">Edit</button>
+                <button className="organiser_create_event-form_button">Delete</button>
+              </div>
+            </div>
+            
+            <button className="organiser_create_event_shifts_button">Add shift</button>
+
             <div className="button-group">
-            <button className="signup-form_button">Add shift</button>
-            <button className="signup-form_button" type="submit" disabled={isSubmitting}>
+            <button className="organiser_create_event-form_button" type="submit" disabled={isSubmitting}>
               Create
             </button>
 
           </div>
           </Form>
+
         )}
       </Formik>
     </div>
