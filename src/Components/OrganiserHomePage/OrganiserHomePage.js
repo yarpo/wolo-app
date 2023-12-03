@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
+import { Link } from "react-router-dom";
 import '../../styles/organiser-home-page.scss';
 import OrganiserEventListDisplay from '../OrganiserEventListDisplay/OrganiserEventListDisplay.js';
 
@@ -27,9 +28,11 @@ const OrganiserHomePage = () => {
             </div>
             <div id="button_div">
                 <form>
+                <Link to="/createEvent">
                     <div id="button_create_event">
                         {t('createNewEvent')}
                     </div>
+                    </Link>
                 </form>
             </div>
             <div id="ongoing_events">
