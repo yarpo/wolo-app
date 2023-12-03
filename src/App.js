@@ -24,7 +24,7 @@ function App() {
             <Route path="/organizer" element={<Organizer />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/organiser" element={<OrganiserHomePage />} />
+            <Route path="/organiserHomePage" element={<OrganiserHomePage />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </FiltersProvider>
