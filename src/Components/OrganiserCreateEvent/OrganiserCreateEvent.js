@@ -1,5 +1,4 @@
 import { Formik, Field, Form, ErrorMessage } from "formik";
-
 import '../../styles/organiser-create-event.scss';
 
 const OrganiserCreateEvent = () => {
@@ -119,7 +118,6 @@ const OrganiserCreateEvent = () => {
             <ErrorMessage className="error" name="category" component="div" />
             </div>
             <br/>
-
             
             <div className="checkbox_organiser_create_event-group">
               <label htmlFor="peselVerification">
@@ -134,19 +132,18 @@ const OrganiserCreateEvent = () => {
             </div>
             
             <br/>
-            <br/>
             
             <p className="organiser_create_event_sub-title">Shifts</p>
             <div className="organiser_create_event_shifts">
               <div className="organiser_create_event_shifts_column">
-                <div>31.02.2024</div>
-                <div>07:00-14:00</div>
-                <div>ul. Wrót Baldura 666</div>
+                <span>31.02.2024</span>
+                <p><span>07:00-14:00</span></p>
+                <span>ul. Wrót Baldura 666</span>
               </div>
               <div>
-                <div><b>Volunteers needed</b>: 4</div> 
-                <div><b>Minimum age required</b>: 2</div>
-                <div><b>Leader required</b>: No</div>
+                <span><b>Volunteers needed</b>: 4</span> 
+                <p><span><b>Minimum age required</b>: 2</span></p>
+                <span><b>Leader required</b>: No</span>
               </div>
               <div className="organiser_create_event_shifts_manage">
                 <button className="organiser_create_event-form_button">Edit</button>
@@ -156,14 +153,14 @@ const OrganiserCreateEvent = () => {
 
             <div className="organiser_create_event_shifts">
               <div className="organiser_create_event_shifts_column">
-                <div>31.02.2024</div>
-                <div>07:00-14:00</div>
-                <div>ul. Wrót Baldura 666</div>
+                <span>31.02.2024</span>
+                <p><span>07:00-14:00</span></p>
+                <span>ul. Wrót Baldura 666</span>
               </div>
               <div>
-                <div><b>Volunteers needed</b>: 4</div> 
-                <div><b>Minimum age required</b>: 2</div>
-                <div><b>Leader required</b>: No</div>
+                <span><b>Volunteers needed</b>: 4</span>
+                <p><span><b>Minimum age required</b>: 2</span></p>
+                <span><b>Leader required</b>: No</span>
               </div>
               <div className="organiser_create_event_shifts_manage">
                 <button className="organiser_create_event-form_button">Edit</button>
