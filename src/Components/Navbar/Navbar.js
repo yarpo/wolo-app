@@ -63,7 +63,7 @@ const Navbar = () => {
             </select>
           </li>
           <li>
-            <Link to="/login">{t('login')}</Link>
+            <Link to="/login">{t('signIn')}</Link>
           </li>
         </ul>
         <button
