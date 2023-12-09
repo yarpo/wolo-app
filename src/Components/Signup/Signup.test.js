@@ -2,6 +2,12 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import Signup from "./Signup";
 
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({
+    t: (key) => key,
+  }),
+}));
+
 describe("Signup Component", () => {
   test("renders signup form", () => {
     render(<Signup />);

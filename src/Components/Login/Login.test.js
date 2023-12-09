@@ -3,6 +3,11 @@ import { render, fireEvent } from '@testing-library/react';
 import Login from './Login';
 import { screen } from '@testing-library/react';
 
+jest.mock('./Login', () => ({
+  __esModule: true,
+  default: jest.fn(),
+}));
+
 describe('Login component', () => {
   it('renders without crashing', () => {
     render(<Login />);
