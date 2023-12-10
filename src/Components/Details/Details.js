@@ -31,14 +31,14 @@ const Details = () => {
     fetchEventData();
   }, [id]);
 
-useEffect(() => {
+ useEffect(() => {
   if (eventData && eventData.organisationId) {
-    fetch(`http://localhost:8080/events?organier=${eventData.organisationId}`)
+    fetch(`http://localhost:8080/events?organizer=${eventData.organisationId}`)
       .then(response => response.json())
       .then(data => setOrganiserEvents(data))
       .catch(error => console.error(error));
   }
-}, [eventData?.organisationId]); // Depend on eventData.organisationId instead of eventData
+}, [eventData?.organisationId]);
 
   if (!eventData) {
     return <div>Loading...</div>;
@@ -47,7 +47,6 @@ useEffect(() => {
   const {
   name,
   organisationName,
-  // organisationId,
   description,
   street,
   addressDescription,
