@@ -38,7 +38,7 @@ const Details = () => {
       .then(data => setOrganiserEvents(data))
       .catch(error => console.error(error));
   }
-}, [eventData?.organisationId]);
+}, [eventData, eventData?.organisationId]);
 
   if (!eventData) {
     return <div>Loading...</div>;
