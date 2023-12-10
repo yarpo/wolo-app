@@ -3,26 +3,67 @@ import { useTranslation } from 'react-i18next';
 import { VscChevronDown, VscChevronUp, VscClose } from 'react-icons/vsc';
 import DatePicker from 'react-datepicker';
 import { useFiltersContext } from './FiltersContext';
-import eventData from '../../eventsData.json';
 
 const Filters = ({ setFilteredEvents }) => {
   const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const { filters, setFilters } = useFiltersContext();
-  const locations = [...new Set(eventData.map(event => event.location))];
-  const categories = [...new Set(eventData.map(event => event.category))];
-  const organisations = [...new Set(eventData.map(event => event.organizedBy))];
-  const ages = [...new Set(eventData.map(event => event.ageRestrictions))];
+  const [apiResponse, setApiResponse] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [districts, setDistricts] = useState([]);
+  const [organizations, setOrganizations] = useState([]);
 
-  useEffect(() => {
-    fetch('http://localhost:8080/events')
-      .then(res =>{
-        return res.json()
-      })
-      .then (data =>{
-        console.log(data)
-      })
-  }, []);
+
+useEffect(() => {
+  let url = 'http://localhost:8080/events';
+
+  // if (filters.selectedDate) {
+  //   const startDate = filters.selectedDate;
+  //   url += `startDate=${startDate}&`;
+  // }
+
+  // if (filters.chosenTags && filters.chosenTags.length > 0) {
+  //   const category = filters.chosenTags[0];
+  //   const categoryId = typeof category === 'object' ? category.id : categories.find(cat => cat.name === category)?.id;
+  //   if (categoryId) {
+  //     url += `category=${categoryId}&`;
+  //   }
+  // }
+
+  // if (filters.requiresVerification !== null) {
+  //   const verification = typeof filters.requiresVerification === 'object' ? filters.requiresVerification.id : filters.requiresVerification;
+  //   url += `verification=${verification}&`;
+  // }
+
+  // if (filters.selectedAge !== '') {
+  //   const ageRestriction = typeof filters.selectedAge === 'object' ? filters.selectedAge.id : filters.selectedAge;
+  //   url += `ageRestriction=${ageRestriction}&`;
+  // }
+
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      setApiResponse(data);
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    });
+}, [filters, categories]);
+
+useEffect(() => {
+  fetch('http://localhost:8080/categories')
+    .then(response => response.json())
+    .then(data => setCategories(data));
+
+  fetch('http://localhost:8080/districts')
+    .then(response => response.json())
+    .then(data => setDistricts(data));
+
+  fetch('http://localhost:8080/organisations')
+    .then(response => response.json())
+    .then(data => setOrganizations(data));
+}, []);
+  
 
   useEffect(() => {
     const storedLanguage = localStorage.getItem('language');
@@ -31,78 +72,79 @@ const Filters = ({ setFilteredEvents }) => {
     }
   }, [i18n]);
 
-  useEffect(() => {
-    const filteredEvents = eventData.filter(event => {
-      const isMatchingTag = filters.chosenTags.some(tag =>
-        [event.location, event.category, event.organizedBy, event.age].includes(
-          tag
-        )
-      );
+useEffect(() => {
+  const filteredEvents = apiResponse.filter((event) => {
+    // const isMatchingTag = filters.chosenTags.some((tag) =>
+    //   [event.street, event.districtId, event.organisationId].includes(tag)
+    // );
+    const isMatchingTag = filters.chosenTags.some((tag) => tag === event.organisationId);
+    
+    const isMatchingDate =
+      filters.selectedDate === null || new Date(event.shifts[0].date.join('-')) >= filters.selectedDate;
 
-      const isMatchingDate =
-        filters.selectedDate === null ||
-        new Date(event.date) >= filters.selectedDate;
+    const isMatchingVerification =
+      !filters.requiresVerification || event.peselVerificationRequired === false;
 
-      const isMatchingVerification =
-        !filters.requiresVerification || event.requiresVerification === false;
+    const isMatchingBooking =
+      !filters.hideFullyBookedEvents || event.shifts[0].signedUp < event.shifts[0].capacity;
 
-      const isMatchingBooking =
-        !filters.hideFullyBookedEvents ||
-        event.participantsSignedIn < event.participantsNeeded;
+    const isMatchingAge =
+      filters.selectedAge === '' ||
+      parseInt(event.shifts[0].requiredMinAge) >= parseInt(filters.selectedAge);
 
-      const isMatchingAge =
-        filters.selectedAge === '' ||
-        parseInt(event.ageRestrictions) >= parseInt(filters.selectedAge);
+    return (
+      (filters.chosenTags.length === 0 || isMatchingTag) &&
+      isMatchingDate &&
+      isMatchingVerification &&
+      isMatchingBooking &&
+      isMatchingAge
+    );
+  });
 
-      return (
-        (filters.chosenTags.length === 0 || isMatchingTag) &&
-        isMatchingDate &&
-        isMatchingVerification &&
-        isMatchingBooking &&
-        isMatchingAge
-      );
-    });
-
-    setFilteredEvents(filteredEvents);
-  }, [filters, setFilteredEvents]);
+  setFilteredEvents(filteredEvents);
+}, [filters, setFilteredEvents, apiResponse]);
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleDateChange = date => {
+  const handleDateChange = (date) => {
     setFilters({ ...filters, selectedDate: date });
   };
 
-  const handleTagChange = event => {
+  const handleTagChange = (event) => {
     const { value } = event.target;
     if (!filters.chosenTags.includes(value)) {
       setFilters({ ...filters, chosenTags: [...filters.chosenTags, value] });
     }
   };
 
-  const handleTagRemove = tag => {
+  const handleTagRemove = (tag) => {
     setFilters({
       ...filters,
-      chosenTags: filters.chosenTags.filter(chosenTag => chosenTag !== tag),
+      chosenTags: filters.chosenTags.filter((chosenTag) => chosenTag !== tag),
     });
   };
 
-  const handleCheckboxChange = event => {
+  const handleCheckboxChange = (event) => {
     const { name, checked } = event.target;
     setFilters({ ...filters, [name]: checked });
   };
 
-  const handleAgeChange = event => {
+  const handleAgeChange = (event) => {
     const { value } = event.target;
     setFilters({ ...filters, selectedAge: value });
   };
 
-  const handleKeyDown = event => {
+  const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
       handleToggle();
     }
   };
+
+  if (apiResponse.length === 0) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div id="filters">
@@ -117,10 +159,10 @@ const Filters = ({ setFilteredEvents }) => {
               placeholderText={t('date')}
             />
             {[
-              { label: t('location'), options: locations },
-              { label: t('category'), options: categories },
-              { label: t('organisations'), options: organisations },
-            ].map((filter, index) => (
+          { label: t('location'), options: districts.map((district) => district.name) },
+          { label: t('category'), options: categories.map((category) => category.name) },
+          { label: t('organisations'), options: organizations.map((organization) => organization.name) },
+        ].map((filter, index) => (
               <select
                 key={index}
                 id="selectInput"
@@ -148,7 +190,7 @@ const Filters = ({ setFilteredEvents }) => {
               <option value="" disabled>
                 {t('ageRestrictions')}
               </option>
-              {ages.map((age, index) => (
+              {[...new Set(apiResponse.map((event) => event.ageRestrictions))].map((age, index) => (
                 <option key={index} value={age}>
                   {age}
                 </option>
@@ -184,22 +226,14 @@ const Filters = ({ setFilteredEvents }) => {
           <ul className="chosen-tags-container">
             {filters.chosenTags.map((tag, index) => (
               <li key={index} className="chosen-tags">
-                {tag}{' '}
-                <VscClose
-                  className="icon"
-                  onClick={() => handleTagRemove(tag)}
-                />
+                {tag} <VscClose className="icon" onClick={() => handleTagRemove(tag)} />
               </li>
             ))}
           </ul>
         </>
       )}
       <br />
-      <button
-        id="toggle-filters"
-        onClick={handleToggle}
-        onKeyDown={handleKeyDown}
-      >
+      <button id="toggle-filters" onClick={handleToggle} onKeyDown={handleKeyDown}>
         {isOpen ? (
           <>
             {t('hideFilters')} <VscChevronUp />

@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {
   VscArrowLeft,
   VscBrowser,
@@ -7,72 +7,99 @@ import {
   VscLocation,
 } from 'react-icons/vsc';
 import { BiTime, BiBorderAll } from 'react-icons/bi';
-import { Link } from 'react-router-dom';
-import MoreEvents from '../MoreEventsFromOrganizer/MoreEvents';
+import { Link, useParams } from 'react-router-dom';
 import '../../styles/details.scss';
+import EventCard from '../EventCard/EventCard';
 
 const Details = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
+  const { id } = useParams();
+  const [eventData, setEventData] = useState(null);
+  const [organiserEvents, setOrganiserEvents] = useState([]);
 
   useEffect(() => {
-    const storedLanguage = localStorage.getItem('language');
-    if (storedLanguage) {
-      i18n.changeLanguage(storedLanguage);
-    }
-  }, [i18n]);
+    const fetchEventData = async () => {
+      try {
+        const response = await fetch(`http://localhost:8080/events/${id}`);
+        const data = await response.json();
+        setEventData(data);
+      } catch (error) {
+        console.error('Error fetching event data:', error);
+      }
+    };
+
+    fetchEventData();
+  }, [id]);
+
+useEffect(() => {
+  if (eventData && eventData.organisationId) {
+    fetch(`http://localhost:8080/events?organier=${eventData.organisationId}`)
+      .then(response => response.json())
+      .then(data => setOrganiserEvents(data))
+      .catch(error => console.error(error));
+  }
+}, [eventData?.organisationId]); // Depend on eventData.organisationId instead of eventData
+
+  if (!eventData) {
+    return <div>Loading...</div>;
+  }
+
+  const {
+  name,
+  organisationName,
+  // organisationId,
+  description,
+  street,
+  addressDescription,
+  homeNum,
+  district,
+  imageUrl,
+  shifts,
+} = eventData;
 
   return (
     <div className="details_container">
-      <div id="column">
-        <Link to="/events" id="back">
-          <VscArrowLeft id="back_arrow" /> {t('back')}
-        </Link> 
-        <h1 id="title">Event details will show up here...</h1>
-        <ul id="volunteers_numbers">
-          <li>
-            <strong>X</strong> {t('haveBeenSignedIn')}
-          </li>
-          <li>
-            <strong>X</strong> {t('moreIsNeeded')}
-          </li>
-        </ul>
-        <ul id="information">
-          <li>
-            <VscBrowser id="icon" /> <strong>{t('date')}:</strong>{' '}
-          </li>
-          <li>
-            <BiTime id="icon" /> <strong>{t('time')}:</strong>{' '}
-          </li>
-          <li>
-            <BiBorderAll id="icon" /> <strong>{t('category')}:</strong>{' '}
-          </li>
-        </ul>
-      </div>
+        <div id="column">
+      <Link to="/events" id="back">
+        <VscArrowLeft id="back_arrow" /> {t('back')}
+      </Link> 
+      <h1 id="title">{name}</h1>
+      <ul id="volunteers_numbers">
+        <li>
+          <strong>{shifts[0].signedUp}</strong> {t('haveBeenSignedIn')}
+        </li>
+        <li>
+          <strong>{shifts[0].capacity - shifts[0].signedUp}</strong> {t('moreIsNeeded')}
+        </li>
+      </ul>
+      <ul id="information">
+        <li>
+          <VscBrowser id="icon" /> <strong>{t('date')}:</strong> {new Date(shifts[0].date[0], shifts[0].date[1] - 1, shifts[0].date[2]).toLocaleDateString()}
+        </li>
+        <li>
+          <BiTime id="icon" /> <strong>{t('time')}:</strong> {`${shifts[0].startTime.join(':')} - ${shifts[0].endTime.join(':')}`}
+        </li>
+        <li>
+          <BiBorderAll id="icon" /> <strong>{t('category')}:</strong>{' '}
+        </li>
+      </ul>
+    </div>
 
-      <div id="column" className="photo">
-        <img src="#" alt="hands holding in circle" />
-      </div>
+    <div id="column" className="photo">
+      <img src={imageUrl} alt="hands holding in circle" />
+    </div>
 
-      <p id="description">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
-        fringilla est sit amet ultricies tempus. Praesent ultricies, arcu at
-        lobortis porttitor, risus erat porta purus, at imperdiet sapien turpis
-        vitae dolor. Fusce congue porttitor metus sit amet vehicula. Etiam
-        commodo volutpat vulputate. Donec in dolor a orci laoreet tristique
-        vitae ut ipsum. Quisque commodo, tortor quis efficitur vestibulum,
-        nibh nisl maximus risus, sed imperdiet felis tortor eget tellus. Morbi
-        pellentesque vehicula sem et tempus. In sapien leo, tincidunt at nisl
-        sit amet, luctus venenatis quam. Maecenas malesuada at erat eu
-        viverra.
-      </p>
+    <p id="description">{description}</p>
 
       <div id="extra_information">
         <ul id="information">
             <li>
               <VscOrganization id="icon" /> <strong>{t('organizer')}:</strong>{' '}
+              {organisationName}
             </li>
             <li>
               <VscLocation id="icon" /> <strong>{t('location')}:</strong>{' '}
+              {street} {homeNum}, {addressDescription}, {district}
             </li>
         </ul>
       </div>
@@ -96,8 +123,10 @@ const Details = () => {
       </div>
 
       <div id="more-events">
-        <MoreEvents />
-      </div>
+      {organiserEvents.map(event => (
+        <EventCard key={event.id} event={event} />
+      ))}
+    </div>
     </div>
   );
 };
