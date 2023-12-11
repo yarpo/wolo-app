@@ -17,29 +17,6 @@ const Filters = ({ setFilteredEvents }) => {
 useEffect(() => {
   let url = 'http://localhost:8080/events';
 
-  // if (filters.selectedDate) {
-  //   const startDate = filters.selectedDate;
-  //   url += `startDate=${startDate}&`;
-  // }
-
-  // if (filters.chosenTags && filters.chosenTags.length > 0) {
-  //   const category = filters.chosenTags[0];
-  //   const categoryId = typeof category === 'object' ? category.id : categories.find(cat => cat.name === category)?.id;
-  //   if (categoryId) {
-  //     url += `category=${categoryId}&`;
-  //   }
-  // }
-
-  // if (filters.requiresVerification !== null) {
-  //   const verification = typeof filters.requiresVerification === 'object' ? filters.requiresVerification.id : filters.requiresVerification;
-  //   url += `verification=${verification}&`;
-  // }
-
-  // if (filters.selectedAge !== '') {
-  //   const ageRestriction = typeof filters.selectedAge === 'object' ? filters.selectedAge.id : filters.selectedAge;
-  //   url += `ageRestriction=${ageRestriction}&`;
-  // }
-
   fetch(url)
     .then(response => response.json())
     .then(data => {
@@ -140,6 +117,18 @@ useEffect(() => {
     }
   };
 
+  const handleResetFilters = () => {
+  setFilters({
+    chosenTags: [],
+    chosenLocation: '',
+    chosenOrganisation: '',
+    selectedDate: null,
+    requiresVerification: false,
+    hideFullyBookedEvents: false,
+    selectedAge: '',
+  });
+};
+
   if (apiResponse.length === 0) {
     return <p>Loading...</p>;
   }
@@ -194,6 +183,7 @@ useEffect(() => {
                 </option>
               ))}
             </select>
+            <button onClick={handleResetFilters}>Reset All Filters</button>
             <br />
           </div>
           <div className="checkbox-container">
