@@ -74,10 +74,8 @@ useEffect(() => {
 
 useEffect(() => {
   const filteredEvents = apiResponse.filter((event) => {
-    // const isMatchingTag = filters.chosenTags.some((tag) =>
-    //   [event.street, event.districtId, event.organisationId].includes(tag)
-    // );
-    const isMatchingTag = filters.chosenTags.some((tag) => tag === event.organisationId);
+
+    const isMatchingTag = filters.chosenTags.some((tag) => tag === event.organisation);
     
     const isMatchingDate =
       filters.selectedDate === null || new Date(event.shifts[0].date.join('-')) >= filters.selectedDate;
