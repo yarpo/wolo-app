@@ -125,7 +125,7 @@ const Signup = () => {
             </button>
             <div className="line-text">
               <hr />
-              <p>{t('orContinueWith')}</p>
+              <p>{t('orContinueWithGoogle')}</p>
               <hr />
             </div>
             <button className="signup-form_button">{t('SignUpWithGoole')} </button>
