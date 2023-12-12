@@ -42,5 +42,27 @@
     "volunteers": "Волонтери",
     "details": "Подробиці",
     "edit": "Редагувати",
-    "delete": "Видалити"
+    "delete": "Видалити",
+    
+    "signup": "Реєстрація",
+    "begin": "Почніть свій шлях волонтера",
+    "firstName": "Ім'я",
+    "lastName": "Прізвище",
+    "email": "Електронна пошта",
+    "phone": "Номер телефону (Опціонально)",
+    "password": "Пароль",
+    "showPassword": "Показати пароль",
+    "confirmPassword": "Підтвердіть пароль",
+    "forgotPassword": "Забули пароль?",
+    "confirmAge": "Підтверджую, що мені більше 18 років",
+    "agreeTerms": "Я прочитав(ла) і погоджуюсь з умовами",
+    "orContinueWith": "Або продовжте за допомогою своєї електронної адреси",
+    "orContinueWithGoogle": "Або продовжте з обліковим записом Google",
+    "alreadyHaveAccount": "Вже є обліковий запис? ",
+    "SignUpWithGoole": "Зареєструватися за допомогою Google",
+    "loginNow": "Увійти зараз",
+    "signUpNow": "Зареєструватися зараз",
+    "keepMeLoggedIn": "Залишити мене у системі",
+    "continue": "Продовжте свій шлях волонтера",
+    "continueWithGoogle": "Продовжити за допомогою Google"
 }
