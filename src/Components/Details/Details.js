@@ -33,7 +33,7 @@ const Details = () => {
 
  useEffect(() => {
   if (eventData && eventData.organisationId) {
-    fetch(`http://localhost:8080/events?organizer=${eventData.organisationId}`)
+    fetch(`http://localhost:8080/organisations/events/${eventData.organisationId}`)
       .then(response => response.json())
       .then(data => setOrganiserEvents(data))
       .catch(error => console.error(error));
@@ -122,6 +122,7 @@ const Details = () => {
       </div>
 
       <div id="more-events">
+        <p>{t('moreEventsFromThisOrganizer')}</p>
       {organiserEvents.map(event => (
         <EventCard key={event.id} event={event} />
       ))}
