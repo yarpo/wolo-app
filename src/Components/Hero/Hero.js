@@ -25,7 +25,7 @@ const Hero = () => {
     };
 
     return (
-        <div>
+        <div className='hero-container'>
             <form id="form_hero">
                 <div id="mainContainer_hero">
                     <div id="background_hero">

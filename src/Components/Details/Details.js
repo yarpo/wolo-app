@@ -56,37 +56,37 @@ const Details = () => {
   shifts,
 } = eventData;
 
-  return (
-    <div className="details_container">
-        <div id="column">
+return (
+  <div className="details_container">
+    <div id="column">
       <Link to="/events" id="back">
         <VscArrowLeft id="back_arrow" /> {t('back')}
       </Link> 
-      <h1 id="title">{name}</h1>
-      <ul id="volunteers_numbers">
-        <li>
-          <strong>{shifts[0].signedUp}</strong> {t('haveBeenSignedIn')}
-        </li>
-        <li>
-          <strong>{shifts[0].capacity - shifts[0].signedUp}</strong> {t('moreIsNeeded')}
-        </li>
-      </ul>
-      <ul id="information">
-        <li>
-          <VscBrowser id="icon" /> <strong>{t('date')}:</strong> {new Date(shifts[0].date[0], shifts[0].date[1] - 1, shifts[0].date[2]).toLocaleDateString()}
-        </li>
-        <li>
-          <BiTime id="icon" /> <strong>{t('time')}:</strong> {`${shifts[0].startTime.join(':')} - ${shifts[0].endTime.join(':')}`}
-        </li>
-        <li>
-          <BiBorderAll id="icon" /> <strong>{t('category')}:</strong>{' '}
-        </li>
-      </ul>
-    </div>
+        <h1 id="title">{name}</h1>
+        <ul id="volunteers_numbers">
+          <li>
+            <strong>{shifts[0].signedUp}</strong> {t('haveBeenSignedIn')}
+          </li>
+          <li>
+            <strong>{shifts[0].capacity - shifts[0].signedUp}</strong> {t('moreIsNeeded')}
+          </li>
+        </ul>
+        <ul id="information">
+          <li>
+            <VscBrowser id="icon" /> <strong>{t('date')}:</strong> {new Date(shifts[0].date[0], shifts[0].date[1] - 1, shifts[0].date[2]).toLocaleDateString()}
+          </li>
+          <li>
+            <BiTime id="icon" /> <strong>{t('time')}:</strong> {`${shifts[0].startTime.join(':')} - ${shifts[0].endTime.join(':')}`}
+          </li>
+          <li>
+            <BiBorderAll id="icon" /> <strong>{t('category')}:</strong>{' '}
+          </li>
+        </ul>
+      </div>
 
-    <div id="column" className="photo">
-      <img src={imageUrl} alt="hands holding in circle" />
-    </div>
+      <div className="photo">
+        <img src={imageUrl} alt="hands holding in circle" />
+      </div>
 
     <p id="description">{description}</p>
 

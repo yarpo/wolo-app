@@ -10,12 +10,16 @@
   height: auto; 
   width: 800px;
   margin: 100px auto;
+  label {
+    font-weight: 400;
+    font-size: 25px;
+  }
 }
 
 .signup_title{ 
   display: flex;
   justify-content: flex-start;
-  font-size: 2,5rem;
+  font-size: 24px;
   font-weight: bold;
   margin-bottom: 10px;
 }
@@ -46,11 +50,6 @@
   margin-bottom: 10px;
 }
 
-label {
-  font-weight: 400;
-  font-size: 25px;
-}
-
 .password-field {
   display: flex;
   flex-direction: column;
@@ -76,7 +75,7 @@ label {
   display: flex;
   flex-direction: column;
   label {
-    font-size: 1em; // Adjust this to control the size of the checkbox text
+    font-size: 1em;
   }
   input{
     margin-right: 10px;

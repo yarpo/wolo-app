@@ -1,148 +1,149 @@
-h1 {
-  text-align: center;
-  font-size: 40px;
-}
-
-h2 {
-  font-weight: 450;
-  text-align: center;
-  font-size: 24px;
-}
-
-a {
-  text-decoration-thickness: 1px;
-  font-size: 24px;
-  &:hover {
-    color: #2661BA;
+.hero-container{
+  h1 {
+    text-align: center;
+    font-size: 40px;
   }
-}
 
-input[type="submit"] {
-  background-color: #2661BA;
-  color: white;
-  font-size: 20px;
-  padding: 10px 30px;
-  text-align: center;
-  border-radius: 5px;
-  border: 0px;
-  cursor: pointer;
-  width: 10%;
-  min-width: 150px;
-  height: 80px;
-  font-family: 'Open Sans', sans-serif;
-}
-
-#mainContainer_hero {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex-wrap: wrap;
-  padding-top: 100px;
-  width: 100%;
-  height: 520px;
-  background: url("../images/hero.jpg") no-repeat 100% 40% / cover;
-  margin: 0 auto;
-}
-
-#mainContainer_hero > :last-child {
-  margin-top: auto; /* Push the last child to the bottom */
-  margin-bottom: 20px;
-}
-
-#form_hero {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  flex-direction: column;
-}
-
-#containerHero_hero,
-#subtext_hero {
-  flex-grow: 1;
-  margin: 5px 10vw;
-  text-align: center;
-}
-
-#MainRow_hero {
-  display: flex;
-  justify-content: space-between;
-  gap: 40px;
-}
-
-#MainRow_hero > :nth-last-child(-n+2) {
-  margin-top: auto; /* Push the last two children to the bottom */
-}
-
-#selectInput_hero,
-#datePicker_hero {
-  padding: 10px;
-  height: 100px;
-  min-width: 400px;
-  background-color: rgba(255, 255, 255, 0.8);
-  cursor: pointer;
-  border-radius: 5px;
-  border: 0px;
-  font-size: 30px;
-  font-family: 'Open Sans', sans-serif;
-  margin: 10px;
-  text-align: center;
-}
-
-#filters_hero{
-  padding-inline: 350px;
-}
-
-#button_hero {
-  display: flex;
-  justify-content: flex-end;
-}
-
-@media screen and (max-width: 1268px) {
-  #selectInput_hero,
-  #datePicker_hero {
-    min-width: 300px;
+  h2 {
+    font-weight: 450;
+    text-align: center;
+    font-size: 24px;
   }
-}
 
-@media screen and (max-width: 780px) {
-  form {
-    align-items: center;
+  a {
+    text-decoration-thickness: 1px;
+    font-size: 24px;
+    &:hover {
+      color: #2661BA;
+    }
   }
 
   input[type="submit"] {
-    width: 20%;
-    min-width: 200px;
+    background-color: #2661BA;
+    color: white;
+    font-size: 20px;
+    padding: 10px 30px;
+    text-align: center;
+    border-radius: 5px;
+    border: 0px;
+    cursor: pointer;
+    width: 10%;
+    min-width: 150px;
     height: 80px;
+    font-family: 'Open Sans', sans-serif;
   }
 
   #mainContainer_hero {
-    padding-top: 80px;
-    padding-bottom: 60px;
-    height: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-top: 100px;
+    width: 100%;
+    height: 520px;
+    background: url("../images/hero.jpg") no-repeat 100% 40% / cover;
+    margin: 0 auto;
   }
 
+  #mainContainer_hero > :last-child {
+    margin-top: auto;
+    margin-bottom: 20px;
+  }
+
+  #form_hero {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  #containerHero_hero,
   #subtext_hero {
-    padding-bottom: 30px;
+    flex-grow: 1;
+    margin: 5px 10vw;
+    text-align: center;
   }
 
   #MainRow_hero {
-    flex-direction: column;
-    justify-content: center;
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
   }
 
-  #button_hero {
-    padding-right: 0;
+  #MainRow_hero > :nth-last-child(-n+2) {
+    margin-top: auto; /* Push the last two children to the bottom */
   }
 
   #selectInput_hero,
   #datePicker_hero {
-    min-width: 90px;
-    margin: 2px;
-  }
-  
-  #filters_hero{
-    justify-content: center;
-      text-align: center;
+    padding: 10px;
+    height: 100px;
+    min-width: 400px;
+    background-color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    border-radius: 5px;
+    border: 0px;
+    font-size: 30px;
+    font-family: 'Open Sans', sans-serif;
+    margin: 10px;
+    text-align: center;
   }
 
+  #filters_hero{
+    padding-inline: 350px;
+  }
+
+  #button_hero {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  @media screen and (max-width: 1268px) {
+    #selectInput_hero,
+    #datePicker_hero {
+      min-width: 300px;
+    }
+  }
+
+  @media screen and (max-width: 780px) {
+    form {
+      align-items: center;
+    }
+
+    input[type="submit"] {
+      width: 20%;
+      min-width: 200px;
+      height: 80px;
+    }
+
+    #mainContainer_hero {
+      padding-top: 80px;
+      padding-bottom: 60px;
+      height: 700px;
+    }
+
+    #subtext_hero {
+      padding-bottom: 30px;
+    }
+
+    #MainRow_hero {
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    #button_hero {
+      padding-right: 0;
+    }
+
+    #selectInput_hero,
+    #datePicker_hero {
+      min-width: 90px;
+      margin: 2px;
+    }
+    
+    #filters_hero{
+      justify-content: center;
+        text-align: center;
+    }
+  }
 }

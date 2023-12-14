@@ -10,8 +10,12 @@
     height: auto; 
     width: 800px;
     margin: 100px auto;
-    
+    label {
+      font-weight: 400;
+      font-size: 25px;
+    }
   }
+
   .organiser_create_event_row_div{
       display: flex;
       justify-content: space-between;
@@ -40,7 +44,6 @@
     margin-left: 65%;
   }
 
-
   .organiser_create_event-from_input {
     width: 75%;
     padding: 10px;
@@ -59,6 +62,7 @@
     resize:none;
     float: right;
   }
+
   .organiser_create_event-from_input_dropdown{
     width: 75%;
     padding: 10px;
@@ -91,9 +95,9 @@
     float:left;
     margin-left: 25%;
     label {
-      font-size: 1em; // Adjust this to control the size of the checkbox text
+      font-size: 1em; 
     }
-    input{
+    input {
       margin-right: 10px;
     }
   }
@@ -112,7 +116,6 @@
     hr {
       flex-grow: 1;
     }
-  
     p {
       margin: 0 10px;
     }
@@ -128,31 +131,27 @@
     cursor: pointer;
     margin-bottom: 20px;
   }
-label {
-  font-weight: 400;
-  font-size: 25px;
-}
+
   .error {
     margin-top: -10px;
     padding: 4px;
     color: red;
     font-size: 12px;
     margin-left: 27%;
-
-
   }
-  .organiser_create_event_address-form
-  {
+
+  .organiser_create_event_address-form{
     display: flex;
     justify-content: space-between;
-    
     .organiser_create_event-from_input_textbox {
       width: 100%;
     }
   }
+
   .organiser_create_event_address-form_top{
     width: 75%;
   }
+
   .organiser_create_event_row_div_address{
     display: flex;
     justify-content: space-between;
@@ -165,10 +164,10 @@ label {
     justify-content: space-between;
     margin: 40px;
   }
+
   .organiser_create_event_shifts_column{
     flex-wrap: wrap;
     flex-direction: column;
-
   }
 
   .organiser_create_event_shifts_manage{
@@ -180,7 +179,6 @@ label {
   }
  
   .organiser_create_event_shifts_button{
-
     width: 20%;
     padding: 10px;
     background-color: #007bff;
