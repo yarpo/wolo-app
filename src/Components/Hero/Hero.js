@@ -10,6 +10,7 @@ import '../../styles/hero.scss';
 const Hero = () => {
     const { t, i18n } = useTranslation();
     const locations = ['Zaspa', 'Chełm', 'Wrzeszcz'];
+    const [selectedLocation, setSelectedLocation] = useState("");
     const [selectedDate, setSelectedDate] = useState(null);
     const [  , setFilteredEvents] = useState([]);
 
@@ -22,6 +23,9 @@ const Hero = () => {
 
     const handleDateChange = (date) => {
         setSelectedDate(date);
+    };
+    const handleLocationChange = (event) => {
+        setSelectedLocation(event.target.value);
     };
 
     return (
@@ -47,11 +51,17 @@ const Hero = () => {
                             className="MainInput"
                         />
                         </div>
-                        <select id="selectInput_hero" className="MainInput" data-testid="location-select">
-                            <option value="" disabled selected>{t('location')}</option>
+                       <select 
+                            id="selectInput_hero" 
+                            className="MainInput" 
+                            data-testid="location-select"
+                            value={selectedLocation}
+                            onChange={handleLocationChange}
+                            >
+                            <option value="" disabled>{t('location')}</option>
                             {locations.map((location, index) => (
                                 <option key={index} value={location}>
-                                    {location}
+                                {location}
                                 </option>
                             ))}
                         </select>
