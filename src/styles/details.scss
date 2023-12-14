@@ -17,11 +17,9 @@ $background-color_1: rgb(170, 139, 240); // to be removed when fetching photos w
     flex: 1;
   }
 
-  // to be tested when fetching photos will be implemented
   img {
     background-color: $background-color_1;
     max-height: 35vh;
-    margin: 5px;
   }
 
   #back {
@@ -31,6 +29,7 @@ $background-color_1: rgb(170, 139, 240); // to be removed when fetching photos w
 
   #back_arrow {
     margin: -1px;
+    
   }
 
   a {
@@ -62,6 +61,7 @@ $background-color_1: rgb(170, 139, 240); // to be removed when fetching photos w
     #icon {
       margin: -2.3px;
       margin-right: 5px;
+      vertical-align: middle;
     }
   }
 

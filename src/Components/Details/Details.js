@@ -126,7 +126,7 @@ return (
       {organiserEvents.map(event => (
         <EventCard key={event.id} event={event} />
       ))}
-    </div>
+      </div>
     </div>
   );
 };
