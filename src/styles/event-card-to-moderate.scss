@@ -58,6 +58,17 @@
         }
     }
 
+    #event_card_to_moderate_button {
+        background-color: $color-3-yellow;
+        margin: 10px 5%;
+        width: 90%;
+        padding: 10px;
+        border-radius: 10px;
+        cursor: pointer;
+        text-align: center;
+        font-size: $font-size-normall;
+    }
+
     @media screen and (max-width: 768px) {
         .card {
             width: 275px;

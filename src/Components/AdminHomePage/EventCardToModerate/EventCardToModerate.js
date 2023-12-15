@@ -40,6 +40,12 @@ const EventCardToModerate = () => {
               <strong>{t('signedIn')}:</strong>
             </li>
           </ul>
+            <div id="event_card_to_moderate_button">
+                Accept
+            </div>
+            <div id="event_card_to_moderate_button">
+                Discard
+            </div>
         </div>
       </div>
     </Link>
