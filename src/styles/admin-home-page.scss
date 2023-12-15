@@ -14,8 +14,12 @@
     }
 
     #admin_home_page_events_to_approve {
-        #admin_home_page_events_to_approve p {
+        margin-bottom: 20px;
+
+        #admin_home_page_show_all {
             float: right;
+            margin-right: 50px;
+            cursor: pointer;
         }
 
         #admin_home_page_events_to_approve svg {
@@ -27,6 +31,8 @@
             flex-direction: row;
             flex-wrap: wrap;
             width: 100%;
+            padding: 0px 30px;
+            margin-bottom: 10px;
         }
     }
 
@@ -61,6 +67,7 @@
         flex-direction: row;
         flex-wrap: wrap;
         width: 100%;
+        padding-bottom: 20px;
     }
 
     .admin_home_page_panel_column {
@@ -84,6 +91,14 @@
     @media screen and (max-width: 730px) {
         #admin_home_page_panel {
             flex-direction: column;
+        }
+
+        .admin_home_page_text {
+            margin-top: 50px;
+
+            #admin_home_page_icon {
+                display: none;
+            }
         }
     }
 }

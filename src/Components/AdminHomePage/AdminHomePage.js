@@ -34,10 +34,10 @@ const AdminHomePage = () => {
                         <EventCardToModerate />
                         <EventCardToModerate />
                     </div>
-                    <p>Show all <VscArrowRight /></p>
+                    <p id="admin_home_page_show_all">Show all <VscArrowRight /></p>
                 </div>
                 <div className='admin_home_page_text'>
-                    <h1><VscEdit /> Administrator panel</h1>
+                    <h1><VscEdit id="admin_home_page_icon"/> Administrator panel</h1>
                 </div>
                 <div id="admin_home_page_panel">
                     <div className="admin_home_page_panel_column">
