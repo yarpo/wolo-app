@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
 import '../../styles/admin-home-page.scss';
 import { VscEdit, VscArrowRight } from "react-icons/vsc";
+import EventCardToModerate from "./EventCardToModerate/EventCardToModerate.js";
 
 const AdminHomePage = () => {
     const { t, i18n } = useTranslation();
@@ -29,7 +30,9 @@ const AdminHomePage = () => {
                 <div id="admin_home_page_events_to_approve">
                     <h2>Events waiting for approval</h2>
                     <div id="admin_home_page_events_container">
-
+                        <EventCardToModerate />
+                        <EventCardToModerate />
+                        <EventCardToModerate />
                     </div>
                     <p>Show all <VscArrowRight /></p>
                 </div>
