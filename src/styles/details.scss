@@ -95,6 +95,13 @@ $background-color_1: rgb(170, 139, 240); // to be removed when fetching photos w
     height: 10vh;
     font-size: x-large;
   }
+
+  #details_shift_checkboxes {
+      display: flex;
+      justify-items: left;
+      flex-direction: row;
+      flex-wrap: wrap;
+  }
 }
 
 @media screen and (max-width: 768px) {
