@@ -13,6 +13,23 @@
         height: fit-content;
     }
 
+    #admin_home_page_events_to_approve {
+        #admin_home_page_events_to_approve p {
+            float: right;
+        }
+
+        #admin_home_page_events_to_approve svg {
+            vertical-align: middle;
+        }
+
+        #admin_home_page_events_container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+    }
+
     #admin_home_page_welcome_text {
         margin: 10vh 10vw;
         text-align: center;
@@ -21,6 +38,11 @@
 
     #admin_home_page_content {
         padding: 15px;
+    }
+
+    #admin_home_page_content h2 {
+        text-align: left;
+        margin: 20px;
     }
 
     .admin_home_page_text h1 {
@@ -46,11 +68,6 @@
         flex-direction: column;
         flex: 1;
         height: 100px;
-    }
-
-    .admin_home_page_panel_column h2 {
-        text-align: left;
-        margin: 20px;
     }
 
     #admin_home_page_button {

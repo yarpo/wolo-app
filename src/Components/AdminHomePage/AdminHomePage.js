@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
 import '../../styles/admin-home-page.scss';
-import { VscEdit } from "react-icons/vsc";
+import { VscEdit, VscArrowRight } from "react-icons/vsc";
 
 const AdminHomePage = () => {
     const { t, i18n } = useTranslation();
@@ -26,8 +26,12 @@ const AdminHomePage = () => {
                 </div>
             </div>
             <div id='admin_home_page_content'>
-                <div>
-                    Events waiting for approval
+                <div id="admin_home_page_events_to_approve">
+                    <h2>Events waiting for approval</h2>
+                    <div id="admin_home_page_events_container">
+
+                    </div>
+                    <p>Show all <VscArrowRight /></p>
                 </div>
                 <div className='admin_home_page_text'>
                     <h1><VscEdit /> Administrator panel</h1>
