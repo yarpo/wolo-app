@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
 import '../../styles/admin-home-page.scss';
+import { VscEdit } from "react-icons/vsc";
 
 const AdminHomePage = () => {
     const { t, i18n } = useTranslation();
@@ -24,18 +25,38 @@ const AdminHomePage = () => {
                     </div>
                 </div>
             </div>
-            <div>
-                Events waiting for approval
-            </div>
-            <div>
-                Administrator panel
-            </div>
-            <div id="admin_home_page_panel">
-                <div className="admin_home_page_panel_column">
-                    <h2>Events setup</h2>
+            <div id='admin_home_page_content'>
+                <div>
+                    Events waiting for approval
                 </div>
-                <div className="admin_home_page_panel_column">
-                    <h2>Management</h2>
+                <div className='admin_home_page_text'>
+                    <h1><VscEdit /> Administrator panel</h1>
+                </div>
+                <div id="admin_home_page_panel">
+                    <div className="admin_home_page_panel_column">
+                        <h2>Events setup</h2>
+                        <div id="admin_home_page_button">
+                            Categories
+                        </div>
+                        <div id="admin_home_page_button">
+                            Districts
+                        </div>
+                        <div id="admin_home_page_button">
+                            Roles
+                        </div>
+                    </div>
+                    <div className="admin_home_page_panel_column">
+                        <h2>Management</h2>
+                        <div id="admin_home_page_button">
+                            Users
+                        </div>
+                        <div id="admin_home_page_button">
+                            Organisations
+                        </div>
+                        <div id="admin_home_page_button">
+                            Events
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
