@@ -1,0 +1,104 @@
+@import './common.scss';
+
+.admin_home_page_container {
+    #admin_home_page_background_photo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: wrap;
+        padding-top: 100px;
+        width: 100%;
+        background: url("../images/hero.jpg") no-repeat 100% 40% / cover;
+        margin: 0 auto;
+        height: fit-content;
+    }
+
+    #admin_home_page_events_to_approve {
+        margin-bottom: 20px;
+
+        #admin_home_page_show_all {
+            float: right;
+            margin-right: 50px;
+            cursor: pointer;
+        }
+
+        #admin_home_page_events_to_approve svg {
+            vertical-align: middle;
+        }
+
+        #admin_home_page_events_container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            width: 100%;
+            padding: 0px 30px;
+            margin-bottom: 10px;
+        }
+    }
+
+    #admin_home_page_welcome_text {
+        margin: 10vh 10vw;
+        text-align: center;
+        padding-bottom: 20px;
+    }
+
+    #admin_home_page_content {
+        padding: 15px;
+    }
+
+    #admin_home_page_content h2 {
+        text-align: left;
+        margin: 20px;
+    }
+
+    .admin_home_page_text h1 {
+        text-align: left;
+        padding-left: 20px;
+    }
+
+    .admin_home_page_text svg {
+        height: 35px;
+        width: 35px;
+        vertical-align: middle;
+    }
+
+    #admin_home_page_panel {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+        padding-bottom: 20px;
+    }
+
+    .admin_home_page_panel_column {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        height: 100px;
+    }
+
+    #admin_home_page_button {
+        background-color: $color-2-orange;
+        margin: 5px 5%;
+        width: 90%;
+        padding: 10px;
+        border-radius: 10px;
+        cursor: pointer;
+        text-align: center;
+        font-size: $font-size-normall;
+    }
+
+    @media screen and (max-width: 730px) {
+        #admin_home_page_panel {
+            flex-direction: column;
+        }
+
+        .admin_home_page_text {
+            margin-top: 50px;
+
+            #admin_home_page_icon {
+                display: none;
+            }
+        }
+    }
+}
