@@ -64,5 +64,19 @@
     "signUpNow": "Зареєструватися зараз",
     "keepMeLoggedIn": "Залишити мене у системі",
     "continue": "Продовжте свій шлях волонтера",
-    "continueWithGoogle": "Продовжити за допомогою Google"
+    "continueWithGoogle": "Продовжити за допомогою Google",
+
+    "welcomeToWoloApp": "Ласкаво просимо в WoloApp",
+    "yourAccountStatus": "Статус вашого облікового запису",
+    "eventsWaitingForApproval": "Події очікують на затвердження",
+    "administratorPanel": "Панель адміністратора",
+    "eventsSetup": "Налаштування подій",
+    "categories": "Категорії",
+    "roles": "Ролі",
+    "districts": "Райони",
+    "management": "управління",
+    "users": "Користувачі",
+    "events": "Події",
+    "accept": "прийняти",
+    "discard": "Відкинути"
 }
