@@ -8,7 +8,6 @@ import {
 } from 'react-icons/vsc';
 import { BiTime, BiBorderAll } from 'react-icons/bi';
 import { Link, useParams } from 'react-router-dom';
-import MoreEvents from '../MoreEventsFromOrganizer/MoreEvents';
 import ShiftCheckbox from './ShiftCheckbox/ShiftCheckbox.js';
 import '../../styles/details.scss';
 import EventCard from '../EventCard/EventCard';
