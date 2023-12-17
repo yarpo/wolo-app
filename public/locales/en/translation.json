@@ -64,5 +64,19 @@
   "signUpNow": "Sign up now",
   "keepMeLoggedIn": "Keep me logged in",
   "continue": "Continue your journey as a volunteer",
-  "continueWithGoogle": "Continue with Google"
+  "continueWithGoogle": "Continue with Google",
+
+  "welcomeToWoloApp": "Welcome to WoloApp",
+  "yourAccountStatus": "Your account status",
+  "eventsWaitingForApproval": "Events waiting for approval",
+  "administratorPanel": "Administrator Panel",
+  "eventsSetup": "Events Setup",
+  "categories": "Categories",
+  "roles": "Roles",
+  "districts": "Districts",
+  "management": "Management",
+  "users": "Users",
+  "events": "Events",
+  "accept": "Accept",
+  "discard": "Discard"
 }

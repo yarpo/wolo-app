@@ -41,10 +41,10 @@ const EventCardToModerate = () => {
             </li>
           </ul>
             <div id="event_card_to_moderate_button">
-                Accept
+              {t('accept')}
             </div>
             <div id="event_card_to_moderate_button">
-                Discard
+              {t('discard')}
             </div>
         </div>
       </div>
