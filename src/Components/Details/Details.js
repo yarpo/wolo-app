@@ -8,6 +8,8 @@ import {
 } from 'react-icons/vsc';
 import { BiTime, BiBorderAll } from 'react-icons/bi';
 import { Link, useParams } from 'react-router-dom';
+import MoreEvents from '../MoreEventsFromOrganizer/MoreEvents';
+import ShiftCheckbox from './ShiftCheckbox/ShiftCheckbox.js';
 import '../../styles/details.scss';
 import EventCard from '../EventCard/EventCard';
 
@@ -115,6 +117,12 @@ return (
 
       <div id="column" className="signin">
         <form action="#">
+          <div id="details_shift_checkboxes">
+            <ShiftCheckbox />
+            <ShiftCheckbox />
+            <ShiftCheckbox />
+            <ShiftCheckbox />
+          </div>
           <button type="submit" id="sign-in">
             {t('signIn')}
           </button>
