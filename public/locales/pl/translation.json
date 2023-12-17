@@ -64,5 +64,19 @@
   "signUpNow": "Zarejestruj się teraz",
   "keepMeLoggedIn": "Zaloguj mnie automatycznie",
   "continue": "Kontynuuj swoją przygodę jako wolontariusz",
-  "continueWithGoogle": "Kontynuuj za pomocą Google"
+  "continueWithGoogle": "Kontynuuj za pomocą Google",
+
+  "welcomeToWoloApp": "Witaj w WoloApp",
+  "yourAccountStatus": "Status Twojego konta",
+  "eventsWaitingForApproval": "Wydarzenia czekające na zatwierdzenie",
+  "administratorPanel": "Panel Administratora",
+  "eventsSetup": "Ustawienia wydarzeń",
+  "categories": "Kategorie",
+  "roles": "Role",
+  "districts": "Dzielnice",
+  "management": "Zarządzanie",
+  "users": "Użytkownicy",
+  "events": "Wydarzenia",
+  "accept": "Akceptuj",
+  "discard": "Odrzuć"
 }
