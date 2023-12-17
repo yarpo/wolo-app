@@ -1,10 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useTranslation } from 'react-i18next';
 import { Formik } from "formik";
 import { Link } from "react-router-dom";
 import '../../styles/login.scss';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    const storedLanguage = localStorage.getItem('language');
+    if (storedLanguage) {
+      i18n.changeLanguage(storedLanguage);
+    }
+  }, [i18n]);
 
    const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -40,17 +49,17 @@ const Login = () => {
           isSubmitting,
         }) => (
           <form onSubmit={handleSubmit}>
-            <h1 className="login-form__title">Log In</h1>
-            <p className="login-form_subtitle" >Continue your journey as a volunteer</p>
-            <button className="login-form__button" type="button" onClick={handleGoogleLogin}>G - Continue with Google</button>
+            <h1 className="login-form__title">{t('login')}</h1>
+            <p className="login-form_subtitle" >{t('continue')}</p>
+            <button className="login-form__button" type="button" onClick={handleGoogleLogin}>G - {t('continueWithGoogle')}</button>
            <div className="login-form_paragraph-container">
               <hr />
-                <p className="login-form_paragraph">Or continue with your email address</p>
+                <p className="login-form_paragraph">{t('orContinueWith')}</p>
               <hr />
            </div>
             <input
               className="login-form__input"
-              placeholder="Email"
+              placeholder={t('email')}
               type="email"
               name="email"
               onChange={handleChange}
@@ -59,10 +68,10 @@ const Login = () => {
             />
             {errors.email && touched.email && <span className="error">{errors.email} *</span>}
             <br />
-            <Link className="login-form_forgot-password">Forgot password</Link>
+            <Link className="login-form_forgot-password">{t('forgotPassword')}</Link>
             <input
               className="login-form__input"
-              placeholder="Password"
+              placeholder={t('password')}
               type={showPassword ? "text" : "password"}
               name="password"
               onChange={handleChange}
@@ -78,7 +87,7 @@ const Login = () => {
                 id="showPassword"
                 name="showPassword"
               />
-              <span className="checkbox-text" >Show my password</span>
+              <span className="checkbox-text" >{t('showPassword')}</span>
             </div>
             <div className="checkbox-container">
               <input
@@ -86,14 +95,14 @@ const Login = () => {
                 id="keepMeLoggedIn"
                 name="keepMeLoggedIn"
               />
-              <span className="checkbox-text">Keep me logged in</span>
+              <span className="checkbox-text">{t('keepMeLoggedIn')}</span>
             </div>
             <br />
             <button className="login-form__button" type="submit" disabled={isSubmitting}>
-              Log in
+              {t('login')}
             </button>
             <p className="login-form_register-text">
-              {`Don't have an account?`} <Link className="login-form_register-text" to="/signup">Register now</Link>
+              {`Don't have an account?`} <Link className="login-form_register-text" to="/signup">{t('signUpNow')}</Link>
             </p>
           </form>
         )}
