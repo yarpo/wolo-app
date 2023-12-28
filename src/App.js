@@ -12,6 +12,7 @@ import OrganiserHomePage from './Components/OrganiserHomePage/OrganiserHomePage.
 import OrganiserCreateEvent from './Components/OrganiserCreateEvent/OrganiserCreateEvent.js';
 import AdminHomePage from './Components/AdminHomePage/AdminHomePage.js';
 import { FiltersProvider } from './Components/Filters/FiltersContext';
+import AdminUsersPage from "./Components/AdminHomePage/AdminUsersPage/AdminUsersPage";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/organiserHomePage" element={<OrganiserHomePage />} />
             <Route path="/adminHomePage" element={<AdminHomePage />} />
+            <Route path="/adminUsersPage" element={<AdminUsersPage />} />
             <Route path="/createEvent" element={<OrganiserCreateEvent />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
