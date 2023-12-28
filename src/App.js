@@ -13,6 +13,7 @@ import OrganiserCreateEvent from './Components/OrganiserCreateEvent/OrganiserCre
 import AdminHomePage from './Components/AdminHomePage/AdminHomePage.js';
 import VolunteerHomePage from './Components/VolunteerHomePage/VolunteerHomePage.js';
 import { FiltersProvider } from './Components/Filters/FiltersContext';
+import AdminUsersPage from "./Components/AdminHomePage/AdminUsersPage/AdminUsersPage";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             <Route path="/organiserHomePage" element={<OrganiserHomePage />} />
             <Route path="/adminHomePage" element={<AdminHomePage />} />
             <Route path="/volunteerHomePage" element={<VolunteerHomePage />} />
+            <Route path="/adminUsersPage" element={<AdminUsersPage />} />
             <Route path="/createEvent" element={<OrganiserCreateEvent />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
