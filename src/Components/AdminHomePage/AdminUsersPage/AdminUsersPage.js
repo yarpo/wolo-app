@@ -1,20 +1,20 @@
 import { useTranslation } from 'react-i18next';
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import '../../../styles/admin-home-page.scss';
-
 
 const AdminUsersPage = () => {
     const { t, i18n } = useTranslation();
     const [users, setUsers] = useState([]);
     const [editedUserId, setEditedUserId] = useState(null);
     const [editedUserData, setEditedUserData] = useState({});
+    const [roles, setRoles] = useState([]);
+
     useEffect(() => {
         const storedLanguage = localStorage.getItem('language');
         if (storedLanguage) {
             i18n.changeLanguage(storedLanguage);
         }
     }, [i18n]);
-
 
     useEffect(() => {
         const fetchData = async () => {
@@ -30,17 +30,28 @@ const AdminUsersPage = () => {
         fetchData();
     }, []);
 
+    useEffect(() => {
+        const fetchRoles = async () => {
+            try {
+                const response = await fetch('http://localhost:8080/roles');
+                const data = await response.json();
+                setRoles(data);
+            } catch (error) {
+                console.error('Error fetching roles:', error);
+            }
+        };
 
+        fetchRoles();
+    }, []);
 
     const handleEditClick = (userId) => {
         setEditedUserId(userId);
-        const editedUser = users.find(user => user.id === userId);
+        const editedUser = users.find((user) => user.id === userId);
         setEditedUserData(editedUser);
     };
 
     const handleDeleteClick = async (userId) => {
         try {
-
             await fetch(`http://localhost:8080/users/delete/${userId}`, {
                 method: 'DELETE',
                 headers: {
@@ -48,8 +59,7 @@ const AdminUsersPage = () => {
                 },
             });
 
-
-            setUsers(users.filter(user => user.id !== userId));
+            setUsers(users.filter((user) => user.id !== userId));
         } catch (error) {
             console.error('Error deleting user:', error);
         }
@@ -57,7 +67,6 @@ const AdminUsersPage = () => {
 
     const handleSaveClick = async () => {
         try {
-
             const response = await fetch(`http://localhost:8080/users/${editedUserId}/edit`, {
                 method: 'PUT',
                 headers: {
@@ -68,12 +77,10 @@ const AdminUsersPage = () => {
 
             const responseBody = await response.text();
             if (response.ok) {
-
                 const updatedUsers = [...users];
-                const index = updatedUsers.findIndex(user => user.id === editedUserId);
+                const index = updatedUsers.findIndex((user) => user.id === editedUserId);
                 updatedUsers[index] = editedUserData;
                 setUsers(updatedUsers);
-
 
                 setEditedUserId(null);
                 setEditedUserData({});
@@ -86,7 +93,6 @@ const AdminUsersPage = () => {
     };
 
     const handleCancelClick = () => {
-
         setEditedUserId(null);
         setEditedUserData({});
     };
@@ -113,14 +119,11 @@ const AdminUsersPage = () => {
                         <div>
                             <h1>Users List</h1>
 
-
-
                             <table className="user-table">
                                 <thead>
                                 <tr>
-                                    {users.length > 0 && Object.keys(users[0]).map((key) => (
-                                        <th key={key}>{key}</th>
-                                    ))}
+                                    {users.length > 0 &&
+                                        Object.keys(users[0]).map((key) => <th key={key}>{key}</th>)}
                                     <th>Actions</th>
                                 </tr>
                                 </thead>
@@ -136,11 +139,33 @@ const AdminUsersPage = () => {
                                                                 <button onClick={() => handleToggleValue(key)}>
                                                                     {editedUserData[key] ? 'True' : 'False'}
                                                                 </button>
+                                                            ) : key === 'roleDto' ? (
+                                                                <select
+                                                                    value={editedUserData.roleDto ? editedUserData.roleDto.id : ''}
+                                                                    onChange={(e) =>
+                                                                        setEditedUserData({
+                                                                            ...editedUserData,
+                                                                            roleDto: {
+                                                                                id: e.target.value,
+                                                                                name: roles.find((role) => role.id === Number(e.target.value)).name,
+                                                                            },
+                                                                        })
+                                                                    }
+                                                                >
+                                                                    <option value="">Select Role</option>
+                                                                    {roles.map((role) => (
+                                                                        <option key={role.id} value={role.id}>
+                                                                            {role.name}
+                                                                        </option>
+                                                                    ))}
+                                                                </select>
                                                             ) : (
                                                                 <input
                                                                     type="text"
                                                                     value={editedUserData[key] || ''}
-                                                                    onChange={(e) => setEditedUserData({ ...editedUserData, [key]: e.target.value })}
+                                                                    onChange={(e) =>
+                                                                        setEditedUserData({ ...editedUserData, [key]: e.target.value })
+                                                                    }
                                                                 />
                                                             )
                                                         ) : (
@@ -148,6 +173,8 @@ const AdminUsersPage = () => {
                                                                 <button onClick={() => handleToggleValue(key)}>
                                                                     {user[key] ? 'True' : 'False'}
                                                                 </button>
+                                                            ) : key === 'roleDto' ? (
+                                                                String(user[key].name)
                                                             ) : (
                                                                 String(user[key])
                                                             )
@@ -175,18 +202,12 @@ const AdminUsersPage = () => {
                                 ))}
                                 </tbody>
                             </table>
-
                         </div>
-
-
-
-
                     </div>
-
                 </div>
             </div>
         </div>
-    )
+    );
 };
 
 export default AdminUsersPage;
