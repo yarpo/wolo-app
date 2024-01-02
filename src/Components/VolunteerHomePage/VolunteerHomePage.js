@@ -37,10 +37,10 @@ const VolunteerHomePage = () => {
                     <div id="mainContainer_hero">
                         <div id="background_hero">
                             <div id="containerHero_hero">
-                                <h1>Hello user! Welcome to WoloApp</h1>
+                                <h1>{t('hello')} user! {t('welcomeToWoloApp')}</h1>
                             </div>
                             <div id="subtext_hero">
-                                <h2>Your account status: <strong>leader</strong></h2>
+                                <h2>{t('yourAccountStatus')}: leader</h2>
                             </div>
                         </div>
                         <div id="MainRow_hero">
@@ -81,7 +81,7 @@ const VolunteerHomePage = () => {
                 </div>
             </div>
             <div id="volunteer_home_page_your_events">
-                <h2>Your events </h2>
+                <h2>{t('yourEvents')} </h2>
                 <br />
                 <YourEventVolunteer />
                 <YourEventVolunteer />
