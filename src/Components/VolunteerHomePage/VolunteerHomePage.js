@@ -80,6 +80,7 @@ const VolunteerHomePage = () => {
                     </div>
                 </div>
             </div>
+            <br />
             <div id="volunteer_home_page_your_events">
                 <h2>{t('yourEvents')} </h2>
                 <br />
