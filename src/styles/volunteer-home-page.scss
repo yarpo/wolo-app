@@ -1,0 +1,19 @@
+@import './common.scss';
+
+.volunteer_home_page {
+
+    #volunteer_home_page_your_events{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        width: 100%;
+        padding: 0px 30px;
+        margin-bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 730px) {
+    #volunteer_home_page_your_events{
+        margin: 0px;
+    }
+}

@@ -11,6 +11,7 @@ import Signup from './Components/Signup/Signup.js';
 import OrganiserHomePage from './Components/OrganiserHomePage/OrganiserHomePage.js';
 import OrganiserCreateEvent from './Components/OrganiserCreateEvent/OrganiserCreateEvent.js';
 import AdminHomePage from './Components/AdminHomePage/AdminHomePage.js';
+import VolunteerHomePage from './Components/VolunteerHomePage/VolunteerHomePage.js';
 import { FiltersProvider } from './Components/Filters/FiltersContext';
 import AdminUsersPage from "./Components/AdminHomePage/AdminUsersPage/AdminUsersPage";
 
@@ -30,6 +31,7 @@ function App() {
             <Route path="/organiserHomePage" element={<OrganiserHomePage />} />
             <Route path="/adminHomePage" element={<AdminHomePage />} />
             <Route path="/adminUsersPage" element={<AdminUsersPage />} />
+            <Route path="/volunteerHomePage" element={<VolunteerHomePage />} />
             <Route path="/createEvent" element={<OrganiserCreateEvent />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>

@@ -1,0 +1,57 @@
+@import './common.scss';
+
+.your_event_volunteer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 0px 40px;
+
+    .your_event_volunteer_event_item {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        margin: 10px 20px;
+    }
+
+    #your_event_volunteer_event_name {
+        min-width: 35%;
+    }
+
+    #your_event_volunteer_event_address {
+        min-width: 25%;
+    }
+
+    #your_event_volunteer_event_sign_off_button {
+        cursor: pointer;
+        background-color: $color-4-red;
+        padding: 4px;
+        border-radius: 7px;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 730px) {
+    .your_event_volunteer {
+        padding: 0px;
+
+        #your_event_volunteer_event_date {
+            order: 0;
+            min-width: 35%;
+        }
+    
+        #your_event_volunteer_event_name {
+            min-width: 100%;
+        }
+    
+        #your_event_volunteer_event_address {
+            min-width: 100%;
+            order: 1;
+        }
+    
+        #your_event_volunteer_event_sign_off_button {
+            order: 2;
+            text-align: center;
+        }
+    }
+}
