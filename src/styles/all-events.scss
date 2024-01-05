@@ -97,13 +97,13 @@
 .select-boolean {
   display: flex;
   width: auto;
-  background-color: $color-3-yellow;
+  background-color: $color-3-yellow;  
   cursor: pointer;
   margin: 5px;
   padding: 5px 5px 5px 15px;
   border-radius: 20px;
   background-color: $color-backgroud;
-  height: 40px;
+  height: fit-content;
   padding-top: 9px;
 }
 #toggle-filters {
