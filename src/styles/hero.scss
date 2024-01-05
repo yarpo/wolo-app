@@ -1,15 +1,6 @@
+@import './common.scss';
+
 .hero-container{
-  h1 {
-    text-align: center;
-    font-size: 40px;
-  }
-
-  h2 {
-    font-weight: 450;
-    text-align: center;
-    font-size: 24px;
-  }
-
   a {
     text-decoration-thickness: 1px;
     font-size: 24px;
@@ -90,7 +81,8 @@
   }
 
   #filters_hero{
-    padding-inline: 350px;
+    width: 70%;
+    margin-left: 14%;
   }
 
   #button_hero {
@@ -143,7 +135,7 @@
     
     #filters_hero{
       justify-content: center;
-        text-align: center;
+      text-align: center;
     }
   }
 }
