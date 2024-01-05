@@ -67,7 +67,7 @@ $background-color_1: #f5f5f5;
 @media screen and (max-width: 768px) {
   .card {
     width: 275px;
-    height: 600px;
+    height: fit-content;
     
     img {
       width: 100%;
