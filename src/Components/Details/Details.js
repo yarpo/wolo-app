@@ -81,6 +81,9 @@ return (
           </li>
           <li>
             <BiBorderAll id="icon" /> <strong>{t('category')}:</strong>{' '}
+              {eventData.categories.map((category, index) => (
+              <span key={category.id}>{category.name}{index < eventData.categories.length - 1 ? ', ' : ''}</span>
+            ))}
           </li>
         </ul>
       </div>
