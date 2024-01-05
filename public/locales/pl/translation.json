@@ -78,5 +78,8 @@
   "users": "Użytkownicy",
   "events": "Wydarzenia",
   "accept": "Akceptuj",
-  "discard": "Odrzuć"
+  "discard": "Odrzuć",
+
+  "signOff": "Wypisz się",
+  "yourEvents": "Twoje wydarzenia"
 }

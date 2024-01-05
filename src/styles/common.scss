@@ -4,6 +4,7 @@ $color-backgroud: #f5f5f5;
 $color-1-blue: #3769cb;
 $color-2-orange: #fbcc71;
 $color-3-yellow: #fbf79c;
+$color-4-red: #e96262;
 
 // fonts
 $font-family-default: 'Open Sans', sans-serif;
@@ -16,4 +17,13 @@ $font-size-large: 32px;
   font-size: $font-size-normall;
   font-family: $font-family_default;
   color: $color-text;
+}
+
+h1 {
+  font-size: 40px;
+}
+
+h2 {
+  font-weight: 450;
+  font-size: 24px;
 }

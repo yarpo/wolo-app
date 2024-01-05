@@ -78,5 +78,8 @@
   "users": "Users",
   "events": "Events",
   "accept": "Accept",
-  "discard": "Discard"
+  "discard": "Discard",
+
+  "signOff": "Sign Off",
+  "yourEvents": "Your Events"
 }
