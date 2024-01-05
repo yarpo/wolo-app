@@ -1,14 +1,5 @@
-$color_1: #3769cb;
-$font-family_1: 'Open Sans', sans-serif;
-$background-color_1: #f5f5f5;
-$background-color_2: white;
-$background-color_3: #fbcc71;
-$background-color_4: #fbf79c;
-
 @import './common.scss';
-* {
-  box-sizing: border-box;
-}
+
 #container {
   padding-top: 65px;
   display: flex;
@@ -38,13 +29,12 @@ $background-color_4: #fbf79c;
   width: 23%;
   min-width: 175px;
   padding: 20px;
-  background-color: $background-color_1;
+  background-color: $color-backgroud;
   cursor: pointer;
   padding: 5px 5px 5px 15px;
   border-radius: 5px;
   border: 0px;
   font-size: 16px;
-  font-family: $font-family_1;
 }
 #datePicker {
   float: left;
@@ -53,13 +43,12 @@ $background-color_4: #fbf79c;
   width: 23%;
   min-width: 175px;
   padding: 20px;
-  background-color: $background-color_1;
+  background-color: $color-backgroud;
   cursor: pointer;
   padding: 5px 5px 5px 15px;
   border-radius: 5px;
   border: 0px;
   font-size: 16px;
-  font-family: $font-family_1;
   width: 100%;
 }
 .react-datepicker-wrapper {
@@ -69,7 +58,7 @@ $background-color_4: #fbf79c;
 .checkbox-round {
   width: 20px;
   height: 20px;
-  background-color: $background-color_2;
+  background-color: $color-backgroud;
   border-radius: 50%;
   aspect-ratio: 1;
   vertical-align: middle;
@@ -79,7 +68,7 @@ $background-color_4: #fbf79c;
   outline: none;
   cursor: pointer;
   &:checked {
-    background-color: $background-color_3;
+    background-color: $color-2-orange;
     border: 3px solid white;
   }
 }
@@ -99,7 +88,7 @@ $background-color_4: #fbf79c;
 .chosen-tags {
   display: flex;
   width: auto;
-  background-color: $background-color_4;
+  background-color: $color-3-yellow;
   cursor: pointer;
   margin: 5px;
   padding: 5px 5px 5px 15px;
@@ -108,18 +97,21 @@ $background-color_4: #fbf79c;
 .select-boolean {
   display: flex;
   width: auto;
-  background-color: $background-color_4;
+  background-color: $color-3-yellow;
   cursor: pointer;
   margin: 5px;
   padding: 5px 5px 5px 15px;
   border-radius: 20px;
-  background-color: $background-color_1;
+  background-color: $color-backgroud;
   height: 40px;
   padding-top: 9px;
 }
 #toggle-filters {
-  color: $color_1;
+  color: $color-1-blue;
   cursor: pointer;
+  background-color: transparent;
+  border: none;
+  margin-bottom: 15px;
 }
 .icon {
   width: 1.4em;
