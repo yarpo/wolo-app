@@ -170,9 +170,7 @@ const AdminUsersPage = () => {
                                                             )
                                                         ) : (
                                                             typeof user[key] === 'boolean' ? (
-                                                                <button onClick={() => handleToggleValue(key)}>
-                                                                    {user[key] ? 'True' : 'False'}
-                                                                </button>
+                                                                String(user[key])
                                                             ) : key === 'roleDto' ? (
                                                                 String(user[key].name)
                                                             ) : (
