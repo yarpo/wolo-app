@@ -117,10 +117,15 @@ return (
       <div id="column" className="signin">
         <form action="#">
           <div id="details_shift_checkboxes">
-            <ShiftCheckbox />
-            <ShiftCheckbox />
-            <ShiftCheckbox />
-            <ShiftCheckbox />
+            {eventData && eventData.shifts && eventData.shifts.map((shift, index) => (
+              <ShiftCheckbox 
+                key={index}
+                startTime={shift.startTime.join(':')}
+                endTime={shift.endTime.join(':')}
+                numVolunteers={shift.signedUp}
+                maxVolunteers={shift.capacity}
+              />
+            ))}
           </div>
           <button type="submit" id="sign-in">
             {t('signIn')}
