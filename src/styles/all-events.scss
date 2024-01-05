@@ -113,6 +113,22 @@
   border: none;
   margin-bottom: 15px;
 }
+
+#filters-reset-filters-button{
+  float: right;
+  border: none;
+  background-color: $color-4-red;
+  border-radius: 5px;
+  padding: 5px 20px;
+  margin: 20px 0px;
+  height: fit-content;
+  cursor: pointer;
+}
+
+#filters-reset-filters-button:hover {
+  background-color: $color-4-red-hover;
+}
+
 .icon {
   width: 1.4em;
   height: 1.4em;
