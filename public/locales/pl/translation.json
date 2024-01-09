@@ -81,5 +81,50 @@
   "discard": "Odrzuć",
 
   "signOff": "Wypisz się",
-  "yourEvents": "Twoje wydarzenia"
+  "yourEvents": "Twoje wydarzenia",
+
+  "tableHeaders": {
+    "id": "ID",
+    "firstname": "Imię",
+    "lastname": "Nazwisko",
+    "email": "Email",
+    "phoneNumber": "Numer Telefonu",
+    "roleDto": "Rola",
+    "isPeselVerified": "PESEL Zweryfikowany",
+    "isAgreementSigned": "Umowa Podpisana",
+    "isAdult": "Pełnoletni",
+    "peselVerified": "Zweryfikowany Pesel",
+    "agreementSigned": "Zatwierdzona Zgoda",
+    "adult": "Dorosły",
+    "actions": "Akcje"
+    },
+    "userActions": {
+      "edit": "Edytuj",
+      "delete": "Usuń",
+      "save": "Zapisz",
+      "cancel": "Anuluj"
+    },
+
+    "userStatus": {
+      "peselVerified": {
+        "true": "Tak",
+        "false": "Nie"
+      },
+      "agreementSigned": {
+        "true": "Tak",
+        "false": "Nie"
+      },
+      "adult": {
+        "true": "Tak",
+        "false": "Nie"
+      }
+    },
+
+  "roles": {
+    "USER": "Użytkownik",
+    "ADMIN": "Administrator",
+    "ORGANIZATION": "Organizacja"
+  },
+  "True": "Tak",
+  "False": "Nie"
 }

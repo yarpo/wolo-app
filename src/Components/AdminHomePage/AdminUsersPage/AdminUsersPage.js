@@ -1,5 +1,5 @@
-import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import '../../../styles/admin-home-page.scss';
 
 const AdminUsersPage = () => {
@@ -102,29 +102,33 @@ const AdminUsersPage = () => {
     };
 
     return (
-        <div className='admin_home_page_container'>
+        <div className="admin_home_page_container">
             <div id="admin_home_page_background_photo">
                 <div id="admin_home_page_welcome_text">
                     <div>
-                        <h1>{t('hello')} user. {t('welcomeToWoloApp')}</h1>
+                        <h1>
+                            {t('hello')} user. {t('welcomeToWoloApp')}
+                        </h1>
                     </div>
                     <div>
                         <h2>{t('yourAccountStatus')}: administartor</h2>
                     </div>
                 </div>
             </div>
-            <div id='admin_home_page_content'>
+            <div id="admin_home_page_content">
                 <div id="admin_home_page_events_to_approve">
                     <div id="admin_home_page_events_container">
                         <div>
-                            <h1>Users List</h1>
+                            <h1>{t('Users List')}</h1>
 
                             <table className="user-table">
                                 <thead>
                                 <tr>
                                     {users.length > 0 &&
-                                        Object.keys(users[0]).map((key) => <th key={key}>{key}</th>)}
-                                    <th>Actions</th>
+                                        Object.keys(users[0]).map((key) => (
+                                            <th key={key}>{t(`tableHeaders.${key}`)}</th>
+                                        ))}
+                                    <th>{t('tableHeaders.actions')}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -137,7 +141,7 @@ const AdminUsersPage = () => {
                                                         {editedUserId === user.id ? (
                                                             typeof user[key] === 'boolean' ? (
                                                                 <button onClick={() => handleToggleValue(key)}>
-                                                                    {editedUserData[key] ? 'True' : 'False'}
+                                                                    {editedUserData[key] ? t('True') : t('False')}
                                                                 </button>
                                                             ) : key === 'roleDto' ? (
                                                                 <select
@@ -152,10 +156,10 @@ const AdminUsersPage = () => {
                                                                         })
                                                                     }
                                                                 >
-                                                                    <option value="">Select Role</option>
+                                                                    <option value="">{t('Select Role')}</option>
                                                                     {roles.map((role) => (
                                                                         <option key={role.id} value={role.id}>
-                                                                            {role.name}
+                                                                            {t(`roles.${role.name}`)}
                                                                         </option>
                                                                     ))}
                                                                 </select>
@@ -164,15 +168,18 @@ const AdminUsersPage = () => {
                                                                     type="text"
                                                                     value={editedUserData[key] || ''}
                                                                     onChange={(e) =>
-                                                                        setEditedUserData({ ...editedUserData, [key]: e.target.value })
+                                                                        setEditedUserData({
+                                                                            ...editedUserData,
+                                                                            [key]: e.target.value,
+                                                                        })
                                                                     }
                                                                 />
                                                             )
                                                         ) : (
                                                             typeof user[key] === 'boolean' ? (
-                                                                String(user[key])
+                                                                t(`userStatus.${key}.${user[key] ? 'true' : 'false'}`)
                                                             ) : key === 'roleDto' ? (
-                                                                String(user[key].name)
+                                                                t(`roles.${user[key].name}`)
                                                             ) : (
                                                                 String(user[key])
                                                             )
@@ -186,13 +193,13 @@ const AdminUsersPage = () => {
                                         <td>
                                             {editedUserId === user.id ? (
                                                 <>
-                                                    <button onClick={handleSaveClick}>Save</button>
-                                                    <button onClick={handleCancelClick}>Cancel</button>
+                                                    <button onClick={handleSaveClick}>{t('userActions.save')}</button>
+                                                    <button onClick={handleCancelClick}>{t('userActions.cancel')}</button>
                                                 </>
                                             ) : (
                                                 <>
-                                                    <button onClick={() => handleEditClick(user.id)}>Edit</button>
-                                                    <button onClick={() => handleDeleteClick(user.id)}>Delete</button>
+                                                    <button onClick={() => handleEditClick(user.id)}>{t('userActions.edit')}</button>
+                                                    <button onClick={() => handleDeleteClick(user.id)}>{t('userActions.delete')}</button>
                                                 </>
                                             )}
                                         </td>
