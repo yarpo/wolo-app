@@ -72,7 +72,7 @@ const Hero = () => {
                 <Filters setFilteredEvents={setFilteredEvents} />
                 <div id="button_hero">
                     <Link to="/events">
-                        <input type="submit" value={t('mainSearch')} />
+                        <input id="hero_submmit_button" type="submit" value={t('mainSearch')} />
                     </Link>
                 </div>
             </div>
