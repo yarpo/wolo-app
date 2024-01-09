@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { VscChevronDown, VscChevronUp, VscClose } from 'react-icons/vsc';
 import DatePicker from 'react-datepicker';
 import { useFiltersContext } from './FiltersContext';
+import fetchData from '../../Utils/fetchData.js';
 
 const Filters = ({ setFilteredEvents }) => {
   const { t, i18n } = useTranslation();
@@ -13,35 +14,16 @@ const Filters = ({ setFilteredEvents }) => {
   const [districts, setDistricts] = useState([]);
   const [organizations, setOrganizations] = useState([]);
 
-
 useEffect(() => {
-  let url = 'http://localhost:8080/events';
-
-  fetch(url)
-    .then(response => response.json())
-    .then(data => {
-      setApiResponse(data);
-    })
-    .catch(error => {
-      console.error('Error fetching data:', error);
-    });
+  fetchData('http://localhost:8080/events', setApiResponse);
 }, [filters, categories]);
 
 useEffect(() => {
-  fetch('http://localhost:8080/categories')
-    .then(response => response.json())
-    .then(data => setCategories(data));
-
-  fetch('http://localhost:8080/districts')
-    .then(response => response.json())
-    .then(data => setDistricts(data));
-
-  fetch('http://localhost:8080/organisations')
-    .then(response => response.json())
-    .then(data => setOrganizations(data));
+  fetchData('http://localhost:8080/categories', setCategories);
+  fetchData('http://localhost:8080/districts', setDistricts);
+  fetchData('http://localhost:8080/organisations', setOrganizations);
 }, []);
   
-
   useEffect(() => {
     const storedLanguage = localStorage.getItem('language');
     if (storedLanguage) {
@@ -52,7 +34,12 @@ useEffect(() => {
 useEffect(() => {
   const filteredEvents = apiResponse.filter((event) => {
 
-    const isMatchingTag = filters.chosenTags.some((tag) => tag === event.organisation);
+    const isMatchingTag = filters.chosenTags.some((tag) => 
+      tag === event.organisation || 
+      event.categories.some(category => category.name === tag) ||
+      event.district === tag ||
+      event.shifts.some(shift => shift.requiredMinAge.toString() === tag)
+    );
     
     const isMatchingDate =
       filters.selectedDate === null || new Date(event.shifts[0].date.join('-')) >= filters.selectedDate;
@@ -63,16 +50,11 @@ useEffect(() => {
     const isMatchingBooking =
       !filters.hideFullyBookedEvents || event.shifts[0].signedUp < event.shifts[0].capacity;
 
-    const isMatchingAge =
-      filters.selectedAge === '' ||
-      parseInt(event.shifts[0].requiredMinAge) >= parseInt(filters.selectedAge);
-
     return (
       (filters.chosenTags.length === 0 || isMatchingTag) &&
       isMatchingDate &&
       isMatchingVerification &&
-      isMatchingBooking &&
-      isMatchingAge
+      isMatchingBooking 
     );
   });
 
@@ -146,10 +128,11 @@ useEffect(() => {
               placeholderText={t('date')}
             />
             {[
-          { label: t('location'), options: districts.map((district) => district.name) },
-          { label: t('category'), options: categories.map((category) => category.name) },
-          { label: t('organisations'), options: organizations.map((organization) => organization.name) },
-        ].map((filter, index) => (
+              { label: t('location'), options: districts.map((district) => district.name) },
+              { label: t('category'), options: categories.map((category) => category.name) },
+              { label: t('organisations'), options: organizations.map((organization) => organization.name) },
+              { label: t('ageRestrictions'), options: [...new Set(apiResponse.flatMap((event) => event.shifts.map((shift) => shift.requiredMinAge)))] },
+            ].map((filter, index) => (
               <select
                 key={index}
                 id="selectInput"
@@ -167,7 +150,6 @@ useEffect(() => {
                 ))}
               </select>
             ))}
-
             <select
               id="selectInput"
               onChange={handleAgeChange}
@@ -177,13 +159,13 @@ useEffect(() => {
               <option value="" disabled>
                 {t('ageRestrictions')}
               </option>
-              {[...new Set(apiResponse.map((event) => event.ageRestrictions))].map((age, index) => (
+              {[...new Set(apiResponse.flatMap((event) => event.shifts.map((shift) => shift.requiredMinAge)))].map((age, index) => (
                 <option key={index} value={age}>
                   {age}
                 </option>
               ))}
             </select>
-            <button onClick={handleResetFilters}>Reset All Filters</button>
+            <button className="filters-reset-button" onClick={handleResetFilters}>{t('resetAllFilters')}</button>
             <br />
           </div>
           <div className="checkbox-container">

@@ -27,6 +27,7 @@
     "hideFullyBookedEvents": "Скрыть мероприятия с закрытым набором",
     "showFilters": "Показать фильтры",
     "hideFilters": "Скрыть фильтры",
+    "resetAllFilters": "Сбросить все фильтры",
 
     "welcome": "Вы готовы изменить мир?",
     "signInToday": "Войти",
