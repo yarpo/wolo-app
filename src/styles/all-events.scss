@@ -118,21 +118,17 @@ $background-color_4: #fbf79c;
   padding-top: 9px;
 }
 .filters-reset-button{
-   float: left;
-  padding: 10px;
   height: 50px;
   width: 23%;
   min-width: 175px;
-  padding: 20px;
-  background-color: $background-color_1;
+  background-color:  rgba(243, 80, 80, 0.836);
   cursor: pointer;
-  padding: 5px 5px 5px 15px;
   border-radius: 5px;
   border: 0px;
   font-size: 16px;
   font-family: $font-family_1;
   &:hover {
-    background-color: darken($background-color_1, 10%);
+    background-color: darken(rgba(243, 80, 80, 0.836), 10%);
   }
 }
 #toggle-filters {
