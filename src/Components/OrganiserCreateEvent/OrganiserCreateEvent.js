@@ -50,12 +50,6 @@ const OrganiserCreateEvent = () => {
     return errors;
   };
 
-  const handleSubmit = (values, { setSubmitting }) => {
-    console.log('Form values:', values);
-    console.log('PLEASE WRITE SOMETHING');
-    setSubmitting(false);
-  };
-
   return (
     <div className="organiser_create_event_div">
       <h1 className="organiser_create_event_title">Create Event</h1>
@@ -63,11 +57,12 @@ const OrganiserCreateEvent = () => {
       <Formik
         initialValues={initialValues}
         validate={validate}
-        onSubmit={handleSubmit}
+        onSubmit={(values, { setSubmitting }) => {
+          console.log(values);
+          setSubmitting(false);
+        }}
       >
-        {({ isSubmitting }) => (
-          <Form>
-
+        <Form>
           <div className="organiser_create_event_row_div">
             <label htmlFor="title">Title*</label>
             <Field className="organiser_create_event-from_input" type="text" name="title" placeholder="Title" />
@@ -94,8 +89,7 @@ const OrganiserCreateEvent = () => {
                   <ErrorMessage className="error" name="addressNumber" component="div" />
                 </div>
               
-              <textarea className="organiser_create_event-from_input_textbox" type="text" name="addressDescription"  maxLength="255" placeholder="Describe how to get there" />
-              <ErrorMessage className="error" name="addressDescription" component="div" />
+                <Field as="textarea" className="organiser_create_event-from_input_textbox" type="text" maxLength="255" name="addressDescription"  placeholder="Describe how to get there"/>              <ErrorMessage className="error" name="addressDescription" component="div" />
               </div>
             </div>
             <br/>
@@ -173,14 +167,9 @@ const OrganiserCreateEvent = () => {
             <button className="organiser_create_event_shifts_button">Add shift</button>
 
             <div className="button-group">
-            <button className="organiser_create_event-form_button" type="submit" disabled={isSubmitting}>
-              Create
-            </button>
-
+            <button className="organiser_create_event-form_button" type="submit">Create</button>
           </div>
-          </Form>
-
-        )}
+        </Form>
       </Formik>
     </div>
   );
