@@ -88,11 +88,6 @@ useEffect(() => {
     setFilters({ ...filters, [name]: checked });
   };
 
-  const handleAgeChange = (event) => {
-    const { value } = event.target;
-    setFilters({ ...filters, selectedAge: value });
-  };
-
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
       handleToggle();
@@ -150,21 +145,6 @@ useEffect(() => {
                 ))}
               </select>
             ))}
-            <select
-              id="selectInput"
-              onChange={handleAgeChange}
-              value={filters.selectedAge}
-              disabled={!isOpen}
-            >
-              <option value="" disabled>
-                {t('ageRestrictions')}
-              </option>
-              {[...new Set(apiResponse.flatMap((event) => event.shifts.map((shift) => shift.requiredMinAge)))].map((age, index) => (
-                <option key={index} value={age}>
-                  {age}
-                </option>
-              ))}
-            </select>
             <button className="filters-reset-button" onClick={handleResetFilters}>{t('resetAllFilters')}</button>
             <br />
           </div>
