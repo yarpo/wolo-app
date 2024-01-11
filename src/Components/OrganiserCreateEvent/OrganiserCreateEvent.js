@@ -23,9 +23,9 @@ const OrganiserCreateEvent = () => {
       errors.title = 'Title is required';
     }
 
-    //if (!values.description) {
-    //  errors.description = 'Description is required';
-    //}
+    if (!values.description) {
+     errors.description = 'Description is required';
+    }
 
     if (!values.district) {
       errors.district = 'District is required';
@@ -35,20 +35,18 @@ const OrganiserCreateEvent = () => {
       errors.categories = 'At least one category is required';
     }
     
-    /*
     if (!values.addressStreet) {
-      errors.categories = 'At least one category is required';
+      errors.addressStreet = 'Address street is required';
     }
-    
+
     if (!values.addressNumber) {
-      errors.categories = 'At least one category is required';
+      errors.addressNumber = 'Address number is required';
     }
-    
+
     if (!values.addressDescription) {
-      errors.categories = 'At least one category is required';
+      errors.addressDescription = 'Address description is required';
     }
-    */
-    
+
     return errors;
   };
 
@@ -77,9 +75,8 @@ const OrganiserCreateEvent = () => {
             <ErrorMessage className="error" name="title" component="div" />
             
             <div className="organiser_create_event_row_div">
-              <label htmlFor="description">Description*</label>
-              <textarea className="organiser_create_event-from_input_textbox" type="text" maxLength="255" name="description"  placeholder="Description"/>
-            </div>
+            <label htmlFor="description">Description*</label>
+            <Field as="textarea" className="organiser_create_event-from_input_textbox" type="text" maxLength="255" name="description"  placeholder="Description"/>            </div>
             <ErrorMessage className="error" name="description" component="div" />
             <div className="organiser_create_event_row_div">
             <label htmlFor="picture">Picture</label>
@@ -91,10 +88,10 @@ const OrganiserCreateEvent = () => {
               <label htmlFor="address">Address*</label>
               <div className="organiser_create_event_address-form_top">
                 <div className="organiser_create_event_row_div_address">
-                <Field className="organiser_create_event-from_input" type="text" name="addressStreet" placeholder="Street" />
-                <ErrorMessage className="error" name="addressStreet" component="div" />
-                <Field className="organiser_create_event-from_input" type="text" name="addressNumber"  placeholder="Number"/>
-                <ErrorMessage className="error" name="addressNumber" component="div" />
+                  <Field className="organiser_create_event-from_input" type="text" name="addressStreet" placeholder="Street" />
+                  <ErrorMessage className="error" name="addressStreet" component="div" />
+                  <Field className="organiser_create_event-from_input" type="text" name="addressNumber"  placeholder="Number"/>
+                  <ErrorMessage className="error" name="addressNumber" component="div" />
                 </div>
               
               <textarea className="organiser_create_event-from_input_textbox" type="text" name="addressDescription"  maxLength="255" placeholder="Describe how to get there" />
