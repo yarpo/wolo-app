@@ -82,5 +82,6 @@
   "discard": "Discard",
 
   "signOff": "Sign Off",
-  "yourEvents": "Your Events"
+  "yourEvents": "Your Events",
+  "resetFilters": "Reset Filters"
 }

@@ -81,6 +81,9 @@ return (
           </li>
           <li>
             <BiBorderAll id="icon" /> <strong>{t('category')}:</strong>{' '}
+              {eventData.categories.map((category, index) => (
+              <span key={category.id}>{category.name}{index < eventData.categories.length - 1 ? ', ' : ''}</span>
+            ))}
           </li>
         </ul>
       </div>
@@ -117,10 +120,15 @@ return (
       <div id="column" className="signin">
         <form action="#">
           <div id="details_shift_checkboxes">
-            <ShiftCheckbox />
-            <ShiftCheckbox />
-            <ShiftCheckbox />
-            <ShiftCheckbox />
+            {eventData && eventData.shifts && eventData.shifts.map((shift, index) => (
+              <ShiftCheckbox 
+                key={index}
+                startTime={shift.startTime.join(':')}
+                endTime={shift.endTime.join(':')}
+                numVolunteers={shift.signedUp}
+                maxVolunteers={shift.capacity}
+              />
+            ))}
           </div>
           <button type="submit" id="sign-in">
             {t('signIn')}

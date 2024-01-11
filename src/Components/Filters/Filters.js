@@ -114,6 +114,7 @@ useEffect(() => {
     <div id="filters">
       {isOpen && (
         <>
+        <button id="filters-reset-filters-button" onClick={handleResetFilters}>{t('resetFilters')}</button>
           <div id="options">
             <DatePicker
               id="datePicker"

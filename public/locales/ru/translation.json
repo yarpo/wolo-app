@@ -82,5 +82,6 @@
     "discard": "Відкинути",
 
     "signOff": "Выйти",
-    "yourEvents": "Ваши события"
+    "yourEvents": "Ваши события",
+    "resetFilters": "Сбросить фильтры"
 }
