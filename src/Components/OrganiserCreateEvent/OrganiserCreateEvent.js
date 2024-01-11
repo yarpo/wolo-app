@@ -17,38 +17,46 @@ const OrganiserCreateEvent = () => {
   };
 
   const validate = values => {
-  const errors = {};
+    const errors = {};
 
-  if (!values.title) {
-    errors.title = 'Title is required';
-  }
+    if (!values.title) {
+      errors.title = 'Title is required';
+    }
 
-  if (!values.description) {
-    errors.description = 'Description is required';
-  }
+    //if (!values.description) {
+    //  errors.description = 'Description is required';
+    //}
 
-  if (!values.district) {
-    errors.district = 'District is required';
-  } 
+    if (!values.district) {
+      errors.district = 'District is required';
+    } 
 
-  if (!values.categories) {
-    errors.categories = 'At least one category is required';
-  }
-  
-  if (!values.addressStreet) {
-    errors.categories = 'At least one category is required';
-  }
-  
-  if (!values.addressNumber) {
-    errors.categories = 'At least one category is required';
-  }
-  
-  if (!values.addressDescription) {
-    errors.categories = 'At least one category is required';
-  }
-  
-  return errors;
-};
+    if (!values.categories) {
+      errors.categories = 'At least one category is required';
+    }
+    
+    /*
+    if (!values.addressStreet) {
+      errors.categories = 'At least one category is required';
+    }
+    
+    if (!values.addressNumber) {
+      errors.categories = 'At least one category is required';
+    }
+    
+    if (!values.addressDescription) {
+      errors.categories = 'At least one category is required';
+    }
+    */
+    
+    return errors;
+  };
+
+  const handleSubmit = (values, { setSubmitting }) => {
+    console.log('Form values:', values);
+    console.log('PLEASE WRITE SOMETHING');
+    setSubmitting(false);
+  };
 
   return (
     <div className="organiser_create_event_div">
@@ -57,10 +65,7 @@ const OrganiserCreateEvent = () => {
       <Formik
         initialValues={initialValues}
         validate={validate}
-        onSubmit={(values, { setSubmitting }) => {
-          console.log(values);
-          setSubmitting(false);
-        }}
+        onSubmit={handleSubmit}
       >
         {({ isSubmitting }) => (
           <Form>
@@ -121,12 +126,12 @@ const OrganiserCreateEvent = () => {
             
             <div className="checkbox_organiser_create_event-group">
               <label htmlFor="peselVerification">
-                <Field type="checkbox" name="peselVerification" />
+                <Field type="checkbox" name="peselVerification"/>
                 Pesel verification needed
               </label>
 
               <label htmlFor="volunteerAgreement">
-                <Field type="checkbox" name="volunteerAgreement" />
+                <Field type="checkbox" name="volunteerAgreement"/>
                 Volunteer agreement needed
               </label>
             </div>
