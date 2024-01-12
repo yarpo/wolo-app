@@ -35,20 +35,7 @@ const AdminRolesPage = () => {
         setEditedRoleData(editedRole);
     };
 
-    const handleDeleteClick = async (roleId) => {
-        try {
-            await fetch(`http://localhost:8080/roles/delete/${roleId}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
 
-            setRoles(roles.filter((role) => role.id !== roleId));
-        } catch (error) {
-            console.error('Error deleting role:', error);
-        }
-    };
 
     const handleSaveClick = async () => {
         try {
@@ -143,8 +130,8 @@ const AdminRolesPage = () => {
                                             ) : (
                                                 <>
                                                     <button onClick={() => handleEditClick(role.id)}>Edit</button>
-                                                    <></>
-                                                    <button onClick={() => handleDeleteClick(role.id)}>Delete</button>
+
+
                                                 </>
                                             )}
                                         </td>
