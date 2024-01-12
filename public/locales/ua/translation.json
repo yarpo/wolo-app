@@ -27,6 +27,7 @@
     "hideFullyBookedEvents": "Тільки події з відкритим набором",
     "showFilters": "Показати фільтри",
     "hideFilters": "Приховати фільтри",
+    "resetAllFilters": "Скинути фільтри",
 
     "welcome": "Чи готові ви змінити світ?",
     "signInToday": "Увійдіть",
@@ -81,5 +82,6 @@
     "discard": "Відкинути",
 
     "signOff": "Підписати",
-    "yourEvents": "Ваші події"
+    "yourEvents": "Ваші події",
+    "resetFilters": "Скинути фільтри"
 }

@@ -27,6 +27,7 @@
   "hideFullyBookedEvents": "Hide fully booked events",
   "showFilters": "Show Filters",
   "hideFilters": "Hide Filters",
+  "resetAllFilters": "Reset All Filters",
 
   "welcome": "Are you ready to change the world?",
   "signInToday": "Sign in",
@@ -81,5 +82,6 @@
   "discard": "Discard",
 
   "signOff": "Sign Off",
-  "yourEvents": "Your Events"
+  "yourEvents": "Your Events",
+  "resetFilters": "Reset Filters"
 }

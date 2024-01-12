@@ -27,6 +27,7 @@
   "hideFullyBookedEvents": "Ukryj zapełnione wydarzenia",
   "showFilters": "Pokaż filtry",
   "hideFilters": "Ukryj filtry",
+  "resetAllFilters": "Usuń wszystkie filtry",
 
   "welcome": "Czy jesteś gotów zmienić świat ?",
   "signInToday": "Zaloguj się",
@@ -83,6 +84,7 @@
   "signOff": "Wypisz się",
   "yourEvents": "Twoje wydarzenia",
 
+
   "tableHeaders": {
     "id": "ID",
     "firstname": "Imię",
@@ -128,4 +130,7 @@
   "True": "Tak",
   "False": "Nie",
   "Users List": "Lista Użytkowników"
+
+  "resetFilters": "Resetuj filtry"
 }
+
