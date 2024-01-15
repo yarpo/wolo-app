@@ -7,16 +7,27 @@ const axiosInstance  = axios.create({
   },
 });
 const setAuthToken = (token) => {
-  if (token) {
-    axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-  } else {
-    delete axiosInstance.defaults.headers.common['Authorization'];
-  }
+  if (token) {axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;}
+  else {delete axiosInstance.defaults.headers.common['Authorization'];}
 };
 
-/*const isLoggedIn = () => {
+/*const isLoggedIn = async () => {
   const token = localStorage.getItem('token');
-  return !!token;
+  if (token) {
+    try {
+      const response = await fetch('http://localhost:8080/auth/validateToken', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      if (response.ok) return true;
+    }
+    catch (error) {
+      console.error('Error validating token:', error);
+    }
+  }
+  return false;
 };*/
 
 export { axiosInstance , setAuthToken };
