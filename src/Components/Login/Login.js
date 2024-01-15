@@ -22,6 +22,7 @@ const Login = () => {
 
   const handleGoogleLogin = (event) => {
   event.preventDefault();
+  window.location.href = 'http://localhost:8080/oauth2/authorization/google';
   // Handle Google login here
 }
     const handleLogin = async (values) => {
