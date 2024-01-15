@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Formik } from "formik";
 import { Link } from "react-router-dom";
 import '../../styles/login.scss';
+import {axiosInstance, setAuthToken} from '../../Utils/axiosInstance'
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -23,6 +24,22 @@ const Login = () => {
   event.preventDefault();
   // Handle Google login here
 }
+    const handleLogin = async (values) => {
+        try {
+            const response = await axiosInstance.post('/auth/login', {
+                email: values.email,
+                password: values.password
+            });
+            const token = response.data.accessToken;
+            localStorage.setItem('token', token);
+            setAuthToken(token);
+
+        } catch (error) {
+            console.error('Login error:', error);
+        }
+    };
+
+
   return (
     <div className="login-form" >
       <Formik
@@ -45,10 +62,12 @@ const Login = () => {
           touched,
           handleChange,
           handleBlur,
-          handleSubmit,
           isSubmitting,
         }) => (
-          <form onSubmit={handleSubmit}>
+            <form onSubmit={(event) => {
+                event.preventDefault();
+                handleLogin(values);
+            }}>
             <h1 className="login-form__title">{t('login')}</h1>
             <p className="login-form_subtitle" >{t('continue')}</p>
             <button className="login-form__button" type="button" onClick={handleGoogleLogin}>G - {t('continueWithGoogle')}</button>

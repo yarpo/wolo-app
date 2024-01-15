@@ -2,6 +2,7 @@ import React, { useState, useEffect} from "react";
 import { useTranslation } from 'react-i18next';
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { Link } from "react-router-dom";
+import {axiosInstance} from '../../Utils/axiosInstance'
 import '../../styles/signup.scss';
 
 const Signup = () => {
@@ -53,12 +54,18 @@ const Signup = () => {
       <h1 className="signup_title">{t('signup')}</h1>
       <p className="signup_sub-title">{t('begin')}</p>
       <Formik
-        initialValues={initialValues}
-        validate={validate}
-        onSubmit={(values, { setSubmitting }) => {
-          console.log(values);
-          setSubmitting(false);
-        }}
+          initialValues={initialValues}
+          validate={validate}
+          onSubmit={async (values, { setSubmitting }) => {
+            try {
+              const response = await axiosInstance.post('/auth/signup', values);
+              console.log('Signup response:', response);
+            } catch (error) {
+              console.error('Signup error:', error);
+            } finally {
+              setSubmitting(false);
+            }
+          }}
       >
         {({ isSubmitting }) => (
           <Form>
