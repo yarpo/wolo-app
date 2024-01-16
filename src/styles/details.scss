@@ -41,7 +41,7 @@ $background-color_1: rgb(170, 139, 240); // to be removed when fetching photos w
     flex: 1;
   }
 
-  img {
+  .details_photo img {
     background-color: $background-color_1;
     height: 35vh;
     width: 35vw;

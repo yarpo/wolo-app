@@ -88,8 +88,8 @@ return (
         </ul>
       </div>
 
-      <div className="photo">
-        <img src={imageUrl} alt="hands holding in circle" />
+      <div className="details_photo">
+        <img src={imageUrl} alt="Event" onError={(event) => event.target.style.display = 'none'} />
       </div>
 
     <p id="description">{description}</p>
