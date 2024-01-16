@@ -21,18 +21,21 @@ const Login = () => {
   };
 
   const handleGoogleLogin = (event) => {
-  event.preventDefault();
-  window.location.href = 'http://localhost:8080/auth/google';
-}
+      event.preventDefault();
+      window.location.href = 'http://localhost:8080/auth/google';
+  }
     const handleLogin = async (values) => {
         try {
             const response = await axiosInstance.post('/auth/login', {
                 email: values.email,
                 password: values.password
             });
-            const token = response.data.accessToken;
-            localStorage.setItem('token', token);
-            setAuthToken(token);
+            if (response.status >= 200 && response.status < 300) {
+                const token = response.data.accessToken;
+                localStorage.setItem('token', token);
+                setAuthToken(token);
+                window.location.href = 'http://localhost:3000/organiserHomePage';
+            }
 
         } catch (error) {
             console.error('Login error:', error);
