@@ -265,7 +265,7 @@ const AdminUsersPage = () => {
                                                             <option value="">{t('Select Role')}</option>
                                                             {roles.map((role) => (
                                                                 <option key={role.id} value={role.id}>
-                                                                    {t(`roles.${role.name}`)}
+                                                                    {t(`userActions.roles.${role.name}`)}
                                                                 </option>
                                                             ))}
                                                         </select>
