@@ -83,5 +83,20 @@
 
   "signOff": "Wypisz się",
   "yourEvents": "Twoje wydarzenia",
-  "resetFilters": "Resetuj filtry"
+  "resetFilters": "Resetuj filtry",
+
+  "createEvent": "Utwórz wydarzenie",
+  "inputsAreRequired": "Pola zaznaczone * są wymagane",
+  "title": "Tytuł",
+  "description": "Opis",
+  "imageURL": "URL zdjęcia",
+  "address": "Adres",
+  "district": "Dzielnica",
+  "peselVerificationNeeded": "Wymagana wereyfikacja numeru PESEL",
+  "volunteerAgreementNeeded": "Wymagane podpisanie Porozumienia Wolontariuszy",
+  "shifts": "Zmiany",
+  "volunteersNeeded": "Potrzebnych wolontariuszy",
+  "minimumAgeRequired": "Wymagany minimalny wiek",
+  "leaderRequired": "Wymagany lider",
+  "addShift": "Dodaj zmianę"
 }

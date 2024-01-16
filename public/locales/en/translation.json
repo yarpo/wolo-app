@@ -83,5 +83,20 @@
 
   "signOff": "Sign Off",
   "yourEvents": "Your Events",
-  "resetFilters": "Reset Filters"
+  "resetFilters": "Reset Filters",
+
+  "createEvent": "Create Event",
+  "inputsAreRequired": "Inputs marked with * are required",
+  "title": "Title",
+  "description": "Description",
+  "imageURL": "Image URL",
+  "address": "Address",
+  "district": "District",
+  "peselVerificationNeeded": "PESEL verification needed",
+  "volunteerAgreementNeeded": "Volunteer Agreement needed",
+  "shifts": "Shifts",
+  "volunteersNeeded": "Volunteers Needed",
+  "minimumAgeRequired": "Minimum Age Required",
+  "leaderRequired": "Leader Required",
+  "addShift": "Add Shift"
 }
