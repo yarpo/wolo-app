@@ -135,12 +135,14 @@ return (
           </button>
         </form>
       </div>
-
-      <div id="more-events">
-        <p>{t('moreEventsFromThisOrganizer')}</p>
-      {organiserEvents.map(event => (
-        <EventCard key={event.id} event={event} />
-      ))}
+      
+      <div id="details_more_events">
+        <h2>{t('moreEventsFromThisOrganizer')}</h2>
+        <div id="details_more_events_container">
+          {organiserEvents.map(event => (
+            <EventCard key={event.id} event={event} id='details_more_events_item' />
+          ))}
+        </div>
       </div>
     </div>
   );
