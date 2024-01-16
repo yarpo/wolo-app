@@ -1,14 +1,15 @@
-import axios from 'axios';
+const axios = require('axios');
 
 const axiosInstance  = axios.create({
   baseURL: 'http://localhost:8080',
   headers: {
     'Content-Type': 'application/json',
-  },
+  }
 });
 const setAuthToken = (token) => {
-  if (token) {axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;}
+  if (token) {axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;console.log(token);}
   else {delete axiosInstance.defaults.headers.common['Authorization'];}
+
 };
 
 /*const isLoggedIn = async () => {
