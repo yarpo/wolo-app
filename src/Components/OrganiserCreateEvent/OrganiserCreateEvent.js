@@ -43,12 +43,10 @@ const OrganiserCreateEvent = () => {
       errors.addressNumber = 'Address number is required';
     }
 
-    if (!values.addressDescription) {
-      errors.addressDescription = 'Address description is required';
-    }
-
     return errors;
   };
+
+  
 
   return (
     <div className="organiser_create_event_div">
@@ -59,7 +57,38 @@ const OrganiserCreateEvent = () => {
         validate={validate}
         onSubmit={(values, { setSubmitting }) => {
           console.log(values);
-          setSubmitting(false);
+
+          values.organisation = 1;
+          values.categories = [parseInt(values.categories, 10)];
+          values.shifts = [
+            {
+              start_date: [9, 0],
+              end_date: [12, 30],
+            },
+            {
+              start_date: [10, 30], 
+              end_date: [15, 45], 
+            }
+          ];
+
+          const jsonData = JSON.stringify(values);
+          console.log(jsonData);
+
+          fetch('http://localhost:8080/events/add', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: jsonData,
+          })
+            .then(response => {
+              console.log('Response:', response);
+              setSubmitting(false);
+            })
+            .catch(error => {
+              console.error('Error:', error);
+              setSubmitting(false);
+            })
         }}
       >
         <Form>
@@ -75,7 +104,7 @@ const OrganiserCreateEvent = () => {
           <ErrorMessage className="error" name="description" component="div" />
           <div className="organiser_create_event_row_div">
             <label htmlFor="picture">Picture</label>
-            <Field className="organiser_create_event-from_input" type="file" name="picture" />
+            <Field className="organiser_create_event-from_input" type="text" name="picture" />
             <ErrorMessage className="error" name="file" component="div" />
           </div>
           <br/>
@@ -96,9 +125,9 @@ const OrganiserCreateEvent = () => {
           <div className="organiser_create_event_row_div">
             <label htmlFor="district">District*</label>
             <Field as="select" className="organiser_create_event-from_input_dropdown" type="text" name="district"  placeholder="District">
-              <option value="place_1">Chełm</option>
-              <option value="place_2">Zaspa</option>
-              <option value="place_3">Śródmieście</option>
+              <option value="1">Centrum, Warszawa</option>
+              <option value="2">Wrzeszcz, Gdańsk</option>
+              <option value="3">Śródmieście, Gdańsk</option>
             </Field>
           </div>
           <ErrorMessage className="error" name="district" component="div" />
@@ -106,8 +135,8 @@ const OrganiserCreateEvent = () => {
           <div className="organiser_create_event_row_div">
             <label htmlFor="categories">Categories*</label>
             <Field as="select" className="organiser_create_event-from_input_dropdown" type="text" name="categories"  placeholder="Category">
-              <option value="help_1">Pomoc Bezdomnym</option>
-              <option value="help_2">Wyprowadzanie</option>
+              <option value="1">Sport</option>
+              <option value="2">Pomoc</option>
             </Field>
             <ErrorMessage className="error" name="category" component="div" />
           </div>
