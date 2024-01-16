@@ -7,6 +7,7 @@ const AdminDistrictsPage = () => {
     const [Districts, setDistricts] = useState([]);
     const [editedDistrictId, setEditedDistrictId] = useState(null);
     const [editedDistrictData, setEditedDistrictData] = useState({});
+    const [formData, setFormData] = useState({});
 
     useEffect(() => {
         const storedLanguage = localStorage.getItem('language');
@@ -28,6 +29,30 @@ const AdminDistrictsPage = () => {
 
         fetchData();
     }, []);
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        });
+    };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await fetch('http://localhost:8080/districts/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+
+            console.log('Response:', response);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
 
     const handleEditClick = (districtId) => {
         setEditedDistrictId(districtId);
@@ -152,6 +177,28 @@ const AdminDistrictsPage = () => {
                                 ))}
                                 </tbody>
                             </table>
+                            <form onSubmit={handleSubmit}>
+                                {Districts.length > 0 &&
+                                    Object.keys(Districts[0]).map((key) => {
+
+                                        if (key !== 'id') {
+                                            return (
+                                                <div key={key}>
+                                                    <label htmlFor={key}>{t(`tableHeaders.${key}`)}</label>
+                                                    <input
+                                                        type="text"
+                                                        id={key}
+                                                        name={key}
+                                                        onChange={handleChange}
+                                                        value={formData[key] || ''}
+                                                    />
+                                                </div>
+                                            );
+                                        }
+                                        return null;
+                                    })}
+                                <button type="submit">Submit</button>
+                            </form>
                         </div>
                     </div>
                 </div>

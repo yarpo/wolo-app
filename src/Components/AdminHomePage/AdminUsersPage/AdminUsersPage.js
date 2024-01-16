@@ -8,6 +8,7 @@ const AdminUsersPage = () => {
     const [editedUserId, setEditedUserId] = useState(null);
     const [editedUserData, setEditedUserData] = useState({});
     const [roles, setRoles] = useState([]);
+    const [formData, setFormData] = useState({});
 
     useEffect(() => {
         const storedLanguage = localStorage.getItem('language');
@@ -43,7 +44,45 @@ const AdminUsersPage = () => {
 
         fetchRoles();
     }, []);
+    const handleChange = (e) => {
+        const { name, value, type, checked } = e.target;
+        const newValue = type === 'checkbox' ? checked : value;
 
+        setFormData({
+            ...formData,
+            [name]: newValue,
+        });
+    };
+    const handleRoleDtoChange = (e) => {
+        const selectedRoleId = e.target.value;
+
+        setFormData({
+            ...formData,
+            roleDto: {
+                id: selectedRoleId,
+                name: roles.find((role) => role.id === Number(selectedRoleId)).name,
+            },
+        });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await fetch('http://localhost:8080/users/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+
+            console.log('Response:', response);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
     const handleEditClick = (userId) => {
         setEditedUserId(userId);
         const editedUser = users.find((user) => user.id === userId);
@@ -207,6 +246,59 @@ const AdminUsersPage = () => {
                                 ))}
                                 </tbody>
                             </table>
+                            <form onSubmit={handleSubmit}>
+                                {users.length > 0 &&
+                                    Object.keys(users[0]).map((key) => {
+                                        if (key !== 'id') {
+                                            return (
+                                                <div key={key}>
+                                                    <label htmlFor={key}>{t(`tableHeaders.${key}`)}</label>
+
+
+                                                    {key === 'roleDto' && (
+                                                        <select
+                                                            id={key}
+                                                            name={key}
+                                                            onChange={handleRoleDtoChange}
+                                                            value={formData.roleDto ? formData.roleDto.id : ''}
+                                                        >
+                                                            <option value="">{t('Select Role')}</option>
+                                                            {roles.map((role) => (
+                                                                <option key={role.id} value={role.id}>
+                                                                    {t(`roles.${role.name}`)}
+                                                                </option>
+                                                            ))}
+                                                        </select>
+                                                    )}
+
+
+                                                    {typeof users[0][key] === 'boolean' && (
+                                                        <input
+                                                            type="checkbox"
+                                                            id={key}
+                                                            name={key}
+                                                            onChange={handleChange}
+                                                            checked={formData[key] || false}
+                                                        />
+                                                    )}
+
+
+                                                    {key !== 'roleDto' && typeof users[0][key] !== 'boolean' && (
+                                                        <input
+                                                            type="text"
+                                                            id={key}
+                                                            name={key}
+                                                            onChange={handleChange}
+                                                            value={formData[key] || ''}
+                                                        />
+                                                    )}
+                                                </div>
+                                            );
+                                        }
+
+                                    })}
+                                <button type="submit">Submit</button>
+                            </form>
                         </div>
                     </div>
                 </div>

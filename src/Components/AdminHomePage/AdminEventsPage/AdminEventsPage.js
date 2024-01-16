@@ -125,7 +125,23 @@ const AdminEventsPage = () => {
                                                             />
 
                                                         ) : (
-                                                            String(event[key])
+                                                            typeof event[key] === 'boolean' ? (
+                                                                t(`${event[key] ? 'true' : 'false'}`)
+                                                            ) : key === 'categories' ? (
+                                                                <ul>
+                                                                    {event[key].map((category) => (
+                                                                        <li key={category.id}>{category.name}</li>
+                                                                    ))}
+                                                                </ul>
+                                                            ) : key === 'shifts' ? (
+                                                                <ul>
+                                                                    {event[key].map((shift) => (
+                                                                        <li key={shift.id}>{shift.name}</li>
+                                                                    ))}
+                                                                </ul>
+                                                            ): (
+                                                                String(event[key])
+                                                            )
                                                         )}
                                                     </>
                                                 ) : (

@@ -7,6 +7,7 @@ const AdminOrganisationsPage = () => {
     const [organisations, setOrganisations] = useState([]);
     const [editedOrganisationId, setEditedOrganisationId] = useState(null);
     const [editedOrganisationData, setEditedOrganisationData] = useState({});
+    const [formData, setFormData] = useState({});
 
     useEffect(() => {
         const storedLanguage = localStorage.getItem('language');
@@ -28,7 +29,30 @@ const AdminOrganisationsPage = () => {
 
         fetchData();
     }, []);
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        });
+    };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
+        try {
+            const response = await fetch('http://localhost:8080/organisations/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+
+            console.log('Response:', response);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
     const handleEditClick = (organisationId) => {
         setEditedOrganisationId(organisationId);
         const editedOrganisation = organisations.find((organisation) => organisation.id === organisationId);
@@ -152,6 +176,28 @@ const AdminOrganisationsPage = () => {
                                 ))}
                                 </tbody>
                             </table>
+                            <form onSubmit={handleSubmit}>
+                                {organisations.length > 0 &&
+                                    Object.keys(organisations[0]).map((key) => {
+
+                                        if (key !== 'id') {
+                                            return (
+                                                <div key={key}>
+                                                    <label htmlFor={key}>{t(`tableHeaders.${key}`)}</label>
+                                                    <input
+                                                        type="text"
+                                                        id={key}
+                                                        name={key}
+                                                        onChange={handleChange}
+                                                        value={formData[key] || ''}
+                                                    />
+                                                </div>
+                                            );
+                                        }
+                                        return null;
+                                    })}
+                                <button type="submit">Submit</button>
+                            </form>
                         </div>
                     </div>
                 </div>
