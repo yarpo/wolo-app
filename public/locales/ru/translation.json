@@ -27,6 +27,7 @@
     "hideFullyBookedEvents": "Скрыть мероприятия с закрытым набором",
     "showFilters": "Показать фильтры",
     "hideFilters": "Скрыть фильтры",
+    "resetAllFilters": "Сбросить все фильтры",
 
     "welcome": "Вы готовы изменить мир?",
     "signInToday": "Войти",
@@ -82,5 +83,20 @@
 
     "signOff": "Выйти",
     "yourEvents": "Ваши события",
-    "resetFilters": "Сбросить фильтры"
+    "resetFilters": "Сбросить фильтры",
+
+    "createEvent": "Создать событие",
+    "inputsAreRequired": "Входы, отмеченные *, обязательны.",
+    "title": "Заголовок",
+    "description": "Описание",
+    "imageURL": "URL изображения",
+    "address": "Адрес",
+    "district": "Округ",
+    "peselVerificationNeeded": "Требуется проверка PESEL",
+    "volunteerAgreementNeeded": "Требуется волонтерский договор",
+    "shifts": "Смены",
+    "volunteersNeeded": "Требуются волонтеры",
+    "minimumAgeRequired": "Минимальный возраст",
+    "leaderRequired": "Требуется лидер",
+    "addShift": "Добавить смену"
 }

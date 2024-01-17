@@ -27,6 +27,7 @@
     "hideFullyBookedEvents": "Тільки події з відкритим набором",
     "showFilters": "Показати фільтри",
     "hideFilters": "Приховати фільтри",
+    "resetAllFilters": "Скинути фільтри",
 
     "welcome": "Чи готові ви змінити світ?",
     "signInToday": "Увійдіть",
@@ -82,5 +83,20 @@
 
     "signOff": "Підписати",
     "yourEvents": "Ваші події",
-    "resetFilters": "Скинути фільтри"
+    "resetFilters": "Скинути фільтри",
+
+    "createEvent": "Створити подію",
+    "inputsAreRequired": "Введення, позначені *, є обов’язковими",
+    "title": "Назва",
+    "description": "опис",
+    "imageURL": "URL зображення",
+    "address": "Адреса",
+    "district": "Район",
+    "peselVerificationNeeded": "Потрібна перевірка PESEL",
+    "volunteerAgreementNeeded": "Потрібен договір волонтера",
+    "shifts": "Зміни",
+    "volunteersNeeded": "Потрібні волонтери",
+    "minimumAgeRequired": "Необхідний мінімальний вік",
+    "leaderRequired": "Потрібен лідер",
+    "addShift": "Додати Shift"
 }
