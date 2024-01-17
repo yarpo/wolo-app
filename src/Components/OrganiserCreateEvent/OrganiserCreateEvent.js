@@ -99,7 +99,7 @@ const OrganiserCreateEvent = () => {
             <label htmlFor="name">Title*</label>
             <Field className="organiser_create_event-from_input" type="text" name="name" placeholder="Title" />
           </div>
-          <ErrorMessage className="error" name="title" component="div" />
+          <ErrorMessage className="error" name="name" component="div" />
           <div className="organiser_create_event_row_div">
             <label htmlFor="description">Description*</label>
             <Field as="textarea" className="organiser_create_event-from_input_textbox" type="text" maxLength="255" name="description"  placeholder="Description"/>
@@ -115,11 +115,15 @@ const OrganiserCreateEvent = () => {
             <label htmlFor="address">Address*</label>
             <div className="organiser_create_event_address-form_top">
               <div className="organiser_create_event_row_div_address">
-                <Field className="organiser_create_event-from_input" type="text" name="street" placeholder="Street" />
-                <ErrorMessage className="error" name="street" component="div" />
-                <Field className="organiser_create_event-from_input" type="text" name="homeNum"  placeholder="Number"/>
-                <ErrorMessage className="error" name="homeNum" component="div" />
-              </div>      
+                <div className="address_error">
+                  <Field className="organiser_create_event-from_input" type="text" name="street" placeholder="Street" />
+                  <ErrorMessage className="error" name="street" component="div" />
+                </div>
+                <div className="address_error">
+                  <Field className="organiser_create_event-from_input" type="text" name="homeNum"  placeholder="Number"/>
+                  <ErrorMessage className="error" name="homeNum" component="div" />
+                </div>
+              </div>
               <Field as="textarea" className="organiser_create_event-from_input_textbox" type="text" maxLength="255" name="addressDescription"  placeholder="Describe how to get there"/>              
               <ErrorMessage className="error" name="addressDescription" component="div" />
             </div>

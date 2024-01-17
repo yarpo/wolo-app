@@ -14,6 +14,15 @@
       font-weight: 400;
       font-size: 25px;
     }
+    .error {
+      margin-top: -15px;
+      padding: 4px;
+      color: red;
+      font-size: 12px;
+      margin-left: 27%;
+      padding-left: 0px;
+      padding-bottom: 8px;
+    }
   }
 
   .organiser_create_event_row_div{
@@ -58,7 +67,7 @@
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     resize:none;
     float: right;
   }
@@ -132,14 +141,6 @@
     margin-bottom: 20px;
   }
 
-  .error {
-    margin-top: -10px;
-    padding: 4px;
-    color: red;
-    font-size: 12px;
-    margin-left: 27%;
-  }
-
   .organiser_create_event_address-form{
     display: flex;
     justify-content: space-between;
@@ -154,8 +155,18 @@
 
   .organiser_create_event_row_div_address{
     display: flex;
-    justify-content: space-between;
-    gap: 20px; 
+    gap: 20px;
+  }
+  .address_error {
+    width: 100%;
+    .organiser_create_event-from_input {
+      width: 100%;
+      margin-bottom: 5px;
+    }
+    .error{
+      padding-top: 0;
+      margin-left: 7%;
+    }
   }
 
   .organiser_create_event_shifts{
