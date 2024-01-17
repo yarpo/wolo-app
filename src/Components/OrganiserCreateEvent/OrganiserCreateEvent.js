@@ -12,6 +12,7 @@ const OrganiserCreateEvent = () => {
     addressDescription: '',
     districtId: '',
     categories: '',
+    shift: '',
     peselVerificationRequired: false,
     volunteerAgreement: false,
   };
