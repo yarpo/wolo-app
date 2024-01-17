@@ -12,7 +12,7 @@ const EventCard = ({ event }) => {
     <Link to={`/details/${event.id}`} style={{ textDecoration: 'none' }}>
       <div className="card">
         <div id="card-img">
-          <img src={event.imageUrl} alt={event.name} />
+          <img src={event.imageUrl} alt={event.name}  onError={(event) => event.target.style.display = 'none'}/>
         </div>
         <div id="information">
           <h2>{event.name}</h2>

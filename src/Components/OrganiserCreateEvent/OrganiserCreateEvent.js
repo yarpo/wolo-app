@@ -1,7 +1,17 @@
 import { Formik, Field, Form, ErrorMessage } from "formik";
+import { useTranslation } from 'react-i18next';
+import { useEffect } from 'react';
 import '../../styles/organiser-create-event.scss';
 
 const OrganiserCreateEvent = () => {
+  const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    const storedLanguage = localStorage.getItem('language');
+    if (storedLanguage) {
+      i18n.changeLanguage(storedLanguage);
+    }
+  }, [i18n]);
 
   const initialValues = {
     name: '',
@@ -51,8 +61,8 @@ const OrganiserCreateEvent = () => {
 
   return (
     <div className="organiser_create_event_div">
-      <h1 className="organiser_create_event_title">Create Event</h1>
-      <p className="organiser_create_event_sub-title_disclaimer">Inputs marked with * are required</p>
+      <h1 className="organiser_create_event_title">{t('createEvent')}</h1>
+      <p className="organiser_create_event_sub-title_disclaimer">{t('inputsAreRequired')}</p>
       <Formik
         initialValues={initialValues}
         validate={validate}
@@ -96,23 +106,23 @@ const OrganiserCreateEvent = () => {
       >
         <Form>
           <div className="organiser_create_event_row_div">
-            <label htmlFor="name">Title*</label>
+            <label htmlFor="name">{t('title')}*</label>
             <Field className="organiser_create_event-from_input" type="text" name="name" placeholder="Title" />
           </div>
           <ErrorMessage className="error" name="title" component="div" />
           <div className="organiser_create_event_row_div">
-            <label htmlFor="description">Description*</label>
+            <label htmlFor="description">{t('description')}*</label>
             <Field as="textarea" className="organiser_create_event-from_input_textbox" type="text" maxLength="255" name="description"  placeholder="Description"/>
           </div>
           <ErrorMessage className="error" name="description" component="div" />
           <div className="organiser_create_event_row_div">
-            <label htmlFor="imageUrl">Picture</label>
+            <label htmlFor="imageUrl">{t('imageURL')}</label>
             <Field className="organiser_create_event-from_input" type="text" name="imageUrl" placeholder="Picture Url" />
             <ErrorMessage className="error" name="file" component="div" />
           </div>
           <br/>
           <div className="organiser_create_event_address-form">
-            <label htmlFor="address">Address*</label>
+            <label htmlFor="address">{t('address')}*</label>
             <div className="organiser_create_event_address-form_top">
               <div className="organiser_create_event_row_div_address">
                 <Field className="organiser_create_event-from_input" type="text" name="street" placeholder="Street" />
@@ -120,13 +130,13 @@ const OrganiserCreateEvent = () => {
                 <Field className="organiser_create_event-from_input" type="text" name="homeNum"  placeholder="Number"/>
                 <ErrorMessage className="error" name="homeNum" component="div" />
               </div>      
-              <Field as="textarea" className="organiser_create_event-from_input_textbox" type="text" maxLength="255" name="addressDescription"  placeholder="Describe how to get there"/>              
+              <Field as="textarea" className="organiser_create_event-from_input_textbox" type="text" maxLength="255" name="addressDescription"  placeholder="Describe how to get there"/>
               <ErrorMessage className="error" name="addressDescription" component="div" />
             </div>
           </div>
           <br/>
           <div className="organiser_create_event_row_div">
-            <label htmlFor="districtId">District*</label>
+            <label htmlFor="districtId">{t('district')}*</label>
             <Field as="select" className="organiser_create_event-from_input_dropdown" type="text" name="districtId"  placeholder="District">
               <option value="1">Centrum, Warszawa</option>
               <option value="2">Wrzeszcz, Gdańsk</option>
@@ -136,7 +146,7 @@ const OrganiserCreateEvent = () => {
           <ErrorMessage className="error" name="district" component="div" />
           <br/>
           <div className="organiser_create_event_row_div">
-            <label htmlFor="categories">Categories*</label>
+            <label htmlFor="categories">{t('categories')}*</label>
             <Field as="select" className="organiser_create_event-from_input_dropdown" type="text" name="categories"  placeholder="Category">
               <option value="1">Sport</option>
               <option value="2">Pomoc</option>
@@ -147,11 +157,11 @@ const OrganiserCreateEvent = () => {
           <div className="checkbox_organiser_create_event-group">
             <label htmlFor="peselVerificationRequired">
               <Field type="checkbox" name="peselVerificationRequired"/>
-              Pesel verification needed
+              {t('peselVerificationNeeded')}
             </label>
             <label htmlFor="agreementNeeded">
               <Field type="checkbox" name="agreementNeeded"/>
-              Volunteer agreement needed
+              {t('volunteerAgreementNeeded')}
             </label>
           </div>
           <br/>  
@@ -175,8 +185,8 @@ const OrganiserCreateEvent = () => {
               </div>
             </div>
             <div>
-              <span><b>Volunteers needed</b>: <Field type="number" name="shift.volunteersNum" min="1" max="12"/></span> 
-              <p><span><b>Minimum age required</b>: <Field type="number" name="shift.minAge" min="0" max="99"/></span></p>
+              <span><b>{t('volunteersNeeded')}</b>: <Field type="number" name="shift.volunteersNum" min="1" max="12"/></span> 
+              <p><span><b>{t('minimumAgeRequired')}</b>: <Field type="number" name="shift.minAge" min="0" max="99"/></span></p>
             </div>
              <div className="organiser_create_event_shifts_manage">
                <button className="organiser_create_event-form_button">Edit</button>
@@ -185,7 +195,7 @@ const OrganiserCreateEvent = () => {
           </div>
           <button className="organiser_create_event_shifts_button" disabled>Add shift</button>
           <div className="button-group">
-            <button className="organiser_create_event-form_button" type="submit">Create</button>
+            <button className="organiser_create_event-form_button" type="submit">{t('createEvent')}</button>
           </div>
         </Form>
       </Formik>
