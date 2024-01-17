@@ -60,6 +60,7 @@ const Signup = () => {
             try {
               const response = await axiosInstance.post('/auth/signup', values);
               console.log('Signup response:', response);
+              window.location.href = 'http://localhost:3000/';
             } catch (error) {
               console.error('Signup error:', error);
             } finally {

@@ -34,9 +34,8 @@ const Login = () => {
                 const token = response.data.accessToken;
                 localStorage.setItem('token', token);
                 setAuthToken(token);
-                window.location.href = 'http://localhost:3000/organiserHomePage';
             }
-
+            window.location.href = 'http://localhost:3000/organiserHomePage';
         } catch (error) {
             console.error('Login error:', error);
         }
