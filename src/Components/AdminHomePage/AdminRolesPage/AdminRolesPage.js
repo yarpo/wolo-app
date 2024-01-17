@@ -110,14 +110,14 @@ const AdminRolesPage = () => {
                 <div id="admin_home_page_events_to_approve">
                     <div id="admin_home_page_events_container">
                         <div>
-                            <h1>Roles List</h1>
+                            <h1>{t(`Roles List`)}</h1>
 
-                            <table className="role-table">
+                            <table className="table">
                                 <thead>
                                 <tr>
                                     {roles.length > 0 &&
-                                        Object.keys(roles[0]).map((key) => <th key={key}>{key}</th>)}
-                                    <th>Actions</th>
+                                        Object.keys(roles[0]).map((key) => <th key={key}>{t(`tableHeaders.${key}`)}</th>)}
+                                    <th>{t('tableHeaders.actions')}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -148,15 +148,13 @@ const AdminRolesPage = () => {
                                         <td>
                                             {editedRoleId === role.id ? (
                                                 <>
-                                                    <button onClick={handleSaveClick}>Save</button>
+                                                    <button onClick={handleSaveClick}>{t('userActions.save')}</button>
                                                     <></>
-                                                    <button onClick={handleCancelClick}>Cancel</button>
+                                                    <button onClick={handleCancelClick}>{t('userActions.cancel')}</button>
                                                 </>
                                             ) : (
                                                 <>
-                                                    <button onClick={() => handleEditClick(role.id)}>Edit</button>
-
-
+                                                    <button onClick={() => handleEditClick(role.id)}>{t('userActions.edit')}</button>
                                                 </>
                                             )}
                                         </td>
@@ -184,7 +182,7 @@ const AdminRolesPage = () => {
                                         }
                                         return null;
                                     })}
-                                <button type="submit">Submit</button>
+                                <button type="submit">{t('Add')}</button>
                             </form>
                         </div>
                     </div>

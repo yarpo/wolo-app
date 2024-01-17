@@ -98,6 +98,7 @@
   "minimumAgeRequired": "Wymagany minimalny wiek",
   "leaderRequired": "Wymagany lider",
   "addShift": "Dodaj zmianę",
+
   "tableHeaders": {
     "id": "ID",
     "firstname": "Imię",
@@ -111,7 +112,20 @@
     "peselVerified": "Zweryfikowany Pesel",
     "agreementSigned": "Zatwierdzona Zgoda",
     "adult": "Dorosły",
-    "actions": "Akcje"
+    "actions": "Akcje",
+    "name": "Nazwa",
+    "city": "Miasto",
+    "description": "Opis",
+    "street": "Ulica",
+    "homeNum": "Numer Domu",
+    "addressDescription": "Opis Adresu",
+    "logoUrl": "Url Loga",
+    "imageUrl": "Url Obrazu",
+    "shifts": "Zmiany",
+    "peselVerificationRequired": "Wymagany PESEL",
+    "district": "Dzielnica",
+    "categories": "Kategorie",
+    "organisation": "Organizacja"
   },
   "userActions": {
     "edit": "Edytuj",
@@ -119,7 +133,6 @@
     "save": "Zapisz",
     "cancel": "Anuluj"
   },
-
   "userStatus": {
     "peselVerified": {
       "true": "Tak",
@@ -133,14 +146,20 @@
       "true": "Tak",
       "false": "Nie"
     },
-
-
     "roles": {
       "USER": "Użytkownik",
       "ADMIN": "Administrator",
       "ORGANIZATION": "Organizacja"
     }
   },
+  "Users List": "Lista Użytkowników",
+  "Districts List": "Lista Dzielnic",
+  "Organisations List": "Lista Organizacji",
+  "Roles List": "Lista Ról",
+  "Events List": "Lista Wydarzeń",
+  "Categories List": "Lista Kategorii",
   "True": "Tak",
-  "False": "Nie"
+  "False": "Nie",
+  "Select Role": "Wybierz Role",
+  "Add": "Dodaj"
 }

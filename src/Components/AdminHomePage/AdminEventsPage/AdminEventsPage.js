@@ -98,14 +98,14 @@ const AdminEventsPage = () => {
                 <div id="admin_home_page_events_to_approve">
                     <div id="admin_home_page_events_container">
                         <div>
-                            <h1>Events List</h1>
+                            <h1>{t(`Events List`)}</h1>
 
-                            <table className="event-table">
+                            <table className="table">
                                 <thead>
                                 <tr>
                                     {events.length > 0 &&
-                                        Object.keys(events[0]).map((key) => <th key={key}>{key}</th>)}
-                                    <th>Actions</th>
+                                        Object.keys(events[0]).map((key) => <th key={key}>{t(`tableHeaders.${key}`)}</th>)}
+                                    <th>{t('tableHeaders.actions')}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -136,7 +136,7 @@ const AdminEventsPage = () => {
                                                             ) : key === 'shifts' ? (
                                                                 <ul>
                                                                     {event[key].map((shift) => (
-                                                                        <li key={shift.id}>{shift.name}</li>
+                                                                        <li key={shift.id}>{shift.date}</li>
                                                                     ))}
                                                                 </ul>
                                                             ): (

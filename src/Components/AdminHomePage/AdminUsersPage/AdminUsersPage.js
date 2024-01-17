@@ -160,7 +160,7 @@ const AdminUsersPage = () => {
                         <div>
                             <h1>{t('Users List')}</h1>
 
-                            <table className="user-table">
+                            <table className="table">
                                 <thead>
                                 <tr>
                                     {users.length > 0 &&
@@ -198,7 +198,7 @@ const AdminUsersPage = () => {
                                                                     <option value="">{t('Select Role')}</option>
                                                                     {roles.map((role) => (
                                                                         <option key={role.id} value={role.id}>
-                                                                            {t(`roles.${role.name}`)}
+                                                                            {t(`userStatus.roles.${role.name}`)}
                                                                         </option>
                                                                     ))}
                                                                 </select>
@@ -265,7 +265,7 @@ const AdminUsersPage = () => {
                                                             <option value="">{t('Select Role')}</option>
                                                             {roles.map((role) => (
                                                                 <option key={role.id} value={role.id}>
-                                                                    {t(`userActions.roles.${role.name}`)}
+                                                                    {t(`userStatus.roles.${role.name}`)}
                                                                 </option>
                                                             ))}
                                                         </select>
@@ -297,7 +297,7 @@ const AdminUsersPage = () => {
                                         }
 
                                     })}
-                                <button type="submit">Submit</button>
+                                <button type="submit">{t('Add')}</button>
                             </form>
                         </div>
                     </div>

@@ -123,14 +123,14 @@ const AdminDistrictsPage = () => {
                 <div id="admin_home_page_events_to_approve">
                     <div id="admin_home_page_events_container">
                         <div>
-                            <h1>Districts List</h1>
+                            <h1>{t(`Districts List`)}</h1>
 
-                            <table className="district-table">
+                            <table className="table">
                                 <thead>
                                 <tr>
                                     {Districts.length > 0 &&
-                                        Object.keys(Districts[0]).map((key) => <th key={key}>{key}</th>)}
-                                    <th>Actions</th>
+                                        Object.keys(Districts[0]).map((key) => <th key={key}>{t(`tableHeaders.${key}`)}</th>)}
+                                    <th>{t('tableHeaders.actions')}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -161,16 +161,15 @@ const AdminDistrictsPage = () => {
                                         <td>
                                             {editedDistrictId === district.id ? (
                                                 <>
-                                                    <button onClick={handleSaveClick}>Save</button>
+                                                    <button onClick={handleSaveClick}>{t('userActions.save')}</button>
                                                     <></>
-                                                    <button onClick={handleCancelClick}>Cancel</button>
+                                                    <button onClick={handleCancelClick}>{t('userActions.cancel')}</button>
                                                 </>
                                             ) : (
                                                 <>
-                                                    <button onClick={() => handleEditClick(district.id)}>Edit</button>
+                                                    <button onClick={() => handleEditClick(district.id)}>{t('userActions.edit')}</button>
                                                     <></>
-                                                    <button onClick={() => handleDeleteClick(district.id)}>Delete</button>
-                                                </>
+                                                    <button onClick={() => handleDeleteClick(district.id)}>{t('userActions.delete')}</button> </>
                                             )}
                                         </td>
                                     </tr>
@@ -197,7 +196,7 @@ const AdminDistrictsPage = () => {
                                         }
                                         return null;
                                     })}
-                                <button type="submit">Submit</button>
+                                <button type="submit">{t('Add')}</button>
                             </form>
                         </div>
                     </div>

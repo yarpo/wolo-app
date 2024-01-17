@@ -124,14 +124,14 @@ const AdminCategoriesPage = () => {
                 <div id="admin_home_page_events_to_approve">
                     <div id="admin_home_page_events_container">
                         <div>
-                            <h1>Categories List</h1>
+                            <h1>{t(`Categories List`)}</h1>
 
-                            <table className="category-table">
+                            <table className="table">
                                 <thead>
                                 <tr>
                                     {categories.length > 0 &&
-                                        Object.keys(categories[0]).map((key) => <th key={key}>{key}</th>)}
-                                    <th>Actions</th>
+                                        Object.keys(categories[0]).map((key) => <th key={key}>{t(`tableHeaders.${key}`)}</th>)}
+                                    <th>{t('tableHeaders.actions')}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -162,15 +162,15 @@ const AdminCategoriesPage = () => {
                                         <td>
                                             {editedCategoryId === category.id ? (
                                                 <>
-                                                    <button onClick={handleSaveClick}>Save</button>
+                                                    <button onClick={handleSaveClick}>{t('userActions.save')}</button>
                                                     <></>
-                                                    <button onClick={handleCancelClick}>Cancel</button>
+                                                    <button onClick={handleCancelClick}>{t('userActions.cancel')}</button>
                                                 </>
                                             ) : (
                                                 <>
-                                                    <button onClick={() => handleEditClick(category.id)}>Edit</button>
+                                                    <button onClick={() => handleEditClick(category.id)}>{t('userActions.edit')}</button>
                                                     <></>
-                                                    <button onClick={() => handleDeleteClick(category.id)}>Delete</button>
+                                                    <button onClick={() => handleDeleteClick(category.id)}>{t('userActions.delete')}</button>
                                                 </>
                                             )}
                                         </td>
@@ -198,7 +198,7 @@ const AdminCategoriesPage = () => {
                                         }
                                         return null;
                                     })}
-                                <button type="submit">Submit</button>
+                                <button type="submit">{t('Add')}</button>
                             </form>
                         </div>
                     </div>

@@ -122,14 +122,14 @@ const AdminOrganisationsPage = () => {
                 <div id="admin_home_page_events_to_approve">
                     <div id="admin_home_page_events_container">
                         <div>
-                            <h1>Organisations List</h1>
+                            <h1>{t(`Organisations List`)}</h1>
 
-                            <table className="organisation-table">
+                            <table className="table">
                                 <thead>
                                 <tr>
                                     {organisations.length > 0 &&
-                                        Object.keys(organisations[0]).map((key) => <th key={key}>{key}</th>)}
-                                    <th>Actions</th>
+                                        Object.keys(organisations[0]).map((key) => <th key={key}>{t(`tableHeaders.${key}`)}</th>)}
+                                    <th>{t('tableHeaders.actions')}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -160,15 +160,15 @@ const AdminOrganisationsPage = () => {
                                         <td>
                                             {editedOrganisationId === organisation.id ? (
                                                 <>
-                                                    <button onClick={handleSaveClick}>Save</button>
+                                                    <button onClick={handleSaveClick}>{t('userActions.save')}</button>
                                                     <></>
-                                                    <button onClick={handleCancelClick}>Cancel</button>
+                                                    <button onClick={handleCancelClick}>{t('userActions.cancel')}</button>
                                                 </>
                                             ) : (
                                                 <>
-                                                    <button onClick={() => handleEditClick(organisation.id)}>Edit</button>
+                                                    <button onClick={() => handleEditClick(organisation.id)}>{t('userActions.edit')}</button>
                                                     <></>
-                                                    <button onClick={() => handleDeleteClick(organisation.id)}>Delete</button>
+                                                    <button onClick={() => handleDeleteClick(organisation.id)}>{t('userActions.delete')}</button>
                                                 </>
                                             )}
                                         </td>
@@ -196,7 +196,7 @@ const AdminOrganisationsPage = () => {
                                         }
                                         return null;
                                     })}
-                                <button type="submit">Submit</button>
+                                <button type="submit">{t('Add')}</button>
                             </form>
                         </div>
                     </div>
