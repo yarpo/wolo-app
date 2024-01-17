@@ -62,14 +62,16 @@ const OrganiserCreateEvent = () => {
           values.categories = [parseInt(values.categories, 10)];
           values.shifts = [
             {
-              startTime: [10, 30],
-              endTime: [16, 45],
-              date: [2023, 6, 10],
-              capacity: 5,
-              isLeaderRequired: true,
-              requiredMinAge: 18,
+              startTime: [values.shift.starthour, values.shift.startmin],
+              endTime: [values.shift.endhour, values.shift.endmin],
+              date: [values.shift.year, values.shift.month, values.shift.day],
+              capacity: values.shift.volunteersNum,
+              isLeaderRequired: false,
+              requiredMinAge: values.shift.minAge,
             },
           ];
+
+          delete values.shift
 
           const jsonData = JSON.stringify(values);
           console.log(jsonData);
@@ -155,37 +157,32 @@ const OrganiserCreateEvent = () => {
           <p className="organiser_create_event_sub-title">Shifts</p>
           <div className="organiser_create_event_shifts">
             <div className="organiser_create_event_shifts_column">
-              <span>31.02.2024</span>
-               <p><span>07:00-14:00</span></p>
-              <span>ul. Wrót Baldura 666</span>
+              <div>
+                <Field type="number" name="shift.year" min="2023"/>
+                <Field type="number" name="shift.month" min="1" max="12"/>
+                <Field type="number" name="shift.day" min="1" max="31"/>
+              </div>
+              <div>
+              Start:
+              <Field type="number" name="shift.starthour" min="1" max="24"/>
+              :
+              <Field type="number" name="shift.startmin" min="0" max="60"/>
+                End:
+              <Field type="number" name="shift.endhour" min="1" max="24"/>
+              :
+              <Field type="number" name="shift.endmin" min="0" max="60"/>
+              </div>
             </div>
             <div>
-              <span><b>Volunteers needed</b>: 4</span> 
-              <p><span><b>Minimum age required</b>: 2</span></p>
-              <span><b>Leader required</b>: No</span>
+              <span><b>Volunteers needed</b>: <Field type="number" name="shift.volunteersNum" min="1" max="12"/></span> 
+              <p><span><b>Minimum age required</b>: <Field type="number" name="shift.minAge" min="0" max="99"/></span></p>
             </div>
              <div className="organiser_create_event_shifts_manage">
                <button className="organiser_create_event-form_button">Edit</button>
               <button className="organiser_create_event-form_button">Delete</button>
             </div>
           </div>
-          <div className="organiser_create_event_shifts">
-            <div className="organiser_create_event_shifts_column">
-              <span>31.02.2024</span>
-              <p><span>07:00-14:00</span></p>
-              <span>ul. Wrót Baldura 666</span>
-            </div>
-            <div>
-              <span><b>Volunteers needed</b>: 4</span>
-              <p><span><b>Minimum age required</b>: 2</span></p>
-              <span><b>Leader required</b>: No</span>
-            </div>
-            <div className="organiser_create_event_shifts_manage">
-              <button className="organiser_create_event-form_button">Edit</button>
-              <button className="organiser_create_event-form_button">Delete</button>
-            </div>
-          </div>
-          <button className="organiser_create_event_shifts_button">Add shift</button>
+          <button className="organiser_create_event_shifts_button" disabled>Add shift</button>
           <div className="button-group">
             <button className="organiser_create_event-form_button" type="submit">Create</button>
           </div>
