@@ -14,51 +14,50 @@ const OrganiserCreateEvent = () => {
   }, [i18n]);
 
   const initialValues = {
-    title: '',
+    name: '',
     description: '',
-    picture: '',
-    addressStreet: '',
-    addressNumber: '',
+    imageUrl: '',
+    street: '',
+    homeNum: '',
     addressDescription: '',
-    district: '',
+    districtId: '',
     categories: '',
-    peselVerification: false,
+    shift: '',
+    peselVerificationRequired: false,
     volunteerAgreement: false,
   };
 
   const validate = values => {
-  const errors = {};
+    const errors = {};
 
-  if (!values.title) {
-    errors.title = 'Title is required';
-  }
+    if (!values.name) {
+      errors.name = 'Title is required';
+    }
 
-  if (!values.description) {
-    errors.description = 'Description is required';
-  }
+    if (!values.description) {
+     errors.description = 'Description is required';
+    }
 
-  if (!values.district) {
-    errors.district = 'District is required';
-  } 
+    if (!values.districtId) {
+      errors.districtId = 'District is required';
+    } 
 
-  if (!values.categories) {
-    errors.categories = 'At least one category is required';
-  }
+    if (!values.categories) {
+      errors.categories = 'At least one category is required';
+    }
+    
+    if (!values.street) {
+      errors.street = 'Address street is required';
+    }
+
+    if (!values.homeNum) {
+      errors.homeNum = 'Address number is required';
+    }
+
+    return errors;
+  };
+
   
-  if (!values.addressStreet) {
-    errors.categories = 'At least one category is required';
-  }
-  
-  if (!values.addressNumber) {
-    errors.categories = 'At least one category is required';
-  }
-  
-  if (!values.addressDescription) {
-    errors.categories = 'At least one category is required';
-  }
-  
-  return errors;
-};
 
   return (
     <div className="organiser_create_event_div">
@@ -69,109 +68,140 @@ const OrganiserCreateEvent = () => {
         validate={validate}
         onSubmit={(values, { setSubmitting }) => {
           console.log(values);
-          setSubmitting(false);
+
+          values.organisationId = 1;
+          values.categories = [parseInt(values.categories, 10)];
+          values.shifts = [
+            {
+              startTime: [values.shift.starthour, values.shift.startmin],
+              endTime: [values.shift.endhour, values.shift.endmin],
+              date: [values.shift.year, values.shift.month, values.shift.day],
+              capacity: values.shift.volunteersNum,
+              isLeaderRequired: false,
+              requiredMinAge: values.shift.minAge,
+            },
+          ];
+
+          delete values.shift
+
+          const jsonData = JSON.stringify(values);
+          console.log(jsonData);
+
+          fetch('http://localhost:8080/events/add', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: jsonData,
+          })
+            .then(response => {
+              console.log('Response:', response);
+              setSubmitting(false);
+            })
+            .catch(error => {
+              console.error('Error:', error);
+              setSubmitting(false);
+            })
         }}
       >
-        {({ isSubmitting }) => (
-          <Form>
-
+        <Form>
           <div className="organiser_create_event_row_div">
-            <label htmlFor="title">{t('title')}*</label>
-            <Field className="organiser_create_event-from_input" type="text" name="title" placeholder="Title" />
-            </div>
-            <ErrorMessage className="error" name="title" component="div" />
-            
-            <div className="organiser_create_event_row_div">
-              <label htmlFor="description">{t('description')}*</label>
-              <textarea className="organiser_create_event-from_input_textbox" type="text" maxLength="255" name="description"  placeholder="Description"/>
-            </div>
-            <ErrorMessage className="error" name="description" component="div" />
-            <div className="organiser_create_event_row_div">
-            <label htmlFor="picture">{t('imageURL')}</label>
-            <Field className="organiser_create_event-from_input" type="file" name="picture" />
+            <label htmlFor="name">{t('title')}*</label>
+            <Field className="organiser_create_event-from_input" type="text" name="name" placeholder="Title" />
+          </div>
+          <ErrorMessage className="error" name="name" component="div" />
+          <div className="organiser_create_event_row_div">
+            <label htmlFor="description">{t('description')}*</label>
+            <Field as="textarea" className="organiser_create_event-from_input_textbox" type="text" maxLength="255" name="description"  placeholder="Description"/>
+          </div>
+          <ErrorMessage className="error" name="description" component="div" />
+          <div className="organiser_create_event_row_div">
+            <label htmlFor="imageUrl">{t('imageURL')}</label>
+            <Field className="organiser_create_event-from_input" type="text" name="imageUrl" placeholder="Picture Url" />
             <ErrorMessage className="error" name="file" component="div" />
-            </div>
-            <br/>
-            <div className="organiser_create_event_address-form">
-              <label htmlFor="address">{t('address')}*</label>
-              <div className="organiser_create_event_address-form_top">
-                <div className="organiser_create_event_row_div_address">
-                <Field className="organiser_create_event-from_input" type="text" name="addressStreet" placeholder="Street" />
-                <ErrorMessage className="error" name="addressStreet" component="div" />
-                <Field className="organiser_create_event-from_input" type="text" name="addressNumber"  placeholder="Number"/>
-                <ErrorMessage className="error" name="addressNumber" component="div" />
+          </div>
+          <br/>
+          <div className="organiser_create_event_address-form">
+            <label htmlFor="address">{t('address')}*</label>
+            <div className="organiser_create_event_address-form_top">
+              <div className="organiser_create_event_row_div_address">
+                <div className="address_error">
+                  <Field className="organiser_create_event-from_input" type="text" name="street" placeholder="Street" />
+                  <ErrorMessage className="error" name="street" component="div" />
                 </div>
-              
-              <textarea className="organiser_create_event-from_input_textbox" type="text" name="addressDescription"  maxLength="255" placeholder="Describe how to get there" />
-              <ErrorMessage className="error" name="addressDescription" component="div" />
+                <div className="address_error">
+                  <Field className="organiser_create_event-from_input" type="text" name="homeNum"  placeholder="Number"/>
+                  <ErrorMessage className="error" name="homeNum" component="div" />
+                </div>
               </div>
+              <Field as="textarea" className="organiser_create_event-from_input_textbox" type="text" maxLength="255" name="addressDescription"  placeholder="Describe how to get there"/>              
+              <ErrorMessage className="error" name="addressDescription" component="div" />
             </div>
-            <br/>
-
-            <div className="organiser_create_event_row_div">
-            <label htmlFor="district">{t('district')}*</label>
-            <Field as="select" className="organiser_create_event-from_input_dropdown" type="text" name="district"  placeholder="District">
-              <option value="place_1">Chełm</option>
-              <option value="place_2">Zaspa</option>
-              <option value="place_3">Śródmieście</option>
+          </div>
+          <br/>
+          <div className="organiser_create_event_row_div">
+            <label htmlFor="districtId">{t('district')}*</label>
+            <Field as="select" className="organiser_create_event-from_input_dropdown" type="text" name="districtId"  placeholder="District">
+              <option value="1">Centrum, Warszawa</option>
+              <option value="2">Wrzeszcz, Gdańsk</option>
+              <option value="3">Śródmieście, Gdańsk</option>
             </Field>
-            </div>
-            <ErrorMessage className="error" name="district" component="div" />
-            <br/>
-
-            <div className="organiser_create_event_row_div">
+          </div>
+          <ErrorMessage className="error" name="district" component="div" />
+          <br/>
+          <div className="organiser_create_event_row_div">
             <label htmlFor="categories">{t('categories')}*</label>
             <Field as="select" className="organiser_create_event-from_input_dropdown" type="text" name="categories"  placeholder="Category">
-              <option value="help_1">Pomoc Bezdomnym</option>
-              <option value="help_2">Wyprowadzanie</option>
+              <option value="1">Sport</option>
+              <option value="2">Pomoc</option>
             </Field>
             <ErrorMessage className="error" name="category" component="div" />
-            </div>
-            <br/>
-            
-            <div className="checkbox_organiser_create_event-group">
-              <label htmlFor="peselVerification">
-                <Field type="checkbox" name="peselVerification" />
-                {t('peselVerificationNeeded')}
-              </label>
-
-              <label htmlFor="volunteerAgreement">
-                <Field type="checkbox" name="volunteerAgreement" />
-                {t('volunteerAgreementNeeded')}
-              </label>
-            </div>
-            
-            <br/>
-            
-            <p className="organiser_create_event_sub-title">{t('shifts')}</p>
-            <div className="organiser_create_event_shifts">
-              <div className="organiser_create_event_shifts_column">
-                <span>31.02.2024</span>
-                <p><span>07:00-14:00</span></p>
-                <span>ul. Wrót Baldura 666</span>
+          </div>
+          <br/>  
+          <div className="checkbox_organiser_create_event-group">
+            <label htmlFor="peselVerificationRequired">
+              <Field type="checkbox" name="peselVerificationRequired"/>
+              {t('peselVerificationNeeded')}
+            </label>
+            <label htmlFor="agreementNeeded">
+              <Field type="checkbox" name="agreementNeeded"/>
+              {t('volunteerAgreementNeeded')}
+            </label>
+          </div>
+          <br/>  
+          <p className="organiser_create_event_sub-title">Shifts</p>
+          <div className="organiser_create_event_shifts">
+            <div className="organiser_create_event_shifts_column">
+              <div>
+                <Field type="number" name="shift.year" min="2023"/>
+                <Field type="number" name="shift.month" min="1" max="12"/>
+                <Field type="number" name="shift.day" min="1" max="31"/>
               </div>
               <div>
-                <span><b>{t('volunteersNeeded')}</b>: 4</span> 
-                <p><span><b>{t('minimumAgeRequired')}</b>: 2</span></p>
-                <span><b>{t('leaderRequired')}</b>: No</span>
-              </div>
-              <div className="organiser_create_event_shifts_manage">
-                <button className="organiser_create_event-form_button">{t('edit')}</button>
-                <button className="organiser_create_event-form_button">{t('delete')}</button>
+              Start:
+              <Field type="number" name="shift.starthour" min="1" max="24"/>
+              :
+              <Field type="number" name="shift.startmin" min="0" max="60"/>
+                End:
+              <Field type="number" name="shift.endhour" min="1" max="24"/>
+              :
+              <Field type="number" name="shift.endmin" min="0" max="60"/>
               </div>
             </div>
-            
-            <button className="organiser_create_event_shifts_button">{t('addShift')}</button>
-
-            <div className="button-group">
-            <button className="organiser_create_event-form_button" type="submit" disabled={isSubmitting}>
-            {t('createEvent')}
-            </button>
-
+            <div>
+              <span><b>{t('volunteersNeeded')}</b>: <Field type="number" name="shift.volunteersNum" min="1" max="12"/></span> 
+              <p><span><b>{t('minimumAgeRequired')}</b>: <Field type="number" name="shift.minAge" min="0" max="99"/></span></p>
+            </div>
+             <div className="organiser_create_event_shifts_manage">
+               <button className="organiser_create_event-form_button">Edit</button>
+              <button className="organiser_create_event-form_button">Delete</button>
+            </div>
           </div>
-          </Form>
-
-        )}
+          <button className="organiser_create_event_shifts_button" disabled>Add shift</button>
+          <div className="button-group">
+            <button className="organiser_create_event-form_button" type="submit">{t('createEvent')}</button>
+          </div>
+        </Form>
       </Formik>
     </div>
   );
