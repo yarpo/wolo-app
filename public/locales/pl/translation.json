@@ -98,5 +98,7 @@
   "volunteersNeeded": "Potrzebnych wolontariuszy",
   "minimumAgeRequired": "Wymagany minimalny wiek",
   "leaderRequired": "Wymagany lider",
-  "addShift": "Dodaj zmianę"
+  "addShift": "Dodaj zmianę",
+    "SelectDistrict": "Wybierz dzielnicę",
+  "SelectCategory": "Wybierz kategorię"
 }

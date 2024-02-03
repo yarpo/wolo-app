@@ -98,5 +98,7 @@
   "volunteersNeeded": "Volunteers Needed",
   "minimumAgeRequired": "Minimum Age Required",
   "leaderRequired": "Leader Required",
-  "addShift": "Add Shift"
+  "addShift": "Add Shift",
+  "SelectDistrict": "Select a district",
+  "SelectCategory": "Select a category"
 }

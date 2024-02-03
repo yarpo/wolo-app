@@ -1,10 +1,19 @@
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { useTranslation } from 'react-i18next';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import '../../styles/organiser-create-event.scss';
+import fetchData from '../../Utils/fetchData.js';
+import * as Yup from 'yup';
 
 const OrganiserCreateEvent = () => {
   const { t, i18n } = useTranslation();
+  const [categories, setCategories] = useState([]);
+  const [districts, setDistricts] = useState([])
+
+  useEffect(() => {
+    fetchData('http://localhost:8080/categories', setCategories);
+    fetchData('http://localhost:8080/districts', setDistricts);
+  }, []);
 
   useEffect(() => {
     const storedLanguage = localStorage.getItem('language');
@@ -13,7 +22,7 @@ const OrganiserCreateEvent = () => {
     }
   }, [i18n]);
 
-  const initialValues = {
+  const [initialValues] = useState({
     name: '',
     description: '',
     imageUrl: '',
@@ -22,42 +31,26 @@ const OrganiserCreateEvent = () => {
     addressDescription: '',
     districtId: '',
     categories: '',
-    shift: '',
+    // shift: '',
     peselVerificationRequired: false,
     volunteerAgreement: false,
-  };
+    language: i18n.language,
+  });
 
-  const validate = values => {
-    const errors = {};
-
-    if (!values.name) {
-      errors.name = 'Title is required';
-    }
-
-    if (!values.description) {
-     errors.description = 'Description is required';
-    }
-
-    if (!values.districtId) {
-      errors.districtId = 'District is required';
-    } 
-
-    if (!values.categories) {
-      errors.categories = 'At least one category is required';
-    }
-    
-    if (!values.street) {
-      errors.street = 'Address street is required';
-    }
-
-    if (!values.homeNum) {
-      errors.homeNum = 'Address number is required';
-    }
-
-    return errors;
-  };
-
-  
+  const validationSchema = Yup.object().shape({
+    name: Yup.string()
+      .required('Title is required'),
+    description: Yup.string()
+      .required('Description is required'),
+    districtId: Yup.string()
+      .required('District is required'),
+    categories: Yup.string()
+      .required('At least one category is required'),
+    street: Yup.string()
+      .required('Address street is required'),
+    homeNum: Yup.string()
+      .required('Address number is required'),
+  });
 
   return (
     <div className="organiser_create_event_div">
@@ -65,22 +58,22 @@ const OrganiserCreateEvent = () => {
       <p className="organiser_create_event_sub-title_disclaimer">{t('inputsAreRequired')}</p>
       <Formik
         initialValues={initialValues}
-        validate={validate}
+        validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting }) => {
           console.log(values);
 
           values.organisationId = 1;
           values.categories = [parseInt(values.categories, 10)];
-          values.shifts = [
-            {
-              startTime: [values.shift.starthour, values.shift.startmin],
-              endTime: [values.shift.endhour, values.shift.endmin],
-              date: [values.shift.year, values.shift.month, values.shift.day],
-              capacity: values.shift.volunteersNum,
-              isLeaderRequired: false,
-              requiredMinAge: values.shift.minAge,
-            },
-          ];
+          // values.shifts = [
+          //   {
+          //     startTime: [values.shift.starthour, values.shift.startmin],
+          //     endTime: [values.shift.endhour, values.shift.endmin],
+          //     date: [values.shift.year, values.shift.month, values.shift.day],
+          //     capacity: values.shift.volunteersNum,
+          //     isLeaderRequired: false,
+          //     requiredMinAge: values.shift.minAge,
+          //   },
+          // ];
 
           delete values.shift
 
@@ -142,9 +135,10 @@ const OrganiserCreateEvent = () => {
           <div className="organiser_create_event_row_div">
             <label htmlFor="districtId">{t('district')}*</label>
             <Field as="select" className="organiser_create_event-from_input_dropdown" type="text" name="districtId"  placeholder="District">
-              <option value="1">Centrum, Warszawa</option>
-              <option value="2">Wrzeszcz, Gdańsk</option>
-              <option value="3">Śródmieście, Gdańsk</option>
+              <option value="" disabled selected>{t('SelectDistrict')}</option>
+              {districts.map(district => (
+                <option key={district.id} value={district.id}>{district.name}</option>
+              ))}
             </Field>
           </div>
           <ErrorMessage className="error" name="district" component="div" />
@@ -152,8 +146,10 @@ const OrganiserCreateEvent = () => {
           <div className="organiser_create_event_row_div">
             <label htmlFor="categories">{t('categories')}*</label>
             <Field as="select" className="organiser_create_event-from_input_dropdown" type="text" name="categories"  placeholder="Category">
-              <option value="1">Sport</option>
-              <option value="2">Pomoc</option>
+              <option value="" disabled selected>{t('SelectCategory')}</option>
+              {categories.map(category => (
+                <option key={category.id} value={category.id}>{category.name}</option>
+              ))}
             </Field>
             <ErrorMessage className="error" name="category" component="div" />
           </div>
@@ -169,7 +165,7 @@ const OrganiserCreateEvent = () => {
             </label>
           </div>
           <br/>  
-          <p className="organiser_create_event_sub-title">Shifts</p>
+          {/* <p className="organiser_create_event_sub-title">Shifts</p>
           <div className="organiser_create_event_shifts">
             <div className="organiser_create_event_shifts_column">
               <div>
@@ -196,7 +192,7 @@ const OrganiserCreateEvent = () => {
                <button className="organiser_create_event-form_button">Edit</button>
               <button className="organiser_create_event-form_button">Delete</button>
             </div>
-          </div>
+          </div> */}
           <button className="organiser_create_event_shifts_button" disabled>Add shift</button>
           <div className="button-group">
             <button className="organiser_create_event-form_button" type="submit">{t('createEvent')}</button>
