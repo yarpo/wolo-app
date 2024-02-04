@@ -1,16 +1,9 @@
 import { useTranslation } from 'react-i18next';
-import { useEffect } from 'react';
 import '../../../styles/your-event-volunteer.scss';
 
 const YourEventVolunteer = () => {
-    const { t, i18n } = useTranslation();
 
-    useEffect(() => {
-        const storedLanguage = localStorage.getItem('language');
-        if (storedLanguage) {
-            i18n.changeLanguage(storedLanguage);
-        }
-    }, [i18n]);
+    const { t } = useTranslation();
 
     return (
         <div className='your_event_volunteer'>

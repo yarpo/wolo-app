@@ -1,5 +1,4 @@
 import { useTranslation } from 'react-i18next';
-import { useEffect } from 'react';
 import {
   VscArrowLeft,
   VscMail,
@@ -12,14 +11,8 @@ import MoreEvents from '../MoreEventsFromOrganizer/MoreEvents';
 import '../../styles/organizer.scss';
 
 const Organizer = () => {
-  const { t, i18n } = useTranslation();
 
-  useEffect(() => {
-    const storedLanguage = localStorage.getItem('language');
-    if (storedLanguage) {
-      i18n.changeLanguage(storedLanguage);
-    }
-  }, [i18n]);
+  const { t } = useTranslation();
 
   return (
     <div className="organizer_container">

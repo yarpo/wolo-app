@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useTranslation } from 'react-i18next';
 import { Formik } from "formik";
 import { Link } from "react-router-dom";
@@ -6,17 +6,10 @@ import '../../styles/login.scss';
 import {axiosInstance, setAuthToken} from '../../Utils/axiosInstance'
 
 const Login = () => {
+
   const [showPassword, setShowPassword] = useState(false);
-  const { t, i18n } = useTranslation();
-
-  useEffect(() => {
-    const storedLanguage = localStorage.getItem('language');
-    if (storedLanguage) {
-      i18n.changeLanguage(storedLanguage);
-    }
-  }, [i18n]);
-
-   const toggleShowPassword = () => {
+  const { t } = useTranslation();
+  const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
@@ -40,7 +33,6 @@ const Login = () => {
             console.error('Login error:', error);
         }
     };
-
 
   return (
     <div className="login-form" >

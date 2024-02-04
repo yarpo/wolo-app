@@ -13,6 +13,7 @@ import '../../styles/details.scss';
 import EventCard from '../EventCard/EventCard';
 
 const Details = () => {
+  
   const { t } = useTranslation();
   const { id } = useParams();
   const [eventData, setEventData] = useState(null);
@@ -21,7 +22,7 @@ const Details = () => {
   useEffect(() => {
     const fetchEventData = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/events/${id}`);
+        const response = await fetch(`http://localhost:8080/events/${id}?language=pl`);
         const data = await response.json();
         setEventData(data);
       } catch (error) {
@@ -34,7 +35,7 @@ const Details = () => {
 
  useEffect(() => {
   if (eventData && eventData.organisationId) {
-    fetch(`http://localhost:8080/organisations/events/${eventData.organisationId}`)
+    fetch(`http://localhost:8080/organisations/events/${eventData.organisationId}?language=pl`)
       .then(response => response.json())
       .then(data => setOrganiserEvents(data))
       .catch(error => console.error(error));

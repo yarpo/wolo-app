@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Map = ({ address }) => {
+  
   const googleMapsUrl = `https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=${encodeURIComponent(address)}`;
 
   return (

@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import '../../styles/event-card.scss';
 
 const EventCard = ({ event }) => {
+  
   const { t } = useTranslation();
 
   return (

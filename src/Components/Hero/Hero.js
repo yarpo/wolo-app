@@ -1,5 +1,4 @@
 import { useTranslation } from 'react-i18next';
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Filters from '../Filters/Filters';
 import React, { useState } from 'react';
@@ -8,18 +7,12 @@ import 'react-datepicker/dist/react-datepicker.css';
 import '../../styles/hero.scss';
 
 const Hero = () => {
-    const { t, i18n } = useTranslation();
+
+    const { t } = useTranslation();
     const locations = ['Zaspa', 'Chełm', 'Wrzeszcz'];
     const [selectedLocation, setSelectedLocation] = useState("");
     const [selectedDate, setSelectedDate] = useState(null);
     const [  , setFilteredEvents] = useState([]);
-
-    useEffect(() => {
-        const storedLanguage = localStorage.getItem('language');
-        if (storedLanguage) {
-            i18n.changeLanguage(storedLanguage);
-        }
-    }, [i18n]);
 
     const handleDateChange = (date) => {
         setSelectedDate(date);

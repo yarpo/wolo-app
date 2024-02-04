@@ -1,18 +1,12 @@
 import { useTranslation } from 'react-i18next';
-import { useEffect } from 'react';
+
 import '../../styles/admin-home-page.scss';
 import { VscEdit, VscArrowRight } from "react-icons/vsc";
 import EventCardToModerate from "./EventCardToModerate/EventCardToModerate.js";
 
 const AdminHomePage = () => {
-    const { t, i18n } = useTranslation();
-
-    useEffect(() => {
-        const storedLanguage = localStorage.getItem('language');
-        if (storedLanguage) {
-            i18n.changeLanguage(storedLanguage);
-        }
-    }, [i18n]);
+    
+    const { t } = useTranslation();
 
     return (
         <div className='admin_home_page_container'>

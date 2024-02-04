@@ -6,6 +6,7 @@ import fetchData from '../../Utils/fetchData.js';
 import * as Yup from 'yup';
 
 const OrganiserCreateEvent = () => {
+  
   const { t, i18n } = useTranslation();
   const [categories, setCategories] = useState([]);
   const [districts, setDistricts] = useState([])
@@ -14,13 +15,6 @@ const OrganiserCreateEvent = () => {
     fetchData('http://localhost:8080/categories', setCategories);
     fetchData('http://localhost:8080/districts', setDistricts);
   }, []);
-
-  useEffect(() => {
-    const storedLanguage = localStorage.getItem('language');
-    if (storedLanguage) {
-      i18n.changeLanguage(storedLanguage);
-    }
-  }, [i18n]);
 
   const [initialValues] = useState({
     name: '',
@@ -31,7 +25,7 @@ const OrganiserCreateEvent = () => {
     addressDescription: '',
     districtId: '',
     categories: '',
-    // shift: '',
+    shift: '',
     peselVerificationRequired: false,
     volunteerAgreement: false,
     language: i18n.language,
@@ -64,16 +58,16 @@ const OrganiserCreateEvent = () => {
 
           values.organisationId = 1;
           values.categories = [parseInt(values.categories, 10)];
-          // values.shifts = [
-          //   {
-          //     startTime: [values.shift.starthour, values.shift.startmin],
-          //     endTime: [values.shift.endhour, values.shift.endmin],
-          //     date: [values.shift.year, values.shift.month, values.shift.day],
-          //     capacity: values.shift.volunteersNum,
-          //     isLeaderRequired: false,
-          //     requiredMinAge: values.shift.minAge,
-          //   },
-          // ];
+          values.shifts = [
+            {
+              startTime: [values.shift.starthour, values.shift.startmin],
+              endTime: [values.shift.endhour, values.shift.endmin],
+              date: [values.shift.year, values.shift.month, values.shift.day],
+              capacity: values.shift.volunteersNum,
+              isLeaderRequired: false,
+              requiredMinAge: values.shift.minAge,
+            },
+          ];
 
           delete values.shift
 
