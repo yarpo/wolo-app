@@ -11,6 +11,8 @@ const OrganiserCreateEvent = () => {
   const [categories, setCategories] = useState([]);
   const [districts, setDistricts] = useState([])
   const [suggestedCategory, setSuggestedCategory] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState('');
+
 
   useEffect(() => {
     fetchData('http://localhost:8080/categories', setCategories);
@@ -28,11 +30,14 @@ const OrganiserCreateEvent = () => {
       });
 
       if (response.ok) {
-        const result = await response.json();
-        setSuggestedCategory(result);
-      } else {
-        console.error('Error fetching suggestion:', response.statusText);
-      }
+      const result = await response.json();
+      setSuggestedCategory(result);
+      
+      setSelectedCategory(result.id);
+
+    } else {
+      console.error('Error fetching suggestion:', response.statusText);
+    }
     } catch (error) {
       console.error('Error fetching suggestion:', error);
     }
@@ -50,7 +55,7 @@ const OrganiserCreateEvent = () => {
     shift: '',
     peselVerificationRequired: false,
     volunteerAgreement: false,
-    language: i18n.language,
+    language: i18n.language.toUpperCase(),
   });
 
   const validationSchema = Yup.object().shape({
@@ -161,11 +166,11 @@ const OrganiserCreateEvent = () => {
           <br/>
           <div className="organiser_create_event_row_div">
             <label htmlFor="categories">{t('categories')}*</label>
-            <Field as="select" className="organiser_create_event-from_input_dropdown" type="text" name="categories" placeholder="Category">
-              <option value="" disabled selected>{t('SelectCategory')}</option>
+            <Field as="select" className="organiser_create_event-from_input_dropdown" type="text" name="categories" placeholder="Category" value={selectedCategory}>
+              <option value="" disabled>{t('SelectCategory')}</option>
               {categories.map(category => (
                 <option key={category.id} value={category.id}>{category.name}</option>
-              ))}
+             ))}
             </Field>
             {suggestedCategory && (
               <p>Suggested category : {suggestedCategory.name}</p>
