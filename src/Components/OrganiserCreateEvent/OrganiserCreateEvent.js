@@ -10,11 +10,33 @@ const OrganiserCreateEvent = () => {
   const { t, i18n } = useTranslation();
   const [categories, setCategories] = useState([]);
   const [districts, setDistricts] = useState([])
+  const [suggestedCategory, setSuggestedCategory] = useState(null);
 
   useEffect(() => {
     fetchData('http://localhost:8080/categories', setCategories);
     fetchData('http://localhost:8080/districts', setDistricts);
   }, []);
+
+  const suggestCategory = async (description) => {
+    try {
+      const response = await fetch('http://127.0.0.1:5000/suggest', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ description }),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        setSuggestedCategory(result);
+      } else {
+        console.error('Error fetching suggestion:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error fetching suggestion:', error);
+    }
+  };
 
   const [initialValues] = useState({
     name: '',
@@ -139,13 +161,27 @@ const OrganiserCreateEvent = () => {
           <br/>
           <div className="organiser_create_event_row_div">
             <label htmlFor="categories">{t('categories')}*</label>
-            <Field as="select" className="organiser_create_event-from_input_dropdown" type="text" name="categories"  placeholder="Category">
+            <Field as="select" className="organiser_create_event-from_input_dropdown" type="text" name="categories" placeholder="Category">
               <option value="" disabled selected>{t('SelectCategory')}</option>
               {categories.map(category => (
                 <option key={category.id} value={category.id}>{category.name}</option>
               ))}
             </Field>
+            {suggestedCategory && (
+              <p>Suggested category : {suggestedCategory.name}</p>
+            )}
             <ErrorMessage className="error" name="category" component="div" />
+            <button
+              className="organiser_create_event_shifts_button"
+              onClick={() => {
+                const currentDescription = document.getElementsByName('description')[0]?.value;
+                if (currentDescription) {
+                  suggestCategory(currentDescription);
+                }
+              }}
+            >
+              Get Category Suggestion
+            </button>
           </div>
           <br/>  
           <div className="checkbox_organiser_create_event-group">
