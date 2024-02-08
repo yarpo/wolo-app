@@ -102,7 +102,7 @@ const OrganiserCreateEvent = () => {
             console.log(jsonData);
 
             try {
-              const response = await fetch('http://127.0.0.1:5000/translate', {
+              const response = await fetch('http://127.0.0.1:5000/event-create', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
