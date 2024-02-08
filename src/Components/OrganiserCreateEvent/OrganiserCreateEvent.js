@@ -87,12 +87,12 @@ const OrganiserCreateEvent = () => {
             values.categories = [parseInt(values.categories, 10)];
             values.shifts = [
               {
-                startTime: [values.shift.starthour, values.shift.startmin],
-                endTime: [values.shift.endhour, values.shift.endmin],
-                date: [values.shift.year, values.shift.month, values.shift.day],
-                capacity: values.shift.volunteersNum,
+                startTime: [9, 9],
+                endTime: [12, 12],
+                date: [2024, 11, 11],
+                capacity: 7,
                 isLeaderRequired: false,
-                requiredMinAge: values.shift.minAge,
+                requiredMinAge: 18,
               },
             ];
 
@@ -116,7 +116,11 @@ const OrganiserCreateEvent = () => {
 
               const translatedEvent = await response.json();
 
-              const response2 = await fetch('http://localhost:8080/events/add', {
+              console.log(translatedEvent)
+
+              
+
+              const response2 = await fetch('https://127.0.0.1:8080/events/add', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -184,7 +188,7 @@ const OrganiserCreateEvent = () => {
           <br/>
           <div className="organiser_create_event_row_div">
             <label htmlFor="categories">{t('categories')}*</label>
-           <Field as="select" className="organiser_create_event-from_input_dropdown" type="text" name="categories" placeholder="Category" value={selectedCategory} onChange={event => setSelectedCategory(event.target.value)}>
+           <Field as="select" className="organiser_create_event-from_input_dropdown" type="text" name="categories" placeholder="Category" value={selectedCategory}>
               <option value="" disabled>{t('SelectCategory')}</option>
               {categories.map(category => (
                 <option key={category.id} value={category.id}>{category.name}</option>
