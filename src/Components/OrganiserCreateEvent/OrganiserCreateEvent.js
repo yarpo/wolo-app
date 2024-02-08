@@ -184,11 +184,11 @@ const OrganiserCreateEvent = () => {
           <br/>
           <div className="organiser_create_event_row_div">
             <label htmlFor="categories">{t('categories')}*</label>
-            <Field as="select" className="organiser_create_event-from_input_dropdown" type="text" name="categories" placeholder="Category" value={selectedCategory}>
+           <Field as="select" className="organiser_create_event-from_input_dropdown" type="text" name="categories" placeholder="Category" value={selectedCategory} onChange={event => setSelectedCategory(event.target.value)}>
               <option value="" disabled>{t('SelectCategory')}</option>
               {categories.map(category => (
                 <option key={category.id} value={category.id}>{category.name}</option>
-             ))}
+              ))}
             </Field>
             {suggestedCategory && (
               <p>Suggested category : {suggestedCategory.name}</p>
