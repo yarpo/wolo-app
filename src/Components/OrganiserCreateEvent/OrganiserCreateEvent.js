@@ -77,47 +77,65 @@ const OrganiserCreateEvent = () => {
     <div className="organiser_create_event_div">
       <h1 className="organiser_create_event_title">{t('createEvent')}</h1>
       <p className="organiser_create_event_sub-title_disclaimer">{t('inputsAreRequired')}</p>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={(values, { setSubmitting }) => {
-          console.log(values);
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={async (values, { setSubmitting }) => {
+            console.log(values);
 
-          values.organisationId = 1;
-          values.categories = [parseInt(values.categories, 10)];
-          values.shifts = [
-            {
-              startTime: [values.shift.starthour, values.shift.startmin],
-              endTime: [values.shift.endhour, values.shift.endmin],
-              date: [values.shift.year, values.shift.month, values.shift.day],
-              capacity: values.shift.volunteersNum,
-              isLeaderRequired: false,
-              requiredMinAge: values.shift.minAge,
-            },
-          ];
+            values.organisationId = 1;
+            values.categories = [parseInt(values.categories, 10)];
+            values.shifts = [
+              {
+                startTime: [values.shift.starthour, values.shift.startmin],
+                endTime: [values.shift.endhour, values.shift.endmin],
+                date: [values.shift.year, values.shift.month, values.shift.day],
+                capacity: values.shift.volunteersNum,
+                isLeaderRequired: false,
+                requiredMinAge: values.shift.minAge,
+              },
+            ];
 
-          delete values.shift
+            delete values.shift
 
-          const jsonData = JSON.stringify(values);
-          console.log(jsonData);
+            const jsonData = JSON.stringify(values);
+            console.log(jsonData);
 
-          fetch('http://localhost:8080/events/add', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: jsonData,
-          })
-            .then(response => {
-              console.log('Response:', response);
-              setSubmitting(false);
-            })
-            .catch(error => {
+            try {
+              const response = await fetch('http://127.0.0.1:5000/translate', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: jsonData,
+              });
+
+              if (!response.ok) {
+                throw new Error('Error translating event');
+              }
+
+              const translatedEvent = await response.json();
+
+              const response2 = await fetch('http://localhost:8080/events/add', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(translatedEvent),
+              });
+
+              if (!response2.ok) {
+                throw new Error('Error adding event');
+              }
+
+              console.log('Response:', response2);
+            } catch (error) {
               console.error('Error:', error);
+            } finally {
               setSubmitting(false);
-            })
-        }}
-      >
+            }
+          }}
+        >
         <Form>
           <div className="organiser_create_event_row_div">
             <label htmlFor="name">{t('title')}*</label>
