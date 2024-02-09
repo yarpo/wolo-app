@@ -47,15 +47,16 @@ const Details = () => {
   }
 
   const {
-  name,
-  organisationName,
-  description,
-  street,
-  addressDescription,
-  homeNum,
-  district,
-  imageUrl,
-  shifts,
+    name,
+    organisationName,
+    description,
+    street,
+    addressDescription,
+    homeNum,
+    district,
+    imageUrl,
+    shifts,
+    alt,
 } = eventData;
 
 return (
@@ -90,7 +91,7 @@ return (
       </div>
 
       <div className="details_photo">
-        <img src={imageUrl} alt="Event" onError={(event) => event.target.style.display = 'none'} />
+        <img src={imageUrl} alt={alt} onError={(event) => event.target.style.display = 'none'} />
       </div>
 
     <p id="description">{description}</p>

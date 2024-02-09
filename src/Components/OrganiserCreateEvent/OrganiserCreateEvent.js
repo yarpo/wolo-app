@@ -11,8 +11,6 @@ const OrganiserCreateEvent = () => {
   const [categories, setCategories] = useState([]);
   const [districts, setDistricts] = useState([])
   const [suggestedCategory, setSuggestedCategory] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState('');
-
 
   useEffect(() => {
     fetchData('http://localhost:8080/categories', setCategories);
@@ -32,9 +30,7 @@ const OrganiserCreateEvent = () => {
       if (response.ok) {
       const result = await response.json();
       setSuggestedCategory(result);
-      
-      setSelectedCategory(result.id);
-
+  
     } else {
       console.error('Error fetching suggestion:', response.statusText);
     }
@@ -178,7 +174,7 @@ const OrganiserCreateEvent = () => {
           <div className="organiser_create_event_row_div">
             <label htmlFor="districtId">{t('district')}*</label>
             <Field as="select" className="organiser_create_event-from_input_dropdown" type="text" name="districtId"  placeholder="District">
-              <option value="" disabled selected>{t('SelectDistrict')}</option>
+              <option value="" disabled >{t('SelectDistrict')}</option>
               {districts.map(district => (
                 <option key={district.id} value={district.id}>{district.name}</option>
               ))}
@@ -188,28 +184,29 @@ const OrganiserCreateEvent = () => {
           <br/>
           <div className="organiser_create_event_row_div">
             <label htmlFor="categories">{t('categories')}*</label>
-           <Field as="select" className="organiser_create_event-from_input_dropdown" type="text" name="categories" placeholder="Category" value={selectedCategory}>
-              <option value="" disabled>{t('SelectCategory')}</option>
+           <Field as="select" className="organiser_create_event-from_input_dropdown" type="text" name="categories" placeholder="Category" >
+              <option value="" disabled >{t('SelectCategory')}</option>
               {categories.map(category => (
                 <option key={category.id} value={category.id}>{category.name}</option>
               ))}
             </Field>
-            {suggestedCategory && (
-              <p>Suggested category : {suggestedCategory.name}</p>
-            )}
-            <ErrorMessage className="error" name="category" component="div" />
-            <button
-              className="organiser_create_event_shifts_button"
-              onClick={() => {
-                const currentDescription = document.getElementsByName('description')[0]?.value;
-                if (currentDescription) {
-                  suggestCategory(currentDescription);
-                }
-              }}
-            >
-              Get Category Suggestion
-            </button>
           </div>
+            <div className="organiser_create_event_row_div">
+              <label>Suggested category : {suggestedCategory ? suggestedCategory.name : 'None'}</label>
+              <ErrorMessage className="error" name="category" component="div" />
+              <button
+                className="organiser_create_event_shifts_button"
+                onClick={(event) => {
+                  event.preventDefault();
+                  const currentDescription = document.getElementsByName('description')[0]?.value;
+                  if (currentDescription) {
+                    suggestCategory(currentDescription);
+                  }
+                }}
+              >
+                Get Category Suggestion
+              </button>
+            </div>
           <br/>  
           <div className="checkbox_organiser_create_event-group">
             <label htmlFor="peselVerificationRequired">
@@ -250,7 +247,8 @@ const OrganiserCreateEvent = () => {
               <button className="organiser_create_event-form_button">Delete</button>
             </div>
           </div> */}
-          <button className="organiser_create_event_shifts_button" disabled>Add shift</button>
+          {/* <button className="organiser_create_event_shifts_button" disabled>Add shift</button> */}
+          <br/>
           <div className="button-group">
             <button className="organiser_create_event-form_button" type="submit">{t('createEvent')}</button>
           </div>
