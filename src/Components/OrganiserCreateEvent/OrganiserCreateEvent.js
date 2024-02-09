@@ -120,7 +120,7 @@ const OrganiserCreateEvent = () => {
 
               
 
-              const response2 = await fetch('https://127.0.0.1:8080/events/add', {
+              const response2 = await fetch('http://127.0.0.1:8080/events/add', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
