@@ -13,10 +13,13 @@ import OrganiserCreateEvent from './Components/OrganiserCreateEvent/OrganiserCre
 import AdminHomePage from './Components/AdminHomePage/AdminHomePage.js';
 import VolunteerHomePage from './Components/VolunteerHomePage/VolunteerHomePage.js';
 import { FiltersProvider } from './Components/Filters/FiltersContext';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
     <>
+     <ToastContainer />
       <div className="App">
         <Navbar />
         <FiltersProvider>

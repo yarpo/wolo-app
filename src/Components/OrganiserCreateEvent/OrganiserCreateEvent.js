@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import '../../styles/organiser-create-event.scss';
 import fetchData from '../../Utils/fetchData.js';
 import * as Yup from 'yup';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const OrganiserCreateEvent = () => {
   
@@ -107,14 +109,17 @@ const OrganiserCreateEvent = () => {
               });
 
               if (!response.ok) {
-                throw new Error('Error translating event');
+                const errorData = await response.json();
+                if (errorData.error_code === 420) {
+                  toast.error('Inappropriate content');
+                  return;
+                }
+                toast.error('Error translating event');
+                return;
               }
 
               const translatedEvent = await response.json();
-
               console.log(translatedEvent)
-
-              
 
               const response2 = await fetch('http://127.0.0.1:8080/events/add', {
                 method: 'POST',
@@ -124,13 +129,17 @@ const OrganiserCreateEvent = () => {
                 body: JSON.stringify(translatedEvent),
               });
 
-              if (!response2.ok) {
-                throw new Error('Error adding event');
-              }
+            if (!response2.ok) {
+              toast.error('Error adding event');
+              return;
+            }
 
-              console.log('Response:', response2);
+            toast.success('Event added successfully');
+
+            console.log('Response:', response2);
             } catch (error) {
               console.error('Error:', error);
+              toast.error('An unexpected error occurred');
             } finally {
               setSubmitting(false);
             }
