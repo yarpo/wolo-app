@@ -125,7 +125,15 @@
     "peselVerificationRequired": "Wymagany PESEL",
     "district": "Dzielnica",
     "categories": "Kategorie",
-    "organisation": "Organizacja"
+    "organisation": "Organizacja",
+    "startTime": "Początek zmiany",
+    "endTime": "Koniec zmiany",
+    "date": "Data",
+    "capacity": "Ilość miejsc",
+    "signedUp": "Ilość zarejestrowanych",
+    "isLeaderRequired": "Czy jest wymagany lider",
+    "requiredMinAge": "Wymagania wiekowe",
+    "address_id": "Identyfikator adresu"
   },
   "userActions": {
     "edit": "Edytuj",
@@ -160,6 +168,18 @@
   "Categories List": "Lista Kategorii",
   "True": "Tak",
   "False": "Nie",
+  "true": "Tak",
+  "false": "Nie",
   "Select Role": "Wybierz Role",
-  "Add": "Dodaj"
+  "Add": "Dodaj",
+  "Add new": "Dodaj nowy",
+  "Add new shift":  "Dodaj nową zmianę",
+  "startTime": "Początek zmiany",
+  "endTime": "Koniec zmiany",
+  "capacity": "Ilość miejsc",
+  "signedUp": "Ilość zarejestrowanych",
+  "isLeaderRequired": "Czy jest wymagany lider",
+  "requiredMinAge": "Wymagania wiekowe",
+  "address_id": "Identyfikator adresu",
+  "Edit Shifts": "Edytuj zmiany"
 }

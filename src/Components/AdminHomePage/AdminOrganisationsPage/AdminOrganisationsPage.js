@@ -1,14 +1,24 @@
 import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
-import '../../../styles/admin-home-page.scss';
+import '../../../styles/admin-organisations-page.scss';
 
 const AdminOrganisationsPage = () => {
     const { t, i18n } = useTranslation();
     const [organisations, setOrganisations] = useState([]);
     const [editedOrganisationId, setEditedOrganisationId] = useState(null);
     const [editedOrganisationData, setEditedOrganisationData] = useState({});
-    const [formData, setFormData] = useState({});
-
+    const [formData, setFormData] = useState({
+        name: '',
+        description: '',
+        email: '',
+        phoneNumber: '',
+        street: '',
+        homeNum: '',
+        addressDescription: '',
+        districtId: null,
+        moderatorId: null,
+        logoUrl: '',
+    });
     useEffect(() => {
         const storedLanguage = localStorage.getItem('language');
         if (storedLanguage) {
@@ -177,25 +187,23 @@ const AdminOrganisationsPage = () => {
                                 </tbody>
                             </table>
                             <form onSubmit={handleSubmit}>
-                                {organisations.length > 0 &&
-                                    Object.keys(organisations[0]).map((key) => {
+                                {Object.keys(formData).map((key) => {
+                                    if (key !== 'id') {
+                                        return (
+                                            <div key={key}>
+                                                <label htmlFor={key}>{t(`tableHeaders.${key}`)}</label>
+                                                <input
+                                                    type="text"
+                                                    id={key}
+                                                    name={key}
+                                                    onChange={handleChange}
+                                                    value={formData[key] || ''}
+                                                />
+                                            </div>
+                                        );
+                                    }
 
-                                        if (key !== 'id') {
-                                            return (
-                                                <div key={key}>
-                                                    <label htmlFor={key}>{t(`tableHeaders.${key}`)}</label>
-                                                    <input
-                                                        type="text"
-                                                        id={key}
-                                                        name={key}
-                                                        onChange={handleChange}
-                                                        value={formData[key] || ''}
-                                                    />
-                                                </div>
-                                            );
-                                        }
-                                        return null;
-                                    })}
+                                })}
                                 <button type="submit">{t('Add')}</button>
                             </form>
                         </div>

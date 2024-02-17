@@ -1,6 +1,6 @@
-import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
-import '../../../styles/admin-home-page.scss';
+import { useTranslation } from 'react-i18next';
+import '../../../styles/admin-categories-page.scss';
 
 const AdminCategoriesPage = () => {
     const { t, i18n } = useTranslation();
@@ -8,6 +8,7 @@ const AdminCategoriesPage = () => {
     const [editedCategoryId, setEditedCategoryId] = useState(null);
     const [editedCategoryData, setEditedCategoryData] = useState({});
     const [formData, setFormData] = useState({});
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         const storedLanguage = localStorage.getItem('language');
@@ -36,6 +37,11 @@ const AdminCategoriesPage = () => {
             [e.target.name]: e.target.value,
         });
     };
+
+    const handleAddClick = () => {
+        setIsModalOpen(true);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -48,17 +54,19 @@ const AdminCategoriesPage = () => {
                 body: JSON.stringify(formData),
             });
 
-
-            console.log('Response:', response);
+            if (response.ok) {
+                const updatedResponse = await fetch('http://localhost:8080/categories');
+                const updatedData = await updatedResponse.json();
+                setCategories(updatedData);
+            } else {
+                console.error('Error adding category:', await response.text());
+            }
         } catch (error) {
-            console.error('Error:', error);
+            console.error('Error adding category:', error);
         }
-    };
 
-    const handleEditClick = (categoryId) => {
-        setEditedCategoryId(categoryId);
-        const editedCategory = categories.find((category) => category.id === categoryId);
-        setEditedCategoryData(editedCategory);
+        setIsModalOpen(false);
+        setFormData({});
     };
 
     const handleDeleteClick = async (categoryId) => {
@@ -69,12 +77,24 @@ const AdminCategoriesPage = () => {
                     'Content-Type': 'application/json',
                 },
             });
-
-            setCategories(categories.filter((category) => category.id !== categoryId));
+            setCategories((prevCategories) => prevCategories.filter((category) => category.id !== categoryId));
         } catch (error) {
             console.error('Error deleting category:', error);
         }
     };
+
+    const handleModalCloseButton = () => {
+        setIsModalOpen(false);
+        setFormData({});
+    };
+
+    const handleEditClick = (categoryId) => {
+        setEditedCategoryId(categoryId);
+        const editedCategory = categories.find((category) => category.id === categoryId);
+        setEditedCategoryData(editedCategory);
+    };
+
+
 
     const handleSaveClick = async () => {
         try {
@@ -121,90 +141,92 @@ const AdminCategoriesPage = () => {
                 </div>
             </div>
             <div id='admin_home_page_content'>
-                <div id="admin_home_page_events_to_approve">
-                    <div id="admin_home_page_events_container">
-                        <div>
-                            <h1>{t(`Categories List`)}</h1>
+            {!isModalOpen && (
+                <button onClick={handleAddClick}>{t('Add')}</button>
+            )}
 
-                            <table className="table">
-                                <thead>
-                                <tr>
-                                    {categories.length > 0 &&
-                                        Object.keys(categories[0]).map((key) => <th key={key}>{t(`tableHeaders.${key}`)}</th>)}
-                                    <th>{t('tableHeaders.actions')}</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {categories.map((category) => (
-                                    <tr key={category.id}>
-                                        {Object.keys(category).map((key) => (
-                                            <td key={key}>
-                                                {key !== 'id' ? (
-                                                    <>
-                                                        {editedCategoryId === category.id ? (
-                                                                <input
-                                                                    type="text"
-                                                                    value={editedCategoryData[key] || ''}
-                                                                    onChange={(e) =>
-                                                                        setEditedCategoryData({ ...editedCategoryData, [key]: e.target.value })
-                                                                    }
-                                                                />
+            {isModalOpen && (
+                <div className="modal-overlay">
+                    <div className="modal">
+                        <button className="modal-close-button" onClick={handleModalCloseButton}>
+                            &times; Close
+                        </button>
 
-                                                        ) : (
-                                                                String(category[key])
-                                                        )}
-                                                    </>
-                                                ) : (
-                                                    String(category[key])
-                                                )}
-                                            </td>
-                                        ))}
-                                        <td>
-                                            {editedCategoryId === category.id ? (
-                                                <>
-                                                    <button onClick={handleSaveClick}>{t('userActions.save')}</button>
-                                                    <></>
-                                                    <button onClick={handleCancelClick}>{t('userActions.cancel')}</button>
-                                                </>
-                                            ) : (
-                                                <>
-                                                    <button onClick={() => handleEditClick(category.id)}>{t('userActions.edit')}</button>
-                                                    <></>
-                                                    <button onClick={() => handleDeleteClick(category.id)}>{t('userActions.delete')}</button>
-                                                </>
-                                            )}
-                                        </td>
-                                    </tr>
-                                ))}
-                                </tbody>
-                            </table>
-                            <form onSubmit={handleSubmit}>
-                                {categories.length > 0 &&
-                                    Object.keys(categories[0]).map((key) => {
-
-                                        if (key !== 'id') {
-                                            return (
-                                                <div key={key}>
-                                                    <label htmlFor={key}>{t(`tableHeaders.${key}`)}</label>
-                                                    <input
-                                                        type="text"
-                                                        id={key}
-                                                        name={key}
-                                                        onChange={handleChange}
-                                                        value={formData[key] || ''}
-                                                    />
-                                                </div>
-                                            );
-                                        }
-                                        return null;
-                                    })}
-                                <button type="submit">{t('Add')}</button>
-                            </form>
-                        </div>
+                        <form onSubmit={handleSubmit} className="modal-form">
+                            {categories.length > 0 &&
+                                Object.keys(categories[0]).map((key) => {
+                                    if (key !== 'id') {
+                                        return (
+                                            <div key={key}>
+                                                <label htmlFor={key}>{t(`tableHeaders.${key}`)}</label>
+                                                <input
+                                                    type="text"
+                                                    id={key}
+                                                    name={key}
+                                                    onChange={handleChange}
+                                                    value={formData[key] || ''}
+                                                />
+                                            </div>
+                                        );
+                                    }
+                                })}
+                            <button type="submit">{t('Add')}</button>
+                        </form>
                     </div>
                 </div>
-            </div>
-        </div>
+            )}
+
+            <table className="table">
+                <thead>
+                <tr>
+                    {categories.length > 0 &&
+                        Object.keys(categories[0]).map((key) => <th key={key}>{t(`tableHeaders.${key}`)}</th>)}
+                    <th>{t('tableHeaders.actions')}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {categories.map((category) => (
+                    <tr key={category.id}>
+                        {Object.keys(category).map((key) => (
+                            <td key={key}>
+                                {key !== 'id' ? (
+                                    <>
+                                        {editedCategoryId === category.id ? (
+                                            <input
+                                                type="text"
+                                                value={editedCategoryData[key] || ''}
+                                                onChange={(e) =>
+                                                    setEditedCategoryData({ ...editedCategoryData, [key]: e.target.value })
+                                                }
+                                            />
+                                        ) : (
+                                            String(category[key])
+                                        )}
+                                    </>
+                                ) : (
+                                    String(category[key])
+                                )}
+                            </td>
+                        ))}
+                        <td>
+                            {editedCategoryId === category.id ? (
+                                <>
+                                    <button onClick={handleSaveClick}>{t('userActions.save')}</button>
+                                    <button onClick={handleCancelClick}>{t('userActions.cancel')}</button>
+                                </>
+                            ) : (
+                                <>
+                                    <button onClick={() => handleEditClick(category.id)}>{t('userActions.edit')}</button>
+                                    <button onClick={() => handleDeleteClick(category.id)}>{t('userActions.delete')}</button>
+                                </>
+                            )}
+                        </td>
+                    </tr>
+                ))}
+                </tbody>
+            </table>
+</div>
+</div>
     );
 };
 

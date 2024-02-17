@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import '../../../styles/admin-home-page.scss';
+import '../../../styles/admin-users-page.scss';
 
 const AdminUsersPage = () => {
     const { t, i18n } = useTranslation();

@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
-import '../../../styles/admin-home-page.scss';
+import '../../../styles/admin-districts-page.scss';
 
 const AdminDistrictsPage = () => {
     const { t, i18n } = useTranslation();
@@ -194,7 +194,7 @@ const AdminDistrictsPage = () => {
                                                 </div>
                                             );
                                         }
-                                        return null;
+
                                     })}
                                 <button type="submit">{t('Add')}</button>
                             </form>

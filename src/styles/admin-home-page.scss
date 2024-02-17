@@ -93,33 +93,4 @@
         text-align: center;
         font-size: $font-size-normall;
     }
-    .table {
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-    .table th, .table td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-    }
-
-    .table th {
-        background-color: #f2f2f2;
-    }
-
-    @media screen and (max-width: 730px) {
-        #admin_home_page_panel {
-            flex-direction: column;
-            padding-bottom: 10px;
-        }
-
-        .admin_home_page_text {
-            margin-top: 50px;
-
-            #admin_home_page_icon {
-                display: none;
-            }
-        }
-    }
 }
