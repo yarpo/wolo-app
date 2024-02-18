@@ -7,7 +7,7 @@ import fetchData from '../../Utils/fetchData.js';
 
 const Filters = ({ setFilteredEvents }) => {
   
-  const { t, i18n } = useTranslation();
+  const {t} = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const { filters, setFilters } = useFiltersContext();
   const [apiResponse, setApiResponse] = useState([]);
@@ -16,7 +16,7 @@ const Filters = ({ setFilteredEvents }) => {
   const [organizations, setOrganizations] = useState([]);
 
 useEffect(() => {
-  fetchData(`http://localhost:8080/events?language=${i18n.language}`, setApiResponse);
+  fetchData(`http://localhost:8080/events`, setApiResponse);
 }, [filters, categories]);
 
 useEffect(() => {

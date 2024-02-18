@@ -11,35 +11,12 @@ const OrganiserCreateEvent = () => {
   
   const { t, i18n } = useTranslation();
   const [categories, setCategories] = useState([]);
-  const [districts, setDistricts] = useState([])
-  const [suggestedCategory, setSuggestedCategory] = useState(null);
+  const [districts, setDistricts] = useState([]);
 
   useEffect(() => {
     fetchData('http://localhost:8080/categories', setCategories);
     fetchData('http://localhost:8080/districts', setDistricts);
   }, []);
-
-  const suggestCategory = async (description) => {
-    try {
-      const response = await fetch('http://127.0.0.1:5000/suggest', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ description }),
-      });
-
-      if (response.ok) {
-      const result = await response.json();
-      setSuggestedCategory(result);
-  
-    } else {
-      console.error('Error fetching suggestion:', response.statusText);
-    }
-    } catch (error) {
-      console.error('Error fetching suggestion:', error);
-    }
-  };
 
   const [initialValues] = useState({
     name: '',
@@ -100,33 +77,12 @@ const OrganiserCreateEvent = () => {
             console.log(jsonData);
 
             try {
-              const response = await fetch('http://127.0.0.1:5000/event-create', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: jsonData,
-              });
-
-              if (!response.ok) {
-                const errorData = await response.json();
-                if (errorData.error_code === 420) {
-                  toast.error('Inappropriate content');
-                  return;
-                }
-                toast.error('Error translating event');
-                return;
-              }
-
-              const translatedEvent = await response.json();
-              console.log(translatedEvent)
-
               const response2 = await fetch('http://127.0.0.1:8080/events/add', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(translatedEvent),
+                body: jsonData,
               });
 
             if (!response2.ok) {
@@ -200,22 +156,6 @@ const OrganiserCreateEvent = () => {
               ))}
             </Field>
           </div>
-            <div className="organiser_create_event_row_div">
-              <label>Suggested category : {suggestedCategory ? suggestedCategory.name : 'None'}</label>
-              <ErrorMessage className="error" name="category" component="div" />
-              <button
-                className="organiser_create_event_shifts_button"
-                onClick={(event) => {
-                  event.preventDefault();
-                  const currentDescription = document.getElementsByName('description')[0]?.value;
-                  if (currentDescription) {
-                    suggestCategory(currentDescription);
-                  }
-                }}
-              >
-                Get Category Suggestion
-              </button>
-            </div>
           <br/>  
           <div className="checkbox_organiser_create_event-group">
             <label htmlFor="peselVerificationRequired">
