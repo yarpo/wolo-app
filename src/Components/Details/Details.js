@@ -79,7 +79,7 @@ return (
             <VscBrowser id="icon" /> <strong>{t('date')}:</strong> {new Date(shifts[0].date[0], shifts[0].date[1] - 1, shifts[0].date[2]).toLocaleDateString()}
           </li>
           <li>
-            <BiTime id="icon" /> <strong>{t('time')}:</strong> {`${shifts[0].startTime.join(':')} - ${shifts[0].endTime.join(':')}`}
+            <BiTime id="icon" /> <strong>{t('time')}:</strong> {`${shifts[0].startTime} - ${shifts[0].endTime}`}
           </li>
           <li>
             <BiBorderAll id="icon" /> <strong>{t('category')}:</strong>{' '}
@@ -125,8 +125,8 @@ return (
             {eventData && eventData.shifts && eventData.shifts.map((shift, index) => (
               <ShiftCheckbox 
                 key={index}
-                startTime={shift.startTime.join(':')}
-                endTime={shift.endTime.join(':')}
+                startTime={shift.startTime}
+                endTime={shift.endTime}
                 numVolunteers={shift.signedUp}
                 maxVolunteers={shift.capacity}
               />

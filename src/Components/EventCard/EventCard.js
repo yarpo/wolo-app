@@ -24,11 +24,11 @@ const EventCard = ({ event }) => {
             </li>
             <li>
               <VscBrowser className="icon" /> <strong>{t('date')}:</strong>{' '}
-              {event.shifts[0].date.join('/')}
+              {event.shifts.date}
             </li>
             <li>
               <BiTime className="icon" /> <strong>{t('time')}:</strong>{' '}
-              {event.shifts[0].startTime.join(':')} - {event.shifts[0].endTime.join(':')}
+              {event.shifts.startTime} - {event.shifts.endTime}
             </li>
             <li>
               <VscOrganization className="icon" />{' '}
