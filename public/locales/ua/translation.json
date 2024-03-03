@@ -98,5 +98,7 @@
     "volunteersNeeded": "Потрібні волонтери",
     "minimumAgeRequired": "Необхідний мінімальний вік",
     "leaderRequired": "Потрібен лідер",
-    "addShift": "Додати Shift"
+    "addShift": "Додати Shift",
+    "SelectDistrict": "Виберіть район",
+    "SelectCategory": "Виберіть категорію"
 }

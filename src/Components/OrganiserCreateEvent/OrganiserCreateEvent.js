@@ -1,19 +1,24 @@
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { useTranslation } from 'react-i18next';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import '../../styles/organiser-create-event.scss';
+import fetchData from '../../Utils/fetchData.js';
+import * as Yup from 'yup';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const OrganiserCreateEvent = () => {
+  
   const { t, i18n } = useTranslation();
+  const [categories, setCategories] = useState([]);
+  const [districts, setDistricts] = useState([]);
 
   useEffect(() => {
-    const storedLanguage = localStorage.getItem('language');
-    if (storedLanguage) {
-      i18n.changeLanguage(storedLanguage);
-    }
-  }, [i18n]);
+    fetchData('http://localhost:8080/categories', setCategories);
+    fetchData('http://localhost:8080/districts', setDistricts);
+  }, []);
 
-  const initialValues = {
+  const [initialValues] = useState({
     name: '',
     description: '',
     imageUrl: '',
@@ -25,85 +30,77 @@ const OrganiserCreateEvent = () => {
     shift: '',
     peselVerificationRequired: false,
     volunteerAgreement: false,
-  };
+    language: i18n.language.toUpperCase(),
+  });
 
-  const validate = values => {
-    const errors = {};
-
-    if (!values.name) {
-      errors.name = 'Title is required';
-    }
-
-    if (!values.description) {
-     errors.description = 'Description is required';
-    }
-
-    if (!values.districtId) {
-      errors.districtId = 'District is required';
-    } 
-
-    if (!values.categories) {
-      errors.categories = 'At least one category is required';
-    }
-    
-    if (!values.street) {
-      errors.street = 'Address street is required';
-    }
-
-    if (!values.homeNum) {
-      errors.homeNum = 'Address number is required';
-    }
-
-    return errors;
-  };
-
-  
+  const validationSchema = Yup.object().shape({
+    name: Yup.string()
+      .required('Title is required'),
+    description: Yup.string()
+      .required('Description is required'),
+    districtId: Yup.string()
+      .required('District is required'),
+    categories: Yup.string()
+      .required('At least one category is required'),
+    street: Yup.string()
+      .required('Address street is required'),
+    homeNum: Yup.string()
+      .required('Address number is required'),
+  });
 
   return (
     <div className="organiser_create_event_div">
       <h1 className="organiser_create_event_title">{t('createEvent')}</h1>
       <p className="organiser_create_event_sub-title_disclaimer">{t('inputsAreRequired')}</p>
-      <Formik
-        initialValues={initialValues}
-        validate={validate}
-        onSubmit={(values, { setSubmitting }) => {
-          console.log(values);
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={async (values, { setSubmitting }) => {
+            console.log(values);
 
-          values.organisationId = 1;
-          values.categories = [parseInt(values.categories, 10)];
-          values.shifts = [
-            {
-              startTime: [values.shift.starthour, values.shift.startmin],
-              endTime: [values.shift.endhour, values.shift.endmin],
-              date: [values.shift.year, values.shift.month, values.shift.day],
-              capacity: values.shift.volunteersNum,
-              isLeaderRequired: false,
-              requiredMinAge: values.shift.minAge,
-            },
-          ];
+            values.organisationId = 1;
+            values.categories = [parseInt(values.categories, 10)];
+            values.shifts = [
+              {
+                startTime: [9, 9],
+                endTime: [12, 12],
+                date: [2024, 11, 11],
+                capacity: 7,
+                isLeaderRequired: false,
+                requiredMinAge: 18,
+              },
+            ];
 
-          delete values.shift
+            delete values.shift
 
-          const jsonData = JSON.stringify(values);
-          console.log(jsonData);
+            const jsonData = JSON.stringify(values);
+            console.log(jsonData);
 
-          fetch('http://localhost:8080/events/add', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: jsonData,
-          })
-            .then(response => {
-              console.log('Response:', response);
-              setSubmitting(false);
-            })
-            .catch(error => {
+            try {
+              const response2 = await fetch('http://127.0.0.1:8080/events/add', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: jsonData,
+              });
+
+            if (!response2.ok) {
+              toast.error('Error adding event');
+              return;
+            }
+
+            toast.success('Event added successfully');
+
+            console.log('Response:', response2);
+            } catch (error) {
               console.error('Error:', error);
+              toast.error('An unexpected error occurred');
+            } finally {
               setSubmitting(false);
-            })
-        }}
-      >
+            }
+          }}
+        >
         <Form>
           <div className="organiser_create_event_row_div">
             <label htmlFor="name">{t('title')}*</label>
@@ -142,20 +139,22 @@ const OrganiserCreateEvent = () => {
           <div className="organiser_create_event_row_div">
             <label htmlFor="districtId">{t('district')}*</label>
             <Field as="select" className="organiser_create_event-from_input_dropdown" type="text" name="districtId"  placeholder="District">
-              <option value="1">Centrum, Warszawa</option>
-              <option value="2">Wrzeszcz, Gdańsk</option>
-              <option value="3">Śródmieście, Gdańsk</option>
+              <option value="" disabled >{t('SelectDistrict')}</option>
+              {districts.map(district => (
+                <option key={district.id} value={district.id}>{district.name}</option>
+              ))}
             </Field>
           </div>
           <ErrorMessage className="error" name="district" component="div" />
           <br/>
           <div className="organiser_create_event_row_div">
             <label htmlFor="categories">{t('categories')}*</label>
-            <Field as="select" className="organiser_create_event-from_input_dropdown" type="text" name="categories"  placeholder="Category">
-              <option value="1">Sport</option>
-              <option value="2">Pomoc</option>
+           <Field as="select" className="organiser_create_event-from_input_dropdown" type="text" name="categories" placeholder="Category" >
+              <option value="" disabled >{t('SelectCategory')}</option>
+              {categories.map(category => (
+                <option key={category.id} value={category.id}>{category.name}</option>
+              ))}
             </Field>
-            <ErrorMessage className="error" name="category" component="div" />
           </div>
           <br/>  
           <div className="checkbox_organiser_create_event-group">
@@ -169,7 +168,7 @@ const OrganiserCreateEvent = () => {
             </label>
           </div>
           <br/>  
-          <p className="organiser_create_event_sub-title">Shifts</p>
+          {/* <p className="organiser_create_event_sub-title">Shifts</p>
           <div className="organiser_create_event_shifts">
             <div className="organiser_create_event_shifts_column">
               <div>
@@ -196,8 +195,9 @@ const OrganiserCreateEvent = () => {
                <button className="organiser_create_event-form_button">Edit</button>
               <button className="organiser_create_event-form_button">Delete</button>
             </div>
-          </div>
-          <button className="organiser_create_event_shifts_button" disabled>Add shift</button>
+          </div> */}
+          {/* <button className="organiser_create_event_shifts_button" disabled>Add shift</button> */}
+          <br/>
           <div className="button-group">
             <button className="organiser_create_event-form_button" type="submit">{t('createEvent')}</button>
           </div>

@@ -1,18 +1,11 @@
 import { useTranslation } from 'react-i18next';
-import { useEffect } from 'react';
 import { Link } from "react-router-dom";
 import '../../styles/organiser-home-page.scss';
 import OrganiserEventListDisplay from '../OrganiserEventListDisplay/OrganiserEventListDisplay.js';
 
 const OrganiserHomePage = () => {
-    const { t, i18n } = useTranslation();
 
-    useEffect(() => {
-        const storedLanguage = localStorage.getItem('language');
-        if (storedLanguage) {
-            i18n.changeLanguage(storedLanguage);
-        }
-    }, [i18n]);
+    const { t } = useTranslation();
 
     return (
         <div className='organiser_home_page_container'>

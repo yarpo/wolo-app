@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState} from "react";
 import { useTranslation } from 'react-i18next';
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { Link } from "react-router-dom";
@@ -6,16 +6,10 @@ import {axiosInstance} from '../../Utils/axiosInstance'
 import '../../styles/signup.scss';
 
 const Signup = () => {
+
+  const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const { t, i18n } = useTranslation();
-
-  useEffect(() => {
-    const storedLanguage = localStorage.getItem('language');
-    if (storedLanguage) {
-      i18n.changeLanguage(storedLanguage);
-    }
-  }, [i18n]);
 
   const initialValues = {
     firstName: '',

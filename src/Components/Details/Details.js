@@ -13,6 +13,7 @@ import '../../styles/details.scss';
 import EventCard from '../EventCard/EventCard';
 
 const Details = () => {
+  
   const { t } = useTranslation();
   const { id } = useParams();
   const [eventData, setEventData] = useState(null);
@@ -34,7 +35,7 @@ const Details = () => {
 
  useEffect(() => {
   if (eventData && eventData.organisationId) {
-    fetch(`http://localhost:8080/organisations/events/${eventData.organisationId}`)
+    fetch(`http://localhost:8080/organisations/${eventData.organisationId}/events`)
       .then(response => response.json())
       .then(data => setOrganiserEvents(data))
       .catch(error => console.error(error));
@@ -46,15 +47,16 @@ const Details = () => {
   }
 
   const {
-  name,
-  organisationName,
-  description,
-  street,
-  addressDescription,
-  homeNum,
-  district,
-  imageUrl,
-  shifts,
+    name,
+    organisationName,
+    description,
+    street,
+    addressDescription,
+    homeNum,
+    district,
+    imageUrl,
+    shifts,
+    alt,
 } = eventData;
 
 return (
@@ -77,7 +79,7 @@ return (
             <VscBrowser id="icon" /> <strong>{t('date')}:</strong> {new Date(shifts[0].date[0], shifts[0].date[1] - 1, shifts[0].date[2]).toLocaleDateString()}
           </li>
           <li>
-            <BiTime id="icon" /> <strong>{t('time')}:</strong> {`${shifts[0].startTime.join(':')} - ${shifts[0].endTime.join(':')}`}
+            <BiTime id="icon" /> <strong>{t('time')}:</strong> {`${shifts[0].startTime} - ${shifts[0].endTime}`}
           </li>
           <li>
             <BiBorderAll id="icon" /> <strong>{t('category')}:</strong>{' '}
@@ -89,7 +91,7 @@ return (
       </div>
 
       <div className="details_photo">
-        <img src={imageUrl} alt="Event" onError={(event) => event.target.style.display = 'none'} />
+        <img src={imageUrl} alt={alt} onError={(event) => event.target.style.display = 'none'} />
       </div>
 
     <p id="description">{description}</p>
@@ -123,8 +125,8 @@ return (
             {eventData && eventData.shifts && eventData.shifts.map((shift, index) => (
               <ShiftCheckbox 
                 key={index}
-                startTime={shift.startTime.join(':')}
-                endTime={shift.endTime.join(':')}
+                startTime={shift.startTime}
+                endTime={shift.endTime}
                 numVolunteers={shift.signedUp}
                 maxVolunteers={shift.capacity}
               />

@@ -1,19 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import '../../styles/navbar.scss';
 import logo from '../../images/logo.svg';
 
 const Navbar = () => {
+
   const [clicked, setClicked] = useState(false);
   const { t, i18n } = useTranslation();
-
-  useEffect(() => {
-    const storedLanguage = localStorage.getItem('language');
-    if (storedLanguage) {
-      i18n.changeLanguage(storedLanguage);
-    }
-  }, [i18n]);
 
   const handleLanguageChange = language => {
     i18n.changeLanguage(language);

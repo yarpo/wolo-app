@@ -6,8 +6,9 @@ import { Link } from 'react-router-dom';
 import '../../../styles/event-card-to-moderate.scss';
 
 const EventCardToModerate = () => {
-  const { t } = useTranslation();
 
+  const { t } = useTranslation();
+  
   return (
     <Link to="/details" style={{ textDecoration: 'none' }}>
       <div id="event_card_to_moderate">
@@ -19,15 +20,12 @@ const EventCardToModerate = () => {
           <ul>
             <li>
               <VscLocation className="event_card_to_moderate_icon" /> <strong>{t('location')}:</strong>{' '}
-              
             </li>
             <li>
               <VscBrowser className="event_card_to_moderate_icon" /> <strong>{t('date')}:</strong>{' '}
-              
             </li>
             <li>
               <BiTime className="event_card_to_moderate_icon" /> <strong>{t('time')}:</strong>{' '}
-              
             </li>
             <li>
               <VscOrganization className="event_card_to_moderate_icon" />{' '}

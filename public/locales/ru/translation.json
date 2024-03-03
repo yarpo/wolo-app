@@ -98,5 +98,7 @@
     "volunteersNeeded": "Требуются волонтеры",
     "minimumAgeRequired": "Минимальный возраст",
     "leaderRequired": "Требуется лидер",
-    "addShift": "Добавить смену"
+    "addShift": "Добавить смену",
+    "SelectDistrict": "Выберите округ",
+    "SelectCategory": "Выберите категорию"
 }

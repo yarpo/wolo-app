@@ -6,7 +6,8 @@ import { useFiltersContext } from './FiltersContext';
 import fetchData from '../../Utils/fetchData.js';
 
 const Filters = ({ setFilteredEvents }) => {
-  const { t, i18n } = useTranslation();
+  
+  const {t} = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const { filters, setFilters } = useFiltersContext();
   const [apiResponse, setApiResponse] = useState([]);
@@ -15,7 +16,7 @@ const Filters = ({ setFilteredEvents }) => {
   const [organizations, setOrganizations] = useState([]);
 
 useEffect(() => {
-  fetchData('http://localhost:8080/events', setApiResponse);
+  fetchData(`http://localhost:8080/events`, setApiResponse);
 }, [filters, categories]);
 
 useEffect(() => {
@@ -23,13 +24,6 @@ useEffect(() => {
   fetchData('http://localhost:8080/districts', setDistricts);
   fetchData('http://localhost:8080/organisations', setOrganizations);
 }, []);
-  
-  useEffect(() => {
-    const storedLanguage = localStorage.getItem('language');
-    if (storedLanguage) {
-      i18n.changeLanguage(storedLanguage);
-    }
-  }, [i18n]);
 
 useEffect(() => {
   const filteredEvents = apiResponse.filter((event) => {
