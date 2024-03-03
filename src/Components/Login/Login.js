@@ -13,10 +13,10 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleGoogleLogin = (event) => {
-      event.preventDefault();
-      window.location.href = 'http://localhost:8080/auth/google';
-  }
+  // const handleGoogleLogin = (event) => {
+  //     event.preventDefault();
+  //     window.location.href = 'http://localhost:8080/auth/google';
+  // }
     const handleLogin = async (values) => {
         try {
             const response = await axiosInstance.post('/auth/login', {
@@ -64,7 +64,7 @@ const Login = () => {
             }}>
             <h1 className="login-form__title">{t('login')}</h1>
             <p className="login-form_subtitle" >{t('continue')}</p>
-            <button className="login-form__button" type="button" onClick={handleGoogleLogin}>G - {t('continueWithGoogle')}</button>
+            <button className="login-form__button" type="button">G - {t('continueWithGoogle')}</button>
            <div className="login-form_paragraph-container">
               <hr />
                 <p className="login-form_paragraph">{t('orContinueWith')}</p>
