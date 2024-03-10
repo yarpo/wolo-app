@@ -19,6 +19,7 @@ const Details = () => {
   const [eventData, setEventData] = useState(null);
   const [organiserEvents, setOrganiserEvents] = useState([]);
   const [selectedShifts, setSelectedShifts] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     const fetchEventData = async () => {
@@ -47,13 +48,51 @@ const Details = () => {
 const handleShiftCheckboxChange = (shiftId, selected) => {
   if (selected){
     setSelectedShifts((allSelectedShifts) => [...allSelectedShifts, shiftId]);
+    setSelectedShifts((allSelectedShifts) => [...allSelectedShifts, 2]);
   } else {
     setSelectedShifts((allSelectedShifts) => allSelectedShifts.filter((id) => id !== shiftId));
+    setSelectedShifts((allSelectedShifts) => allSelectedShifts.filter((id) => id !== 2));
   }
 }
 
-const handleJoinEvent = () => {
-  console.log(selectedShifts);
+const handleJoinEvent = async (e) => {
+  e.preventDefault();
+
+  if (selectedShifts.length === 0) {
+    setErrorMessage('Please select at least one shift to sign in.');
+    return;
+  }
+
+  setErrorMessage('');
+
+  const userId = 1 // TODO - edit this when there is a working login system
+
+  for (const shiftId of selectedShifts) {
+    const requestData = {
+      user: userId,
+      shift: shiftId,
+    };
+
+    console.log(requestData);
+
+    try {
+      const response = await fetch('https://localhost:8080/events/join', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestData),
+      });
+
+      if (response.ok) {
+        console.log(`Successfully joined shift ${shiftId}`);
+      } else {
+        console.error(`Failed to join shift ${shiftId}`);
+      }
+    } catch (error) {
+      console.error(`Error joining shift ${shiftId}:`, error);
+    }
+  }
 }
 
   if (!eventData) {
@@ -151,6 +190,7 @@ return (
           <button type="submit" id="sign-in">
             {t('signIn')}
           </button>
+          {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
         </form>
       </div>
       
