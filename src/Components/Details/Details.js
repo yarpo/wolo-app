@@ -62,35 +62,38 @@ const handleJoinEvent = async (e) => {
     setErrorMessage('Please select at least one shift to sign in.');
     return;
   }
-
   setErrorMessage('');
 
-  const userId = 1 // TODO - edit this when there is a working login system
+  const userConfirmed = window.confirm('I agree to give my phone number to the organizer.');
 
-  for (const shiftId of selectedShifts) {
-    const requestData = {
-      user: userId,
-      shift: shiftId,
-    };
+  if (userConfirmed) {
+    const userId = '1'; // TODO - edit this when there is a working login system
 
-    console.log(requestData);
+    for (const shiftId of selectedShifts) {
+      const requestData = {
+        user: userId,
+        shift: shiftId,
+      };
 
-    try {
-      const response = await fetch('https://localhost:8080/events/join', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestData),
-      });
+      console.log(requestData);
 
-      if (response.ok) {
-        console.log(`Successfully joined shift ${shiftId}`);
-      } else {
-        console.error(`Failed to join shift ${shiftId}`);
+      try {
+        const response = await fetch('http://localhost:8080/events/join', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(requestData),
+        });
+
+        if (response.ok) {
+          console.log(`Successfully joined shift ${shiftId}`);
+        } else {
+          console.error(`Failed to join shift ${shiftId}`);
+        }
+      } catch (error) {
+        console.error(`Error joining shift ${shiftId}:`, error);
       }
-    } catch (error) {
-      console.error(`Error joining shift ${shiftId}:`, error);
     }
   }
 }
