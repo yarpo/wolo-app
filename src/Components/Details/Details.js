@@ -18,12 +18,14 @@ const Details = () => {
   const { id } = useParams();
   const [eventData, setEventData] = useState(null);
   const [organiserEvents, setOrganiserEvents] = useState([]);
+  const [selectedShifts, setSelectedShifts] = useState([]);
 
   useEffect(() => {
     const fetchEventData = async () => {
       try {
         const response = await fetch(`http://localhost:8080/events/${id}`);
         const data = await response.json();
+        console.log(data);
         setEventData(data);
       } catch (error) {
         console.error('Error fetching event data:', error);
@@ -41,6 +43,18 @@ const Details = () => {
       .catch(error => console.error(error));
   }
 }, [eventData, eventData?.organisationId]);
+
+const handleShiftCheckboxChange = (shiftId, selected) => {
+  if (selected){
+    setSelectedShifts((allSelectedShifts) => [...allSelectedShifts, shiftId]);
+  } else {
+    setSelectedShifts((allSelectedShifts) => allSelectedShifts.filter((id) => id !== shiftId));
+  }
+}
+
+const handleJoinEvent = () => {
+  console.log(selectedShifts);
+}
 
   if (!eventData) {
     return <div>Loading...</div>;
@@ -120,15 +134,17 @@ return (
       </div>
 
       <div id="column" className="signin">
-        <form action="#">
+        <form onSubmit={handleJoinEvent}>
           <div id="details_shift_checkboxes">
             {eventData && eventData.shifts && eventData.shifts.map((shift, index) => (
               <ShiftCheckbox 
                 key={index}
+                id={shift.id}
                 startTime={shift.startTime}
                 endTime={shift.endTime}
                 numVolunteers={shift.signedUp}
                 maxVolunteers={shift.capacity}
+                onChange={(selected) => handleShiftCheckboxChange(shift.id, selected)}
               />
             ))}
           </div>
