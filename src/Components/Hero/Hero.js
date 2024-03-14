@@ -14,21 +14,31 @@ const Hero = () => {
     const { filters, setFilters } = useFiltersContext();
     const [selectedLocation, setSelectedLocation] = useState("");
     const [locations, setLocations] = useState([]);
+    const [selectedDate, setSelectedDate] = useState(null);
     const [  , setFilteredEvents] = useState([]);
 
     useEffect(() => {
         fetchData('http://localhost:8080/districts', setLocations);
     }, []);
 
-   const handleDateChange = (date) => {
-    setFilters({ ...filters, selectedDate: date });
+    const handleDateChange = (date) => {
+        setSelectedDate(date);
     };
 
     const handleLocationChange = (event) => {
         const { value } = event.target;
         setSelectedLocation(value);
-        setFilters({ ...filters, chosenTags: [...filters.chosenTags, value] });
     };
+
+   const handleSubmit = () => {
+    let newFilters = { ...filters, selectedDate: selectedDate };
+
+    if (selectedLocation !== "") {
+        newFilters.chosenTags = [...filters.chosenTags, selectedLocation];
+    }
+
+    setFilters(newFilters);
+};
 
     return (
         <div className='hero-container'>
@@ -46,7 +56,7 @@ const Hero = () => {
                         <div>
                         <DatePicker
                             id="datePicker_hero"
-                            selected={filters.selectedDate}
+                            selected={selectedDate}
                             onChange={handleDateChange}
                             dateFormat="dd/MM/yyyy"
                             placeholderText={t('selectDate')}
@@ -74,7 +84,7 @@ const Hero = () => {
                 <Filters setFilteredEvents={setFilteredEvents} />
                 <div id="button_hero">
                     <Link to="/events">
-                        <input id="hero_submmit_button" type="submit" value={t('mainSearch')} />
+                        <input id="hero_submmit_button" type="submit" value={t('mainSearch')} onClick={handleSubmit} />
                     </Link>
                 </div>
             </div>
