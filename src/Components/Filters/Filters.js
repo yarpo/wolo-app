@@ -36,7 +36,7 @@ useEffect(() => {
     );
     
     const isMatchingDate =
-      filters.selectedDate === null || new Date(event.shifts[0].date.join('-')) >= filters.selectedDate;
+      filters.selectedDate === null || new Date(event.shifts[0].date) >= filters.selectedDate;
 
     const isMatchingVerification =
       !filters.requiresVerification || event.peselVerificationRequired === false;

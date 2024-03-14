@@ -1,24 +1,33 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import Filters from '../Filters/Filters';
-import React, { useState } from 'react';
+import { useFiltersContext } from '../Filters/FiltersContext';
+import { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../../styles/hero.scss';
+import fetchData from '../../Utils/fetchData';
 
 const Hero = () => {
 
     const { t } = useTranslation();
-    const locations = ['Zaspa', 'Chełm', 'Wrzeszcz'];
+    const { filters, setFilters } = useFiltersContext();
     const [selectedLocation, setSelectedLocation] = useState("");
-    const [selectedDate, setSelectedDate] = useState(null);
+    const [locations, setLocations] = useState([]);
     const [  , setFilteredEvents] = useState([]);
 
-    const handleDateChange = (date) => {
-        setSelectedDate(date);
+    useEffect(() => {
+        fetchData('http://localhost:8080/districts', setLocations);
+    }, []);
+
+   const handleDateChange = (date) => {
+    setFilters({ ...filters, selectedDate: date });
     };
+
     const handleLocationChange = (event) => {
-        setSelectedLocation(event.target.value);
+        const { value } = event.target;
+        setSelectedLocation(value);
+        setFilters({ ...filters, chosenTags: [...filters.chosenTags, value] });
     };
 
     return (
@@ -37,7 +46,7 @@ const Hero = () => {
                         <div>
                         <DatePicker
                             id="datePicker_hero"
-                            selected={selectedDate}
+                            selected={filters.selectedDate}
                             onChange={handleDateChange}
                             dateFormat="dd/MM/yyyy"
                             placeholderText={t('selectDate')}
@@ -53,8 +62,8 @@ const Hero = () => {
                             >
                             <option value="" disabled>{t('location')}</option>
                             {locations.map((location, index) => (
-                                <option key={index} value={location}>
-                                {location}
+                                <option key={index} value={location.name}>
+                                {location.name}
                                 </option>
                             ))}
                         </select>
