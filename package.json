@@ -32,8 +32,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "owasp": "owasp-dependency-check --project ./package.json -f HTML",
-    "lint": "eslint src/**/*.js",
-    "prepare": "git config --local core.hooksPath .githooks"
+    "lint": "eslint src/**/*.js"
   },
   "eslintConfig": {
     "extends": [
