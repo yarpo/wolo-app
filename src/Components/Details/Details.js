@@ -26,7 +26,6 @@ const Details = () => {
       try {
         const response = await fetch(`http://localhost:8080/events/${id}`);
         const data = await response.json();
-        console.log(data);
         setEventData(data);
       } catch (error) {
         console.error('Error fetching event data:', error);
@@ -71,10 +70,6 @@ const handleJoinEvent = async (e) => {
       const params = new URLSearchParams();
       params.append('user', userId);
       params.append('shift', shiftId);
-
-      console.log(userId);
-      console.log(shiftId);
-      console.log(params);
 
       try {
         const response = await fetch(`http://localhost:8080/events/join?${params.toString()}`, {
