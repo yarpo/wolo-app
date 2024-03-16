@@ -48,10 +48,8 @@ const Details = () => {
 const handleShiftCheckboxChange = (shiftId, selected) => {
   if (selected){
     setSelectedShifts((allSelectedShifts) => [...allSelectedShifts, shiftId]);
-    setSelectedShifts((allSelectedShifts) => [...allSelectedShifts, 2]);
   } else {
     setSelectedShifts((allSelectedShifts) => allSelectedShifts.filter((id) => id !== shiftId));
-    setSelectedShifts((allSelectedShifts) => allSelectedShifts.filter((id) => id !== 2));
   }
 }
 
