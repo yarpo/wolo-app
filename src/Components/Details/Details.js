@@ -67,23 +67,23 @@ const handleJoinEvent = async (e) => {
   const userConfirmed = window.confirm('I agree to give my phone number to the organizer.');
 
   if (userConfirmed) {
-    const userId = 1; // TODO - edit this when there is a working login system
+    const userId = parseInt(1); // TODO - edit this when there is a working login system
 
     for (const shiftId of selectedShifts) {
-      const requestData = {
-        user: userId,
-        shift: shiftId,
-      };
+      const params = new URLSearchParams();
+      params.append('user', userId);
+      params.append('shift', shiftId);
 
-      console.log(requestData);
+      console.log(userId);
+      console.log(shiftId);
+      console.log(params);
 
       try {
-        const response = await fetch('http://localhost:8080/events/join', {
+        const response = await fetch(`http://localhost:8080/events/join?${params.toString()}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(requestData),
         });
 
         if (response.ok) {
