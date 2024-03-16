@@ -67,7 +67,7 @@ const handleJoinEvent = async (e) => {
   const userConfirmed = window.confirm('I agree to give my phone number to the organizer.');
 
   if (userConfirmed) {
-    const userId = '1'; // TODO - edit this when there is a working login system
+    const userId = 1; // TODO - edit this when there is a working login system
 
     for (const shiftId of selectedShifts) {
       const requestData = {

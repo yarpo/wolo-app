@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import Filters from '../Filters/Filters';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import YourEventVolunteer from './YourEventVolunteer/YourEventVolunteer.js';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -15,12 +15,39 @@ const VolunteerHomePage = () => {
     const [selectedLocation, setSelectedLocation] = useState("");
     const [selectedDate, setSelectedDate] = useState(null);
     const [  , setFilteredEvents] = useState([]);
+    const [userEvents, setUserEvents] = useState([]);
+
+    const userId = 1; // TODO - change it when login works
 
     const handleDateChange = (date) => {
         setSelectedDate(date);
     };
     const handleLocationChange = (event) => {
         setSelectedLocation(event.target.value);
+    };
+
+    useEffect(() => {
+        const fetchUserEvents = async () => {
+            try {
+                const response = await fetch(`http://localhost:8080/users/${userId}/shifts`);
+                const data = await response.json();
+                console.log(data)
+                setUserEvents(data);
+            } catch (error) {
+                console.error('Error fetching user events:', error);
+            }
+        };
+
+        fetchUserEvents();
+    }, [userId]);
+
+    if (!userEvents) {
+        return <div>Loading...</div>;
+    }
+
+    const formatTime = (timeString) => {
+        const [hours, minutes] = timeString.split(':');
+        return `${hours}:${minutes}`;
     };
 
     return (
@@ -77,9 +104,17 @@ const VolunteerHomePage = () => {
             <div id="volunteer_home_page_your_events">
                 <h2>{t('yourEvents')} </h2>
                 <br />
-                <YourEventVolunteer />
-                <YourEventVolunteer />
-                <YourEventVolunteer />
+                {userEvents && userEvents.map((shift) => (
+                    <YourEventVolunteer 
+                        key={shift.shiftId} 
+                        name={shift.name}
+                        date={shift.date}
+                        startTime={formatTime(shift.startTime)}
+                        endTime={formatTime(shift.endTime)}
+                        street={shift.street}
+                        homeNum={shift.homeNum}
+                        city={shift.city} />
+                ))}
             </div>
         </div>
     )
