@@ -12,6 +12,8 @@ import ShiftCheckbox from './ShiftCheckbox/ShiftCheckbox.js';
 import '../../styles/details.scss';
 import EventCard from '../EventCard/EventCard';
 import fetchUserToken from '../../Utils/fetchUserToken.js';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Details = () => {
   
@@ -82,11 +84,14 @@ const handleJoinEvent = async (e) => {
 
         if (response.ok) {
           console.log(`Successfully joined shift ${shiftId}`);
+          toast.success(`Successfully joined shift`);
         } else {
           console.error(`Failed to join shift ${shiftId}`);
+          toast.error(`Failed to join shift`);
         }
       } catch (error) {
         console.error(`Error joining shift ${shiftId}:`, error);
+        toast.error('An unexpected error occurred while joining event. Please try again later');
       }
     }
   }
