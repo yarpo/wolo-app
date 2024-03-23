@@ -7,6 +7,8 @@ import YourEventVolunteer from './YourEventVolunteer/YourEventVolunteer.js';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../../styles/hero.scss';
 import '../../styles/volunteer-home-page.scss';
+import fetchData from '../../Utils/fetchData.js';
+import fetchUserToken from '../../Utils/fetchUserToken.js';
 
 const VolunteerHomePage = () => {
 
@@ -17,7 +19,7 @@ const VolunteerHomePage = () => {
     const [  , setFilteredEvents] = useState([]);
     const [userEvents, setUserEvents] = useState([]);
 
-    const userId = 1; // TODO - change it when login works
+    const userId = fetchUserToken();
 
     const handleDateChange = (date) => {
         setSelectedDate(date);
@@ -28,18 +30,12 @@ const VolunteerHomePage = () => {
 
     useEffect(() => {
         const fetchUserEvents = async () => {
-            try {
-                const response = await fetch(`http://localhost:8080/users/${userId}/shifts`);
-                const data = await response.json();
-                console.log(data)
-                setUserEvents(data);
-            } catch (error) {
-                console.error('Error fetching user events:', error);
-            }
+          const url = `http://localhost:8080/users/${userId}/shifts`;
+          await fetchData(url, setUserEvents);
         };
-
+    
         fetchUserEvents();
-    }, [userId]);
+      }, [userId]);
 
     if (!userEvents) {
         return <div>Loading...</div>;

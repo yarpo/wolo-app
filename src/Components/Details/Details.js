@@ -11,6 +11,7 @@ import { Link, useParams } from 'react-router-dom';
 import ShiftCheckbox from './ShiftCheckbox/ShiftCheckbox.js';
 import '../../styles/details.scss';
 import EventCard from '../EventCard/EventCard';
+import fetchUserToken from '../../Utils/fetchUserToken.js';
 
 const Details = () => {
   
@@ -64,7 +65,7 @@ const handleJoinEvent = async (e) => {
   const userConfirmed = window.confirm('I agree to give my phone number to the organizer.');
 
   if (userConfirmed) {
-    const userId = parseInt(1); // TODO - edit this when there is a working login system
+    const userId = fetchUserToken();
 
     for (const shiftId of selectedShifts) {
       const params = new URLSearchParams();
