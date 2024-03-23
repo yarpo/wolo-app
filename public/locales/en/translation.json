@@ -100,5 +100,7 @@
   "leaderRequired": "Leader Required",
   "addShift": "Add Shift",
   "SelectDistrict": "Select a district",
-  "SelectCategory": "Select a category"
+  "SelectCategory": "Select a category",
+
+  "loading": "Loading"
 }

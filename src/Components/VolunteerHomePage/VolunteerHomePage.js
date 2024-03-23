@@ -39,7 +39,7 @@ const VolunteerHomePage = () => {
       }, [userId]);
 
     if (!userEvents) {
-        return <div>Loading...</div>;
+        return <div>{t('loading')}...</div>;
     }
 
     return (

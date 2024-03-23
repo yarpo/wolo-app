@@ -93,7 +93,7 @@ const handleJoinEvent = async (e) => {
 }
 
   if (!eventData) {
-    return <div>Loading...</div>;
+    return <div>{t('loading')}...</div>;
   }
 
   const {
