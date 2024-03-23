@@ -1,0 +1,28 @@
+@import './common.scss';
+
+.signed_in_volunteers {
+    width: 100%;
+    order: 6;
+    margin-top: 20px;    
+
+    .signed_in_volunteers_content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+
+        .signed_in_volunteers_export_button {
+            cursor: pointer;
+            background-color: $color-2-orange;
+            padding: 4px;
+            border: none;
+            border-radius: 7px;
+            text-align: center;
+            float: right;
+        }
+
+        .signed_in_volunteers_export_button:hover {
+            background-color: $color-2-orange-hover;
+        }
+    }
+}

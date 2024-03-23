@@ -13,6 +13,7 @@ import EventCard from '../EventCard/EventCard';
 import fetchData from '../../Utils/fetchData.js';
 import formatDate from '../../Utils/formatDate.js';
 import SignInSection from './SignInSection/SignInSection.js';
+import SignedInVolunteers from './SignedInVolunteers/SignedInVolunteers.js';
 
 const Details = () => {
   
@@ -117,6 +118,8 @@ return (
           ))}
         </div>
       </div>
+
+      <SignedInVolunteers />
     </div>
   );
 };
