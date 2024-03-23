@@ -8,7 +8,7 @@ const ShiftCheckbox = ({ id, startTime, endTime, numVolunteers, maxVolunteers, o
 
     const handleShiftChange = (s) => {
         const selected = s.target.checked;
-        onChange(selected)
+        onChange(selected);
     }
 
     return (
