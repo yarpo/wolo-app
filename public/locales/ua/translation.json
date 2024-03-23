@@ -100,5 +100,7 @@
     "leaderRequired": "Потрібен лідер",
     "addShift": "Додати Shift",
     "SelectDistrict": "Виберіть район",
-    "SelectCategory": "Виберіть категорію"
+    "SelectCategory": "Виберіть категорію",
+
+    "loading": "завантаження"
 }

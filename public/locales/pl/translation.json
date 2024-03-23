@@ -100,5 +100,7 @@
   "leaderRequired": "Wymagany lider",
   "addShift": "Dodaj zmianę",
     "SelectDistrict": "Wybierz dzielnicę",
-  "SelectCategory": "Wybierz kategorię"
+  "SelectCategory": "Wybierz kategorię",
+
+  "loading": "Ładowanie"
 }

@@ -100,5 +100,7 @@
     "leaderRequired": "Требуется лидер",
     "addShift": "Добавить смену",
     "SelectDistrict": "Выберите округ",
-    "SelectCategory": "Выберите категорию"
+    "SelectCategory": "Выберите категорию",
+
+    "loading": "загрузка"
 }
