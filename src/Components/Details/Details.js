@@ -8,11 +8,11 @@ import {
 } from 'react-icons/vsc';
 import { BiBorderAll } from 'react-icons/bi';
 import { Link, useParams } from 'react-router-dom';
-import ShiftCheckbox from './ShiftCheckbox/ShiftCheckbox.js';
 import '../../styles/details.scss';
 import EventCard from '../EventCard/EventCard';
 import fetchData from '../../Utils/fetchData.js';
 import formatDate from '../../Utils/formatDate.js';
+import SignInSection from './SignInSection/SignInSection.js';
 
 const Details = () => {
   
@@ -107,24 +107,7 @@ return (
       ></iframe>
       </div>
 
-      <div id="column" className="signin">
-        <form action="#">
-          <div id="details_shift_checkboxes">
-            {eventData && eventData.shifts && eventData.shifts.map((shift, index) => (
-              <ShiftCheckbox 
-                key={index}
-                startTime={shift.startTime}
-                endTime={shift.endTime}
-                numVolunteers={shift.signedUp}
-                maxVolunteers={shift.capacity}
-              />
-            ))}
-          </div>
-          <button type="submit" id="sign-in">
-            {t('signIn')}
-          </button>
-        </form>
-      </div>
+      <SignInSection eventData={eventData} />
       
       <div id="details_more_events">
         <h2>{t('moreEventsFromThisOrganizer')}</h2>
