@@ -6,11 +6,13 @@ import {
   VscOrganization,
   VscLocation,
 } from 'react-icons/vsc';
-import { BiTime, BiBorderAll } from 'react-icons/bi';
+import { BiBorderAll } from 'react-icons/bi';
 import { Link, useParams } from 'react-router-dom';
-import ShiftCheckbox from './ShiftCheckbox/ShiftCheckbox.js';
 import '../../styles/details.scss';
 import EventCard from '../EventCard/EventCard';
+import fetchData from '../../Utils/fetchData.js';
+import formatDate from '../../Utils/formatDate.js';
+import SignInSection from './SignInSection/SignInSection.js';
 
 const Details = () => {
   
@@ -20,27 +22,16 @@ const Details = () => {
   const [organiserEvents, setOrganiserEvents] = useState([]);
 
   useEffect(() => {
-    const fetchEventData = async () => {
-      try {
-        const response = await fetch(`http://localhost:8080/events/${id}`);
-        const data = await response.json();
-        setEventData(data);
-      } catch (error) {
-        console.error('Error fetching event data:', error);
-      }
-    };
-
-    fetchEventData();
+    const url = `http://localhost:8080/events/${id}`;
+    fetchData(url, setEventData);
   }, [id]);
 
- useEffect(() => {
-  if (eventData && eventData.organisationId) {
-    fetch(`http://localhost:8080/organisations/${eventData.organisationId}/events`)
-      .then(response => response.json())
-      .then(data => setOrganiserEvents(data))
-      .catch(error => console.error(error));
-  }
-}, [eventData, eventData?.organisationId]);
+  useEffect(() => {
+    if (eventData && eventData.organisationId) {
+      const url = `http://localhost:8080/organisations/${eventData.organisationId}/events`;
+      fetchData(url, setOrganiserEvents);
+    }
+  }, [eventData, eventData?.organisationId]);
 
   if (!eventData) {
     return <div>Loading...</div>;
@@ -76,16 +67,17 @@ return (
         </ul>
         <ul id="information">
           <li>
-            <VscBrowser id="icon" /> <strong>{t('date')}:</strong> {new Date(shifts[0].date[0], shifts[0].date[1] - 1, shifts[0].date[2]).toLocaleDateString()}
-          </li>
-          <li>
-            <BiTime id="icon" /> <strong>{t('time')}:</strong> {`${shifts[0].startTime} - ${shifts[0].endTime}`}
+            <VscBrowser id="icon" /> <strong>{t('date')}:</strong> {formatDate(new Date(shifts[0].date).toLocaleDateString())}
           </li>
           <li>
             <BiBorderAll id="icon" /> <strong>{t('category')}:</strong>{' '}
               {eventData.categories.map((category, index) => (
               <span key={category.id}>{category.name}{index < eventData.categories.length - 1 ? ', ' : ''}</span>
             ))}
+          </li>
+          <li>
+              <VscOrganization id="icon" /> <strong>{t('organizer')}:</strong>{' '}
+              {organisationName}
           </li>
         </ul>
       </div>
@@ -98,10 +90,6 @@ return (
 
       <div id="extra_information">
         <ul id="information">
-            <li>
-              <VscOrganization id="icon" /> <strong>{t('organizer')}:</strong>{' '}
-              {organisationName}
-            </li>
             <li>
               <VscLocation id="icon" /> <strong>{t('location')}:</strong>{' '}
               {street} {homeNum}, {addressDescription}, {district}
@@ -119,24 +107,7 @@ return (
       ></iframe>
       </div>
 
-      <div id="column" className="signin">
-        <form action="#">
-          <div id="details_shift_checkboxes">
-            {eventData && eventData.shifts && eventData.shifts.map((shift, index) => (
-              <ShiftCheckbox 
-                key={index}
-                startTime={shift.startTime}
-                endTime={shift.endTime}
-                numVolunteers={shift.signedUp}
-                maxVolunteers={shift.capacity}
-              />
-            ))}
-          </div>
-          <button type="submit" id="sign-in">
-            {t('signIn')}
-          </button>
-        </form>
-      </div>
+      <SignInSection eventData={eventData} />
       
       <div id="details_more_events">
         <h2>{t('moreEventsFromThisOrganizer')}</h2>
