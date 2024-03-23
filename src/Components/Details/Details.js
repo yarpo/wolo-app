@@ -6,11 +6,12 @@ import {
   VscOrganization,
   VscLocation,
 } from 'react-icons/vsc';
-import { BiTime, BiBorderAll } from 'react-icons/bi';
+import { BiBorderAll } from 'react-icons/bi';
 import { Link, useParams } from 'react-router-dom';
 import ShiftCheckbox from './ShiftCheckbox/ShiftCheckbox.js';
 import '../../styles/details.scss';
 import EventCard from '../EventCard/EventCard';
+import fetchData from '../../Utils/fetchData.js';
 
 const Details = () => {
   
@@ -20,17 +21,8 @@ const Details = () => {
   const [organiserEvents, setOrganiserEvents] = useState([]);
 
   useEffect(() => {
-    const fetchEventData = async () => {
-      try {
-        const response = await fetch(`http://localhost:8080/events/${id}`);
-        const data = await response.json();
-        setEventData(data);
-      } catch (error) {
-        console.error('Error fetching event data:', error);
-      }
-    };
-
-    fetchEventData();
+    const url = `http://localhost:8080/events/${id}`;
+    fetchData(url, setEventData);
   }, [id]);
 
  useEffect(() => {
@@ -77,9 +69,6 @@ return (
         <ul id="information">
           <li>
             <VscBrowser id="icon" /> <strong>{t('date')}:</strong> {new Date(shifts[0].date[0], shifts[0].date[1] - 1, shifts[0].date[2]).toLocaleDateString()}
-          </li>
-          <li>
-            <BiTime id="icon" /> <strong>{t('time')}:</strong> {`${shifts[0].startTime} - ${shifts[0].endTime}`}
           </li>
           <li>
             <BiBorderAll id="icon" /> <strong>{t('category')}:</strong>{' '}
