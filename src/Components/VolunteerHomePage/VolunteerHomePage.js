@@ -9,6 +9,7 @@ import '../../styles/hero.scss';
 import '../../styles/volunteer-home-page.scss';
 import fetchData from '../../Utils/fetchData.js';
 import fetchUserToken from '../../Utils/fetchUserToken.js';
+import formatTime from '../../Utils/formatTime.js';
 
 const VolunteerHomePage = () => {
 
@@ -40,11 +41,6 @@ const VolunteerHomePage = () => {
     if (!userEvents) {
         return <div>Loading...</div>;
     }
-
-    const formatTime = (timeString) => {
-        const [hours, minutes] = timeString.split(':');
-        return `${hours}:${minutes}`;
-    };
 
     return (
         <div className='volunteer_home_page'>
