@@ -12,6 +12,7 @@ import ShiftCheckbox from './ShiftCheckbox/ShiftCheckbox.js';
 import '../../styles/details.scss';
 import EventCard from '../EventCard/EventCard';
 import fetchData from '../../Utils/fetchData.js';
+import formatDate from '../../Utils/formatDate.js';
 
 const Details = () => {
   
@@ -25,14 +26,12 @@ const Details = () => {
     fetchData(url, setEventData);
   }, [id]);
 
- useEffect(() => {
-  if (eventData && eventData.organisationId) {
-    fetch(`http://localhost:8080/organisations/${eventData.organisationId}/events`)
-      .then(response => response.json())
-      .then(data => setOrganiserEvents(data))
-      .catch(error => console.error(error));
-  }
-}, [eventData, eventData?.organisationId]);
+  useEffect(() => {
+    if (eventData && eventData.organisationId) {
+      const url = `http://localhost:8080/organisations/${eventData.organisationId}/events`;
+      fetchData(url, setOrganiserEvents);
+    }
+  }, [eventData, eventData?.organisationId]);
 
   if (!eventData) {
     return <div>Loading...</div>;
@@ -68,13 +67,17 @@ return (
         </ul>
         <ul id="information">
           <li>
-            <VscBrowser id="icon" /> <strong>{t('date')}:</strong> {new Date(shifts[0].date[0], shifts[0].date[1] - 1, shifts[0].date[2]).toLocaleDateString()}
+            <VscBrowser id="icon" /> <strong>{t('date')}:</strong> {formatDate(new Date(shifts[0].date).toLocaleDateString())}
           </li>
           <li>
             <BiBorderAll id="icon" /> <strong>{t('category')}:</strong>{' '}
               {eventData.categories.map((category, index) => (
               <span key={category.id}>{category.name}{index < eventData.categories.length - 1 ? ', ' : ''}</span>
             ))}
+          </li>
+          <li>
+              <VscOrganization id="icon" /> <strong>{t('organizer')}:</strong>{' '}
+              {organisationName}
           </li>
         </ul>
       </div>
@@ -87,10 +90,6 @@ return (
 
       <div id="extra_information">
         <ul id="information">
-            <li>
-              <VscOrganization id="icon" /> <strong>{t('organizer')}:</strong>{' '}
-              {organisationName}
-            </li>
             <li>
               <VscLocation id="icon" /> <strong>{t('location')}:</strong>{' '}
               {street} {homeNum}, {addressDescription}, {district}
