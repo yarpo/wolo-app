@@ -104,12 +104,12 @@ $background-color_1: rgb(170, 139, 240); // to be removed when fetching photos w
 
   #details_more_events {
     width: 100%;
-    overflow-x: scroll;
     order: 5;
   }
   
   #details_more_events_container {
     display: flex;
+    overflow-x: scroll;
   }
   
   #details_more_events_item {
