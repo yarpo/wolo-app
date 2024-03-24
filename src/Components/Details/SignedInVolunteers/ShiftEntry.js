@@ -1,9 +1,11 @@
+import { useTranslation } from 'react-i18next';
 import { useState} from 'react';
 import '../../../styles/shift-entry.scss';
 import { VscChevronRight, VscChevronDown } from "react-icons/vsc";
 import VolunteerEntry from './VolunteerEntry';
 
 const ShiftEntry = () => {
+    const { t } = useTranslation();
     const [isOpen, setIsOpen] = useState(false);
 
     const handleToggle = () => {
@@ -28,8 +30,8 @@ const ShiftEntry = () => {
                         <VscChevronRight id="shift_entry_icon"/> 
                     </>
                 )}
-                <span className="shift_entry_shift"><strong>Shift</strong> 00:00 - 00:00 </span>
-                <span className="shift_entry_volunteer"><strong>Volunteers:</strong> 0 / 0</span>
+                <span className="shift_entry_shift"><strong>{t('shift')}:</strong> 00:00 - 00:00 </span>
+                <span className="shift_entry_volunteer"><strong>{t('volunteers')}:</strong> 0 / 0</span>
             </button>
 
             {isOpen ? (
