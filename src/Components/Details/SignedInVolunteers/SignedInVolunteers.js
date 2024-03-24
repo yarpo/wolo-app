@@ -11,6 +11,8 @@ const SignedInVolunteers = () => {
             </div>
 
             <ShiftEntry />
+            <ShiftEntry />
+            <ShiftEntry />
         </div>
     )
 }
