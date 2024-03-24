@@ -1,6 +1,7 @@
 import { useState} from 'react';
 import '../../../styles/shift-entry.scss';
 import { VscChevronRight, VscChevronDown } from "react-icons/vsc";
+import VolunteerEntry from './VolunteerEntry';
 
 const ShiftEntry = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -33,7 +34,12 @@ const ShiftEntry = () => {
 
             {isOpen ? (
                     <>
-                        Volunteer
+                        <ol className='shift_entry_list'>
+                            <li><VolunteerEntry name={"John"} lastname={"Smith"} phone={"123 456 7890"}/></li>
+                            <li><VolunteerEntry name={"Maciej"} lastname={"Nowak"} phone={"123 456 7890"}/></li>
+                            <li><VolunteerEntry name={"Weronika"} lastname={"Kowalska-Puszcz"} phone={"123 456 7890"}/></li>
+                            <li><VolunteerEntry name={"Franciszek"} lastname={"Bąk"} phone={"123 456 7890"}/></li>
+                        </ol>
                     </>
                 ) : (
                     <>
