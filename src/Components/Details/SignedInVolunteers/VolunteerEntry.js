@@ -1,11 +1,18 @@
 import '../../../styles/volunteer-entry.scss';
 
-const VolunteerEntry = ({name, lastname, phone}) => {
+const VolunteerEntry = ({name, lastname, phone, email}) => {
 
     return (
         <div className='volunteer_entry'>
-            <span className='volunteer_entry_text'>{name} {lastname}</span>
-            <span className='volunteer_entry_phone'>{phone}</span>
+            <div className='volunteer_entry_text'>
+                <span>{name} {lastname}</span>
+            </div>
+            <div className='volunteer_entry_phone'>
+                <span>{phone}</span>
+            </div>
+            <div className='volunteer_entry_email'>
+                <span>{email}</span>
+            </div>
         </div>
     )
 }

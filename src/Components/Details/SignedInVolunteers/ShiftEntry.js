@@ -35,10 +35,10 @@ const ShiftEntry = () => {
             {isOpen ? (
                     <>
                         <ol className='shift_entry_list'>
-                            <li><VolunteerEntry name={"John"} lastname={"Smith"} phone={"123 456 7890"}/></li>
-                            <li><VolunteerEntry name={"Maciej"} lastname={"Nowak"} phone={"123 456 7890"}/></li>
-                            <li><VolunteerEntry name={"Weronika"} lastname={"Kowalska-Puszcz"} phone={"123 456 7890"}/></li>
-                            <li><VolunteerEntry name={"Franciszek"} lastname={"Bąk"} phone={"123 456 7890"}/></li>
+                            <li><VolunteerEntry name={"John"} lastname={"Smith"} phone={"123 456 7890"} email={"example@example.pl"}/></li>
+                            <li><VolunteerEntry name={"Maciej"} lastname={"Nowak"} phone={"123 456 7890"} email={"example@example.pl"}/></li>
+                            <li><VolunteerEntry name={"Weronika"} lastname={"Kowalska-Puszcz"} phone={"123 456 7890"} email={"exampleexampleexample@example.pl"}/></li>
+                            <li><VolunteerEntry name={"Franciszek"} lastname={"Bąk"} phone={"123 456 7890"} email={"example@example.pl"}/></li>
                         </ol>
                     </>
                 ) : (

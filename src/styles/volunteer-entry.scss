@@ -2,17 +2,22 @@
 
 .volunteer_entry {
     display: flex;
-    flex-wrap: wrap;
-    width: 60%;
+    justify-content: space-between;
+    align-items: center;
     margin-left: 10px;
 
-    .volunteer_entry_text{
-        flex-grow: 1;
+    .volunteer_entry_text {
+        flex: 1;
     }
 
-    .volunteer_entry_phone{
-        flex-shrink: 0;
-        margin-left: auto;
-        margin-right: 10vw;
+    .volunteer_entry_phone {
+        flex: 1;
+        text-align: center;
     }
+
+    .volunteer_entry_email {
+        flex: 1;
+        text-align: right;
+    }
+
 }
