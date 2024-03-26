@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { Link } from "react-router-dom";
 import '../../styles/signup.scss';
+import { URLS } from '../../config.js';
 
 const Signup = () => {
 
@@ -23,7 +24,7 @@ const Signup = () => {
 
 const handleRegister = async (values) => {
   try {
-    const response = await fetch('http://localhost:8080/auth/register', {
+    const response = await fetch(URLS.REGISTER, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -32,7 +33,7 @@ const handleRegister = async (values) => {
     });
 
     if (response.ok) {
-      window.location.href = 'http://localhost:3000/login';
+      window.location.href = URLS.LOGIN;
     } else {
       console.error('Failed to register'); //alert to do
     }

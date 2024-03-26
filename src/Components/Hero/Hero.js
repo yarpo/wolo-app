@@ -7,6 +7,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../../styles/hero.scss';
 import fetchData from '../../Utils/fetchData';
+import { URLS } from '../../config';
 
 const Hero = () => {
 
@@ -18,7 +19,7 @@ const Hero = () => {
     const [  , setFilteredEvents] = useState([]);
 
     useEffect(() => {
-        fetchData('http://localhost:8080/districts', setLocations);
+        fetchData(URLS.DISTRICTS, setLocations);
     }, []);
 
     const handleDateChange = (date) => {

@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Formik } from "formik";
 import { Link } from "react-router-dom";
 import '../../styles/login.scss';
+import { URLS } from '../../config.js';
 
 const Login = () => {
 
@@ -13,7 +14,7 @@ const Login = () => {
   };
 
 const handleLogin = async (values) => {
-  const response = await fetch('http://localhost:8080/auth/authenticate', {
+  const response = await fetch(URLS.AUTHENTICATE, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
