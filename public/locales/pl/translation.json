@@ -100,5 +100,9 @@
   "leaderRequired": "Wymagany lider",
   "addShift": "Dodaj zmianę",
     "SelectDistrict": "Wybierz dzielnicę",
-  "SelectCategory": "Wybierz kategorię"
+  "SelectCategory": "Wybierz kategorię",
+
+  "participants": "Uczestnicy",
+  "shift": "Zmiana",
+  "export list": "Eksportuj listę"
 }

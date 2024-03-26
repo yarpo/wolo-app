@@ -100,5 +100,9 @@
     "leaderRequired": "Требуется лидер",
     "addShift": "Добавить смену",
     "SelectDistrict": "Выберите округ",
-    "SelectCategory": "Выберите категорию"
+    "SelectCategory": "Выберите категорию",
+
+    "participants": "Участники",
+    "shift": "Смена",
+    "export list": "Экспорт списка"
 }
