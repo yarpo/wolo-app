@@ -32,16 +32,12 @@ const handleRegister = async (values) => {
     });
 
     if (response.ok) {
-      const data = await response.json();
-      console.log('Signup response:', data);
-      // Redirect to login page or home page
       window.location.href = 'http://localhost:3000/login';
     } else {
-      // Handle error
-      console.error('Failed to register');
+      console.error('Failed to register'); //alert to do
     }
   } catch (error) {
-    console.error('Signup error:', error);
+    console.error('Signup error:', error); //aletr to do
   }
 };
 
