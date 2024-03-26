@@ -6,6 +6,7 @@ import fetchData from '../../Utils/fetchData.js';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { URLS } from '../../config.js';
 
 const OrganiserCreateEvent = () => {
   
@@ -14,8 +15,8 @@ const OrganiserCreateEvent = () => {
   const [districts, setDistricts] = useState([]);
 
   useEffect(() => {
-    fetchData('http://localhost:8080/categories', setCategories);
-    fetchData('http://localhost:8080/districts', setDistricts);
+      fetchData(URLS.CATEGORIES, setCategories);
+      fetchData(URLS.DISTRICTS, setDistricts);
   }, []);
 
   const [initialValues] = useState({

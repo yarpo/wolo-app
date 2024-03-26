@@ -4,6 +4,7 @@ import { VscChevronDown, VscChevronUp, VscClose } from 'react-icons/vsc';
 import DatePicker from 'react-datepicker';
 import { useFiltersContext } from './FiltersContext';
 import fetchData from '../../Utils/fetchData.js';
+import { URLS } from '../../config.js';
 
 const Filters = ({ setFilteredEvents }) => {
   
@@ -16,13 +17,13 @@ const Filters = ({ setFilteredEvents }) => {
   const [organizations, setOrganizations] = useState([]);
 
 useEffect(() => {
-  fetchData(`http://localhost:8080/events`, setApiResponse);
+    fetchData(URLS.EVENTS, setApiResponse);
 }, [filters, categories]);
 
 useEffect(() => {
-  fetchData('http://localhost:8080/categories', setCategories);
-  fetchData('http://localhost:8080/districts', setDistricts);
-  fetchData('http://localhost:8080/organisations', setOrganizations);
+    fetchData(URLS.CATEGORIES, setCategories);
+    fetchData(URLS.DISTRICTS, setDistricts);
+    fetchData(URLS.ORGANISATIONS, setOrganizations);
 }, []);
 
 useEffect(() => {

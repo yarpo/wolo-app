@@ -14,6 +14,7 @@ import fetchData from '../../Utils/fetchData.js';
 import formatDate from '../../Utils/formatDate.js';
 import SignInSection from './SignInSection/SignInSection.js';
 import SignedInVolunteers from './SignedInVolunteers/SignedInVolunteers.js';
+import { URLS } from '../../config.js'
 
 const Details = () => {
   
@@ -23,15 +24,15 @@ const Details = () => {
   const [organiserEvents, setOrganiserEvents] = useState([]);
 
   useEffect(() => {
-    const url = `http://localhost:8080/events/${id}`;
-    fetchData(url, setEventData);
+      const url = `${URLS.EVENTS}/${id}`;
+      fetchData(url, setEventData);
   }, [id]);
 
   useEffect(() => {
-    if (eventData && eventData.organisationId) {
-      const url = `http://localhost:8080/organisations/${eventData.organisationId}/events`;
-      fetchData(url, setOrganiserEvents);
-    }
+      if (eventData && eventData.organisationId) {
+          const url = `${URLS.ORGANISATIONS}/${eventData.organisationId}/events`;
+          fetchData(url, setOrganiserEvents);
+      }
   }, [eventData, eventData?.organisationId]);
 
   if (!eventData) {
