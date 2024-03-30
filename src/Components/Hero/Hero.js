@@ -1,25 +1,45 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import Filters from '../Filters/Filters';
-import React, { useState } from 'react';
+import { useFiltersContext } from '../Filters/FiltersContext';
+import { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../../styles/hero.scss';
+import fetchData from '../../Utils/fetchData';
+import { URLS } from '../../config';
 
 const Hero = () => {
 
     const { t } = useTranslation();
-    const locations = ['Zaspa', 'Chełm', 'Wrzeszcz'];
+    const { filters, setFilters } = useFiltersContext();
     const [selectedLocation, setSelectedLocation] = useState("");
+    const [locations, setLocations] = useState([]);
     const [selectedDate, setSelectedDate] = useState(null);
     const [  , setFilteredEvents] = useState([]);
+
+    useEffect(() => {
+        fetchData(URLS.DISTRICTS, setLocations);
+    }, []);
 
     const handleDateChange = (date) => {
         setSelectedDate(date);
     };
+
     const handleLocationChange = (event) => {
-        setSelectedLocation(event.target.value);
+        const { value } = event.target;
+        setSelectedLocation(value);
     };
+
+   const handleSubmit = () => {
+    let newFilters = { ...filters, selectedDate: selectedDate };
+
+    if (selectedLocation !== "") {
+        newFilters.chosenTags = [...filters.chosenTags, selectedLocation];
+    }
+
+    setFilters(newFilters);
+};
 
     return (
         <div className='hero-container'>
@@ -53,8 +73,8 @@ const Hero = () => {
                             >
                             <option value="" disabled>{t('location')}</option>
                             {locations.map((location, index) => (
-                                <option key={index} value={location}>
-                                {location}
+                                <option key={index} value={location.name}>
+                                {location.name}
                                 </option>
                             ))}
                         </select>
@@ -65,7 +85,7 @@ const Hero = () => {
                 <Filters setFilteredEvents={setFilteredEvents} />
                 <div id="button_hero">
                     <Link to="/events">
-                        <input id="hero_submmit_button" type="submit" value={t('mainSearch')} />
+                        <input id="hero_submmit_button" type="submit" value={t('mainSearch')} onClick={handleSubmit} />
                     </Link>
                 </div>
             </div>

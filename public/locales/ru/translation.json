@@ -102,5 +102,8 @@
     "SelectDistrict": "Выберите округ",
     "SelectCategory": "Выберите категорию",
 
-    "loading": "загрузка"
+    "loading": "загрузка",
+    "participants": "Участники",
+    "shift": "Смена",
+    "export list": "Экспорт списка"
 }

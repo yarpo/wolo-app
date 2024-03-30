@@ -102,5 +102,8 @@
   "SelectDistrict": "Select a district",
   "SelectCategory": "Select a category",
 
-  "loading": "Loading"
+  "loading": "Loading",
+  "participants": "Participants",
+  "shift": "Shift",
+  "export list": "Export list"
 }

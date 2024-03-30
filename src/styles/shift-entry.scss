@@ -1,0 +1,28 @@
+@import './common.scss';
+
+.shift_entry {
+    width: 100%;
+    margin-top: 10px;
+
+    .shift_entry_toggle {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    }
+
+    .shift_entry_volunteer {
+        margin-left: 30px;
+    }
+
+    #shift_entry_icon {
+        margin-top: -3px;
+        margin-right: 5px;
+        vertical-align: middle;
+    }
+
+    .shift_entry_list{
+        margin-left: 40px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+}

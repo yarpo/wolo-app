@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Formik } from "formik";
 import { Link } from "react-router-dom";
 import '../../styles/login.scss';
-import {axiosInstance, setAuthToken} from '../../Utils/axiosInstance'
+import { URLS } from '../../config.js';
 
 const Login = () => {
 
@@ -13,26 +13,22 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
-  // const handleGoogleLogin = (event) => {
-  //     event.preventDefault();
-  //     window.location.href = 'http://localhost:8080/auth/google';
-  // }
-    const handleLogin = async (values) => {
-        try {
-            const response = await axiosInstance.post('/auth/login', {
-                email: values.email,
-                password: values.password
-            });
-            if (response.status >= 200 && response.status < 300) {
-                const token = response.data.accessToken;
-                localStorage.setItem('token', token);
-                setAuthToken(token);
-            }
-            window.location.href = 'http://localhost:3000/organiserHomePage';
-        } catch (error) {
-            console.error('Login error:', error);
-        }
-    };
+const handleLogin = async (values) => {
+  const response = await fetch(URLS.AUTHENTICATE, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(values)
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    localStorage.setItem('token', data.token);
+  } else {
+    console.error('Failed to login'); //alert to do
+  }
+};
 
   return (
     <div className="login-form" >

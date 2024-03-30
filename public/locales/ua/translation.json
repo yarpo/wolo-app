@@ -102,5 +102,8 @@
     "SelectDistrict": "Виберіть район",
     "SelectCategory": "Виберіть категорію",
 
-    "loading": "завантаження"
+    "loading": "завантаження",
+    "participants": "Учасники",
+    "shift": "Зміна",
+    "export list": "Експорт списку"
 }

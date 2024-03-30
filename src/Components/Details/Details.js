@@ -6,14 +6,18 @@ import {
   VscOrganization,
   VscLocation,
 } from 'react-icons/vsc';
-import { BiTime, BiBorderAll } from 'react-icons/bi';
+import { BiBorderAll } from 'react-icons/bi';
 import { Link, useParams } from 'react-router-dom';
-import ShiftCheckbox from './ShiftCheckbox/ShiftCheckbox.js';
 import '../../styles/details.scss';
 import EventCard from '../EventCard/EventCard';
 import fetchUserToken from '../../Utils/fetchUserToken.js';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import fetchData from '../../Utils/fetchData.js';
+import formatDate from '../../Utils/formatDate.js';
+import SignInSection from './SignInSection/SignInSection.js';
+import SignedInVolunteers from './SignedInVolunteers/SignedInVolunteers.js';
+import { URLS } from '../../config.js'
 
 const Details = () => {
   
@@ -25,27 +29,16 @@ const Details = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-    const fetchEventData = async () => {
-      try {
-        const response = await fetch(`http://localhost:8080/events/${id}`);
-        const data = await response.json();
-        setEventData(data);
-      } catch (error) {
-        console.error('Error fetching event data:', error);
-      }
-    };
-
-    fetchEventData();
+      const url = `${URLS.EVENTS}/${id}`;
+      fetchData(url, setEventData);
   }, [id]);
 
- useEffect(() => {
-  if (eventData && eventData.organisationId) {
-    fetch(`http://localhost:8080/organisations/${eventData.organisationId}/events`)
-      .then(response => response.json())
-      .then(data => setOrganiserEvents(data))
-      .catch(error => console.error(error));
-  }
-}, [eventData, eventData?.organisationId]);
+  useEffect(() => {
+      if (eventData && eventData.organisationId) {
+          const url = `${URLS.ORGANISATIONS}/${eventData.organisationId}/events`;
+          fetchData(url, setOrganiserEvents);
+      }
+  }, [eventData, eventData?.organisationId]);
 
 const handleShiftCheckboxChange = (shiftId, selected) => {
   if (selected){
@@ -131,16 +124,17 @@ return (
         </ul>
         <ul id="information">
           <li>
-            <VscBrowser id="icon" /> <strong>{t('date')}:</strong> {new Date(shifts[0].date[0], shifts[0].date[1] - 1, shifts[0].date[2]).toLocaleDateString()}
-          </li>
-          <li>
-            <BiTime id="icon" /> <strong>{t('time')}:</strong> {`${shifts[0].startTime} - ${shifts[0].endTime}`}
+            <VscBrowser id="icon" /> <strong>{t('date')}:</strong> {formatDate(new Date(shifts[0].date).toLocaleDateString())}
           </li>
           <li>
             <BiBorderAll id="icon" /> <strong>{t('category')}:</strong>{' '}
               {eventData.categories.map((category, index) => (
               <span key={category.id}>{category.name}{index < eventData.categories.length - 1 ? ', ' : ''}</span>
             ))}
+          </li>
+          <li>
+              <VscOrganization id="icon" /> <strong>{t('organizer')}:</strong>{' '}
+              {organisationName}
           </li>
         </ul>
       </div>
@@ -153,10 +147,6 @@ return (
 
       <div id="extra_information">
         <ul id="information">
-            <li>
-              <VscOrganization id="icon" /> <strong>{t('organizer')}:</strong>{' '}
-              {organisationName}
-            </li>
             <li>
               <VscLocation id="icon" /> <strong>{t('location')}:</strong>{' '}
               {street} {homeNum}, {addressDescription}, {district}
@@ -195,6 +185,7 @@ return (
           {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
         </form>
       </div>
+      <SignInSection eventData={eventData} />
       
       <div id="details_more_events">
         <h2>{t('moreEventsFromThisOrganizer')}</h2>
@@ -204,6 +195,8 @@ return (
           ))}
         </div>
       </div>
+
+      <SignedInVolunteers />
     </div>
   );
 };

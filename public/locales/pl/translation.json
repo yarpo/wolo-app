@@ -102,5 +102,8 @@
     "SelectDistrict": "Wybierz dzielnicę",
   "SelectCategory": "Wybierz kategorię",
 
-  "loading": "Ładowanie"
+  "loading": "Ładowanie",
+  "participants": "Uczestnicy",
+  "shift": "Zmiana",
+  "export list": "Eksportuj listę"
 }
