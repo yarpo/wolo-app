@@ -10,8 +10,6 @@ import { BiBorderAll } from 'react-icons/bi';
 import { Link, useParams } from 'react-router-dom';
 import '../../styles/details.scss';
 import EventCard from '../EventCard/EventCard';
-import fetchUserToken from '../../Utils/fetchUserToken.js';
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import fetchData from '../../Utils/fetchData.js';
 import formatDate from '../../Utils/formatDate.js';
@@ -25,8 +23,6 @@ const Details = () => {
   const { id } = useParams();
   const [eventData, setEventData] = useState(null);
   const [organiserEvents, setOrganiserEvents] = useState([]);
-  const [selectedShifts, setSelectedShifts] = useState([]);
-  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
       const url = `${URLS.EVENTS}/${id}`;
@@ -39,56 +35,6 @@ const Details = () => {
           fetchData(url, setOrganiserEvents);
       }
   }, [eventData, eventData?.organisationId]);
-
-const handleShiftCheckboxChange = (shiftId, selected) => {
-  if (selected){
-    setSelectedShifts((allSelectedShifts) => [...allSelectedShifts, shiftId]);
-  } else {
-    setSelectedShifts((allSelectedShifts) => allSelectedShifts.filter((id) => id !== shiftId));
-  }
-}
-
-const handleJoinEvent = async (e) => {
-  e.preventDefault();
-
-  if (selectedShifts.length === 0) {
-    setErrorMessage('Please select at least one shift to sign in.');
-    return;
-  }
-  setErrorMessage('');
-
-  const userConfirmed = window.confirm('I agree to give my phone number to the organizer.');
-
-  if (userConfirmed) {
-    const userId = fetchUserToken();
-
-    for (const shiftId of selectedShifts) {
-      const params = new URLSearchParams();
-      params.append('user', userId);
-      params.append('shift', shiftId);
-
-      try {
-        const response = await fetch(`http://localhost:8080/events/join?${params.toString()}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-
-        if (response.ok) {
-          console.log(`Successfully joined shift ${shiftId}`);
-          toast.success(`Successfully joined shift`);
-        } else {
-          console.error(`Failed to join shift ${shiftId}`);
-          toast.error(`Failed to join shift`);
-        }
-      } catch (error) {
-        console.error(`Error joining shift ${shiftId}:`, error);
-        toast.error('An unexpected error occurred while joining event. Please try again later');
-      }
-    }
-  }
-}
 
   if (!eventData) {
     return <div>{t('loading')}...</div>;
@@ -164,27 +110,6 @@ return (
       ></iframe>
       </div>
 
-      <div id="column" className="signin">
-        <form onSubmit={handleJoinEvent}>
-          <div id="details_shift_checkboxes">
-            {eventData && eventData.shifts && eventData.shifts.map((shift, index) => (
-              <ShiftCheckbox 
-                key={index}
-                id={shift.id}
-                startTime={shift.startTime}
-                endTime={shift.endTime}
-                numVolunteers={shift.signedUp}
-                maxVolunteers={shift.capacity}
-                onChange={(selected) => handleShiftCheckboxChange(shift.id, selected)}
-              />
-            ))}
-          </div>
-          <button type="submit" id="sign-in">
-            {t('signIn')}
-          </button>
-          {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-        </form>
-      </div>
       <SignInSection eventData={eventData} />
       
       <div id="details_more_events">

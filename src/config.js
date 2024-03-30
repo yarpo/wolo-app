@@ -9,6 +9,7 @@ const URLS = {
   AUTHENTICATE: `${BASE_URL}/auth/authenticate`,
   REGISTER: `${BASE_URL}/auth/register`,
   LOGIN: LOGIN_URL,
+  JOIN: `${BASE_URL}/events/join`,
 };
 
 module.exports = { URLS, BASE_URL };
