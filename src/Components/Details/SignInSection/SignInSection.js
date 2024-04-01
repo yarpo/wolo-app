@@ -1,14 +1,28 @@
 import { useTranslation } from 'react-i18next';
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import ShiftCheckbox from '../ShiftCheckbox/ShiftCheckbox.js';
 import fetchUserToken from '../../../Utils/fetchUserId.js';
 import { toast } from 'react-toastify';
-import { URLS } from '../../../config.js'
+import { URLS } from '../../../config.js';
+import fetchUserRoles from '../../../Utils/fetchUserRoles.js';
+import { Link } from 'react-router-dom';
+import '../../../styles/sign-in-section.scss';
 
 const SignInSection = ({ eventData }) => {
   const { t } = useTranslation();
   const [selectedShifts, setSelectedShifts] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
+  const [roles, setRoles] = useState(null);
+  const canSignIn = roles && roles.includes('USER');
+
+  useEffect(() => {
+    const fetchRoles = async () => {
+      const userRoles = await fetchUserRoles();
+      setRoles(userRoles);
+    };
+
+    fetchRoles();
+  }, []);
   
   const handleShiftCheckboxChange = (shiftId, selected) => {
       if (selected) {
@@ -76,10 +90,12 @@ const SignInSection = ({ eventData }) => {
             />
             ))}
         </div>
-        <button type="submit" id="sign-in">
+        {canSignIn && <button type="submit" id="sign-in">
             {t('signIn')}
-        </button>
-        {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+        </button>}
+        {errorMessage && <p id="sign_in_section_error">{errorMessage}</p>}
+
+        {!canSignIn && <p id="sign_in_section_error">Only logged in volunteers can join events. <Link to="/login">{t('signInToday')}</Link></p>}
         </form>
         </div>
 
