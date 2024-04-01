@@ -8,6 +8,7 @@ const URLS = {
   ORGANISATIONS: `${BASE_URL}/organisations`,
   AUTHENTICATE: `${BASE_URL}/auth/authenticate`,
   REGISTER: `${BASE_URL}/auth/register`,
+  USER: `${BASE_URL}/auth/current`,
   LOGIN: LOGIN_URL,
   JOIN: `${BASE_URL}/events/join`,
 };

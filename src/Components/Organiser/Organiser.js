@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import MoreEvents from '../MoreEventsFromOrganizer/MoreEvents';
 import '../../styles/organizer.scss';
 
-const Organizer = () => {
+const Organiser = () => {
 
   const { t } = useTranslation();
 
@@ -75,4 +75,4 @@ const Organizer = () => {
   );
 };
 
-export default Organizer;
+export default Organiser;
