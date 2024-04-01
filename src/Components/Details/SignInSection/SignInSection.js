@@ -95,7 +95,7 @@ const SignInSection = ({ eventData }) => {
         </button>}
         {errorMessage && <p id="sign_in_section_error">{errorMessage}</p>}
 
-        {!canSignIn && <p id="sign_in_section_error">Only logged in volunteers can join events. <Link to="/login">{t('signInToday')}</Link></p>}
+        {!canSignIn && <p id="sign_in_section_error">{t('volunteersRestricedFunctionality')}. <Link to="/login">{t('signInToday')}</Link></p>}
         </form>
         </div>
 

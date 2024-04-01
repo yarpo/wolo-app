@@ -105,5 +105,6 @@
   "loading": "Loading",
   "participants": "Participants",
   "shift": "Shift",
-  "export list": "Export list"
+  "export list": "Export list",
+  "volunteersRestricedFunctionality": "Only logged in volunteers can join events"
 }
