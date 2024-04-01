@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import React, {useState} from 'react';
 import ShiftCheckbox from '../ShiftCheckbox/ShiftCheckbox.js';
-import fetchUserToken from '../../../Utils/fetchUserToken.js';
+import fetchUserToken from '../../../Utils/fetchUserId.js';
 import { toast } from 'react-toastify';
 import { URLS } from '../../../config.js'
 
@@ -9,7 +9,6 @@ const SignInSection = ({ eventData }) => {
   const { t } = useTranslation();
   const [selectedShifts, setSelectedShifts] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
-  const token = localStorage.getItem('token');
   
   const handleShiftCheckboxChange = (shiftId, selected) => {
       if (selected) {
@@ -37,15 +36,12 @@ const SignInSection = ({ eventData }) => {
         const params = new URLSearchParams();
         params.append('user', userId);
         params.append('shift', shiftId);
-
-        console.log(token)
   
         try {
           const response = await fetch(`${URLS.JOIN}?${params.toString()}`, {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`
+              'Content-Type': 'application/json'
             },
           });
   

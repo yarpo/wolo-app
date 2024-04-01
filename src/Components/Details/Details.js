@@ -13,6 +13,7 @@ import EventCard from '../EventCard/EventCard';
 import 'react-toastify/dist/ReactToastify.css';
 import fetchData from '../../Utils/fetchData.js';
 import formatDate from '../../Utils/formatDate.js';
+import fetchUserRoles from '../../Utils/fetchUserRoles.js';
 import SignInSection from './SignInSection/SignInSection.js';
 import SignedInVolunteers from './SignedInVolunteers/SignedInVolunteers.js';
 import { URLS } from '../../config.js'
@@ -23,6 +24,8 @@ const Details = () => {
   const { id } = useParams();
   const [eventData, setEventData] = useState(null);
   const [organiserEvents, setOrganiserEvents] = useState([]);
+  const [roles, setRoles] = useState(null);
+  const canSignIn = roles && roles.includes('USER');
 
   useEffect(() => {
       const url = `${URLS.EVENTS}/${id}`;
@@ -35,6 +38,15 @@ const Details = () => {
           fetchData(url, setOrganiserEvents);
       }
   }, [eventData, eventData?.organisationId]);
+
+  useEffect(() => {
+    const fetchRoles = async () => {
+      const userRoles = await fetchUserRoles();
+      setRoles(userRoles);
+    };
+
+    fetchRoles();
+  }, []);
 
   if (!eventData) {
     return <div>{t('loading')}...</div>;
@@ -110,7 +122,7 @@ return (
       ></iframe>
       </div>
 
-      <SignInSection eventData={eventData} />
+      {canSignIn && <SignInSection eventData={eventData} />}
       
       <div id="details_more_events">
         <h2>{t('moreEventsFromThisOrganizer')}</h2>

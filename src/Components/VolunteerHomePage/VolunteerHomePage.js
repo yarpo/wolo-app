@@ -8,7 +8,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import '../../styles/hero.scss';
 import '../../styles/volunteer-home-page.scss';
 import fetchData from '../../Utils/fetchData.js';
-import fetchUserToken from '../../Utils/fetchUserToken.js';
+import fetchUserToken from '../../Utils/fetchUserId.js';
 import formatTime from '../../Utils/formatTime.js';
 
 const VolunteerHomePage = () => {
