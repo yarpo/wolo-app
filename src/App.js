@@ -15,8 +15,27 @@ import VolunteerHomePage from './Components/VolunteerHomePage/VolunteerHomePage.
 import { FiltersProvider } from './Components/Filters/FiltersContext';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { URLS } from './config.js';
+
+import React, { useState, useEffect } from 'react';
 
 function App() {
+  const [role, setRole] = useState(null);
+  const token = localStorage.getItem('token');
+  useEffect(() => {
+    if (token) {
+      fetch(URLS.USER, 
+        { method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
+        .then(response => response.json())
+        .then(data => setRole(data.roles))
+        .catch(error => console.error('Error: No information about the user', error));
+      }
+  }, [token]);
+
   return (
     <>
      <ToastContainer />
@@ -31,7 +50,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/organiserHomePage" element={<OrganiserHomePage />} />
-            <Route path="/adminHomePage" element={<AdminHomePage />} />
+            {role && role.includes('ADMIN') && <Route path="/adminHomePage" element={<AdminHomePage />} />}
             <Route path="/volunteerHomePage" element={<VolunteerHomePage />} />
             <Route path="/createEvent" element={<OrganiserCreateEvent />} />
             <Route path="*" element={<PageNotFound />} />
