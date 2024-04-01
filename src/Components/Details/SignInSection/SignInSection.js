@@ -1,27 +1,30 @@
 import { useTranslation } from 'react-i18next';
 import React, { useState, useEffect } from 'react';
 import ShiftCheckbox from '../ShiftCheckbox/ShiftCheckbox.js';
-import fetchUserToken from '../../../Utils/fetchUserId.js';
 import { toast } from 'react-toastify';
 import { URLS } from '../../../config.js';
 import fetchUserRoles from '../../../Utils/fetchUserRoles.js';
 import { Link } from 'react-router-dom';
 import '../../../styles/sign-in-section.scss';
+import fetchUserId from '../../../Utils/fetchUserId.js';
 
 const SignInSection = ({ eventData }) => {
   const { t } = useTranslation();
   const [selectedShifts, setSelectedShifts] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
   const [roles, setRoles] = useState(null);
+  const [id, setId] = useState(null);
   const canSignIn = roles && roles.includes('USER');
 
   useEffect(() => {
-    const fetchRoles = async () => {
+    const fetchUserData = async () => {
       const userRoles = await fetchUserRoles();
       setRoles(userRoles);
+      const userId = await fetchUserId();
+      setId(userId);
     };
 
-    fetchRoles();
+    fetchUserData();
   }, []);
   
   const handleShiftCheckboxChange = (shiftId, selected) => {
@@ -43,12 +46,10 @@ const SignInSection = ({ eventData }) => {
   
     const userConfirmed = window.confirm('I agree to give my phone number to the organizer.');
   
-    if (userConfirmed) {
-      const userId = fetchUserToken();
-  
+    if (userConfirmed) {  
       for (const shiftId of selectedShifts) {
         const params = new URLSearchParams();
-        params.append('user', userId);
+        params.append('user', id);
         params.append('shift', shiftId);
   
         try {
