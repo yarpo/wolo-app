@@ -4,7 +4,7 @@ import Navbar from './Components/Navbar/Navbar';
 import AllEvents from './Components/AllEvents/AllEvents';
 import Details from './Components/Details/Details';
 import Hero from './Components/Hero/Hero';
-import Organizer from './Components/Organizer/Organizer.js';
+import Organiser from './Components/Organiser/Organiser.js';
 import PageNotFound from './Components/PageNotFound/PageNotFound.js';
 import Login from './Components/Login/Login.js';
 import Signup from './Components/Signup/Signup.js';
@@ -46,13 +46,13 @@ function App() {
             <Route path="/" element={<Hero />} />
             <Route path="/events" element={<AllEvents />} />
             <Route path="/details/:id" element={<Details />} />
-            <Route path="/organizer" element={<Organizer />} />
+            <Route path="/organiser" element={<Organiser />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/organiserHomePage" element={<OrganiserHomePage />} />
+            {role && role.includes('MODERATOR') && <Route path="/organiserHomePage" element={<OrganiserHomePage />} />} 
             {role && role.includes('ADMIN') && <Route path="/adminHomePage" element={<AdminHomePage />} />}
-            <Route path="/volunteerHomePage" element={<VolunteerHomePage />} />
-            <Route path="/createEvent" element={<OrganiserCreateEvent />} />
+            {role && role.includes('USER') && <Route path="/volunteerHomePage" element={<VolunteerHomePage />} />}
+            {role && role.includes('MODERATOR') && <Route path="/createEvent" element={<OrganiserCreateEvent />} />} 
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </FiltersProvider>
