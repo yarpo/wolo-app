@@ -11,6 +11,7 @@ const URLS = {
   USER: `${BASE_URL}/auth/current`,
   LOGIN: LOGIN_URL,
   JOIN: `${BASE_URL}/events/join`,
+  USERS: `${BASE_URL}/users`
 };
 
 module.exports = { URLS, BASE_URL };

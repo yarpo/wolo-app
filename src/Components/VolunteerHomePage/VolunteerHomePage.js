@@ -8,8 +8,9 @@ import 'react-datepicker/dist/react-datepicker.css';
 import '../../styles/hero.scss';
 import '../../styles/volunteer-home-page.scss';
 import fetchData from '../../Utils/fetchData.js';
-import fetchUserToken from '../../Utils/fetchUserId.js';
 import formatTime from '../../Utils/formatTime.js';
+import fetchUserId from '../../Utils/fetchUserId.js';
+import { URLS } from '../../config.js';
 
 const VolunteerHomePage = () => {
 
@@ -19,8 +20,16 @@ const VolunteerHomePage = () => {
     const [selectedDate, setSelectedDate] = useState(null);
     const [  , setFilteredEvents] = useState([]);
     const [userEvents, setUserEvents] = useState([]);
+    const [userId, setId] = useState(null);
+    
+    useEffect(() => {
+        const fetchUserData = async () => {
+            const userId = await fetchUserId();
+            setId(userId);
+        };
 
-    const userId = fetchUserToken();
+        fetchUserData();
+    }, []);
 
     const handleDateChange = (date) => {
         setSelectedDate(date);
@@ -31,7 +40,7 @@ const VolunteerHomePage = () => {
 
     useEffect(() => {
         const fetchUserEvents = async () => {
-          const url = `http://localhost:8080/users/${userId}/shifts`;
+          const url = `${URLS.USERS}/${userId}/shifts`;
           await fetchData(url, setUserEvents);
         };
     
