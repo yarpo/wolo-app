@@ -1,5 +1,9 @@
 const formatDate = (inputDate) => {
-    const parts = inputDate.split('/');
+    let delimiter = '/';
+    if (inputDate.includes('-')) {
+        delimiter = '-';
+    }
+    const parts = inputDate.split(delimiter);
     const day = parts[1].padStart(2, '0');
     const month = parts[0].padStart(2, '0');
     const formattedDate = `${day}.${month}.${parts[2]}`;
