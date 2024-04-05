@@ -53,7 +53,7 @@ const Organiser = () => {
         </Link>
         <div className='organizer_container_logo_text'>
           <h1 id="title">{name}</h1>
-          <img src={logoUrl} alt="logo" className='organizer_container_logo'/>
+          <img src={logoUrl} alt="logo" className='organizer_container_logo' onError={(organiserData) => organiserData.target.style.display = 'none'}/>
         </div>
       </div>
       <p id="description">
