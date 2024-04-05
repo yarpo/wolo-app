@@ -14,7 +14,7 @@ import fetchData from '../../Utils/fetchData.js';
 import formatDate from '../../Utils/formatDate.js';
 import SignInSection from './SignInSection/SignInSection.js';
 import SignedInVolunteers from './SignedInVolunteers/SignedInVolunteers.js';
-import { URLS } from '../../config.js'
+import { URLS } from '../../config.js';
 
 const Details = () => {
   
@@ -79,7 +79,7 @@ return (
           </li>
           <li>
               <VscOrganization id="icon" /> <strong>{t('organizer')}:</strong>{' '}
-              {organisationName}
+              <Link to={`/organiser?organisationId=${eventData.organisationId}`}> {organisationName} </Link>
           </li>
         </ul>
       </div>
