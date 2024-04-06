@@ -102,7 +102,9 @@
     "SelectDistrict": "Виберіть район",
     "SelectCategory": "Виберіть категорію",
 
+    "loading": "завантаження",
     "participants": "Учасники",
     "shift": "Зміна",
-    "export list": "Експорт списку"
+    "export list": "Експорт списку",
+    "volunteersRestricedFunctionality": "Тільки зареєстровані волонтери можуть брати участь у заходах"
 }

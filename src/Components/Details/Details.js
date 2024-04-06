@@ -10,6 +10,7 @@ import { BiBorderAll } from 'react-icons/bi';
 import { Link, useParams } from 'react-router-dom';
 import '../../styles/details.scss';
 import EventCard from '../EventCard/EventCard';
+import 'react-toastify/dist/ReactToastify.css';
 import fetchData from '../../Utils/fetchData.js';
 import formatDate from '../../Utils/formatDate.js';
 import SignInSection from './SignInSection/SignInSection.js';
@@ -36,7 +37,7 @@ const Details = () => {
   }, [eventData, eventData?.organisationId]);
 
   if (!eventData) {
-    return <div>Loading...</div>;
+    return <div>{t('loading')}...</div>;
   }
 
   const {
