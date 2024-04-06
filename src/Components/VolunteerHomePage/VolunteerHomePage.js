@@ -7,7 +7,6 @@ import YourEventVolunteer from './YourEventVolunteer/YourEventVolunteer.js';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../../styles/hero.scss';
 import '../../styles/volunteer-home-page.scss';
-import fetchData from '../../Utils/fetchData.js';
 import formatTime from '../../Utils/formatTime.js';
 import fetchUserId from '../../Utils/fetchUserId.js';
 import { URLS } from '../../config.js';
@@ -40,14 +39,37 @@ const VolunteerHomePage = () => {
 
     useEffect(() => {
         const fetchUserEvents = async () => {
-          const url = `${URLS.USERS}/${userId}/shifts`;
-          await fetchData(url, setUserEvents);
+            if (userId) {
+                try {
+                    const url = `${URLS.USERS}/${userId}/shifts`;
+                    const token = localStorage.getItem('token');
+                    console.log(token)
+    
+                    const response = await fetch(url, {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        }
+                    });
+    
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+    
+                    const data = await response.json();
+                    setUserEvents(data);
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                }
+            }
         };
     
         fetchUserEvents();
-      }, [userId]);
+    }, [userId]);
+    
 
-    if (!userEvents) {
+    if (!userEvents.length === 0) {
         return <div>{t('loading')}...</div>;
     }
 
