@@ -69,7 +69,7 @@ return (
         </ul>
         <ul id="information">
           <li>
-            <VscBrowser id="icon" /> <strong>{t('date')}:</strong> {formatDate(new Date(shifts[0].date).toLocaleDateString())}
+            <VscBrowser id="icon" /> <strong>{t('date')}:</strong> {formatDate(shifts[0].date)}
           </li>
           <li>
             <BiBorderAll id="icon" /> <strong>{t('category')}:</strong>{' '}

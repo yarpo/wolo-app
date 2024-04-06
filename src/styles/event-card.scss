@@ -52,14 +52,6 @@ $background-color_1: #f5f5f5;
   ul {
     li {
       list-style-type: none;
-      
-      &:nth-last-child(2) {
-        padding-left: 21px;
-      }
-      
-      &:last-child {
-        padding-left: 21px;
-      }
     }
   }
 }

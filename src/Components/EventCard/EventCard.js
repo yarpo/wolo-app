@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { VscLocation, VscBrowser, VscOrganization } from 'react-icons/vsc';
-import { BiTime } from 'react-icons/bi';
+import { VscLocation, VscBrowser, VscOrganization, VscAccount } from 'react-icons/vsc';
+import formatDate from '../../Utils/formatDate';
 import { Link } from 'react-router-dom';
 import '../../styles/event-card.scss';
 
@@ -23,22 +23,16 @@ const EventCard = ({ event }) => {
               {event.street} {event.homeNum}, {event.district}, {event.city}
             </li>
             <li>
-              <VscBrowser className="icon" /> <strong>{t('date')}:</strong>{' '}
-              {event.shifts.date}
-            </li>
-            <li>
-              <BiTime className="icon" /> <strong>{t('time')}:</strong>{' '}
-              {event.shifts.startTime} - {event.shifts.endTime}
+              <VscBrowser className="icon" /> <strong>{t('date')}:</strong> {' '}
+              {formatDate(event.shifts[0].date)}
             </li>
             <li>
               <VscOrganization className="icon" />{' '}
               <strong>{t('organizedBy')}:</strong> {event.organisation}
             </li>
             <li>
-              <strong>{t('needed')}:</strong> {event.shifts[0].capacity}
-            </li>
-            <li>
-              <strong>{t('signedIn')}:</strong> {event.shifts[0].signedUp}
+              <VscAccount  className="icon"/>{' '}
+              <strong>{t('volunteers')}:</strong> {event.shifts[0].signedUp} / {event.shifts[0].capacity}
             </li>
           </ul>
         </div>
