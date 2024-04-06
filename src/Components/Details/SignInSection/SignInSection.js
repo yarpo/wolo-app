@@ -15,7 +15,8 @@ const SignInSection = ({ eventData }) => {
   const [roles, setRoles] = useState(null);
   const [id, setId] = useState(null);
   const canSignIn = roles && roles.includes('USER');
-
+  const token = localStorage.getItem('token');
+  
   useEffect(() => {
     const fetchUserData = async () => {
       const userRoles = await fetchUserRoles();
@@ -56,6 +57,7 @@ const SignInSection = ({ eventData }) => {
           const response = await fetch(`${URLS.JOIN}?${params.toString()}`, {
             method: 'POST',
             headers: {
+              'Authorization': `Bearer ${token}`,
               'Content-Type': 'application/json'
             },
           });
