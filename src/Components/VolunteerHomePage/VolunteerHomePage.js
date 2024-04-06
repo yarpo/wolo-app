@@ -43,7 +43,6 @@ const VolunteerHomePage = () => {
                 try {
                     const url = `${URLS.USERS}/${userId}/shifts`;
                     const token = localStorage.getItem('token');
-                    console.log(token)
     
                     const response = await fetch(url, {
                         method: 'GET',
