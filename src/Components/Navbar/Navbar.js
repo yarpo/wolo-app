@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../../styles/navbar.scss';
 import logo from '../../images/logo.svg';
 
 const Navbar = () => {
 
   const [clicked, setClicked] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem('user'))
 
   const handleLanguageChange = language => {
     i18n.changeLanguage(language);
@@ -23,6 +26,16 @@ const Navbar = () => {
       handleClick();
     }
   };
+
+const toggleDropdown = () => {
+  setShowDropdown(prevShowDropdown => !prevShowDropdown);
+};
+
+function handleLogout() {
+  localStorage.removeItem('user');
+  localStorage.removeItem('token');
+  navigate('/login');
+}
 
   return (
     <>
@@ -56,8 +69,27 @@ const Navbar = () => {
               <option value="ru">Russian</option>
             </select>
           </li>
-          <li>
-            <Link to="/login">{t('signIn')}</Link>
+          <li className="navbar-dropdown">
+            {user ? (
+              <>
+                <button className="navbar-dropdown-button" onClick={toggleDropdown}>
+                  {user.email} {/* Display the user's email */}
+                </button>
+                {showDropdown && (
+                  <ul className="navbar-dropdown-menu">
+                    <li><Link to="/yourEvents">{t('yourEvents')}</Link></li>
+                    <li><Link to="/liked">{t('liked')}</Link></li>
+                    <li><Link to="/messages">{t('messages')}</Link></li>
+                    <li><Link to="/settings">{t('settings')}</Link></li>
+                    <li>
+                      <button onClick={handleLogout}>{t('logout')}</button> {/* Logout button */}
+                    </li>
+                  </ul>
+                )}
+              </>
+            ) : (
+              <Link to="/login">{t('signIn')}</Link>
+            )}
           </li>
         </ul>
         <button

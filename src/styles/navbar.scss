@@ -15,10 +15,51 @@ nav {
   position: fixed;
   top: 0;
   width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   img {
   height: 60px;
   width: 100px;
 }
+}
+
+.navbar-dropdown-button {
+  display: flex;
+  align-items: center;
+  background-color: $background-color_1;
+  color: $color_1;
+  padding: 10px 16px;
+  font-size: 14px;
+  border: none;
+  img {
+    flex-shrink: 0; 
+  }
+  &:after {
+    content: "\25BC"; /* down arrow */
+    font-size: 0.8em;
+    padding-left: 10px;
+  }
+}
+
+.navbar-dropdown-menu {
+  display: none;
+  position: absolute;
+  min-width: 160px;
+  background-color: $background-color_2;
+  border: 1px solid $color_1;
+  z-index: 1;
+  li {
+    padding: 10px;
+    color: $color_1;
+    background-color: $background-color_2;
+    &:hover {
+      background-color: $background-color_3;
+      color: $color_2;
+    }
+  }
+}
+
+.navbar-dropdown:hover .navbar-dropdown-menu {
+  display: block;
 }
 
 #logo {
