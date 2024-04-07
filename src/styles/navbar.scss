@@ -78,15 +78,11 @@ nav {
   cursor: pointer;
 }
 
-.user-icon, .dropdown-icon, .user-info > span {
-  align-self: center;
-}
-
 .user-info {
   display: flex;
   align-items: center;
-  line-height: 25px; 
 }
+
 #navbar {
   display: flex;
   align-items: center;
