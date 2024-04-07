@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import '../../styles/navbar.scss';
 import logo from '../../images/logo.svg';
+import { RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri';
+import { FaRegUserCircle } from 'react-icons/fa';
 
 const Navbar = () => {
 
@@ -72,8 +74,17 @@ function handleLogout() {
           <li className="navbar-dropdown">
             {user ? (
               <>
-                <button className="navbar-dropdown-button" onClick={toggleDropdown}>
-                  {user.email} {/* Display the user's email */}
+                <button 
+                  className="navbar-dropdown-button" 
+                  onClick={toggleDropdown}
+                >
+              <div className="user-info">
+                <FaRegUserCircle className="user-icon" />
+                <span>{user.email}</span>
+                <div className="dropdown-icon">
+                  {showDropdown ? <RiArrowDropUpLine size={25}/> : <RiArrowDropDownLine size={25}/>}
+                </div>
+              </div>
                 </button>
                 {showDropdown && (
                   <ul className="navbar-dropdown-menu">
