@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Formik } from "formik";
-import { Link, useNavigate } from "react-router-dom";
+import { Formik } from 'formik';
+import { Link, useNavigate } from 'react-router-dom';
 import '../../styles/login.scss';
 import { URLS } from '../../config.js';
 
