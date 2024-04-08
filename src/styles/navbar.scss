@@ -25,44 +25,40 @@ nav {
 }
 
 .navbar-dropdown-button {
-  display: flex;
-  align-items: center;
-  background-color: $background-color_1;
-  color: $color_1;
-  padding: 10px 16px;
-  font-size: 14px;
+  background-color: initial;
   border: none;
-  
-  img {
-    flex-shrink: 0; 
-  }
 }
 
 .navbar-dropdown-menu {
-  display: none;
+  display: block;
   position: absolute;
+  top: 130%;
+  left: 0;
+  width: 100%; 
   min-width: 160px;
   background-color: $background-color_2;
   border: 1px solid $color_1;
   z-index: 1;
-  
   li {
-    padding: 10px;
-    background-color: $background-color_2;
+button {
+  text-decoration: none;
+  border: none;
+  background-color: transparent; 
+  color: inherit; 
+  padding: 0; 
+  margin: 0; 
+  font-weight: normal;
+  &:hover {
     text-decoration: none;
-    
-    &:hover {
-      color: $color_2;
-    }
+    font-weight: bold;
+    color: $color_2;
+  }
+}
   }
 }
 
 .user-icon {
   margin-right: 5px;
-}
-
-.navbar-dropdown:hover .navbar-dropdown-menu {
-  display: block;
 }
 
 #logo {
@@ -72,10 +68,16 @@ nav {
   color: $color_1;
 }
 
-#langauges-select:hover {
-  font-weight: bold;
-  color: $color_2;
-  cursor: pointer;
+#langauges-select {
+  li {
+    a, button {
+      &:hover {
+        font-weight: bold;
+        color: $color_2;
+        cursor: pointer;
+      }
+    }
+  }
 }
 
 .user-info {
@@ -99,12 +101,11 @@ nav {
       font-weight: 500;
       font-size: 16px;
       color: $color_1;
-    }
-    
-    &:hover a {
-      text-decoration: none;
-      font-weight: bold;
-      color: $color_2;
+      &:hover {
+        text-decoration: none;
+        font-weight: bold;
+        color: $color_2;
+      }
     }
     
     select {
@@ -152,8 +153,10 @@ nav {
   
   #mobile {
     display: block;
-    
-    i {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+      i {
       font-size: 24px;
       cursor: pointer;
     }
