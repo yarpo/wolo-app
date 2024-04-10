@@ -102,11 +102,6 @@ return (
       {eventData.shifts.map(shift => (
         <ShiftCard key={shift.id} shift={shift} id='details_more_events_item' />
       ))}
-
-      <ShiftCard 
-        shift={eventData.shifts[0]}
-      />
-      {/* <SignInSection eventData={eventData} /> */}
       
       <div id="details_more_events">
         <h2>{t('moreEventsFromThisOrganizer')}</h2>

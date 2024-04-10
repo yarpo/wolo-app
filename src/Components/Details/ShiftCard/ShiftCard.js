@@ -4,7 +4,6 @@ import { toast } from 'react-toastify';
 import { URLS } from '../../../config.js';
 import fetchUserRoles from '../../../Utils/fetchUserRoles.js';
 import { Link } from 'react-router-dom';
-import '../../../styles/sign-in-section.scss';
 import fetchUserId from '../../../Utils/fetchUserId.js';
 
 const ShiftCard = ({ shift }) => {
