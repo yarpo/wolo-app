@@ -1,12 +1,22 @@
 import { useTranslation } from 'react-i18next';
-import { useState} from 'react';
+import { useState, useEffect } from 'react';
 import '../../../styles/shift-entry.scss';
 import { VscChevronRight, VscChevronDown } from "react-icons/vsc";
 import VolunteerEntry from './VolunteerEntry';
+import formatTime from '../../../Utils/formatTime.js';
+import fetchData from '../../../Utils/fetchData.js'; 
+import { URLS } from '../../../config.js';
 
-const ShiftEntry = () => {
+
+const ShiftEntry = ({ id, startTime, endTime, numVolunteers, maxVolunteers }) => {
     const { t } = useTranslation();
     const [isOpen, setIsOpen] = useState(false);
+    const [volunteerData, setVolunteerData] = useState(null);
+
+    useEffect(() => {
+        const url = `${URLS.USERS_ON_SHIFT}=${id}`;
+        fetchData(url, setVolunteerData);
+    }, [id]);
 
     const handleToggle = () => {
         setIsOpen(!isOpen);
@@ -30,18 +40,28 @@ const ShiftEntry = () => {
                         <VscChevronRight id="shift_entry_icon"/> 
                     </>
                 )}
-                <span className="shift_entry_shift"><strong>{t('shift')}:</strong> 00:00 - 00:00 </span>
-                <span className="shift_entry_volunteer"><strong>{t('volunteers')}:</strong> 0 / 0</span>
+                <span className="shift_entry_shift"><strong>{t('shift')}:</strong> { formatTime(startTime) } - { formatTime(endTime) } </span>
+                <span className="shift_entry_volunteer"><strong>{t('volunteers')}:</strong> { numVolunteers } / { maxVolunteers }</span>
             </button>
 
             {isOpen ? (
                     <>
-                        <ol className='shift_entry_list'>
-                            <li><VolunteerEntry name={"John"} lastname={"Smith"} phone={"123 456 7890"} email={"example@example.pl"}/></li>
-                            <li><VolunteerEntry name={"Maciej"} lastname={"Nowak"} phone={"123 456 7890"} email={"example@example.pl"}/></li>
-                            <li><VolunteerEntry name={"Weronika"} lastname={"Kowalska-Puszcz"} phone={"123 456 7890"} email={"exampleexampleexample@example.pl"}/></li>
-                            <li><VolunteerEntry name={"Franciszek"} lastname={"Bąk"} phone={"123 456 7890"} email={"example@example.pl"}/></li>
-                        </ol>
+                        {volunteerData && volunteerData.length > 0 ? (
+                            <ol className='shift_entry_list'>
+                                {volunteerData.map((volunteer, index) => (
+                                    <li key={index}>
+                                        <VolunteerEntry 
+                                            name={volunteer.firstName}
+                                            lastname={volunteer.lastName}
+                                            phone={volunteer.phoneNumber}
+                                            email={volunteer.email}
+                                        />
+                                    </li>
+                                ))}
+                            </ol>
+                        ) : (
+                            <p className='shift_entry_no_volunteers'>There are no volunteers signed in</p>
+                        )}
                     </>
                 ) : (
                     <>
