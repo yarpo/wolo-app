@@ -12,6 +12,8 @@ import '../../styles/details.scss';
 import EventCard from '../EventCard/EventCard';
 import 'react-toastify/dist/ReactToastify.css';
 import fetchData from '../../Utils/fetchData.js';
+import fetchUserOrganisation from '../../Utils/fetchUserOrganisation.js';
+import fetchUserRoles from '../../Utils/fetchUserRoles.js';
 import formatDate from '../../Utils/formatDate.js';
 import SignInSection from './SignInSection/SignInSection.js';
 import SignedInVolunteers from './SignedInVolunteers/SignedInVolunteers.js';
@@ -23,6 +25,20 @@ const Details = () => {
   const { id } = useParams();
   const [eventData, setEventData] = useState(null);
   const [organiserEvents, setOrganiserEvents] = useState([]);
+  const [roles, setRoles] = useState(null);
+  const [userOrganisation, setUserOrganisation] = useState();
+  const isModerator = roles && roles.includes('MODERATOR');
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const userRoles = await fetchUserRoles();
+      setRoles(userRoles);
+      const userOrganisation = await fetchUserOrganisation();
+      setUserOrganisation(userOrganisation);
+    };
+
+    fetchUserData();
+  }, []);
 
   useEffect(() => {
       const url = `${URLS.EVENTS}/${id}`;
@@ -121,7 +137,7 @@ return (
         </div>
       </div>
 
-      <SignedInVolunteers />
+      {eventData.organisationId === userOrganisation && isModerator && <SignedInVolunteers />}
     </div>
   );
 };
