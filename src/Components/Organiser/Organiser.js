@@ -7,11 +7,12 @@ import {
   VscLocation,
 } from 'react-icons/vsc';
 import { AiOutlineInstagram, AiOutlineUpload, AiFillHeart, AiOutlineFacebook, AiOutlineYoutube } from "react-icons/ai";
-import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import '../../styles/organizer.scss';
 import fetchData from '../../Utils/fetchData.js';
 import { URLS } from '../../config.js';
 import EventCard from '../EventCard/EventCard.js';
+import { useNavigate } from 'react-router-dom';
 
 
 const Organiser = () => {
@@ -24,24 +25,13 @@ const Organiser = () => {
   const [organiserEvents, setOrganiserEvents] = useState([]);
 
   useEffect(() => {
-    const fetchOrganiserData = async () => {
-      try {
-        const url = `${URLS.ORGANISATIONS}/${organisationId}`;
-        const response = await fetch(url);
-        if (!response.ok) {
-          // If response is not OK, redirect to /events page
-          navigate('/events');
-          return;
-        }
-        const data = await response.json();
-        setOrganiserData(data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
+    const fetchDataForOrganiser = async () => {
+      const url = `${URLS.ORGANISATIONS}/${organisationId}`;
+      fetchData(url, setOrganiserData, navigate);
     };
-
+  
     if (organisationId) {
-      fetchOrganiserData();
+      fetchDataForOrganiser();
     }
   }, [organisationId, navigate]);
 
