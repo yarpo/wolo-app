@@ -60,7 +60,7 @@ const ShiftEntry = ({ id, startTime, endTime, numVolunteers, maxVolunteers }) =>
                                 ))}
                             </ol>
                         ) : (
-                            <p className='shift_entry_no_volunteers'>There are no volunteers signed in</p>
+                            <p className='shift_entry_no_volunteers'>{t('thereAreNoVolunteers')}</p>
                         )}
                     </>
                 ) : (
