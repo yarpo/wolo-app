@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { VscLocation, VscBrowser, VscOrganization } from 'react-icons/vsc';
-import { BiTime } from 'react-icons/bi';
+import formatDate from '../../Utils/formatDate';
 import { Link } from 'react-router-dom';
 import '../../styles/event-card.scss';
 
@@ -20,25 +20,15 @@ const EventCard = ({ event }) => {
           <ul>
             <li>
               <VscLocation className="icon" /> <strong>{t('location')}:</strong>{' '}
-              {event.street} {event.homeNum}, {event.district}, {event.city}
+              {event.city}
             </li>
             <li>
-              <VscBrowser className="icon" /> <strong>{t('date')}:</strong>{' '}
-              {event.shifts.date}
-            </li>
-            <li>
-              <BiTime className="icon" /> <strong>{t('time')}:</strong>{' '}
-              {event.shifts.startTime} - {event.shifts.endTime}
+              <VscBrowser className="icon" /> <strong>{t('date')}:</strong> {' '}
+              {formatDate(event.shifts[0].date)}
             </li>
             <li>
               <VscOrganization className="icon" />{' '}
               <strong>{t('organizedBy')}:</strong> {event.organisation}
-            </li>
-            <li>
-              <strong>{t('needed')}:</strong> {event.shifts[0].capacity}
-            </li>
-            <li>
-              <strong>{t('signedIn')}:</strong> {event.shifts[0].signedUp}
             </li>
           </ul>
         </div>

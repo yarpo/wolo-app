@@ -10,11 +10,12 @@ import { BiBorderAll } from 'react-icons/bi';
 import { Link, useParams } from 'react-router-dom';
 import '../../styles/details.scss';
 import EventCard from '../EventCard/EventCard';
+import 'react-toastify/dist/ReactToastify.css';
 import fetchData from '../../Utils/fetchData.js';
 import formatDate from '../../Utils/formatDate.js';
-import SignInSection from './SignInSection/SignInSection.js';
 import SignedInVolunteers from './SignedInVolunteers/SignedInVolunteers.js';
-import { URLS } from '../../config.js';
+import { URLS } from '../../config.js'
+import ShiftCard from './ShiftCard/ShiftCard.js';
 
 const Details = () => {
   
@@ -36,20 +37,18 @@ const Details = () => {
   }, [eventData, eventData?.organisationId]);
 
   if (!eventData) {
-    return <div>Loading...</div>;
+    return <div>{t('loading')}...</div>;
   }
 
   const {
     name,
     organisationName,
     description,
-    street,
-    addressDescription,
-    homeNum,
-    district,
+    city,
     imageUrl,
     shifts,
     alt,
+    categories
 } = eventData;
 
 return (
@@ -59,23 +58,14 @@ return (
         <VscArrowLeft id="back_arrow" /> {t('back')}
       </Link> 
         <h1 id="title">{name}</h1>
-        <ul id="volunteers_numbers">
-          <li>
-            <strong>{shifts[0].signedUp}</strong> {t('haveBeenSignedIn')}
-          </li>
-          <li>
-            <strong>{shifts[0].capacity - shifts[0].signedUp}</strong> {t('moreIsNeeded')}
-          </li>
-        </ul>
         <ul id="information">
           <li>
-            <VscBrowser id="icon" /> <strong>{t('date')}:</strong> {formatDate(new Date(shifts[0].date).toLocaleDateString())}
+            <VscBrowser id="icon" /> <strong>{t('date')}:</strong> {formatDate(shifts[0].date)}
           </li>
           <li>
             <BiBorderAll id="icon" /> <strong>{t('category')}:</strong>{' '}
-              {eventData.categories.map((category, index) => (
-              <span key={category.id}>{category.name}{index < eventData.categories.length - 1 ? ', ' : ''}</span>
-            ))}
+            {categories}
+            {console.log(categories)}
           </li>
           <li>
               <VscOrganization id="icon" /> <strong>{t('organizer')}:</strong>{' '}
@@ -94,7 +84,7 @@ return (
         <ul id="information">
             <li>
               <VscLocation id="icon" /> <strong>{t('location')}:</strong>{' '}
-              {street} {homeNum}, {addressDescription}, {district}
+              {city}
             </li>
         </ul>
       </div>
@@ -109,7 +99,9 @@ return (
       ></iframe>
       </div>
 
-      <SignInSection eventData={eventData} />
+      {eventData.shifts.map(shift => (
+        <ShiftCard key={shift.id} shift={shift} id='details_more_events_item' />
+      ))}
       
       <div id="details_more_events">
         <h2>{t('moreEventsFromThisOrganizer')}</h2>

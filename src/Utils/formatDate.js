@@ -1,9 +1,10 @@
 const formatDate = (inputDate) => {
-    const parts = inputDate.split('/');
-    const day = parts[1].padStart(2, '0');
-    const month = parts[0].padStart(2, '0');
-    const formattedDate = `${day}.${month}.${parts[2]}`;
-    return formattedDate;
+    const date = new Date(inputDate);
+    const day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+    const month = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1;
+    const year = date.getFullYear();
+    
+    return `${day}.${month}.${year}`;
 }
 
 export default formatDate;
