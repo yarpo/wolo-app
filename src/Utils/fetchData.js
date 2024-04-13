@@ -1,8 +1,7 @@
-
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const fetchData = async (url, setData) => {
+const fetchData = async (url, setData, navigate) => {
   try {
     const response = await fetch(url);
     if (!response.ok) {

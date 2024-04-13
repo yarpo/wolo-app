@@ -18,7 +18,6 @@ import { URLS } from '../../config.js'
 import ShiftCard from './ShiftCard/ShiftCard.js';
 
 const Details = () => {
-  
   const { t } = useTranslation();
   const { id } = useParams();
   const [eventData, setEventData] = useState(null);
