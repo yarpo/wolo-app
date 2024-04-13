@@ -1,18 +1,28 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import '../../styles/navbar.scss';
 import logo from '../../images/logo.svg';
 import { RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri';
 import { FaRegUserCircle } from 'react-icons/fa';
+import fetchUserRoles from '../../Utils/fetchUserRoles.js';
 
 const Navbar = () => {
-
+  const [role, setRole] = useState(null);
   const [clicked, setClicked] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem('user'))
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const role = await fetchUserRoles();
+      setRole(role);
+    }
+
+    fetchUserData();
+  }, []);
 
   const handleLanguageChange = language => {
     i18n.changeLanguage(language);
@@ -88,7 +98,9 @@ function handleLogout() {
                 </button>
                 {showDropdown && (
                   <ul className="navbar-dropdown-menu">
-                    <li id="navbar-dropdown-li"><Link to="/yourEvents">{t('myPage')}</Link></li>
+                    {role && role.includes('ADMIN') && <li id="navbar-dropdown-li"><Link to='/adminHomePage'>{t('adminPage')}</Link></li>}
+                    {role && role.includes('MODERATOR') && <li id="navbar-dropdown-li"><Link to='/organiserHomePage'>{t('organiserPage')}</Link></li>}
+                    {role && role.includes('USER') && <li id="navbar-dropdown-li"><Link to='/volunteerHomePage'>{t('volunteerPage')}</Link></li>}
                     <li id="navbar-dropdown-li"><Link to="/liked">{t('liked')}</Link></li>
                     <li id="navbar-dropdown-li"><Link to="/messages">{t('messages')}</Link></li>
                     <li id="navbar-dropdown-li"><Link to="/settings">{t('settings')}</Link></li>
