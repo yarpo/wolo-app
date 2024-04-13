@@ -112,5 +112,7 @@
   "messages": "Wiadomości",
   "settings": "Ustawienia",
   "logout": "Wyloguj się",
-  "myPage": "Moja strona"
+  "adminPage": "Strona administratora",
+  "organiserPage": "Strona organizacji",
+  "volunteerPage": "Strona wolontariusza"
 }

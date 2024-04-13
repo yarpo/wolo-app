@@ -112,5 +112,7 @@
   "messages": "Messages",
   "settings": "Settings",
   "logout": "Log out",
-  "myPage": "My Page"
+  "adminPage": "Administrator's Page",
+  "organiserPage": "Organisation's Page",
+  "volunteerPage": "Volunteer's Page"
 }
