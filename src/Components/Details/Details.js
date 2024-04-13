@@ -27,6 +27,7 @@ const Details = () => {
   const [roles, setRoles] = useState(null);
   const [userOrganisation, setUserOrganisation] = useState();
   const isModerator = roles && roles.includes('MODERATOR');
+  const isAdmin = roles && roles.includes('ADMIN');
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -80,7 +81,6 @@ return (
           <li>
             <BiBorderAll id="icon" /> <strong>{t('category')}:</strong>{' '}
             {categories}
-            {console.log(categories)}
           </li>
           <li>
               <VscOrganization id="icon" /> <strong>{t('organizer')}:</strong>{' '}
@@ -127,7 +127,7 @@ return (
         </div>
       </div>
 
-      {eventData.organisationId === userOrganisation && isModerator && <SignedInVolunteers />}
+      {((eventData.organisationId === userOrganisation && isModerator) || isAdmin) && <SignedInVolunteers eventData={eventData} />}
     </div>
   );
 };
