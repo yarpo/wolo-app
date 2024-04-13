@@ -44,14 +44,11 @@ const ShiftCard = ({ shift }) => {
             });
 
             if (response.ok) {
-            console.log(`Successfully joined shift ${shift.id}`);
             toast.success(`Successfully joined shift`);
             } else {
-            console.error(`Failed to join shift ${shift.id}`);
             toast.error(`Failed to join shift`);
             }
         } catch (error) {
-            console.error(`Error joining shift ${shift.id}:`, error);
             toast.error('An unexpected error occurred while joining event. Please try again later');
         }
     }
