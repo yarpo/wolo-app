@@ -106,5 +106,11 @@
   "participants": "Participants",
   "shift": "Shift",
   "export list": "Export list",
-  "volunteersRestricedFunctionality": "Only logged in volunteers can join events"
+  "volunteersRestricedFunctionality": "Only logged in volunteers can join events",
+
+  "liked": "Liked events",
+  "messages": "Messages",
+  "settings": "Settings",
+  "logout": "Log out",
+  "myPage": "My Page"
 }

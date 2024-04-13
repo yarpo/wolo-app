@@ -88,7 +88,7 @@ function handleLogout() {
                 </button>
                 {showDropdown && (
                   <ul className="navbar-dropdown-menu">
-                    <li id="navbar-dropdown-li"><Link to="/yourEvents">{t('yourEvents')}</Link></li>
+                    <li id="navbar-dropdown-li"><Link to="/yourEvents">{t('myPage')}</Link></li>
                     <li id="navbar-dropdown-li"><Link to="/liked">{t('liked')}</Link></li>
                     <li id="navbar-dropdown-li"><Link to="/messages">{t('messages')}</Link></li>
                     <li id="navbar-dropdown-li"><Link to="/settings">{t('settings')}</Link></li>

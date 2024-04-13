@@ -106,5 +106,11 @@
   "participants": "Uczestnicy",
   "shift": "Zmiana",
   "export list": "Eksportuj listę",
-  "volunteersRestricedFunctionality": "Tylko zalogowani wolontariusze mogą brać udział w wydarzeniach"
+  "volunteersRestricedFunctionality": "Tylko zalogowani wolontariusze mogą brać udział w wydarzeniach",
+
+  "liked": "Ulubione wydarzenia",
+  "messages": "Wiadomości",
+  "settings": "Ustawienia",
+  "logout": "Wyloguj się",
+  "myPage": "Moja strona"
 }

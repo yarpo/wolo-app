@@ -106,5 +106,11 @@
     "participants": "Учасники",
     "shift": "Зміна",
     "export list": "Експорт списку",
-    "volunteersRestricedFunctionality": "Тільки зареєстровані волонтери можуть брати участь у заходах"
+    "volunteersRestricedFunctionality": "Тільки зареєстровані волонтери можуть брати участь у заходах",
+
+    "liked": "Сподобані події",
+    "messages": "Повідомлення",
+    "settings": "Налаштування",
+    "logout": "Вийти",
+    "myPage": "Моя сторінка"
 }
