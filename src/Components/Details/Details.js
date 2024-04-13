@@ -18,7 +18,6 @@ import { URLS } from '../../config.js'
 import ShiftCard from './ShiftCard/ShiftCard.js';
 
 const Details = () => {
-  
   const { t } = useTranslation();
   const { id } = useParams();
   const [eventData, setEventData] = useState(null);
@@ -69,7 +68,7 @@ return (
           </li>
           <li>
               <VscOrganization id="icon" /> <strong>{t('organizer')}:</strong>{' '}
-              {organisationName}
+              <Link to={`/organiser?organisationId=${eventData.organisationId}`}> {organisationName} </Link>
           </li>
         </ul>
       </div>
