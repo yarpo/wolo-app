@@ -1,6 +1,5 @@
 @import './common.scss';
 
-$background-color_1: rgb(170, 139, 240);
 
 .organizer_container {
   padding-top: 65px;
@@ -10,17 +9,49 @@ $background-color_1: rgb(170, 139, 240);
   margin: 20px 10vw 20px 10vw;
   gap: 30px 40px;
 
+  ::-webkit-scrollbar {
+    width: 12px; 
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: $color-backgroud; 
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: $color-1-blue; 
+    border-radius: 6px; 
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: $color-1-blue-hover; 
+  }
+
+  ::-webkit-scrollbar-button {
+    display: none; 
+  }
+
+  scrollbar-width: thin;
+  scrollbar-color: $color-1-blue $color-backgroud;
+
+
+  .organizer_container_logo_text{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .organizer_container_logo{
+      height: 100px;
+      float: right;
+      margin: 5px;
+    }
+  }
+
   #column {
     display: flex;
     flex-direction: column;
     flex-basis: 100%;
     flex: 1;
-  }
-
-  img {
-    background-color: $background-color_1;
-    max-height: 35vh;
-    margin: 5px;
   }
 
   #back {
@@ -83,9 +114,10 @@ $background-color_1: rgb(170, 139, 240);
   }
 
   iframe {
-    width: 90%;
+    width: 50%;
     height: 35vh;
     border: none;
+    margin: 10px;
   }
 
   #more_events {
@@ -104,10 +136,24 @@ $background-color_1: rgb(170, 139, 240);
     height: 10vh;
     font-size: x-large;
   }
+
+  #organiser_more_events {
+    width: 100%;
+    order: 5;
+  }
+  
+  #organiser_more_events_container {
+    display: flex;
+    overflow-x: scroll;
+  }
+  
+  #organiser_more_events_item {
+    flex: 1;
+  }
 }
 
 @media screen and (max-width: 768px) {
-  .details_container {
+  .organizer_container {
     #column {
       flex-basis: 200%;
     }
