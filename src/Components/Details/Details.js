@@ -118,14 +118,14 @@ return (
         <ShiftCard key={shift.id} shift={shift} id='details_more_events_item' />
       ))}
       
-      <div id="details_more_events">
+      {!((eventData.organisationId === userOrganisation && isModerator) || isAdmin) && <div id="details_more_events">
         <h2>{t('moreEventsFromThisOrganizer')}</h2>
         <div id="details_more_events_container">
           {organiserEvents.map(event => (
             <EventCard key={event.id} event={event} id='details_more_events_item' />
           ))}
         </div>
-      </div>
+      </div>}
 
       {((eventData.organisationId === userOrganisation && isModerator) || isAdmin) && <SignedInVolunteers eventData={eventData} />}
     </div>

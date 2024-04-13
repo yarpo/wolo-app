@@ -15,6 +15,8 @@ const ShiftCard = ({ shift }) => {
   const canSignIn = roles && roles.includes('USER');
   const token = localStorage.getItem('token');
   const [userShifts, setUserShifts] = useState([]);
+  const isModerator = roles && roles.includes('MODERATOR');
+  const isAdmin = roles && roles.includes('ADMIN');
   
   useEffect(() => {
     const fetchUserData = async () => {
@@ -50,6 +52,7 @@ const ShiftCard = ({ shift }) => {
 
             if (response.ok) {
             toast.success(`Successfully joined shift`);
+            window.location.reload();
             } else {
             toast.error(`Failed to join shift`);
             }
@@ -80,7 +83,7 @@ const ShiftCard = ({ shift }) => {
                 </button>}
             </form>
 
-            {!canSignIn && <p id="sign_in_section_error">{t('volunteersRestricedFunctionality')}. <Link to="/login">{t('signInToday')}</Link></p>}
+            {!canSignIn && !isAdmin && !isModerator && <p id="sign_in_section_error">{t('volunteersRestricedFunctionality')}. <Link to="/login">{t('signInToday')}</Link></p>}
         </div>
     );
 };
