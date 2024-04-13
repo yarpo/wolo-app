@@ -1,18 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Formik } from 'formik';
 import { Link, useNavigate } from 'react-router-dom';
 import '../../styles/login.scss';
 import { URLS } from '../../config.js';
+import fetchUserId from '../../Utils/fetchUserId.js';
 
 const Login = () => {
-
+  const [id, setId] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const navigate_user_logged = useNavigate();
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const userId = await fetchUserId();
+      setId(userId);
+    };
+
+    fetchUserData();
+  }, []);
+
+  useEffect(() => {
+    if (id !== null) {
+      navigate_user_logged('/events');
+    }
+  }, [id, navigate_user_logged]);
 
 const handleLogin = async (values) => {
     const response = await fetch(URLS.AUTHENTICATE, {
