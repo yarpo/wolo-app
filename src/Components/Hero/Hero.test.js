@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import Hero from './Hero';
-import i18n from '../../i18nTests';
+import i18n from '../../i18n';
 import { I18nextProvider } from 'react-i18next';
 import { BrowserRouter } from 'react-router-dom';
 import { FiltersProvider } from '../Filters/FiltersContext';
