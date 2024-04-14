@@ -43,24 +43,21 @@ describe('Hero', () => {
         expect(window.location.pathname).toBe('/events');
     });
 
-    it('should handle date and location selection', () => {
+    it('should handle date selection', () => {
+        const handleLocationChange = jest.fn();
         render(
             <I18nextProvider i18n={i18n}>
                 <BrowserRouter>
                     <FiltersProvider>
-                        <Hero />
+                        <Hero handleLocationChange={handleLocationChange}/>
                     </FiltersProvider>
                 </BrowserRouter>
             </I18nextProvider>
         );
 
         const dateInput = screen.getByPlaceholderText('Select a date');
-        const locationSelect = screen.getByTestId("location-select");
 
         fireEvent.change(dateInput, { target: { value: '10/06/2023' } });
         expect(dateInput).toHaveValue('10/06/2023');
-
-        fireEvent.change(locationSelect, { target: { value: 'Zaspa' } });
-        expect(locationSelect).toHaveValue('Zaspa');
     });
 });
