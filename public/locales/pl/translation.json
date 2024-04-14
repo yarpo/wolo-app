@@ -108,11 +108,11 @@
   "export list": "Eksportuj listę",
   "volunteersRestricedFunctionality": "Tylko zalogowani wolontariusze mogą brać udział w wydarzeniach",
 
-  "liked": "Ulubione wydarzenia",
+  "favouriteEvents": "Ulubione wydarzenia",
   "messages": "Wiadomości",
   "settings": "Ustawienia",
   "logout": "Wyloguj się",
   "adminPage": "Strona administratora",
-  "organiserPage": "Strona organizacji",
-  "volunteerPage": "Strona wolontariusza"
+  "organiserPage": "Zarządzaj organizacją",
+  "volunteerPage": "Twoja strona"
 }

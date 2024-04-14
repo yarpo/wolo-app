@@ -108,11 +108,11 @@
   "export list": "Export list",
   "volunteersRestricedFunctionality": "Only logged in volunteers can join events",
 
-  "liked": "Liked events",
+  "favouriteEvents": "Favorite Events",
   "messages": "Messages",
   "settings": "Settings",
-  "logout": "Log out",
-  "adminPage": "Administrator's Page",
-  "organiserPage": "Organisation's Page",
-  "volunteerPage": "Volunteer's Page"
+  "logout": "Logout",
+  "adminPage": "Admin Page",
+  "organiserPage": "Organizer Page",
+  "volunteerPage": "Your Page"
 }

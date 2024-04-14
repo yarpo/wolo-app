@@ -98,10 +98,10 @@ function handleLogout() {
                 </button>
                 {showDropdown && (
                   <ul className="navbar-dropdown-menu">
+                    {role && role.includes('USER') && <li id="navbar-dropdown-li"><Link to='/volunteerHomePage'>{t('volunteerPage')}</Link></li>}
                     {role && role.includes('ADMIN') && <li id="navbar-dropdown-li"><Link to='/adminHomePage'>{t('adminPage')}</Link></li>}
                     {role && role.includes('MODERATOR') && <li id="navbar-dropdown-li"><Link to='/organiserHomePage'>{t('organiserPage')}</Link></li>}
-                    {role && role.includes('USER') && <li id="navbar-dropdown-li"><Link to='/volunteerHomePage'>{t('volunteerPage')}</Link></li>}
-                    <li id="navbar-dropdown-li"><Link to="/liked">{t('liked')}</Link></li>
+                    <li id="navbar-dropdown-li"><Link to="/liked">{t('favouriteEvents')}</Link></li>
                     <li id="navbar-dropdown-li"><Link to="/messages">{t('messages')}</Link></li>
                     <li id="navbar-dropdown-li"><Link to="/settings">{t('settings')}</Link></li>
                     <li id="navbar-dropdown-li">

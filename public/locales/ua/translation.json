@@ -108,11 +108,11 @@
     "export list": "Експорт списку",
     "volunteersRestricedFunctionality": "Тільки зареєстровані волонтери можуть брати участь у заходах",
 
-    "liked": "Сподобані події",
+    "favouriteEvents": "Улюблені події",
     "messages": "Повідомлення",
     "settings": "Налаштування",
     "logout": "Вийти",
     "adminPage": "Сторінка адміністратора",
-    "organiserPage": "Сторінка організації",
-    "volunteerPage": "Сторінка волонтера"
+    "organiserPage": "Управління організацією",
+    "volunteerPage": "Ваша сторінка"
 }
