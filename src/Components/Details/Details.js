@@ -12,6 +12,8 @@ import '../../styles/details.scss';
 import EventCard from '../EventCard/EventCard';
 import 'react-toastify/dist/ReactToastify.css';
 import fetchData from '../../Utils/fetchData.js';
+import fetchUserOrganisation from '../../Utils/fetchUserOrganisation.js';
+import fetchUserRoles from '../../Utils/fetchUserRoles.js';
 import formatDate from '../../Utils/formatDate.js';
 import SignedInVolunteers from './SignedInVolunteers/SignedInVolunteers.js';
 import { URLS } from '../../config.js'
@@ -22,6 +24,21 @@ const Details = () => {
   const { id } = useParams();
   const [eventData, setEventData] = useState(null);
   const [organiserEvents, setOrganiserEvents] = useState([]);
+  const [roles, setRoles] = useState(null);
+  const [userOrganisation, setUserOrganisation] = useState();
+  const isModerator = roles && roles.includes('MODERATOR');
+  const isAdmin = roles && roles.includes('ADMIN');
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const userRoles = await fetchUserRoles();
+      setRoles(userRoles);
+      const userOrganisation = await fetchUserOrganisation();
+      setUserOrganisation(userOrganisation);
+    };
+
+    fetchUserData();
+  }, []);
 
   useEffect(() => {
       const url = `${URLS.EVENTS}/${id}`;
@@ -64,7 +81,6 @@ return (
           <li>
             <BiBorderAll id="icon" /> <strong>{t('category')}:</strong>{' '}
             {categories}
-            {console.log(categories)}
           </li>
           <li>
               <VscOrganization id="icon" /> <strong>{t('organizer')}:</strong>{' '}
@@ -102,16 +118,17 @@ return (
         <ShiftCard key={shift.id} shift={shift} id='details_more_events_item' />
       ))}
       
-      <div id="details_more_events">
+      {!((eventData.organisationId === userOrganisation && isModerator) || isAdmin) && <div id="details_more_events">
         <h2>{t('moreEventsFromThisOrganizer')}</h2>
         <div id="details_more_events_container">
           {organiserEvents.map(event => (
             <EventCard key={event.id} event={event} id='details_more_events_item' />
           ))}
         </div>
-      </div>
+      </div>}
 
-      <SignedInVolunteers eventData={eventData}/>
+      {((eventData.organisationId === userOrganisation && isModerator) || isAdmin) && <SignedInVolunteers eventData={eventData} />}
+
     </div>
   );
 };

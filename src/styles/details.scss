@@ -129,6 +129,11 @@ $background-color_1: rgb(170, 139, 240); // to be removed when fetching photos w
     font-size: x-large;
   }
 
+  #sign-out {
+    @extend #sign-in;
+    background-color: $color-4-red;
+  }
+
   #details_shift_checkboxes {
       display: flex;
       justify-items: left;

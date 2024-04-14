@@ -5,13 +5,18 @@ import { URLS } from '../../../config.js';
 import fetchUserRoles from '../../../Utils/fetchUserRoles.js';
 import { Link } from 'react-router-dom';
 import fetchUserId from '../../../Utils/fetchUserId.js';
+import fetchUserShifts from '../../../Utils/fetchUserShifts.js';
 
 const ShiftCard = ({ shift }) => {
   const { t } = useTranslation();
   const [roles, setRoles] = useState(null);
   const [id, setId] = useState(null);
+  const shiftId = shift.id;
   const canSignIn = roles && roles.includes('USER');
   const token = localStorage.getItem('token');
+  const [userShifts, setUserShifts] = useState([]);
+  const isModerator = roles && roles.includes('MODERATOR');
+  const isAdmin = roles && roles.includes('ADMIN');
   
   useEffect(() => {
     const fetchUserData = async () => {
@@ -19,6 +24,8 @@ const ShiftCard = ({ shift }) => {
       setRoles(userRoles);
       const userId = await fetchUserId();
       setId(userId);
+      const userShifts = await fetchUserShifts(userId);
+      setUserShifts(userShifts);
     };
 
     fetchUserData();
@@ -45,6 +52,7 @@ const ShiftCard = ({ shift }) => {
 
             if (response.ok) {
             toast.success(`Successfully joined shift`);
+            window.location.reload();
             } else {
             toast.error(`Failed to join shift`);
             }
@@ -66,12 +74,16 @@ const ShiftCard = ({ shift }) => {
                 <p>Directions: {shift.shiftDirections}</p>
                 <p>Address: {shift.street}, {shift.homeNum}</p>
                 <p>District ID: {shift.districtId}</p>
-                {canSignIn && <button type="submit" id="sign-in">
+                {canSignIn && !userShifts.includes(shiftId) && <button type="submit" id="sign-in">
                     {t('signIn')}
+                </button>}
+                {/* Sign Off - WOLO-183 */}
+                {canSignIn && userShifts.includes(shiftId) && <button id="sign-out">
+                    {t('signOff')}
                 </button>}
             </form>
 
-            {!canSignIn && <p id="sign_in_section_error">{t('volunteersRestricedFunctionality')}. <Link to="/login">{t('signInToday')}</Link></p>}
+            {!canSignIn && !isAdmin && !isModerator && <p id="sign_in_section_error">{t('volunteersRestricedFunctionality')}. <Link to="/login">{t('signInToday')}</Link></p>}
         </div>
     );
 };
