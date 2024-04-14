@@ -5,6 +5,7 @@ $background-color_2: whitesmoke;
 $background-color_3: gold;
 
 @import './common.scss';
+
 nav {
   display: flex;
   align-items: center;
@@ -15,10 +16,76 @@ nav {
   position: fixed;
   top: 0;
   width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
   img {
-  height: 60px;
-  width: 100px;
+    height: 60px;
+    width: 100px;
+  }
 }
+
+.navbar-dropdown-button {
+  background-color: transparent;
+  border: none;
+  text-align: center;
+}
+
+.navbar-dropdown-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: block;
+  position: absolute;
+  top: 115%;
+  left: 0;
+  width: 100%; 
+  min-width: 160px;
+  background-color: $background-color_2; 
+  z-index: 1;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  #navbar-dropdown-li {
+    width: 100%;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+
+    button {
+      cursor: pointer;
+      border: none;
+      background-color: transparent; 
+      margin: 0; 
+      font-weight: normal;
+      text-decoration: none;
+      color: inherit;
+      padding: 10px;
+      display: block;
+      transition: 0.3s ease;
+      text-align: center;
+
+      &:hover {
+        font-weight: bold;
+        color: $color_2; 
+      }
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      padding: 10px;
+      display: block;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        font-weight: bold;
+        color: $color_2;
+      }
+    }
+  }
+}
+
+.user-icon {
+  margin-right: 5px;
 }
 
 #logo {
@@ -27,23 +94,35 @@ nav {
   font-size: 24px;
   color: $color_1;
 }
+
 #langauges-select {
-  &:hover {
-    font-weight: bold;
-    color: $color_2;
-    cursor: pointer;
+  li {
+    a, button {
+      &:hover {
+        font-weight: bold;
+        color: $color_2;
+        cursor: pointer;
+      }
+    }
   }
 }
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
 #navbar {
   display: flex;
   align-items: center;
   justify-content: right;
-
+  
   li {
     list-style: none;
     padding: 0 20px;
     position: relative;
     text-align: center;
+
     a {
       text-decoration: none;
       font-weight: 500;
@@ -55,6 +134,7 @@ nav {
         color: $color_2;
       }
     }
+    
     select {
       border: 0px;
       outline: 0px;
@@ -64,12 +144,15 @@ nav {
     }
   }
 }
+
 #mobile {
   display: none;
+  
   i {
     color: $color_1;
   }
 }
+
 @media screen and (max-width: 1065px) {
   #navbar {
     display: flex;
@@ -84,24 +167,23 @@ nav {
     background-color: $background-color_2;
     padding: 40px 0 0 10px;
     transition: 0.3s ease-in-out;
+    
     li {
       text-align: center;
       margin-bottom: 20px;
-      select {
-        border: 0px;
-        outline: 0px;
-        background-color: $background-color_2;
-        font-size: 16px;
-        font-weight: 500;
-      }
     }
   }
+  
   #navbar.active {
     right: 0px;
   }
+  
   #mobile {
     display: block;
-    i {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+      i {
       font-size: 24px;
       cursor: pointer;
     }

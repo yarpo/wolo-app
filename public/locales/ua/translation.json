@@ -108,5 +108,12 @@
     "export list": "Експорт списку",
     "volunteersRestricedFunctionality": "Тільки зареєстровані волонтери можуть брати участь у заходах",
 
+    "favouriteEvents": "Улюблені події",
+    "messages": "Повідомлення",
+    "settings": "Налаштування",
+    "logout": "Вийти",
+    "adminPage": "Сторінка адміністратора",
+    "organiserPage": "Управління організацією",
+    "volunteerPage": "Ваша сторінка",
     "thereAreNoVolunteers": "Немає зареєстрованих волонтерів"
 }

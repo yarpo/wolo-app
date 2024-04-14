@@ -108,5 +108,12 @@
   "export list": "Export list",
   "volunteersRestricedFunctionality": "Only logged in volunteers can join events",
 
+  "favouriteEvents": "Favorite Events",
+  "messages": "Messages",
+  "settings": "Settings",
+  "logout": "Logout",
+  "adminPage": "Admin Page",
+  "organiserPage": "Organizer Page",
+  "volunteerPage": "Your Page",
   "thereAreNoVolunteers": "There are no signed in volunteers"
 }

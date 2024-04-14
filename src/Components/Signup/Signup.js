@@ -1,15 +1,32 @@
-import React, { useState} from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from 'react-i18next';
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import '../../styles/signup.scss';
 import { URLS } from '../../config.js';
+import fetchUserId from '../../Utils/fetchUserId.js';
 
 const Signup = () => {
-
+  const navigate = useNavigate();
+  const [id, setId] = useState(null);
   const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const userId = await fetchUserId();
+      setId(userId);
+    };
+
+    fetchUserData();
+  }, []);
+
+  useEffect(() => {
+    if (id !== null) {
+      navigate('/events');
+    }
+  }, [id, navigate]);
 
   const initialValues = {
     firstName: '',

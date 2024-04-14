@@ -1,34 +1,62 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Formik } from "formik";
-import { Link } from "react-router-dom";
+import { Formik } from 'formik';
+import { Link, useNavigate } from 'react-router-dom';
 import '../../styles/login.scss';
 import { URLS } from '../../config.js';
+import fetchUserId from '../../Utils/fetchUserId.js';
 
 const Login = () => {
-
+  const [id, setId] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const navigate_user_logged = useNavigate();
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
-const handleLogin = async (values) => {
-  const response = await fetch(URLS.AUTHENTICATE, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(values)
-  });
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const userId = await fetchUserId();
+      setId(userId);
+    };
 
-  if (response.ok) {
-    const data = await response.json();
-    localStorage.setItem('token', data.accessToken);
-  } else {
-    console.error('Failed to login'); //alert to do
-  }
-};
+    fetchUserData();
+  }, []);
+
+  useEffect(() => {
+    if (id !== null) {
+      navigate_user_logged('/events');
+    }
+  }, [id, navigate_user_logged]);
+
+const handleLogin = async (values) => {
+    const response = await fetch(URLS.AUTHENTICATE, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(values)
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      localStorage.setItem('token', data.accessToken);
+
+      const userResponse = await fetch(URLS.USER, {
+        headers: {
+          'Authorization': `Bearer ${data.accessToken}`
+        }
+      });
+      const userData = await userResponse.json();
+      localStorage.setItem('user', JSON.stringify(userData));
+
+      navigate('/');
+    } else {
+      console.error('Failed to login'); //alert to do
+    }
+  };
 
   return (
     <div className="login-form" >

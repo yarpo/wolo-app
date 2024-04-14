@@ -108,5 +108,12 @@
     "export list": "Экспорт списка",
     "volunteersRestricedFunctionality": "Только зарегистрированные добровольцы могут принимать участие в мероприятиях",
 
+    "favouriteEvents": "Любимые события",
+    "messages": "Сообщения",
+    "settings": "Настройки",
+    "logout": "Выйти",
+    "adminPage": "Страница администратора",
+    "organiserPage": "Управление организацией",
+    "volunteerPage": "Ваша страница",
     "thereAreNoVolunteers": "Нет зарегистрированных добровольцев"
 }
