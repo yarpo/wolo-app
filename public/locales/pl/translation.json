@@ -106,5 +106,7 @@
   "participants": "Uczestnicy",
   "shift": "Zmiana",
   "export list": "Eksportuj listę",
-  "volunteersRestricedFunctionality": "Tylko zalogowani wolontariusze mogą brać udział w wydarzeniach"
+  "volunteersRestricedFunctionality": "Tylko zalogowani wolontariusze mogą brać udział w wydarzeniach",
+
+  "thereAreNoVolunteers": "Nie ma zarejestrowanych wolontariuszy"
 }

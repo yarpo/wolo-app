@@ -106,5 +106,7 @@
     "participants": "Участники",
     "shift": "Смена",
     "export list": "Экспорт списка",
-    "volunteersRestricedFunctionality": "Только зарегистрированные добровольцы могут принимать участие в мероприятиях"
+    "volunteersRestricedFunctionality": "Только зарегистрированные добровольцы могут принимать участие в мероприятиях",
+
+    "thereAreNoVolunteers": "Нет зарегистрированных добровольцев"
 }

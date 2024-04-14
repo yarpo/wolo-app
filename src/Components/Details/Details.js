@@ -111,7 +111,7 @@ return (
         </div>
       </div>
 
-      <SignedInVolunteers />
+      <SignedInVolunteers eventData={eventData}/>
     </div>
   );
 };

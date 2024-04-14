@@ -2,8 +2,10 @@ import { useTranslation } from 'react-i18next';
 import '../../../styles/signed-in-volunteers.scss';
 import ShiftEntry from './ShiftEntry';
 
-const SignedInVolunteers = () => {
+const SignedInVolunteers = ({ eventData }) => {
     const { t } = useTranslation();
+
+    
 
     return (
         <div className='signed_in_volunteers'>
@@ -13,9 +15,16 @@ const SignedInVolunteers = () => {
                 <button className='signed_in_volunteers_export_button'>{t('export list')}</button>
             </div>
 
-            <ShiftEntry />
-            <ShiftEntry />
-            <ShiftEntry />
+            {eventData && eventData.shifts && eventData.shifts.map((shift, index) => (
+            <ShiftEntry 
+                key={index}
+                id={shift.id}
+                startTime={shift.startTime}
+                endTime={shift.endTime}
+                numVolunteers={shift.signedUp}
+                maxVolunteers={shift.capacity}
+            />
+            ))}
         </div>
     )
 }
