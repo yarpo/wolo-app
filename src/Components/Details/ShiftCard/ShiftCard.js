@@ -94,8 +94,7 @@ const ShiftCard = ({ shift }) => {
                 {canSignIn && !userShifts.includes(shiftId) && <button type="submit" id="sign-in">
                     {t('signIn')}
                 </button>}
-                {/* Sign Off - WOLO-183 */}
-                {canSignIn && userShifts.includes(shiftId) && <button id="sign-out">
+                {canSignIn && userShifts.includes(shiftId) && <button type="submit" id="sign-out">
                     {t('signOff')}
                 </button>}
             </form>

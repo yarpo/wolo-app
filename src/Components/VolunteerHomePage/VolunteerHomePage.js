@@ -128,7 +128,9 @@ const VolunteerHomePage = () => {
                 <br />
                 {userEvents && userEvents.map((shift) => (
                     <YourEventVolunteer 
-                        key={shift.shiftId} 
+                        key={shift.shiftId}
+                        shiftId={shift.shiftId}
+                        userId={userId}
                         name={shift.eventName}
                         date={shift.date}
                         startTime={formatTime(shift.startTime)}
