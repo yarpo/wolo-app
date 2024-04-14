@@ -128,6 +128,7 @@ return (
       </div>}
 
       {((eventData.organisationId === userOrganisation && isModerator) || isAdmin) && <SignedInVolunteers eventData={eventData} />}
+
     </div>
   );
 };
