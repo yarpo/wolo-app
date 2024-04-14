@@ -114,5 +114,6 @@
   "logout": "Logout",
   "adminPage": "Admin Page",
   "organiserPage": "Organizer Page",
-  "volunteerPage": "Your Page"
+  "volunteerPage": "Your Page",
+  "thereAreNoVolunteers": "There are no signed in volunteers"
 }

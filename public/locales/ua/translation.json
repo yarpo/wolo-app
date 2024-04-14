@@ -114,5 +114,6 @@
     "logout": "Вийти",
     "adminPage": "Сторінка адміністратора",
     "organiserPage": "Управління організацією",
-    "volunteerPage": "Ваша сторінка"
+    "volunteerPage": "Ваша сторінка",
+    "thereAreNoVolunteers": "Немає зареєстрованих волонтерів"
 }

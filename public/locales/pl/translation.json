@@ -114,5 +114,6 @@
   "logout": "Wyloguj się",
   "adminPage": "Strona administratora",
   "organiserPage": "Zarządzaj organizacją",
-  "volunteerPage": "Twoja strona"
+  "volunteerPage": "Twoja strona",
+  "thereAreNoVolunteers": "Nie ma zarejestrowanych wolontariuszy"
 }

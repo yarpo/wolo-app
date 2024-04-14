@@ -114,5 +114,6 @@
     "logout": "Выйти",
     "adminPage": "Страница администратора",
     "organiserPage": "Управление организацией",
-    "volunteerPage": "Ваша страница"
+    "volunteerPage": "Ваша страница",
+    "thereAreNoVolunteers": "Нет зарегистрированных добровольцев"
 }
