@@ -11,6 +11,7 @@ const URLS = {
   USER: `${BASE_URL}/auth/current`,
   LOGIN: LOGIN_URL,
   JOIN: `${BASE_URL}/events/join`,
+  REFUSE: `${BASE_URL}/events/refuse`,
   USERS: `${BASE_URL}/users`,
   USERS_ON_SHIFT: `${BASE_URL}/events/users?shift`
 };

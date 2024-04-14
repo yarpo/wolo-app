@@ -42,6 +42,7 @@ const ShiftCard = ({ shift }) => {
         params.append('shift', shift.id);
 
         try {
+        if(!userShifts.includes(shiftId)) {
             const response = await fetch(`${URLS.JOIN}?${params.toString()}`, {
             method: 'POST',
             headers: {
@@ -51,11 +52,27 @@ const ShiftCard = ({ shift }) => {
             });
 
             if (response.ok) {
-            toast.success(`Successfully joined shift`);
+            toast.success(`Successfully joined the shift`);
             window.location.reload();
             } else {
-            toast.error(`Failed to join shift`);
+            toast.error(`Failed to join the shift`);
             }
+        }else{
+            const response = await fetch(`${URLS.REFUSE}?${params.toString()}`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            });
+    
+            if (response.ok) {
+            toast.success(`Successfully left the shift`);
+            window.location.reload();
+            } else {
+            toast.error(`Failed to leave the shift`);
+            }
+        }
         } catch (error) {
             toast.error('An unexpected error occurred while joining event. Please try again later');
         }
