@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import Filters from '../Filters/Filters';
-import { useFiltersContext } from '../Filters/FiltersContext';
+import Filters from '../../Components/Filters/Filters';
+import { useFiltersContext } from '../../Components/Filters/FiltersContext';
 import { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';

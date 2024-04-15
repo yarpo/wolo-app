@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
-import EventCard from '../EventCard/EventCard';
-import Filters from '../Filters/Filters';
+import EventCard from '../../Components/EventCard/EventCard';
+import Filters from '../../Components/Filters/Filters';
 import '../../styles/all-events.scss';
 
 const AllEvents = () => {

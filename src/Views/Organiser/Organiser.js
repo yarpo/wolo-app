@@ -11,7 +11,7 @@ import { Link, useLocation } from 'react-router-dom';
 import '../../styles/organizer.scss';
 import fetchData from '../../Utils/fetchData.js';
 import { URLS } from '../../config.js';
-import EventCard from '../EventCard/EventCard.js';
+import EventCard from '../../Components/EventCard/EventCard.js';
 import { useNavigate } from 'react-router-dom';
 
 

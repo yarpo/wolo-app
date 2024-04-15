@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import Filters from '../Filters/Filters';
+import Filters from '../../Components/Filters/Filters';
 import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import YourEventVolunteer from './YourEventVolunteer/YourEventVolunteer.js';

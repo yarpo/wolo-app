@@ -9,7 +9,7 @@ import {
 import { BiBorderAll } from 'react-icons/bi';
 import { Link, useParams } from 'react-router-dom';
 import '../../styles/details.scss';
-import EventCard from '../EventCard/EventCard';
+import EventCard from '../../Components/EventCard/EventCard';
 import 'react-toastify/dist/ReactToastify.css';
 import fetchData from '../../Utils/fetchData.js';
 import fetchUserOrganisation from '../../Utils/fetchUserOrganisation.js';
