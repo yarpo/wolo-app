@@ -31,7 +31,23 @@ const ShiftCard = ({ shift }) => {
     fetchUserData();
   }, []);
   
-  const handleJoinEvent = async (e) => {
+const postRequest = async (url, token, params) => {
+    const response = await fetch(`${url}?${params.toString()}`, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        },
+    });
+    if (response.ok) {
+        toast.success(`Successfully joined the shift`);
+        window.location.reload();
+    } else {
+        toast.error(`Failed to join the shift`);
+    }
+};
+
+  const handleEventInteract = async (e) => {
     e.preventDefault();
   
     const userConfirmed = window.confirm('I agree to give my phone number to the organizer.');
@@ -42,19 +58,10 @@ const ShiftCard = ({ shift }) => {
         params.append('shift', shift.id);
 
         try {
-            const response = await fetch(`${URLS.JOIN}?${params.toString()}`, {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            },
-            });
-
-            if (response.ok) {
-            toast.success(`Successfully joined shift`);
-            window.location.reload();
+            if (!userShifts.includes(shiftId) ) {
+                await postRequest(URLS.JOIN, token, params);
             } else {
-            toast.error(`Failed to join shift`);
+                await postRequest(URLS.REFUSE, token, params);
             }
         } catch (error) {
             toast.error('An unexpected error occurred while joining event. Please try again later');
@@ -64,7 +71,7 @@ const ShiftCard = ({ shift }) => {
 
     return (
         <div className="card">
-            <form onSubmit={handleJoinEvent}>
+            <form onSubmit={handleEventInteract}>
                 <p>ID: {shift.id}</p>
                 <p>Date: {shift.date}</p>
                 <p>Time: {shift.startTime} - {shift.endTime}</p>
@@ -77,8 +84,7 @@ const ShiftCard = ({ shift }) => {
                 {canSignIn && !userShifts.includes(shiftId) && <button type="submit" id="sign-in">
                     {t('signIn')}
                 </button>}
-                {/* Sign Off - WOLO-183 */}
-                {canSignIn && userShifts.includes(shiftId) && <button id="sign-out">
+                {canSignIn && userShifts.includes(shiftId) && <button type="submit" id="sign-out">
                     {t('signOff')}
                 </button>}
             </form>
