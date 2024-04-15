@@ -13,7 +13,8 @@ const URLS = {
   JOIN: `${BASE_URL}/events/join`,
   REFUSE: `${BASE_URL}/events/refuse`,
   USERS: `${BASE_URL}/users`,
-  USERS_ON_SHIFT: `${BASE_URL}/events/users?shift`
+  USERS_ON_SHIFT: `${BASE_URL}/events/users?shift`,
+  EVENT_USERS_PDF: `${BASE_URL}/events/users/pdf`
 };
 
 module.exports = { URLS, BASE_URL };
