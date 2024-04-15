@@ -6,6 +6,7 @@ import fetchUserRoles from '../../../Utils/fetchUserRoles.js';
 import { Link } from 'react-router-dom';
 import fetchUserId from '../../../Utils/fetchUserId.js';
 import fetchUserShifts from '../../../Utils/fetchUserShifts.js';
+import Confirmation from '../../Popups/Confirmation.js';
 
 const ShiftCard = ({ shift }) => {
   const { t } = useTranslation();
@@ -17,6 +18,7 @@ const ShiftCard = ({ shift }) => {
   const [userShifts, setUserShifts] = useState([]);
   const isModerator = roles && roles.includes('MODERATOR');
   const isAdmin = roles && roles.includes('ADMIN');
+  var userConfirmed;
   
   useEffect(() => {
     const fetchUserData = async () => {
@@ -32,10 +34,7 @@ const ShiftCard = ({ shift }) => {
   }, []);
   
   const handleJoinEvent = async (e) => {
-    e.preventDefault();
-  
-    const userConfirmed = window.confirm('I agree to give my phone number to the organizer.');
-  
+    e.preventDefault(); 
     if (userConfirmed) {  
         const params = new URLSearchParams();
         params.append('user', id);
@@ -64,6 +63,7 @@ const ShiftCard = ({ shift }) => {
 
     return (
         <div className="card">
+
             <form onSubmit={handleJoinEvent}>
                 <p>ID: {shift.id}</p>
                 <p>Date: {shift.date}</p>
@@ -75,7 +75,15 @@ const ShiftCard = ({ shift }) => {
                 <p>Address: {shift.street}, {shift.homeNum}</p>
                 <p>District ID: {shift.districtId}</p>
                 {canSignIn && !userShifts.includes(shiftId) && <button type="submit" id="sign-in">
-                    {t('signIn')}
+                    <Confirmation type="submit" id="sign-in"
+                    buttonName={t('signIn')}
+                        title="I agree to give my phone number to the organizer."
+                        accept="Yes"
+                        deny="No"
+                        onResult={(result) => {
+                        userConfirmed=result;
+                    }}
+                    />
                 </button>}
                 {/* Sign Off - WOLO-183 */}
                 {canSignIn && userShifts.includes(shiftId) && <button id="sign-out">
