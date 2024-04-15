@@ -6,6 +6,7 @@ import fetchUserRoles from '../../../Utils/fetchUserRoles.js';
 import { Link } from 'react-router-dom';
 import fetchUserId from '../../../Utils/fetchUserId.js';
 import fetchUserShifts from '../../../Utils/fetchUserShifts.js';
+import Confirmation from '../../Popups/Confirmation.js';
 
 const ShiftCard = ({ shift }) => {
   const { t } = useTranslation();
@@ -17,6 +18,7 @@ const ShiftCard = ({ shift }) => {
   const [userShifts, setUserShifts] = useState([]);
   const isModerator = roles && roles.includes('MODERATOR');
   const isAdmin = roles && roles.includes('ADMIN');
+  const [userConfirmed, setUserConfirmed] = useState(false);
   
   useEffect(() => {
     const fetchUserData = async () => {
@@ -47,11 +49,16 @@ const postRequest = async (url, token, params) => {
     }
 };
 
+const handleUserConfirmation = async (confirmation) => {
+    await setUserConfirmed(confirmation);
+};
+
   const handleEventInteract = async (e) => {
     e.preventDefault();
   
-    const userConfirmed = window.confirm('I agree to give my phone number to the organizer.');
-  
+    await handleUserConfirmation(userConfirmed);
+
+   console.log(userConfirmed);
     if (userConfirmed) {  
         const params = new URLSearchParams();
         params.append('user', id);
@@ -81,12 +88,24 @@ const postRequest = async (url, token, params) => {
                 <p>Directions: {shift.shiftDirections}</p>
                 <p>Address: {shift.street}, {shift.homeNum}</p>
                 <p>District ID: {shift.districtId}</p>
-                {canSignIn && !userShifts.includes(shiftId) && <button type="submit" id="sign-in">
-                    {t('signIn')}
-                </button>}
-                {canSignIn && userShifts.includes(shiftId) && <button type="submit" id="sign-out">
-                    {t('signOff')}
-                </button>}
+                {canSignIn && !userShifts.includes(shiftId) &&  
+                <Confirmation id="sign-in"
+                    buttonName={t('signIn')}
+                        title="I agree to give my phone number to the organiser."
+                        accept="Yes"
+                        deny="No" 
+                        onResult={handleUserConfirmation}
+                        styleId="sign-in"
+                    />}
+                {canSignIn && userShifts.includes(shiftId) &&                
+                <Confirmation id="sign-in"
+                    buttonName={t('signIn')}
+                        title="Are you sure you want to leave this shift?"
+                        accept="Yes"
+                        deny="No" 
+                        onResult={handleUserConfirmation}
+                        styleId="sign-out"
+                    />}
             </form>
 
             {!canSignIn && !isAdmin && !isModerator && <p id="sign_in_section_error">{t('volunteersRestricedFunctionality')}. <Link to="/login">{t('signInToday')}</Link></p>}
