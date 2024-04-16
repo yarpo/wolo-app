@@ -2,22 +2,19 @@
 "use client";
 
 import { Button, Modal } from "flowbite-react";
-import { useState } from "react";
 
-function Confirmation({ buttonName, title, message, accept, deny, onResult, styleId, className }) {
-  const [openModal, setOpenModal] = useState(false);
+function Confirmation({ title, message, accept, deny, onAgree, onDeny, openModal, setOpenModal }) {
   const handleAgree = () => {
     setOpenModal(false);
-    onResult(true);
+    onAgree();
   };
 
   const handleDeny = () => {
     setOpenModal(false);
-    onResult(false);
+    onDeny();
   };
   return (
     <>
-      <button id={styleId} className={className} onClick={() => setOpenModal(true)}>{buttonName}</button>
       <Modal show={openModal} size="md" onClose={() => setOpenModal(false)} popup>
         <Modal.Header />
         <Modal.Body>
@@ -29,10 +26,10 @@ function Confirmation({ buttonName, title, message, accept, deny, onResult, styl
               {message}
             </p>
             <div className="flex justify-center gap-4">
-                <Button color="success"  type="submit" onClick={handleAgree}>
+                <Button color="success"  onClick={handleAgree}>
                 {accept}
               </Button>
-              <Button color="failure" type="submit" onClick={handleDeny}>
+              <Button color="failure" onClick={handleDeny}>
                 {deny}
               </Button>
             </div>
