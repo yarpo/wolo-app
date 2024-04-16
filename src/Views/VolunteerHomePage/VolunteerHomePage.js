@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import Filters from '../Filters/Filters';
+import Filters from '../../Components/Filters/Filters';
 import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import YourEventVolunteer from './YourEventVolunteer/YourEventVolunteer.js';
@@ -17,10 +17,10 @@ const VolunteerHomePage = () => {
     const locations = ['Zaspa', 'Chełm', 'Wrzeszcz'];
     const [selectedLocation, setSelectedLocation] = useState("");
     const [selectedDate, setSelectedDate] = useState(null);
-    const [  , setFilteredEvents] = useState([]);
+    const [, setFilteredEvents] = useState([]);
     const [userEvents, setUserEvents] = useState([]);
     const [userId, setId] = useState(null);
-    
+
     useEffect(() => {
         const fetchUserData = async () => {
             const userId = await fetchUserId();
@@ -43,7 +43,7 @@ const VolunteerHomePage = () => {
                 try {
                     const url = `${URLS.USERS}/${userId}/shifts`;
                     const token = localStorage.getItem('token');
-    
+
                     const response = await fetch(url, {
                         method: 'GET',
                         headers: {
@@ -51,11 +51,11 @@ const VolunteerHomePage = () => {
                             'Content-Type': 'application/json'
                         }
                     });
-    
+
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
                     }
-    
+
                     const data = await response.json();
                     setUserEvents(data);
                 } catch (error) {
@@ -63,10 +63,10 @@ const VolunteerHomePage = () => {
                 }
             }
         };
-    
+
         fetchUserEvents();
     }, [userId]);
-    
+
 
     if (!userEvents.length === 0) {
         return <div>{t('loading')}...</div>;
@@ -87,26 +87,26 @@ const VolunteerHomePage = () => {
                         </div>
                         <div id="MainRow_hero">
                             <div>
-                            <DatePicker
-                                id="datePicker_hero"
-                                selected={selectedDate}
-                                onChange={handleDateChange}
-                                dateFormat="dd/MM/yyyy"
-                                placeholderText={t('selectDate')}
-                                className="MainInput"
-                            />
+                                <DatePicker
+                                    id="datePicker_hero"
+                                    selected={selectedDate}
+                                    onChange={handleDateChange}
+                                    dateFormat="dd/MM/yyyy"
+                                    placeholderText={t('selectDate')}
+                                    className="MainInput"
+                                />
                             </div>
-                        <select 
-                                id="selectInput_hero" 
-                                className="MainInput" 
+                            <select
+                                id="selectInput_hero"
+                                className="MainInput"
                                 data-testid="location-select"
                                 value={selectedLocation}
                                 onChange={handleLocationChange}
-                                >
+                            >
                                 <option value="" disabled>{t('location')}</option>
                                 {locations.map((location, index) => (
                                     <option key={index} value={location}>
-                                    {location}
+                                        {location}
                                     </option>
                                 ))}
                             </select>
@@ -127,7 +127,7 @@ const VolunteerHomePage = () => {
                 <h2>{t('yourEvents')} </h2>
                 <br />
                 {userEvents && userEvents.map((shift) => (
-                    <YourEventVolunteer 
+                    <YourEventVolunteer
                         key={shift.shiftId}
                         shiftId={shift.shiftId}
                         userId={userId}
