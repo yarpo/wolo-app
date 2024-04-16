@@ -16,7 +16,7 @@ const Hero = () => {
     const [selectedLocation, setSelectedLocation] = useState("");
     const [locations, setLocations] = useState([]);
     const [selectedDate, setSelectedDate] = useState(null);
-    const [  , setFilteredEvents] = useState([]);
+    const [, setFilteredEvents] = useState([]);
 
     useEffect(() => {
         fetchData(URLS.DISTRICTS, setLocations);
@@ -31,15 +31,15 @@ const Hero = () => {
         setSelectedLocation(value);
     };
 
-   const handleSubmit = () => {
-    let newFilters = { ...filters, selectedDate: selectedDate };
+    const handleSubmit = () => {
+        let newFilters = { ...filters, selectedDate: selectedDate };
 
-    if (selectedLocation !== "") {
-        newFilters.chosenTags = [...filters.chosenTags, selectedLocation];
-    }
+        if (selectedLocation !== "") {
+            newFilters.chosenTags = [...filters.chosenTags, selectedLocation];
+        }
 
-    setFilters(newFilters);
-};
+        setFilters(newFilters);
+    };
 
     return (
         <div className='hero-container'>
@@ -55,26 +55,26 @@ const Hero = () => {
                     </div>
                     <div id="MainRow_hero">
                         <div>
-                        <DatePicker
-                            id="datePicker_hero"
-                            selected={selectedDate}
-                            onChange={handleDateChange}
-                            dateFormat="dd/MM/yyyy"
-                            placeholderText={t('selectDate')}
-                            className="MainInput"
-                        />
+                            <DatePicker
+                                id="datePicker_hero"
+                                selected={selectedDate}
+                                onChange={handleDateChange}
+                                dateFormat="dd/MM/yyyy"
+                                placeholderText={t('selectDate')}
+                                className="MainInput"
+                            />
                         </div>
-                       <select 
-                            id="selectInput_hero" 
-                            className="MainInput" 
+                        <select
+                            id="selectInput_hero"
+                            className="MainInput"
                             data-testid="location-select"
                             value={selectedLocation}
                             onChange={handleLocationChange}
-                            >
+                        >
                             <option value="" disabled>{t('location')}</option>
                             {locations.map((location, index) => (
                                 <option key={index} value={location.name}>
-                                {location.name}
+                                    {location.name}
                                 </option>
                             ))}
                         </select>

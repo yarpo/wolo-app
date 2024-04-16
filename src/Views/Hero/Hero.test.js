@@ -4,7 +4,7 @@ import Hero from './Hero';
 import i18n from '../../i18nTests';
 import { I18nextProvider } from 'react-i18next';
 import { BrowserRouter } from 'react-router-dom';
-import { FiltersProvider } from '../Filters/FiltersContext';
+import { FiltersProvider } from '../../Components/Filters/FiltersContext';
 
 describe('Hero', () => {
     it('should render without errors', () => {
@@ -49,7 +49,7 @@ describe('Hero', () => {
             <I18nextProvider i18n={i18n}>
                 <BrowserRouter>
                     <FiltersProvider>
-                        <Hero handleLocationChange={handleLocationChange}/>
+                        <Hero handleLocationChange={handleLocationChange} />
                     </FiltersProvider>
                 </BrowserRouter>
             </I18nextProvider>

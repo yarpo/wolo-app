@@ -4,7 +4,7 @@ import { I18nextProvider } from 'react-i18next';
 import i18n from '../../i18nTests';
 import AllEvents from './AllEvents';
 import { BrowserRouter } from "react-router-dom";
-import { FiltersProvider } from "../Filters/FiltersContext";
+import { FiltersProvider } from "../../Components/Filters/FiltersContext";
 
 describe('AllEvents', () => {
   it('should render without errors', () => {
