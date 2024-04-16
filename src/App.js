@@ -14,24 +14,18 @@ import AdminHomePage from './Views/AdminHomePage/AdminHomePage.js';
 import VolunteerHomePage from './Views/VolunteerHomePage/VolunteerHomePage.js';
 import Navbar from './Components/Navbar/Navbar';
 import { FiltersProvider } from './Components/Filters/FiltersContext';
-import { URLS } from './config.js';
+import fetchUserRoles from './Utils/fetchUserRoles.js';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
 function App() {
   const [role, setRole] = useState(null);
   const token = localStorage.getItem('token');
+
   useEffect(() => {
     if (token) {
-      fetch(URLS.USER,
-        {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        })
-        .then(response => response.json())
-        .then(data => setRole(data.roles))
+      fetchUserRoles()
+        .then(roles => setRole(roles))
         .catch(error => console.error('Error: No information about the user', error));
     }
   }, [token]);
