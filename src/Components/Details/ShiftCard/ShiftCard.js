@@ -70,7 +70,7 @@ const ShiftCard = ({ shift }) => {
                     postRequest(URLS.REFUSE, token, params, t('leaveShiftSuccess'), t('leaveShiftError'));
                 }
             } catch (error) {
-                toast.error('An unexpected error occurred while joining event. Please try again later');
+                toast.error( t('unknownError') );
             }
         }
     }, [id, shiftId, userShifts, token, shift, userConfirmed, t]);

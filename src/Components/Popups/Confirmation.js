@@ -1,7 +1,6 @@
+'use client';
 
-"use client";
-
-import { Button, Modal } from "flowbite-react";
+import { Button, Modal } from 'flowbite-react';
 
 function Confirmation({ title, message, accept, deny, onAgree, onDeny, openModal, setOpenModal }) {
   const handleAgree = () => {
@@ -13,6 +12,7 @@ function Confirmation({ title, message, accept, deny, onAgree, onDeny, openModal
     setOpenModal(false);
     onDeny();
   };
+  
   return (
     <>
       <Modal show={openModal} size="md" onClose={() => setOpenModal(false)} popup>
