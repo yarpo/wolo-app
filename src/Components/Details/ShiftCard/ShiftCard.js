@@ -36,7 +36,7 @@ const ShiftCard = ({ shift }) => {
     fetchUserData();
   }, []);
   
-    const postRequest = async (url, token, params) => {
+    const postRequest = async (url, token, params, success, error) => {
         const response = await fetch(`${url}?${params.toString()}`, {
             method: 'POST',
             headers: {
@@ -45,10 +45,10 @@ const ShiftCard = ({ shift }) => {
             },
         });
         if (response.ok) {
-            toast.success(`Successfully joined the shift`);
+            toast.success(`${success}`);
             window.location.reload();
         } else {
-            toast.error(`Failed to join the shift`);
+            toast.error(`${error}`);
         }
     };
 
@@ -65,15 +65,15 @@ const ShiftCard = ({ shift }) => {
     
             try {
                 if (!userShifts.includes(shiftId)) {
-                    postRequest(URLS.JOIN, token, params);
+                    postRequest(URLS.JOIN, token, params, t('joinShiftSuccess') ,t('joinShiftError'));
                 } else {
-                    postRequest(URLS.REFUSE, token, params);
+                    postRequest(URLS.REFUSE, token, params, t('leaveShiftSuccess'), t('leaveShiftError'));
                 }
             } catch (error) {
                 toast.error('An unexpected error occurred while joining event. Please try again later');
             }
         }
-    }, [id, shiftId, userShifts, token, shift, userConfirmed]);
+    }, [id, shiftId, userShifts, token, shift, userConfirmed, t]);
     
     useEffect(() => {
         if (userConfirmed !== false) {
@@ -97,9 +97,9 @@ const ShiftCard = ({ shift }) => {
                 {canSignIn && !userShifts.includes(shiftId) && <button type="button"  onClick={() => setConfirmPhone(true)} id="sign-in" > {t('signIn')} </button>}
                 <Confirmation id="sign-in"
                     buttonName={t('signIn')}
-                        title="I agree to give my phone number to the organiser."
-                        accept="Yes"
-                        deny="No" 
+                        title={t('phoneConfirmation')}
+                        accept={t('agreeConfirmation')}
+                        deny={t('declineConfirmation')}
                         styleId="sign-in"
                         onAgree={() => {
                             handleUserConfirmation(true)
@@ -113,9 +113,9 @@ const ShiftCard = ({ shift }) => {
                 {canSignIn && userShifts.includes(shiftId) && <button type="button"  onClick={() => setConfirmLeave(true)} id="sign-out">{t('signIn')} </button>}               
                 <Confirmation id="sign-in"
                     buttonName={t('signIn')}
-                        title="Are you sure you want to leave this shift?"
-                        accept="Yes"
-                        deny="No" 
+                        title={t('leaveShiftConfirmation')}
+                        accept={t('agreeToLeave')}
+                        deny={t('cancelLeave')} 
                         styleId="sign-out"
                         onAgree={() => {
                             handleUserConfirmation(true)
