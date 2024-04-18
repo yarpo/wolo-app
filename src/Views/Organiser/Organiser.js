@@ -11,7 +11,7 @@ import { Link, useLocation } from 'react-router-dom';
 import '../../styles/organizer.scss';
 import fetchData from '../../Utils/fetchData.js';
 import { URLS } from '../../config.js';
-import EventCard from '../EventCard/EventCard.js';
+import EventCard from '../../Components/EventCard/EventCard.js';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -29,7 +29,7 @@ const Organiser = () => {
       const url = `${URLS.ORGANISATIONS}/${organisationId}`;
       fetchData(url, setOrganiserData, navigate);
     };
-  
+
     if (organisationId) {
       fetchDataForOrganiser();
     }
@@ -48,7 +48,7 @@ const Organiser = () => {
     street,
     homeNum,
     logoUrl
-} = organiserData;
+  } = organiserData;
 
   return (
     <div className="organizer_container">
@@ -59,7 +59,7 @@ const Organiser = () => {
           </Link>
           <div className='organizer_container_logo_text'>
             <h1 id="title">{name}</h1>
-            <img src={logoUrl} alt="logo" className='organizer_container_logo' onError={(organiserData) => organiserData.target.style.display = 'none'}/>
+            <img src={logoUrl} alt="logo" className='organizer_container_logo' onError={(organiserData) => organiserData.target.style.display = 'none'} />
           </div>
         </div>
       )}
@@ -103,7 +103,7 @@ const Organiser = () => {
           </div>
         </div>
       )}
-      
+
       {organiserData && Object.keys(organiserData).length > 0 && (
         <div id="organiser_more_events">
           <h2>{t('moreEventsFromThisOrganizer')}</h2>

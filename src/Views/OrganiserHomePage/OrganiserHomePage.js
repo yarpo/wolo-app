@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from "react-router-dom";
 import '../../styles/organiser-home-page.scss';
-import OrganiserEventListDisplay from '../OrganiserEventListDisplay/OrganiserEventListDisplay.js';
+import OrganiserEventListDisplay from '../../Components/OrganiserEventListDisplay/OrganiserEventListDisplay.js';
 
 const OrganiserHomePage = () => {
 
