@@ -44,11 +44,13 @@ const Hero = () => {
 
     return (
         <div className='hero-container'>
-            <form id="form_hero">
                 <div id="mainContainer_hero">
                     <WelcomingBanner isOrganizerPage={ false }/>
+                </div>
+                <form id="form_hero">
                     <div id="MainRow_hero">
                         <div>
+                            hello
                             <DatePicker
                                 id="datePicker_hero"
                                 selected={selectedDate}
@@ -73,8 +75,7 @@ const Hero = () => {
                             ))}
                         </select>
                     </div>
-                </div>
-            </form>
+                </form>
             <div id="filters_hero">
                 <Filters setFilteredEvents={setFilteredEvents} />
                 <div id="button_hero">
