@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import React, { useState, useEffect, useCallback} from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { toast } from 'react-toastify';
 import { URLS } from '../../../config.js';
 import fetchUserRoles from '../../../Utils/fetchUserRoles.js';
@@ -57,16 +57,14 @@ const ShiftCard = ({ shift }) => {
     };
     
     const handleEventInteract = useCallback(() => {
-        // function body remains the same
         if (userConfirmed) {  
             const params = new URLSearchParams();
             params.append('user', id);
-            console.log(shift);
             params.append('shift', shift.shiftId);
     
             try {
                 if (!userShifts.includes(shiftId)) {
-                    postRequest(URLS.JOIN, token, params, t('joinShiftSuccess') ,t('joinShiftError'));
+                    postRequest(URLS.JOIN, token, params, t('joinShiftSuccess'), t('joinShiftError'));
                 } else {
                     postRequest(URLS.REFUSE, token, params, t('leaveShiftSuccess'), t('leaveShiftError'));
                 }
@@ -112,7 +110,7 @@ const ShiftCard = ({ shift }) => {
                         setOpenModal={setConfirmPhone}
                     />
                 {canSignIn && userShifts.includes(shiftId) && <button type="button"  onClick={() => setConfirmLeave(true)} id="sign-out">{t('signOff')} </button>}               
-                <Confirmation id="sign-in"
+                <Confirmation id="sign-off"
                     buttonName={t('signIn')}
                         title={t('leaveShiftConfirmation')}
                         accept={t('agreeToLeave')}
@@ -121,9 +119,9 @@ const ShiftCard = ({ shift }) => {
                         onAgree={() => {
                             handleUserConfirmation(true)
                             handleEventInteract()
-                            setConfirmPhone(false)}}
+                            setConfirmLeave(false)}}
                         onDeny={() => 
-                            setConfirmPhone(false)}
+                            setConfirmLeave(false)}
                         openModal={confirmLeave}
                         setOpenModal={setConfirmLeave}
                     />
