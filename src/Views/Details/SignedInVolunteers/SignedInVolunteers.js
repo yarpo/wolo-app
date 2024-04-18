@@ -45,7 +45,7 @@ const SignedInVolunteers = ({ eventData }) => {
             {eventData && eventData.shifts && eventData.shifts.map((shift, index) => (
             <ShiftEntry 
                 key={index}
-                id={shift.id}
+                id={shift.shiftId}
                 startTime={shift.startTime}
                 endTime={shift.endTime}
                 numVolunteers={shift.signedUp}

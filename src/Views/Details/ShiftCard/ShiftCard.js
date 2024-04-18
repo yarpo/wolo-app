@@ -6,7 +6,7 @@ import fetchUserRoles from '../../../Utils/fetchUserRoles.js';
 import { Link } from 'react-router-dom';
 import fetchUserId from '../../../Utils/fetchUserId.js';
 import fetchUserShifts from '../../../Utils/fetchUserShifts.js';
-import Confirmation from '../../Popups/Confirmation.js';
+import Confirmation from '../../../Components/Popups/Confirmation.js';
 
 const ShiftCard = ({ shift }) => {
     const { t } = useTranslation();
