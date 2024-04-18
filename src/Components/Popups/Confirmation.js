@@ -1,6 +1,7 @@
 'use client';
 
-import { Button, Modal } from 'flowbite-react';
+import { Modal } from 'flowbite-react';
+import '../../styles/confirmation-popup.scss';
 
 function Confirmation({ title, message, accept, deny, onAgree, onDeny, openModal, setOpenModal }) {
   const handleAgree = () => {
@@ -26,12 +27,12 @@ function Confirmation({ title, message, accept, deny, onAgree, onDeny, openModal
               {message}
             </p>
             <div className="flex justify-center gap-4">
-                <Button color="success"  onClick={handleAgree}>
+                <button  className="confirm_button" onClick={handleAgree}>
                 {accept}
-              </Button>
-              <Button color="failure" onClick={handleDeny}>
+              </button>
+              <button  className="deny_button" onClick={handleDeny}>
                 {deny}
-              </Button>
+              </button>
             </div>
           </div>
         </Modal.Body>
