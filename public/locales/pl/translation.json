@@ -17,6 +17,16 @@
   "location": "Lokalizacja",
   "signIn": "Zapisz się",
   "moreEventsFromThisOrganizer": "Więcej wydarzeń od tego organizatora",
+  "phoneConfirmation": "Zgadzam się na przekazanie mojego numeru telefonu organizatorowi",
+  "agreeConfirmation": "Zgadzam się",
+  "declineConfirmation": "Odmawiam",
+  "leaveShiftConfirmation": "Czy na pewno chcesz opuścić tę zmianę?",
+  "agreeToLeave": "Opuść zmianę",
+  "cancelLeave": "Anuluj",
+  "joinShiftError": "Nie udało się dołączyć do zmiany",
+  "joinShiftSuccess": "Pomyślnie dołączono do zmiany",
+  "leaveShiftError": "Nie udało się opuścić zmiany",
+  "leaveShiftSuccess": "Pomyślnie opuszczono zmianę",
 
   "organizedBy": "Organizowany przez",
   "needed": "Potrzebnych wolonatriuszy",
@@ -116,4 +126,6 @@
   "organiserPage": "Zarządzaj organizacją",
   "volunteerPage": "Twoja strona",
   "thereAreNoVolunteers": "Nie ma zarejestrowanych wolontariuszy"
+
+
 }
