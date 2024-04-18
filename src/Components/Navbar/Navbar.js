@@ -76,9 +76,9 @@ function handleLogout() {
               data-testid="languages-select"
             >
               <option value="en">English</option>
-              <option value="pl">Polish</option>
-              <option value="ua">Ukrainian</option>
-              <option value="ru">Russian</option>
+              <option value="pl">Polski</option>
+              <option value="ua">Українська</option>
+              <option value="ru">Русский</option>
             </select>
           </li>
           <li className="navbar-dropdown">
