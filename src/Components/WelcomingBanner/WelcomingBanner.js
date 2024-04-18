@@ -37,7 +37,7 @@ const WelcomingBanner = ({ isOrganizerPage }) => {
                     <h2>{t('welcome')}</h2>
                 </div>}
                 { isModerator && isOrganizerPage && <div id="subtext_hero">
-                    <h2>{t('welcome')}AAA</h2>
+                    <h2>{t('yourOrganisation')}: NAZWA</h2>
                 </div>}
             </div>
         </>
