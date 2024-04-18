@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import '../../../styles/your-event-volunteer.scss';
 import { toast } from 'react-toastify';
 import { URLS } from '../../../config.js';
-import Confirmation from '../../Popups/Confirmation.js';
+import Confirmation from '../../../Components/Popups/Confirmation.js';
 import React, { useState, useEffect, useCallback} from 'react';
 import { Button } from 'flowbite-react';
 
