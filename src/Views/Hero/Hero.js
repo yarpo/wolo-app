@@ -50,7 +50,6 @@ const Hero = () => {
                 <form id="form_hero">
                     <div id="MainRow_hero">
                         <div>
-                            hello
                             <DatePicker
                                 id="datePicker_hero"
                                 selected={selectedDate}
