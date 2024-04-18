@@ -12,7 +12,7 @@ const ShiftCard = ({ shift }) => {
     const { t } = useTranslation();
     const [roles, setRoles] = useState(null);
     const [id, setId] = useState(null);
-    const shiftId = shift.id;
+    const shiftId = shift.shiftId;
     const canSignIn = roles && roles.includes('USER');
     const token = localStorage.getItem('token');
     const [userShifts, setUserShifts] = useState([]);
@@ -61,7 +61,8 @@ const ShiftCard = ({ shift }) => {
         if (userConfirmed) {  
             const params = new URLSearchParams();
             params.append('user', id);
-            params.append('shift', shift.id);
+            console.log(shift);
+            params.append('shift', shift.shiftId);
     
             try {
                 if (!userShifts.includes(shiftId)) {
@@ -85,7 +86,7 @@ const ShiftCard = ({ shift }) => {
     return (
         <div className="card">
             <form onSubmit={(e) => e.preventDefault()}>
-                <p>ID: {shift.id}</p>
+                <p>ID: {shift.shiftId}</p>
                 <p>Date: {shift.date}</p>
                 <p>Time: {shift.startTime} - {shift.endTime}</p>
                 <p>Capacity: {shift.capacity}</p>
@@ -110,7 +111,7 @@ const ShiftCard = ({ shift }) => {
                         openModal={confirmPhone}
                         setOpenModal={setConfirmPhone}
                     />
-                {canSignIn && userShifts.includes(shiftId) && <button type="button"  onClick={() => setConfirmLeave(true)} id="sign-out">{t('signIn')} </button>}               
+                {canSignIn && userShifts.includes(shiftId) && <button type="button"  onClick={() => setConfirmLeave(true)} id="sign-out">{t('signOff')} </button>}               
                 <Confirmation id="sign-in"
                     buttonName={t('signIn')}
                         title={t('leaveShiftConfirmation')}
