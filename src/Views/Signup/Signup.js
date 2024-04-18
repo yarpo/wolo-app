@@ -35,7 +35,7 @@ const Signup = () => {
     phoneNumber: '',
     password: '',
     confirmPassword: '',
-    adultConfirmation: false,
+    isAdult: false,
     termsAndConditions: false,
   };
 
@@ -64,7 +64,7 @@ console.log(handleRegister);
   const validate = values => {
     const errors = {};
 
-    const requiredFields = ['firstName', 'lastName', 'email', 'password', 'confirmPassword', 'adultConfirmation', 'termsAndConditions'];
+    const requiredFields = ['firstName', 'lastName', 'email', 'password', 'confirmPassword', 'isAdult', 'termsAndConditions'];
     requiredFields.forEach(field => {
       if (!values[field]) {
         errors[field] = `${field.charAt(0).toUpperCase() + field.slice(1)} is required`;
@@ -142,8 +142,8 @@ console.log(handleRegister);
              <br/>
 
             <div className="checkbox_signup-group">
-              <label htmlFor="adultConfirmation">
-                <Field type="checkbox" name="adultConfirmation" />
+              <label htmlFor="isAdult">
+                <Field type="checkbox" name="isAdult" />
                 {t('confirmAge')}
               </label>
 
