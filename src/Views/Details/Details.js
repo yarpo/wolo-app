@@ -81,7 +81,7 @@ const Details = () => {
           </li>
           <li>
             <BiBorderAll id="icon" /> <strong>{t('category')}:</strong>{' '}
-            {categories}
+            {categories.map((category, index) => index === categories.length - 1 ? category : category + ", ")}
           </li>
           <li>
             <VscOrganization id="icon" /> <strong>{t('organizer')}:</strong>{' '}
