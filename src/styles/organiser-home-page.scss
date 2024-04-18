@@ -1,12 +1,13 @@
 @import './common.scss';
 
 .organiser_home_page_container {
-    #background_photo {
+    #organiser_home_page_background_photo {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        text-align: center;
         flex-wrap: wrap;
         padding-top: 100px;
+        padding-bottom: 100px;
         width: 100%;
         background: url("../images/hero.jpg") no-repeat 100% 40% / cover;
         margin: 0 auto;
