@@ -8,6 +8,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import '../../styles/hero.scss';
 import fetchData from '../../Utils/fetchData';
 import { URLS } from '../../config';
+import Banner from '../../Components/Banner/Banner';
 
 const Hero = () => {
 
@@ -45,14 +46,7 @@ const Hero = () => {
         <div className='hero-container'>
             <form id="form_hero">
                 <div id="mainContainer_hero">
-                    <div id="background_hero">
-                        <div id="containerHero_hero">
-                            <h1>{t('welcome')}</h1>
-                        </div>
-                        <div id="subtext_hero">
-                            <h2><Link to="/login">{t('signInToday')}</Link> {t('or')} <Link to="/events">{t('findEvent')}</Link></h2>
-                        </div>
-                    </div>
+                    <Banner />
                     <div id="MainRow_hero">
                         <div>
                             <DatePicker
