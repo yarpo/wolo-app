@@ -6,6 +6,7 @@ import fetchUserRoles from '../../../Utils/fetchUserRoles.js';
 import { Link } from 'react-router-dom';
 import fetchUserId from '../../../Utils/fetchUserId.js';
 import fetchUserShifts from '../../../Utils/fetchUserShifts.js';
+import postRequest from '../../../Utils/postRequest.js';
 import Confirmation from '../../../Components/Popups/Confirmation.js';
 
 const ShiftCard = ({ shift }) => {
@@ -24,33 +25,19 @@ const ShiftCard = ({ shift }) => {
     const [confirmLeave, setConfirmLeave] = useState(false);
   
     useEffect(() => {
-    const fetchUserData = async () => {
-      const userRoles = await fetchUserRoles();
-      setRoles(userRoles);
-      const userId = await fetchUserId();
-      setId(userId);
-      const userShifts = await fetchUserShifts(userId);
-      setUserShifts(userShifts);
-    };
+        const fetchUserData = async () => {
+        const userRoles = await fetchUserRoles();
+        setRoles(userRoles);
+        const userId = await fetchUserId();
+        setId(userId);
+        const userShifts = await fetchUserShifts(userId);
+        setUserShifts(userShifts);
+        };
 
-    fetchUserData();
-  }, []);
+        fetchUserData();
+    }, []);
   
-    const postRequest = async (url, token, params, success, error) => {
-        const response = await fetch(`${url}?${params.toString()}`, {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            },
-        });
-        if (response.ok) {
-            toast.success(`${success}`);
-            window.location.reload();
-        } else {
-            toast.error(`${error}`);
-        }
-    };
+    
 
     const handleUserConfirmation = async (confirmation) => {
         setUserConfirmed(confirmation);

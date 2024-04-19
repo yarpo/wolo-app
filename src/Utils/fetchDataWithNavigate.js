@@ -1,11 +1,12 @@
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const fetchData = async (url, setData) => {
+const fetchDataWithNavigate = async (url, setData, navigate) => {
   try {
     const response = await fetch(url);
     if (!response.ok) {
-      return null;
+      navigate('/events');
+      return;
     }
     const data = await response.json();
     setData(data);
@@ -15,4 +16,4 @@ const fetchData = async (url, setData) => {
   }
 };
 
-export default fetchData;
+export default fetchDataWithNavigate;

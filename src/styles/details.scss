@@ -1,7 +1,5 @@
 @import './common.scss';
 
-$background-color_1: rgb(170, 139, 240); // to be removed when fetching photos will be implemented
-
 .details_container {
   padding-top: 65px;
   display: flex;
@@ -10,6 +8,7 @@ $background-color_1: rgb(170, 139, 240); // to be removed when fetching photos w
   margin: 20px 10vw 20px 10vw;
   gap: 30px 40px;
 
+  // For scrollbar
   ::-webkit-scrollbar {
     width: 12px; 
   }
@@ -42,7 +41,6 @@ $background-color_1: rgb(170, 139, 240); // to be removed when fetching photos w
   }
 
   .details_photo img {
-    background-color: $background-color_1;
     height: 35vh;
     width: 35vw;
     margin-top: 30px;
@@ -67,12 +65,6 @@ $background-color_1: rgb(170, 139, 240); // to be removed when fetching photos w
     }
   }
 
-  #volunteers_numbers {
-    list-style: none;
-    padding-bottom: 15px;
-    padding-top: 10px;
-  }
-
   #information {
     line-height: 2;
     padding: 0px;
@@ -88,6 +80,10 @@ $background-color_1: rgb(170, 139, 240); // to be removed when fetching photos w
     }
   }
 
+  .details_shifts_text {
+    margin-left: 20px;
+  }
+
   #extra_information {
     width: 100%;
   }
@@ -96,24 +92,30 @@ $background-color_1: rgb(170, 139, 240); // to be removed when fetching photos w
     width: 100%;
   }
 
+  .details_shift_card_wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
   iframe {
-    width: 90%;
-    height: 35vh;
+    width: 60%;
+    height: 45vh;
     border: none;
   }
 
   #details_more_events {
     width: 100%;
     order: 5;
-  }
-  
-  #details_more_events_container {
-    display: flex;
-    overflow-x: scroll;
-  }
-  
-  #details_more_events_item {
-    flex: 1;
+
+    #details_more_events_container {
+      display: flex;
+      overflow-x: scroll;
+
+      #details_more_events_item {
+        flex: 1;
+      }  
+    }
   }
 
   #sign-in {
@@ -133,19 +135,16 @@ $background-color_1: rgb(170, 139, 240); // to be removed when fetching photos w
     @extend #sign-in;
     background-color: $color-4-red;
   }
-
-  #details_shift_checkboxes {
-      display: flex;
-      justify-items: left;
-      flex-direction: row;
-      flex-wrap: wrap;
-  }
 }
 
 @media screen and (max-width: 768px) {
   .details_container {
     #column {
       flex-basis: 200%;
+    }
+
+    .details_photo img {
+      width: 100%;
     }
 
     .photo {
