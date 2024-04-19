@@ -35,14 +35,14 @@ function AddOrganisation({onAccept}) {
         const name = nameInputRef.current?.value;
         const description = descriptionInputRef.current?.value;
         const email = emailInputRef.current?.value;
-        const phone = phoneInputRef.current?.value;
+        const phoneNumber = phoneInputRef.current?.value;
         const street = streetInputRef.current?.value;
         const homeNum = homeNumInputRef.current?.value;
         const distrctId = districtInputRef.current?.value;
         const cityId = cityInputRef.current?.value;
         const logoUrl = urlInputRef.current?.value;
 
-        onAccept({name, description, email, phone, street, homeNum, distrctId, cityId, logoUrl});
+        onAccept({name, description, email, phoneNumber, street, homeNum, distrctId, cityId, logoUrl});
         setOpenModal(false);
     };
 
