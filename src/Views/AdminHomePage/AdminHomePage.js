@@ -16,26 +16,26 @@ const AdminHomePage = () => {
     const { t } = useTranslation();
 
     return (
-    <div className='admin_home_page_container'>
-        <h1 className='admin_home_page_text'>{t('administratorPanel')}</h1>
-        <Tabs aria-label="Default tabs" style="default">
-            <Tabs.Item active title={t('users')} icon={HiUserCircle}>
-                <UsersTab />
-            </Tabs.Item>
-            <Tabs.Item title={t('organisations')} icon={MdDashboard}>
-                <OrganisationsTab />
-            </Tabs.Item>
-            <Tabs.Item title={t('events')} icon={HiAdjustments}>
-                <EventsTab />
-            </Tabs.Item>
-            <Tabs.Item title={t('categories')} icon={HiClipboardList}> 
-                <CategoriesTab />
-            </Tabs.Item>
-            <Tabs.Item title={t('districts')} icon={HiClipboardList}>
-                <DistrictsTab />
-            </Tabs.Item>
-        </Tabs>
-    </div>
+        <div className='admin_home_page_container'>
+            <h1 className='admin_home_page_text'>{t('administratorPanel')}</h1>
+            <Tabs aria-label="Default tabs" style="default">
+                <Tabs.Item active title={t('users')} icon={HiUserCircle}>
+                    <UsersTab />
+                </Tabs.Item>
+                <Tabs.Item title={t('organisations')} icon={MdDashboard}>
+                    <OrganisationsTab />
+                </Tabs.Item>
+                <Tabs.Item title={t('events')} icon={HiAdjustments}>
+                    <EventsTab />
+                </Tabs.Item>
+                <Tabs.Item title={t('categories')} icon={HiClipboardList}> 
+                    <CategoriesTab />
+                </Tabs.Item>
+                <Tabs.Item title={t('districts')} icon={HiClipboardList}>
+                    <DistrictsTab />
+                </Tabs.Item>
+            </Tabs>
+        </div>
     )
 };
 

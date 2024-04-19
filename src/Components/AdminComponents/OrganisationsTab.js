@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import '../../styles/admin-home-page.scss';
-
 import { URLS } from '../../config';
 import fetchData  from  '../../Utils/fetchData';
 import { Table } from "flowbite-react";
@@ -12,8 +11,13 @@ const OrganisationsTab = () => {
         fetchData(URLS.ORGANISATIONS, setOrganisations);
     }, []);
 
+    const addRecord = () => {
+        console.log("added")
+    };
+
     return (
         <div className="overflow-x-auto">
+            <button className="confirm_button" onClick={addRecord}>Blue</button>
             <Table striped>
                 <Table.Head>
                     <Table.HeadCell>ID</Table.HeadCell>
