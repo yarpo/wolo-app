@@ -24,9 +24,10 @@ a {
   text-decoration: none;
 }
 
-/* .App {
-  text-align: center;
-} */
+svg {
+  display: inline;
+  vertical-align:auto;
+}
 
 .App-header {
   background-color: #282c34;
