@@ -14,6 +14,7 @@ function AddOrganisation({onAccept}) {
     const [openModal, setOpenModal] = useState(true);
     const [districts, setDistricts] = useState([]);
     const [cities, setCities] = useState([]);
+    const [users, setUsers] = useState([]);
 
     const nameInputRef = useRef(null);
     const descriptionInputRef = useRef(null);
@@ -23,13 +24,16 @@ function AddOrganisation({onAccept}) {
     const homeNumInputRef = useRef(null);
     const districtInputRef = useRef(null);
     const cityInputRef = useRef(null);
+    const moderatorInputRef = useRef(null);
     const urlInputRef = useRef(null);
 
     useEffect(() => {
-            fetchData(URLS.DISTRICTS, setDistricts);
-            fetchDataWithAuth(URLS.CITIES, setCities, localStorage.getItem('token'))
-    }, []);
+        const token = localStorage.getItem('token');
     
+        fetchData(URLS.DISTRICTS, setDistricts);
+        fetchDataWithAuth(URLS.CITIES, setCities, token)
+        fetchDataWithAuth(URLS.USERS, setUsers, token)
+    }, []);
 
     const handleAgree = () => {
         const name = nameInputRef.current?.value;
@@ -38,11 +42,12 @@ function AddOrganisation({onAccept}) {
         const phoneNumber = phoneInputRef.current?.value;
         const street = streetInputRef.current?.value;
         const homeNum = homeNumInputRef.current?.value;
-        const distrctId = districtInputRef.current?.value;
+        const districtId = districtInputRef.current?.value;
         const cityId = cityInputRef.current?.value;
+        const moderatorId = moderatorInputRef.current?.value;
         const logoUrl = urlInputRef.current?.value;
 
-        onAccept({name, description, email, phoneNumber, street, homeNum, distrctId, cityId, logoUrl});
+        onAccept({name, description, email, phoneNumber, street, homeNum, districtId, cityId, moderatorId, logoUrl});
         setOpenModal(false);
     };
 
@@ -109,6 +114,18 @@ function AddOrganisation({onAccept}) {
                         {districts.map((district) => (
                             <option key={district.id} value={district.id}>
                                 {district.name}
+                            </option>
+                        ))}
+                    </Select>
+                </div>
+                <div className="max-w-md">
+                    <div className="mb-2 block">
+                        <Label htmlFor="moderator" value="Moderator" />
+                    </div>
+                    <Select id="moderator" ref={moderatorInputRef} required>
+                        {users.map((user) => (
+                            <option key={user.id} value={user.id}>
+                                {user.email}
                             </option>
                         ))}
                     </Select>

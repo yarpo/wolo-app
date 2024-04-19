@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import '../../styles/admin-home-page.scss';
-import { URLS } from '../../config';
-import fetchData  from  '../../Utils/fetchData';
+import { useTranslation } from 'react-i18next';
 import { Table } from "flowbite-react";
+
+import fetchData  from  '../../Utils/fetchData';
+import postRequestWithJson from '../../Utils/postRequestWithJson.js';
+
+import '../../styles/admin-home-page.scss';
 import AddOrganisation from './addRecordModals/AddOrganisation.js';
+import { URLS } from '../../config';
 
 const OrganisationsTab = () => {
+    const { t } = useTranslation();
     const [organisations, setOrganisations] = useState([]);
     const [openModal, setOpenModal] = useState(false);
 
@@ -16,7 +21,10 @@ const OrganisationsTab = () => {
     const handleModalAccept = (data) => {
         setOpenModal(false);
         console.log("Accepted Data:", data);
-        console.log(openModal)
+
+        const jsonData = JSON.stringify(data);
+
+        postRequestWithJson(URLS.ADD_ORGANISATION, localStorage.getItem('token'), jsonData, t('joinShiftSuccess'), t('joinShiftError'));
     };
 
     return (
