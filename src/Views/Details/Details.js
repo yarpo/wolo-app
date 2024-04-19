@@ -13,12 +13,12 @@ import '../../styles/details.scss';
 import EventCard from '../../Components/EventCard/EventCard.js';
 import 'react-toastify/dist/ReactToastify.css';
 import fetchData from '../../Utils/fetchData.js';
-import fetchUserOrganisation from '../../Utils/fetchUserOrganisation.js';
-import fetchUserRoles from '../../Utils/fetchUserRoles.js';
 import formatDate from '../../Utils/formatDate.js';
 import SignedInVolunteers from './SignedInVolunteers/SignedInVolunteers.js';
 import { URLS } from '../../config.js'
 import ShiftCard from './ShiftCard/ShiftCard.js';
+
+import fetchUser from '../../Utils/fetchUser.js';
 
 const Details = () => {
   const { t } = useTranslation();
@@ -31,14 +31,12 @@ const Details = () => {
   const isAdmin = roles && roles.includes('ADMIN');
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      const userRoles = await fetchUserRoles();
-      setRoles(userRoles);
-      const userOrganisation = await fetchUserOrganisation();
-      setUserOrganisation(userOrganisation);
-    };
-
-    fetchUserData();
+    fetchUser().then(data => {
+      if (data) {
+        setRoles(data.roles);
+        setUserOrganisation(data.organisationName);
+      }
+    })
   }, []);
 
   useEffect(() => {
