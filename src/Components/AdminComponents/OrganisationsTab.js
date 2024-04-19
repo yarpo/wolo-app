@@ -3,21 +3,26 @@ import '../../styles/admin-home-page.scss';
 import { URLS } from '../../config';
 import fetchData  from  '../../Utils/fetchData';
 import { Table } from "flowbite-react";
+import AddOrganisation from './addRecordModals/AddOrganisation.js';
 
 const OrganisationsTab = () => {
     const [organisations, setOrganisations] = useState([]);
+    const [openModal, setOpenModal] = useState(false);
 
     useEffect(() => {
         fetchData(URLS.ORGANISATIONS, setOrganisations);
     }, []);
 
-    const addRecord = () => {
-        console.log("added")
+    const handleModalAccept = (data) => {
+        setOpenModal(false);
+        console.log("Accepted Data:", data);
+        console.log(openModal)
     };
 
     return (
         <div className="overflow-x-auto">
-            <button className="confirm_button" onClick={addRecord}>Blue</button>
+            <button className="confirm_button" onClick={() => setOpenModal(true)}> Add </button>
+            {openModal && <AddOrganisation onAccept={handleModalAccept} />}
             <Table striped>
                 <Table.Head>
                     <Table.HeadCell>ID</Table.HeadCell>

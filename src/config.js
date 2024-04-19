@@ -5,6 +5,7 @@ const URLS = {
   EVENTS: `${BASE_URL}/events`,
   CATEGORIES: `${BASE_URL}/categories`,
   DISTRICTS: `${BASE_URL}/districts`,
+  CITIES: `${BASE_URL}/cities`,
   ORGANISATIONS: `${BASE_URL}/organisations`,
   AUTHENTICATE: `${BASE_URL}/auth/authenticate`,
   REGISTER: `${BASE_URL}/auth/register`,
