@@ -1,7 +1,7 @@
 import { URLS } from "../config";
 import { toast } from 'react-toastify';
 
-const fetchUserData = async ( field ) => {
+const fetchUser = async () => {
     const token = localStorage.getItem('token');
 
     if (!token) {
@@ -21,15 +21,12 @@ const fetchUserData = async ( field ) => {
         }
 
         const data = await response.json();
-        if (Object.prototype.hasOwnProperty.call(data, field)) {
-            return data[field]; 
-        } else {
-            throw new Error(`Field '${field}' not found in user data`);
-        }
+        console.log("DATAAAAAA", data)
+        return data;
     } catch (error) {
         toast.error(`Failed to recognise the user. Please try again later`);
         return null; 
     }
 };
 
-export default fetchUserData;
+export default fetchUser;

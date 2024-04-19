@@ -13,13 +13,12 @@ import '../../styles/details.scss';
 import EventCard from '../../Components/EventCard/EventCard.js';
 import 'react-toastify/dist/ReactToastify.css';
 import fetchData from '../../Utils/fetchData.js';
-import fetchUserOrganisation from '../../Utils/fetchUserOrganisation.js';
 import formatDate from '../../Utils/formatDate.js';
 import SignedInVolunteers from './SignedInVolunteers/SignedInVolunteers.js';
 import { URLS } from '../../config.js'
 import ShiftCard from './ShiftCard/ShiftCard.js';
 
-import fetchUserData from '../../Utils/fetchUserData.js';
+import fetchUser from '../../Utils/fetchUser.js';
 
 const Details = () => {
   const { t } = useTranslation();
@@ -32,14 +31,13 @@ const Details = () => {
   const isAdmin = roles && roles.includes('ADMIN');
 
   useEffect(() => {
-    const fetchUser = async () => {
-      const userRoles = await fetchUserData("roles");
-      setRoles(userRoles);
-      const userOrganisation = await fetchUserOrganisation();
-      setUserOrganisation(userOrganisation);
-    };
-
-    fetchUser();
+    fetchUser().then(data => {
+      console.log("DATA:", data);
+      if (data) {
+        setRoles(data.roles);
+        setUserOrganisation(data.organisationName);
+      }
+    })
   }, []);
 
   useEffect(() => {
@@ -128,6 +126,8 @@ const Details = () => {
           ))}
         </div>
       </div>}
+
+      {console.log(isAdmin)}
 
       {((eventData.organisationId === userOrganisation && isModerator) || isAdmin) && <SignedInVolunteers eventData={eventData} />}
 
