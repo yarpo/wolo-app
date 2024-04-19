@@ -32,7 +32,6 @@ const Details = () => {
 
   useEffect(() => {
     fetchUser().then(data => {
-      console.log("DATA:", data);
       if (data) {
         setRoles(data.roles);
         setUserOrganisation(data.organisationName);
@@ -126,8 +125,6 @@ const Details = () => {
           ))}
         </div>
       </div>}
-
-      {console.log(isAdmin)}
 
       {((eventData.organisationId === userOrganisation && isModerator) || isAdmin) && <SignedInVolunteers eventData={eventData} />}
 

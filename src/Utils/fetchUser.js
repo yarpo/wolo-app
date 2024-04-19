@@ -21,7 +21,6 @@ const fetchUser = async () => {
         }
 
         const data = await response.json();
-        console.log("DATAAAAAA", data)
         return data;
     } catch (error) {
         toast.error(`Failed to recognise the user. Please try again later`);
