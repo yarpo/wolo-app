@@ -1,8 +1,24 @@
-import { Button, Checkbox, Label,  Textarea, TextInput } from 'flowbite-react';
+import React, { useState, useEffect } from 'react';
+import { Button, Checkbox, Label,  Textarea, TextInput, Select } from 'flowbite-react';
 import { Formik, Field, Form, FieldArray  } from 'formik';
+import fetchData from '../../Utils/fetchData.js';
+import { URLS } from '../../config';
+
 
 const OrganiserCreateEvent = () => {
+
   const user = JSON.parse(localStorage.getItem('user'));
+  const [categories, setCategories] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [districts, setDistricts] = useState([]);
+
+  useEffect(() => {
+    fetchData(URLS.CATEGORIES, setCategories);
+    fetchData(URLS.CITIES, setCities);
+    fetchData(URLS.DISTRICTS, setDistricts);
+}, []);
+
+  
   const initialValues = {
     name: '',
     organisationId: user.organisationId,
@@ -34,7 +50,7 @@ const OrganiserCreateEvent = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen pt-20" style={{ minHeight: 'calc(100vh - 60px)' }}>
+    <div className="flex justify-center items-center min-h-screen pt-20" style={{ minHeight: 'calc(100vh)' }}>
       <div className="flex max-w-md flex-col gap-4">
         <Formik initialValues={initialValues} onSubmit={handleSubmit}>
           {({ isSubmitting, values }) => (
@@ -48,8 +64,19 @@ const OrganiserCreateEvent = () => {
               <Label htmlFor="imageUrl" value="Image URL" />
               <Field as={TextInput} id="imageUrl" type="text" sizing="md" name="imageUrl" />
 
-              <Label htmlFor="cityId" value="City ID" />
-              <Field as={TextInput} id="cityId" type="text" sizing="md" name="cityId" />
+              <Label htmlFor="categories" value="Categories" />
+              <Field as={Select} id="categories" name="categories">
+                {categories.map(category => (
+                  <option key={category.id} value={category.id}>{category.name}</option>
+                ))}
+              </Field>
+
+              <Label htmlFor="cityId" value="City" />
+              <Field as={Select} id="cityId" name="cityId">
+                {cities.map(city => (
+                  <option key={city.id} value={city.id}>{city.name}</option>
+                ))}
+              </Field>
 
               <Label htmlFor="isPeselVerificationRequired" value="Is PESEL Verification Required?" />
               <Field as={Checkbox} id="isPeselVerificationRequired" name="isPeselVerificationRequired" />
@@ -90,8 +117,12 @@ const OrganiserCreateEvent = () => {
                           <Label htmlFor={`shifts.${index}.homeNum`} value="Home Number" />
                           <Field as={TextInput} id={`shifts.${index}.homeNum`} type="text" name={`shifts.${index}.homeNum`} />
 
-                          <Label htmlFor={`shifts.${index}.districtId`} value="District ID" />
-                          <Field as={TextInput} id={`shifts.${index}.districtId`} type="text" name={`shifts.${index}.districtId`} />
+                          <Label htmlFor={`shifts.${index}.districtId`} value="District" />
+                          <Field as={Select} id={`shifts.${index}.districtId`} name={`shifts.${index}.districtId`}>
+                            {districts.map(district => (
+                              <option key={district.id} value={district.id}>{district.name}</option>
+                            ))}
+                          </Field>
                         </div>
                         <div className="col">
                         <button type="button" onClick={() => remove(index)}>Remove Shift</button>
@@ -102,8 +133,7 @@ const OrganiserCreateEvent = () => {
                 </div>
               )}
             </FieldArray>
-
-              <Button type="submit" variant="primary" disabled={isSubmitting}>Submit</Button>
+            <Button type="submit" variant="primary" disabled={isSubmitting}>Submit</Button>
             </Form>
           )}
         </Formik>
