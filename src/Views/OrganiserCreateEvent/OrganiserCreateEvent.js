@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
 import { Button, Checkbox, Label,  Textarea, TextInput, Select } from 'flowbite-react';
 import { Formik, Field, Form, FieldArray  } from 'formik';
 import fetchData from '../../Utils/fetchData.js';
-import { URLS } from '../../config';
+import { URLS, BASE_URL } from '../../config';
 
 
 const OrganiserCreateEvent = () => {
 
   const user = JSON.parse(localStorage.getItem('user'));
+  const token = localStorage.getItem('token');
   const [categories, setCategories] = useState([]);
   const [cities, setCities] = useState([]);
   const [districts, setDistricts] = useState([]);
@@ -43,10 +45,30 @@ const OrganiserCreateEvent = () => {
     isAgreementNeeded: false
   };
 
-  const handleSubmit = (values, { setSubmitting, resetForm }) => {
-    console.log(values);
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+    setSubmitting(true);
+
+    values.categories = Array.from(values.categories);
+
+     console.log(values); 
+
+    const response = await fetch(`${BASE_URL}/events/add`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(values)
+    });
+
+    if (response.ok) {
+      toast.success('Event added successfully');
+      resetForm();
+    } else {
+      toast.error('Failed to add event');
+    }
+
     setSubmitting(false);
-    resetForm();
   };
 
   return (
@@ -65,7 +87,7 @@ const OrganiserCreateEvent = () => {
               <Field as={TextInput} id="imageUrl" type="text" sizing="md" name="imageUrl" />
 
               <Label htmlFor="categories" value="Categories" />
-              <Field as={Select} id="categories" name="categories">
+              <Field as="select" id="categories" name="categories" multiple>
                 {categories.map(category => (
                   <option key={category.id} value={category.id}>{category.name}</option>
                 ))}
