@@ -13,6 +13,7 @@ import OrganiserHomePage from './Views/OrganiserHomePage/OrganiserHomePage.js';
 import OrganiserCreateEvent from './Views/OrganiserCreateEvent/OrganiserCreateEvent.js';
 import AdminHomePage from './Views/AdminHomePage/AdminHomePage.js';
 import VolunteerHomePage from './Views/VolunteerHomePage/VolunteerHomePage.js';
+import TheyNeedYouEvents from './Views/TheyNeedYou/TheyNeedYou.js';
 import Navbar from './Components/Navbar/Navbar';
 import { FiltersProvider } from './Components/Filters/FiltersContext';
 import fetchUserRoles from './Utils/fetchUserRoles.js';
@@ -44,6 +45,7 @@ function App() {
             <Route path="/organiser" element={<Organiser />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/needyou" element={<TheyNeedYouEvents />} />
             {role && role.includes('MODERATOR') && <Route path="/organiserHomePage" element={<OrganiserHomePage />} />}
             {role && role.includes('ADMIN') && <Route path="/adminHomePage" element={<AdminHomePage />} />}
             {role && role.includes('USER') && <Route path="/volunteerHomePage" element={<VolunteerHomePage />} />}
