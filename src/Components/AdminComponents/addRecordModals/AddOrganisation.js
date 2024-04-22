@@ -32,7 +32,7 @@ function AddOrganisation({onAccept}) {
     
         fetchData(URLS.DISTRICTS, setDistricts);
         fetchDataWithAuth(URLS.CITIES, setCities, token)
-        fetchDataWithAuth(URLS.USERS, setUsers, token)
+        fetchDataWithAuth(URLS.USERS_WITH_NO_ROLES, setUsers, token)
     }, []);
 
     const handleAgree = () => {
