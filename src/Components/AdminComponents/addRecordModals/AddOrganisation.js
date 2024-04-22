@@ -10,7 +10,7 @@ import { URLS } from "../../../config";
 import fetchData from "../../../Utils/fetchData";
 import fetchDataWithAuth from '../../../Utils/fetchDataWithAuth';
 
-function AddOrganisation({onAccept}) {
+function AddOrganisation({ onAccept, onClose }) {
     const [openModal, setOpenModal] = useState(true);
     const [districts, setDistricts] = useState([]);
     const [cities, setCities] = useState([]);
@@ -35,6 +35,11 @@ function AddOrganisation({onAccept}) {
         fetchDataWithAuth(URLS.USERS_WITH_NO_ROLES, setUsers, token)
     }, []);
 
+    const handleClose = () => {
+        setOpenModal(false);
+        onClose();
+    }
+
     const handleAgree = () => {
         const name = nameInputRef.current?.value;
         const description = descriptionInputRef.current?.value;
@@ -53,7 +58,7 @@ function AddOrganisation({onAccept}) {
 
     return (
         <>
-        <Modal show={openModal} size="md" popup onClose={() => setOpenModal(false)} initialFocus={nameInputRef}>
+        <Modal show={openModal} size="md" popup onClose={() => setOpenModal(false)} onClick={handleClose} initialFocus={nameInputRef}>
             <Modal.Header />
             <Modal.Body>
             <div className="space-y-6">

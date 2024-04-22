@@ -25,10 +25,14 @@ const OrganisationsTab = () => {
         postRequestWithJson(URLS.ADD_ORGANISATION, localStorage.getItem('token'), data, t('joinShiftSuccess'), t('joinShiftError'));
     };
 
+    const handleModalClose = () => {
+        setOpenModal(false);
+    }
+
     return (
         <div className="overflow-x-auto">
             <button className="confirm_button" onClick={() => setOpenModal(true)}> Add </button>
-            {openModal && <AddOrganisation onAccept={handleModalAccept} />}
+            {openModal && <AddOrganisation onAccept={handleModalAccept} onClose={handleModalClose} />}
             <Table striped>
                 <Table.Head>
                     <Table.HeadCell>ID</Table.HeadCell>
