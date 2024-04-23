@@ -1,14 +1,14 @@
 import { useTranslation } from 'react-i18next';
 import '../../styles/organiser-event-list-display.scss';
 
-const OrganiserEventListDisplay = () => {
+const OrganiserEventListDisplay = ({ event }) => {
 
     const { t } = useTranslation();
     
     return (
         <div className='organiser_event_list_display_content'>
             <div className="column">
-                Name
+                {event.name}
             </div>
             <div className="column">
                 <p><strong>{t('volunteers')}:</strong> 3 / 8</p>

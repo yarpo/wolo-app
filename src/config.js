@@ -14,7 +14,9 @@ const URLS = {
   REFUSE: `${BASE_URL}/events/refuse`,
   USERS: `${BASE_URL}/users`,
   USERS_ON_SHIFT: `${BASE_URL}/events/users?shift`,
-  EVENT_USERS_PDF: `${BASE_URL}/events/users/pdf`
+  EVENT_USERS_PDF: `${BASE_URL}/events/users/pdf`,
+  USER_EVENTS_CURRENT: `${BASE_URL}/users/currentEvents`,
+  USER_EVENTS_PAST: `${BASE_URL}/users/pastEvents`,
 };
 
 module.exports = { URLS, BASE_URL };
