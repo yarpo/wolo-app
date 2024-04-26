@@ -12,22 +12,22 @@ import Hero from '../Hero/Hero.js';
 
 const VolunteerHomePage = () => {
     const { t } = useTranslation();
-    const [userEvents, setUserEvents] = useState([]);
-    const [userId, setId] = useState(null);
+    const [userEventsCurrent, setUserEventsCurrent] = useState([]);
+    const [userEventsPast, setUserEventsPast] = useState([]);
+    const [userId, setUserId] = useState(null);
 
     useEffect(() => {
-        fetchUser().then(data => {
-            if (data) {
-              setId(data.id)
+        const fetchUserData = async () => {
+            const userData = await fetchUser();
+            if (userData && userData.id) {
+                setUserId(userData.id);
+                fetchDataWithAuth(`${URLS.USER_EVENTS_CURRENT}/${userData.id}`, setUserEventsCurrent, localStorage.getItem('token'));
+                fetchDataWithAuth(`${URLS.USER_EVENTS_PAST}/${userData.id}`, setUserEventsPast, localStorage.getItem('token'));
             }
-        })
+        };
 
-        fetchDataWithAuth(`${URLS.USERS}/${userId}/shifts`, setUserEvents, localStorage.getItem('token'))
+        fetchUserData();
     }, []);
-
-    if (!userEvents.length === 0) {
-        return <div>{t('loading')}...</div>;
-    }
 
     return (
         <div className='volunteer_home_page'>
@@ -36,7 +36,7 @@ const VolunteerHomePage = () => {
             <div id="volunteer_home_page_your_events">
                 <h2>{t('yourEvents')} </h2>
                 <br />
-                {userEvents && userEvents.map((shift) => (
+                {userEventsCurrent.map((shift) => (
                     <YourEventVolunteer
                         key={shift.shiftId}
                         shiftId={shift.shiftId}
@@ -53,7 +53,7 @@ const VolunteerHomePage = () => {
             <div id="volunteer_home_page_your_events">
                 <h2>{t('yourEvents')} Archived</h2>
                 <br />
-                {userEvents && userEvents.map((shift) => (
+                {userEventsPast.map((shift) => (
                     <YourEventVolunteer
                         key={shift.shiftId}
                         shiftId={shift.shiftId}
