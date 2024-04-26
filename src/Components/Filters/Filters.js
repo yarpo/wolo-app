@@ -90,6 +90,7 @@ const Filters = ({ setFilteredEvents }) => {
   };
 
   const handleResetFilters = () => {
+    setFilters({
       chosenTags: [],
       chosenLocation: '',
       chosenOrganisation: '',
