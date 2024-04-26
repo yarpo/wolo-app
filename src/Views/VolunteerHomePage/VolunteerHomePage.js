@@ -21,8 +21,8 @@ const VolunteerHomePage = () => {
             const userData = await fetchUser();
             if (userData && userData.id) {
                 setUserId(userData.id);
-                fetchDataWithAuth(`${URLS.USER_EVENTS_CURRENT}/${userData.id}`, setUserEventsCurrent, localStorage.getItem('token'));
-                fetchDataWithAuth(`${URLS.USER_EVENTS_PAST}/${userData.id}`, setUserEventsPast, localStorage.getItem('token'));
+                fetchDataWithAuth(`${URLS.USER_EVENTS_CURRENT}`, setUserEventsCurrent, localStorage.getItem('token'));
+                fetchDataWithAuth(`${URLS.USER_EVENTS_PAST}`, setUserEventsPast, localStorage.getItem('token'));
             }
         };
 

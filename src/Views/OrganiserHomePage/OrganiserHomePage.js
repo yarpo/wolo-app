@@ -19,8 +19,8 @@ const OrganiserHomePage = () => {
             const userData = await fetchUser();
             if (userData && userData.organisationId) {
                 setOrganisationName(userData.organisationName)
-                fetchDataWithAuth(`${URLS.ORGANISATIONS}/${userData.organisationId}/currentEvents`, setOrganisationEventsCurrent, localStorage.getItem('token'));
-                fetchDataWithAuth(`${URLS.ORGANISATIONS}/${userData.organisationId}/pastEvents`, setOrganisationEventsPast, localStorage.getItem('token'));
+                fetchDataWithAuth(`${URLS.ORGANISATIONS_EVENTS_CURRENT}/${userData.organisationId}`, setOrganisationEventsCurrent, localStorage.getItem('token'));
+                fetchDataWithAuth(`${URLS.ORGANISATIONS_EVENTS_PAST}/${userData.organisationId}`, setOrganisationEventsPast, localStorage.getItem('token'));
             }
         };
     
