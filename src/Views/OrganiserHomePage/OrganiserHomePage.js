@@ -12,11 +12,13 @@ const OrganiserHomePage = () => {
     const { t } = useTranslation();
     const [organisationEventsCurrent, setOrganisationEventsCurrent] = useState([]);
     const [organisationEventsPast, setOrganisationEventsPast] = useState([]);
+    const [organisationName, setOrganisationName] = useState(null);
 
     useEffect(() => {
         const fetchUserData = async () => {
             const userData = await fetchUser();
             if (userData && userData.organisationId) {
+                setOrganisationName(userData.organisationName)
                 fetchDataWithAuth(`${URLS.ORGANISATIONS}/${userData.organisationId}/currentEvents`, setOrganisationEventsCurrent, localStorage.getItem('token'));
                 fetchDataWithAuth(`${URLS.ORGANISATIONS}/${userData.organisationId}/pastEvents`, setOrganisationEventsPast, localStorage.getItem('token'));
             }
@@ -28,7 +30,7 @@ const OrganiserHomePage = () => {
     return (
         <div className='organiser_home_page_container'>
             <div id="organiser_home_page_background_photo">
-                <WelcomingBanner isOrganizerPage={ true }/>
+                <WelcomingBanner isOrganizerPage={ true } organisationName={organisationName}/>
             </div>
             <div id="button_div">
                 <form>
@@ -47,7 +49,8 @@ const OrganiserHomePage = () => {
                     organisationEventsCurrent.map((event) => (
                         <OrganiserEventListDisplay
                         key={event.id}
-                        event={event} />
+                        event={event}
+                        isArchived={false} />
                         ))
                     )}
             </div>
@@ -59,7 +62,8 @@ const OrganiserHomePage = () => {
                     organisationEventsPast.map((event) => (
                         <OrganiserEventListDisplay
                         key={event.id}
-                        event={event} />
+                        event={event}
+                        isArchived={true} />
                         ))
                     )}
             </div>

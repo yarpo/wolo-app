@@ -43,6 +43,7 @@ const VolunteerHomePage = () => {
                         <YourEventVolunteer
                         key={shift.shiftId}
                         shiftId={shift.shiftId}
+                        eventId={shift.eventId}
                         userId={userId}
                         name={shift.eventName}
                         date={shift.date}
@@ -50,7 +51,7 @@ const VolunteerHomePage = () => {
                         endTime={formatTime(shift.endTime)}
                         street={shift.street}
                         homeNum={shift.homeNum}
-                        city={shift.city} />
+                        isArchived={false} />
                         ))
                     )}
                 </div>
@@ -71,6 +72,7 @@ const VolunteerHomePage = () => {
                             endTime={formatTime(shift.endTime)}
                             street={shift.street}
                             homeNum={shift.homeNum}
+                            isArchived={true}
                         />
                     ))
                 )}

@@ -1,4 +1,5 @@
 const BASE_URL = 'http://localhost:8080';
+const CLIENT_URL = 'http://localhost:3000';
 const LOGIN_URL = 'http://localhost:3000/login';
 
 const URLS = {
@@ -17,6 +18,7 @@ const URLS = {
   EVENT_USERS_PDF: `${BASE_URL}/events/users/pdf`,
   USER_EVENTS_CURRENT: `${BASE_URL}/users/currentEvents`,
   USER_EVENTS_PAST: `${BASE_URL}/users/pastEvents`,
+  DETAILS: `${CLIENT_URL}/details`
 };
 
 module.exports = { URLS, BASE_URL };
