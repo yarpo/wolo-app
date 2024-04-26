@@ -12,18 +12,17 @@ const OrganiserHomePage = () => {
     const { t } = useTranslation();
     const [organisationEventsCurrent, setOrganisationEventsCurrent] = useState([]);
     const [organisationEventsPast, setOrganisationEventsPast] = useState([]);
-    const [organisationId, setOrganisationId] = useState(null);
 
     useEffect(() => {
-        fetchUser().then(data => {
-            if (data) {
-              setOrganisationId(data.organisationId)
+        const fetchUserData = async () => {
+            const userData = await fetchUser();
+            if (userData && userData.organisationId) {
+                fetchDataWithAuth(`${URLS.ORGANISATIONS}/${userData.organisationId}/currentEvents`, setOrganisationEventsCurrent, localStorage.getItem('token'));
+                fetchDataWithAuth(`${URLS.ORGANISATIONS}/${userData.organisationId}/pastEvents`, setOrganisationEventsPast, localStorage.getItem('token'));
             }
-        })
-
-        fetchDataWithAuth(`${URLS.ORGANISATIONS}/${organisationId}/currentEvents`, setOrganisationEventsCurrent, localStorage.getItem('token'))
-        fetchDataWithAuth(`${URLS.ORGANISATIONS}/${organisationId}/pastEvents`, setOrganisationEventsPast, localStorage.getItem('token'))
-        console.log(organisationEventsCurrent)
+        };
+    
+        fetchUserData();
     }, []);
 
     return (
@@ -42,7 +41,7 @@ const OrganiserHomePage = () => {
             </div>
             <div id="ongoing_events">
                 <strong>{t('yourOngoingEvents')}</strong>
-                {organisationEventsCurrent.map((event) => (
+                {organisationEventsCurrent && organisationEventsCurrent.map((event) => (
                     <OrganiserEventListDisplay
                         key={event.id}
                         event={event} />
@@ -53,7 +52,7 @@ const OrganiserHomePage = () => {
             </div>
             <div id="events_in_moderation">
                 <strong>{t('eventsInModeration')} - Archived </strong>
-                {organisationEventsPast.map((event) => (
+                {organisationEventsPast && organisationEventsPast.map((event) => (
                     <OrganiserEventListDisplay
                         key={event.id}
                         event={event} />

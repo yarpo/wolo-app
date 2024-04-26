@@ -1,9 +1,12 @@
 import { useTranslation } from 'react-i18next';
 import '../../styles/organiser-event-list-display.scss';
+import formatDate from '../../Utils/formatDate.js';
 
 const OrganiserEventListDisplay = ({ event }) => {
 
     const { t } = useTranslation();
+
+    console.log(event)
     
     return (
         <div className='organiser_event_list_display_content'>
@@ -11,12 +14,10 @@ const OrganiserEventListDisplay = ({ event }) => {
                 {event.name}
             </div>
             <div className="column">
-                <p><strong>{t('volunteers')}:</strong> 3 / 8</p>
-                <p>Address</p>
+                {formatDate(event.shifts[0].date)}
             </div>
             <div className="column">
-                <p>Date</p>
-                <p>Time</p>
+                {event.city}
             </div>
             <div className="column">
                 <strong>{t('details')}</strong>
