@@ -48,9 +48,7 @@
 
     "yourOrganisation": "Ваша организация",
     "createNewEvent": "Создать новое событие",
-    "yourOngoingEvents": "Ваши текущие события",
     "showAll": "Более",
-    "eventsInModeration": "Мероприятия в модерации",
     "volunteers": "Волонтёры",
     "details": "Подробности",
     "edit": "Редактировать",
@@ -93,7 +91,8 @@
     "discard": "Відкинути",
 
     "signOff": "Выйти",
-    "yourEvents": "Ваши события",
+    "yourEvents": "Ваши мероприятия",
+    "yourPastEvents": "Ваши прошлые мероприятия",
     "resetFilters": "Сбросить фильтры",
 
     "createEvent": "Создать событие",

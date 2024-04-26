@@ -48,9 +48,7 @@
 
     "yourOrganisation": "Ваша організація",
     "createNewEvent": "Створити нову подію",
-    "yourOngoingEvents": "Ваші поточні події",
     "showAll": "більше",
-    "eventsInModeration": "Події в модерації",
     "volunteers": "Волонтери",
     "details": "Подробиці",
     "edit": "Редагувати",
@@ -94,6 +92,7 @@
 
     "signOff": "Підписати",
     "yourEvents": "Ваші події",
+    "yourPastEvents": "Ваші минулі події",
     "resetFilters": "Скинути фільтри",
 
     "createEvent": "Створити подію",

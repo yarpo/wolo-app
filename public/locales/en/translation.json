@@ -47,9 +47,7 @@
 
   "yourOrganisation": "Your Organisation",
   "createNewEvent": "Create new event",
-  "yourOngoingEvents": "Your ongoing events",
   "showAll": "Show All",
-  "eventsInModeration": "Events in moderation",
   "volunteers": "Volunteers",
   "details": "Details",
   "edit": "Edit",
@@ -93,6 +91,7 @@
 
   "signOff": "Sign Off",
   "yourEvents": "Your Events",
+  "yourPastEvents": "Your Past Events",
   "resetFilters": "Reset Filters",
 
   "createEvent": "Create Event",

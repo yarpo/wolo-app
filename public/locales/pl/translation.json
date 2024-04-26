@@ -45,9 +45,7 @@
   "findEvent": "znajdź wydarzenie dla siebie",
   "mainSearch": "Wyszukaj",
 
-  "yourOrganisation": "Twoja organizacja",
   "createNewEvent": "Stwórz nowe wydarzenie",
-  "yourOngoingEvents": "Twoje trwające wydarzenia",
   "showAll": "Więcej",
   "eventsInModeration": "Wydarzenia w moderacji",
   "volunteers": "Wolontariusze",
@@ -93,6 +91,7 @@
 
   "signOff": "Wypisz się",
   "yourEvents": "Twoje wydarzenia",
+  "yourPastEvents": "Twoje przeszłe wydarzenia",
   "resetFilters": "Resetuj filtry",
 
   "createEvent": "Utwórz wydarzenie",
