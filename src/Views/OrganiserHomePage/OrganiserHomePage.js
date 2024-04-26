@@ -40,26 +40,28 @@ const OrganiserHomePage = () => {
                 </form>
             </div>
             <div id="ongoing_events">
-                <strong>{t('yourOngoingEvents')}</strong>
-                {organisationEventsCurrent && organisationEventsCurrent.map((event) => (
-                    <OrganiserEventListDisplay
+                <h2>{t('yourEvents')}</h2>
+                {organisationEventsCurrent.length === 0 ? (
+                    <p id='organiser_home_page_text'>{t('noCurrentEventsOrganisation')}</p>
+                ) : (
+                    organisationEventsCurrent.map((event) => (
+                        <OrganiserEventListDisplay
                         key={event.id}
                         event={event} />
-                ))}
-                <div id="show_all_button">
-                    <strong>{t('showAll')}</strong>
-                </div>
+                        ))
+                    )}
             </div>
             <div id="events_in_moderation">
-                <strong>{t('eventsInModeration')} - Archived </strong>
-                {organisationEventsPast && organisationEventsPast.map((event) => (
-                    <OrganiserEventListDisplay
+                <h2>{t('yourPastEvents')}</h2>
+                {organisationEventsPast.length === 0 ? (
+                    <p id='organiser_home_page_text'>{t('noPastEventsOrganisation')}</p>
+                ) : (
+                    organisationEventsPast.map((event) => (
+                        <OrganiserEventListDisplay
                         key={event.id}
                         event={event} />
-                ))}
-                <div id="show_all_button">
-                    <strong>{t('showAll')}</strong>
-                </div>
+                        ))
+                    )}
             </div>
         </div>
     )

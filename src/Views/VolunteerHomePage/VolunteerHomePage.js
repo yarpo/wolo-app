@@ -36,8 +36,11 @@ const VolunteerHomePage = () => {
             <div id="volunteer_home_page_your_events">
                 <h2>{t('yourEvents')} </h2>
                 <br />
-                {userEventsCurrent.map((shift) => (
-                    <YourEventVolunteer
+                {userEventsCurrent.length === 0 ? (
+                    <p id="volunteer_home_page_text">{t('noCurrentEvents')}</p>
+                ) : (
+                    userEventsCurrent.map((shift) => (
+                        <YourEventVolunteer
                         key={shift.shiftId}
                         shiftId={shift.shiftId}
                         userId={userId}
@@ -48,24 +51,29 @@ const VolunteerHomePage = () => {
                         street={shift.street}
                         homeNum={shift.homeNum}
                         city={shift.city} />
-                ))}
-            </div>
+                        ))
+                    )}
+                </div>
             <div id="volunteer_home_page_your_events">
-                <h2>{t('yourEvents')} Archived</h2>
+                <h2>{t('yourPastEvents')}</h2>
                 <br />
-                {userEventsPast.map((shift) => (
-                    <YourEventVolunteer
-                        key={shift.shiftId}
-                        shiftId={shift.shiftId}
-                        userId={userId}
-                        name={shift.eventName}
-                        date={shift.date}
-                        startTime={formatTime(shift.startTime)}
-                        endTime={formatTime(shift.endTime)}
-                        street={shift.street}
-                        homeNum={shift.homeNum}
-                        city={shift.city} />
-                ))}
+                {userEventsPast.length === 0 ? (
+                    <p id="volunteer_home_page_text">{t('noPastEvents')}</p>
+                ) : (
+                    userEventsPast.map((shift) => (
+                        <YourEventVolunteer
+                            key={shift.shiftId}
+                            shiftId={shift.shiftId}
+                            userId={userId}
+                            name={shift.eventName}
+                            date={shift.date}
+                            startTime={formatTime(shift.startTime)}
+                            endTime={formatTime(shift.endTime)}
+                            street={shift.street}
+                            homeNum={shift.homeNum}
+                        />
+                    ))
+                )}
             </div>
         </div>
     )

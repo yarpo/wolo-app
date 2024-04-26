@@ -6,7 +6,7 @@ import Confirmation from '../../../Components/Popups/Confirmation.js';
 import React, { useState, useEffect, useCallback} from 'react';
 import { Button } from 'flowbite-react';
 
-const YourEventVolunteer = ({shiftId, userId, name, date, startTime, endTime, street, homeNum, city}) => {
+const YourEventVolunteer = ({shiftId, userId, name, date, startTime, endTime, street, homeNum}) => {
 
     const { t } = useTranslation();
     const token = localStorage.getItem('token');
@@ -67,7 +67,7 @@ const YourEventVolunteer = ({shiftId, userId, name, date, startTime, endTime, st
                 {startTime} - {endTime}
             </div>
             <div className="your_event_volunteer_event_item"  id="your_event_volunteer_event_address">
-                {street} {homeNum}, {city}
+                {street} {homeNum}
             </div>
 
             <Button type="button"  onClick={() => setConfirmLeave(true)} id="your_event_volunteer_event_sign_off_button">{t('signOff')} </Button>          

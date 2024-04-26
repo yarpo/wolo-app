@@ -124,7 +124,10 @@
   "adminPage": "Strona administratora",
   "organiserPage": "Zarządzaj organizacją",
   "volunteerPage": "Twoja strona",
-  "thereAreNoVolunteers": "Nie ma zarejestrowanych wolontariuszy"
+  "thereAreNoVolunteers": "Nie ma zarejestrowanych wolontariuszy",
 
-
+  "noCurrentEvents": "Nie jesteś zapisany na żadne wydarzenie. Spróbuj wyszukać na stronie Wszystkie Wydarzenia!",
+  "noPastEvents": "Nie brałeś udziału w żadnych wydarzeniach.",
+  "noCurrentEventsOrganisation": "Twoja organizacja nie ma żadnych trwających wydarzeń. Spróbuj utworzyć jedno!",
+  "noPastEventsOrganisation": "Twoja organizacja nie miała żadnych wcześniejszych wydarzeń."
 }

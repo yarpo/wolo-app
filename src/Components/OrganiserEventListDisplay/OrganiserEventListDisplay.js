@@ -5,8 +5,6 @@ import formatDate from '../../Utils/formatDate.js';
 const OrganiserEventListDisplay = ({ event }) => {
 
     const { t } = useTranslation();
-
-    console.log(event)
     
     return (
         <div className='organiser_event_list_display_content'>

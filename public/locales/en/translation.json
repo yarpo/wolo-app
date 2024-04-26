@@ -124,5 +124,10 @@
   "adminPage": "Admin Page",
   "organiserPage": "Organizer Page",
   "volunteerPage": "Your Page",
-  "thereAreNoVolunteers": "There are no signed in volunteers"
+  "thereAreNoVolunteers": "There are no signed in volunteers",
+
+  "noCurrentEvents": "You are not signed up for any event. Try searching in All Events page!",
+  "noPastEvents": "You have not participated in any events.",
+  "noCurrentEventsOrganisation": "Your organisation have no ongoing events. Try creating one!",
+  "noPastEventsOrganisation": "Your organisation doesn't have any past events."
 }
