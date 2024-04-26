@@ -58,7 +58,7 @@ function AddOrganisation({ onAccept, onClose }) {
 
     return (
         <>
-        <Modal show={openModal} size="md" popup onClose={() => setOpenModal(false)} onClick={handleClose} initialFocus={nameInputRef}>
+        <Modal show={openModal} size="md" popup onClose={handleClose} initialFocus={nameInputRef}>
             <Modal.Header />
             <Modal.Body>
             <div className="space-y-6">
@@ -142,7 +142,8 @@ function AddOrganisation({ onAccept, onClose }) {
                     <TextInput id="url" ref={urlInputRef} type="url" icon={HiGlobeAlt } placeholder="woloapp.com/logo.png" required />
                 </div>
                 <div className="w-full">
-                <button className="confirm_button" onClick={handleAgree}>Accept</button>
+                    <button className="confirm_button" onClick={handleAgree}>Accept</button>
+                    <button className="cancel_button" onClick={handleClose}>Decline</button>
                 </div>
             </div>
             </Modal.Body>
