@@ -77,7 +77,7 @@ const VolunteerHomePage = () => {
                         endTime={formatTime(shift.endTime)}
                         street={shift.street}
                         homeNum={shift.homeNum}
-                        city={shift.city} />
+                        district={shift.district} />
                 ))}
             </div>
         </div>
