@@ -22,7 +22,7 @@ const CitiesTab = () => {
         setOpenModal(false);
         console.log("Accepted Data:", data);
 
-        postRequestWithJson(URLS.ADD_CITIES, localStorage.getItem('token'), data, t('addOrganisationSuccess'), t('addOrganisationFail'));
+        postRequestWithJson(URLS.ADD_CITIES, localStorage.getItem('token'), data, t('addCitySuccess'), t('addCityFail'));
     };
 
     const handleModalClose = () => {
