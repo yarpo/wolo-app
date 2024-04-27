@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import '../../styles/navbar.scss';
@@ -14,6 +14,7 @@ const Navbar = () => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem('user'))
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -23,6 +24,18 @@ const Navbar = () => {
 
     fetchUserData();
   }, []);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dropdownRef]);
 
   const handleLanguageChange = language => {
     i18n.changeLanguage(language);
@@ -97,11 +110,10 @@ function handleLogout() {
               </div>
                 </button>
                 {showDropdown && (
-                  <ul className="navbar-dropdown-menu">
+                  <ul ref={dropdownRef} className="navbar-dropdown-menu">
                     {role && role.includes('USER') && <li id="navbar-dropdown-li"><Link to='/volunteerHomePage'>{t('volunteerPage')}</Link></li>}
                     {role && role.includes('ADMIN') && <li id="navbar-dropdown-li"><Link to='/adminHomePage'>{t('adminPage')}</Link></li>}
                     {role && role.includes('MODERATOR') && <li id="navbar-dropdown-li"><Link to='/organiserHomePage'>{t('organiserPage')}</Link></li>}
-                    <li id="navbar-dropdown-li"><Link to="/liked">{t('favouriteEvents')}</Link></li>
                     <li id="navbar-dropdown-li"><Link to="/messages">{t('messages')}</Link></li>
                     <li id="navbar-dropdown-li"><Link to="/settings">{t('settings')}</Link></li>
                     <li id="navbar-dropdown-li">
