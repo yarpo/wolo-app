@@ -21,6 +21,7 @@ const URLS = {
   ADD_ORGANISATION: `${BASE_URL}/organisations/add`,
   ADD_CITIES: `${BASE_URL}/cities/add`,
   ADD_DISTRICTS: `${BASE_URL}/districts/add`,
+  ADD_CATEGORIES: `${BASE_URL}/categories/add`,
   USERS_WITH_NO_ROLES: `${BASE_URL}/users/volunteers`,
   THEY_NEED_YOU: `${BASE_URL}/events/need`
 };

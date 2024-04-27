@@ -1,19 +1,37 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import '../../styles/admin-home-page.scss';
 
 import { URLS } from '../../config';
 import fetchData  from  '../../Utils/fetchData';
 import { Table } from "flowbite-react";
 
+import AddCategory from './addRecordModals/AddCategory';
+import postRequestWithJson from '../../Utils/postRequestWithJson';
+
 const CategoriesTab = () => {
+    const { t } = useTranslation();
     const [categories, setCategories] = useState([]);
+    const [openModal, setOpenModal] = useState(false);
 
     useEffect(() => {
         fetchData(URLS.CATEGORIES, setCategories);
     }, []);
 
+    const handleModalAccept = (data) => {
+        setOpenModal(false);
+
+        postRequestWithJson(URLS.ADD_CATEGORIES, localStorage.getItem('token'), data, t('addCategorySuccess'), t('addCategoryFail'));
+    };
+
+    const handleModalClose = () => {
+        setOpenModal(false);
+    }
+
     return (
         <div className="overflow-x-auto">
+            <button className="confirm_button" onClick={() => setOpenModal(true)}> Add </button>
+            {openModal && <AddCategory onAccept={handleModalAccept} onClose={handleModalClose} />}
             <Table striped>
                 <Table.Head>
                     <Table.HeadCell>ID</Table.HeadCell>
