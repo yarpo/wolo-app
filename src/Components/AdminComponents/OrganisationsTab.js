@@ -22,7 +22,7 @@ const OrganisationsTab = () => {
         setOpenModal(false);
         console.log("Accepted Data:", data);
 
-        postRequestWithJson(URLS.ADD_ORGANISATION, localStorage.getItem('token'), data, t('joinShiftSuccess'), t('joinShiftError'));
+        postRequestWithJson(URLS.ADD_ORGANISATION, localStorage.getItem('token'), data, t('addOrganisationSuccess'), t('addOrganisationFail'));
     };
 
     const handleModalClose = () => {

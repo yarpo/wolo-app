@@ -83,7 +83,7 @@ function AddOrganisation({ onAccept, onClose }) {
                 </div>
                 <div className="max-w-md">
                     <div className="mb-2 block">
-                        <Label htmlFor="phone" value="Phone number (optional)" />
+                        <Label htmlFor="phone" value="Phone number" />
                     </div>
                     <TextInput id="phone" ref={phoneInputRef} type="phone" icon={HiPhone} placeholder="123 456 789" required />
                 </div>
