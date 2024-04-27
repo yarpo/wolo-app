@@ -7,8 +7,8 @@ import fetchData from '../../Utils/fetchData.js';
 import { URLS } from '../../config.js';
 
 const Filters = ({ setFilteredEvents }) => {
-  
-  const {t} = useTranslation();
+
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const { filters, setFilters } = useFiltersContext();
   const [apiResponse, setApiResponse] = useState([]);
@@ -16,45 +16,45 @@ const Filters = ({ setFilteredEvents }) => {
   const [districts, setDistricts] = useState([]);
   const [organizations, setOrganizations] = useState([]);
 
-useEffect(() => {
+  useEffect(() => {
     fetchData(URLS.EVENTS, setApiResponse);
-}, [filters, categories]);
+  }, [filters, categories]);
 
-useEffect(() => {
+  useEffect(() => {
     fetchData(URLS.CATEGORIES, setCategories);
     fetchData(URLS.DISTRICTS, setDistricts);
     fetchData(URLS.ORGANISATIONS, setOrganizations);
-}, []);
+  }, []);
 
-useEffect(() => {
-  const filteredEvents = apiResponse.filter((event) => {
+  useEffect(() => {
+    const filteredEvents = apiResponse.filter((event) => {
 
-    const isMatchingTag = filters.chosenTags.some((tag) => 
-      tag === event.organisation || 
-      event.categories.some(category => category.name === tag) ||
-      event.district === tag ||
-      event.shifts.some(shift => shift.requiredMinAge.toString() === tag)
-    );
-    
-    const isMatchingDate =
-      filters.selectedDate === null || new Date(event.shifts[0].date) >= filters.selectedDate;
+      const isMatchingTag = filters.chosenTags.some((tag) =>
+        tag === event.organisation ||
+        event.categories.some(category => category.name === tag) ||
+        event.district === tag ||
+        event.shifts.some(shift => shift.requiredMinAge.toString() === tag)
+      );
 
-    const isMatchingVerification =
-      !filters.requiresVerification || event.peselVerificationRequired === false;
+      const isMatchingDate =
+        filters.selectedDate === null || new Date(event.shifts[0].date) >= filters.selectedDate;
 
-    const isMatchingBooking =
-      !filters.hideFullyBookedEvents || event.shifts[0].signedUp < event.shifts[0].capacity;
+      const isMatchingVerification =
+        !filters.requiresVerification || event.peselVerificationRequired === false;
 
-    return (
-      (filters.chosenTags.length === 0 || isMatchingTag) &&
-      isMatchingDate &&
-      isMatchingVerification &&
-      isMatchingBooking 
-    );
-  });
+      const isMatchingBooking =
+        !filters.hideFullyBookedEvents || event.shifts[0].signedUp < event.shifts[0].capacity;
 
-  setFilteredEvents(filteredEvents);
-}, [filters, setFilteredEvents, apiResponse]);
+      return (
+        (filters.chosenTags.length === 0 || isMatchingTag) &&
+        isMatchingDate &&
+        isMatchingVerification &&
+        isMatchingBooking
+      );
+    });
+
+    setFilteredEvents(filteredEvents);
+  }, [filters, setFilteredEvents, apiResponse]);
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -90,16 +90,16 @@ useEffect(() => {
   };
 
   const handleResetFilters = () => {
-  setFilters({
-    chosenTags: [],
-    chosenLocation: '',
-    chosenOrganisation: '',
-    selectedDate: null,
-    requiresVerification: false,
-    hideFullyBookedEvents: false,
-    selectedAge: '',
-  });
-};
+    setFilters({
+      chosenTags: [],
+      chosenLocation: '',
+      chosenOrganisation: '',
+      selectedDate: new Date(),
+      requiresVerification: false,
+      hideFullyBookedEvents: false,
+      selectedAge: '',
+    });
+  };
 
   if (apiResponse.length === 0) {
     return <p>Loading...</p>;

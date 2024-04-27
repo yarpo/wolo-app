@@ -129,5 +129,8 @@
   "noCurrentEvents": "Nie jesteś zapisany na żadne wydarzenie. Spróbuj wyszukać na stronie Wszystkie Wydarzenia!",
   "noPastEvents": "Nie brałeś udziału w żadnych wydarzeniach.",
   "noCurrentEventsOrganisation": "Twoja organizacja nie ma żadnych trwających wydarzeń. Spróbuj utworzyć jedno!",
-  "noPastEventsOrganisation": "Twoja organizacja nie miała żadnych wcześniejszych wydarzeń."
+  "noPastEventsOrganisation": "Twoja organizacja nie miała żadnych wcześniejszych wydarzeń.",
+  "theyNeedYouBanner": "Te wydarzenia odbywają się już niedługo, a nie uzyskały pełnej liczby wolontariuszy. Być może czekają właśnie na Ciebie!",
+  "addOrganisationSuccess": "Pomyślnie utworzono nową organizację",
+  "addOrganisationFail": "Wystąpił problem podczas tworzenia nowej organizacji. Proszę spróbować ponownie później"
 }
