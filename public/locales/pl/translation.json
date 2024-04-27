@@ -128,5 +128,7 @@
   "thereAreNoVolunteers": "Nie ma zarejestrowanych wolontariuszy",
   "theyNeedYouBanner": "Te wydarzenia odbywają się już niedługo, a nie uzyskały pełnej liczby wolontariuszy. Być może czekają właśnie na Ciebie!",
   "addOrganisationSuccess": "Pomyślnie utworzono nową organizację",
-  "addOrganisationFail": "Wystąpił problem podczas tworzenia nowej organizacji. Proszę spróbować ponownie później"
+  "addOrganisationFail": "Wystąpił problem podczas tworzenia nowej organizacji. Proszę spróbować ponownie później",
+
+  "eventIsOver": "To wydarzenie już się odbyło"
 }

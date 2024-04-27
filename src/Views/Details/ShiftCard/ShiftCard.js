@@ -14,7 +14,7 @@ import { Card } from "flowbite-react";
 import formatDate from '../../../Utils/formatDate.js';
 import formatTime from '../../../Utils/formatTime.js';
 
-const ShiftCard = ({ shift, city }) => {
+const ShiftCard = ({ shift, city, isInPast }) => {
     const { t } = useTranslation();
     const [roles, setRoles] = useState(null);
     const [id, setId] = useState(null);
@@ -76,15 +76,15 @@ const ShiftCard = ({ shift, city }) => {
     return (
         <div className="card">
             <Card className="max-w-sm">
-                <p className="font-normal text-gray-700 dark:text-gray-400">
+                <span className="font-normal text-gray-700 dark:text-gray-400">
                     <p><strong>{t('date')}:</strong> {formatDate(shift.date)}</p>
                     <p><strong>{t('time')}:</strong> {formatTime(shift.startTime)} - {formatTime(shift.endTime)}</p>
                     <p><strong>{t('volunteers')}:</strong> {shift.registeredUsers} / {shift.capacity}</p>
                     <p><strong>{shift.district}, {city}</strong></p>
                     <p><strong> {shift.street} {shift.homeNum}</strong></p>
                     <p>{shift.shiftDirections}</p>
-                </p>
-                <form onSubmit={(e) => e.preventDefault()}>
+                </span>
+                {!isInPast && <form onSubmit={(e) => e.preventDefault()}>
                     {canSignIn && !userShifts.includes(shiftId) && <button type="button"  onClick={() => setConfirmPhone(true)} id="sign-in" > {t('signIn')} </button>}
                     <Confirmation id="sign-in"
                         buttonName={t('signIn')}
@@ -117,11 +117,9 @@ const ShiftCard = ({ shift, city }) => {
                             openModal={confirmLeave}
                             setOpenModal={setConfirmLeave}
                         />
-                </form>
+                    {!canSignIn && !isAdmin && !isModerator && <p id="sign_in_section_error">{t('volunteersRestricedFunctionality')}. <Link to="/login">{t('signInToday')}</Link></p>}
+                </form>}
             </Card>
-            
-
-            {!canSignIn && !isAdmin && !isModerator && <p id="sign_in_section_error">{t('volunteersRestricedFunctionality')}. <Link to="/login">{t('signInToday')}</Link></p>}
         </div>
     );
 };
