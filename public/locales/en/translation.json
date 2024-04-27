@@ -126,5 +126,8 @@
   "organiserPage": "Organizer Page",
   "volunteerPage": "Your Page",
   "thereAreNoVolunteers": "There are no signed in volunteers",
-  "theyNeedYouBanner": "These events are happening soon and haven't reached the full number of volunteers yet. Maybe they're waiting for you!"
+  "theyNeedYouBanner": "These events are happening soon and haven't reached the full number of volunteers yet. Maybe they're waiting for you!",
+  
+  "addOrganisationSuccess": "Successfully created new organisation",
+  "addOrganisationFail": "There was a problem creating new organisation. Please try again later"
 }
