@@ -36,7 +36,7 @@ const Details = () => {
     fetchUser().then(data => {
       if (data) {
         setRoles(data.roles);
-        setUserOrganisation(data.organisationName);
+        setUserOrganisation(data.organisationId);
       }
     })
   }, []);
