@@ -102,7 +102,7 @@ const Details = () => {
         <p className="details_shifts_text"><strong>{t('shifts')}:</strong></p>
         <div className='details_shift_card_wrapper'>
           {eventData.shifts.map(shift => (
-            <ShiftCard key={shift.id} shift={shift} />
+            <ShiftCard key={shift.id} shift={shift} city={eventData.city} />
           ))}
         </div>
 

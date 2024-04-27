@@ -1,3 +1,5 @@
+"use client";
+
 import { useTranslation } from 'react-i18next';
 import React, { useState, useEffect, useCallback } from 'react';
 import { toast } from 'react-toastify';
@@ -8,8 +10,11 @@ import fetchUserId from '../../../Utils/fetchUserId.js';
 import fetchUserShifts from '../../../Utils/fetchUserShifts.js';
 import postRequest from '../../../Utils/postRequest.js';
 import Confirmation from '../../../Components/Popups/Confirmation.js';
+import { Card } from "flowbite-react";
+import formatDate from '../../../Utils/formatDate.js';
+import formatTime from '../../../Utils/formatTime.js';
 
-const ShiftCard = ({ shift }) => {
+const ShiftCard = ({ shift, city }) => {
     const { t } = useTranslation();
     const [roles, setRoles] = useState(null);
     const [id, setId] = useState(null);
@@ -70,49 +75,51 @@ const ShiftCard = ({ shift }) => {
 
     return (
         <div className="card">
-            <form onSubmit={(e) => e.preventDefault()}>
-                <p>ID: {shift.shiftId}</p>
-                <p>Date: {shift.date}</p>
-                <p>Time: {shift.startTime} - {shift.endTime}</p>
-                <p>Capacity: {shift.capacity}</p>
-                <p>Leader Required: {shift.isLeaderRequired ? 'Yes' : 'No'}</p>
-                <p>Minimum Age: {shift.requiredMinAge}</p>
-                <p>Directions: {shift.shiftDirections}</p>
-                <p>Address: {shift.street}, {shift.homeNum}</p>
-                <p>District ID: {shift.districtId}</p>
-                {canSignIn && !userShifts.includes(shiftId) && <button type="button"  onClick={() => setConfirmPhone(true)} id="sign-in" > {t('signIn')} </button>}
-                <Confirmation id="sign-in"
-                    buttonName={t('signIn')}
-                        title={t('phoneConfirmation')}
-                        accept={t('agreeConfirmation')}
-                        deny={t('declineConfirmation')}
-                        styleId="sign-in"
-                        onAgree={() => {
-                            handleUserConfirmation(true)
-                            handleEventInteract()
-                            setConfirmPhone(false)}}
-                        onDeny={() => 
-                            setConfirmPhone(false)}
-                        openModal={confirmPhone}
-                        setOpenModal={setConfirmPhone}
-                    />
-                {canSignIn && userShifts.includes(shiftId) && <button type="button"  onClick={() => setConfirmLeave(true)} id="sign-out">{t('signOff')} </button>}               
-                <Confirmation id="sign-off"
-                    buttonName={t('signIn')}
-                        title={t('leaveShiftConfirmation')}
-                        accept={t('agreeToLeave')}
-                        deny={t('cancelLeave')} 
-                        styleId="sign-out"
-                        onAgree={() => {
-                            handleUserConfirmation(true)
-                            handleEventInteract()
-                            setConfirmLeave(false)}}
-                        onDeny={() => 
-                            setConfirmLeave(false)}
-                        openModal={confirmLeave}
-                        setOpenModal={setConfirmLeave}
-                    />
-            </form>
+            <Card className="max-w-sm">
+                <p className="font-normal text-gray-700 dark:text-gray-400">
+                    <p><strong>{t('date')}:</strong> {formatDate(shift.date)}</p>
+                    <p><strong>{t('time')}:</strong> {formatTime(shift.startTime)} - {formatTime(shift.endTime)}</p>
+                    <p><strong>{t('volunteers')}:</strong> {shift.registeredUsers} / {shift.capacity}</p>
+                    <p><strong>{shift.district}, {city}</strong></p>
+                    <p><strong> {shift.street} {shift.homeNum}</strong></p>
+                    <p>{shift.shiftDirections}</p>
+                </p>
+                <form onSubmit={(e) => e.preventDefault()}>
+                    {canSignIn && !userShifts.includes(shiftId) && <button type="button"  onClick={() => setConfirmPhone(true)} id="sign-in" > {t('signIn')} </button>}
+                    <Confirmation id="sign-in"
+                        buttonName={t('signIn')}
+                            title={t('phoneConfirmation')}
+                            accept={t('agreeConfirmation')}
+                            deny={t('declineConfirmation')}
+                            styleId="sign-in"
+                            onAgree={() => {
+                                handleUserConfirmation(true)
+                                handleEventInteract()
+                                setConfirmPhone(false)}}
+                            onDeny={() => 
+                                setConfirmPhone(false)}
+                            openModal={confirmPhone}
+                            setOpenModal={setConfirmPhone}
+                        />
+                    {canSignIn && userShifts.includes(shiftId) && <button type="button"  onClick={() => setConfirmLeave(true)} id="sign-out">{t('signOff')} </button>}               
+                    <Confirmation id="sign-off"
+                        buttonName={t('signIn')}
+                            title={t('leaveShiftConfirmation')}
+                            accept={t('agreeToLeave')}
+                            deny={t('cancelLeave')} 
+                            styleId="sign-out"
+                            onAgree={() => {
+                                handleUserConfirmation(true)
+                                handleEventInteract()
+                                setConfirmLeave(false)}}
+                            onDeny={() => 
+                                setConfirmLeave(false)}
+                            openModal={confirmLeave}
+                            setOpenModal={setConfirmLeave}
+                        />
+                </form>
+            </Card>
+            
 
             {!canSignIn && !isAdmin && !isModerator && <p id="sign_in_section_error">{t('volunteersRestricedFunctionality')}. <Link to="/login">{t('signInToday')}</Link></p>}
         </div>
