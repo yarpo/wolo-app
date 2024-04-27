@@ -19,7 +19,8 @@ const URLS = {
   USERS_ON_SHIFT: `${BASE_URL}/events/users?shift`,
   EVENT_USERS_PDF: `${BASE_URL}/events/users/pdf`,
   ADD_ORGANISATION: `${BASE_URL}/organisations/add`,
-  USERS_WITH_NO_ROLES: `${BASE_URL}/users/volunteers`
+  USERS_WITH_NO_ROLES: `${BASE_URL}/users/volunteers`,
+  THEY_NEED_YOU: `${BASE_URL}/events/need`
 };
 
 module.exports = { URLS, BASE_URL };

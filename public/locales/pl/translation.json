@@ -125,7 +125,6 @@
   "adminPage": "Strona administratora",
   "organiserPage": "Zarządzaj organizacją",
   "volunteerPage": "Twoja strona",
-  "thereAreNoVolunteers": "Nie ma zarejestrowanych wolontariuszy"
-
-
+  "thereAreNoVolunteers": "Nie ma zarejestrowanych wolontariuszy",
+  "theyNeedYouBanner": "Te wydarzenia odbywają się już niedługo, a nie uzyskały pełnej liczby wolontariuszy. Być może czekają właśnie na Ciebie!"
 }
