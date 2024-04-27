@@ -20,7 +20,6 @@ const CitiesTab = () => {
 
     const handleModalAccept = (data) => {
         setOpenModal(false);
-        console.log("Accepted Data:", data);
 
         postRequestWithJson(URLS.ADD_CITIES, localStorage.getItem('token'), data, t('addCitySuccess'), t('addCityFail'));
     };
