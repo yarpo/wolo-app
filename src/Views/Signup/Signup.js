@@ -56,14 +56,14 @@ console.log(handleRegister);
     const requiredFields = ['firstName', 'lastName', 'email', 'phoneNumber', 'password', 'confirmPassword', 'termsAndConditions'];
     requiredFields.forEach(field => {
       if (field === 'termsAndConditions' && !values[field]) {
-        errors[field] = 'You must agree to the terms and conditions';
+        errors[field] = t('needToAcceptTerms');
       } else if (!values[field]) {
         errors[field] = t('field')  + ' "' + t(field) + '" ' + t('required');
       }
     });
 
     if (values.phoneNumber && !/^\d{9}$/.test(values.phoneNumber)) {
-      errors.phoneNumber = 'Phone number must have 9 digits';
+      errors.phoneNumber = t('invalidPhoneNumber');
     }
 
     if (values.email && !/\S+@\S+\.\S+/.test(values.email)) {

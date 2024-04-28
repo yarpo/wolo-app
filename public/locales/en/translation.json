@@ -80,7 +80,9 @@
   "field": "Field",
   "invalidEmail": "Address Email is not valid",
   "registerSuccess": "You have successfully registered.",
-  "registerError": "There was a problem with registration. Please try again later",
+  "registerError": "User with this email already exists",
+  "invalidPhoneNumber": "Phone number must consist of 9 digits",
+  "needToAcceptTerms": "You need to accept terms and conditions to create an account",
 
   "welcomeToWoloApp": "Welcome to WoloApp",
   "yourAccountStatus": "Your account status",

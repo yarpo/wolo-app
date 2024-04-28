@@ -81,6 +81,8 @@
   "invalidEmail": "Nieprawidłowy adres e-mail",
   "registerSuccess": "Rejestracja przebiegła pomyślnie",
   "registerError": "Użytkownik o podanym adresie e-mail już istnieje",
+  "invalidPhoneNumber": "Numer telefonu musi zawierać 9 cyfr",
+  "needToAcceptTerms": "Musisz zaakceptować warunki i zasady, aby utworzyć konto",
 
   "welcomeToWoloApp": "Witaj w WoloApp",
   "yourAccountStatus": "Status Twojego konta",
