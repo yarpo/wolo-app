@@ -42,7 +42,7 @@ const Signup = () => {
 
 const handleRegister = async (values) => {
   try {
-    postRequestWithJson(URLS.REGISTER, '', values, t('registerSuccess'), t('registerError'));
+    postRequestWithJson(URLS.REGISTER, '', values, t('registerSuccess'), t('registerError'), URLS.LOGIN);
   } catch (error) {
     console.error('Signup error:', error);
   }
