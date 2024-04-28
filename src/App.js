@@ -13,6 +13,7 @@ import OrganiserHomePage from './Views/OrganiserHomePage/OrganiserHomePage.js';
 import OrganiserCreateEvent from './Views/OrganiserCreateEvent/OrganiserCreateEvent.js';
 import AdminHomePage from './Views/AdminHomePage/AdminHomePage.js';
 import VolunteerHomePage from './Views/VolunteerHomePage/VolunteerHomePage.js';
+import TheyNeedYouEvents from './Views/TheyNeedYou/TheyNeedYou.js';
 import Navbar from './Components/Navbar/Navbar';
 import { FiltersProvider } from './Components/Filters/FiltersContext';
 import fetchUserRoles from './Utils/fetchUserRoles.js';
@@ -21,7 +22,8 @@ import './App.css';
 
 function App() {
   const [role, setRole] = useState(null);
-  const token = localStorage.getItem('token');
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
+  const [token, setToken] = useState(localStorage.getItem('token'));
 
   useEffect(() => {
     if (token) {
@@ -29,7 +31,7 @@ function App() {
         .then(roles => setRole(roles))
         .catch(error => console.error('Error: No information about the user', error));
     }
-  }, [token]);
+  }, [token, user]);
 
   return (
     <>
@@ -42,8 +44,9 @@ function App() {
             <Route path="/events" element={<AllEvents />} />
             <Route path="/details/:id" element={<Details />} />
             <Route path="/organiser" element={<Organiser />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<Login  setToken={setToken} setUser={setUser}  />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/needyou" element={<TheyNeedYouEvents />} />
             {role && role.includes('MODERATOR') && <Route path="/organiserHomePage" element={<OrganiserHomePage />} />}
             {role && role.includes('ADMIN') && <Route path="/adminHomePage" element={<AdminHomePage />} />}
             {role && role.includes('USER') && <Route path="/volunteerHomePage" element={<VolunteerHomePage />} />}

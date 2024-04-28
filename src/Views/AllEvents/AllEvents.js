@@ -12,9 +12,11 @@ const AllEvents = () => {
     <div id="container">
       <Filters setFilteredEvents={setFilteredEvents} />
 
-      {filteredEvents.map(event => (
-        <EventCard key={event.id} event={event} />
-      ))}
+      <div className='all_events_cards'>
+        {filteredEvents.map(event => (
+          <EventCard key={event.id} event={event} />
+        ))}
+      </div>
     </div>
   );
 };

@@ -26,11 +26,11 @@
   #mainContainer_hero {
     display: flex;
     flex-direction: column;
-    align-items: center;
     flex-wrap: wrap;
-    padding-top: 100px;
+    padding-top: 275px;
+    padding-bottom: 100px;
     width: 100%;
-    height: 520px;
+    height: fit-content;
     background: url("../images/hero.jpg") no-repeat 100% 40% / cover;
     margin: 0 auto;
   }
@@ -55,13 +55,23 @@
   }
 
   #MainRow_hero {
+    width: 50%;
     display: flex;
     justify-content: space-between;
-    gap: 40px;
+    margin-top: -50px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   #MainRow_hero > :nth-last-child(-n+2) {
     margin-top: auto; /* Push the last two children to the bottom */
+  }
+
+  #selectInput_hero{
+    margin-left: 40px;
+  }
+  #datePicker_hero{
+    margin-left: -20px;
   }
 
   #selectInput_hero,
@@ -75,8 +85,8 @@
     border: 0px;
     font-size: 30px;
     font-family: 'Open Sans', sans-serif;
-    margin: 10px;
     text-align: center;
+    margin-top: -50px;
   }
 
   #filters_hero{

@@ -8,7 +8,7 @@ export const useFiltersContext = () => {
 
 export const FiltersProvider = ({ children }) => {
   const [filters, setFilters] = useState({
-    selectedDate: null,
+    selectedDate: new Date(),
     chosenTags: [],
     requiresVerification: false,
     hideFullyBookedEvents: false,

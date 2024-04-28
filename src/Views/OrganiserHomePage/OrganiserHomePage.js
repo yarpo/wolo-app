@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from "react-router-dom";
 import '../../styles/organiser-home-page.scss';
 import OrganiserEventListDisplay from '../../Components/OrganiserEventListDisplay/OrganiserEventListDisplay.js';
+import WelcomingBanner from '../../Components/WelcomingBanner/WelcomingBanner.js';
 
 const OrganiserHomePage = () => {
 
@@ -9,15 +10,8 @@ const OrganiserHomePage = () => {
 
     return (
         <div className='organiser_home_page_container'>
-            <div id="background_photo">
-                <div id="welcome_text">
-                    <div>
-                        <h1>{t('hello')} user. {t('welcome')}</h1>
-                    </div>
-                    <div>
-                        <h2>{t('yourOrganisation')}: schronisko przyjazna łapa</h2>
-                    </div>
-                </div>
+            <div id="organiser_home_page_background_photo">
+                <WelcomingBanner isOrganizerPage={ true }/>
             </div>
             <div id="button_div">
                 <form>

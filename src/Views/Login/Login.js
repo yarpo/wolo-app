@@ -1,37 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Formik } from 'formik';
+import { Formik, Field } from 'formik';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import '../../styles/login.scss';
 import { URLS } from '../../config.js';
 import fetchUserId from '../../Utils/fetchUserId.js';
+import { TextInput } from 'flowbite-react'; 
+import { HiMail, HiEye, HiEyeOff } from 'react-icons/hi';
 
-const Login = () => {
-  const [id, setId] = useState(null);
-  const [showPassword, setShowPassword] = useState(false);
+const Login = ({ setToken, setUser }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const navigate_user_logged = useNavigate();
-  const toggleShowPassword = () => {
-    setShowPassword(!showPassword);
+  const [id, setId] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const toggleShowPassword = () => setShowPassword(!showPassword);
+
+  const fetchUserData = async () => {
+    const userId = await fetchUserId();
+    setId(userId);
   };
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      const userId = await fetchUserId();
-      setId(userId);
-    };
-
-    fetchUserData();
-  }, []);
-
-  useEffect(() => {
-    if (id !== null) {
-      navigate_user_logged('/events');
-    }
-  }, [id, navigate_user_logged]);
-
-const handleLogin = async (values) => {
+  const handleLogin = async (values) => {
     const response = await fetch(URLS.AUTHENTICATE, {
       method: 'POST',
       headers: {
@@ -43,6 +35,16 @@ const handleLogin = async (values) => {
     if (response.ok) {
       const data = await response.json();
       localStorage.setItem('token', data.accessToken);
+      setToken(data.accessToken);
+      setUser(data.user);
+      
+      if (values.rememberMe) {
+        localStorage.setItem('rememberMe', values.email);
+        localStorage.setItem('password', values.password);
+      } else {
+        localStorage.removeItem('rememberMe');
+        localStorage.removeItem('password');
+      }
 
       const userResponse = await fetch(URLS.USER, {
         headers: {
@@ -51,15 +53,36 @@ const handleLogin = async (values) => {
       });
       const userData = await userResponse.json();
       localStorage.setItem('user', JSON.stringify(userData));
-
+      setUser(userData);
+      
       navigate('/');
+      window.location.reload();
     } else {
-      console.error('Failed to login'); //alert to do
+      toast.error('Failed to login. Please check your credentials.');
     }
   };
 
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
+  useEffect(() => {
+    if (id !== null) {
+      navigate('/events');
+    }
+  }, [id, navigate]);
+
+  useEffect(() => {
+    const rememberMe = localStorage.getItem('rememberMe');
+    const password = localStorage.getItem('password');
+
+    if (rememberMe && password) {
+      handleLogin({ email: rememberMe, password: password });
+    }
+  }, []);
+
   return (
-    <div className="login-form" >
+    <div className="login-form">
       <Formik
         initialValues={{ email: '', password: '' }}
         validate={values => {
@@ -70,6 +93,9 @@ const handleLogin = async (values) => {
             !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
           ) {
             errors.email = 'Invalid email address';
+          }
+          if (!values.password) {
+            errors.password = 'Required'; 
           }
           return errors;
         }}
@@ -82,41 +108,43 @@ const handleLogin = async (values) => {
           handleBlur,
           isSubmitting,
         }) => (
-            <form onSubmit={(event) => {
-                event.preventDefault();
-                handleLogin(values);
-            }}>
+          <form onSubmit={(event) => {
+            event.preventDefault();
+            handleLogin(values);
+          }}>
             <h1 className="login-form__title">{t('login')}</h1>
-            <p className="login-form_subtitle" >{t('continue')}</p>
-            <button className="login-form__button" type="button">G - {t('continueWithGoogle')}</button>
-           <div className="login-form_paragraph-container">
-              <hr />
-                <p className="login-form_paragraph">{t('orContinueWith')}</p>
-              <hr />
-           </div>
-            <input
-              className="login-form__input"
-              placeholder={t('email')}
-              type="email"
-              name="email"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.email}
-            />
+            <p className="login-form_subtitle">{t('continue')}</p>
+            <div className="max-w-md">
+              <TextInput 
+                id="email4" 
+                type="email"
+                name='email' 
+                icon={HiMail} 
+                placeholder={t('email')}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.email} 
+                required 
+              />
+            </div>
             {errors.email && touched.email && <span className="error">{errors.email} *</span>}
             <br />
-            <Link className="login-form_forgot-password">{t('forgotPassword')}</Link>
-            <input
-              className="login-form__input"
+          <div className="max-w-md">
+            <TextInput 
+              id="password1"
               placeholder={t('password')}
               type={showPassword ? "text" : "password"}
               name="password"
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.password}
+              required
+              icon={showPassword ? HiEyeOff : HiEye}
+              iconClick={toggleShowPassword}
             />
+          </div>
             {errors.password && touched.password && <span className="error">{errors.password} *</span>}
-            <br />
+            <Link className="login-form_forgot-password">{t('forgotPassword')}</Link>
             <div className="checkbox-container">
               <input
                 onClick={toggleShowPassword}
@@ -124,15 +152,11 @@ const handleLogin = async (values) => {
                 id="showPassword"
                 name="showPassword"
               />
-              <span className="checkbox-text" >{t('showPassword')}</span>
+              <span className="checkbox-text">{t('showPassword')}</span>
             </div>
             <div className="checkbox-container">
-              <input
-                type="checkbox"
-                id="keepMeLoggedIn"
-                name="keepMeLoggedIn"
-              />
-              <span className="checkbox-text">{t('keepMeLoggedIn')}</span>
+              <Field type="checkbox" id="keepMeLoggedIn" name="keepMeLoggedIn" />
+              <span className="checkbox-text" htmlFor="keepMeLoggedIn">{t('keepMeLoggedIn')}</span>
             </div>
             <br />
             <button className="login-form__button" type="submit" disabled={isSubmitting}>

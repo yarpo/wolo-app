@@ -17,6 +17,16 @@
   "location": "Location",
   "signIn": "Sign In",
   "moreEventsFromThisOrganizer": "More events from this organiser",
+  "phoneConfirmation": "I agree to give my phone number to the organiser.",
+  "agreeConfirmation": "I Agree",
+  "declineConfirmation": "Decline",
+  "leaveShiftConfirmation": "Are you sure you want to leave this shift?",
+  "agreeToLeave": "Leave the shift",
+  "cancelLeave": "Cancel",
+  "joinShiftError": "Failed to join the shift",
+  "joinShiftSuccess": "Successfully joined the shift",
+  "leaveShiftError": "Failed to leave the shift",
+  "leaveShiftSuccess": "Successfully left the shift",
 
   "organizedBy": "Organised By",
   "needed": "Needed",
@@ -115,5 +125,19 @@
   "adminPage": "Admin Page",
   "organiserPage": "Organizer Page",
   "volunteerPage": "Your Page",
-  "thereAreNoVolunteers": "There are no signed in volunteers"
+  "thereAreNoVolunteers": "There are no signed in volunteers",
+  "theyNeedYouBanner": "These events are happening soon and haven't reached the full number of volunteers yet. Maybe they're waiting for you!",
+
+  "addOrganisationSuccess": "Successfully created new organisation",
+  "addOrganisationFail": "There was a problem creating new organisation. Please try again later",
+  "addCitySuccess": "Successfully created new city",
+  "addCityFail": "There was a problem creating new city. Please try again later",
+  "addDistrictSuccess": "Successfully created new district",
+  "addDistrictFail": "There was a problem creating new district. Please try again later",
+  "addEventSuccess": "Successfully created new event",
+  "addEventFail": "There was a problem creating new event. Please try again later",
+  "addUserSuccess": "Successfully created new user",
+  "addUserFail": "There was a problem creating new user. Please try again later",
+  
+  "cities": "Cities"
 }
