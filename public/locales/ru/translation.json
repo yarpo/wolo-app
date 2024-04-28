@@ -80,6 +80,8 @@
     "required": "is required",
     "field": "Field",
     "invalidEmail": "Invalid email",
+    "registerSuccess": "You have successfully registered.",
+    "registerError": "There was a problem with registration. Please try again later",
 
     "welcomeToWoloApp": "Ласкаво просимо в WoloApp",
     "yourAccountStatus": "Статус вашого облікового запису",

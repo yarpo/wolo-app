@@ -79,6 +79,8 @@
   "required": "is required",
   "field": "Field",
   "invalidEmail": "Address Email is not valid",
+  "registerSuccess": "You have successfully registered.",
+  "registerError": "There was a problem with registration. Please try again later",
 
   "welcomeToWoloApp": "Welcome to WoloApp",
   "yourAccountStatus": "Your account status",

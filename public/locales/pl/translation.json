@@ -79,6 +79,8 @@
   "required": "jest wymagane",
   "field": "Pole",
   "invalidEmail": "Nieprawidłowy adres e-mail",
+  "registerSuccess": "Rejestracja przebiegła pomyślnie",
+  "registerError": "Użytkownik o podanym adresie e-mail już istnieje",
 
   "welcomeToWoloApp": "Witaj w WoloApp",
   "yourAccountStatus": "Status Twojego konta",

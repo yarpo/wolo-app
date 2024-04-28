@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import '../../styles/signup.scss';
 import { URLS } from '../../config.js';
 import fetchUserId from '../../Utils/fetchUserId.js';
+import postRequestWithJson from '../../Utils/postRequestWithJson.js';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -41,21 +42,9 @@ const Signup = () => {
 
 const handleRegister = async (values) => {
   try {
-    const response = await fetch(URLS.REGISTER, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(values)
-    });
-
-    if (response.ok) {
-      window.location.href = URLS.LOGIN;
-    } else {
-      console.error('Failed to register'); //alert to do
-    }
+    postRequestWithJson(URLS.REGISTER, '', values, t('registerSuccess'), t('registerError'));
   } catch (error) {
-    console.error('Signup error:', error); //aletr to do
+    console.error('Signup error:', error);
   }
 };
 
@@ -69,16 +58,20 @@ console.log(handleRegister);
       if (field === 'termsAndConditions' && !values[field]) {
         errors[field] = 'You must agree to the terms and conditions';
       } else if (!values[field]) {
-        errors[field] = t(field) + ' is required';
+        errors[field] = t('field')  + ' "' + t(field) + '" ' + t('required');
       }
     });
 
+    if (values.phoneNumber && !/^\d{9}$/.test(values.phoneNumber)) {
+      errors.phoneNumber = 'Phone number must have 9 digits';
+    }
+
     if (values.email && !/\S+@\S+\.\S+/.test(values.email)) {
-      errors.email = 'Email address is invalid';
+      errors.email = t('invalidEmail');
     }
 
     if (values.password && values.confirmPassword && values.password !== values.confirmPassword) {
-      errors.confirmPassword = 'Passwords must match';
+      errors.confirmPassword = t('passwordsDoNotMatch');
     }
 
     return errors;
@@ -156,6 +149,7 @@ console.log(handleRegister);
             </div>
             <br/>
             <div className="button-group">
+            <ErrorMessage className="error" name="termsAndConditions" component="div" />
             <button className="signup-form_button" type="submit" disabled={isSubmitting}>
               {t('signup')}
             </button>
