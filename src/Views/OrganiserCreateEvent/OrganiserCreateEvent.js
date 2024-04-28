@@ -87,7 +87,7 @@ const OrganiserCreateEvent = () => {
               <Field as={TextInput} id="imageUrl" type="text" sizing="md" name="imageUrl" />
 
              <Label htmlFor="categoryId" value="Category" />
-              <Field as={Select} id="categoryId" name="categoryId">
+              <Field as={Select} id="categories" name="categories">
                 {categories.map(category => (
                   <option key={category.id} value={category.id}>{category.name}</option>
                 ))}
