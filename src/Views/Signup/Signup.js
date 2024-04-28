@@ -64,10 +64,12 @@ console.log(handleRegister);
   const validate = values => {
     const errors = {};
 
-    const requiredFields = ['firstName', 'lastName', 'email', 'password', 'confirmPassword', 'isAdult', 'termsAndConditions'];
+    const requiredFields = ['firstName', 'lastName', 'email', 'phoneNumber', 'password', 'confirmPassword', 'termsAndConditions'];
     requiredFields.forEach(field => {
-      if (!values[field]) {
-        errors[field] = `${field.charAt(0).toUpperCase() + field.slice(1)} is required`;
+      if (field === 'termsAndConditions' && !values[field]) {
+        errors[field] = 'You must agree to the terms and conditions';
+      } else if (!values[field]) {
+        errors[field] = t(field) + ' is required';
       }
     });
 
@@ -115,10 +117,10 @@ console.log(handleRegister);
             <ErrorMessage className="error" name="email" component="div" />
             <br/>
 
-            <label htmlFor="phonenumber">{t('phone')}</label>
+            <label htmlFor="phoneNumber">{t('phoneNumber')}</label>
             <Field className="signup-from_input" type="text" name="phoneNumber" />
             <ErrorMessage className="error" name="phoneNumber" component="div" />
-             <br/>
+            <br/>
 
             <div className="password-field">
               <label htmlFor="password">{t('password')}</label>
@@ -142,7 +144,7 @@ console.log(handleRegister);
              <br/>
 
             <div className="checkbox_signup-group">
-              <label htmlFor="isAdult">
+              <label htmlFor="checkIfAdult">
                 <Field type="checkbox" name="isAdult" />
                 {t('confirmAge')}
               </label>
@@ -157,12 +159,6 @@ console.log(handleRegister);
             <button className="signup-form_button" type="submit" disabled={isSubmitting}>
               {t('signup')}
             </button>
-            <div className="line-text">
-              <hr />
-              <p>{t('orContinueWithGoogle')}</p>
-              <hr />
-            </div>
-            <button className="signup-form_button">{t('SignUpWithGoole')} </button>
             <p>{t('alreadyHaveAccount')}<Link className="login-form_register-text" to="/login">{t('loginNow')}</Link></p>
           </div>
           </Form>
