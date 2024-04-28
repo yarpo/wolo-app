@@ -125,5 +125,19 @@
   "adminPage": "Admin Page",
   "organiserPage": "Organizer Page",
   "volunteerPage": "Your Page",
-  "thereAreNoVolunteers": "There are no signed in volunteers"
+  "thereAreNoVolunteers": "There are no signed in volunteers",
+  "theyNeedYouBanner": "These events are happening soon and haven't reached the full number of volunteers yet. Maybe they're waiting for you!",
+
+  "addOrganisationSuccess": "Successfully created new organisation",
+  "addOrganisationFail": "There was a problem creating new organisation. Please try again later",
+  "addCitySuccess": "Successfully created new city",
+  "addCityFail": "There was a problem creating new city. Please try again later",
+  "addDistrictSuccess": "Successfully created new district",
+  "addDistrictFail": "There was a problem creating new district. Please try again later",
+  "addEventSuccess": "Successfully created new event",
+  "addEventFail": "There was a problem creating new event. Please try again later",
+  "addUserSuccess": "Successfully created new user",
+  "addUserFail": "There was a problem creating new user. Please try again later",
+  
+  "cities": "Cities"
 }

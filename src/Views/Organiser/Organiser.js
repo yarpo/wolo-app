@@ -13,6 +13,7 @@ import fetchData from '../../Utils/fetchData.js';
 import { URLS } from '../../config.js';
 import EventCard from '../../Components/EventCard/EventCard.js';
 import { useNavigate } from 'react-router-dom';
+import fetchDataWithNavigate from '../../Utils/fetchDataWithNavigate.js';
 
 
 const Organiser = () => {
@@ -27,7 +28,7 @@ const Organiser = () => {
   useEffect(() => {
     const fetchDataForOrganiser = async () => {
       const url = `${URLS.ORGANISATIONS}/${organisationId}`;
-      fetchData(url, setOrganiserData, navigate);
+      fetchDataWithNavigate(url, setOrganiserData, navigate);
     };
 
     if (organisationId) {

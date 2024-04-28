@@ -13,12 +13,12 @@ import '../../styles/details.scss';
 import EventCard from '../../Components/EventCard/EventCard.js';
 import 'react-toastify/dist/ReactToastify.css';
 import fetchData from '../../Utils/fetchData.js';
-import fetchUserOrganisation from '../../Utils/fetchUserOrganisation.js';
-import fetchUserRoles from '../../Utils/fetchUserRoles.js';
 import formatDate from '../../Utils/formatDate.js';
 import SignedInVolunteers from './SignedInVolunteers/SignedInVolunteers.js';
 import { URLS } from '../../config.js'
 import ShiftCard from './ShiftCard/ShiftCard.js';
+
+import fetchUser from '../../Utils/fetchUser.js';
 
 const Details = () => {
   const { t } = useTranslation();
@@ -31,14 +31,12 @@ const Details = () => {
   const isAdmin = roles && roles.includes('ADMIN');
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      const userRoles = await fetchUserRoles();
-      setRoles(userRoles);
-      const userOrganisation = await fetchUserOrganisation();
-      setUserOrganisation(userOrganisation);
-    };
-
-    fetchUserData();
+    fetchUser().then(data => {
+      if (data) {
+        setRoles(data.roles);
+        setUserOrganisation(data.organisationName);
+      }
+    })
   }, []);
 
   useEffect(() => {
@@ -81,11 +79,15 @@ const Details = () => {
           </li>
           <li>
             <BiBorderAll id="icon" /> <strong>{t('category')}:</strong>{' '}
-            {categories}
+            {categories.map((category, index) => index === categories.length - 1 ? category : category + ", ")}
           </li>
           <li>
             <VscOrganization id="icon" /> <strong>{t('organizer')}:</strong>{' '}
             <Link to={`/organiser?organisationId=${eventData.organisationId}`}> {organisationName} </Link>
+          </li>
+          <li>
+            <VscLocation id="icon" /> <strong>{t('location')}:</strong>{' '}
+            {city}
           </li>
         </ul>
       </div>
@@ -96,28 +98,24 @@ const Details = () => {
 
       <p id="description">{description}</p>
 
-      <div id="extra_information">
-        <ul id="information">
-          <li>
-            <VscLocation id="icon" /> <strong>{t('location')}:</strong>{' '}
-            {city}
-          </li>
-        </ul>
-      </div>
+      <div id='column'>
+        <p className="details_shifts_text"><strong>{t('shifts')}:</strong></p>
+        <div className='details_shift_card_wrapper'>
+          {eventData.shifts.map(shift => (
+            <ShiftCard key={shift.id} shift={shift} />
+          ))}
+        </div>
 
-      <div id="column">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d148784.80927349653!2d18.52522342001657!3d54.36117516765159!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46fd731c14d4fa6f%3A0x9bb9fbf163b7be8d!2zR2RhxYRzaw!5e0!3m2!1spl!2spl!4v1685735055387!5m2!1spl!2spl"
-          title="map of Gdansk"
-          allowFullScreen=""
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        ></iframe>
+        <div className='details_map'>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d148784.80927349653!2d18.52522342001657!3d54.36117516765159!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46fd731c14d4fa6f%3A0x9bb9fbf163b7be8d!2zR2RhxYRzaw!5e0!3m2!1spl!2spl!4v1685735055387!5m2!1spl!2spl"
+            title="map of Gdansk"
+            allowFullScreen=""
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
       </div>
-
-      {eventData.shifts.map(shift => (
-        <ShiftCard key={shift.id} shift={shift} id='details_more_events_item' />
-      ))}
 
       {!((eventData.organisationId === userOrganisation && isModerator) || isAdmin) && <div id="details_more_events">
         <h2>{t('moreEventsFromThisOrganizer')}</h2>

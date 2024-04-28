@@ -125,7 +125,19 @@
   "adminPage": "Strona administratora",
   "organiserPage": "Zarządzaj organizacją",
   "volunteerPage": "Twoja strona",
-  "thereAreNoVolunteers": "Nie ma zarejestrowanych wolontariuszy"
+  "thereAreNoVolunteers": "Nie ma zarejestrowanych wolontariuszy",
+  "theyNeedYouBanner": "Te wydarzenia odbywają się już niedługo, a nie uzyskały pełnej liczby wolontariuszy. Być może czekają właśnie na Ciebie!",
+  
+  "addOrganisationSuccess": "Pomyślnie utworzono nową organizację",
+  "addOrganisationFail": "Wystąpił problem podczas tworzenia nowej organizacji. Spróbuj ponownie później",
+  "addCitySuccess": "Pomyślnie utworzono nowe miasto",
+  "addCityFail": "Wystąpił problem podczas tworzenia nowego miasta. Spróbuj ponownie później",
+  "addDistrictSuccess": "Pomyślnie utworzono nowy dystrykt",
+  "addDistrictFail": "Wystąpił problem podczas tworzenia nowego dystryktu. Spróbuj ponownie później",
+  "addEventSuccess": "Pomyślnie utworzono nowe wydarzenie",
+  "addEventFail": "Wystąpił problem podczas tworzenia nowego wydarzenia. Spróbuj ponownie później",
+  "addUserSuccess": "Pomyślnie utworzono nowego użytkownika",
+  "addUserFail": "Wystąpił problem podczas tworzenia nowego użytkownika. Spróbuj ponownie później",
 
-
+  "cities": "Miasta"
 }
