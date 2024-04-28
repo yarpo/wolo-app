@@ -6,22 +6,22 @@ import { URLS } from '../../config';
 import fetchData  from  '../../Utils/fetchData';
 import { Table } from "flowbite-react";
 
-import AddCategory from './addRecordModals/AddCategory';
+import AddCity from './addRecordModals/AddCity.js';
 import postRequestWithJson from '../../Utils/postRequestWithJson';
 
-const CategoriesTab = () => {
+const CitiesTab = () => {
     const { t } = useTranslation();
-    const [categories, setCategories] = useState([]);
+    const [cities, setCities] = useState([]);
     const [openModal, setOpenModal] = useState(false);
 
     useEffect(() => {
-        fetchData(URLS.CATEGORIES, setCategories);
+        fetchData(URLS.CITIES, setCities);
     }, []);
 
     const handleModalAccept = (data) => {
         setOpenModal(false);
 
-        postRequestWithJson(URLS.ADD_CATEGORIES, localStorage.getItem('token'), data, t('addCategorySuccess'), t('addCategoryFail'));
+        postRequestWithJson(URLS.ADD_CITIES, localStorage.getItem('token'), data, t('addCitySuccess'), t('addCityFail'));
     };
 
     const handleModalClose = () => {
@@ -31,19 +31,21 @@ const CategoriesTab = () => {
     return (
         <div className="overflow-x-auto">
             <button className="confirm_button" onClick={() => setOpenModal(true)}> Add </button>
-            {openModal && <AddCategory onAccept={handleModalAccept} onClose={handleModalClose} />}
+            {openModal && <AddCity onAccept={handleModalAccept} onClose={handleModalClose} />}
             <Table striped>
                 <Table.Head>
                     <Table.HeadCell>ID</Table.HeadCell>
-                    <Table.HeadCell>Category Name</Table.HeadCell>
+                    <Table.HeadCell>City Name</Table.HeadCell>
+                    <Table.HeadCell>Districts</Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
-                    {categories.map((category, index) => (
+                    {cities.map((city, index) => (
                         <Table.Row key={index} className="bg-white dark:border-gray-700 dark:bg-gray-800">
                             <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                                {category.id}
+                                {city.id}
                             </Table.Cell>
-                            <Table.Cell>{category.name}</Table.Cell>
+                            <Table.Cell>{city.name}</Table.Cell>
+                            <Table.Cell>{city.districts.join(', ')}</Table.Cell>
                         </Table.Row>
                     ))}
                 </Table.Body>
@@ -52,4 +54,4 @@ const CategoriesTab = () => {
     )
 };
 
-export default CategoriesTab;
+export default CitiesTab;

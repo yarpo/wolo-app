@@ -60,7 +60,7 @@
   "firstName": "Imię",
   "lastName": "Nazwisko",
   "email": "Email",
-  "phone": "Numer telefonu (opcjonalnie)",
+  "phoneNumber": "Numer telefonu",
   "password": "Hasło",
   "showPassword": "Pokaż hasło",
   "confirmPassword": "Potwierdź hasło",
@@ -75,7 +75,14 @@
   "signUpNow": "Zarejestruj się teraz",
   "keepMeLoggedIn": "Zaloguj mnie automatycznie",
   "continue": "Kontynuuj swoją przygodę jako wolontariusz",
-  "continueWithGoogle": "Kontynuuj za pomocą Google",
+  "passwordsDoNotMatch": "Passwords do not match",
+  "required": "jest wymagane",
+  "field": "Pole",
+  "invalidEmail": "Nieprawidłowy adres e-mail",
+  "registerSuccess": "Rejestracja przebiegła pomyślnie",
+  "registerError": "Użytkownik o podanym adresie e-mail już istnieje",
+  "invalidPhoneNumber": "Numer telefonu musi zawierać 9 cyfr",
+  "needToAcceptTerms": "Musisz zaakceptować warunki i zasady, aby utworzyć konto",
 
   "welcomeToWoloApp": "Witaj w WoloApp",
   "yourAccountStatus": "Status Twojego konta",
@@ -127,8 +134,20 @@
   "volunteerPage": "Twoja strona",
   "thereAreNoVolunteers": "Nie ma zarejestrowanych wolontariuszy",
   "theyNeedYouBanner": "Te wydarzenia odbywają się już niedługo, a nie uzyskały pełnej liczby wolontariuszy. Być może czekają właśnie na Ciebie!",
+  
   "addOrganisationSuccess": "Pomyślnie utworzono nową organizację",
   "addOrganisationFail": "Wystąpił problem podczas tworzenia nowej organizacji. Proszę spróbować ponownie później",
 
-  "eventIsOver": "To wydarzenie już się odbyło"
+  "eventIsOver": "To wydarzenie już się odbyło",
+  "addCitySuccess": "Pomyślnie utworzono nowe miasto",
+  "addCityFail": "Wystąpił problem podczas tworzenia nowego miasta. Spróbuj ponownie później",
+  "addDistrictSuccess": "Pomyślnie utworzono nowy dystrykt",
+  "addDistrictFail": "Wystąpił problem podczas tworzenia nowego dystryktu. Spróbuj ponownie później",
+  "addEventSuccess": "Pomyślnie utworzono nowe wydarzenie",
+  "addEventFail": "Wystąpił problem podczas tworzenia nowego wydarzenia. Spróbuj ponownie później",
+  "addUserSuccess": "Pomyślnie utworzono nowego użytkownika",
+  "addUserFail": "Wystąpił problem podczas tworzenia nowego użytkownika. Spróbuj ponownie później",
+
+  "cities": "Miasta"
+
 }

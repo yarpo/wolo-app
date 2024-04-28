@@ -61,7 +61,7 @@
     "firstName": "Имя",
     "lastName": "Фамилия",
     "email": "Электронная почта",
-    "phone": "Номер телефона (По желанию)",
+    "phoneNumber": "Номер телефона",
     "password": "Пароль",
     "showPassword": "Показать пароль",
     "confirmPassword": "Подтвердите пароль",
@@ -76,7 +76,14 @@
     "signUpNow": "Зарегистрироваться сейчас",
     "keepMeLoggedIn": "Оставить меня в системе",
     "continue": "Продолжите свой путь волонтёра",
-    "continueWithGoogle": "Продолжить с помощью Google",
+    "passwordsDoNotMatch": "Passwords do not match",
+    "required": "is required",
+    "field": "Field",
+    "invalidEmail": "Invalid email",
+    "registerSuccess": "You have successfully registered.",
+    "registerError": "User with this email already exists",
+    "invalidPhoneNumber": "Phone number must consist of 9 digits",
+    "needToAcceptTerms": "You need to accept terms and conditions to create an account",
 
     "welcomeToWoloApp": "Ласкаво просимо в WoloApp",
     "yourAccountStatus": "Статус вашого облікового запису",
@@ -128,8 +135,22 @@
     "volunteerPage": "Ваша страница",
     "thereAreNoVolunteers": "Нет зарегистрированных добровольцев",
     "theyNeedYouBanner": "Эти мероприятия скоро состоятся, и им еще не хватает полного количества волонтёров. Возможно, они именно вас ждут!",
+
     "addOrganisationSuccess": "Организация успешно создана",
     "addOrganisationFail": "При создании новой организации возникла проблема. Пожалуйста, попробуйте снова позже",
 
-    "eventIsOver": "Это событие уже произошло"
+    "eventIsOver": "Это событие уже произошло",
+
+    "addOrganisationFail": "При создании организации возникла проблема. Пожалуйста, попробуйте позже",
+    "addCitySuccess": "Новый город успешно создан",
+    "addCityFail": "При создании нового города возникла проблема. Пожалуйста, попробуйте позже",
+    "addDistrictSuccess": "Новый район успешно создан",
+    "addDistrictFail": "При создании нового района возникла проблема. Пожалуйста, попробуйте позже",
+    "addEventSuccess": "Новое событие успешно создано",
+    "addEventFail": "При создании нового события возникла проблема. Пожалуйста, попробуйте позже",
+    "addUserSuccess": "Новый пользователь успешно создан",
+    "addUserFail": "При создании нового пользователя возникла проблема. Пожалуйста, попробуйте позже",
+
+    "cities": "Cities"
+
 }
