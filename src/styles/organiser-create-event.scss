@@ -1,11 +1,11 @@
-/* OrganiserCreateEvent.css */
-
-.form-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: calc(100vh - 60px);
-  padding: 20px;
+.form-containe {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding-top: 100px !important;
+  padding-right: 20px !important;
+  padding-bottom: 20px !important;
+  padding-left: 20px !important;
 }
 
 .form-fields {
@@ -29,4 +29,9 @@
 
 .field-input {
   flex: 2;
+}
+
+.half-width {
+  width: 50%;
+  float: left;
 }

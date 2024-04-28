@@ -72,8 +72,8 @@ const OrganiserCreateEvent = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen pt-20" style={{ minHeight: 'calc(100vh)' }}>
-      <div className="flex max-w-md flex-col gap-4">
+  <div className="flex justify-center items-center min-h-screen mt-60" style={{ minHeight: 'calc(100vh)' }}>
+    <div className="flex max-w-md flex-col gap-4">
         <Formik initialValues={initialValues} onSubmit={handleSubmit}>
           {({ isSubmitting, values }) => (
             <Form>
@@ -86,8 +86,8 @@ const OrganiserCreateEvent = () => {
               <Label htmlFor="imageUrl" value="Image URL" />
               <Field as={TextInput} id="imageUrl" type="text" sizing="md" name="imageUrl" />
 
-              <Label htmlFor="categories" value="Categories" />
-              <Field as="select" id="categories" name="categories" multiple>
+             <Label htmlFor="categoryId" value="Category" />
+              <Field as={Select} id="categoryId" name="categoryId">
                 {categories.map(category => (
                   <option key={category.id} value={category.id}>{category.name}</option>
                 ))}
@@ -113,16 +113,16 @@ const OrganiserCreateEvent = () => {
                       <div className="row" key={index}>
                         <div className="col">
                           <Label htmlFor={`shifts.${index}.startTime`} value="Start Time" />
-                          <Field as={TextInput} id={`shifts.${index}.startTime`} type="text" name={`shifts.${index}.startTime`} />
+                          <Field as={TextInput} id={`shifts.${index}.startTime`} type="time" name={`shifts.${index}.startTime`} />
 
                           <Label htmlFor={`shifts.${index}.endTime`} value="End Time" />
-                          <Field as={TextInput} id={`shifts.${index}.endTime`} type="text" name={`shifts.${index}.endTime`} />
+                          <Field as={TextInput} id={`shifts.${index}.endTime`} type="time" name={`shifts.${index}.endTime`} />
 
                           <Label htmlFor={`shifts.${index}.date`} value="Date" />
-                          <Field as={TextInput} id={`shifts.${index}.date`} type="text" name={`shifts.${index}.date`} />
+                          <Field as={TextInput} id={`shifts.${index}.date`} type="date" name={`shifts.${index}.date`} />
 
                           <Label htmlFor={`shifts.${index}.capacity`} value="Capacity" />
-                          <Field as={TextInput} id={`shifts.${index}.capacity`} type="text" name={`shifts.${index}.capacity`} />
+                          <Field as={TextInput} id={`shifts.${index}.capacity`} type="number" name={`shifts.${index}.capacity`} />
 
                           <Label htmlFor={`shifts.${index}.isLeaderRequired`} value="Is Leader Required?" />
                           <Field as={Checkbox} id={`shifts.${index}.isLeaderRequired`} name={`shifts.${index}.isLeaderRequired`} />
