@@ -28,7 +28,6 @@ const OrganiserCreateEvent = () => {
     categories: [],
     imageUrl: '',
     shifts: [{
-      id: null,
       startTime: '',
       endTime: '',
       date: '',
