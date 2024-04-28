@@ -136,7 +136,9 @@
   "theyNeedYouBanner": "Te wydarzenia odbywają się już niedługo, a nie uzyskały pełnej liczby wolontariuszy. Być może czekają właśnie na Ciebie!",
   
   "addOrganisationSuccess": "Pomyślnie utworzono nową organizację",
-  "addOrganisationFail": "Wystąpił problem podczas tworzenia nowej organizacji. Spróbuj ponownie później",
+  "addOrganisationFail": "Wystąpił problem podczas tworzenia nowej organizacji. Proszę spróbować ponownie później",
+
+  "eventIsOver": "To wydarzenie już się odbyło",
   "addCitySuccess": "Pomyślnie utworzono nowe miasto",
   "addCityFail": "Wystąpił problem podczas tworzenia nowego miasta. Spróbuj ponownie później",
   "addDistrictSuccess": "Pomyślnie utworzono nowy dystrykt",
@@ -147,4 +149,5 @@
   "addUserFail": "Wystąpił problem podczas tworzenia nowego użytkownika. Spróbuj ponownie później",
 
   "cities": "Miasta"
+
 }

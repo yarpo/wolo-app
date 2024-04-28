@@ -137,6 +137,8 @@
 
   "addOrganisationSuccess": "Successfully created new organisation",
   "addOrganisationFail": "There was a problem creating new organisation. Please try again later",
+
+  "eventIsOver": "This event is already over",
   "addCitySuccess": "Successfully created new city",
   "addCityFail": "There was a problem creating new city. Please try again later",
   "addDistrictSuccess": "Successfully created new district",

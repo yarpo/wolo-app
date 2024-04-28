@@ -5,8 +5,9 @@ import { URLS } from '../../../config.js';
 import Confirmation from '../../../Components/Popups/Confirmation.js';
 import React, { useState, useEffect, useCallback} from 'react';
 import { Button } from 'flowbite-react';
+import formatDate from '../../../Utils/formatDate.js';
 
-const YourEventVolunteer = ({shiftId, userId, name, date, startTime, endTime, street, homeNum, city}) => {
+const YourEventVolunteer = ({shiftId, userId, name, date, startTime, endTime, street, homeNum, district}) => {
 
     const { t } = useTranslation();
     const token = localStorage.getItem('token');
@@ -61,13 +62,13 @@ const YourEventVolunteer = ({shiftId, userId, name, date, startTime, endTime, st
                 {name}
             </div>
             <div className="your_event_volunteer_event_item" id="your_event_volunteer_event_date">
-                {date}
+                {formatDate(date)}
             </div>
             <div className="your_event_volunteer_event_item"  id="your_event_volunteer_event_date">
                 {startTime} - {endTime}
             </div>
             <div className="your_event_volunteer_event_item"  id="your_event_volunteer_event_address">
-                {street} {homeNum}, {city}
+                {street} {homeNum}, {district}
             </div>
 
             <Button type="button"  onClick={() => setConfirmLeave(true)} id="your_event_volunteer_event_sign_off_button">{t('signOff')} </Button>          
@@ -86,6 +87,7 @@ const YourEventVolunteer = ({shiftId, userId, name, date, startTime, endTime, st
                         setOpenModal={setConfirmLeave}
                     />
             </div>
+        <hr />
         </form>)
 };
 

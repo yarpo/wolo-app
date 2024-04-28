@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
+import { format } from 'date-fns';
 import {
   VscArrowLeft,
   VscBrowser,
@@ -29,12 +30,13 @@ const Details = () => {
   const [userOrganisation, setUserOrganisation] = useState();
   const isModerator = roles && roles.includes('MODERATOR');
   const isAdmin = roles && roles.includes('ADMIN');
+  const [isInPast, setIsInPast] = useState(false);
 
   useEffect(() => {
     fetchUser().then(data => {
       if (data) {
         setRoles(data.roles);
-        setUserOrganisation(data.organisationName);
+        setUserOrganisation(data.organisationId);
       }
     })
   }, []);
@@ -48,6 +50,10 @@ const Details = () => {
     if (eventData && eventData.organisationId) {
       const url = `${URLS.ORGANISATIONS}/${eventData.organisationId}/events`;
       fetchData(url, setOrganiserEvents);
+    }
+    
+    if (eventData && eventData.shifts && eventData.shifts[0].date < format(new Date(), 'yyyy-MM-dd')){
+      setIsInPast(true)
     }
   }, [eventData, eventData?.organisationId]);
 
@@ -98,11 +104,21 @@ const Details = () => {
 
       <p id="description">{description}</p>
 
+      {isInPast && 
+        <h2 id="details_event_over_text">{t('eventIsOver')}</h2>
+      }
+
       <div id='column'>
         <p className="details_shifts_text"><strong>{t('shifts')}:</strong></p>
         <div className='details_shift_card_wrapper'>
-          {eventData.shifts.map(shift => (
-            <ShiftCard key={shift.id} shift={shift} />
+          {eventData.shifts
+            .sort((a, b) => new Date(a.shiftId) - new Date(b.shiftId))
+            .map(shift => (
+            <ShiftCard 
+              key={shift.id} 
+              shift={shift} 
+              city={eventData.city}
+              isInPast={isInPast} />
           ))}
         </div>
 

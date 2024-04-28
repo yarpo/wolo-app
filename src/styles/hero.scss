@@ -47,20 +47,21 @@
     flex-direction: column;
   }
 
+
   #containerHero_hero,
   #subtext_hero {
     flex-grow: 1;
-    margin: 5px 10vw;
     text-align: center;
   }
 
   #MainRow_hero {
-    width: 50%;
-    display: flex;
-    justify-content: space-between;
-    margin-top: -50px;
+    margin-top: -60px;
     margin-left: auto;
     margin-right: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
   }
 
   #MainRow_hero > :nth-last-child(-n+2) {
@@ -68,25 +69,28 @@
   }
 
   #selectInput_hero{
-    margin-left: 40px;
+    margin: 0px 20px;
+    color: #6B7280;
   }
+
   #datePicker_hero{
-    margin-left: -20px;
+    margin: 0px 20px;
+    color: #6B7280;
   }
 
   #selectInput_hero,
   #datePicker_hero {
     padding: 10px;
     height: 100px;
-    min-width: 400px;
-    background-color: rgba(255, 255, 255, 0.8);
+    width: 400px;
+    background-color: rgb(255, 255, 255);
     cursor: pointer;
     border-radius: 5px;
     border: 0px;
     font-size: 30px;
-    font-family: 'Open Sans', sans-serif;
     text-align: center;
     margin-top: -50px;
+    box-shadow: 0 2px 2px 0 rgba(18, 18, 18, 0.247);
   }
 
   #filters_hero{
@@ -98,14 +102,7 @@
     display: flex;
     justify-content: flex-end;
   }
-
-  @media screen and (max-width: 1268px) {
-    #selectInput_hero,
-    #datePicker_hero {
-      min-width: 300px;
-    }
-  }
-
+  
   @media screen and (max-width: 780px) {
     form {
       align-items: center;
@@ -130,6 +127,7 @@
     #MainRow_hero {
       flex-direction: column;
       justify-content: center;
+      margin-top: -25px;
     }
 
     #button_hero {
@@ -138,8 +136,8 @@
 
     #selectInput_hero,
     #datePicker_hero {
-      min-width: 90px;
-      margin: 2px;
+      margin-bottom: 10px;
+      width: 80vw;
     }
     
     #filters_hero{
