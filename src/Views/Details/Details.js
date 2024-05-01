@@ -25,6 +25,7 @@ const Details = () => {
   const { t } = useTranslation();
   const { id } = useParams();
   const [eventData, setEventData] = useState(null);
+  const [raportData, setRaportData] = useState(null);
   const [organiserEvents, setOrganiserEvents] = useState([]);
   const [roles, setRoles] = useState(null);
   const [userOrganisation, setUserOrganisation] = useState();
@@ -44,6 +45,7 @@ const Details = () => {
   useEffect(() => {
     const url = `${URLS.EVENTS}/${id}`;
     fetchData(url, setEventData);
+    fetchData(`${URLS.PUBLIC_RAPORT}/${id}`, setRaportData);
   }, [id]);
 
   useEffect(() => {
@@ -105,7 +107,10 @@ const Details = () => {
       <p id="description">{description}</p>
 
       {isInPast && 
-        <h2 id="details_event_over_text">{t('eventIsOver')}</h2>
+        <div id="details_event_over" > 
+          <h2 id="details_event_over_text">{t('eventIsOver')}</h2>
+          <p>{raportData}</p>
+        </div>
       }
 
       <div id='column'>
