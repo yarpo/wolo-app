@@ -44,9 +44,7 @@
 
   "yourOrganisation": "Your Organisation",
   "createNewEvent": "Create new event",
-  "yourOngoingEvents": "Your ongoing events",
   "showAll": "Show All",
-  "eventsInModeration": "Events in moderation",
   "volunteers": "Volunteers",
   "details": "Details",
   "edit": "Edit",
@@ -95,6 +93,7 @@
   "joinShift": "Join Shift",
   "leaveShift": "Leave Shift",
   "yourEvents": "Your Events",
+  "yourPastEvents": "Your Past Events",
   "resetFilters": "Reset Filters",
 
   "createEvent": "Create Event",
@@ -128,6 +127,11 @@
   "organiserPage": "Organiser Page",
   "volunteerPage": "Your Page",
   "thereAreNoVolunteers": "There are no signed in volunteers",
+
+  "noCurrentEvents": "You are not signed up for any event. Try searching in All Events page!",
+  "noPastEvents": "You have not participated in any events.",
+  "noCurrentEventsOrganisation": "Your organisation have no ongoing events. Try creating one!",
+  "noPastEventsOrganisation": "Your organisation doesn't have any past events.",
   "theyNeedYouBanner": "These events are happening soon and haven't reached the full number of volunteers yet. Maybe they're waiting for you!",
 
   "addOrganisationSuccess": "Successfully created new organisation",
