@@ -152,6 +152,14 @@
   "addUserSuccess": "Pomyślnie utworzono nowego użytkownika",
   "addUserFail": "Wystąpił problem podczas tworzenia nowego użytkownika. Spróbuj ponownie później",
 
-  "cities": "Miasta"
+  "cities": "Miasta",
 
+  "peselVerified": "PESEL zweryfikowany",
+  "agreementSigned": "Umowa podpisana",
+  "isAdult": "Pełnoletni",
+  "organisationName": "Nazwa organizacji",
+  "deactivateAccount": "Dezaktywuj konto",
+  "yes": "Tak",
+  "no": "Nie",
+  "none": "Brak"
 }

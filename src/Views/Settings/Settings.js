@@ -23,44 +23,40 @@ const Settings = () => {
                 <h1>{t('volunteers')} User Settings</h1>
                 { userData && <div className="settings-data-container">
                     <div className="settings-row">
-                        <div className="label">First Name:</div>
+                        <div className="label">{t('firstName')}:</div>
                         <div className="value">{userData.firstName}</div>
                     </div>
                     <div className="settings-row">
-                        <div className="label">Last Name:</div>
+                        <div className="label">{t('lastName')}:</div>
                         <div className="value">{userData.lastName}</div>
                     </div>
                     <div className="settings-row">
-                        <div className="label">Email:</div>
+                        <div className="label">{t('email')}:</div>
                         <div className="value">{userData.email}</div>
                     </div>
                     <div className="settings-row">
-                        <div className="label">Phone Number:</div>
+                        <div className="label">{t('phoneNumber')}:</div>
                         <div className="value">{userData.phoneNumber}</div>
                     </div>
                     <div className="settings-row">
-                        <div className="label">PESEL Verified:</div>
-                        <div className="value">{userData.isPeselVerified ? "Yes" : "No"}</div>
+                        <div className="label">{t('peselVerified')}:</div>
+                        <div className="value">{userData.isPeselVerified ? t('yes') : t('no') }</div>
                     </div>
                     <div className="settings-row">
-                        <div className="label">Agreement Signed:</div>
-                        <div className="value">{userData.isAgreementSigned ? "Yes" : "No" }</div>
+                        <div className="label">{t('agreementSigned')}:</div>
+                        <div className="value">{userData.isAgreementSigned ? t('yes') : t('no') }</div>
                     </div>
                     <div className="settings-row">
-                        <div className="label">Adult:</div>
-                        <div className="value">{userData.isAdult ? "Yes" : "No" }</div>
+                        <div className="label">{t('isAdult')}:</div>
+                        <div className="value">{userData.isAdult ? t('yes') : t('no') }</div>
                     </div>
                     <div className="settings-row">
-                        <div className="label">Roles:</div>
-                        <div className="value">{userData.roles.join(', ')}</div>
-                    </div>
-                    <div className="settings-row">
-                        <div className="label">Organization Name:</div>
-                        <div className="value">{userData.organisationName ? userData.organisationName : "None"}</div>
+                        <div className="label">{t('organisationName')}:</div>
+                        <div className="value">{userData.organisationName ? userData.organisationName : t('none')}</div>
                     </div>
                 </div>}
-                <button className="settings_edit_button"> Edit </button>
-                <button className="settings_delete_button"> Deactivate account </button>
+                <button className="settings_edit_button"> {t('edit')} </button>
+                <button className="settings_delete_button"> {t('deactivateAccount')} </button>
             </div>
         </div>
     )

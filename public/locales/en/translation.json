@@ -152,5 +152,14 @@
   "addUserSuccess": "Successfully created new user",
   "addUserFail": "There was a problem creating new user. Please try again later",
   
-  "cities": "Cities"
+  "cities": "Cities",
+
+  "peselVerified": "PESEL verified",
+  "agreementSigned": "Agreement signed",
+  "isAdult": "Adult",
+  "organisationName": "Organisation name",
+  "deactivateAccount": "Deactvate account",
+  "yes": "Yes",
+  "no": "No",
+  "none": "None"
 }
