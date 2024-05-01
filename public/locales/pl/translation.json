@@ -45,9 +45,7 @@
   "findEvent": "znajdź wydarzenie dla siebie",
   "mainSearch": "Wyszukaj",
 
-  "yourOrganisation": "Twoja organizacja",
   "createNewEvent": "Stwórz nowe wydarzenie",
-  "yourOngoingEvents": "Twoje trwające wydarzenia",
   "showAll": "Więcej",
   "eventsInModeration": "Wydarzenia w moderacji",
   "volunteers": "Wolontariusze",
@@ -100,6 +98,7 @@
 
   "signOff": "Wypisz się",
   "yourEvents": "Twoje wydarzenia",
+  "yourPastEvents": "Twoje przeszłe wydarzenia",
   "resetFilters": "Resetuj filtry",
 
   "createEvent": "Utwórz wydarzenie",
@@ -133,6 +132,11 @@
   "organiserPage": "Zarządzaj organizacją",
   "volunteerPage": "Twoja strona",
   "thereAreNoVolunteers": "Nie ma zarejestrowanych wolontariuszy",
+
+  "noCurrentEvents": "Nie jesteś zapisany na żadne wydarzenie. Spróbuj wyszukać na stronie Wszystkie Wydarzenia!",
+  "noPastEvents": "Nie brałeś udziału w żadnych wydarzeniach.",
+  "noCurrentEventsOrganisation": "Twoja organizacja nie ma żadnych trwających wydarzeń. Spróbuj utworzyć jedno!",
+  "noPastEventsOrganisation": "Twoja organizacja nie miała żadnych wcześniejszych wydarzeń.",
   "theyNeedYouBanner": "Te wydarzenia odbywają się już niedługo, a nie uzyskały pełnej liczby wolontariuszy. Być może czekają właśnie na Ciebie!",
   
   "addOrganisationSuccess": "Pomyślnie utworzono nową organizację",

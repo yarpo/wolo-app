@@ -5,10 +5,10 @@ import { URLS } from '../../../config.js';
 import Confirmation from '../../../Components/Popups/Confirmation.js';
 import React, { useState, useEffect, useCallback} from 'react';
 import { Button } from 'flowbite-react';
+import { Link } from 'react-router-dom';
 import formatDate from '../../../Utils/formatDate.js';
 
-const YourEventVolunteer = ({shiftId, userId, name, date, startTime, endTime, street, homeNum, district}) => {
-
+const YourEventVolunteer = ({shiftId, eventId, userId, name, date, startTime, endTime, street, homeNum, district, isArchived}) => {
     const { t } = useTranslation();
     const token = localStorage.getItem('token');
     const [userConfirmed, setUserConfirmed] = useState(false);
@@ -59,7 +59,9 @@ const YourEventVolunteer = ({shiftId, userId, name, date, startTime, endTime, st
         <form onSubmit={handleLeaveEvent}>
         <div className='your_event_volunteer'>
             <div className="your_event_volunteer_event_item" id="your_event_volunteer_event_name">
-                {name}
+                <Link to={`${URLS.DETAILS}/${eventId}`}>
+                    {name}
+                </Link>
             </div>
             <div className="your_event_volunteer_event_item" id="your_event_volunteer_event_date">
                 {formatDate(date)}
@@ -71,7 +73,7 @@ const YourEventVolunteer = ({shiftId, userId, name, date, startTime, endTime, st
                 {street} {homeNum}, {district}
             </div>
 
-            <Button type="button"  onClick={() => setConfirmLeave(true)} id="your_event_volunteer_event_sign_off_button">{t('signOff')} </Button>          
+            {!isArchived && <Button type="button"  onClick={() => setConfirmLeave(true)} id="your_event_volunteer_event_sign_off_button">{t('signOff')} </Button>}         
                 <Confirmation id="sign-in"
                     buttonName={t('signIn')}
                         title={t('leaveShiftConfirmation')}
@@ -87,7 +89,6 @@ const YourEventVolunteer = ({shiftId, userId, name, date, startTime, endTime, st
                         setOpenModal={setConfirmLeave}
                     />
             </div>
-        <hr />
         </form>)
 };
 
