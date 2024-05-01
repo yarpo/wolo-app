@@ -20,7 +20,7 @@ const Settings = () => {
     return (
         <div className="settings-page">
             <div className="settings-container">
-                <h1>{t('volunteers')} User Settings</h1>
+                <h1>{t('settings')}</h1>
                 { userData && <div className="settings-data-container">
                     <div className="settings-row">
                         <div className="label">{t('firstName')}:</div>
