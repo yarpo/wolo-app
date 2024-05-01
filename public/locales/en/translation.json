@@ -90,8 +90,8 @@
   "accept": "Accept",
   "discard": "Discard",
 
-  "joinShift": "Join Shift",
-  "leaveShift": "Leave Shift",
+  "joinShift": "Join shift",
+  "leaveShift": "Leave shift",
   "yourEvents": "Your Events",
   "yourPastEvents": "Your Past Events",
   "resetFilters": "Reset Filters",
@@ -110,8 +110,8 @@
   "minimumAgeRequired": "Minimum Age Required",
   "leaderRequired": "Leader Required",
   "addShift": "Add Shift",
-  "SelectDistrict": "Select a district",
-  "SelectCategory": "Select a category",
+  "selectDistrict": "Select a district",
+  "selectCategory": "Select a category",
 
   "loading": "Loading",
   "participants": "Participants",

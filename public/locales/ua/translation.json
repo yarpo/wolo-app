@@ -113,8 +113,8 @@
     "minimumAgeRequired": "Необхідний мінімальний вік",
     "leaderRequired": "Потрібен лідер",
     "addShift": "Додати Shift",
-    "SelectDistrict": "Виберіть район",
-    "SelectCategory": "Виберіть категорію",
+    "selectDistrict": "Виберіть район",
+    "selectCategory": "Виберіть категорію",
 
     "loading": "завантаження",
     "participants": "Учасники",

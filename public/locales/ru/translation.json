@@ -115,8 +115,8 @@
     "minimumAgeRequired": "Минимальный возраст",
     "leaderRequired": "Требуется лидер",
     "addShift": "Добавить смену",
-    "SelectDistrict": "Выберите округ",
-    "SelectCategory": "Выберите категорию",
+    "selectDistrict": "Выберите округ",
+    "selectCategory": "Выберите категорию",
 
     "loading": "загрузка",
     "participants": "Участники",
