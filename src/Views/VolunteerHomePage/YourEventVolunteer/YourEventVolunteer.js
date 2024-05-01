@@ -89,7 +89,6 @@ const YourEventVolunteer = ({shiftId, eventId, userId, name, date, startTime, en
                         setOpenModal={setConfirmLeave}
                     />
             </div>
-        <hr />
         </form>)
 };
 
