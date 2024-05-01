@@ -6,9 +6,9 @@ import Confirmation from '../../../Components/Popups/Confirmation.js';
 import React, { useState, useEffect, useCallback} from 'react';
 import { Button } from 'flowbite-react';
 import { Link } from 'react-router-dom';
+import formatDate from '../../../Utils/formatDate.js';
 
-const YourEventVolunteer = ({shiftId, eventId, userId, name, date, startTime, endTime, street, homeNum, isArchived}) => {
-
+const YourEventVolunteer = ({shiftId, eventId, userId, name, date, startTime, endTime, street, homeNum, district, isArchived}) => {
     const { t } = useTranslation();
     const token = localStorage.getItem('token');
     const [userConfirmed, setUserConfirmed] = useState(false);
@@ -64,13 +64,13 @@ const YourEventVolunteer = ({shiftId, eventId, userId, name, date, startTime, en
                 </Link>
             </div>
             <div className="your_event_volunteer_event_item" id="your_event_volunteer_event_date">
-                {date}
+                {formatDate(date)}
             </div>
             <div className="your_event_volunteer_event_item"  id="your_event_volunteer_event_date">
                 {startTime} - {endTime}
             </div>
             <div className="your_event_volunteer_event_item"  id="your_event_volunteer_event_address">
-                {street} {homeNum}
+                {street} {homeNum}, {district}
             </div>
 
             {!isArchived && <Button type="button"  onClick={() => setConfirmLeave(true)} id="your_event_volunteer_event_sign_off_button">{t('signOff')} </Button>}         
@@ -89,6 +89,7 @@ const YourEventVolunteer = ({shiftId, eventId, userId, name, date, startTime, en
                         setOpenModal={setConfirmLeave}
                     />
             </div>
+        <hr />
         </form>)
 };
 

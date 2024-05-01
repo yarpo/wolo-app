@@ -48,7 +48,7 @@ const SignedInVolunteers = ({ eventData }) => {
                 id={shift.shiftId}
                 startTime={shift.startTime}
                 endTime={shift.endTime}
-                numVolunteers={shift.signedUp}
+                numVolunteers={shift.registeredUsers}
                 maxVolunteers={shift.capacity}
             />
             ))}

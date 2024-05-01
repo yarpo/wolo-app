@@ -51,6 +51,7 @@ const VolunteerHomePage = () => {
                         endTime={formatTime(shift.endTime)}
                         street={shift.street}
                         homeNum={shift.homeNum}
+                        district={shift.district}
                         isArchived={false} />
                         ))
                     )}
@@ -72,6 +73,7 @@ const VolunteerHomePage = () => {
                             endTime={formatTime(shift.endTime)}
                             street={shift.street}
                             homeNum={shift.homeNum}
+                            district={shift.district}
                             isArchived={true}
                         />
                     ))

@@ -58,7 +58,7 @@
   "firstName": "First Name",
   "lastName": "Last Name",
   "email": "Email",
-  "phone": "Phone Number (Optional)",
+  "phoneNumber": "Phone Number",
   "password": "Password",
   "showPassword": "Show Password",
   "confirmPassword": "Confirm Password",
@@ -73,7 +73,14 @@
   "signUpNow": "Sign up now",
   "keepMeLoggedIn": "Keep me logged in",
   "continue": "Continue your journey as a volunteer",
-  "continueWithGoogle": "Continue with Google",
+  "passwordsDoNotMatch": "Passwords do not match",
+  "required": "is required",
+  "field": "Field",
+  "invalidEmail": "Address Email is not valid",
+  "registerSuccess": "You have successfully registered.",
+  "registerError": "User with this email already exists",
+  "invalidPhoneNumber": "Phone number must consist of 9 digits",
+  "needToAcceptTerms": "You need to accept terms and conditions to create an account",
 
   "welcomeToWoloApp": "Welcome to WoloApp",
   "yourAccountStatus": "Your account status",
@@ -131,7 +138,19 @@
   "noCurrentEventsOrganisation": "Your organisation have no ongoing events. Try creating one!",
   "noPastEventsOrganisation": "Your organisation doesn't have any past events.",
   "theyNeedYouBanner": "These events are happening soon and haven't reached the full number of volunteers yet. Maybe they're waiting for you!",
-  
+
   "addOrganisationSuccess": "Successfully created new organisation",
-  "addOrganisationFail": "There was a problem creating new organisation. Please try again later"
+  "addOrganisationFail": "There was a problem creating new organisation. Please try again later",
+
+  "eventIsOver": "This event is already over",
+  "addCitySuccess": "Successfully created new city",
+  "addCityFail": "There was a problem creating new city. Please try again later",
+  "addDistrictSuccess": "Successfully created new district",
+  "addDistrictFail": "There was a problem creating new district. Please try again later",
+  "addEventSuccess": "Successfully created new event",
+  "addEventFail": "There was a problem creating new event. Please try again later",
+  "addUserSuccess": "Successfully created new user",
+  "addUserFail": "There was a problem creating new user. Please try again later",
+  
+  "cities": "Cities"
 }
