@@ -42,6 +42,7 @@
   "findEvent": "znajdź wydarzenie dla siebie",
   "mainSearch": "Wyszukaj",
 
+  "yourOrganisation": "Twoja Organizacja",
   "createNewEvent": "Stwórz nowe wydarzenie",
   "showAll": "Więcej",
   "eventsInModeration": "Wydarzenia w moderacji",
@@ -64,6 +65,7 @@
   "agreeTerms": "Przeczytałem/am i zgadzam się z warunkami.",
   "alreadyHaveAccount": "Masz już konto? ",
   "loginNow": "Zaloguj się teraz",
+  "dontHaveAccount":"Nie posiadasz konta?",
   "registerNow": "Zarejestruj się teraz",
   "keepMeLoggedIn": "Zaloguj mnie automatycznie",
   "continue": "Kontynuuj swoją przygodę jako wolontariusz",

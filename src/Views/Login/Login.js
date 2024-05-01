@@ -160,10 +160,10 @@ const Login = ({ setToken, setUser }) => {
             </div>
             <br />
             <button className="login-form__button" type="submit" disabled={isSubmitting}>
-              {t('login')}
+              {t('logIn')}
             </button>
             <p className="login-form_register-text">
-              {`Don't have an account?`} <Link className="login-form_register-text" to="/signup">{t('registerNow')}</Link>
+              {t('dontHaveAccount')} <Link className="login-form_register-text" to="/signup">{t('registerNow')}</Link>
             </p>
           </form>
         )}
