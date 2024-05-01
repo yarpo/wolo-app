@@ -112,7 +112,7 @@ const Login = ({ setToken, setUser }) => {
             event.preventDefault();
             handleLogin(values);
           }}>
-            <h1 className="login-form__title">{t('login')}</h1>
+            <h1 className="login-form__title">{t('logIn')}</h1>
             <p className="login-form_subtitle">{t('continue')}</p>
             <div className="max-w-md">
               <TextInput 
