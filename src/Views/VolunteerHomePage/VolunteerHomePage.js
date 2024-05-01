@@ -66,6 +66,7 @@ const VolunteerHomePage = () => {
                         <YourEventVolunteer
                             key={shift.shiftId}
                             shiftId={shift.shiftId}
+                            eventId={shift.eventId}
                             userId={userId}
                             name={shift.eventName}
                             date={shift.date}
