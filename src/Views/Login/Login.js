@@ -36,7 +36,7 @@ const Login = ({ setToken, setUser }) => {
       const data = await response.json();
       localStorage.setItem('token', data.accessToken);
       setToken(data.accessToken);
-      setUser(data.user);
+      setUser(data.user );
       
       if (values.rememberMe) {
         localStorage.setItem('rememberMe', values.email);
@@ -163,7 +163,7 @@ const Login = ({ setToken, setUser }) => {
               {t('login')}
             </button>
             <p className="login-form_register-text">
-              {`Don't have an account?`} <Link className="login-form_register-text" to="/signup">{t('signUpNow')}</Link>
+              {`Don't have an account?`} <Link className="login-form_register-text" to="/signup">{t('registerNow')}</Link>
             </p>
           </form>
         )}

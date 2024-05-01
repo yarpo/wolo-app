@@ -31,7 +31,7 @@ const WelcomingBanner = ({ isOrganizerPage }) => {
                     <h1>{t('hello')}, {user.firstName}. {t('welcomeToWoloApp')}</h1>
                 </div>}
                 { !isLoggedIn && <div id="subtext_hero">
-                    <h2><Link to="/login">{t('signInToday')}</Link> {t('or')} <Link to="/events">{t('findEvent')}</Link></h2>
+                    <h2><Link to="/login">{t('logInToday')}</Link> {t('or')} <Link to="/events">{t('findEvent')}</Link></h2>
                 </div>}
                 { isLoggedIn && !isOrganizerPage && <div id="subtext_hero">
                     <h2>{t('welcome')}</h2>

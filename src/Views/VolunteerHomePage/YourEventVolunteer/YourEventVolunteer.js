@@ -73,7 +73,7 @@ const YourEventVolunteer = ({shiftId, userId, name, date, startTime, endTime, st
 
             <Button type="button"  onClick={() => setConfirmLeave(true)} id="your_event_volunteer_event_sign_off_button">{t('signOff')} </Button>          
                 <Confirmation id="sign-in"
-                    buttonName={t('signIn')}
+                    buttonName={t('logIn')}
                         title={t('leaveShiftConfirmation')}
                         accept={t('agreeToLeave')}
                         deny={t('cancelLeave')} 
