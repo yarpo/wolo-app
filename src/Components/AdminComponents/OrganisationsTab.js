@@ -39,18 +39,19 @@ const OrganisationsTab = () => {
 
     const handleUserConfirmation = async (confirmation) => {
         setUserConfirmed(confirmation);
+
     };
 
     useEffect(() => {
         if (userConfirmed !== false) {
             setUserConfirmed(false);
+            handleDelete()
         }
     }, [userConfirmed]); 
 
     const handleDelete = () => {
-        // Implement delete logic here
         console.log("Delete confirmed");
-        setConfirmDelete(false); // Close the confirmation popup after deletion
+        setConfirmDelete(false);
     };
 
     return (
@@ -108,7 +109,7 @@ const OrganisationsTab = () => {
                                         styleId="sign-in"
                                         onAgree={() => {
                                             handleUserConfirmation(true)
-                                            console.log("Deleteeee")
+                                            console.log("Deleteeee", organisation)
                                             setConfirmDelete(false)}}
                                         onDeny={() => 
                                             setConfirmDelete(false)}
