@@ -46,6 +46,7 @@ const OrganisationsTab = () => {
                     <Table.HeadCell>Organisation Email</Table.HeadCell>
                     <Table.HeadCell>Organisation Phone</Table.HeadCell>
                     <Table.HeadCell>Organisation Address</Table.HeadCell>
+                    <Table.HeadCell>More</Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
                     {organisations.map((organisation, index) => (

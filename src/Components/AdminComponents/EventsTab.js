@@ -45,6 +45,7 @@ const EventsTab = () => {
                     <Table.HeadCell>Organisation</Table.HeadCell>
                     <Table.HeadCell>Categories</Table.HeadCell>
                     <Table.HeadCell>City</Table.HeadCell>
+                    <Table.HeadCell>More</Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
                     {events.map((event, index) => (
@@ -57,17 +58,15 @@ const EventsTab = () => {
                                 <Table.Cell>{event.organisation}</Table.Cell>
                                 <Table.Cell>{event.categories}</Table.Cell>
                                 <Table.Cell>{event.city}</Table.Cell>
-                                <tr>
-                                    <td colSpan="6">
-                                        <button
-                                            className="details-toggle"
-                                            onClick={() => toggleDetails(index)}
-                                        >
-                                            {openIndex === index ? <VscChevronUp /> : <VscChevronDown />}
-                                            <span className="dropdown-label">Details</span>
-                                        </button>
-                                    </td>
-                                </tr>
+                                <Table.Cell>
+                                    <button
+                                        className="details-toggle"
+                                        onClick={() => toggleDetails(index)}
+                                    >
+                                        {openIndex === index ? <VscChevronUp /> : <VscChevronDown />}
+                                        <span className="dropdown-label">Details</span>
+                                    </button>
+                                </Table.Cell>
                             </Table.Row>
                             {openIndex === index && (
                                 <tr>
