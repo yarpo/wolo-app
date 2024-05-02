@@ -17,6 +17,7 @@ const OrganisationsTab = () => {
     const [openIndex, setOpenIndex] = useState(null);
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [userConfirmed, setUserConfirmed] = useState(false);
+    const [organisationToDelete, setOrganisationToDelete] = useState(null);
 
     useEffect(() => {
         fetchData(URLS.ORGANISATIONS, setOrganisations);
@@ -50,7 +51,8 @@ const OrganisationsTab = () => {
     }, [userConfirmed]); 
 
     const handleDelete = () => {
-        console.log("Delete confirmed");
+        console.log("Delete confirmed", organisationToDelete);
+        setOrganisationToDelete(null);
         setConfirmDelete(false);
     };
 
@@ -72,7 +74,8 @@ const OrganisationsTab = () => {
                     <Table.HeadCell>Organisation Email</Table.HeadCell>
                     <Table.HeadCell>Organisation Phone</Table.HeadCell>
                     <Table.HeadCell>Organisation Address</Table.HeadCell>
-                    <Table.HeadCell>Actions</Table.HeadCell> {/* Add Actions column header */}
+                    <Table.HeadCell>More</Table.HeadCell>
+                    <Table.HeadCell>Delete</Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
                     {organisations.map((organisation, index) => (
@@ -97,22 +100,28 @@ const OrganisationsTab = () => {
                                 <Table.Cell>
                                     <button
                                         className="delete-button"
-                                        onClick={() => setConfirmDelete(true)}
+                                        onClick={() => {
+                                            setConfirmDelete(true);
+                                            setOrganisationToDelete(organisation.id);
+                                        }}
                                     >
                                         <span>Delete</span>
                                     </button>
-                                    <Confirmation id="sign-off"
+                                    <Confirmation
+                                        id="sign-off"
                                         buttonName="Delete"
                                         title="Czy usunąć"
                                         accept="Tak, usuń"
                                         deny="Anuluj"
                                         styleId="sign-in"
                                         onAgree={() => {
-                                            handleUserConfirmation(true)
-                                            console.log("Deleteeee", organisation)
-                                            setConfirmDelete(false)}}
-                                        onDeny={() => 
-                                            setConfirmDelete(false)}
+                                            handleUserConfirmation(true);
+                                            setConfirmDelete(false);
+                                        }}
+                                        onDeny={() => {
+                                            setConfirmDelete(false);
+                                            setOrganisationToDelete(null);
+                                        }}
                                         openModal={confirmDelete}
                                         setOpenModal={setConfirmDelete}
                                     />
