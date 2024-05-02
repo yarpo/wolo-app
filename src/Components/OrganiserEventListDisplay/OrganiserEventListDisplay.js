@@ -41,9 +41,6 @@ const OrganiserEventListDisplay = ({ event, isArchived }) => {
             <div className="column">
                 {event.city}
             </div>
-            <div className="column">
-                <strong>{t('details')}</strong>
-            </div>
             {!isArchived && <div className="column">
                 <strong>{t('edit')}</strong>
             </div>}
