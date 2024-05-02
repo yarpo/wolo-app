@@ -27,8 +27,8 @@
     
     .settings-row {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
+        flex-direction: column;
+        justify-content: flex-start;
         margin-bottom: 10px;
     }
     
@@ -74,6 +74,12 @@
         &:hover {
             background-color: #e7e7e7;
         }    
+    }
+
+    .settings-error{
+        color: $color-4-red;
+        font-size: small;
+        margin-top: 5px;
     }
 }
 
