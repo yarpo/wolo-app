@@ -5,6 +5,7 @@ import fetchUser from '../../Utils/fetchUser';
 import putRequest from '../../Utils/putRequest';
 import { URLS } from '../../config';
 import Confirmation from '../../Components/Popups/Confirmation.js';
+import deleteRequest from '../../Utils/deleteRequest.js';
 
 const Settings = () => {
     const { t } = useTranslation();
@@ -101,7 +102,8 @@ const Settings = () => {
     }, [userConfirmed]); 
 
     const handleDelete = () => {
-        console.log("Delete confirmed");
+        console.log(`${URLS.DELETE_USER}/${userData.id}`);
+        deleteRequest(`${URLS.DELETE_USER}/${userData.id}`, localStorage.getItem('token'), t('deleteAccountSuccess'), t('deleteAccountFail'))
         setConfirmDelete(false);
     };
 
@@ -226,7 +228,6 @@ const Settings = () => {
                     deny={t('discard')}
                     onAgree={() => {
                         handleUserConfirmation(true)
-                        console.log("Deleteeee", userData)
                         setConfirmDelete(false)}}
                     onDeny={() => 
                         setConfirmDelete(false)}

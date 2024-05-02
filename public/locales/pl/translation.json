@@ -167,5 +167,7 @@
 
   "invalidPhoneNumberFormat": "Nieprawidłowy format numeru telefonu. Proszę wprowadzić 9-cyfrowy numer.",
   "invalidEmailFormat": "Nieprawidłowy format adresu e-mail. Proszę podać poprawny adres e-mail.",
-  "invalidNameFormat": "Nieprawidłowy format. Proszę wprowadzić tylko litery."
+  "invalidNameFormat": "Nieprawidłowy format. Proszę wprowadzić tylko litery.",
+  "deleteAccountSuccess": "Konto zostało pomyślnie usunięte",
+  "deleteAccountFail": "Jesteś jedynym moderatorem Twojej organizacji. Przed usunięciem konta przekaż prawa organizacji."
 }
