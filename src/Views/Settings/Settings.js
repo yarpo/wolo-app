@@ -4,6 +4,7 @@ import '../../styles/settings.scss';
 import fetchUser from '../../Utils/fetchUser';
 import putRequest from '../../Utils/putRequest';
 import { URLS } from '../../config';
+import Confirmation from '../../Components/Popups/Confirmation.js';
 
 const Settings = () => {
     const { t } = useTranslation();
@@ -11,6 +12,8 @@ const Settings = () => {
     const [editMode, setEditMode] = useState(false);
     const [editedUserData, setEditedUserData] = useState({});
     const [errors, setErrors] = useState({});
+    const [confirmDelete, setConfirmDelete] = useState(false);
+    const [userConfirmed, setUserConfirmed] = useState(false);
 
     useEffect(() => {
         fetchUser().then(data => {
@@ -84,6 +87,23 @@ const Settings = () => {
         setEditedUserData(userData);
         setEditMode(false);
     }
+
+    const handleUserConfirmation = async (confirmation) => {
+        setUserConfirmed(confirmation);
+
+    };
+
+    useEffect(() => {
+        if (userConfirmed !== false) {
+            setUserConfirmed(false);
+            handleDelete()
+        }
+    }, [userConfirmed]); 
+
+    const handleDelete = () => {
+        console.log("Delete confirmed");
+        setConfirmDelete(false);
+    };
 
     return (
         <div className="settings-page">
@@ -198,7 +218,22 @@ const Settings = () => {
                         {t('edit')}
                     </button>
                 )}
-                <button className="settings_delete_button"> {t('deactivateAccount')} </button>
+                <button className="settings_delete_button" onClick={() => setConfirmDelete(true)}> {t('deactivateAccount')} </button>
+                <Confirmation id="sign-off"
+                    buttonName="Delete"
+                    title={t('deactivateUser')}
+                    accept="Tak, usuń"
+                    deny="Anuluj"
+                    styleId="sign-out"
+                    onAgree={() => {
+                        handleUserConfirmation(true)
+                        console.log("Deleteeee", userData)
+                        setConfirmDelete(false)}}
+                    onDeny={() => 
+                        setConfirmDelete(false)}
+                    openModal={confirmDelete}
+                    setOpenModal={setConfirmDelete}
+                />
             </div>
         </div>
     );
