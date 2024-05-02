@@ -161,5 +161,11 @@
   "deactivateAccount": "Dezaktywuj konto",
   "yes": "Tak",
   "no": "Nie",
-  "none": "Brak"
+  "none": "Brak",
+  "deleteAccount": "Czy na pewno chcesz trwale usunąć swoje konto?",
+  "confirmAccountDelete": "Usuń moje konto",
+
+  "invalidPhoneNumberFormat": "Nieprawidłowy format numeru telefonu. Proszę wprowadzić 9-cyfrowy numer.",
+  "invalidEmailFormat": "Nieprawidłowy format adresu e-mail. Proszę podać poprawny adres e-mail.",
+  "invalidNameFormat": "Nieprawidłowy format. Proszę wprowadzić tylko litery."
 }

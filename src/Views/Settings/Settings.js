@@ -50,18 +50,18 @@ const Settings = () => {
 
         // validation 
         if (!phoneNumberRegex.test(editedUserData.phoneNumber)) {
-            newErrors.phoneNumber = "Invalid phone number format. Please enter a 9-digit number.";
+            newErrors.phoneNumber = t('invalidPhoneNumberFormat');
         }
 
         if (!nameRegex.test(editedUserData.firstName)) {
-            newErrors.firstName = "Invalid first name format. Please enter only letters.";
+            newErrors.firstName = t('invalidNameFormat');
         }
         if (!nameRegex.test(editedUserData.lastName)) {
-            newErrors.lastName = "Invalid last name format. Please enter only letters.";
+            newErrors.lastName = t('invalidNameFormat');
         }
 
         if (!emailRegex.test(editedUserData.email)) {
-            newErrors.email = "Invalid email format. Please enter a valid email address.";
+            newErrors.email = t('invalidEmailFormat');
         }
 
         if (Object.keys(newErrors).length > 0) {
@@ -205,7 +205,7 @@ const Settings = () => {
                     </div>
                 )}
                 {editMode ? (
-                    <div>
+                    <div className='settngs_confirm_buttons_group'>
                         <button className="settings_edit_button" onClick={handleSaveClick}>
                             {t('accept')}
                         </button>
@@ -221,10 +221,9 @@ const Settings = () => {
                 <button className="settings_delete_button" onClick={() => setConfirmDelete(true)}> {t('deactivateAccount')} </button>
                 <Confirmation id="sign-off"
                     buttonName="Delete"
-                    title={t('deactivateUser')}
-                    accept="Tak, usuń"
-                    deny="Anuluj"
-                    styleId="sign-out"
+                    title={t('deleteAccount')}
+                    accept={t('confirmAccountDelete')}
+                    deny={t('discard')}
                     onAgree={() => {
                         handleUserConfirmation(true)
                         console.log("Deleteeee", userData)

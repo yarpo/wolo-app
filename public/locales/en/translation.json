@@ -161,5 +161,11 @@
   "deactivateAccount": "Deactvate account",
   "yes": "Yes",
   "no": "No",
-  "none": "None"
+  "none": "None",
+  "deleteAccount": "Do You want to permamently delete Your account?",
+  "confirmAccountDelete": "Delete my account",
+
+  "invalidPhoneNumberFormat": "Invalid phone number format. Please enter a 9-digit number.",
+  "invalidEmailFormat": "Invalid email format. Please enter a valid email address.",
+  "invalidNameFormat": "Invalid name format. Please enter only letters."
 }
