@@ -29,7 +29,9 @@ const URLS = {
   ADD_DISTRICTS: `${BASE_URL}/districts/add`,
   ADD_CATEGORIES: `${BASE_URL}/categories/add`,
   USERS_WITH_NO_ROLES: `${BASE_URL}/users/volunteers`,
-  THEY_NEED_YOU: `${BASE_URL}/events/need`
+  THEY_NEED_YOU: `${BASE_URL}/events/need`,
+
+  DELETE_EVENT: `${BASE_URL}/events/delete`
 };
 
 module.exports = { URLS, BASE_URL };

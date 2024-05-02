@@ -5,6 +5,7 @@ import formatDate from '../../Utils/formatDate.js';
 import { Link } from 'react-router-dom';
 import { URLS } from '../../config.js';
 import Confirmation from '../Popups/Confirmation.js';
+import deleteRequest from '../../Utils/deleteRequest.js';
 
 const OrganiserEventListDisplay = ({ event, isArchived }) => {
     const { t } = useTranslation();
@@ -25,7 +26,8 @@ const OrganiserEventListDisplay = ({ event, isArchived }) => {
     }, [userConfirmed]); 
 
     const handleDelete = () => {
-        console.log("Delete", event.id);
+        console.log(`${URLS.DELETE_EVENT}/${event.id}`);
+        deleteRequest(`${URLS.DELETE_EVENT}/${event.id}`, localStorage.getItem('token'), "sukces", "Nie sukces")
         setConfirmDelete(false);
     };
     
