@@ -8,6 +8,7 @@ import Confirmation from '../Popups/Confirmation.js';
 
 const OrganiserEventListDisplay = ({ event, isArchived }) => {
     const { t } = useTranslation();
+    const eventName = event.namePl; 
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [userConfirmed, setUserConfirmed] = useState(false);
 
@@ -45,12 +46,11 @@ const OrganiserEventListDisplay = ({ event, isArchived }) => {
                 <strong>{t('edit')}</strong>
             </div>}
             {!isArchived && 
-                <button className="column" onClick={() => setConfirmDelete(true)}><strong>{t('delete')}</strong></button>
+                <button className="column" id="organiser_event_list_delete_button" onClick={() => setConfirmDelete(true)}><strong>{t('delete')}</strong></button>
             }
             <Confirmation id="sign-off"
-                    buttonName="Delete"
-                    title={t('deleteAccount')}
-                    accept={t('confirmAccountDelete')}
+                    title={t('cancelEvent') + eventName + "?"}
+                    accept={t('acceptCancelEvent')}
                     deny={t('discard')}
                     onAgree={() => {
                         handleUserConfirmation(true)

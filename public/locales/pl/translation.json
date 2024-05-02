@@ -152,6 +152,8 @@
   "addUserSuccess": "Pomyślnie utworzono nowego użytkownika",
   "addUserFail": "Wystąpił problem podczas tworzenia nowego użytkownika. Spróbuj ponownie później",
 
-  "cities": "Miasta"
+  "cities": "Miasta",
 
+  "cancelEvent": "Czy na pewno chcesz anulować wydarzenie: ",
+  "acceptCancelEvent": "Tak, anuluj wydarzenie"
 }

@@ -152,5 +152,8 @@
   "addUserSuccess": "Successfully created new user",
   "addUserFail": "There was a problem creating new user. Please try again later",
   
-  "cities": "Cities"
+  "cities": "Cities",
+
+  "cancelEvent": "Do You want to cancel event: ",
+  "acceptCancelEvent": "Yes, cancell the event"
 }
