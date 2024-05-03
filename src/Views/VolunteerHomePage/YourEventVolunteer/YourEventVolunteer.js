@@ -10,9 +10,8 @@ import formatDate from '../../../Utils/formatDate.js';
 import formatTime from '../../../Utils/formatTime.js';
 
 const YourEventVolunteer = ({shiftId, eventId, userId, shift, isArchived}) => {
-    const { t, i18n } = useTranslation();
-    const currentLang = i18n.language.toUpperCase();
-    const eventName = `eventName${currentLang}`;
+    const { t } = useTranslation();
+    const eventName = `eventName${localStorage.getItem('i18nextLng').toUpperCase()}`;
     const token = localStorage.getItem('token');
     const [userConfirmed, setUserConfirmed] = useState(false);
     const [confirmLeave, setConfirmLeave] = useState(false);

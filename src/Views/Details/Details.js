@@ -18,11 +18,10 @@ import formatDate from '../../Utils/formatDate.js';
 import SignedInVolunteers from './SignedInVolunteers/SignedInVolunteers.js';
 import { URLS } from '../../config.js'
 import ShiftCard from './ShiftCard/ShiftCard.js';
-
 import fetchUser from '../../Utils/fetchUser.js';
 
 const Details = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { id } = useParams();
   const [eventData, setEventData] = useState(null);
   const [organiserEvents, setOrganiserEvents] = useState([]);
@@ -31,9 +30,8 @@ const Details = () => {
   const isModerator = roles && roles.includes('MODERATOR');
   const isAdmin = roles && roles.includes('ADMIN');
   const [isInPast, setIsInPast] = useState(false);
-  const currentLang = i18n.language.toUpperCase();
-  const eventName = `name${currentLang}`;
-  const eventDescription = `description${currentLang}`;
+  const eventDescription = `description${localStorage.getItem('i18nextLng').toUpperCase()}`;
+  const eventName = `name${localStorage.getItem('i18nextLng').toUpperCase()}`;
 
   useEffect(() => {
     fetchUser().then(data => {

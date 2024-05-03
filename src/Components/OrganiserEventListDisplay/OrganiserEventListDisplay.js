@@ -5,9 +5,8 @@ import { Link } from 'react-router-dom';
 import { URLS } from '../../config.js';
 
 const OrganiserEventListDisplay = ({ event, isArchived }) => {
-    const { t, i18n } = useTranslation();
-    const currentLang = i18n.language.toUpperCase();
-    const eventName = `name${currentLang}`;
+    const { t } = useTranslation();
+    const eventName = `name${localStorage.getItem('i18nextLng').toUpperCase()}`;
     
     return (
         <div className='organiser_event_list_display_content'>
@@ -25,12 +24,8 @@ const OrganiserEventListDisplay = ({ event, isArchived }) => {
             <div className="column">
                 <strong>{t('details')}</strong>
             </div>
-            {!isArchived && <div className="column">
-                <strong>{t('edit')}</strong>
-            </div>}
-            {!isArchived && <div className="column">
-                <strong>{t('delete')}</strong>
-            </div>}
+            {!isArchived && <div className="column"><strong>{t('edit')}</strong></div>}
+            {!isArchived && <div className="column"><strong>{t('delete')}</strong></div>}
         </div>
     )
 };

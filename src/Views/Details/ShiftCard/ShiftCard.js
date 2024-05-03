@@ -14,9 +14,8 @@ import { Card } from "flowbite-react";
 import formatTime from '../../../Utils/formatTime.js';
 
 const ShiftCard = ({ shift, city, isInPast }) => {
-    const { t, i18n } = useTranslation();
-    const currentLang = i18n.language.toUpperCase();
-    const shiftDirections = `shiftDirections${currentLang}`;
+    const { t } = useTranslation();
+    const shiftDirections = `shiftDirections${localStorage.getItem('i18nextLng').toUpperCase()}`;
     const [roles, setRoles] = useState(null);
     const [id, setId] = useState(null);
     const shiftId = shift.shiftId;
@@ -43,8 +42,6 @@ const ShiftCard = ({ shift, city, isInPast }) => {
         fetchUserData();
     }, []);
   
-    
-
     const handleUserConfirmation = async (confirmation) => {
         setUserConfirmed(confirmation);
     };
