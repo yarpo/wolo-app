@@ -6,9 +6,8 @@ import { Link } from 'react-router-dom';
 import '../../styles/event-card.scss';
 
 const EventCard = ({ event }) => {
-  const { t, i18n } = useTranslation();
-  const currentLang = i18n.language.toUpperCase();
-  const eventName = `name${currentLang}`;
+  const { t } = useTranslation();
+  const eventName = `name${localStorage.getItem('i18nextLng').toUpperCase()}`;
 
   return (
     <Link to={`/details/${event.id}`} style={{ textDecoration: 'none' }}>
