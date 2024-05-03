@@ -39,6 +39,13 @@
   }
 }
 
+.error {
+  margin-top: -10px;
+  color: red;
+  font-size: 12px;
+  margin-left: 5px;
+}
+
 @media screen and (max-width: 768px) {
   #organiser-create-event-container {
     padding-left: 5vw;
