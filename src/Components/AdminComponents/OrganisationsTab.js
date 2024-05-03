@@ -133,7 +133,7 @@ const OrganisationsTab = () => {
                             </Table.Row>
                             {openIndex === index && (
                                 <Table.Row>
-                                    <Table.Cell colSpan="7">
+                                    <Table.Cell colSpan="8">
                                         <div className="dropdown-content">
                                             <p><strong>Organisation Logo URL:</strong> {organisation.logoUrl}</p>
                                             <p><strong>Organisation Description:</strong> {organisation.description}</p>
