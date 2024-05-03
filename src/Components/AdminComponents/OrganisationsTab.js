@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { VscChevronDown, VscChevronUp } from 'react-icons/vsc';
 import { useTranslation } from 'react-i18next';
 import { Table } from "flowbite-react";
-import fetchData from '../../Utils/fetchData';
+import fetchDataWithAuth from '../../Utils/fetchDataWithAuth.js';
 import postRequestWithJson from '../../Utils/postRequestWithJson.js';
 import Confirmation from '../Popups/Confirmation.js';
 import { URLS } from '../../config';
 
 import '../../styles/admin-home-page.scss';
 import AddOrganisation from './addRecordModals/AddOrganisation.js';
+import deleteRequest from '../../Utils/deleteRequest.js';
 
 const OrganisationsTab = () => {
     const { t } = useTranslation();
@@ -20,7 +21,7 @@ const OrganisationsTab = () => {
     const [organisationToDelete, setOrganisationToDelete] = useState(null);
 
     useEffect(() => {
-        fetchData(URLS.ORGANISATIONS, setOrganisations);
+        fetchDataWithAuth(URLS.ORGANISATIONS_ADMIN, setOrganisations, localStorage.getItem('token'));
     }, []);
 
     const handleModalAccept = (data) => {
@@ -52,6 +53,7 @@ const OrganisationsTab = () => {
 
     const handleDelete = () => {
         console.log("Delete confirmed", organisationToDelete);
+        deleteRequest(`${URLS.DELETE_ORGANISATION}/${organisationToDelete}`, localStorage.getItem('token'), "Deleted", "Fail")
         setOrganisationToDelete(null);
         setConfirmDelete(false);
     };
@@ -74,6 +76,7 @@ const OrganisationsTab = () => {
                     <Table.HeadCell>Organisation Email</Table.HeadCell>
                     <Table.HeadCell>Organisation Phone</Table.HeadCell>
                     <Table.HeadCell>Organisation Address</Table.HeadCell>
+                    <Table.HeadCell>Organisation Status</Table.HeadCell>
                     <Table.HeadCell>More</Table.HeadCell>
                     <Table.HeadCell>Delete</Table.HeadCell>
                 </Table.Head>
@@ -88,6 +91,7 @@ const OrganisationsTab = () => {
                                 <Table.Cell>{organisation.email}</Table.Cell>
                                 <Table.Cell>{organisation.phoneNumber}</Table.Cell>
                                 <Table.Cell>{organisation.street} {organisation.homeNum}</Table.Cell>
+                                <Table.Cell>{organisation.approved ? "Yes" : "No"}</Table.Cell>
                                 <Table.Cell>
                                     <button
                                         className="details-toggle"
