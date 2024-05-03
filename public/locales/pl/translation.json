@@ -72,7 +72,7 @@
   "passwordsDoNotMatch": "Passwords do not match",
   "required": "jest wymagane",
   "field": "Pole",
-  "invalidEmail": "Nieprawidłowy adres e-mail",
+  "invalidEmail": "Podany adress email jest nie prawidłowy",
   "registerSuccess": "Rejestracja przebiegła pomyślnie",
   "registerError": "Użytkownik o podanym adresie e-mail już istnieje",
   "invalidPhoneNumber": "Numer telefonu musi zawierać 9 cyfr",
@@ -93,7 +93,7 @@
   "discard": "Odrzuć",
 
   "joinShift": "Dołącz do zmiany",
-  "leaveShift": "Opuść Zmianę",
+  "leaveShift": "Opuść zmianę",
   "yourEvents": "Twoje Wydarzenia",
   "yourPastEvents": "Twoje Przeszłe Wydarzenia",
   "resetFilters": "Resetuj filtry",

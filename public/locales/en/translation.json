@@ -4,7 +4,7 @@
   "calendar": "Calendar",
   "forVolunteers": "For Volunteers",
   "theyNeedYou": "They Need You",
-  "logIn": "Log in", 
+  "logIn": "Log in",
 
   "back": "Back",
   "date": "Date",
@@ -71,7 +71,7 @@
   "passwordsDoNotMatch": "Passwords do not match",
   "required": "is required",
   "field": "Field",
-  "invalidEmail": "Address Email is not valid",
+  "invalidEmail": "Invalid email address",
   "registerSuccess": "You have successfully registered.",
   "registerError": "User with this email already exists",
   "invalidPhoneNumber": "Phone number must consist of 9 digits",
