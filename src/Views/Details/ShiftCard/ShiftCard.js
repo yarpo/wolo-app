@@ -85,9 +85,9 @@ const ShiftCard = ({ shift, city, isInPast }) => {
                     <p>{shift.shiftDirections}</p>
                 </span>
                 {!isInPast && <form onSubmit={(e) => e.preventDefault()}>
-                    {canSignIn && !userShifts.includes(shiftId) && <button type="button"  onClick={() => setConfirmPhone(true)} id="sign-in" > {t('signIn')} </button>}
+                    {canSignIn && !userShifts.includes(shiftId) && <button type="button"  onClick={() => setConfirmPhone(true)} id="sign-in" > {t('joinShift')} </button>}
                     <Confirmation id="sign-in"
-                        buttonName={t('signIn')}
+                        buttonName={t('joinShift')}
                             title={t('phoneConfirmation')}
                             accept={t('agreeConfirmation')}
                             deny={t('declineConfirmation')}
@@ -101,9 +101,9 @@ const ShiftCard = ({ shift, city, isInPast }) => {
                             openModal={confirmPhone}
                             setOpenModal={setConfirmPhone}
                         />
-                    {canSignIn && userShifts.includes(shiftId) && <button type="button"  onClick={() => setConfirmLeave(true)} id="sign-out">{t('signOff')} </button>}               
+                    {canSignIn && userShifts.includes(shiftId) && <button type="button"  onClick={() => setConfirmLeave(true)} id="sign-out">{t('leaveShift')} </button>}               
                     <Confirmation id="sign-off"
-                        buttonName={t('signIn')}
+                        buttonName={t('leaveShift')}
                             title={t('leaveShiftConfirmation')}
                             accept={t('agreeToLeave')}
                             deny={t('cancelLeave')} 
@@ -117,7 +117,7 @@ const ShiftCard = ({ shift, city, isInPast }) => {
                             openModal={confirmLeave}
                             setOpenModal={setConfirmLeave}
                         />
-                    {!canSignIn && !isAdmin && !isModerator && <p id="sign_in_section_error">{t('volunteersRestricedFunctionality')}. <Link to="/login">{t('signInToday')}</Link></p>}
+                    {!canSignIn && !isAdmin && !isModerator && <p id="sign_in_section_error">{t('volunteersRestricedFunctionality')}. <Link to="/login">{t('logInToday')}</Link></p>}
                 </form>}
             </Card>
         </div>

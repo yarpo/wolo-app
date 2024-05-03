@@ -140,7 +140,7 @@ const OrganiserCreateEvent = () => {
           <div className="organiser_create_event_row_div">
             <label htmlFor="districtId">{t('district')}*</label>
             <Field as="select" className="organiser_create_event-from_input_dropdown" type="text" name="districtId"  placeholder="District">
-              <option value="" disabled >{t('SelectDistrict')}</option>
+              <option value="" disabled >{t('selectDistrict')}</option>
               {districts.map(district => (
                 <option key={district.id} value={district.id}>{district.name}</option>
               ))}
@@ -151,7 +151,7 @@ const OrganiserCreateEvent = () => {
           <div className="organiser_create_event_row_div">
             <label htmlFor="categories">{t('categories')}*</label>
            <Field as="select" className="organiser_create_event-from_input_dropdown" type="text" name="categories" placeholder="Category" >
-              <option value="" disabled >{t('SelectCategory')}</option>
+              <option value="" disabled >{t('selectCategory')}</option>
               {categories.map(category => (
                 <option key={category.id} value={category.id}>{category.name}</option>
               ))}
