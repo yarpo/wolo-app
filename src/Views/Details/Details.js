@@ -33,6 +33,7 @@ const Details = () => {
   const [isInPast, setIsInPast] = useState(false);
   const currentLang = i18n.language.toUpperCase();
   const eventName = `name${currentLang}`;
+  const eventDescription = `description${currentLang}`;
 
   useEffect(() => {
     fetchUser().then(data => {
@@ -65,7 +66,6 @@ const Details = () => {
 
   const {
     organisationName,
-    description,
     date,
     city,
     imageUrl,
@@ -103,7 +103,7 @@ const Details = () => {
         <img src={imageUrl} alt={alt} onError={(event) => event.target.style.display = 'none'} />
       </div>
 
-      <p id="description">{description}</p>
+      <p id="description">{eventData[eventDescription]}</p>
 
       {isInPast && 
         <h2 id="details_event_over_text">{t('eventIsOver')}</h2>
