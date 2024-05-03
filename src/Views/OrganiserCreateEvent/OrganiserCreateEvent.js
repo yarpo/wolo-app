@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
@@ -56,7 +54,7 @@ const OrganiserCreateEvent = () => {
 
      console.log(values); 
 
-    const response = await fetch(`${BASE_URL}/events/add`, {
+    const response = await fetch(`${BASE_URL}/events/add?language=${localStorage.getItem('i18nextLng').toLocaleUpperCase}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
