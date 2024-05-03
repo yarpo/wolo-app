@@ -9,7 +9,7 @@ import { URLS } from '../../config';
 
 import '../../styles/admin-home-page.scss';
 import AddOrganisation from './addRecordModals/AddOrganisation.js';
-import deleteRequest from '../../Utils/deleteRequest.js';
+import postRequest from '../../Utils/postRequest.js';
 
 const OrganisationsTab = () => {
     const { t } = useTranslation();
@@ -26,8 +26,6 @@ const OrganisationsTab = () => {
 
     const handleModalAccept = (data) => {
         setOpenModal(false);
-        console.log("Accepted Data:", data);
-
         postRequestWithJson(URLS.ADD_ORGANISATION, localStorage.getItem('token'), data, t('addOrganisationSuccess'), t('addOrganisationFail'));
     };
 
@@ -52,8 +50,10 @@ const OrganisationsTab = () => {
     }, [userConfirmed]); 
 
     const handleDelete = () => {
+        const params = new URLSearchParams();
+        params.append('id', organisationToDelete);
         console.log("Delete confirmed", organisationToDelete);
-        deleteRequest(`${URLS.DELETE_ORGANISATION}/${organisationToDelete}`, localStorage.getItem('token'), "Deleted", "Fail")
+        postRequest(`${URLS.DELETE_ORGANISATION}`, localStorage.getItem('token'), params, "Deleted", "Fail")
         setOrganisationToDelete(null);
         setConfirmDelete(false);
     };
