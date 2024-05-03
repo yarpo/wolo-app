@@ -25,7 +25,7 @@ const EventCard = ({ event }) => {
             </li>
             <li>
               <VscBrowser className="icon" /> <strong>{t('date')}:</strong> {' '}
-              {formatDate(event.shifts[0].date)}
+              {formatDate(event.date)}
             </li>
             <li>
               <VscOrganization className="icon" />{' '}
