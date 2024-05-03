@@ -5,17 +5,19 @@ import { Link } from 'react-router-dom';
 import { URLS } from '../../config.js';
 
 const OrganiserEventListDisplay = ({ event, isArchived }) => {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
+    const currentLang = i18n.language.toUpperCase();
+    const eventName = `name${currentLang}`;
     
     return (
         <div className='organiser_event_list_display_content'>
             <div className="column">
                 <Link to={`${URLS.DETAILS}/${event.id}`}>
-                    {event.name}
+                    {event[eventName]}
                 </Link>
             </div>
             <div className="column">
-                {formatDate(event.shifts[0].date)}
+                {formatDate(event.date)}
             </div>
             <div className="column">
                 {event.city}
