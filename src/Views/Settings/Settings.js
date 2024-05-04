@@ -79,8 +79,7 @@ const Settings = () => {
         };
 
         console.log("Saving edited user data:", filteredUserData);
-        putRequest(`${URLS.USERS}/${userData.id}/edit`, localStorage.getItem('token'), filteredUserData, "Zmieniono dane", "Nie")
-        setUserData(editedUserData);
+        putRequest(`${URLS.USERS}/edit`, localStorage.getItem('token'), filteredUserData, "Zmieniono dane", "Nie")
         setEditMode(false);
     };
 
