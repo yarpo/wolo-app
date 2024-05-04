@@ -40,9 +40,9 @@ const OrganiserCreateEvent = () => {
       shiftDirections: '',
       street: '',
       homeNum: '',
-      districtId: ''
+      districtId: null
     }],
-    cityId: '',
+    cityId: null,
     isPeselVerificationRequired: false,
     isAgreementNeeded: false
   };
@@ -51,6 +51,11 @@ const OrganiserCreateEvent = () => {
     setSubmitting(true);
 
     values.categories = Array.from(values.categories);
+
+    values.cityId = parseInt(values.cityId);
+    for (let i = 0; i < values.shifts.length; i++) {
+      values.shifts[i].districtId = parseInt(values.shifts[i].districtId)
+    }
 
     console.log(values); 
 
@@ -171,10 +176,9 @@ const OrganiserCreateEvent = () => {
                             </Card>
                         </div>
                     ))}
-                    <button type="button" className='confirm_button' onClick={() => push({ id: null, 
+                    <button type="button" className='confirm_button' onClick={() => push({
                                                                 startTime: '', 
                                                                 endTime: '', 
-                                                                date: '', 
                                                                 capacity: '', 
                                                                 isLeaderRequired: false, 
                                                                 requiredMinAge: '', 
