@@ -30,10 +30,10 @@ const OrganiserCreateEvent = () => {
     description: '',
     categories: [],
     imageUrl: '',
+    date: '',
     shifts: [{
       startTime: '',
       endTime: '',
-      date: '',
       capacity: '',
       isLeaderRequired: false,
       requiredMinAge: '',
@@ -52,7 +52,7 @@ const OrganiserCreateEvent = () => {
 
     values.categories = Array.from(values.categories);
 
-     console.log(values); 
+    console.log(values); 
 
     const response = await fetch(`${BASE_URL}/events/add?language=${localStorage.getItem('i18nextLng').toLocaleUpperCase}`, {
       method: 'POST',
@@ -89,6 +89,9 @@ const OrganiserCreateEvent = () => {
 
                 <Label htmlFor="imageUrl" value="Image URL" />
                 <Field as={TextInput} id="imageUrl" type="text" sizing="md" name="imageUrl" />
+
+                <Label htmlFor="date" value="Date" />
+                <Field as={TextInput} id="date" type="date" name="date" />
 
                 <div className="organiser-create-event-two-columns">
                   <div className="organiser-create-event-two-columns-item">
@@ -135,9 +138,6 @@ const OrganiserCreateEvent = () => {
 
                                 <Label htmlFor={`shifts.${index}.endTime`} value="End Time" />
                                 <Field as={TextInput} id={`shifts.${index}.endTime`} type="time" name={`shifts.${index}.endTime`} />
-
-                                <Label htmlFor={`shifts.${index}.date`} value="Date" />
-                                <Field as={TextInput} id={`shifts.${index}.date`} type="date" name={`shifts.${index}.date`} />
 
                                 <Label htmlFor={`shifts.${index}.capacity`} value="Capacity" />
                                 <Field as={TextInput} id={`shifts.${index}.capacity`} type="number" name={`shifts.${index}.capacity`} />
