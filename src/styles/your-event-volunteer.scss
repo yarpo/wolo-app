@@ -5,7 +5,6 @@
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
-    padding: 0px 40px;
 
     .your_event_volunteer_event_item {
         display: flex;
@@ -15,19 +14,23 @@
     }
 
     #your_event_volunteer_event_name {
-        min-width: 35%;
+        min-width: 30%;
     }
 
     #your_event_volunteer_event_address {
-        min-width: 25%;
+        min-width: 20%;
     }
 
     #your_event_volunteer_event_sign_off_button {
         cursor: pointer;
         background-color: $color-4-red;
-        padding: 4px;
+        width: auto;
+        height: auto;
+        padding: 3px;
         border-radius: 7px;
         text-align: center;
+        margin-top: auto;
+        margin-bottom: auto;
     }
 }
 

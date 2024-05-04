@@ -36,7 +36,7 @@ const Login = ({ setToken, setUser }) => {
       const data = await response.json();
       localStorage.setItem('token', data.accessToken);
       setToken(data.accessToken);
-      setUser(data.user);
+      setUser(data.user );
       
       if (values.rememberMe) {
         localStorage.setItem('rememberMe', values.email);
@@ -88,14 +88,14 @@ const Login = ({ setToken, setUser }) => {
         validate={values => {
           const errors = {};
           if (!values.email) {
-            errors.email = 'Required';
+            errors.email = t('field')  + ' "' + t('email') + '" ' + t('required');
           } else if (
             !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
           ) {
-            errors.email = 'Invalid email address';
+            errors.email = t('invalidEmail');
           }
           if (!values.password) {
-            errors.password = 'Required'; 
+            errors.password = t('field')  + ' "' + t('password') + '" ' + t('required'); 
           }
           return errors;
         }}
@@ -112,7 +112,7 @@ const Login = ({ setToken, setUser }) => {
             event.preventDefault();
             handleLogin(values);
           }}>
-            <h1 className="login-form__title">{t('login')}</h1>
+            <h1 className="login-form__title">{t('logIn')}</h1>
             <p className="login-form_subtitle">{t('continue')}</p>
             <div className="max-w-md">
               <TextInput 
@@ -127,7 +127,7 @@ const Login = ({ setToken, setUser }) => {
                 required 
               />
             </div>
-            {errors.email && touched.email && <span className="error">{errors.email} *</span>}
+            {errors.email && touched.email && <span className="error">{errors.email} </span>}
             <br />
           <div className="max-w-md">
             <TextInput 
@@ -143,7 +143,7 @@ const Login = ({ setToken, setUser }) => {
               iconClick={toggleShowPassword}
             />
           </div>
-            {errors.password && touched.password && <span className="error">{errors.password} *</span>}
+            {errors.password && touched.password && <span className="error">{errors.password}</span>}
             <Link className="login-form_forgot-password">{t('forgotPassword')}</Link>
             <div className="checkbox-container">
               <input
@@ -160,10 +160,10 @@ const Login = ({ setToken, setUser }) => {
             </div>
             <br />
             <button className="login-form__button" type="submit" disabled={isSubmitting}>
-              {t('login')}
+              {t('logIn')}
             </button>
             <p className="login-form_register-text">
-              {`Don't have an account?`} <Link className="login-form_register-text" to="/signup">{t('signUpNow')}</Link>
+              {t('dontHaveAccount')} <Link className="login-form_register-text" to="/signup">{t('registerNow')}</Link>
             </p>
           </form>
         )}

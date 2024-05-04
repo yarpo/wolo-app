@@ -5,59 +5,29 @@ import 'react-datepicker/dist/react-datepicker.css';
 import '../../styles/hero.scss';
 import '../../styles/volunteer-home-page.scss';
 import formatTime from '../../Utils/formatTime.js';
-import fetchUserId from '../../Utils/fetchUserId.js';
+import fetchUser from '../../Utils/fetchUser.js';
+import fetchDataWithAuth from '../../Utils/fetchDataWithAuth.js';
 import { URLS } from '../../config.js';
 import Hero from '../Hero/Hero.js';
 
 const VolunteerHomePage = () => {
-
     const { t } = useTranslation();
-    const [userEvents, setUserEvents] = useState([]);
-    const [userId, setId] = useState(null);
+    const [userEventsCurrent, setUserEventsCurrent] = useState([]);
+    const [userEventsPast, setUserEventsPast] = useState([]);
+    const [userId, setUserId] = useState(null);
 
     useEffect(() => {
         const fetchUserData = async () => {
-            const userId = await fetchUserId();
-            setId(userId);
+            const userData = await fetchUser();
+            if (userData && userData.id) {
+                setUserId(userData.id);
+                fetchDataWithAuth(`${URLS.USER_EVENTS_CURRENT}`, setUserEventsCurrent, localStorage.getItem('token'));
+                fetchDataWithAuth(`${URLS.USER_EVENTS_PAST}`, setUserEventsPast, localStorage.getItem('token'));
+            }
         };
 
         fetchUserData();
     }, []);
-
-    useEffect(() => {
-        const fetchUserEvents = async () => {
-            if (userId) {
-                try {
-                    const url = `${URLS.USERS}/${userId}/shifts`;
-                    const token = localStorage.getItem('token');
-
-                    const response = await fetch(url, {
-                        method: 'GET',
-                        headers: {
-                            'Authorization': `Bearer ${token}`,
-                            'Content-Type': 'application/json'
-                        }
-                    });
-
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-
-                    const data = await response.json();
-                    setUserEvents(data);
-                } catch (error) {
-                    console.error('Error fetching data:', error);
-                }
-            }
-        };
-
-        fetchUserEvents();
-    }, [userId]);
-
-
-    if (!userEvents.length === 0) {
-        return <div>{t('loading')}...</div>;
-    }
 
     return (
         <div className='volunteer_home_page'>
@@ -66,10 +36,14 @@ const VolunteerHomePage = () => {
             <div id="volunteer_home_page_your_events">
                 <h2>{t('yourEvents')} </h2>
                 <br />
-                {userEvents && userEvents.map((shift) => (
-                    <YourEventVolunteer
+                {userEventsCurrent.length === 0 ? (
+                    <p id="volunteer_home_page_text">{t('noCurrentEvents')}</p>
+                ) : (
+                    userEventsCurrent.map((shift) => (
+                        <YourEventVolunteer
                         key={shift.shiftId}
                         shiftId={shift.shiftId}
+                        eventId={shift.eventId}
                         userId={userId}
                         name={shift.eventName}
                         date={shift.date}
@@ -77,8 +51,34 @@ const VolunteerHomePage = () => {
                         endTime={formatTime(shift.endTime)}
                         street={shift.street}
                         homeNum={shift.homeNum}
-                        city={shift.city} />
-                ))}
+                        district={shift.district}
+                        isArchived={false} />
+                        ))
+                    )}
+                </div>
+            <div id="volunteer_home_page_your_events">
+                <h2>{t('yourPastEvents')}</h2>
+                <br />
+                {userEventsPast.length === 0 ? (
+                    <p id="volunteer_home_page_text">{t('noPastEvents')}</p>
+                ) : (
+                    userEventsPast.map((shift) => (
+                        <YourEventVolunteer
+                            key={shift.shiftId}
+                            shiftId={shift.shiftId}
+                            eventId={shift.eventId}
+                            userId={userId}
+                            name={shift.eventName}
+                            date={shift.date}
+                            startTime={formatTime(shift.startTime)}
+                            endTime={formatTime(shift.endTime)}
+                            street={shift.street}
+                            homeNum={shift.homeNum}
+                            district={shift.district}
+                            isArchived={true}
+                        />
+                    ))
+                )}
             </div>
         </div>
     )

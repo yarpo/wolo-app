@@ -130,7 +130,6 @@ const OrganiserCreateEvent = () => {
                     <Field as={Checkbox} id="isAgreementNeeded" name="isAgreementNeeded" />
                   </div>
                 </div>
-
                 <FieldArray name="shifts" className="organiser-create-event-grid">
                 {({ remove, push }) => (
                   <div>

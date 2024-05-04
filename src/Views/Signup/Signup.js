@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import '../../styles/signup.scss';
 import { URLS } from '../../config.js';
 import fetchUserId from '../../Utils/fetchUserId.js';
+import postRequestWithJson from '../../Utils/postRequestWithJson.js';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -35,28 +36,12 @@ const Signup = () => {
     phoneNumber: '',
     password: '',
     confirmPassword: '',
-    adultConfirmation: false,
+    isAdult: false,
     termsAndConditions: false,
   };
 
 const handleRegister = async (values) => {
-  try {
-    const response = await fetch(URLS.REGISTER, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(values)
-    });
-
-    if (response.ok) {
-      window.location.href = URLS.LOGIN;
-    } else {
-      console.error('Failed to register'); //alert to do
-    }
-  } catch (error) {
-    console.error('Signup error:', error); //aletr to do
-  }
+    postRequestWithJson(URLS.REGISTER, '', values, t('registerSuccess'), t('registerError'), URLS.LOGIN);
 };
 
 console.log(handleRegister);
@@ -64,19 +49,25 @@ console.log(handleRegister);
   const validate = values => {
     const errors = {};
 
-    const requiredFields = ['firstName', 'lastName', 'email', 'password', 'confirmPassword', 'adultConfirmation', 'termsAndConditions'];
+    const requiredFields = ['firstName', 'lastName', 'email', 'phoneNumber', 'password', 'confirmPassword', 'termsAndConditions'];
     requiredFields.forEach(field => {
-      if (!values[field]) {
-        errors[field] = `${field.charAt(0).toUpperCase() + field.slice(1)} is required`;
+      if (field === 'termsAndConditions' && !values[field]) {
+        errors[field] = t('needToAcceptTerms');
+      } else if (!values[field]) {
+        errors[field] = t('field')  + ' "' + t(field) + '" ' + t('required');
       }
     });
 
+    if (values.phoneNumber && !/^\d{9}$/.test(values.phoneNumber)) {
+      errors.phoneNumber = t('invalidPhoneNumber');
+    }
+
     if (values.email && !/\S+@\S+\.\S+/.test(values.email)) {
-      errors.email = 'Email address is invalid';
+      errors.email = t('invalidEmail');
     }
 
     if (values.password && values.confirmPassword && values.password !== values.confirmPassword) {
-      errors.confirmPassword = 'Passwords must match';
+      errors.confirmPassword = t('passwordsDoNotMatch');
     }
 
     return errors;
@@ -84,7 +75,7 @@ console.log(handleRegister);
 
   return (
     <div className="signup_div">
-      <h1 className="signup_title">{t('signup')}</h1>
+      <h1 className="signup_title">{t('register')}</h1>
       <p className="signup_sub-title">{t('begin')}</p>
       <Formik
           initialValues={initialValues}
@@ -115,10 +106,10 @@ console.log(handleRegister);
             <ErrorMessage className="error" name="email" component="div" />
             <br/>
 
-            <label htmlFor="phonenumber">{t('phone')}</label>
+            <label htmlFor="phoneNumber">{t('phoneNumber')}</label>
             <Field className="signup-from_input" type="text" name="phoneNumber" />
             <ErrorMessage className="error" name="phoneNumber" component="div" />
-             <br/>
+            <br/>
 
             <div className="password-field">
               <label htmlFor="password">{t('password')}</label>
@@ -142,8 +133,8 @@ console.log(handleRegister);
              <br/>
 
             <div className="checkbox_signup-group">
-              <label htmlFor="adultConfirmation">
-                <Field type="checkbox" name="adultConfirmation" />
+              <label htmlFor="checkIfAdult">
+                <Field type="checkbox" name="isAdult" />
                 {t('confirmAge')}
               </label>
 
@@ -154,15 +145,10 @@ console.log(handleRegister);
             </div>
             <br/>
             <div className="button-group">
+            <ErrorMessage className="error" name="termsAndConditions" component="div" />
             <button className="signup-form_button" type="submit" disabled={isSubmitting}>
-              {t('signup')}
+              {t('register')}
             </button>
-            <div className="line-text">
-              <hr />
-              <p>{t('orContinueWithGoogle')}</p>
-              <hr />
-            </div>
-            <button className="signup-form_button">{t('SignUpWithGoole')} </button>
             <p>{t('alreadyHaveAccount')}<Link className="login-form_register-text" to="/login">{t('loginNow')}</Link></p>
           </div>
           </Form>

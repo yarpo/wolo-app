@@ -4,7 +4,7 @@
     "calendar":"Календарь",
     "forVolunteers":"Волонтерам",
     "theyNeedYou":"Им нужна помощ",
-    "login": "Вход",
+    "logIn": "Вход",
 
     "back":"Назад",
     "haveBeenSignedIn":"Записалось волонтёров",
@@ -15,7 +15,6 @@
     "organizer":"Организатор",
     "selectDate":"Выберите дату",
     "location": "Место проведения",
-    "signIn": "Записаться",
     "moreEventsFromThisOrganizer": "Еще мероприятия от этого организатора",
     "phoneConfirmation": "Я согласен предоставить свой номер телефона организатору.",
     "agreeConfirmation": "я согласен",
@@ -41,42 +40,45 @@
     "resetAllFilters": "Сбросить все фильтры",
 
     "welcome": "Вы готовы изменить мир?",
-    "signInToday": "Войти",
+    "logInToday": "Войти",
     "or": "сегодня или",
     "findEvent": "найти событие для себя",
     "mainSearch": "Поиск",
 
     "yourOrganisation": "Ваша организация",
     "createNewEvent": "Создать новое событие",
-    "yourOngoingEvents": "Ваши текущие события",
     "showAll": "Более",
-    "eventsInModeration": "Мероприятия в модерации",
     "volunteers": "Волонтёры",
     "details": "Подробности",
     "edit": "Редактировать",
     "delete": "Удалить",
 
-    "signup": "Регистрация",
+    "register": "Регистрация",
     "begin": "Начните свой путь волонтёра",
     "firstName": "Имя",
     "lastName": "Фамилия",
     "email": "Электронная почта",
-    "phone": "Номер телефона (По желанию)",
+    "phoneNumber": "Номер телефона",
     "password": "Пароль",
     "showPassword": "Показать пароль",
     "confirmPassword": "Подтвердите пароль",
     "forgotPassword": "Забыли пароль?",
     "confirmAge": "Я подтверждаю, что мне больше 18 лет",
     "agreeTerms": "Я прочитал(а) и согласен(а) с условиями",
-    "orContinueWith": "Или продолжите с помощью своего адреса электронной почты",
-    "orContinueWithGoogle": "Или продолжите использовать свою учетную запись Google",
     "alreadyHaveAccount": "Уже есть аккаунт? ",
-    "SignUpWithGoole": "Регистрация через Google",
     "loginNow": "Войти сейчас",
-    "signUpNow": "Зарегистрироваться сейчас",
+    "dontHaveAccount": "Don't have an account?",
+    "registerNow": "Зарегистрироваться сейчас",
     "keepMeLoggedIn": "Оставить меня в системе",
     "continue": "Продолжите свой путь волонтёра",
-    "continueWithGoogle": "Продолжить с помощью Google",
+    "passwordsDoNotMatch": "Passwords do not match",
+    "required": "is required",
+    "field": "Field",
+    "invalidEmail": "Invalid email",
+    "registerSuccess": "You have successfully registered.",
+    "registerError": "User with this email already exists",
+    "invalidPhoneNumber": "Phone number must consist of 9 digits",
+    "needToAcceptTerms": "You need to accept terms and conditions to create an account",
 
     "welcomeToWoloApp": "Ласкаво просимо в WoloApp",
     "yourAccountStatus": "Статус вашого облікового запису",
@@ -92,8 +94,12 @@
     "accept": "прийняти",
     "discard": "Відкинути",
 
-    "signOff": "Выйти",
-    "yourEvents": "Ваши события",
+
+    "joinShift": "Join Shift",
+    "leaveShift": "Leave Shift",
+    "yourEvents": "Ваши мероприятия",
+    "yourPastEvents": "Ваши прошлые мероприятия",
+
     "resetFilters": "Сбросить фильтры",
 
     "createEvent": "Создать событие",
@@ -110,8 +116,8 @@
     "minimumAgeRequired": "Минимальный возраст",
     "leaderRequired": "Требуется лидер",
     "addShift": "Добавить смену",
-    "SelectDistrict": "Выберите округ",
-    "SelectCategory": "Выберите категорию",
+    "selectDistrict": "Выберите округ",
+    "selectCategory": "Выберите категорию",
 
     "loading": "загрузка",
     "participants": "Участники",
@@ -127,7 +133,14 @@
     "organiserPage": "Управление организацией",
     "volunteerPage": "Ваша страница",
     "thereAreNoVolunteers": "Нет зарегистрированных добровольцев",
+
+    "noCurrentEvents": "Вы не зарегистрированы на ни одно мероприятие. Попробуйте поискать на странице Все мероприятия!",
+    "noPastEvents": "Вы не участвовали ни в одном мероприятии.",
+    "noCurrentEventsOrganisation": "Ваша организация не проводит никаких текущих мероприятий. Попробуйте создать одно!",
+    "noPastEventsOrganisation": "Ваша организация не проводила никаких прошлых мероприятий.",
     "theyNeedYouBanner": "Эти мероприятия скоро состоятся, и им еще не хватает полного количества волонтёров. Возможно, они именно вас ждут!",
+
+    "eventIsOver": "Это событие уже произошло",
 
     "addOrganisationSuccess": "Организация успешно создана",
     "addOrganisationFail": "При создании организации возникла проблема. Пожалуйста, попробуйте позже",
@@ -141,4 +154,5 @@
     "addUserFail": "При создании нового пользователя возникла проблема. Пожалуйста, попробуйте позже",
 
     "cities": "Cities"
+
 }

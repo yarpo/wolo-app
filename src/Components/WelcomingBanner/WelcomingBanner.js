@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import '../../styles/hero.scss';
 import fetchUserRoles from '../../Utils/fetchUserRoles.js';
 
-const WelcomingBanner = ({ isOrganizerPage }) => {
+const WelcomingBanner = ({ isOrganizerPage, organisationName }) => {
     const { t } = useTranslation();
     const isLoggedIn = localStorage.getItem('token') ? true : false;
     const user = JSON.parse(localStorage.getItem('user'));
@@ -31,13 +31,13 @@ const WelcomingBanner = ({ isOrganizerPage }) => {
                     <h1>{t('hello')}, {user.firstName}. {t('welcomeToWoloApp')}</h1>
                 </div>}
                 { !isLoggedIn && <div id="subtext_hero">
-                    <h2><Link to="/login">{t('signInToday')}</Link> {t('or')} <Link to="/events">{t('findEvent')}</Link></h2>
+                    <h2><Link to="/login">{t('logInToday')}</Link> {t('or')} <Link to="/events">{t('findEvent')}</Link></h2>
                 </div>}
                 { isLoggedIn && !isOrganizerPage && <div id="subtext_hero">
                     <h2>{t('welcome')}</h2>
                 </div>}
                 { isModerator && isOrganizerPage && <div id="subtext_hero">
-                    <h2>{t('yourOrganisation')}: NAZWA</h2>
+                    <h2>{t('yourOrganisation')}: {organisationName}</h2>
                 </div>}
             </div>
         </>
