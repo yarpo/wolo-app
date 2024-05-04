@@ -19,9 +19,12 @@ const OrganiserCreateEvent = () => {
 
   useEffect(() => {
     fetchData(URLS.CATEGORIES, setCategories);
-    fetchData(URLS.CITIES, setCities);
+    fetchData(URLS.CITIES, (data) => {
+      setCities(data);
+      initialValues.cityId = data[0].id;
+    });
     fetchData(URLS.DISTRICTS, setDistricts);
-}, []);
+  }, []);
 
   
   const initialValues = {
@@ -56,8 +59,6 @@ const OrganiserCreateEvent = () => {
     for (let i = 0; i < values.shifts.length; i++) {
       values.shifts[i].districtId = parseInt(values.shifts[i].districtId)
     }
-
-    console.log(values); 
 
     const response = await fetch(`${BASE_URL}/events/add?language=${localStorage.getItem('i18nextLng').toLocaleUpperCase()}`, {
       method: 'POST',
