@@ -54,7 +54,7 @@ const OrganiserCreateEvent = () => {
 
     console.log(values); 
 
-    const response = await fetch(`${BASE_URL}/events/add?language=${localStorage.getItem('i18nextLng').toLocaleUpperCase}`, {
+    const response = await fetch(`${BASE_URL}/events/add?language=${localStorage.getItem('i18nextLng').toLocaleUpperCase()}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
