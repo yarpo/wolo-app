@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import '../../styles/settings.scss';
 import fetchUser from '../../Utils/fetchUser';
 import putRequest from '../../Utils/putRequest';
@@ -15,6 +16,7 @@ const Settings = () => {
     const [errors, setErrors] = useState({});
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [userConfirmed, setUserConfirmed] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchUser().then(data => {
@@ -104,6 +106,9 @@ const Settings = () => {
         console.log(`${URLS.DELETE_USER}/${userData.id}`);
         deleteRequest(`${URLS.DELETE_USER}/${userData.id}`, localStorage.getItem('token'), t('deleteAccountSuccess'), t('deleteAccountFail'))
         setConfirmDelete(false);
+        localStorage.removeItem('user');
+        localStorage.removeItem('token');
+        navigate('/login');
     };
 
     return (
