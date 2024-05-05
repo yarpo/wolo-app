@@ -130,8 +130,7 @@ const OrganiserCreateEvent = () => {
                   <div className="organiser-create-event-two-columns-item">
                     <Label htmlFor="cityId" value="City" />
                     <Field as={Select} id="cityId" name="cityId" onChange={handleCityChange} >
-                      {
-                      cities.map(city => (
+                      {cities.map(city => (
                         <option key={city.id} value={city.id}>{city.name}</option>
                       ))}
                     </Field>
@@ -164,7 +163,7 @@ const OrganiserCreateEvent = () => {
                                 <Field as={TextInput} id={`shifts.${index}.endTime`} type="time" name={`shifts.${index}.endTime`} />
 
                                 <Label htmlFor={`shifts.${index}.capacity`} value="Capacity" />
-                                <Field as={TextInput} id={`shifts.${index}.capacity`} type="number" name={`shifts.${index}.capacity`} />
+                                <Field as={TextInput} id={`shifts.${index}.capacity`} type="number" min='1' name={`shifts.${index}.capacity`} />
 
                                 <Label htmlFor={`shifts.${index}.isLeaderRequired`} value="Is Leader Required?" />
                                 <Field as={Checkbox} id={`shifts.${index}.isLeaderRequired`} name={`shifts.${index}.isLeaderRequired`} /> 
