@@ -4,7 +4,6 @@ import YourEventVolunteer from './YourEventVolunteer/YourEventVolunteer.js';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../../styles/hero.scss';
 import '../../styles/volunteer-home-page.scss';
-import formatTime from '../../Utils/formatTime.js';
 import fetchUser from '../../Utils/fetchUser.js';
 import fetchDataWithAuth from '../../Utils/fetchDataWithAuth.js';
 import { URLS } from '../../config.js';
@@ -45,13 +44,7 @@ const VolunteerHomePage = () => {
                         shiftId={shift.shiftId}
                         eventId={shift.eventId}
                         userId={userId}
-                        name={shift.eventName}
-                        date={shift.date}
-                        startTime={formatTime(shift.startTime)}
-                        endTime={formatTime(shift.endTime)}
-                        street={shift.street}
-                        homeNum={shift.homeNum}
-                        district={shift.district}
+                        shift={shift}
                         isArchived={false} />
                         ))
                     )}
@@ -68,13 +61,7 @@ const VolunteerHomePage = () => {
                             shiftId={shift.shiftId}
                             eventId={shift.eventId}
                             userId={userId}
-                            name={shift.eventName}
-                            date={shift.date}
-                            startTime={formatTime(shift.startTime)}
-                            endTime={formatTime(shift.endTime)}
-                            street={shift.street}
-                            homeNum={shift.homeNum}
-                            district={shift.district}
+                            shift={shift}
                             isArchived={true}
                         />
                     ))

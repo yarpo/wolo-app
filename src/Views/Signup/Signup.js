@@ -75,7 +75,7 @@ console.log(handleRegister);
 
   return (
     <div className="signup_div">
-      <h1 className="signup_title">{t('signup')}</h1>
+      <h1 className="signup_title">{t('register')}</h1>
       <p className="signup_sub-title">{t('begin')}</p>
       <Formik
           initialValues={initialValues}
@@ -147,7 +147,7 @@ console.log(handleRegister);
             <div className="button-group">
             <ErrorMessage className="error" name="termsAndConditions" component="div" />
             <button className="signup-form_button" type="submit" disabled={isSubmitting}>
-              {t('signup')}
+              {t('register')}
             </button>
             <p>{t('alreadyHaveAccount')}<Link className="login-form_register-text" to="/login">{t('loginNow')}</Link></p>
           </div>

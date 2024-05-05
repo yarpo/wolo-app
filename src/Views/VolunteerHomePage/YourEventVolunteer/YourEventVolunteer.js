@@ -7,12 +7,15 @@ import React, { useState, useEffect, useCallback} from 'react';
 import { Button } from 'flowbite-react';
 import { Link } from 'react-router-dom';
 import formatDate from '../../../Utils/formatDate.js';
+import formatTime from '../../../Utils/formatTime.js';
 
-const YourEventVolunteer = ({shiftId, eventId, userId, name, date, startTime, endTime, street, homeNum, district, isArchived}) => {
+const YourEventVolunteer = ({shiftId, eventId, userId, shift, isArchived}) => {
     const { t } = useTranslation();
+    const eventName = `eventName${localStorage.getItem('i18nextLng').toUpperCase()}`;
     const token = localStorage.getItem('token');
     const [userConfirmed, setUserConfirmed] = useState(false);
     const [confirmLeave, setConfirmLeave] = useState(false);
+
     const postRequest = async (url, token, params, success, error) => {
         const response = await fetch(`${url}?${params.toString()}`, {
             method: 'POST',
@@ -60,22 +63,22 @@ const YourEventVolunteer = ({shiftId, eventId, userId, name, date, startTime, en
         <div className='your_event_volunteer'>
             <div className="your_event_volunteer_event_item" id="your_event_volunteer_event_name">
                 <Link to={`${URLS.DETAILS}/${eventId}`}>
-                    {name}
+                    {shift[eventName]}
                 </Link>
             </div>
             <div className="your_event_volunteer_event_item" id="your_event_volunteer_event_date">
-                {formatDate(date)}
+                {formatDate(shift.date)}
             </div>
             <div className="your_event_volunteer_event_item"  id="your_event_volunteer_event_date">
-                {startTime} - {endTime}
+                {formatTime(shift.startTime)} - {formatTime(shift.endTime)}
             </div>
             <div className="your_event_volunteer_event_item"  id="your_event_volunteer_event_address">
-                {street} {homeNum}, {district}
+                {shift.street} {shift.homeNum}, {shift.district}
             </div>
 
-            {!isArchived && <Button type="button"  onClick={() => setConfirmLeave(true)} id="your_event_volunteer_event_sign_off_button">{t('signOff')} </Button>}         
+            {!isArchived && <Button type="button" size="xl" onClick={() => setConfirmLeave(true)} id="your_event_volunteer_event_sign_off_button"> {t('leaveShift')} </Button>}         
                 <Confirmation id="sign-in"
-                    buttonName={t('signIn')}
+                    buttonName={t('logIn')}
                         title={t('leaveShiftConfirmation')}
                         accept={t('agreeToLeave')}
                         deny={t('cancelLeave')} 
