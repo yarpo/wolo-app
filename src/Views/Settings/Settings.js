@@ -83,7 +83,14 @@ const Settings = () => {
         };
 
         console.log("Saving edited user data:", filteredUserData);
-        putRequest(`${URLS.USERS}/edit`, localStorage.getItem('token'), filteredUserData, "Zmieniono dane", "Nie")
+        putRequest(`${URLS.USERS}/edit`, localStorage.getItem('token'), filteredUserData, "Zmieniono dane", "Nie");
+        // after changing mail recognise user
+        userData.firstName = editedUserData.firstName;
+        userData.lastName = editedUserData.lastName;
+        userData.email = editedUserData.email;
+        userData.phoneNumber = editedUserData.phoneNumber;
+        userData.isAdult = editedUserData.adult;
+        localStorage.setItem('user', JSON.stringify(userData));
         setEditMode(false);
     };
 
