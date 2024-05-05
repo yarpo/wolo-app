@@ -16,16 +16,34 @@ const OrganiserCreateEvent = () => {
   const [categories, setCategories] = useState([]);
   const [cities, setCities] = useState([]);
   const [districts, setDistricts] = useState([]);
+  const [selectedCity, setSelectedCity] = useState(null);
+  const [filteredDistricts, setFilteredDistricts] = useState([]);
+
 
   useEffect(() => {
     fetchData(URLS.CATEGORIES, setCategories);
     fetchData(URLS.CITIES, (data) => {
       setCities(data);
-      initialValues.cityId = data[0].id;
     });
     fetchData(URLS.DISTRICTS, setDistricts);
   }, []);
 
+  const handleCityChange = (event) => {
+    const newSelectedCity = Number(event.target.value);
+    setSelectedCity(newSelectedCity);
+    console.log(selectedCity);
+
+  };
+
+  useEffect(() => {
+    const selectedCityObject = cities.find(city => city.id === selectedCity);
+    if (selectedCityObject) {
+      const newFilteredDistricts = districts.filter(district => district.cityName === selectedCityObject.name);
+      setFilteredDistricts(newFilteredDistricts);
+    } else {
+      setFilteredDistricts([]);
+    }
+  }, [selectedCity, cities, districts]);
   
   const initialValues = {
     name: '',
@@ -45,7 +63,7 @@ const OrganiserCreateEvent = () => {
       homeNum: '',
       districtId: null
     }],
-    cityId: null,
+    cityId: selectedCity ,
     isPeselVerificationRequired: false,
     isAgreementNeeded: false
   };
@@ -55,7 +73,7 @@ const OrganiserCreateEvent = () => {
 
     values.categories = Array.from(values.categories);
 
-    values.cityId = parseInt(values.cityId);
+    values.cityId = parseInt(selectedCity);
     for (let i = 0; i < values.shifts.length; i++) {
       values.shifts[i].districtId = parseInt(values.shifts[i].districtId)
     }
@@ -111,8 +129,9 @@ const OrganiserCreateEvent = () => {
 
                   <div className="organiser-create-event-two-columns-item">
                     <Label htmlFor="cityId" value="City" />
-                    <Field as={Select} id="cityId" name="cityId">
-                      {cities.map(city => (
+                    <Field as={Select} id="cityId" name="cityId" onChange={handleCityChange} >
+                      {
+                      cities.map(city => (
                         <option key={city.id} value={city.id}>{city.name}</option>
                       ))}
                     </Field>
@@ -165,8 +184,8 @@ const OrganiserCreateEvent = () => {
 
                                 <Label htmlFor={`shifts.${index}.districtId`} value="District" />
                                 <Field as={Select} id={`shifts.${index}.districtId`} name={`shifts.${index}.districtId`}>
-                                  {districts.map(district => (
-                                    <option key={district.id} value={district.id}>{district.name}</option>
+                                  {filteredDistricts.map(district => (
+                                     <option key={district.id} value={district.id}>{district.name}</option>
                                   ))}
                                 </Field>
                               </div>
