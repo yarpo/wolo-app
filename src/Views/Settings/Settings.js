@@ -7,6 +7,8 @@ import putRequest from '../../Utils/putRequest';
 import { URLS } from '../../config';
 import Confirmation from '../../Components/Popups/Confirmation.js';
 import deleteRequest from '../../Utils/deleteRequest.js';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Settings = () => {
     const { t } = useTranslation();
@@ -104,11 +106,15 @@ const Settings = () => {
 
     const handleDelete = () => {
         console.log(`${URLS.DELETE_USER}/${userData.id}`);
-        deleteRequest(`${URLS.DELETE_USER}/${userData.id}`, localStorage.getItem('token'), t('deleteAccountSuccess'), t('deleteAccountFail'))
-        setConfirmDelete(false);
-        localStorage.removeItem('user');
-        localStorage.removeItem('token');
-        navigate('/login');
+        if (userData.organisationName == null) {
+            deleteRequest(`${URLS.DELETE_USER}/${userData.id}`, localStorage.getItem('token'), t('deleteAccountSuccess'), t('deleteAccountFail'));
+            setConfirmDelete(false);
+            localStorage.removeItem('user');
+            localStorage.removeItem('token');
+            navigate('/login');
+        } else {
+            toast.error(t('deleteAccountFail'));
+        }        
     };
 
     return (
