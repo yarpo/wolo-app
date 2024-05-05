@@ -6,16 +6,17 @@ import { URLS } from '../../config.js';
 
 const OrganiserEventListDisplay = ({ event, isArchived }) => {
     const { t } = useTranslation();
+    const eventName = `name${localStorage.getItem('i18nextLng').toUpperCase()}`;
     
     return (
         <div className='organiser_event_list_display_content'>
             <div className="column">
                 <Link to={`${URLS.DETAILS}/${event.id}`}>
-                    {event.name}
+                    {event[eventName]}
                 </Link>
             </div>
             <div className="column">
-                {formatDate(event.shifts[0].date)}
+                {formatDate(event.date)}
             </div>
             <div className="column">
                 {event.city}
@@ -23,12 +24,8 @@ const OrganiserEventListDisplay = ({ event, isArchived }) => {
             <div className="column">
                 <strong>{t('details')}</strong>
             </div>
-            {!isArchived && <div className="column">
-                <strong>{t('edit')}</strong>
-            </div>}
-            {!isArchived && <div className="column">
-                <strong>{t('delete')}</strong>
-            </div>}
+            {!isArchived && <div className="column"><strong>{t('edit')}</strong></div>}
+            {!isArchived && <div className="column"><strong>{t('delete')}</strong></div>}
         </div>
     )
 };
