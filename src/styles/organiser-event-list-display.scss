@@ -17,6 +17,9 @@
         text-align: center;
         margin-top: auto;
         margin-bottom: auto;
+        &:hover {
+            background-color: $color-4-red-hover;
+        }
     }
 
     .column:first-child {
