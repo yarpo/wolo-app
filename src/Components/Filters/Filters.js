@@ -27,31 +27,31 @@ const Filters = ({ setFilteredEvents }) => {
   }, []);
 
   useEffect(() => {
-    const filteredEvents = apiResponse.filter((event) => {
+   const filteredEvents = apiResponse.filter((event) => {
 
-      const isMatchingTag = filters.chosenTags.some((tag) =>
-        tag === event.organisation ||
-        event.categories.some(category => category.name === tag) ||
-        event.district === tag ||
-        event.shifts.some(shift => shift.requiredMinAge.toString() === tag)
-      );
+    const isMatchingTag = filters.chosenTags.some((tag) =>
+      tag === event.organisation ||
+      event.categories.some(category => category === tag) ||
+      event.shifts[0].district === tag ||
+      event.shifts[0].requiredMinAge.toString() === tag
+    );
 
-      const isMatchingDate =
-        filters.selectedDate === null || new Date(event.shifts[0].date) >= filters.selectedDate;
+    const isMatchingDate =
+      filters.selectedDate === null || new Date(event.date) >= filters.selectedDate;
 
-      const isMatchingVerification =
-        !filters.requiresVerification || event.peselVerificationRequired === false;
+    const isMatchingVerification =
+      !filters.requiresVerification || event.peselVerificationRequired === false;
 
-      const isMatchingBooking =
-        !filters.hideFullyBookedEvents || event.shifts[0].signedUp < event.shifts[0].capacity;
+    const isMatchingBooking =
+      !filters.hideFullyBookedEvents || event.shifts[0].registeredUsers < event.shifts[0].capacity;
 
-      return (
-        (filters.chosenTags.length === 0 || isMatchingTag) &&
-        isMatchingDate &&
-        isMatchingVerification &&
-        isMatchingBooking
-      );
-    });
+    return (
+      (filters.chosenTags.length === 0 || isMatchingTag) &&
+      isMatchingDate &&
+      isMatchingVerification &&
+      isMatchingBooking
+    );
+  });
 
     setFilteredEvents(filteredEvents);
   }, [filters, setFilteredEvents, apiResponse]);

@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 import '../../styles/event-card.scss';
 
 const EventCard = ({ event }) => {
-  
   const { t } = useTranslation();
+  const eventName = `name${localStorage.getItem('i18nextLng').toUpperCase()}`;
 
   return (
     <Link to={`/details/${event.id}`} style={{ textDecoration: 'none' }}>
@@ -16,7 +16,7 @@ const EventCard = ({ event }) => {
           <img src={event.imageUrl} alt={event.name}  onError={(event) => event.target.style.display = 'none'}/>
         </div>
         <div id="information">
-          <h2>{event.name}</h2>
+          <h2>{event[eventName]}</h2>
           <ul>
             <li>
               <VscLocation className="icon" /> <strong>{t('location')}:</strong>{' '}
@@ -24,7 +24,7 @@ const EventCard = ({ event }) => {
             </li>
             <li>
               <VscBrowser className="icon" /> <strong>{t('date')}:</strong> {' '}
-              {formatDate(event.shifts[0].date)}
+              {formatDate(event.date)}
             </li>
             <li>
               <VscOrganization className="icon" />{' '}

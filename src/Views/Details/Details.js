@@ -18,7 +18,6 @@ import formatDate from '../../Utils/formatDate.js';
 import SignedInVolunteers from './SignedInVolunteers/SignedInVolunteers.js';
 import { URLS } from '../../config.js'
 import ShiftCard from './ShiftCard/ShiftCard.js';
-
 import fetchUser from '../../Utils/fetchUser.js';
 
 const Details = () => {
@@ -31,6 +30,8 @@ const Details = () => {
   const isModerator = roles && roles.includes('MODERATOR');
   const isAdmin = roles && roles.includes('ADMIN');
   const [isInPast, setIsInPast] = useState(false);
+  const eventDescription = `description${localStorage.getItem('i18nextLng').toUpperCase()}`;
+  const eventName = `name${localStorage.getItem('i18nextLng').toUpperCase()}`;
 
   useEffect(() => {
     fetchUser().then(data => {
@@ -62,12 +63,10 @@ const Details = () => {
   }
 
   const {
-    name,
     organisationName,
-    description,
+    date,
     city,
     imageUrl,
-    shifts,
     alt,
     categories
   } = eventData;
@@ -78,10 +77,10 @@ const Details = () => {
         <Link to="/events" id="back">
           <VscArrowLeft id="back_arrow" /> {t('back')}
         </Link>
-        <h1 id="title">{name}</h1>
+        <h1 id="title">{eventData[eventName]}</h1>
         <ul id="information">
           <li>
-            <VscBrowser id="icon" /> <strong>{t('date')}:</strong> {formatDate(shifts[0].date)}
+            <VscBrowser id="icon" /> <strong>{t('date')}:</strong> {formatDate(date)}
           </li>
           <li>
             <BiBorderAll id="icon" /> <strong>{t('category')}:</strong>{' '}
@@ -102,7 +101,7 @@ const Details = () => {
         <img src={imageUrl} alt={alt} onError={(event) => event.target.style.display = 'none'} />
       </div>
 
-      <p id="description">{description}</p>
+      <p id="description">{eventData[eventDescription]}</p>
 
       {isInPast && 
         <h2 id="details_event_over_text">{t('eventIsOver')}</h2>

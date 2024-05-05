@@ -123,7 +123,7 @@ function handleLogout() {
                 )}
               </>
             ) : (
-              <Link to="/login">{t('signIn')}</Link>
+              <Link to="/login">{t('logIn')}</Link>
             )}
           </li>
         </ul>

@@ -11,11 +11,11 @@ import fetchUserShifts from '../../../Utils/fetchUserShifts.js';
 import postRequest from '../../../Utils/postRequest.js';
 import Confirmation from '../../../Components/Popups/Confirmation.js';
 import { Card } from "flowbite-react";
-import formatDate from '../../../Utils/formatDate.js';
 import formatTime from '../../../Utils/formatTime.js';
 
 const ShiftCard = ({ shift, city, isInPast }) => {
     const { t } = useTranslation();
+    const shiftDirections = `shiftDirections${localStorage.getItem('i18nextLng').toUpperCase()}`;
     const [roles, setRoles] = useState(null);
     const [id, setId] = useState(null);
     const shiftId = shift.shiftId;
@@ -42,8 +42,6 @@ const ShiftCard = ({ shift, city, isInPast }) => {
         fetchUserData();
     }, []);
   
-    
-
     const handleUserConfirmation = async (confirmation) => {
         setUserConfirmed(confirmation);
     };
@@ -77,17 +75,16 @@ const ShiftCard = ({ shift, city, isInPast }) => {
         <div className="card">
             <Card className="max-w-sm">
                 <span className="font-normal text-gray-700 dark:text-gray-400">
-                    <p><strong>{t('date')}:</strong> {formatDate(shift.date)}</p>
                     <p><strong>{t('time')}:</strong> {formatTime(shift.startTime)} - {formatTime(shift.endTime)}</p>
                     <p><strong>{t('volunteers')}:</strong> {shift.registeredUsers} / {shift.capacity}</p>
                     <p><strong>{shift.district}, {city}</strong></p>
                     <p><strong> {shift.street} {shift.homeNum}</strong></p>
-                    <p>{shift.shiftDirections}</p>
+                    <p>{shift[shiftDirections]}</p>
                 </span>
                 {!isInPast && <form onSubmit={(e) => e.preventDefault()}>
-                    {canSignIn && !userShifts.includes(shiftId) && <button type="button"  onClick={() => setConfirmPhone(true)} id="sign-in" > {t('signIn')} </button>}
+                    {canSignIn && !userShifts.includes(shiftId) && <button type="button"  onClick={() => setConfirmPhone(true)} id="sign-in" > {t('joinShift')} </button>}
                     <Confirmation id="sign-in"
-                        buttonName={t('signIn')}
+                        buttonName={t('joinShift')}
                             title={t('phoneConfirmation')}
                             accept={t('agreeConfirmation')}
                             deny={t('declineConfirmation')}
@@ -101,9 +98,9 @@ const ShiftCard = ({ shift, city, isInPast }) => {
                             openModal={confirmPhone}
                             setOpenModal={setConfirmPhone}
                         />
-                    {canSignIn && userShifts.includes(shiftId) && <button type="button"  onClick={() => setConfirmLeave(true)} id="sign-out">{t('signOff')} </button>}               
+                    {canSignIn && userShifts.includes(shiftId) && <button type="button"  onClick={() => setConfirmLeave(true)} id="sign-out">{t('leaveShift')} </button>}               
                     <Confirmation id="sign-off"
-                        buttonName={t('signIn')}
+                        buttonName={t('leaveShift')}
                             title={t('leaveShiftConfirmation')}
                             accept={t('agreeToLeave')}
                             deny={t('cancelLeave')} 
@@ -117,7 +114,7 @@ const ShiftCard = ({ shift, city, isInPast }) => {
                             openModal={confirmLeave}
                             setOpenModal={setConfirmLeave}
                         />
-                    {!canSignIn && !isAdmin && !isModerator && <p id="sign_in_section_error">{t('volunteersRestricedFunctionality')}. <Link to="/login">{t('signInToday')}</Link></p>}
+                    {!canSignIn && !isAdmin && !isModerator && <p id="sign_in_section_error">{t('volunteersRestricedFunctionality')}. <Link to="/login">{t('logInToday')}</Link></p>}
                 </form>}
             </Card>
         </div>
