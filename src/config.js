@@ -8,6 +8,7 @@ const URLS = {
   DISTRICTS: `${BASE_URL}/districts`,
   CITIES: `${BASE_URL}/cities`,
   ORGANISATIONS: `${BASE_URL}/organisations`,
+  ORGANISATIONS_ADMIN: `${BASE_URL}/organisations/admin/all`,
   USERS: `${BASE_URL}/users`,
 
   AUTHENTICATE: `${BASE_URL}/auth/authenticate`,
@@ -24,10 +25,14 @@ const URLS = {
   ORGANISATIONS_EVENTS_CURRENT: `${BASE_URL}/organisations/events/current`,
   ORGANISATIONS_EVENTS_PAST: `${BASE_URL}/organisations/events/past`,
   DETAILS: `${CLIENT_URL}/details`,
+
   ADD_ORGANISATION: `${BASE_URL}/organisations/add`,
   ADD_CITIES: `${BASE_URL}/cities/add`,
   ADD_DISTRICTS: `${BASE_URL}/districts/add`,
   ADD_CATEGORIES: `${BASE_URL}/categories/add`,
+
+  DELETE_ORGANISATION: `${BASE_URL}/organisations/disapprove`,
+
   USERS_WITH_NO_ROLES: `${BASE_URL}/users/volunteers`,
   THEY_NEED_YOU: `${BASE_URL}/events/need`,
 

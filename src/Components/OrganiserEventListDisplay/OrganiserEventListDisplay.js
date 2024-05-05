@@ -9,7 +9,7 @@ import deleteRequest from '../../Utils/deleteRequest.js';
 
 const OrganiserEventListDisplay = ({ event, isArchived }) => {
     const { t } = useTranslation();
-    const eventName = event.namePl; 
+    const eventName = `name${localStorage.getItem('i18nextLng').toUpperCase()}`;
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [userConfirmed, setUserConfirmed] = useState(false);
 
@@ -35,7 +35,7 @@ const OrganiserEventListDisplay = ({ event, isArchived }) => {
         <div className='organiser_event_list_display_content'>
             <div className="column">
                 <Link to={`${URLS.DETAILS}/${event.id}`}>
-                    {event.nameEN}
+                    {event[eventName]}
                 </Link>
             </div>
             <div className="column">

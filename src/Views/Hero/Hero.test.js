@@ -30,7 +30,7 @@ describe('Hero', () => {
             </I18nextProvider>
         );
 
-        const signInLink = screen.getByText('Sign in');
+        const signInLink = screen.getByText('Log in');
         const findEventLink = screen.getByText('find an event to join');
 
         expect(signInLink).toBeInTheDocument();

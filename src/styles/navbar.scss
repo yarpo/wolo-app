@@ -7,6 +7,7 @@ $background-color_3: gold;
 @import './common.scss';
 
 nav {
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: space-between;
