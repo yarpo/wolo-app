@@ -26,7 +26,8 @@ const OrganisationsTab = () => {
 
     const handleModalAccept = (data) => {
         setOpenModal(false);
-        postRequestWithJson(URLS.ADD_ORGANISATION, localStorage.getItem('token'), data, t('addOrganisationSuccess'), t('addOrganisationFail'));
+        console.log(data)
+        postRequestWithJson(`${URLS.ADD_ORGANISATION}?language=${localStorage.getItem('i18nextLng').toLocaleUpperCase()}`, localStorage.getItem('token'), data, t('addOrganisationSuccess'), t('addOrganisationFail'));
     };
 
     const handleModalClose = () => {
