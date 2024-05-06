@@ -49,7 +49,6 @@ const Settings = () => {
     const handleSaveClick = () => {
         const phoneNumberRegex = /^\d{9}$/;
         const nameRegex = /^[a-zA-Z]+$/;
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         const newErrors = {};
 
@@ -65,10 +64,6 @@ const Settings = () => {
             newErrors.lastName = t('invalidNameFormat');
         }
 
-        if (!emailRegex.test(editedUserData.email)) {
-            newErrors.email = t('invalidEmailFormat');
-        }
-
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
             return;
@@ -77,20 +72,12 @@ const Settings = () => {
         const filteredUserData = {
             firstName: editedUserData.firstName,
             lastName: editedUserData.lastName,
-            email: editedUserData.email,
             phoneNumber: editedUserData.phoneNumber,
             isAdult: editedUserData.adult
         };
 
         console.log("Saving edited user data:", filteredUserData);
-        putRequest(`${URLS.USERS}/edit`, localStorage.getItem('token'), filteredUserData, "Zmieniono dane", "Nie");
-        // after changing mail recognise user
-        userData.firstName = editedUserData.firstName;
-        userData.lastName = editedUserData.lastName;
-        userData.email = editedUserData.email;
-        userData.phoneNumber = editedUserData.phoneNumber;
-        userData.isAdult = editedUserData.adult;
-        localStorage.setItem('user', JSON.stringify(userData));
+        putRequest(`${URLS.USERS}/edit`, localStorage.getItem('token'), filteredUserData, t('userDataChangedSucess'), t('userDataChangedFail'));
         setEditMode(false);
     };
 
@@ -163,22 +150,6 @@ const Settings = () => {
                             )}
                         </div>
                         <div className="settings-row">
-                            <div className="label">{t('email')}:</div>
-                            {editMode ? (
-                                <>
-                                    <input
-                                        type="text"
-                                        name="email"
-                                        value={editedUserData.email}
-                                        onChange={handleInputChange}
-                                    />
-                                    {errors.email && <div className="settings-error">{errors.email}</div>}
-                                </>
-                            ) : (
-                                <div className="value">{userData.email}</div>
-                            )}
-                        </div>
-                        <div className="settings-row">
                             <div className="label">{t('phoneNumber')}:</div>
                             {editMode ? (
                                 <>
@@ -193,6 +164,10 @@ const Settings = () => {
                             ) : (
                                 <div className="value">{userData.phoneNumber}</div>
                             )}
+                        </div>
+                        <div className="settings-row">
+                            <div className="label">{t('email')}:</div>
+                            <div className="value">{userData.email}</div>
                         </div>
                         <div className="settings-row">
                             <div className="label">{t('isAdult')}:</div>

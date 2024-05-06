@@ -166,5 +166,8 @@
   "invalidEmailFormat": "Nieprawidłowy format adresu e-mail. Proszę podać poprawny adres e-mail.",
   "invalidNameFormat": "Nieprawidłowy format. Proszę wprowadzić tylko litery.",
   "deleteAccountSuccess": "Konto zostało pomyślnie usunięte",
-  "deleteAccountFail": "Jesteś jedynym moderatorem Twojej organizacji. Przed usunięciem konta przekaż prawa organizacji."
+  "deleteAccountFail": "Jesteś jedynym moderatorem Twojej organizacji. Przed usunięciem konta przekaż prawa organizacji.",
+
+  "userDataChangedSucess": "Pomyślnie zmieniono dane osobowe",
+  "userDataChangedFail": "Coś poszło nie tak. Spróbuj ponownie później"
 }

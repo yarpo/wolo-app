@@ -166,5 +166,8 @@
   "invalidNameFormat": "Invalid name format. Please enter only letters.",
 
   "deleteAccountSuccess": "Account deleted successfully",
-  "deleteAccountFail": "You are the only moderator of Your organisation. Transfer organisation rights before deleting Your account"
+  "deleteAccountFail": "You are the only moderator of Your organisation. Transfer organisation rights before deleting Your account",
+
+  "userDataChangedSucess": "Successfully changed personal information",
+  "userDataChangedFail": "Something went wrong. Please try again later"
 }
