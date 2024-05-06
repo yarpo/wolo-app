@@ -28,8 +28,9 @@ const URLS = {
   ADD_DISTRICTS: `${BASE_URL}/districts/add`,
   ADD_CATEGORIES: `${BASE_URL}/categories/add`,
 
+  DELETE_USER: `${BASE_URL}/users/delete`,
   DELETE_ORGANISATION: `${BASE_URL}/organisations/disapprove`,
-
+  
   USERS_WITH_NO_ROLES: `${BASE_URL}/users/volunteers`,
   THEY_NEED_YOU: `${BASE_URL}/events/need`,
   LOGIN: LOGIN_URL
