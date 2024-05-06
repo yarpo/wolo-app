@@ -8,13 +8,11 @@ const URLS = {
   DISTRICTS: `${BASE_URL}/districts`,
   CITIES: `${BASE_URL}/cities`,
   ORGANISATIONS: `${BASE_URL}/organisations`,
+  ORGANISATIONS_ADMIN: `${BASE_URL}/organisations/admin/all`,
   USERS: `${BASE_URL}/users`,
-
   AUTHENTICATE: `${BASE_URL}/auth/authenticate`,
   REGISTER: `${BASE_URL}/auth/register`,
   USER: `${BASE_URL}/auth/current`,
-  LOGIN: LOGIN_URL,
-
   JOIN: `${BASE_URL}/events/join`,
   REFUSE: `${BASE_URL}/events/refuse`,
   USERS_ON_SHIFT: `${BASE_URL}/events/users?shift`,
@@ -29,10 +27,13 @@ const URLS = {
   ADD_CITIES: `${BASE_URL}/cities/add`,
   ADD_DISTRICTS: `${BASE_URL}/districts/add`,
   ADD_CATEGORIES: `${BASE_URL}/categories/add`,
+
+  DELETE_USER: `${BASE_URL}/users/delete`,
+  DELETE_ORGANISATION: `${BASE_URL}/organisations/disapprove`,
   
   USERS_WITH_NO_ROLES: `${BASE_URL}/users/volunteers`,
   THEY_NEED_YOU: `${BASE_URL}/events/need`,
-  DELETE_USER: `${BASE_URL}/users/delete`,
+  LOGIN: LOGIN_URL
 };
 
 module.exports = { URLS, BASE_URL };

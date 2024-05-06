@@ -24,6 +24,7 @@ const Organiser = () => {
   const { t } = useTranslation();
   const [organiserData, setOrganiserData] = useState([]);
   const [organiserEvents, setOrganiserEvents] = useState([]);
+  const organisationDescription = `description${localStorage.getItem('i18nextLng').toUpperCase()}`;
 
   useEffect(() => {
     const fetchDataForOrganiser = async () => {
@@ -43,7 +44,6 @@ const Organiser = () => {
 
   const {
     name,
-    description,
     email,
     phoneNumber,
     street,
@@ -66,7 +66,7 @@ const Organiser = () => {
       )}
       {organiserData && Object.keys(organiserData).length > 0 && (
         <p id="description">
-          {description}
+          {organiserData[organisationDescription]}
         </p>
       )}
 
