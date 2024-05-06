@@ -48,7 +48,7 @@ const Settings = () => {
 
     const handleSaveClick = () => {
         const phoneNumberRegex = /^\d{9}$/;
-        const nameRegex = /^\w{4,}$/;
+        const nameRegex = /^[a-zA-ZżźćńółęąśŻŹĆĄŚĘŁÓŃ]{3,}$/u;
 
         const newErrors = {};
 
