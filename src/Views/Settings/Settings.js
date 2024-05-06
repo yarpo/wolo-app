@@ -48,7 +48,7 @@ const Settings = () => {
 
     const handleSaveClick = () => {
         const phoneNumberRegex = /^\d{9}$/;
-        const nameRegex = /^[a-zA-Z]+$/;
+        const nameRegex = /^\w{4,}$/;
 
         const newErrors = {};
 
@@ -166,10 +166,6 @@ const Settings = () => {
                             )}
                         </div>
                         <div className="settings-row">
-                            <div className="label">{t('email')}:</div>
-                            <div className="value">{userData.email}</div>
-                        </div>
-                        <div className="settings-row">
                             <div className="label">{t('isAdult')}:</div>
                             {editMode ? (
                                 <select
@@ -183,6 +179,10 @@ const Settings = () => {
                             ) : (
                                 <div className="value">{userData.adult ? t('yes') : t('no')}</div>
                             )}
+                        </div>
+                        <div className="settings-row">
+                            <div className="label">{t('email')}:</div>
+                            <div className="value">{userData.email}</div>
                         </div>
                         <div className="settings-row">
                             <div className="label">{t('peselVerified')}:</div>
