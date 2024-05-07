@@ -23,7 +23,6 @@ const URLS = {
   DETAILS: `${CLIENT_URL}/details`,
 
   ORGANISATIONS_ADMIN: `${BASE_URL}/organisations/admin/all`,
-  CATEGORIES_ADMIN: `${BASE_URL}/categories/admin/all`,
   DISTRICTS_ADMIN: `${BASE_URL}/districts/admin/all`,
   CITIES_ADMIN: `${BASE_URL}/cities/admin/all`,
 

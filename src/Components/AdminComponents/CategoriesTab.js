@@ -8,7 +8,7 @@ import { Table } from "flowbite-react";
 import AddCategory from './addRecordModals/AddCategory';
 import Confirmation from '../Popups/Confirmation';
 
-import fetchDataWithAuth  from  '../../Utils/fetchDataWithAuth.js';
+import fetchData  from  '../../Utils/fetchData.js';
 import postRequestWithJson from '../../Utils/postRequestWithJson';
 import deleteRequest from '../../Utils/deleteRequest.js';
 
@@ -21,7 +21,7 @@ const CategoriesTab = () => {
     const [categoryToDelete, setCategoryToDelete] = useState(null);
 
     useEffect(() => {
-        fetchDataWithAuth(URLS.CATEGORIES_ADMIN, setCategories, localStorage.getItem('token'));
+        fetchData(URLS.CATEGORIES, setCategories);
     }, []);
 
     const handleModalAccept = (data) => {
@@ -50,7 +50,7 @@ const CategoriesTab = () => {
         const params = new URLSearchParams();
         params.append('id', categoryToDelete);
         console.log("Delete confirmed", categoryToDelete);
-        deleteRequest(`${URLS.DELETE_CATEGORY}?id=${categoryToDelete}`, localStorage.getItem('token'), "Deleted", "Fail")
+        deleteRequest(`${URLS.DELETE_CATEGORY}/${categoryToDelete}`, localStorage.getItem('token'), "Deleted", "Fail")
         setCategoryToDelete(null);
         setConfirmDelete(false);
     };
@@ -63,7 +63,6 @@ const CategoriesTab = () => {
                 <Table.Head>
                     <Table.HeadCell>ID</Table.HeadCell>
                     <Table.HeadCell>Category Name</Table.HeadCell>
-                    <Table.HeadCell>Status</Table.HeadCell>
                     <Table.HeadCell>Delete</Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
@@ -73,9 +72,8 @@ const CategoriesTab = () => {
                                 {category.id}
                             </Table.Cell>
                             <Table.Cell>{category.name}</Table.Cell>
-                            <Table.Cell>{category.old ? "Not active" : "Active"}</Table.Cell>
                             <Table.Cell>
-                                {!category.old ? <button
+                                <button
                                     className="delete-button"
                                     onClick={() => {
                                         setConfirmDelete(true);
@@ -83,7 +81,7 @@ const CategoriesTab = () => {
                                     }}
                                 >
                                     <span>Delete</span>
-                                </button> : ""}
+                                </button>
                                 <Confirmation
                                     id="sign-off"
                                     buttonName={t('delete')}
