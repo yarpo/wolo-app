@@ -3,19 +3,24 @@ import { useTranslation } from 'react-i18next';
 import '../../styles/admin-home-page.scss';
 
 import { URLS } from '../../config';
-import fetchData  from  '../../Utils/fetchData';
+import fetchDataWithAuth  from  '../../Utils/fetchDataWithAuth.js';
+import deleteRequest from '../../Utils/deleteRequest.js';
 import { Table } from "flowbite-react";
 
 import AddCity from './addRecordModals/AddCity.js';
+import Confirmation from '../Popups/Confirmation';
 import postRequestWithJson from '../../Utils/postRequestWithJson';
 
 const CitiesTab = () => {
     const { t } = useTranslation();
     const [cities, setCities] = useState([]);
     const [openModal, setOpenModal] = useState(false);
+    const [confirmDelete, setConfirmDelete] = useState(false);
+    const [userConfirmed, setUserConfirmed] = useState(false);
+    const [cityToDelete, setCityToDelete] = useState(null);
 
     useEffect(() => {
-        fetchData(URLS.CITIES, setCities);
+        fetchDataWithAuth(URLS.CITIES, setCities, localStorage.getItem('token'));
     }, []);
 
     const handleModalAccept = (data) => {
@@ -26,7 +31,28 @@ const CitiesTab = () => {
 
     const handleModalClose = () => {
         setOpenModal(false);
-    }
+    };
+
+    const handleUserConfirmation = async (confirmation) => {
+        setUserConfirmed(confirmation);
+
+    };
+
+    useEffect(() => {
+        if (userConfirmed !== false) {
+            setUserConfirmed(false);
+            handleDelete()
+        }
+    }, [userConfirmed]); 
+
+    const handleDelete = () => {
+        const params = new URLSearchParams();
+        params.append('id', cityToDelete);
+        console.log("Delete confirmed", cityToDelete);
+        deleteRequest(`${URLS.DELETE_CITY}?id=${cityToDelete}`, localStorage.getItem('token'), "Deleted", "Fail")
+        setCityToDelete(null);
+        setConfirmDelete(false);
+    };
 
     return (
         <div className="overflow-x-auto">
@@ -37,6 +63,8 @@ const CitiesTab = () => {
                     <Table.HeadCell>ID</Table.HeadCell>
                     <Table.HeadCell>City Name</Table.HeadCell>
                     <Table.HeadCell>Districts</Table.HeadCell>
+                    <Table.HeadCell>Status</Table.HeadCell>
+                    <Table.HeadCell>Delete</Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
                     {cities.map((city, index) => (
@@ -46,6 +74,36 @@ const CitiesTab = () => {
                             </Table.Cell>
                             <Table.Cell>{city.name}</Table.Cell>
                             <Table.Cell>{city.districts.join(', ')}</Table.Cell>
+                            <Table.Cell>{city.old ? "Not active" : "Active"}</Table.Cell>
+                            <Table.Cell>
+                                {!city.old ? <button
+                                    className="delete-button"
+                                    onClick={() => {
+                                        setConfirmDelete(true);
+                                        setCityToDelete(city.id);
+                                    }}
+                                >
+                                    <span>Delete</span>
+                                </button> : ""}
+                                <Confirmation
+                                    id="sign-off"
+                                    buttonName={t('delete')}
+                                    title={t('delete') + "?"}
+                                    accept={t('delete')}
+                                    deny={t('discard')}
+                                    styleId="sign-in"
+                                    onAgree={() => {
+                                        handleUserConfirmation(true);
+                                        setConfirmDelete(false);
+                                    }}
+                                    onDeny={() => {
+                                        setConfirmDelete(false);
+                                        setCityToDelete(null);
+                                    }}
+                                    openModal={confirmDelete}
+                                    setOpenModal={setConfirmDelete}
+                                />
+                            </Table.Cell>
                         </Table.Row>
                     ))}
                 </Table.Body>

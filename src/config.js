@@ -24,6 +24,7 @@ const URLS = {
 
   ORGANISATIONS_ADMIN: `${BASE_URL}/organisations/admin/all`,
   DISTRICTS_ADMIN: `${BASE_URL}/districts/admin/all`,
+  CITIES_ADMIN: `${BASE_URL}/cities/admin/all`,
 
   ADD_ORGANISATION: `${BASE_URL}/organisations/add`,
   ADD_CITIES: `${BASE_URL}/cities/add`,
@@ -33,6 +34,7 @@ const URLS = {
   DELETE_USER: `${BASE_URL}/users/delete`,
   DELETE_ORGANISATION: `${BASE_URL}/organisations/disapprove`,
   DELETE_DISTRICT: `${BASE_URL}/districts/delete`,
+  DELETE_CITY: `${BASE_URL}/cities/delete`,
   
   USERS_WITH_NO_ROLES: `${BASE_URL}/users/volunteers`,
   THEY_NEED_YOU: `${BASE_URL}/events/need`,
