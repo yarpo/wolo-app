@@ -48,7 +48,6 @@ const Details = () => {
   useEffect(() => {
     const url = `${URLS.EVENTS}/${id}`;
     fetchData(url, setEventData);
-    fetchDataWithAuth(`${URLS.PUBLIC_RAPORT}/${id}`, setReportData, localStorage.getItem('token'));
   }, [id]);
 
   useEffect(() => {
@@ -60,7 +59,9 @@ const Details = () => {
     if (eventData && eventData.shifts && eventData.shifts[0].date < format(new Date(), 'yyyy-MM-dd')){
       setIsInPast(true)
     }
-  }, [eventData, eventData?.organisationId]);
+    
+    fetchDataWithAuth(`${URLS.PUBLIC_RAPORT}/${id}`, setReportData, localStorage.getItem('token'));
+  }, [eventData, eventData?.organisationId, id]);
 
   if (!eventData) {
     return <div>{t('loading')}...</div>;
@@ -110,7 +111,7 @@ const Details = () => {
       {isInPast && 
         <div id="details_event_over" > 
           <h2 id="details_event_over_text">{t('eventIsOver')}</h2>
-          <p>{reportData[reportText]}</p>
+          <p>{reportData ? reportData[reportText] : ""}</p>
         </div>
       }
 
