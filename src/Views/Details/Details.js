@@ -14,6 +14,7 @@ import '../../styles/details.scss';
 import EventCard from '../../Components/EventCard/EventCard.js';
 import 'react-toastify/dist/ReactToastify.css';
 import fetchData from '../../Utils/fetchData.js';
+import fetchDataWithAuth from '../../Utils/fetchDataWithAuth.js';
 import formatDate from '../../Utils/formatDate.js';
 import SignedInVolunteers from './SignedInVolunteers/SignedInVolunteers.js';
 import { URLS } from '../../config.js'
@@ -24,7 +25,7 @@ const Details = () => {
   const { t } = useTranslation();
   const { id } = useParams();
   const [eventData, setEventData] = useState(null);
-  const [raportData, setRaportData] = useState(null);
+  const [reportData, setReportData] = useState(null);
   const [organiserEvents, setOrganiserEvents] = useState([]);
   const [roles, setRoles] = useState(null);
   const [userOrganisation, setUserOrganisation] = useState();
@@ -33,6 +34,7 @@ const Details = () => {
   const [isInPast, setIsInPast] = useState(false);
   const eventDescription = `description${localStorage.getItem('i18nextLng').toUpperCase()}`;
   const eventName = `name${localStorage.getItem('i18nextLng').toUpperCase()}`;
+  const reportText = `report${localStorage.getItem('i18nextLng').toUpperCase()}`;
 
   useEffect(() => {
     fetchUser().then(data => {
@@ -46,7 +48,7 @@ const Details = () => {
   useEffect(() => {
     const url = `${URLS.EVENTS}/${id}`;
     fetchData(url, setEventData);
-    fetchData(`${URLS.PUBLIC_RAPORT}/${id}`, setRaportData);
+    fetchDataWithAuth(`${URLS.PUBLIC_RAPORT}/${id}`, setReportData, localStorage.getItem('token'));
   }, [id]);
 
   useEffect(() => {
@@ -108,7 +110,7 @@ const Details = () => {
       {isInPast && 
         <div id="details_event_over" > 
           <h2 id="details_event_over_text">{t('eventIsOver')}</h2>
-          <p>{raportData}</p>
+          <p>{reportData[reportText]}</p>
         </div>
       }
 
