@@ -8,7 +8,6 @@ const URLS = {
   DISTRICTS: `${BASE_URL}/districts`,
   CITIES: `${BASE_URL}/cities`,
   ORGANISATIONS: `${BASE_URL}/organisations`,
-  ORGANISATIONS_ADMIN: `${BASE_URL}/organisations/admin/all`,
   USERS: `${BASE_URL}/users`,
   AUTHENTICATE: `${BASE_URL}/auth/authenticate`,
   REGISTER: `${BASE_URL}/auth/register`,
@@ -23,6 +22,11 @@ const URLS = {
   ORGANISATIONS_EVENTS_PAST: `${BASE_URL}/organisations/events/past`,
   DETAILS: `${CLIENT_URL}/details`,
 
+  ORGANISATIONS_ADMIN: `${BASE_URL}/organisations/admin/all`,
+  CATEGORIES_ADMIN: `${BASE_URL}/categories/admin/all`,
+  DISTRICTS_ADMIN: `${BASE_URL}/districts/admin/all`,
+  CITIES_ADMIN: `${BASE_URL}/cities/admin/all`,
+
   ADD_ORGANISATION: `${BASE_URL}/organisations/add`,
   ADD_CITIES: `${BASE_URL}/cities/add`,
   ADD_DISTRICTS: `${BASE_URL}/districts/add`,
@@ -30,6 +34,9 @@ const URLS = {
 
   DELETE_USER: `${BASE_URL}/users/delete`,
   DELETE_ORGANISATION: `${BASE_URL}/organisations/disapprove`,
+  DELETE_CATEGORY: `${BASE_URL}/categories/delete`,
+  DELETE_DISTRICT: `${BASE_URL}/districts/delete`,
+  DELETE_CITY: `${BASE_URL}/cities/delete`,
   
   USERS_WITH_NO_ROLES: `${BASE_URL}/users/volunteers`,
   THEY_NEED_YOU: `${BASE_URL}/events/need`,
