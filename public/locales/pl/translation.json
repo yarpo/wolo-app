@@ -169,5 +169,7 @@
   "deleteAccountFail": "Jesteś jedynym moderatorem Twojej organizacji. Przed usunięciem konta przekaż prawa organizacji.",
 
   "userDataChangedSucess": "Pomyślnie zmieniono dane osobowe",
-  "userDataChangedFail": "Coś poszło nie tak. Spróbuj ponownie później"
+  "userDataChangedFail": "Coś poszło nie tak. Spróbuj ponownie później",
+
+  "defaultImageForEvent": "Obrazek główny do wydarzenia"
 }
