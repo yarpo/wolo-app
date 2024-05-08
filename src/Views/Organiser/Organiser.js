@@ -74,7 +74,7 @@ const Organiser = () => {
         <div id="extra_information">
           <ul id="information">
             <li>
-              <VscCallOutgoing id="icon" /> <strong>{t('phone')}: </strong>{phoneNumber}
+              <VscCallOutgoing id="icon" /> <strong>{t('phoneNumber')}: </strong>{phoneNumber}
             </li>
             <li>
               <VscMail id="icon" /> <strong>{t('E-mail')}: </strong>{email}
