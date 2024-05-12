@@ -6,10 +6,15 @@ import { URLS } from '../../config';
 import fetchData from '../../Utils/fetchData';
 
 import { Table } from "flowbite-react";
+import Confirmation from '../Popups/Confirmation';
+import deleteRequest from '../../Utils/deleteRequest';
 
 const EventsTab = () => {
     const [events, setEvents] = useState([]);
     const [openIndex, setOpenIndex] = useState(null);
+    const [confirmDelete, setConfirmDelete] = useState(false);
+    const [userConfirmed, setUserConfirmed] = useState(false);
+    const [eventToDelete, setEventToDelete] = useState(null);
 
     useEffect(() => {
         fetchData(URLS.EVENTS, setEvents);
@@ -36,6 +41,24 @@ const EventsTab = () => {
         setOpenIndex(openIndex === index ? null : index);
     };
 
+    const handleUserConfirmation = async (confirmation) => {
+        setUserConfirmed(confirmation);
+
+    };
+
+    useEffect(() => {
+        if (userConfirmed !== false) {
+            setUserConfirmed(false);
+            handleDelete()
+        }
+    }, [userConfirmed]); 
+
+    const handleDelete = () => {
+        deleteRequest(`${URLS.DELETE_EVENT}/${eventToDelete}`, localStorage.getItem('token'), "Deleted", "Fail")
+        setEventToDelete(null);
+        setConfirmDelete(false);
+    };
+
     return (
         <div className="overflow-x-auto">
             <Table striped>
@@ -46,6 +69,7 @@ const EventsTab = () => {
                     <Table.HeadCell>Categories</Table.HeadCell>
                     <Table.HeadCell>City</Table.HeadCell>
                     <Table.HeadCell>More</Table.HeadCell>
+                    <Table.HeadCell>Delete</Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
                     {events.map((event, index) => (
@@ -66,6 +90,35 @@ const EventsTab = () => {
                                         {openIndex === index ? <VscChevronUp /> : <VscChevronDown />}
                                         <span className="dropdown-label">Details</span>
                                     </button>
+                                </Table.Cell>
+                                <Table.Cell>
+                                    <button
+                                        className="delete-button"
+                                        onClick={() => {
+                                            setConfirmDelete(true);
+                                            setEventToDelete(event.id);
+                                        }}
+                                    >
+                                        <span>Delete</span>
+                                    </button>
+                                    <Confirmation
+                                        id="sign-off"
+                                        buttonName="Delete"
+                                        title="Czy usunąć"
+                                        accept="Tak, usuń"
+                                        deny="Anuluj"
+                                        styleId="sign-in"
+                                        onAgree={() => {
+                                            handleUserConfirmation(true);
+                                            setConfirmDelete(false);
+                                        }}
+                                        onDeny={() => {
+                                            setConfirmDelete(false);
+                                            setEventToDelete(null);
+                                        }}
+                                        openModal={confirmDelete}
+                                        setOpenModal={setConfirmDelete}
+                                    />
                                 </Table.Cell>
                             </Table.Row>
                             {openIndex === index && (
