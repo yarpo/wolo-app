@@ -72,7 +72,6 @@ const Details = () => {
     date,
     city,
     imageUrl,
-    alt,
     categories
   } = eventData;
 
@@ -103,7 +102,7 @@ const Details = () => {
       </div>
 
       <div className="details_photo">
-        <img src={imageUrl} alt={alt} onError={(event) => event.target.style.display = 'none'} />
+        <img src={imageUrl} alt={t('defaultImageForEvent')} onError={(event) => event.target.style.display = 'none'} />
       </div>
 
       <p id="description">{eventData[eventDescription]}</p>

@@ -15,7 +15,6 @@ import EventCard from '../../Components/EventCard/EventCard.js';
 import { useNavigate } from 'react-router-dom';
 import fetchDataWithNavigate from '../../Utils/fetchDataWithNavigate.js';
 
-
 const Organiser = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -24,6 +23,8 @@ const Organiser = () => {
   const { t } = useTranslation();
   const [organiserData, setOrganiserData] = useState([]);
   const [organiserEvents, setOrganiserEvents] = useState([]);
+  const [showContactInfo, setShowContactInfo] = useState(false);
+
   const organisationDescription = `description${localStorage.getItem('i18nextLng').toUpperCase()}`;
 
   useEffect(() => {
@@ -51,6 +52,10 @@ const Organiser = () => {
     logoUrl
   } = organiserData;
 
+  const handleShowContactInfo = () => {
+    setShowContactInfo(true);
+  };
+
   return (
     <div className="organizer_container">
       {organiserData && Object.keys(organiserData).length > 0 && (
@@ -73,12 +78,21 @@ const Organiser = () => {
       {organiserData && Object.keys(organiserData).length > 0 && (
         <div id="extra_information">
           <ul id="information">
-            <li>
-              <VscCallOutgoing id="icon" /> <strong>{t('phone')}: </strong>{phoneNumber}
-            </li>
-            <li>
-              <VscMail id="icon" /> <strong>{t('E-mail')}: </strong>{email}
-            </li>
+            {!showContactInfo && (
+              <li>
+                <button className="confirm_button" onClick={handleShowContactInfo}>Show contact information</button>
+              </li>
+            )}
+            {showContactInfo && (
+              <>
+                <li>
+                  <VscCallOutgoing id="icon" /> <strong>{t('phoneNumber')}: </strong>{phoneNumber}
+                </li>
+                <li>
+                  <VscMail id="icon" /> <strong>{t('E-mail')}: </strong>{email}
+                </li>
+              </>
+            )}
           </ul>
         </div>
       )}
@@ -117,7 +131,6 @@ const Organiser = () => {
       )}
     </div>
   );
-
 };
 
 export default Organiser;
