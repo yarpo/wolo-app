@@ -29,6 +29,7 @@ const ShiftCard = ({ shift, city, isInPast }) => {
 
     const [confirmPhone, setConfirmPhone] = useState(false);
     const [confirmLeave, setConfirmLeave] = useState(false);
+    const [confirmShiftOverlap, setConfirmShiftOverlap] = useState(false);
   
     useEffect(() => {
         const fetchUserData = async () => {
@@ -55,7 +56,17 @@ const ShiftCard = ({ shift, city, isInPast }) => {
     
             try {
                 if (!userShifts.includes(shiftId)) {
-                    postRequest(URLS.JOIN, token, params, t('joinShiftSuccess'), t('joinShiftError'));
+                    const params = new URLSearchParams();
+                    params.append('id', shift.shiftId);
+                    const checkResponse = postRequest(`${URLS.CHECK_JOIN_EVENT}`, localStorage.getItem('token'), params, "", t('joinShiftError'))
+                    console.log(checkResponse.status)
+                    setConfirmShiftOverlap(true)
+
+                    if (confirmShiftOverlap) {
+                        console.log(confirmShiftOverlap)
+                    } else {
+                        postRequest(URLS.JOIN, token, params, t('joinShiftSuccess'), t('joinShiftError'));
+                    }
                 } else {
                     postRequest(URLS.REFUSE, token, params, t('leaveShiftSuccess'), t('leaveShiftError'));
                 }

@@ -33,6 +33,7 @@ const URLS = {
   
   USERS_WITH_NO_ROLES: `${BASE_URL}/users/volunteers`,
   THEY_NEED_YOU: `${BASE_URL}/events/need`,
+  CHECK_JOIN_EVENT: `${BASE_URL}/events/join/check`,
   LOGIN: LOGIN_URL
 };
 
