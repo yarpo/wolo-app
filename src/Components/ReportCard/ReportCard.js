@@ -7,8 +7,10 @@ import '../../styles/reports.scss';
 
 import { Card } from "flowbite-react";
 
-const ReportCard = () => {    
+const ReportCard = ( report ) => {    
     const { t } = useTranslation();
+
+    const reportName = `report${localStorage.getItem('i18nextLng').toUpperCase()}`;
 
     return (
         <div className='report_card_container'>
@@ -17,7 +19,7 @@ const ReportCard = () => {
                     {t('report')}
                 </h5>
                 <p>
-                    Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order. 
+                    {report[reportName]} 
                 </p>
                 <div>
                     <button  className="confirm_button">
