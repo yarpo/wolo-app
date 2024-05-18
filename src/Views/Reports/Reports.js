@@ -23,19 +23,12 @@ const ReportPage = () => {
 
     useEffect(() => {
         fetchData(`${URLS.EVENTS}/${eventId}`, setEvent);
-        fetchDataWithAuth(`${URLS.REPORTS}?id=${eventId}`, (data) => {
-            if (Array.isArray(data)) {
-                setReports(data);
-            } else {
-                console.log('Expected an array of reports, but got:', data);
-            }
-        }, localStorage.getItem('token'));
+        fetchDataWithAuth(`${URLS.REPORTS}?eventId=${eventId}`, setReports, localStorage.getItem('token'));
     }, [eventId]);
 
     const handleModalAccept = (data) => {
         setOpenModal(false);
         data.event = eventId;
-        console.log(data)
         postRequestWithJson(`${URLS.ADD_REPORT}?language=${localStorage.getItem('i18nextLng').toLocaleUpperCase()}`, 
                             localStorage.getItem('token'),
                             data,
@@ -49,9 +42,13 @@ const ReportPage = () => {
 
     return (
         <div className='report_page_container'>
-            <h1 className='report_page_header'>{t('reports')}</h1>
+            <div className='report_page_header_container'>
+                <h1>{t('reports')}</h1>
+                <div className='report_page_add_button'>
+                    <button className="confirm_button" onClick={() => setOpenModal(true)}> {t('addReport')} </button>
+                </div>
+            </div>
             <h2 className='report_page_header'>{t('event')}: {event && event[eventName]}</h2>
-            <button className="confirm_button" onClick={() => setOpenModal(true)}> {t('addReport')} </button>
             {openModal && <ReportAdd onAccept={handleModalAccept} onClose={handleModalClose} />}
             {reports && reports.map(report => (
                 <ReportCard className='report_card'

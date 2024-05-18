@@ -7,7 +7,7 @@ import '../../styles/reports.scss';
 
 import { Card } from "flowbite-react";
 
-const ReportCard = ( report ) => {    
+const ReportCard = ( {report} ) => {    
     const { t } = useTranslation();
 
     const reportName = `report${localStorage.getItem('i18nextLng').toUpperCase()}`;
@@ -25,14 +25,12 @@ const ReportCard = ( report ) => {
                     <button  className="confirm_button">
                         {t('publish')}
                     </button>
-                    <div id="report_card_right_button">
-                        <button  className="confirm_button">
-                            {t('edit')}
-                        </button>
-                        <button  className="white_button">
-                            {t('delete')}
-                        </button>
-                    </div>
+                    <button  className="confirm_button">
+                        {t('edit')}
+                    </button>
+                    <button  className="white_button">
+                        {t('delete')}
+                    </button>
                 </div>
             </Card>
         </div>
