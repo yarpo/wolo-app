@@ -29,6 +29,7 @@ const ReportPage = () => {
     const handleModalAccept = (data) => {
         setOpenModal(false);
         data.event = eventId;
+        console.log(data)
         postRequestWithJson(`${URLS.ADD_REPORT}?language=${localStorage.getItem('i18nextLng').toLocaleUpperCase()}`, 
                             localStorage.getItem('token'),
                             data,
@@ -50,12 +51,18 @@ const ReportPage = () => {
             </div>
             <h2 className='report_page_header'>{t('event')}: {event && event[eventName]}</h2>
             {openModal && <ReportAdd onAccept={handleModalAccept} onClose={handleModalClose} />}
-            {reports && reports.map(report => (
-                <ReportCard className='report_card'
-                    key={report.id}
-                    report={report}
-                />
-            ))}
+            {reports && reports
+                .sort((a, b) => {
+                    if (a.published && !b.published) return -1;
+                    if (!a.published && b.published) return 1;
+                    return a.id - b.id;
+                })
+                .map(report => (
+                    <ReportCard className='report_card'
+                        key={report.id}
+                        report={report}
+                    />
+                ))}
         </div>
     );
 };

@@ -18,9 +18,9 @@ function ReportAdd({ onAccept, onClose }) {
 
     const handleAgree = () => {
         const report = reportInputRef.current?.value;
-        const publish = publishInputRef.current?.checked;
+        const published = publishInputRef.current?.checked;
 
-        onAccept({report, publish});
+        onAccept({report, published});
         setOpenModal(false);
     };
 
