@@ -177,5 +177,10 @@
   "reports": "Reports",
   "publish": "Publish",
   "Unpublish": "Unpublish",
-  "event": "Event"
+  "event": "Event",
+  "addReport": "Add report",
+  "add": "Add",
+  "publishReport": "Publish report",
+  "reportAddedSuccess": "Report added",
+  "reportAddedFail": "There was a problem adding a report"
 }
