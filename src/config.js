@@ -46,6 +46,7 @@ const URLS = {
   EDIT_REPORT: `${BASE_URL}/reports/edit`,
   PUBLISH_REPORT: `${BASE_URL}/reports/publish`,
   UNPUBLISH_REPORT: `${BASE_URL}/reports/unpublish`,
+  DELETE_REPORT: `${BASE_URL}/reports/delete`,
 
   LOGIN: LOGIN_URL
 };
