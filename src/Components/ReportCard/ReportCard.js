@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import '../../styles/reports.scss';
 import { Card } from "flowbite-react";
 import { URLS } from '../../config';
-import postRequest from '../../Utils/postRequest.js';
+import postRequestWithJson from '../../Utils/postRequestWithJson.js';
 
 const ReportCard = ({ report }) => {    
     const { t } = useTranslation();
@@ -18,13 +18,12 @@ const ReportCard = ({ report }) => {
             ? `${URLS.PUBLISH_REPORT}/${report.id}` 
             : `${URLS.UNPUBLISH_REPORT}/${report.id}`;
         
-        await postRequest(
+        await postRequestWithJson(
             url,
             token,
-            {},
+            {}, 
             t('reportUpdatedSuccessfully'),
-            t('reportUpdatedFailed'),
-            undefined 
+            t('reportUpdatedFailed')
         );
     };
 
