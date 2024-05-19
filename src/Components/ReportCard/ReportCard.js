@@ -11,22 +11,19 @@ const ReportCard = ({ report }) => {
     const { t } = useTranslation();
 
     const reportName = `report${localStorage.getItem('i18nextLng').toUpperCase()}`;
-    const token = localStorage.getItem('token');
-
+    
     const handlePublishToggle = async (newPublishedStatus) => {
-        const url = `${URLS.EDIT_REPORT}?language=${localStorage.getItem('i18nextLng').toLocaleUpperCase()}`;
-        const payload = {
-            id: report.id,
-            published: newPublishedStatus,
-            event: report.event,
-        };
-
+        const token = localStorage.getItem('token');
+        const url = newPublishedStatus 
+            ? `${URLS.PUBLISH_REPORT}/${report.id}` 
+            : `${URLS.UNPUBLISH_REPORT}/${report.id}`;
+        
         await putRequest(
             url,
             token,
-            payload,
-            t('Report updated successfully'),
-            t('Error updating report'),
+            {},
+            t('reportUpdatedSuccessfully'),
+            t('reportUpdatedFailed'),
             undefined 
         );
     };
@@ -37,9 +34,9 @@ const ReportCard = ({ report }) => {
                 <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                     {t('report')}
                 </h5>
+                <h5 className='report_card_info_text'>{report.published ? t('thisIsYourPublicReport') : ""} </h5>
                 <p>
-                    {report[reportName]} 
-                    {report.published ? "yes" : "no"} 
+                    {report[reportName]} {report.id}
                 </p>
                 <div>
                     {!report.published && <button className="confirm_button" onClick={() => handlePublishToggle(true)}>

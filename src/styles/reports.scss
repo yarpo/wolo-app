@@ -29,4 +29,9 @@
     #report_card {
         max-width: fit-content;
     }
+
+    .report_card_info_text {
+        font-size: 14px;
+        color: $color-text-faded;
+    }
 }

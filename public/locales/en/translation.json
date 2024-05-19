@@ -182,5 +182,8 @@
   "add": "Add",
   "publishReport": "Publish report",
   "reportAddedSuccess": "Report added",
-  "reportAddedFail": "There was a problem adding a report"
+  "reportAddedFail": "There was a problem adding a report",
+  "thisIsYourPublicReport": "This is your public report. You can only have one public report for each event.",
+  "reportUpdatedSuccessfully": "Report status was updated successfully",
+  "reportUpdatedFailed": "There was a problem updating a report. Try again later."
 }
