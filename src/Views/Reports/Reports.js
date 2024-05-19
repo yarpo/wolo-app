@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import '../../styles/reports.scss';
 import ReportCard from '../../Components/ReportCard/ReportCard';
 import ReportAdd from '../../Components/ReportCard/ReportAdd/ReportAddModal';
@@ -8,6 +8,7 @@ import fetchData from '../../Utils/fetchData';
 import fetchDataWithAuth from '../../Utils/fetchDataWithAuth';
 import postRequestWithJson from '../../Utils/postRequestWithJson';
 import { URLS } from '../../config';
+import { VscArrowLeft } from 'react-icons/vsc';
 
 const ReportPage = () => {
     const { t } = useTranslation();
@@ -43,6 +44,9 @@ const ReportPage = () => {
 
     return (
         <div className='report_page_container'>
+            <Link to="/organiserHomePage" id="back">
+                <VscArrowLeft id="back_arrow" /> {t('back')}
+            </Link>
             <div className='report_page_header_container'>
                 <h1>{t('reports')}</h1>
                 <div className='report_page_add_button'>
