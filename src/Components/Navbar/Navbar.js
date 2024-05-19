@@ -6,6 +6,7 @@ import logo from '../../images/logo.svg';
 import { RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri';
 import { FaRegUserCircle } from 'react-icons/fa';
 import fetchUserRoles from '../../Utils/fetchUserRoles.js';
+import ReactFlagsSelect from 'react-flags-select';
 
 const Navbar = () => {
   const [role, setRole] = useState(null);
@@ -13,8 +14,9 @@ const Navbar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem('user'))
+  const user = JSON.parse(localStorage.getItem('user'));
   const dropdownRef = useRef(null);
+  const [selected, setSelected] = useState(i18n.language.toUpperCase());
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -37,9 +39,11 @@ const Navbar = () => {
     };
   }, [dropdownRef]);
 
-  const handleLanguageChange = language => {
+  const handleLanguageChange = code => {
+    const language = code.toLowerCase();
     i18n.changeLanguage(language);
     localStorage.setItem('language', language);
+    setSelected(code);
   };
 
   const handleClick = () => {
@@ -52,15 +56,15 @@ const Navbar = () => {
     }
   };
 
-const toggleDropdown = () => {
-  setShowDropdown(prevShowDropdown => !prevShowDropdown);
-};
+  const toggleDropdown = () => {
+    setShowDropdown(prevShowDropdown => !prevShowDropdown);
+  };
 
-function handleLogout() {
-  localStorage.removeItem('user');
-  localStorage.removeItem('token');
-  navigate('/login');
-}
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    navigate('/login');
+  };
 
   return (
     <>
@@ -82,17 +86,14 @@ function handleLogout() {
             <Link to="/needyou">{t('theyNeedYou')}</Link>
           </li>
           <li>
-            <select
-              id="languages-select"
-              onChange={e => handleLanguageChange(e.target.value)}
-              defaultValue={i18n.language}
-              data-testid="languages-select"
-            >
-              <option value="en">English</option>
-              <option value="pl">Polski</option>
-              <option value="ua">Українська</option>
-              <option value="ru">Русский</option>
-            </select>
+            <ReactFlagsSelect
+              countries={["GB", "PL", "UA", "RU"]}
+              customLabels={{ GB: "English", PL: "Polski", UA: "Українська", RU: "Русский" }}
+              selected={selected}
+              onSelect={handleLanguageChange}
+              placeholder="Select Language"
+              className="custom-flags-select"
+            />
           </li>
           <li className="navbar-dropdown">
             {user ? (
@@ -101,13 +102,13 @@ function handleLogout() {
                   className="navbar-dropdown-button" 
                   onClick={toggleDropdown}
                 >
-              <div className="user-info">
-                <FaRegUserCircle className="user-icon" />
-                <span>{user.email}</span>
-                <div className="dropdown-icon">
-                  {showDropdown ? <RiArrowDropUpLine size={25}/> : <RiArrowDropDownLine size={25}/>}
-                </div>
-              </div>
+                  <div className="user-info">
+                    <FaRegUserCircle className="user-icon" />
+                    <span>{user.email}</span>
+                    <div className="dropdown-icon">
+                      {showDropdown ? <RiArrowDropUpLine size={25}/> : <RiArrowDropDownLine size={25}/>}
+                    </div>
+                  </div>
                 </button>
                 {showDropdown && (
                   <ul ref={dropdownRef} className="navbar-dropdown-menu">
