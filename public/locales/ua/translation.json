@@ -172,5 +172,28 @@
     "userDataChangedSucess": "Персональні дані успішно змінено",
     "userDataChangedFail": "Щось пішло не так. Спробуйте ще раз пізніше",
 
-    "defaultImageForEvent": "Зображення за замовчуванням для події"
+    "defaultImageForEvent": "Зображення за замовчуванням для події",
+
+    "report": "Звіт",
+    "reports": "Звіти",
+    "publish": "Опублікувати",
+    "unpublish": "Скасувати публікацію",
+    "event": "Подія",
+    "addReport": "Додати звіт",
+    "add": "Додати",
+    "publishReport": "Опублікувати звіт",
+    "reportAddedSuccess": "Звіт додано",
+    "reportAddedFail": "Сталася проблема з додаванням звіту",
+    "thisIsYourPublicReport": "Це ваш публічний звіт.",
+    "reportUpdatedSuccessfully": "Статус звіту успішно оновлено",
+    "reportUpdatedFailed": "Сталася проблема з оновленням звіту. Будь ласка, спробуйте пізніше",
+    "deleteReport": "Ви хочете видалити цей звіт?",
+    "reportDeleteSuccess": "Звіт успішно видалено",
+    "reportDeleteFail": "Сталася проблема з видаленням звіту. Будь ласка, спробуйте пізніше",
+    "reportPL": "Звіт польською мовою",
+    "reportEN": "Звіт англійською мовою",
+    "reportUA": "Звіт українською мовою",
+    "reportRU": "Звіт російською мовою",
+    "reportEditedSuccess": "Звіт успішно відредаговано",
+    "reportEditedFail": "Сталася проблема з редагуванням звіту. Будь ласка, спробуйте пізніше"
 }

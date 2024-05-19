@@ -192,5 +192,7 @@
   "reportPL": "Report in polish language",
   "reportEN": "Report in english language",
   "reportUA": "Report in ukrainian language",
-  "reportRU": "Report in russian language"
+  "reportRU": "Report in russian language",
+  "reportEditedSuccess": "Report edited successfully",
+  "reportEditedFail": "There was a problem editing report. Please try again later"
 }

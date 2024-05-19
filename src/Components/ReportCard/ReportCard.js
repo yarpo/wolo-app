@@ -64,8 +64,8 @@ const ReportCard = ({ report }) => {
             url,
             token,
             formData,
-            'Report updated successfully',
-            'Error updating report',
+            t('reportEditedSuccess'),
+            t('reportEditedFail'),
             undefined
         );
 
