@@ -27,11 +27,15 @@
     margin-bottom: 20px;
 
     #report_card {
-        max-width: fit-content;
+        max-width: 60vw;
     }
 
     .report_card_info_text {
         font-size: 14px;
         color: $color-text-faded;
+    }
+
+    .report_card_textarea {
+        min-width: 50vw;
     }
 }
