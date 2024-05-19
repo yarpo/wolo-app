@@ -36,7 +36,7 @@ const ReportCard = ({ report }) => {
                 </h5>
                 <h5 className='report_card_info_text'>{report.published ? t('thisIsYourPublicReport') : ""} </h5>
                 <p>
-                    {report[reportName]} {report.id}
+                    {report[reportName]}
                 </p>
                 <div>
                     {!report.published && <button className="confirm_button" onClick={() => handlePublishToggle(true)}>
