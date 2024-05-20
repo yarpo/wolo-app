@@ -151,5 +151,27 @@
   "cities": "Cities",
 
   "cancelEvent": "Do You want to cancel event: ",
-  "acceptCancelEvent": "Yes, cancell the event"
+  "acceptCancelEvent": "Yes, cancell the event",
+  "peselVerified": "PESEL verified",
+  "agreementSigned": "Agreement signed",
+  "isAdult": "Adult",
+  "organisationName": "Organisation name",
+  "deactivateAccount": "Deactvate account",
+  "yes": "Yes",
+  "no": "No",
+  "none": "None",
+  "deleteAccount": "Do You want to permamently delete Your account?",
+  "confirmAccountDelete": "Delete my account",
+
+  "invalidPhoneNumberFormat": "Invalid phone number format. Please enter a 9-digit number.",
+  "invalidEmailFormat": "Invalid email format. Please enter a valid email address.",
+  "invalidNameFormat": "Invalid name format. Please enter only letters.",
+
+  "deleteAccountSuccess": "Account deleted successfully",
+  "deleteAccountFail": "You are the only moderator of Your organisation. Transfer organisation rights before deleting Your account",
+
+  "userDataChangedSucess": "Successfully changed personal information",
+  "userDataChangedFail": "Something went wrong. Please try again later",
+
+  "defaultImageForEvent": "Default image for event"
 }

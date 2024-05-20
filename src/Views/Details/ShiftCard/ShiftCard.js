@@ -24,6 +24,7 @@ const ShiftCard = ({ shift, city, isInPast }) => {
     const [userShifts, setUserShifts] = useState([]);
     const isModerator = roles && roles.includes('MODERATOR');
     const isAdmin = roles && roles.includes('ADMIN');
+    const isFull = shift.registeredUsers === shift.capacity;
     const [userConfirmed, setUserConfirmed] = useState(false);
 
     const [confirmPhone, setConfirmPhone] = useState(false);
@@ -82,7 +83,7 @@ const ShiftCard = ({ shift, city, isInPast }) => {
                     <p>{shift[shiftDirections]}</p>
                 </span>
                 {!isInPast && <form onSubmit={(e) => e.preventDefault()}>
-                    {canSignIn && !userShifts.includes(shiftId) && <button type="button"  onClick={() => setConfirmPhone(true)} id="sign-in" > {t('joinShift')} </button>}
+                    {canSignIn && !isFull && !userShifts.includes(shiftId) && <button type="button"  onClick={() => setConfirmPhone(true)} id="sign-in" > {t('joinShift')} </button>}
                     <Confirmation id="sign-in"
                         buttonName={t('joinShift')}
                             title={t('phoneConfirmation')}

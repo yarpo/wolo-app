@@ -7,7 +7,6 @@ import fetchUserRoles from '../../Utils/fetchUserRoles.js';
 const WelcomingBanner = ({ isOrganizerPage, organisationName }) => {
     const { t } = useTranslation();
     const isLoggedIn = localStorage.getItem('token') ? true : false;
-    const user = JSON.parse(localStorage.getItem('user'));
     const [roles, setRoles] = useState(null);
     const isModerator = roles && roles.includes('MODERATOR');
 
@@ -28,7 +27,7 @@ const WelcomingBanner = ({ isOrganizerPage, organisationName }) => {
                     <h1>{t('welcome')}</h1>
                 </div>}
                 { isLoggedIn && <div id="containerHero_hero">
-                    <h1>{t('hello')}, {user.firstName}. {t('welcomeToWoloApp')}</h1>
+                    <h1>{t('welcomeToWoloApp')}</h1>
                 </div>}
                 { !isLoggedIn && <div id="subtext_hero">
                     <h2><Link to="/login">{t('logInToday')}</Link> {t('or')} <Link to="/events">{t('findEvent')}</Link></h2>

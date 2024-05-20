@@ -19,6 +19,7 @@ import { FiltersProvider } from './Components/Filters/FiltersContext';
 import fetchUserRoles from './Utils/fetchUserRoles.js';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
+import Settings from './Views/Settings/Settings.js';
 
 function App() {
   const [role, setRole] = useState(null);
@@ -44,6 +45,7 @@ function App() {
             <Route path="/events" element={<AllEvents />} />
             <Route path="/details/:id" element={<Details />} />
             <Route path="/organiser" element={<Organiser />} />
+            <Route path="/settings" element={<Settings />} />
             <Route path="/login" element={<Login  setToken={setToken} setUser={setUser}  />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/needyou" element={<TheyNeedYouEvents />} />

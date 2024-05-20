@@ -80,11 +80,15 @@
     }
   }
 
+  #details_event_over {
+    text-align: center;
+    width: 100%;
+    padding: 30px;
+  }
+
   #details_event_over_text {
     color: $color-1-blue;
-    text-align: center;
     font-weight: bolder;
-    width: 100%;
   }
 
   .details_shifts_text {

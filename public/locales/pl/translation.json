@@ -152,5 +152,26 @@
   "cities": "Miasta",
 
   "cancelEvent": "Czy na pewno chcesz anulować wydarzenie: ",
-  "acceptCancelEvent": "Tak, anuluj wydarzenie"
+  "acceptCancelEvent": "Tak, anuluj wydarzenie",
+  "peselVerified": "PESEL zweryfikowany",
+  "agreementSigned": "Umowa podpisana",
+  "isAdult": "Pełnoletni",
+  "organisationName": "Nazwa organizacji",
+  "deactivateAccount": "Dezaktywuj konto",
+  "yes": "Tak",
+  "no": "Nie",
+  "none": "Brak",
+  "deleteAccount": "Czy na pewno chcesz trwale usunąć swoje konto?",
+  "confirmAccountDelete": "Usuń moje konto",
+
+  "invalidPhoneNumberFormat": "Nieprawidłowy format numeru telefonu. Proszę wprowadzić 9-cyfrowy numer.",
+  "invalidEmailFormat": "Nieprawidłowy format adresu e-mail. Proszę podać poprawny adres e-mail.",
+  "invalidNameFormat": "Nieprawidłowy format. Proszę wprowadzić tylko litery.",
+  "deleteAccountSuccess": "Konto zostało pomyślnie usunięte",
+  "deleteAccountFail": "Jesteś jedynym moderatorem Twojej organizacji. Przed usunięciem konta przekaż prawa organizacji.",
+
+  "userDataChangedSucess": "Pomyślnie zmieniono dane osobowe",
+  "userDataChangedFail": "Coś poszło nie tak. Spróbuj ponownie później",
+
+  "defaultImageForEvent": "Obrazek główny do wydarzenia"
 }
