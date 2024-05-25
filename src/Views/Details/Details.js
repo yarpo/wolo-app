@@ -49,6 +49,7 @@ const Details = () => {
   useEffect(() => {
     const url = `${URLS.EVENTS}/${id}`;
     fetchData(url, setEventData);
+    console.log(eventData)
   }, [id]);
 
   useEffect(() => {
@@ -74,8 +75,8 @@ const Details = () => {
     city,
     imageUrl,
     categories,
-    isPeselVerificationRequired,
-    isAgreementNeeded
+    peselVerificationRequired,
+    agreementNeeded
   } = eventData;
 
   return (
@@ -86,14 +87,14 @@ const Details = () => {
         </Link>
         <h1 id="title">{eventData[eventName]}</h1>
         <ul id="information">
-          {isPeselVerificationRequired && (
+          {peselVerificationRequired && (
               <p className='card-extra-requirements'> 
-                  <HiOutlineExclamation className='card-extra-requirements'/> {t('ageRestrictions')} 
+                  <HiOutlineExclamation className='card-extra-requirements'/> {t('peselVerificationNeeded')} 
               </p>
           )}
-          {isAgreementNeeded && (
+          {agreementNeeded && (
               <p className='card-extra-requirements'> 
-                  <HiOutlineExclamation className='card-extra-requirements'/> {t('ageRestrictions')}
+                  <HiOutlineExclamation className='card-extra-requirements'/> {t('volunteerAgreementNeeded')}
               </p>
           )}
           <li>
