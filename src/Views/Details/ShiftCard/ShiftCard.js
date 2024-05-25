@@ -11,6 +11,7 @@ import fetchUserShifts from '../../../Utils/fetchUserShifts.js';
 import postRequest from '../../../Utils/postRequest.js';
 import Confirmation from '../../../Components/Popups/Confirmation.js';
 import { Card } from "flowbite-react";
+import { HiOutlineExclamation } from "react-icons/hi";
 import formatTime from '../../../Utils/formatTime.js';
 
 const ShiftCard = ({ shift, city, isInPast }) => {
@@ -81,6 +82,11 @@ const ShiftCard = ({ shift, city, isInPast }) => {
                     <p><strong>{shift.district}, {city}</strong></p>
                     <p><strong> {shift.street} {shift.homeNum}</strong></p>
                     <p>{shift[shiftDirections]}</p>
+                    {shift.requiredMinAge && shift.requiredMinAge !== 0 && (
+                        <p className='card-extra-requirements'> 
+                            <HiOutlineExclamation className='card-extra-requirements'/> {t('ageRestrictions')}: {shift.requiredMinAge}
+                        </p>
+                    )}
                 </span>
                 {!isInPast && <form onSubmit={(e) => e.preventDefault()}>
                     {canSignIn && !isFull && !userShifts.includes(shiftId) && <button type="button"  onClick={() => setConfirmPhone(true)} id="sign-in" > {t('joinShift')} </button>}
