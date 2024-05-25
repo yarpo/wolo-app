@@ -41,7 +41,8 @@ const URLS = {
   THEY_NEED_YOU: `${BASE_URL}/events/need`,
 
   PUBLIC_RAPORT: `${BASE_URL}/reports/public`,
-  LOGIN: LOGIN_URL
+  LOGIN: LOGIN_URL,
+  ORGANISATION_EDIT: `${BASE_URL}/organisations/edit`
 };
 
 module.exports = { URLS, BASE_URL };

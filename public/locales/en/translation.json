@@ -173,5 +173,8 @@
 
   "defaultImageForEvent": "Default image for event",
 
-  "organiserSettings": "Organisation Settings"
+  "organiserSettings": "Organisation Settings",
+  "logoUrl": "Logo URL",
+  "organisationDataEditedSuccess": "Your organisation was successfully edited",
+  "organisationDataEditedFail": "There was a problem editing organisation. Please try again later"
 }

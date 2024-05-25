@@ -171,5 +171,10 @@
   "userDataChangedSucess": "Pomyślnie zmieniono dane osobowe",
   "userDataChangedFail": "Coś poszło nie tak. Spróbuj ponownie później",
 
-  "defaultImageForEvent": "Obrazek główny do wydarzenia"
+  "defaultImageForEvent": "Obrazek główny do wydarzenia",
+
+  "organiserSettings": "Ustawienia organizacji",
+  "logoUrl": "URL logo",
+  "organisationDataEditedSuccess": "Twoja organizacja została pomyślnie zaktualizowana",
+  "organisationDataEditedFail": "Wystąpił problem z edytowaniem organizacji. Proszę spróbować ponownie później"
 }
