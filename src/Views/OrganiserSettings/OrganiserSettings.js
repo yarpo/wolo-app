@@ -100,7 +100,7 @@ const OrganiserSettings = () => {
     return (
         <div className="settings-page">
             <div className="settings-container">
-                <h1>{t('settings')}</h1>
+                <h1>{t('organiserSettings')}</h1>
                 {organisationData && (
                     <div className="settings-data-container">
                         <div className="settings-row">
