@@ -171,5 +171,7 @@
   "userDataChangedSucess": "Successfully changed personal information",
   "userDataChangedFail": "Something went wrong. Please try again later",
 
-  "defaultImageForEvent": "Default image for event"
+  "defaultImageForEvent": "Default image for event",
+
+  "organiserSettings": "Organisation Settings"
 }

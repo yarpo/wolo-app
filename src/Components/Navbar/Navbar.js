@@ -115,6 +115,7 @@ function handleLogout() {
                     {role && role.includes('ADMIN') && <li id="navbar-dropdown-li"><Link to='/adminHomePage'>{t('adminPage')}</Link></li>}
                     {role && role.includes('MODERATOR') && <li id="navbar-dropdown-li"><Link to='/organiserHomePage'>{t('organiserPage')}</Link></li>}
                     <li id="navbar-dropdown-li"><Link to="/settings">{t('settings')}</Link></li>
+                    {role && role.includes('MODERATOR') && <li id="navbar-dropdown-li"><Link to='/organiserSettings'>{t('organiserSettings')}</Link></li>}
                     <li id="navbar-dropdown-li">
                       <button onClick={handleLogout}>{t('logout')}</button>
                     </li>
