@@ -4,7 +4,7 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import '../../styles/signup.scss';
 import { URLS } from '../../config.js';
-import fetchUserId from '../../Utils/fetchUserId.js';
+import fetchUser from '../../Utils/fetchUser.js';
 import postRequestWithJson from '../../Utils/postRequestWithJson.js';
 
 const Signup = () => {
@@ -16,8 +16,8 @@ const Signup = () => {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const userId = await fetchUserId();
-      setId(userId);
+      const user = await fetchUser();
+      setId(user.id);
     };
 
     fetchUserData();

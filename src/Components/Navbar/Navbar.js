@@ -5,7 +5,7 @@ import '../../styles/navbar.scss';
 import logo from '../../images/logo.svg';
 import { RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri';
 import { FaRegUserCircle } from 'react-icons/fa';
-import fetchUserRoles from '../../Utils/fetchUserRoles.js';
+import fetchUser from '../../Utils/fetchUser';
 
 const Navbar = () => {
   const [role, setRole] = useState(null);
@@ -17,12 +17,11 @@ const Navbar = () => {
   const dropdownRef = useRef(null);
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      const role = await fetchUserRoles();
-      setRole(role);
-    }
-
-    fetchUserData();
+    fetchUser().then(data => {
+      if (data) {
+        setRole(data.roles);
+      }
+    })
   }, []);
 
   useEffect(() => {
