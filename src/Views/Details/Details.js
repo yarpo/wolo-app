@@ -7,6 +7,7 @@ import {
   VscOrganization,
   VscLocation,
 } from 'react-icons/vsc';
+import { HiOutlineExclamation } from "react-icons/hi";
 import { BiBorderAll } from 'react-icons/bi';
 import { Link, useParams } from 'react-router-dom';
 import '../../styles/details.scss';
@@ -72,7 +73,9 @@ const Details = () => {
     date,
     city,
     imageUrl,
-    categories
+    categories,
+    peselVerificationRequired,
+    agreementNeeded
   } = eventData;
 
   return (
@@ -83,6 +86,16 @@ const Details = () => {
         </Link>
         <h1 id="title">{eventData[eventName]}</h1>
         <ul id="information">
+          {peselVerificationRequired && (
+              <p className='card-extra-requirements'> 
+                  <HiOutlineExclamation className='card-extra-requirements'/> {t('peselVerificationNeeded')} 
+              </p>
+          )}
+          {agreementNeeded && (
+              <p className='card-extra-requirements'> 
+                  <HiOutlineExclamation className='card-extra-requirements'/> {t('volunteerAgreementNeeded')}
+              </p>
+          )}
           <li>
             <VscBrowser id="icon" /> <strong>{t('date')}:</strong> {formatDate(date)}
           </li>
