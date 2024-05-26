@@ -82,7 +82,7 @@ const ShiftCard = ({ shift, city, isInPast }) => {
                     <p><strong>{shift.district}, {city}</strong></p>
                     <p><strong> {shift.street} {shift.homeNum}</strong></p>
                     <p>{shift[shiftDirections]}</p>
-                    {shift.requiredMinAge && shift.requiredMinAge !== 0 && (
+                    {shift.requiredMinAge && shift.requiredMinAge > 0 && (
                         <p className='card-extra-requirements'> 
                             <HiOutlineExclamation className='card-extra-requirements'/> {t('ageRestrictions')}: {shift.requiredMinAge}
                         </p>
