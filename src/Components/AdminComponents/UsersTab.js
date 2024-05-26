@@ -6,21 +6,25 @@ import { URLS } from '../../config';
 import { Table } from "flowbite-react";
 
 import AddUser from './addRecordModals/AddUser.js';
+import EditUser from './editRecordModals/EditUser.js';
 import Confirmation from '../Popups/Confirmation.js';
 
 import postRequestWithJson from '../../Utils/postRequestWithJson.js';
 import fetchDataWithAuth from '../../Utils/fetchDataWithAuth.js';
 import deleteRequest from '../../Utils/deleteRequest.js';
+import putRequest from '../../Utils/putRequest.js';
 
 const UsersTab = () => {
     const { t } = useTranslation();
     const [users, setUsers] = useState([]);
     const [openModal, setOpenModal] = useState(false);
+    const [openEditModal, setEditOpenModal] = useState(false);
     const token = localStorage.getItem('token');
     const [openIndex, setOpenIndex] = useState(null);
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [userConfirmed, setUserConfirmed] = useState(false);
     const [userToDelete, setUserToDelete] = useState(null);
+    const [userToEdit, setUserToEdit] = useState(null);
 
     useEffect(() => {
         fetchDataWithAuth(URLS.USERS, setUsers, token)
@@ -34,6 +38,7 @@ const UsersTab = () => {
 
     const handleModalClose = () => {
         setOpenModal(false);
+        setEditOpenModal(false);
     };
 
     const toggleDetails = (index) => {
@@ -56,6 +61,10 @@ const UsersTab = () => {
         setUserToDelete(null);
         setConfirmDelete(false);
     };
+    const handleEdit = (data) => {
+        putRequest(`${URLS.USERS}/${userToEdit.id}/edit`, localStorage.getItem('token'), data, "User was changed Successfully", "Failed to change user's credentials")
+        setUserToEdit(null);
+    };
     
 
     return (
@@ -71,6 +80,7 @@ const UsersTab = () => {
                     <Table.HeadCell>User roles</Table.HeadCell>
                     <Table.HeadCell>Organisation Moderator</Table.HeadCell>
                     <Table.HeadCell>More</Table.HeadCell>
+                    <Table.HeadCell>Edit</Table.HeadCell>
                     <Table.HeadCell>Delete</Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
@@ -94,6 +104,11 @@ const UsersTab = () => {
                                         <span className="dropdown-label">Details</span>
                                     </button>
                                 </Table.Cell>
+                                <Table.Cell>{/* edit row */}
+                                {openEditModal && userToEdit === user && <EditUser User onAccept={handleEdit} onClose={handleModalClose} userData={user} />}
+                                <button className="edit-button" onClick={() =>{ setEditOpenModal(true);setUserToEdit(user);}}> Edit </button>
+                                    
+                                </Table.Cell>
                                 <Table.Cell>
                                     <button
                                         className="delete-button"
@@ -104,6 +119,7 @@ const UsersTab = () => {
                                     >
                                         <span>Delete</span>
                                     </button>
+                                    
                                     <Confirmation
                                         id="sign-off"
                                         buttonName={t('delete')}
@@ -123,6 +139,7 @@ const UsersTab = () => {
                                         setOpenModal={setConfirmDelete}
                                     />
                                 </Table.Cell>
+                                
                             </Table.Row>
                             {openIndex === index && (
                                 <Table.Row>
