@@ -22,6 +22,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import Settings from './Views/Settings/Settings.js';
 import ForVolunteers from './Views/ForVolunteers/ForVolunteers.js';
+import ForgotPassword from './Views/ForgotPassword/ForgotPassword.js';
 
 function App() {
   const [role, setRole] = useState(null);
@@ -52,6 +53,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/needyou" element={<TheyNeedYouEvents />} />
             <Route path="/forVolunteers" element={<ForVolunteers />} />
+            <Route path="/forgotPassword" element={<ForgotPassword />} />
             {role && role.includes('MODERATOR') && <Route path="/reports" element={<ReportPage />} />}
             {role && role.includes('MODERATOR') && <Route path="/organiserHomePage" element={<OrganiserHomePage />} />}
             {role && role.includes('ADMIN') && <Route path="/adminHomePage" element={<AdminHomePage />} />}
