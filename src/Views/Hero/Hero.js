@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import Filters from '../../Components/Filters/Filters';
 import { useFiltersContext } from '../../Components/Filters/FiltersContext';
 import { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
@@ -17,7 +16,6 @@ const Hero = () => {
     const [selectedLocation, setSelectedLocation] = useState("");
     const [locations, setLocations] = useState([]);
     const [selectedDate, setSelectedDate] = useState(null);
-    const [, setFilteredEvents] = useState([]);
 
     useEffect(() => {
         fetchData(URLS.DISTRICTS, setLocations);
@@ -44,39 +42,38 @@ const Hero = () => {
 
     return (
         <div className='hero-container'>
-                <div id="mainContainer_hero">
-                    <WelcomingBanner isOrganizerPage={ false }/>
-                </div>
-                <form id="form_hero">
-                    <div id="MainRow_hero">
-                        <div>
-                            <DatePicker
-                                id="datePicker_hero"
-                                selected={selectedDate}
-                                onChange={handleDateChange}
-                                dateFormat="dd/MM/yyyy"
-                                placeholderText={t('selectDate')}
-                                className="MainInput"
-                            />
-                        </div>
-                        <select
-                            id="selectInput_hero"
+            <div id="mainContainer_hero">
+                <WelcomingBanner isOrganizerPage={ false }/>
+            </div>
+            <form id="form_hero">
+                <div id="MainRow_hero">
+                    <div>
+                        <DatePicker
+                            id="datePicker_hero"
+                            selected={selectedDate}
+                            onChange={handleDateChange}
+                            dateFormat="dd/MM/yyyy"
+                            placeholderText={t('selectDate')}
                             className="MainInput"
-                            data-testid="location-select"
-                            value={selectedLocation}
-                            onChange={handleLocationChange}
-                        >
-                            <option value="" disabled>{t('location')}</option>
-                            {locations.map((location, index) => (
-                                <option key={index} value={location.name}>
-                                    {location.name}
-                                </option>
-                            ))}
-                        </select>
+                        />
                     </div>
-                </form>
+                    <select
+                        id="selectInput_hero"
+                        className="MainInput"
+                        data-testid="location-select"
+                        value={selectedLocation}
+                        onChange={handleLocationChange}
+                    >
+                        <option value="" disabled>{t('location')}</option>
+                        {locations.map((location, index) => (
+                            <option key={index} value={location.name}>
+                                {location.name}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+            </form>
             <div id="filters_hero">
-                <Filters setFilteredEvents={setFilteredEvents} />
                 <div id="button_hero">
                     <Link to="/events">
                         <input id="hero_submmit_button" type="submit" value={t('mainSearch')} onClick={handleSubmit} />

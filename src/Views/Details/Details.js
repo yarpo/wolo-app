@@ -7,6 +7,7 @@ import {
   VscOrganization,
   VscLocation,
 } from 'react-icons/vsc';
+import { HiOutlineExclamation } from "react-icons/hi";
 import { BiBorderAll } from 'react-icons/bi';
 import { Link, useParams } from 'react-router-dom';
 import '../../styles/details.scss';
@@ -14,23 +15,27 @@ import '../../styles/details.scss';
 import EventCard from '../../Components/EventCard/EventCard.js';
 import 'react-toastify/dist/ReactToastify.css';
 import fetchData from '../../Utils/fetchData.js';
+import fetchDataWithAuth from '../../Utils/fetchDataWithAuth.js';
 import formatDate from '../../Utils/formatDate.js';
 import SignedInVolunteers from './SignedInVolunteers/SignedInVolunteers.js';
 import { URLS } from '../../config.js'
 import ShiftCard from './ShiftCard/ShiftCard.js';
-
 import fetchUser from '../../Utils/fetchUser.js';
 
 const Details = () => {
   const { t } = useTranslation();
   const { id } = useParams();
   const [eventData, setEventData] = useState(null);
+  const [reportData, setReportData] = useState(null);
   const [organiserEvents, setOrganiserEvents] = useState([]);
   const [roles, setRoles] = useState(null);
   const [userOrganisation, setUserOrganisation] = useState();
   const isModerator = roles && roles.includes('MODERATOR');
   const isAdmin = roles && roles.includes('ADMIN');
   const [isInPast, setIsInPast] = useState(false);
+  const eventDescription = `description${localStorage.getItem('i18nextLng').toUpperCase()}`;
+  const eventName = `name${localStorage.getItem('i18nextLng').toUpperCase()}`;
+  const reportText = `report${localStorage.getItem('i18nextLng').toUpperCase()}`;
 
   useEffect(() => {
     fetchUser().then(data => {
@@ -55,21 +60,22 @@ const Details = () => {
     if (eventData && eventData.shifts && eventData.shifts[0].date < format(new Date(), 'yyyy-MM-dd')){
       setIsInPast(true)
     }
-  }, [eventData, eventData?.organisationId]);
+    
+    fetchDataWithAuth(`${URLS.PUBLIC_RAPORT}/${id}`, setReportData, localStorage.getItem('token'));
+  }, [eventData, eventData?.organisationId, id]);
 
   if (!eventData) {
     return <div>{t('loading')}...</div>;
   }
 
   const {
-    name,
     organisationName,
-    description,
+    date,
     city,
     imageUrl,
-    shifts,
-    alt,
-    categories
+    categories,
+    peselVerificationRequired,
+    agreementNeeded
   } = eventData;
 
   return (
@@ -78,10 +84,20 @@ const Details = () => {
         <Link to="/events" id="back">
           <VscArrowLeft id="back_arrow" /> {t('back')}
         </Link>
-        <h1 id="title">{name}</h1>
+        <h1 id="title">{eventData[eventName]}</h1>
         <ul id="information">
+          {peselVerificationRequired && (
+              <p className='card-extra-requirements'> 
+                  <HiOutlineExclamation className='card-extra-requirements'/> {t('peselVerificationNeeded')} 
+              </p>
+          )}
+          {agreementNeeded && (
+              <p className='card-extra-requirements'> 
+                  <HiOutlineExclamation className='card-extra-requirements'/> {t('volunteerAgreementNeeded')}
+              </p>
+          )}
           <li>
-            <VscBrowser id="icon" /> <strong>{t('date')}:</strong> {formatDate(shifts[0].date)}
+            <VscBrowser id="icon" /> <strong>{t('date')}:</strong> {formatDate(date)}
           </li>
           <li>
             <BiBorderAll id="icon" /> <strong>{t('category')}:</strong>{' '}
@@ -99,13 +115,16 @@ const Details = () => {
       </div>
 
       <div className="details_photo">
-        <img src={imageUrl} alt={alt} onError={(event) => event.target.style.display = 'none'} />
+        <img src={imageUrl} alt={t('defaultImageForEvent')} onError={(event) => event.target.style.display = 'none'} />
       </div>
 
-      <p id="description">{description}</p>
+      <p id="description">{eventData[eventDescription]}</p>
 
       {isInPast && 
-        <h2 id="details_event_over_text">{t('eventIsOver')}</h2>
+        <div id="details_event_over" > 
+          <h2 id="details_event_over_text">{t('eventIsOver')}</h2>
+          <p>{(reportData && isInPast) ? reportData[reportText] : ""}</p>
+        </div>
       }
 
       <div id='column'>
@@ -136,7 +155,7 @@ const Details = () => {
       {!((eventData.organisationId === userOrganisation && isModerator) || isAdmin) && <div id="details_more_events">
         <h2>{t('moreEventsFromThisOrganizer')}</h2>
         <div id="details_more_events_container">
-          {organiserEvents.map(event => (
+          {organiserEvents.filter(event => new Date(event.date) > new Date()).map(event => (
             <EventCard key={event.id} event={event} id='details_more_events_item' />
           ))}
         </div>

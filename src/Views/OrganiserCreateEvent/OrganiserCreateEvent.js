@@ -1,209 +1,221 @@
-import { Formik, Field, Form, ErrorMessage } from "formik";
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useState, useEffect } from 'react';
-import '../../styles/organiser-create-event.scss';
-import fetchData from '../../Utils/fetchData.js';
-import * as Yup from 'yup';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { URLS } from '../../config.js';
+import { Checkbox, Label,  Textarea, TextInput, Select } from 'flowbite-react';
+import { Formik, Field, Form, FieldArray  } from 'formik';
+import fetchData from '../../Utils/fetchData.js';
+import { URLS, BASE_URL } from '../../config';
+import '../../styles/organiser-create-event.scss';
+import { Card } from "flowbite-react";
+
 
 const OrganiserCreateEvent = () => {
-  
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
+  const user = JSON.parse(localStorage.getItem('user'));
+  const token = localStorage.getItem('token');
   const [categories, setCategories] = useState([]);
+  const [cities, setCities] = useState([]);
   const [districts, setDistricts] = useState([]);
+  const [selectedCity, setSelectedCity] = useState(null);
+  const [filteredDistricts, setFilteredDistricts] = useState([]);
+
 
   useEffect(() => {
-      fetchData(URLS.CATEGORIES, setCategories);
-      fetchData(URLS.DISTRICTS, setDistricts);
+    fetchData(URLS.CATEGORIES, setCategories);
+    fetchData(URLS.CITIES, (data) => {
+      setCities(data);
+    });
+    fetchData(URLS.DISTRICTS, setDistricts);
   }, []);
 
-  const [initialValues] = useState({
-    name: '',
-    description: '',
-    imageUrl: '',
-    street: '',
-    homeNum: '',
-    addressDescription: '',
-    districtId: '',
-    categories: '',
-    shift: '',
-    peselVerificationRequired: false,
-    volunteerAgreement: false,
-    language: i18n.language.toUpperCase(),
-  });
+  const handleCityChange = (event) => {
+    const newSelectedCity = Number(event.target.value);
+    setSelectedCity(newSelectedCity);
+    console.log(selectedCity);
 
-  const validationSchema = Yup.object().shape({
-    name: Yup.string()
-      .required('Title is required'),
-    description: Yup.string()
-      .required('Description is required'),
-    districtId: Yup.string()
-      .required('District is required'),
-    categories: Yup.string()
-      .required('At least one category is required'),
-    street: Yup.string()
-      .required('Address street is required'),
-    homeNum: Yup.string()
-      .required('Address number is required'),
-  });
+  };
+
+  useEffect(() => {
+    const selectedCityObject = cities.find(city => city.id === selectedCity);
+    if (selectedCityObject) {
+      const newFilteredDistricts = districts.filter(district => district.cityName === selectedCityObject.name);
+      setFilteredDistricts(newFilteredDistricts);
+    } else {
+      setFilteredDistricts([]);
+    }
+  }, [selectedCity, cities, districts]);
+  
+  const initialValues = {
+    name: '',
+    organisationId: user.organisationId,
+    description: '',
+    categories: [],
+    imageUrl: '',
+    date: '',
+    shifts: [{
+      startTime: '',
+      endTime: '',
+      capacity: '',
+      isLeaderRequired: false,
+      requiredMinAge: '',
+      shiftDirections: '',
+      street: '',
+      homeNum: '',
+      districtId: null
+    }],
+    cityId: selectedCity ,
+    isPeselVerificationRequired: false,
+    isAgreementNeeded: false
+  };
+
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+    setSubmitting(true);
+
+    values.categories = Array.from(values.categories);
+
+    values.cityId = parseInt(selectedCity);
+    for (let i = 0; i < values.shifts.length; i++) {
+      values.shifts[i].districtId = parseInt(values.shifts[i].districtId)
+    }
+
+    const response = await fetch(`${BASE_URL}/events/add?language=${localStorage.getItem('i18nextLng').toLocaleUpperCase()}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(values)
+    });
+
+    if (response.ok) {
+      toast.success('Event added successfully');
+      resetForm();
+    } else {
+      toast.error('Failed to add event');
+    }
+
+    setSubmitting(false);
+  };
 
   return (
-    <div className="organiser_create_event_div">
-      <h1 className="organiser_create_event_title">{t('createEvent')}</h1>
-      <p className="organiser_create_event_sub-title_disclaimer">{t('inputsAreRequired')}</p>
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={async (values, { setSubmitting }) => {
-            console.log(values);
+  <div id="organiser-create-event-container" className="flex justify-center items-center" style={{ minHeight: 'calc(100vh)' }}>
+    <Card>
+      <div className="flex flex-col gap-4">
+        <h1>{t('createEvent')}</h1>
+          <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+            {({ isSubmitting, values }) => (
+              <Form className="organiser-create-event-event-data">
+                <Label htmlFor="name" value="Event Title" />
+                <Field as={TextInput} id="name" type="text" sizing="md" name="name" />
 
-            values.organisationId = 1;
-            values.categories = [parseInt(values.categories, 10)];
-            values.shifts = [
-              {
-                startTime: [9, 9],
-                endTime: [12, 12],
-                date: [2024, 11, 11],
-                capacity: 7,
-                isLeaderRequired: false,
-                requiredMinAge: 18,
-              },
-            ];
+                <Label htmlFor="description" value="Description" />
+                <Field as={Textarea} id="description" sizing="md" name="description" />
 
-            delete values.shift
+                <Label htmlFor="imageUrl" value="Image URL" />
+                <Field as={TextInput} id="imageUrl" type="text" sizing="md" name="imageUrl" />
 
-            const jsonData = JSON.stringify(values);
-            console.log(jsonData);
+                <Label htmlFor="date" value="Date" />
+                <Field as={TextInput} id="date" type="date" name="date" />
 
-            try {
-              const response2 = await fetch('http://127.0.0.1:8080/events/add', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: jsonData,
-              });
+                <div className="organiser-create-event-two-columns">
+                  <div className="organiser-create-event-two-columns-item">
+                    <Label htmlFor="categoryId" value="Category" />
+                      <Field as={Select} id="categories" name="categories">
+                        {categories.map(category => (
+                          <option key={category.id} value={category.id}>{category.name}</option>
+                        ))}
+                      </Field>
+                  </div>
 
-            if (!response2.ok) {
-              toast.error('Error adding event');
-              return;
-            }
-
-            toast.success('Event added successfully');
-
-            console.log('Response:', response2);
-            } catch (error) {
-              console.error('Error:', error);
-              toast.error('An unexpected error occurred');
-            } finally {
-              setSubmitting(false);
-            }
-          }}
-        >
-        <Form>
-          <div className="organiser_create_event_row_div">
-            <label htmlFor="name">{t('title')}*</label>
-            <Field className="organiser_create_event-from_input" type="text" name="name" placeholder="Title" />
-          </div>
-          <ErrorMessage className="error" name="name" component="div" />
-          <div className="organiser_create_event_row_div">
-            <label htmlFor="description">{t('description')}*</label>
-            <Field as="textarea" className="organiser_create_event-from_input_textbox" type="text" maxLength="255" name="description"  placeholder="Description"/>
-          </div>
-          <ErrorMessage className="error" name="description" component="div" />
-          <div className="organiser_create_event_row_div">
-            <label htmlFor="imageUrl">{t('imageURL')}</label>
-            <Field className="organiser_create_event-from_input" type="text" name="imageUrl" placeholder="Picture Url" />
-            <ErrorMessage className="error" name="file" component="div" />
-          </div>
-          <br/>
-          <div className="organiser_create_event_address-form">
-            <label htmlFor="address">{t('address')}*</label>
-            <div className="organiser_create_event_address-form_top">
-              <div className="organiser_create_event_row_div_address">
-                <div className="address_error">
-                  <Field className="organiser_create_event-from_input" type="text" name="street" placeholder="Street" />
-                  <ErrorMessage className="error" name="street" component="div" />
+                  <div className="organiser-create-event-two-columns-item">
+                    <Label htmlFor="cityId" value="City" />
+                    <Field as={Select} id="cityId" name="cityId" onChange={handleCityChange} >
+                      {cities.map(city => (
+                        <option key={city.id} value={city.id}>{city.name}</option>
+                      ))}
+                    </Field>
+                  </div>
                 </div>
-                <div className="address_error">
-                  <Field className="organiser_create_event-from_input" type="text" name="homeNum"  placeholder="Number"/>
-                  <ErrorMessage className="error" name="homeNum" component="div" />
+
+                <div className="organiser-create-event-two-columns">
+                  <div className="organiser-create-event-two-columns-item">
+                    <Label htmlFor="isPeselVerificationRequired" value="Is PESEL Verification Required?" />{" "}
+                    <Field as={Checkbox} id="isPeselVerificationRequired" name="isPeselVerificationRequired" />
+                  </div>
+                  
+                  <div className="organiser-create-event-two-columns-item">
+                    <Label htmlFor="isAgreementNeeded" value="Is Agreement Needed?" />{" "}
+                    <Field as={Checkbox} id="isAgreementNeeded" name="isAgreementNeeded" />
+                  </div>
                 </div>
-              </div>
-              <Field as="textarea" className="organiser_create_event-from_input_textbox" type="text" maxLength="255" name="addressDescription"  placeholder="Describe how to get there"/>              
-              <ErrorMessage className="error" name="addressDescription" component="div" />
-            </div>
-          </div>
-          <br/>
-          <div className="organiser_create_event_row_div">
-            <label htmlFor="districtId">{t('district')}*</label>
-            <Field as="select" className="organiser_create_event-from_input_dropdown" type="text" name="districtId"  placeholder="District">
-              <option value="" disabled >{t('selectDistrict')}</option>
-              {districts.map(district => (
-                <option key={district.id} value={district.id}>{district.name}</option>
-              ))}
-            </Field>
-          </div>
-          <ErrorMessage className="error" name="district" component="div" />
-          <br/>
-          <div className="organiser_create_event_row_div">
-            <label htmlFor="categories">{t('categories')}*</label>
-           <Field as="select" className="organiser_create_event-from_input_dropdown" type="text" name="categories" placeholder="Category" >
-              <option value="" disabled >{t('selectCategory')}</option>
-              {categories.map(category => (
-                <option key={category.id} value={category.id}>{category.name}</option>
-              ))}
-            </Field>
-          </div>
-          <br/>  
-          <div className="checkbox_organiser_create_event-group">
-            <label htmlFor="peselVerificationRequired">
-              <Field type="checkbox" name="peselVerificationRequired"/>
-              {t('peselVerificationNeeded')}
-            </label>
-            <label htmlFor="agreementNeeded">
-              <Field type="checkbox" name="agreementNeeded"/>
-              {t('volunteerAgreementNeeded')}
-            </label>
-          </div>
-          <br/>  
-          {/* <p className="organiser_create_event_sub-title">Shifts</p>
-          <div className="organiser_create_event_shifts">
-            <div className="organiser_create_event_shifts_column">
-              <div>
-                <Field type="number" name="shift.year" min="2023"/>
-                <Field type="number" name="shift.month" min="1" max="12"/>
-                <Field type="number" name="shift.day" min="1" max="31"/>
-              </div>
-              <div>
-              Start:
-              <Field type="number" name="shift.starthour" min="1" max="24"/>
-              :
-              <Field type="number" name="shift.startmin" min="0" max="60"/>
-                End:
-              <Field type="number" name="shift.endhour" min="1" max="24"/>
-              :
-              <Field type="number" name="shift.endmin" min="0" max="60"/>
-              </div>
-            </div>
-            <div>
-              <span><b>{t('volunteersNeeded')}</b>: <Field type="number" name="shift.volunteersNum" min="1" max="12"/></span> 
-              <p><span><b>{t('minimumAgeRequired')}</b>: <Field type="number" name="shift.minAge" min="0" max="99"/></span></p>
-            </div>
-             <div className="organiser_create_event_shifts_manage">
-               <button className="organiser_create_event-form_button">Edit</button>
-              <button className="organiser_create_event-form_button">Delete</button>
-            </div>
-          </div> */}
-          {/* <button className="organiser_create_event_shifts_button" disabled>Add shift</button> */}
-          <br/>
-          <div className="button-group">
-            <button className="organiser_create_event-form_button" type="submit">{t('createEvent')}</button>
-          </div>
-        </Form>
-      </Formik>
+                <FieldArray name="shifts" className="organiser-create-event-grid">
+                {({ remove, push }) => (
+                  <div>
+                      {values.shifts.map((shift, index) => (
+                          <div className="organiser-create-event-row" key={index}>
+                            <Card>
+                              <h2>{t('shift')}</h2>
+                              <div className="col">
+                                <Label htmlFor={`shifts.${index}.startTime`} value="Start Time" />
+                                <Field as={TextInput} id={`shifts.${index}.startTime`} type="time" name={`shifts.${index}.startTime`} />
+
+                                <Label htmlFor={`shifts.${index}.endTime`} value="End Time" />
+                                <Field as={TextInput} id={`shifts.${index}.endTime`} type="time" name={`shifts.${index}.endTime`} />
+
+                                <Label htmlFor={`shifts.${index}.capacity`} value="Capacity" />
+                                <Field as={TextInput} id={`shifts.${index}.capacity`} type="number" min='1' name={`shifts.${index}.capacity`} />
+
+                                <Label htmlFor={`shifts.${index}.isLeaderRequired`} value="Is Leader Required?" />
+                                <Field as={Checkbox} id={`shifts.${index}.isLeaderRequired`} name={`shifts.${index}.isLeaderRequired`} /> 
+                                <br />
+
+                                <Label htmlFor={`shifts.${index}.requiredMinAge`} value="Required Minimum Age" />
+                                <Field as={TextInput} id={`shifts.${index}.requiredMinAge`} type="text" name={`shifts.${index}.requiredMinAge`} />
+
+                                <Label htmlFor={`shifts.${index}.shiftDirections`} value="Shift Directions" />
+                                <Field as={TextInput} id={`shifts.${index}.shiftDirections`} type="text" name={`shifts.${index}.shiftDirections`} />
+
+                                <Label htmlFor={`shifts.${index}.street`} value="Street" />
+                                <Field as={TextInput} id={`shifts.${index}.street`} type="text" name={`shifts.${index}.street`} />
+
+                                <Label htmlFor={`shifts.${index}.homeNum`} value="Home Number" />
+                                <Field as={TextInput} id={`shifts.${index}.homeNum`} type="text" name={`shifts.${index}.homeNum`} />
+
+                                <Label htmlFor={`shifts.${index}.districtId`} value="District" />
+                                <Field as={Select} id={`shifts.${index}.districtId`} name={`shifts.${index}.districtId`}>
+                                  {filteredDistricts.map(district => (
+                                     <option key={district.id} value={district.id}>{district.name}</option>
+                                  ))}
+                                </Field>
+                              </div>
+                              <div className="col">
+                                <button type="button" onClick={() => remove(index)} className='white_button' >Remove Shift</button>
+                              </div>
+                            </Card>
+                        </div>
+                    ))}
+                    <button type="button" className='confirm_button' onClick={() => push({
+                                                                startTime: '', 
+                                                                endTime: '', 
+                                                                capacity: '', 
+                                                                isLeaderRequired: false, 
+                                                                requiredMinAge: '', 
+                                                                shiftDirections: '', 
+                                                                street: '', 
+                                                                homeNum: '', 
+                                                                districtId: '' })}>
+                        Add Shift</button>
+                  </div>
+                )}
+              </FieldArray>
+                <div className='organiser-create-event-submit-button-wrapper'>
+                  <button type="submit" className='confirm_button' disabled={isSubmitting}>Submit</button>
+                </div>
+              </Form>
+            )}
+          </Formik>
+        </div>
+    </Card>
     </div>
   );
 }

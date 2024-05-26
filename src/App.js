@@ -15,11 +15,13 @@ import AdminHomePage from './Views/AdminHomePage/AdminHomePage.js';
 import VolunteerHomePage from './Views/VolunteerHomePage/VolunteerHomePage.js';
 import TheyNeedYouEvents from './Views/TheyNeedYou/TheyNeedYou.js';
 import Navbar from './Components/Navbar/Navbar';
+import ReportPage from './Views/Reports/Reports.js';
 import { FiltersProvider } from './Components/Filters/FiltersContext';
 import fetchUserRoles from './Utils/fetchUserRoles.js';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import ResetPassword from './Views/ResetPassword/ResetPassword.js';
+import Settings from './Views/Settings/Settings.js';
 
 function App() {
   const [role, setRole] = useState(null);
@@ -45,10 +47,12 @@ function App() {
             <Route path="/events" element={<AllEvents />} />
             <Route path="/details/:id" element={<Details />} />
             <Route path="/organiser" element={<Organiser />} />
+            <Route path="/settings" element={<Settings />} />
             <Route path="/login" element={<Login  setToken={setToken} setUser={setUser}  />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/resetPassword" element={<ResetPassword />} />
             <Route path="/needYou" element={<TheyNeedYouEvents />} />
+            {role && role.includes('MODERATOR') && <Route path="/reports" element={<ReportPage />} />}
             {role && role.includes('MODERATOR') && <Route path="/organiserHomePage" element={<OrganiserHomePage />} />}
             {role && role.includes('ADMIN') && <Route path="/adminHomePage" element={<AdminHomePage />} />}
             {role && role.includes('USER') && <Route path="/volunteerHomePage" element={<VolunteerHomePage />} />}

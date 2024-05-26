@@ -148,5 +148,51 @@
   "addUserSuccess": "Successfully created new user",
   "addUserFail": "There was a problem creating new user. Please try again later",
   
-  "cities": "Cities"
+  "cities": "Cities",
+
+  "peselVerified": "PESEL verified",
+  "agreementSigned": "Agreement signed",
+  "isAdult": "Adult",
+  "organisationName": "Organisation name",
+  "deactivateAccount": "Deactvate account",
+  "yes": "Yes",
+  "no": "No",
+  "none": "None",
+  "deleteAccount": "Do You want to permamently delete Your account?",
+  "confirmAccountDelete": "Delete my account",
+
+  "invalidPhoneNumberFormat": "Invalid phone number format. Please enter a 9-digit number.",
+  "invalidEmailFormat": "Invalid email format. Please enter a valid email address.",
+  "invalidNameFormat": "Invalid name format. Please enter only letters.",
+
+  "deleteAccountSuccess": "Account deleted successfully",
+  "deleteAccountFail": "You are the only moderator of Your organisation. Transfer organisation rights before deleting Your account",
+
+  "userDataChangedSucess": "Successfully changed personal information",
+  "userDataChangedFail": "Something went wrong. Please try again later",
+
+  "defaultImageForEvent": "Default image for event",
+
+  "report": "Report",
+  "reports": "Reports",
+  "publish": "Publish",
+  "unpublish": "Unpublish",
+  "event": "Event",
+  "addReport": "Add report",
+  "add": "Add",
+  "publishReport": "Publish report",
+  "reportAddedSuccess": "Report added",
+  "reportAddedFail": "There was a problem adding a report",
+  "thisIsYourPublicReport": "This is your public report.",
+  "reportUpdatedSuccessfully": "Report status was updated successfully",
+  "reportUpdatedFailed": "There was a problem updating a report. Please try again later",
+  "deleteReport": "Would you like to delete this report?",
+  "reportDeleteSuccess": "Report deleted successfully",
+  "reportDeleteFail": "There was a problem deleting report. Please try again later",
+  "reportPL": "Report in polish language",
+  "reportEN": "Report in english language",
+  "reportUA": "Report in ukrainian language",
+  "reportRU": "Report in russian language",
+  "reportEditedSuccess": "Report edited successfully",
+  "reportEditedFail": "There was a problem editing report. Please try again later"
 }

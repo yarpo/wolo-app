@@ -1,0 +1,98 @@
+@import './common.scss';
+
+.settings-page {
+    padding-top: 65px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 20px 10vw 20px 10vw;
+    
+    .settings-container {
+        width: 45vw;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: #fff;
+    }
+    
+    .settings-container h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    
+    .settings-data-container {
+        padding: 20px;
+    }
+    
+    .settings-row {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        margin-bottom: 10px;
+    }
+    
+    .label {
+        font-weight: bold;
+        flex: 1;
+    }
+    
+    .value {
+        flex: 2;
+        text-align: right;
+    }
+
+    .settings_edit_button {
+        color: white;
+        margin: 10px;
+        background-color: $color-1-blue;
+        border: 1px solid $color-1-blue;
+        font-weight: 500;
+        border-radius: .375rem;
+        font-size: .875rem;
+        padding: .625rem 1.25rem;
+        text-align: center;
+        margin-right: .5rem;
+        margin-bottom: .5rem;
+        &:hover {
+            background-color: $color-1-blue-hover;
+        }    
+    }
+
+    .settings_delete_button {
+        color: #2b6cb0;
+        margin: 10px;
+        background-color: white;
+        border: 1px solid $color-1-blue;
+        font-weight: 500;
+        border-radius: .375rem;
+        font-size: .875rem;
+        padding: .625rem 1.25rem;
+        text-align: center;
+        margin-right: .5rem;
+        margin-bottom: .5rem;
+        &:hover {
+            background-color: #e7e7e7;
+        }    
+    }
+
+    .settings-error{
+        color: $color-4-red;
+        font-size: small;
+        margin-top: 5px;
+    }
+
+    .settngs_confirm_buttons_group{
+        display: inline;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .settings-page {
+        margin: 4vw;
+
+        .settings-container {
+            width: 100%;
+        }
+    }
+}
