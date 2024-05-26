@@ -142,7 +142,7 @@ const Details = () => {
       {!((eventData.organisationId === userOrganisation && isModerator) || isAdmin) && <div id="details_more_events">
         <h2>{t('moreEventsFromThisOrganizer')}</h2>
         <div id="details_more_events_container">
-          {organiserEvents.map(event => (
+          {organiserEvents.filter(event => new Date(event.date) > new Date()).map(event => (
             <EventCard key={event.id} event={event} id='details_more_events_item' />
           ))}
         </div>
