@@ -49,7 +49,6 @@ const Details = () => {
   useEffect(() => {
     const url = `${URLS.EVENTS}/${id}`;
     fetchData(url, setEventData);
-    console.log(eventData)
   }, [id]);
 
   useEffect(() => {
