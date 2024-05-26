@@ -121,6 +121,9 @@ const ShiftCard = ({ shift, city, isInPast }) => {
                             openModal={confirmLeave}
                             setOpenModal={setConfirmLeave}
                         />
+                    {canSignIn && !isAdmin && !isModerator && isFull &&
+                        <p>Reserve list</p>
+                    }
                     {!canSignIn && !isAdmin && !isModerator && <p id="sign_in_section_error">{t('volunteersRestricedFunctionality')}. <Link to="/login">{t('logInToday')}</Link></p>}
                 </form>}
             </Card>
