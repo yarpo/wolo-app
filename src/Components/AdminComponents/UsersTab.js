@@ -105,9 +105,8 @@ const UsersTab = () => {
                                     </button>
                                 </Table.Cell>
                                 <Table.Cell>{/* edit row */}
-                                {openEditModal && userToEdit === user && <EditUser User onAccept={handleEdit} onClose={handleModalClose} userData={user} />}
+                                {openEditModal && userToEdit === user && <EditUser onAccept={handleEdit} onClose={handleModalClose} userData={user} />}
                                 <button className="edit-button" onClick={() =>{ setEditOpenModal(true);setUserToEdit(user);}}> Edit </button>
-                                    
                                 </Table.Cell>
                                 <Table.Cell>
                                     <button

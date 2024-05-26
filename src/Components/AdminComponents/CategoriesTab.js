@@ -11,6 +11,9 @@ import Confirmation from '../Popups/Confirmation';
 import fetchData  from  '../../Utils/fetchData.js';
 import postRequestWithJson from '../../Utils/postRequestWithJson';
 import deleteRequest from '../../Utils/deleteRequest.js';
+import putRequest from '../../Utils/putRequest.js';
+import EditCategory from './editRecordModals/EditCategory.js';
+
 
 const CategoriesTab = () => {
     const { t } = useTranslation();
@@ -19,6 +22,8 @@ const CategoriesTab = () => {
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [userConfirmed, setUserConfirmed] = useState(false);
     const [categoryToDelete, setCategoryToDelete] = useState(null);
+    const [openEditModal, setEditOpenModal] = useState(false);
+    const [categoryToEdit, setCategoryToEdit] = useState(null);
 
     useEffect(() => {
         fetchData(URLS.CATEGORIES, setCategories);
@@ -32,6 +37,7 @@ const CategoriesTab = () => {
 
     const handleModalClose = () => {
         setOpenModal(false);
+        setEditOpenModal(false);
     };
 
     const handleUserConfirmation = async (confirmation) => {
@@ -55,6 +61,11 @@ const CategoriesTab = () => {
         setConfirmDelete(false);
     };
 
+    const handleEdit = (data) => {
+        putRequest(`${URLS.EDIT_CATEGORY}`, localStorage.getItem('token'), data, "Category was changed successfully", "Failed to change the category")
+        setCategoryToEdit(null);
+    };
+
     return (
         <div className="overflow-x-auto">
             <button className="confirm_button" onClick={() => setOpenModal(true)}> Add </button>
@@ -63,6 +74,7 @@ const CategoriesTab = () => {
                 <Table.Head>
                     <Table.HeadCell>ID</Table.HeadCell>
                     <Table.HeadCell>Category Name</Table.HeadCell>
+                    <Table.HeadCell>Edit</Table.HeadCell>
                     <Table.HeadCell>Delete</Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
@@ -72,6 +84,10 @@ const CategoriesTab = () => {
                                 {category.id}
                             </Table.Cell>
                             <Table.Cell>{category.name}</Table.Cell>
+                            <Table.Cell>{/* edit row */}
+                                {openEditModal && categoryToEdit === category && <EditCategory onAccept={handleEdit} onClose={handleModalClose} categoryData={category} />}
+                                <button className="edit-button" onClick={() =>{setEditOpenModal(true);setCategoryToEdit(category);}}> Edit </button>  
+                                </Table.Cell>
                             <Table.Cell>
                                 <button
                                     className="delete-button"

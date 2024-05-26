@@ -8,11 +8,15 @@ import { Table } from "flowbite-react";
 
 import AddCity from './addRecordModals/AddCity.js';
 import postRequestWithJson from '../../Utils/postRequestWithJson';
+import EditCity from './editRecordModals/EditCity.js';
+import putRequest from '../../Utils/putRequest.js';
 
 const CitiesTab = () => {
     const { t } = useTranslation();
     const [cities, setCities] = useState([]);
     const [openModal, setOpenModal] = useState(false);
+    const [openEditModal, setEditOpenModal] = useState(false);
+    const [cityToEdit, setCityToEdit] = useState(null);
 
     useEffect(() => {
         fetchData(URLS.CITIES, setCities);
@@ -20,13 +24,18 @@ const CitiesTab = () => {
 
     const handleModalAccept = (data) => {
         setOpenModal(false);
-
         postRequestWithJson(URLS.ADD_CITIES, localStorage.getItem('token'), data, t('addCitySuccess'), t('addCityFail'));
     };
 
     const handleModalClose = () => {
         setOpenModal(false);
-    }
+        setEditOpenModal(false);
+    };
+    const handleEdit = (data) => {
+        putRequest(`${URLS.EDIT_CITY}`, localStorage.getItem('token'), data, "City was changed successfully", "Failed to change city's details")
+        setCityToEdit(null);
+    };
+
 
     return (
         <div className="overflow-x-auto">
@@ -37,6 +46,7 @@ const CitiesTab = () => {
                     <Table.HeadCell>ID</Table.HeadCell>
                     <Table.HeadCell>City Name</Table.HeadCell>
                     <Table.HeadCell>Districts</Table.HeadCell>
+                    <Table.HeadCell>Edit</Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
                     {cities.map((city, index) => (
@@ -46,6 +56,11 @@ const CitiesTab = () => {
                             </Table.Cell>
                             <Table.Cell>{city.name}</Table.Cell>
                             <Table.Cell>{city.districts.join(', ')}</Table.Cell>
+                            <Table.Cell>{/* edit row */}
+                                {openEditModal && cityToEdit === city && <EditCity onAccept={handleEdit} onClose={handleModalClose} cityData={city} />}
+                                <button className="edit-button" onClick={() =>{setEditOpenModal(true);setCityToEdit(city);}}> Edit </button>
+                                    
+                                </Table.Cell>
                         </Table.Row>
                     ))}
                 </Table.Body>

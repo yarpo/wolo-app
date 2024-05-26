@@ -114,7 +114,7 @@ const OrganisationsTab = () => {
                                     </button>
                                 </Table.Cell>
                                 <Table.Cell>{/* edit row */}
-                                {openEditModal && organisationToEdit === organisation && <EditOrganisation User onAccept={handleEdit} onClose={handleModalClose} organisationData={organisation} />}
+                                {openEditModal && organisationToEdit === organisation && <EditOrganisation onAccept={handleEdit} onClose={handleModalClose} organisationData={organisation} />}
                                 <button className="edit-button" onClick={() =>{ setEditOpenModal(true);setOrganisationToEdit(organisation);}}> Edit </button>
                                 </Table.Cell>
                                 <Table.Cell>

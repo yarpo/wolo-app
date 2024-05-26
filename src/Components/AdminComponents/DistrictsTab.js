@@ -8,11 +8,16 @@ import { Table } from "flowbite-react";
 
 import AddDistrict from './addRecordModals/AddDistricts';
 import postRequestWithJson from '../../Utils/postRequestWithJson';
+import EditDistrict from './editRecordModals/EditDistrict';
+import putRequest from '../../Utils/putRequest.js';
+
 
 const DistrictsTab = () => {
     const { t } = useTranslation();
     const [districts, setDistricts] = useState([]);
     const [openModal, setOpenModal] = useState(false);
+    const [openEditModal, setEditOpenModal] = useState(false);
+    const [districtToEdit, setDistrictToEdit] = useState(null);
 
     useEffect(() => {
         fetchData(URLS.DISTRICTS, setDistricts);
@@ -27,6 +32,11 @@ const DistrictsTab = () => {
     const handleModalClose = () => {
         setOpenModal(false);
     }
+    const handleEdit = (data) => {
+        putRequest(`${URLS.EDIT_DISTRICT}`, localStorage.getItem('token'), data, "District was changed successfully", "Failed to change District's data");
+        setDistrictToEdit(null);
+    };
+    
 
     return (
         <div className="overflow-x-auto">
@@ -37,6 +47,7 @@ const DistrictsTab = () => {
                     <Table.HeadCell>ID</Table.HeadCell>
                     <Table.HeadCell>District Name</Table.HeadCell>
                     <Table.HeadCell>City Name</Table.HeadCell>
+                    <Table.HeadCell>Edit</Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
                     {districts.map((district, index) => (
@@ -46,6 +57,10 @@ const DistrictsTab = () => {
                             </Table.Cell>
                             <Table.Cell>{district.name}</Table.Cell>
                             <Table.Cell>{district.cityName}</Table.Cell>
+                            <Table.Cell>{/* edit row */}
+                                {openEditModal && districtToEdit === district && <EditDistrict onAccept={handleEdit} onClose={handleModalClose} districtData={district} />}
+                                <button className="edit-button" onClick={() =>{ setEditOpenModal(true);setDistrictToEdit(district);}}> Edit </button>
+                                </Table.Cell>
                         </Table.Row>
                     ))}
                 </Table.Body>
