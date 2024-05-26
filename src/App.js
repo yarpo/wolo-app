@@ -21,6 +21,7 @@ import fetchUserRoles from './Utils/fetchUserRoles.js';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import Settings from './Views/Settings/Settings.js';
+import ForVolunteers from './Views/ForVolunteers/ForVolunteers.js';
 
 function App() {
   const [role, setRole] = useState(null);
@@ -50,6 +51,7 @@ function App() {
             <Route path="/login" element={<Login  setToken={setToken} setUser={setUser}  />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/needyou" element={<TheyNeedYouEvents />} />
+            <Route path="/forVolunteers" element={<ForVolunteers />} />
             {role && role.includes('MODERATOR') && <Route path="/reports" element={<ReportPage />} />}
             {role && role.includes('MODERATOR') && <Route path="/organiserHomePage" element={<OrganiserHomePage />} />}
             {role && role.includes('ADMIN') && <Route path="/adminHomePage" element={<AdminHomePage />} />}
