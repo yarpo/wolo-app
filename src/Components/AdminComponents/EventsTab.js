@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { VscChevronDown, VscChevronUp } from 'react-icons/vsc';
 import '../../styles/admin-home-page.scss';
 
@@ -10,11 +11,13 @@ import Confirmation from '../Popups/Confirmation';
 import deleteRequest from '../../Utils/deleteRequest';
 
 const EventsTab = () => {
+    const { t } = useTranslation();
     const [events, setEvents] = useState([]);
     const [openIndex, setOpenIndex] = useState(null);
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [userConfirmed, setUserConfirmed] = useState(false);
     const [eventToDelete, setEventToDelete] = useState(null);
+    const eventName = `name${localStorage.getItem('i18nextLng').toUpperCase()}`;
 
     useEffect(() => {
         fetchData(URLS.EVENTS, setEvents);
@@ -23,6 +26,7 @@ const EventsTab = () => {
     const renderShiftDetails = (shifts) => {
         return shifts.map((shift, index) => (
             <div key={index}>
+                <hr />
                 <p><strong>Shift {index + 1}:</strong></p>
                 <p><strong>Date:</strong> {shift.date}</p>
                 <p><strong>Time:</strong> {shift.startTime} - {shift.endTime}</p>
@@ -32,7 +36,6 @@ const EventsTab = () => {
                 <p><strong>Location:</strong> {shift.shiftDirections ? shift.shiftDirections : '-'}</p>
                 <p><strong>Address:</strong> {shift.street}, {shift.homeNum}</p>
                 <p><strong>District ID:</strong> {shift.districtId}</p>
-                <hr />
             </div>
         ));
     };
@@ -69,7 +72,7 @@ const EventsTab = () => {
                     <Table.HeadCell>Categories</Table.HeadCell>
                     <Table.HeadCell>City</Table.HeadCell>
                     <Table.HeadCell>More</Table.HeadCell>
-                    <Table.HeadCell>Delete</Table.HeadCell>
+                    <Table.HeadCell>{t('delete')}</Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
                     {events.map((event, index) => (
@@ -78,7 +81,7 @@ const EventsTab = () => {
                                 <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                                     {event.id}
                                 </Table.Cell>
-                                <Table.Cell>{event.name}</Table.Cell>
+                                <Table.Cell>{event[eventName]}</Table.Cell>
                                 <Table.Cell>{event.organisation}</Table.Cell>
                                 <Table.Cell>{event.categories}</Table.Cell>
                                 <Table.Cell>{event.city}</Table.Cell>
@@ -123,8 +126,13 @@ const EventsTab = () => {
                             </Table.Row>
                             {openIndex === index && (
                                 <tr>
-                                    <td colSpan="6">
+                                    <td colSpan="7">
                                         <div className="dropdown-content">
+                                            <p><strong>{t('name')} - Polski:</strong> {event.namePL}</p>
+                                            <p><strong>{t('name')} - English:</strong> {event.nameEN}</p>
+                                            <p><strong>{t('name')} - Українська:</strong> {event.nameUA}</p>
+                                            <p><strong>{t('name')} - Русский:</strong> {event.nameRU}</p>
+                                            <hr />
                                             <p><strong>Image URL:</strong> {event.imageUrl}</p>
                                             <p><strong>Requires Pesel verification:</strong> {event.peselVerificationRequired ? 'YES' : 'NO'}</p>
                                             <div>{renderShiftDetails(event.shifts)}</div>
