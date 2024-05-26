@@ -10,6 +10,8 @@ import { URLS } from '../../config';
 import '../../styles/admin-home-page.scss';
 import AddOrganisation from './addRecordModals/AddOrganisation.js';
 import postRequest from '../../Utils/postRequest.js';
+import putRequest from '../../Utils/putRequest.js';
+import EditOrganisation from './editRecordModals/EditOrganisation.js';
 
 const OrganisationsTab = () => {
     const { t } = useTranslation();
@@ -19,6 +21,8 @@ const OrganisationsTab = () => {
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [userConfirmed, setUserConfirmed] = useState(false);
     const [organisationToDelete, setOrganisationToDelete] = useState(null);
+    const [openEditModal, setEditOpenModal] = useState(false);
+    const [organisationToEdit, setOrganisationToEdit] = useState(null);
 
     useEffect(() => {
         fetchDataWithAuth(URLS.ORGANISATIONS_ADMIN, setOrganisations, localStorage.getItem('token'));
@@ -32,6 +36,7 @@ const OrganisationsTab = () => {
 
     const handleModalClose = () => {
         setOpenModal(false);
+        setEditOpenModal(false);
     };
 
     const toggleDetails = (index) => {
@@ -58,6 +63,11 @@ const OrganisationsTab = () => {
         setOrganisationToDelete(null);
         setConfirmDelete(false);
     };
+    const handleEdit = (data) => {
+        putRequest(`${URLS.ORGANISATIONS}/admin/${organisationToEdit.id}/edit`, localStorage.getItem('token'), data, "Organisation was changed successfully", "Failed to change Organisation's data")
+        setOrganisationToEdit(null);
+    };
+    
 
     return (
         <div className="overflow-x-auto">
@@ -79,6 +89,7 @@ const OrganisationsTab = () => {
                     <Table.HeadCell>Organisation Address</Table.HeadCell>
                     <Table.HeadCell>Organisation Status</Table.HeadCell>
                     <Table.HeadCell>More</Table.HeadCell>
+                    <Table.HeadCell>Edit</Table.HeadCell>
                     <Table.HeadCell>Delete</Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
@@ -101,6 +112,10 @@ const OrganisationsTab = () => {
                                         {openIndex === index ? <VscChevronUp /> : <VscChevronDown />}
                                         <span className="dropdown-label">Details</span>
                                     </button>
+                                </Table.Cell>
+                                <Table.Cell>{/* edit row */}
+                                {openEditModal && organisationToEdit === organisation && <EditOrganisation User onAccept={handleEdit} onClose={handleModalClose} organisationData={organisation} />}
+                                <button className="edit-button" onClick={() =>{ setEditOpenModal(true);setOrganisationToEdit(organisation);}}> Edit </button>
                                 </Table.Cell>
                                 <Table.Cell>
                                     <button

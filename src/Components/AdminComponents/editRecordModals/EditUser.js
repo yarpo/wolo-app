@@ -62,14 +62,14 @@ function EditCategory({ onAccept, onClose, userData }) {
                     </Label>
                 </div>
                 <div className="flex items-center gap-2">
-                    <Checkbox id="adult" checked={peselVerified} onChange={() => setPeselVerified(!peselVerified)} />
-                    <Label htmlFor="adult" className="flex">
+                    <Checkbox id="peselVerified" checked={peselVerified} onChange={() => setPeselVerified(!peselVerified)} />
+                    <Label htmlFor="peselVerified" className="flex">
                      Pesel verified
                     </Label>
                 </div>
                 <div className="flex items-center gap-2">
-                    <Checkbox id="adult" checked={agreementSigned} onChange={() => setAgreementSigned(!agreementSigned)} />
-                    <Label htmlFor="adult" className="flex">
+                    <Checkbox id="agreementSigned" checked={agreementSigned} onChange={() => setAgreementSigned(!agreementSigned)} />
+                    <Label htmlFor="agreementSigned" className="flex">
                      Agreement signed
                     </Label>
                 </div>

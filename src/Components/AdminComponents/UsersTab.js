@@ -62,7 +62,7 @@ const UsersTab = () => {
         setConfirmDelete(false);
     };
     const handleEdit = (data) => {
-        putRequest(`${URLS.USERS}/${userToEdit.id}/edit`, localStorage.getItem('token'), data, "User was changed Successfully", "Failed to change user's credentials")
+        putRequest(`${URLS.USERS}/${userToEdit.id}/edit`, localStorage.getItem('token'), data, "User was changed successfully", "Failed to change user's credentials")
         setUserToEdit(null);
     };
     
