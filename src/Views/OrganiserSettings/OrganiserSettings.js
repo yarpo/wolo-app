@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import '../../styles/settings.scss';
 import fetchUser from '../../Utils/fetchUser';
 import fetchData from '../../Utils/fetchData.js';
+import fetchDataWithAuth from '../../Utils/fetchDataWithAuth.js';
 import putRequest from '../../Utils/putRequest';
 import { URLS } from '../../config';
 import 'react-toastify/dist/ReactToastify.css';
@@ -14,6 +15,9 @@ const OrganiserSettings = () => {
     const [editMode, setEditMode] = useState(false);
     const [editedOrganisationData, setEditedOrganisationData] = useState({});
     const [errors, setErrors] = useState({});
+    const token = localStorage.getItem('token');
+    const [districts, setDistricts] = useState([]);
+    const [cities, setCities] = useState([]);
 
     useEffect(() => {
         fetchUser().then(data => {
@@ -31,7 +35,10 @@ const OrganiserSettings = () => {
                 setEditedOrganisationData(data);
             });
         }
-    }, [organisationId]);
+
+        fetchData(URLS.DISTRICTS, setDistricts);
+        fetchDataWithAuth(URLS.CITIES, setCities, token)
+    }, [organisationId, token]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -228,6 +235,50 @@ const OrganiserSettings = () => {
                                 </>
                             ) : (
                                 <div className="value">{organisationData.street} {organisationData.homeNum}</div>
+                            )}
+                        </div>
+                        <div className="settings-row">
+                            <div className="label">{t('district')}:</div>
+                            {editMode ? (
+                                <>
+                                    <select
+                                        name="districtId"
+                                        value={editedOrganisationData.districtId || ''}
+                                        onChange={handleInputChange}
+                                    >
+                                        {districts.map(district => (
+                                            <option key={district.id} value={district.id}>
+                                                {district.name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </>
+                            ) : (
+                                <div className="value">
+                                    {districts.find(district => district.id === organisationData.districtId)?.name || organisationData.districtId}
+                                </div>
+                            )}
+                        </div>
+                        <div className="settings-row">
+                            <div className="label">{t('city')}:</div>
+                            {editMode ? (
+                                <>
+                                    <select
+                                        name="cityId"
+                                        value={editedOrganisationData.cityId || ''}
+                                        onChange={handleInputChange}
+                                    >
+                                        {cities.map(city => (
+                                            <option key={city.id} value={city.id}>
+                                                {city.name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </>
+                            ) : (
+                                <div className="value">
+                                    {cities.find(city => city.id === organisationData.cityId)?.name || organisationData.cityId}
+                                </div>
                             )}
                         </div>
                         <div className="settings-row">

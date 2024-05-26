@@ -176,5 +176,6 @@
   "organiserSettings": "Ustawienia organizacji",
   "logoUrl": "URL logo",
   "organisationDataEditedSuccess": "Twoja organizacja została pomyślnie zaktualizowana",
-  "organisationDataEditedFail": "Wystąpił problem z edytowaniem organizacji. Proszę spróbować ponownie później"
+  "organisationDataEditedFail": "Wystąpił problem z edytowaniem organizacji. Proszę spróbować ponownie później",
+  "city": "Miasto"
 }

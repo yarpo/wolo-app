@@ -177,5 +177,6 @@
     "organiserSettings": "Налаштування організації",
     "logoUrl": "URL логотипу",
     "organisationDataEditedSuccess": "Вашу організацію успішно оновлено",
-    "organisationDataEditedFail": "Виникла проблема з редагуванням організації. Будь ласка, спробуйте пізніше"
+    "organisationDataEditedFail": "Виникла проблема з редагуванням організації. Будь ласка, спробуйте пізніше",
+    "city": "Місто"
 }
