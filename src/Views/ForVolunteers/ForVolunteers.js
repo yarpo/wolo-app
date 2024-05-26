@@ -5,11 +5,13 @@ import '../../styles/faq.scss';
 import { URLS } from '../../config';
 import fetchData from '../../Utils/fetchData';
 import { Accordion } from "flowbite-react";
+import { useTranslation } from 'react-i18next';
 
 const ForVolunteers = () => {
+    const { t } = useTranslation();
     const [questions, setQuestions] = useState([]);
-    const questionName = `question${localStorage.getItem('i18nextLng').toUpperCase()}`;
-    const answerName = `answer${localStorage.getItem('i18nextLng').toUpperCase()}`;
+    const questionName = t(`question${localStorage.getItem('i18nextLng').toUpperCase()}`);
+    const answerName = t(`answer${localStorage.getItem('i18nextLng').toUpperCase()}`);
 
     useEffect(() => {
         fetchData(URLS.FAQ, setQuestions);
