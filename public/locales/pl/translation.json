@@ -194,5 +194,9 @@
   "reportUA": "Raport w języku ukraińskim",
   "reportRU": "Raport w języku rosyjskim",
   "reportEditedSuccess": "Raport został pomyślnie edytowany",
-  "reportEditedFail": "Wystąpił problem z edycją raportu. Proszę spróbować ponownie później"
+  "reportEditedFail": "Wystąpił problem z edycją raportu. Proszę spróbować ponownie później",
+
+  "resetPassword": "Zresetuj hasło",
+  "resetPasswordSuccess": "Hasło zostało pomyślnie zresetowane",
+  "resetPasswordFail": "Wystąpił problem resetowania Twojego hasła. Spróbuj ponownie później"
 }
