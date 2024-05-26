@@ -48,7 +48,9 @@ const URLS = {
   UNPUBLISH_REPORT: `${BASE_URL}/reports/unpublish`,
   DELETE_REPORT: `${BASE_URL}/reports/delete`,
 
-  LOGIN: LOGIN_URL
+  LOGIN: LOGIN_URL,
+
+  RESET_PASSWORD: `${BASE_URL}/check-password`
 };
 
 module.exports = { URLS, BASE_URL };

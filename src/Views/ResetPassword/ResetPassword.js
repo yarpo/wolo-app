@@ -5,6 +5,8 @@ import { useTranslation } from 'react-i18next';
 import { Card, Label, TextInput } from "flowbite-react";
 import '../../styles/reset-password.scss';
 import { toast } from 'react-toastify';
+import putRequest from '../../Utils/putRequest';
+import { URLS } from '../../config';
 
 const ResetPassword = () => {
     const { t } = useTranslation();
@@ -20,12 +22,12 @@ const ResetPassword = () => {
         const newPassword = newPasswordInputRef.current?.value;
         const confirmPassword = confirmNewPasswordInputRef.current?.value;
 
-        // check old password working
-        console.log(oldPassword);
-
         if (newPassword === confirmPassword) {
-            console.log("Changing password to" + newPassword)
-            toast.success(`Changing password to ${newPassword}`);
+            const data = {
+                oldPassword: oldPassword,
+                newPassword: newPassword
+            };
+            putRequest(URLS.RESET_PASSWORD, localStorage.getItem('token'), data, t('resetPasswordSuccess'), t('resetPasswordFail'))
         } else {
             toast.error("Passwords doesn't match")
         }
@@ -35,7 +37,7 @@ const ResetPassword = () => {
     return (
         <div className="reset-password-container">
             <Card>
-            <h2>Reset Password {t('volunteers')} </h2>
+            <h2>{t('resetPassword')} </h2>
             <form className="flex max-w-md flex-col gap-4">
                 <div>
                     <div className="mb-2 block">
