@@ -15,6 +15,7 @@ import AdminHomePage from './Views/AdminHomePage/AdminHomePage.js';
 import VolunteerHomePage from './Views/VolunteerHomePage/VolunteerHomePage.js';
 import TheyNeedYouEvents from './Views/TheyNeedYou/TheyNeedYou.js';
 import Navbar from './Components/Navbar/Navbar';
+import ReportPage from './Views/Reports/Reports.js';
 import { FiltersProvider } from './Components/Filters/FiltersContext';
 import fetchUserRoles from './Utils/fetchUserRoles.js';
 import 'react-toastify/dist/ReactToastify.css';
@@ -49,6 +50,7 @@ function App() {
             <Route path="/login" element={<Login  setToken={setToken} setUser={setUser}  />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/needyou" element={<TheyNeedYouEvents />} />
+            {role && role.includes('MODERATOR') && <Route path="/reports" element={<ReportPage />} />}
             {role && role.includes('MODERATOR') && <Route path="/organiserHomePage" element={<OrganiserHomePage />} />}
             {role && role.includes('ADMIN') && <Route path="/adminHomePage" element={<AdminHomePage />} />}
             {role && role.includes('USER') && <Route path="/volunteerHomePage" element={<VolunteerHomePage />} />}

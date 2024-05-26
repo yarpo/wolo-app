@@ -110,7 +110,7 @@ const Details = () => {
       {isInPast && 
         <div id="details_event_over" > 
           <h2 id="details_event_over_text">{t('eventIsOver')}</h2>
-          <p>{reportData ? reportData[reportText] : ""}</p>
+          <p>{(reportData && isInPast) ? reportData[reportText] : ""}</p>
         </div>
       }
 

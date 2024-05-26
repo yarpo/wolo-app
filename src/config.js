@@ -41,6 +41,13 @@ const URLS = {
   THEY_NEED_YOU: `${BASE_URL}/events/need`,
 
   PUBLIC_RAPORT: `${BASE_URL}/reports/public`,
+  REPORTS: `${BASE_URL}/reports/all`,
+  ADD_REPORT: `${BASE_URL}/reports/add`,
+  EDIT_REPORT: `${BASE_URL}/reports/edit`,
+  PUBLISH_REPORT: `${BASE_URL}/reports/publish`,
+  UNPUBLISH_REPORT: `${BASE_URL}/reports/unpublish`,
+  DELETE_REPORT: `${BASE_URL}/reports/delete`,
+
   LOGIN: LOGIN_URL
 };
 
