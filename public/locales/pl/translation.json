@@ -175,6 +175,15 @@
 
   "defaultImageForEvent": "Obrazek główny do wydarzenia",
 
+
+  "organiserSettings": "Ustawienia organizacji",
+  "logoUrl": "URL logo",
+  "organisationDataEditedSuccess": "Twoja organizacja została pomyślnie zaktualizowana",
+  "organisationDataEditedFail": "Wystąpił problem z edytowaniem organizacji. Proszę spróbować ponownie później",
+  "city": "Miasto",
+
+  "name": "Name",
+  
   "report": "Raport",
   "reports": "Raporty",
   "publish": "Opublikować",
@@ -197,4 +206,5 @@
   "reportRU": "Raport w języku rosyjskim",
   "reportEditedSuccess": "Raport został pomyślnie edytowany",
   "reportEditedFail": "Wystąpił problem z edycją raportu. Proszę spróbować ponownie później"
+
 }

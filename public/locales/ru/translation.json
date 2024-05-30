@@ -178,6 +178,13 @@
     "userDataChangedSucess": "Персональные данные успешно изменены",
     "userDataChangedFail": "Что-то пошло не так. Пожалуйста, попробуйте еще раз позже",
 
+    "organiserSettings": "Настройки организации",
+    "logoUrl": "URL логотипа",
+    "organisationDataEditedSuccess": "Ваша организация была успешно обновлена",
+    "organisationDataEditedFail": "Произошла ошибка при редактировании организации. Пожалуйста, попробуйте позже",
+    "city": "Город",
+    "name": "Name",
+  
     "defaultImageForEvent": "Изображение по умолчанию для события",
 
     "report": "Отчет",

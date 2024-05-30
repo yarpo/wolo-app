@@ -21,6 +21,7 @@ import fetchUser from './Utils/fetchUser.js';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import Settings from './Views/Settings/Settings.js';
+import OrganiserSettings from './Views/OrganiserSettings/OrganiserSettings.js';
 import ForVolunteers from './Views/ForVolunteers/ForVolunteers.js';
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
             <Route path="/forVolunteers" element={<ForVolunteers />} />
             {role && role.includes('MODERATOR') && <Route path="/reports" element={<ReportPage />} />}
             {role && role.includes('MODERATOR') && <Route path="/organiserHomePage" element={<OrganiserHomePage />} />}
+            {role && role.includes('MODERATOR') && <Route path="/organiserSettings" element={<OrganiserSettings />} />}
             {role && role.includes('ADMIN') && <Route path="/adminHomePage" element={<AdminHomePage />} />}
             {role && role.includes('USER') && <Route path="/volunteerHomePage" element={<VolunteerHomePage />} />}
             {role && role.includes('MODERATOR') && <Route path="/createEvent" element={<OrganiserCreateEvent />} />}

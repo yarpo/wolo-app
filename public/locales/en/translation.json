@@ -173,6 +173,12 @@
   "userDataChangedSucess": "Successfully changed personal information",
   "userDataChangedFail": "Something went wrong. Please try again later",
 
+  "organiserSettings": "Organisation Settings",
+  "logoUrl": "Logo URL",
+  "organisationDataEditedSuccess": "Your organisation was successfully edited",
+  "organisationDataEditedFail": "There was a problem editing organisation. Please try again later",
+  "city": "City",
+
 
   "name": "Name",
 
@@ -202,3 +208,4 @@
   "reportEditedFail": "There was a problem editing report. Please try again later"
 
 }
+
