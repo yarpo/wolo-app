@@ -4,10 +4,8 @@ import { useTranslation } from 'react-i18next';
 import React, { useState, useEffect, useCallback } from 'react';
 import { toast } from 'react-toastify';
 import { URLS } from '../../../config.js';
-import fetchUserRoles from '../../../Utils/fetchUserRoles.js';
 import { Link } from 'react-router-dom';
-import fetchUserId from '../../../Utils/fetchUserId.js';
-import fetchUserShifts from '../../../Utils/fetchUserShifts.js';
+import fetchUser from '../../../Utils/fetchUser.js'; 
 import postRequest from '../../../Utils/postRequest.js';
 import Confirmation from '../../../Components/Popups/Confirmation.js';
 import { Card } from "flowbite-react";
@@ -30,19 +28,16 @@ const ShiftCard = ({ shift, city, isInPast }) => {
 
     const [confirmPhone, setConfirmPhone] = useState(false);
     const [confirmLeave, setConfirmLeave] = useState(false);
-  
-    useEffect(() => {
-        const fetchUserData = async () => {
-        const userRoles = await fetchUserRoles();
-        setRoles(userRoles);
-        const userId = await fetchUserId();
-        setId(userId);
-        const userShifts = await fetchUserShifts(userId);
-        setUserShifts(userShifts);
-        };
 
-        fetchUserData();
-    }, []);
+    useEffect(() => {
+        fetchUser().then(data => {
+          if (data) {
+            setRoles(data.roles);
+            setId(data.id);
+            setUserShifts(data.shifts.map(shift => shift.id))
+          }
+        })
+      }, []);
   
     const handleUserConfirmation = async (confirmation) => {
         setUserConfirmed(confirmation);
