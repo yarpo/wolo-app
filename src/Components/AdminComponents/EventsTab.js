@@ -96,6 +96,7 @@ const EventsTab = () => {
                                     </button>
                                 </Table.Cell>
                                 <Table.Cell>
+                                    {event.date > format(new Date(), 'yyyy-MM-dd') ?
                                     <button
                                         className="delete-button"
                                         onClick={() => {
