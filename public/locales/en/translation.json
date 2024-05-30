@@ -209,6 +209,8 @@
 
   "fullShift": "This shift is full. You can join reserve list",
   "joinReserveList": "Join reserve list",
-  "leaveReserveList": "Leave reserve list"
+  "leaveReserveList": "Leave reserve list",
+  "noReserveEvents": "You are not any reserve lists",
+  "yourEventsReserve": "Your Reserve List"
 }
 
