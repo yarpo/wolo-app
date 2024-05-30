@@ -71,7 +71,7 @@ const OrganisationsTab = () => {
                 onCancel={() => setConfirmDelete(false)}
                 isOpen={confirmDelete}
             />
-            <Table striped>
+            <Table hoverable>
                 <Table.Head>
                     <Table.HeadCell>ID</Table.HeadCell>
                     <Table.HeadCell>Organisation Name</Table.HeadCell>

@@ -92,7 +92,7 @@ const FAQTab = () => {
             </div>
             <button className="confirm_button" onClick={() => setOpenModal(true)}> Add </button>
             {openModal && <AddFAQ onAccept={handleModalAccept} onClose={handleModalClose} />}
-            <Table striped>
+            <Table hoverable>
                 <Table.Head>
                     <Table.HeadCell>ID</Table.HeadCell>
                     <Table.HeadCell>{t('question')}</Table.HeadCell>

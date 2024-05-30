@@ -60,7 +60,7 @@ const CategoriesTab = () => {
         <div className="overflow-x-auto">
             <button className="confirm_button" onClick={() => setOpenModal(true)}> Add </button>
             {openModal && <AddCategory onAccept={handleModalAccept} onClose={handleModalClose} />}
-            <Table striped>
+            <Table hoverable>
                 <Table.Head>
                     <Table.HeadCell>ID</Table.HeadCell>
                     <Table.HeadCell>Category Name</Table.HeadCell>

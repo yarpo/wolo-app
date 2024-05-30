@@ -93,7 +93,7 @@ const EventsTab = () => {
                     icon={HiOutlineSearch}
                 />
             </div>
-            <Table striped>
+            <Table hoverable>
                 <Table.Head>
                     <Table.HeadCell>ID</Table.HeadCell>
                     <Table.HeadCell>Name</Table.HeadCell>

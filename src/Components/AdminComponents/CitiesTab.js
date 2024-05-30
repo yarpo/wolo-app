@@ -32,7 +32,7 @@ const CitiesTab = () => {
         <div className="overflow-x-auto">
             <button className="confirm_button" onClick={() => setOpenModal(true)}> Add </button>
             {openModal && <AddCity onAccept={handleModalAccept} onClose={handleModalClose} />}
-            <Table striped>
+            <Table hoverable>
                 <Table.Head>
                     <Table.HeadCell>ID</Table.HeadCell>
                     <Table.HeadCell>City Name</Table.HeadCell>
