@@ -73,7 +73,7 @@ const YourEventVolunteer = ({shiftId, eventId, userId, shift, isArchived}) => {
                 {formatTime(shift.startTime)} - {formatTime(shift.endTime)}
             </div>
             <div className="your_event_volunteer_event_item"  id="your_event_volunteer_event_address">
-                {shift.street} {shift.homeNum}, {shift.district}
+                {shift.street} {shift.homeNum}, {shift.city}
             </div>
 
             {!isArchived && <Button type="button" size="xl" onClick={() => setConfirmLeave(true)} id="your_event_volunteer_event_sign_off_button"> {t('leaveShift')} </Button>}         
