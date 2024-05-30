@@ -10,11 +10,14 @@ import fetchData from '../../Utils/fetchData';
 
 import { Table } from "flowbite-react";
 import Confirmation from '../Popups/Confirmation';
+import AddFAQ from './addRecordModals/AddFAQ';
 import deleteRequest from '../../Utils/deleteRequest';
+import postRequestWithJson from '../../Utils/postRequestWithJson';
 
 const FAQTab = () => {
     const { t } = useTranslation();
     const [openIndex, setOpenIndex] = useState(null);
+    const [openModal, setOpenModal] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [userConfirmed, setUserConfirmed] = useState(false);
@@ -41,6 +44,17 @@ const FAQTab = () => {
             ));
         }
     }, [searchQuery, questions]);
+
+    const handleModalAccept = (data) => {
+        setOpenModal(false);
+
+        postRequestWithJson(`${URLS.ADD_FAQ}?language=${localStorage.getItem('i18nextLng').toLocaleUpperCase()}`, 
+                                localStorage.getItem('token'), data, t('addFAQSuccess'), t('addFAQFail'));
+    };
+
+    const handleModalClose = () => {
+        setOpenModal(false);
+    }
 
     const toggleDetails = (index) => {
         setOpenIndex(openIndex === index ? null : index);
@@ -75,10 +89,13 @@ const FAQTab = () => {
                     icon={HiOutlineSearch}
                 />
             </div>
+            <button className="confirm_button" onClick={() => setOpenModal(true)}> Add </button>
+            {openModal && <AddFAQ onAccept={handleModalAccept} onClose={handleModalClose} />}
             <Table striped>
                 <Table.Head>
                     <Table.HeadCell>ID</Table.HeadCell>
-                    <Table.HeadCell>Question</Table.HeadCell>
+                    <Table.HeadCell>{t('question')}</Table.HeadCell>
+                    <Table.HeadCell>{t('answer')}</Table.HeadCell>
                     <Table.HeadCell>More</Table.HeadCell>
                     <Table.HeadCell>{t('delete')}</Table.HeadCell>
                 </Table.Head>
