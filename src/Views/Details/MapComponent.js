@@ -5,7 +5,7 @@ const MapComponent = ({ addresses }) => {
     const { t } = useTranslation();
 
     useEffect(() => {
-        const city = addresses.length > 0 ? addresses[0].city : 'Warszawa'; // Domyślne miasto, jeśli brak adresów
+        const city = addresses.length > 0 ? addresses[0].city : 'Warszawa';
         const map = new window.google.maps.Map(document.getElementById('map'), {
             zoom: 12,
         });
