@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { VscChevronDown, VscChevronUp } from 'react-icons/vsc';
+import { HiOutlineSearch } from "react-icons/hi";
 import '../../styles/admin-home-page.scss';
 import { URLS } from '../../config';
-import { Table } from "flowbite-react";
 import { HiTrash } from "react-icons/hi";
+import { Table, TextInput } from "flowbite-react";
 
 import AddUser from './addRecordModals/AddUser.js';
 import Confirmation from '../Popups/Confirmation.js';
@@ -23,9 +24,27 @@ const UsersTab = () => {
     const [userConfirmed, setUserConfirmed] = useState(false);
     const [userToDelete, setUserToDelete] = useState(null);
 
+    const [filteredUsers, setFilteredUsers] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
+
     useEffect(() => {
-        fetchDataWithAuth(URLS.USERS, setUsers, token)
+        fetchDataWithAuth(URLS.USERS, (data) => {
+            setUsers(data);
+            setFilteredUsers(data)
+        }, token)
     }, [token]);
+
+    useEffect(() => {
+        if (searchQuery === '') {
+            setFilteredUsers(users);
+        } else {
+            setFilteredUsers(users.filter(user =>
+                user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                user.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                user.lastName.toLowerCase().includes(searchQuery.toLowerCase())
+            ));
+        }
+    }, [searchQuery, users]);
 
     const handleModalAccept = (data) => {
         setOpenModal(false);
@@ -61,6 +80,15 @@ const UsersTab = () => {
 
     return (
         <div className="overflow-x-auto">
+            <div className="admin-panel-search-bar">
+                <TextInput
+                    type="text"
+                    placeholder="Search users"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    icon={HiOutlineSearch}
+                />
+            </div>
             <button className="confirm_button" onClick={() => setOpenModal(true)}> Add </button>
             {openModal && <AddUser onAccept={handleModalAccept} onClose={handleModalClose} />}
             <Table hoverable>
@@ -75,7 +103,7 @@ const UsersTab = () => {
                     <Table.HeadCell></Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
-                    {users.map((user, index) => (
+                    {filteredUsers.map((user, index) => (
                         <React.Fragment key={index}>
                             <Table.Row key={index} className="bg-white dark:border-gray-700 dark:bg-gray-800">
                                 <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
