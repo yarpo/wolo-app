@@ -13,6 +13,8 @@ import Confirmation from '../Popups/Confirmation';
 import AddFAQ from './addRecordModals/AddFAQ';
 import deleteRequest from '../../Utils/deleteRequest';
 import postRequestWithJson from '../../Utils/postRequestWithJson';
+import EditFAQ from './editRecordModals/EditFAQ';
+import putRequest from '../../Utils/putRequest.js';
 
 const FAQTab = () => {
     const { t } = useTranslation();
@@ -24,6 +26,9 @@ const FAQTab = () => {
     const [questionToDelete, setQuestionToDelete] = useState(null);
     const [questions, setQuestions] = useState([]);
     const [filteredQuestions, setFilteredQuestions] = useState([]);
+    const [openEditModal, setEditOpenModal] = useState(false);
+    const [questionToEdit, setQuestionToEdit] = useState(null);
+
     const questionName = t(`question${localStorage.getItem('i18nextLng').toUpperCase()}`);
     const answerName = t(`answer${localStorage.getItem('i18nextLng').toUpperCase()}`);
 
@@ -54,6 +59,7 @@ const FAQTab = () => {
 
     const handleModalClose = () => {
         setOpenModal(false);
+        setEditOpenModal(false);
     }
 
     const toggleDetails = (index) => {
@@ -78,6 +84,12 @@ const FAQTab = () => {
         setConfirmDelete(false);
     };
 
+    const handleEdit = (data) => {
+        putRequest(`${URLS.EDIT_FAQ}`, localStorage.getItem('token'), data, "FAQ was changed successfully", "Failed to change FAQ");
+        setQuestionToEdit(null);
+    };
+    
+
     return (
         <div className="overflow-x-auto">
             <div className="admin-panel-search-bar">
@@ -97,6 +109,7 @@ const FAQTab = () => {
                     <Table.HeadCell>{t('question')}</Table.HeadCell>
                     <Table.HeadCell>{t('answer')}</Table.HeadCell>
                     <Table.HeadCell>More</Table.HeadCell>
+                    <Table.HeadCell>Edit</Table.HeadCell>
                     <Table.HeadCell>{t('delete')}</Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
@@ -116,6 +129,10 @@ const FAQTab = () => {
                                         {openIndex === index ? <VscChevronUp /> : <VscChevronDown />}
                                         <span className="dropdown-label">Details</span>
                                     </button>
+                                </Table.Cell>
+                                <Table.Cell>{/* edit row */}
+                                {openEditModal && questionToEdit === question && <EditFAQ onAccept={handleEdit} onClose={handleModalClose} questionData={question} />}
+                                <button className="edit-button" onClick={() =>{ setEditOpenModal(true);setQuestionToEdit(question);}}> Edit </button>
                                 </Table.Cell>
                                 <Table.Cell>
                                     <button
