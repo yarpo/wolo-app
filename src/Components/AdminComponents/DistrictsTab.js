@@ -50,7 +50,7 @@ const DistrictsTab = () => {
             <div className="admin-panel-search-bar">
                 <TextInput
                     type="text"
-                    placeholder="Search events"
+                    placeholder="Search distrcts"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     icon={HiOutlineSearch}
