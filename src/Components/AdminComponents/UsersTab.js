@@ -82,7 +82,7 @@ const UsersTab = () => {
             <div className="admin-panel-search-bar">
                 <TextInput
                     type="text"
-                    placeholder="Search events"
+                    placeholder="Search users"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     icon={HiOutlineSearch}
