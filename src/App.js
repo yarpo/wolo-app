@@ -17,7 +17,7 @@ import TheyNeedYouEvents from './Views/TheyNeedYou/TheyNeedYou.js';
 import Navbar from './Components/Navbar/Navbar';
 import ReportPage from './Views/Reports/Reports.js';
 import { FiltersProvider } from './Components/Filters/FiltersContext';
-import fetchUserRoles from './Utils/fetchUserRoles.js';
+import fetchUser from './Utils/fetchUser.js';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import Settings from './Views/Settings/Settings.js';
@@ -25,16 +25,16 @@ import ForVolunteers from './Views/ForVolunteers/ForVolunteers.js';
 
 function App() {
   const [role, setRole] = useState(null);
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
-  const [token, setToken] = useState(localStorage.getItem('token'));
+  const [, setUser] = useState(JSON.parse(localStorage.getItem('user')));
+  const [, setToken] = useState(localStorage.getItem('token'));
 
   useEffect(() => {
-    if (token) {
-      fetchUserRoles()
-        .then(roles => setRole(roles))
-        .catch(error => console.error('Error: No information about the user', error));
-    }
-  }, [token, user]);
+    fetchUser().then(data => {
+      if (data) {
+        setRole(data.roles);
+      }
+    })
+  }, []);
 
   return (
     <>
