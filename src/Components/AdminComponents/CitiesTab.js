@@ -32,7 +32,7 @@ const CitiesTab = () => {
         setEditOpenModal(false);
     };
     const handleEdit = (data) => {
-        putRequest(`${URLS.EDIT_CITY}`, localStorage.getItem('token'), data, "City was changed successfully", "Failed to change city's details")
+        putRequest(`${URLS.EDIT_CITY}`, localStorage.getItem('token'), data, "City was changed successfully", "Failed to change city's details: One of selected districts belongs to an already existing event.\n You cannot remove it.")
         setCityToEdit(null);
     };
 
@@ -59,7 +59,6 @@ const CitiesTab = () => {
                             <Table.Cell>{/* edit row */}
                                 {openEditModal && cityToEdit === city && <EditCity onAccept={handleEdit} onClose={handleModalClose} cityData={city} />}
                                 <button className="edit-button" onClick={() =>{setEditOpenModal(true);setCityToEdit(city);}}> Edit </button>
-                                    
                                 </Table.Cell>
                         </Table.Row>
                     ))}

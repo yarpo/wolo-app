@@ -4,6 +4,9 @@ import { Label, Modal, TextInput, Checkbox  } from "flowbite-react";
 import {  useState } from "react";
 import { useEffect } from 'react';
 import { URLS } from "../../../config";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 import fetchData from "../../../Utils/fetchData";
@@ -13,6 +16,7 @@ function EditCategory({ onAccept, onClose, cityData }) {
     const [name, setName] = useState(cityData.name);
     const [districts, setDistricts] = useState([]);
     const [filteredDistricts, setFilteredDistricts] = useState([]);
+    const [selectedDistricts, setSelectedDistricts] = useState([]);
     
 
     useEffect(() => {
@@ -22,14 +26,15 @@ function EditCategory({ onAccept, onClose, cityData }) {
     useEffect(() => {
         const newFilteredDistricts = districts.filter(district => district.cityName === cityData.name);
         setFilteredDistricts(newFilteredDistricts);
+        setSelectedDistricts(newFilteredDistricts);
     }, [cityData, districts]);
 
     const handleCheckChange = (e, districtId) => {
         if (e.target.checked) {
-            const district = districts.find(d => d.id === districtId);
-            setFilteredDistricts(prevDistricts => [...prevDistricts, district]);
+            const district = filteredDistricts.find(d => d.id === districtId);
+            setSelectedDistricts(prevDistricts => [...prevDistricts, district]);
         } else {
-            setFilteredDistricts(prevDistricts => prevDistricts.filter(d => d.id !== districtId));
+            setSelectedDistricts(prevDistricts => prevDistricts.filter(d => d.id !== districtId));
         }
     };
 
@@ -39,7 +44,12 @@ function EditCategory({ onAccept, onClose, cityData }) {
     }
 
     const handleAgree = () => {
-        const districtNames = filteredDistricts.map(district => district.name);
+        if (name.trim() === "") {
+            toast.error(`Name of the city cannot be empty`);
+            return;
+        }
+
+        const districtNames = selectedDistricts.map(district => district.name);
         onAccept({id: cityData.id, name, districts: districtNames});
         setOpenModal(false);
     };
@@ -55,20 +65,21 @@ function EditCategory({ onAccept, onClose, cityData }) {
                 <div className="mb-2 block">
                     <Label htmlFor="firstname" value="Name" /> 
                 </div>
-                <TextInput id="firstname" value={name} onChange={e => setName(e.target.value)}/>
+                <TextInput id="firstname" value={name} onChange={e => setName(e.target.value)} />
                 </div>
                 </div>
                 <div className="max-w-md">
                     <div className="mb-2 block">
-                        <Label htmlFor="distrct" value="Districts" />
+                        <Label htmlFor="distrct" value="Districts (deselect to remove district from city)" />
+                        
                     </div>
                     <div className="flex flex-col items-start gap-2 justify-start" style={{ maxHeight: '200px', overflowY: 'auto', border: '1px solid lightgray', borderRadius: '10px', padding: '10px', backgroundColor: '#f8f8f8' , marginBottom: 20 }}>
-                    {districts.map((district, index) => (
+                    {filteredDistricts.map((district, index) => (
                         <div key={district.id} className="flex items-center w-full" style={{backgroundColor: index % 2 === 0 ? '#f8f8f8' : '#f0f0f0', padding: index % 2 === 0 ? 0 : 10, paddingLeft: index % 2 === 0 ? 10 : 10}}>
                             <Checkbox 
                                 key={district.id} 
                                 value={district.id} 
-                                checked={filteredDistricts.some(filteredDistrict => filteredDistrict.id === district.id)} 
+                                checked={selectedDistricts.some(d => d.id === district.id)}
                                 onChange={(e) => handleCheckChange(e, district.id)} 
                                 label={district.name} 
                                 id={`district-${district.id}`}  
