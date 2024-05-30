@@ -153,6 +153,8 @@
 
     "cities": "Міста",
 
+    "cancelEvent": "Ви впевнені, що хочете скасувати подію: ",
+    "acceptCancelEvent": "Так, скасувати подію",
     "peselVerified": "PESEL перевірено",
     "agreementSigned": "Угода підписана",
     "isAdult": "Дорослий",

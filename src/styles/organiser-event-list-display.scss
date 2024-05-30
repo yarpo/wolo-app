@@ -7,8 +7,23 @@
     padding: 3px 20px;
     padding-bottom: 15px;
 
+    #organiser_event_list_delete_button{
+        cursor: pointer;
+        background-color: $color-4-red;
+        width: 120px;
+        height: 50px;
+        padding: 3px;
+        border-radius: 7px;
+        text-align: center;
+        margin-top: auto;
+        margin-bottom: auto;
+        &:hover {
+            background-color: $color-4-red-hover;
+        }
+    }
+
     .column:first-child {
-        width: 25vw;
+        width: 35vw;
     }
 
     .column {

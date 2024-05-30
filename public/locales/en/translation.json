@@ -150,6 +150,8 @@
   
   "cities": "Cities",
 
+  "cancelEvent": "Do You want to cancel event: ",
+  "acceptCancelEvent": "Yes, cancel the event",
   "peselVerified": "PESEL verified",
   "agreementSigned": "Agreement signed",
   "isAdult": "Adult",

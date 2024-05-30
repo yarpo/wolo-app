@@ -151,6 +151,8 @@
 
   "cities": "Miasta",
 
+  "cancelEvent": "Czy na pewno chcesz anulować wydarzenie: ",
+  "acceptCancelEvent": "Tak, anuluj wydarzenie",
   "peselVerified": "PESEL zweryfikowany",
   "agreementSigned": "Umowa podpisana",
   "isAdult": "Pełnoletni",
