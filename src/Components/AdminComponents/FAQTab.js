@@ -7,6 +7,7 @@ import '../../styles/admin-home-page.scss';
 
 import { URLS } from '../../config';
 import fetchData from '../../Utils/fetchData';
+import { HiTrash } from "react-icons/hi";
 
 import { Table } from "flowbite-react";
 import Confirmation from '../Popups/Confirmation';
@@ -96,8 +97,8 @@ const FAQTab = () => {
                     <Table.HeadCell>ID</Table.HeadCell>
                     <Table.HeadCell>{t('question')}</Table.HeadCell>
                     <Table.HeadCell>{t('answer')}</Table.HeadCell>
-                    <Table.HeadCell>More</Table.HeadCell>
-                    <Table.HeadCell>{t('delete')}</Table.HeadCell>
+                    <Table.HeadCell></Table.HeadCell>
+                    <Table.HeadCell></Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
                     {filteredQuestions.map((question, index) => (
@@ -114,7 +115,7 @@ const FAQTab = () => {
                                         onClick={() => toggleDetails(index)}
                                     >
                                         {openIndex === index ? <VscChevronUp /> : <VscChevronDown />}
-                                        <span className="dropdown-label">Details</span>
+                                        <span className="dropdown-label"></span>
                                     </button>
                                 </Table.Cell>
                                 <Table.Cell>
@@ -125,7 +126,7 @@ const FAQTab = () => {
                                             setQuestionToDelete(question.id);
                                         }}
                                     >
-                                        <span>Delete</span>
+                                        <span><HiTrash /></span>
                                     </button>
                                     <Confirmation
                                         id="sign-off"

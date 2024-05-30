@@ -6,6 +6,7 @@ import fetchDataWithAuth from '../../Utils/fetchDataWithAuth.js';
 import postRequestWithJson from '../../Utils/postRequestWithJson.js';
 import Confirmation from '../Popups/Confirmation.js';
 import { URLS } from '../../config';
+import { HiTrash } from "react-icons/hi";
 
 import '../../styles/admin-home-page.scss';
 import AddOrganisation from './addRecordModals/AddOrganisation.js';
@@ -78,8 +79,8 @@ const OrganisationsTab = () => {
                     <Table.HeadCell>Organisation Phone</Table.HeadCell>
                     <Table.HeadCell>Organisation Address</Table.HeadCell>
                     <Table.HeadCell>Organisation Status</Table.HeadCell>
-                    <Table.HeadCell>More</Table.HeadCell>
-                    <Table.HeadCell>Delete</Table.HeadCell>
+                    <Table.HeadCell></Table.HeadCell>
+                    <Table.HeadCell></Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
                     {organisations.map((organisation, index) => (
@@ -99,7 +100,7 @@ const OrganisationsTab = () => {
                                         onClick={() => toggleDetails(index)}
                                     >
                                         {openIndex === index ? <VscChevronUp /> : <VscChevronDown />}
-                                        <span className="dropdown-label">Details</span>
+                                        <span className="dropdown-label"></span>
                                     </button>
                                 </Table.Cell>
                                 <Table.Cell>
@@ -110,7 +111,7 @@ const OrganisationsTab = () => {
                                             setOrganisationToDelete(organisation.id);
                                         }}
                                     >
-                                        <span>Delete</span>
+                                        <span><HiTrash /></span>
                                     </button>
                                     <Confirmation
                                         id="sign-off"

@@ -8,6 +8,7 @@ import { format } from 'date-fns';
 
 import { URLS } from '../../config';
 import fetchData from '../../Utils/fetchData';
+import { HiTrash } from "react-icons/hi";
 
 import { Table } from "flowbite-react";
 import Confirmation from '../Popups/Confirmation';
@@ -99,8 +100,8 @@ const EventsTab = () => {
                     <Table.HeadCell>Organisation</Table.HeadCell>
                     <Table.HeadCell>{t('categories')}</Table.HeadCell>
                     <Table.HeadCell>City</Table.HeadCell>
-                    <Table.HeadCell>More</Table.HeadCell>
-                    <Table.HeadCell>{t('delete')}</Table.HeadCell>
+                    <Table.HeadCell></Table.HeadCell>
+                    <Table.HeadCell></Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
                     {filteredEvents.map((event, index) => (
@@ -119,7 +120,7 @@ const EventsTab = () => {
                                         onClick={() => toggleDetails(index)}
                                     >
                                         {openIndex === index ? <VscChevronUp /> : <VscChevronDown />}
-                                        <span className="dropdown-label">Details</span>
+                                        <span className="dropdown-label"></span>
                                     </button>
                                 </Table.Cell>
                                 <Table.Cell>
@@ -131,8 +132,8 @@ const EventsTab = () => {
                                             setEventToDelete(event.id);
                                         }}
                                     >
-                                        <span>Delete</span>
-                                    </button> : <p>Past event</p>}
+                                        <span><HiTrash /></span>
+                                    </button> : ' '}
                                     <Confirmation
                                         id="sign-off"
                                         buttonName="Delete"

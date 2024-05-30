@@ -4,6 +4,7 @@ import { VscChevronDown, VscChevronUp } from 'react-icons/vsc';
 import '../../styles/admin-home-page.scss';
 import { URLS } from '../../config';
 import { Table } from "flowbite-react";
+import { HiTrash } from "react-icons/hi";
 
 import AddUser from './addRecordModals/AddUser.js';
 import Confirmation from '../Popups/Confirmation.js';
@@ -70,8 +71,8 @@ const UsersTab = () => {
                     <Table.HeadCell>User Phone</Table.HeadCell>
                     <Table.HeadCell>User roles</Table.HeadCell>
                     <Table.HeadCell>Organisation Moderator</Table.HeadCell>
-                    <Table.HeadCell>More</Table.HeadCell>
-                    <Table.HeadCell>Delete</Table.HeadCell>
+                    <Table.HeadCell></Table.HeadCell>
+                    <Table.HeadCell></Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
                     {users.map((user, index) => (
@@ -91,7 +92,7 @@ const UsersTab = () => {
                                         onClick={() => toggleDetails(index)}
                                     >
                                         {openIndex === index ? <VscChevronUp /> : <VscChevronDown />}
-                                        <span className="dropdown-label">Details</span>
+                                        <span className="dropdown-label"></span>
                                     </button>
                                 </Table.Cell>
                                 <Table.Cell>
@@ -102,7 +103,7 @@ const UsersTab = () => {
                                             setUserToDelete(user.id);
                                         }}
                                     >
-                                        <span>Delete</span>
+                                        <span><HiTrash /></span>
                                     </button>
                                     <Confirmation
                                         id="sign-off"

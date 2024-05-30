@@ -4,6 +4,7 @@ import '../../styles/admin-home-page.scss';
 
 import { URLS } from '../../config';
 import { Table } from "flowbite-react";
+import { HiTrash } from "react-icons/hi";
 
 import AddCategory from './addRecordModals/AddCategory';
 import Confirmation from '../Popups/Confirmation';
@@ -63,7 +64,7 @@ const CategoriesTab = () => {
                 <Table.Head>
                     <Table.HeadCell>ID</Table.HeadCell>
                     <Table.HeadCell>Category Name</Table.HeadCell>
-                    <Table.HeadCell>Delete</Table.HeadCell>
+                    <Table.HeadCell></Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
                     {categories.map((category, index) => (
@@ -80,7 +81,7 @@ const CategoriesTab = () => {
                                         setCategoryToDelete(category.id);
                                     }}
                                 >
-                                    <span>Delete</span>
+                                    <span><HiTrash /></span>
                                 </button>
                                 <Confirmation
                                     id="sign-off"
