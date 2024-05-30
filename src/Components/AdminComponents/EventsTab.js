@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next';
 import React, { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
 import { VscChevronDown, VscChevronUp } from 'react-icons/vsc';
 import { HiOutlineSearch } from "react-icons/hi";
 import { TextInput } from "flowbite-react";
