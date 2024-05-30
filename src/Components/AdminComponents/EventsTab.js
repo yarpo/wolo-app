@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { VscChevronDown, VscChevronUp } from 'react-icons/vsc';
 import '../../styles/admin-home-page.scss';
+import { format } from 'date-fns';
 
 import { URLS } from '../../config';
 import fetchData from '../../Utils/fetchData';
@@ -103,7 +104,7 @@ const EventsTab = () => {
                                         }}
                                     >
                                         <span>Delete</span>
-                                    </button>
+                                    </button> : <p>Past event</p>}
                                     <Confirmation
                                         id="sign-off"
                                         buttonName="Delete"
