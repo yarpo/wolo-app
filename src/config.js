@@ -47,7 +47,7 @@ const URLS = {
   PUBLIC_RAPORT: `${BASE_URL}/reports/public`,
 
   LOGIN: LOGIN_URL,
-  ORGANISATION_EDIT: `${BASE_URL}/organisations/edit`
+  ORGANISATION_EDIT: `${BASE_URL}/organisations/edit`,
 
   REPORTS: `${BASE_URL}/reports/all`,
   ADD_REPORT: `${BASE_URL}/reports/add`,
