@@ -43,7 +43,6 @@ const URLS = {
   USERS_WITH_NO_ROLES: `${BASE_URL}/users/volunteers`,
   THEY_NEED_YOU: `${BASE_URL}/events/need`,
 
-  DELETE_EVENT: `${BASE_URL}/events/delete`,
   PUBLIC_RAPORT: `${BASE_URL}/reports/public`,
 
   LOGIN: LOGIN_URL,
@@ -55,8 +54,6 @@ const URLS = {
   PUBLISH_REPORT: `${BASE_URL}/reports/publish`,
   UNPUBLISH_REPORT: `${BASE_URL}/reports/unpublish`,
   DELETE_REPORT: `${BASE_URL}/reports/delete`,
-
-  LOGIN: LOGIN_URL,
 
   FAQ: `${BASE_URL}/faq`
 
