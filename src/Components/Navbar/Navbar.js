@@ -76,7 +76,7 @@ function handleLogout() {
             <Link to="/calendar">{t('calendar')}</Link>
           </li>
           <li>
-            <Link to="/volunteers">{t('forVolunteers')}</Link>
+            <Link to="/forVolunteers">{t('forVolunteers')}</Link>
           </li>
           <li>
             <Link to="/needyou">{t('theyNeedYou')}</Link>
