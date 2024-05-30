@@ -33,19 +33,27 @@ const URLS = {
 
   DELETE_USER: `${BASE_URL}/users/delete`,
   DELETE_ORGANISATION: `${BASE_URL}/organisations/disapprove`,
+
+  DELETE_EVENT: `${BASE_URL}/events/admin/delete`,
   DELETE_CATEGORY: `${BASE_URL}/categories/delete`,
   DELETE_DISTRICT: `${BASE_URL}/districts/delete`,
   DELETE_CITY: `${BASE_URL}/cities/delete`,
+
 
   EDIT_USER: `${BASE_URL}/users/edit`,
   EDIT_CITY: `${BASE_URL}/cities/edit`,
   EDIT_DISTRICT: `${BASE_URL}/districts/edit`,
   EDIT_CATEGORY: `${BASE_URL}/categories/edit`,
+
   
   USERS_WITH_NO_ROLES: `${BASE_URL}/users/volunteers`,
   THEY_NEED_YOU: `${BASE_URL}/events/need`,
 
   PUBLIC_RAPORT: `${BASE_URL}/reports/public`,
+
+  LOGIN: LOGIN_URL,
+  ORGANISATION_EDIT: `${BASE_URL}/organisations/edit`,
+
   REPORTS: `${BASE_URL}/reports/all`,
   ADD_REPORT: `${BASE_URL}/reports/add`,
   EDIT_REPORT: `${BASE_URL}/reports/edit`,
@@ -53,9 +61,8 @@ const URLS = {
   UNPUBLISH_REPORT: `${BASE_URL}/reports/unpublish`,
   DELETE_REPORT: `${BASE_URL}/reports/delete`,
 
-  LOGIN: LOGIN_URL,
-
   FAQ: `${BASE_URL}/faq`
+
 };
 
 module.exports = { URLS, BASE_URL };

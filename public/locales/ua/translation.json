@@ -153,6 +153,8 @@
 
     "cities": "Міста",
 
+    "cancelEvent": "Ви впевнені, що хочете скасувати подію: ",
+    "acceptCancelEvent": "Так, скасувати подію",
     "peselVerified": "PESEL перевірено",
     "agreementSigned": "Угода підписана",
     "isAdult": "Дорослий",
@@ -172,6 +174,14 @@
     "userDataChangedSucess": "Персональні дані успішно змінено",
     "userDataChangedFail": "Щось пішло не так. Спробуйте ще раз",
 
+    "organiserSettings": "Налаштування організації",
+    "logoUrl": "URL логотипу",
+    "organisationDataEditedSuccess": "Вашу організацію успішно оновлено",
+    "organisationDataEditedFail": "Виникла проблема з редагуванням організації. Будь ласка, спробуйте пізніше",
+    "city": "Місто",
+
+    "name": "Name",
+  
     "defaultImageForEvent": "Зображення за замовчуванням для події",
 
     "report": "Звіт",
@@ -196,4 +206,5 @@
     "reportRU": "Звіт російською мовою",
     "reportEditedSuccess": "Звіт успішно відредаговано",
     "reportEditedFail": "Сталася проблема з редагуванням звіту. Будь ласка, спробуйте пізніше"
+
 }
