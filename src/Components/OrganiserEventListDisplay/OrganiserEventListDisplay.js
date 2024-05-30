@@ -44,6 +44,13 @@ const OrganiserEventListDisplay = ({ event, isArchived }) => {
             <div className="column">
                 {event.city}
             </div>
+            <form className="column">
+                <Link to={`/reports?event=${event.id}`}>
+                    <div>
+                        <strong>{t('reports')}</strong>
+                    </div>
+                </Link>
+            </form>
             {!isArchived && <div className="column">
                 <strong>{t('edit')}</strong>
             </div>}

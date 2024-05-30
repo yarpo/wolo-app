@@ -173,5 +173,28 @@
   "userDataChangedSucess": "Pomyślnie zmieniono dane osobowe",
   "userDataChangedFail": "Coś poszło nie tak. Spróbuj ponownie później",
 
-  "defaultImageForEvent": "Obrazek główny do wydarzenia"
+  "defaultImageForEvent": "Obrazek główny do wydarzenia",
+
+  "report": "Raport",
+  "reports": "Raporty",
+  "publish": "Opublikować",
+  "unpublish": "Cofnąć publikację",
+  "event": "Wydarzenie",
+  "addReport": "Dodaj raport",
+  "add": "Dodaj",
+  "publishReport": "Opublikuj raport",
+  "reportAddedSuccess": "Raport został dodany",
+  "reportAddedFail": "Wystąpił problem z dodaniem raportu",
+  "thisIsYourPublicReport": "To jest twój publiczny raport.",
+  "reportUpdatedSuccessfully": "Status raportu został zaktualizowany pomyślnie",
+  "reportUpdatedFailed": "Wystąpił problem z aktualizacją raportu. Proszę spróbować ponownie później",
+  "deleteReport": "Czy chcesz usunąć ten raport?",
+  "reportDeleteSuccess": "Raport został pomyślnie usunięty",
+  "reportDeleteFail": "Wystąpił problem z usunięciem raportu. Proszę spróbować ponownie później",
+  "reportPL": "Raport w języku polskim",
+  "reportEN": "Raport w języku angielskim",
+  "reportUA": "Raport w języku ukraińskim",
+  "reportRU": "Raport w języku rosyjskim",
+  "reportEditedSuccess": "Raport został pomyślnie edytowany",
+  "reportEditedFail": "Wystąpił problem z edycją raportu. Proszę spróbować ponownie później"
 }

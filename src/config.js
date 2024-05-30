@@ -42,7 +42,16 @@ const URLS = {
 
   DELETE_EVENT: `${BASE_URL}/events/delete`,
   PUBLIC_RAPORT: `${BASE_URL}/reports/public`,
-  LOGIN: LOGIN_URL
+  REPORTS: `${BASE_URL}/reports/all`,
+  ADD_REPORT: `${BASE_URL}/reports/add`,
+  EDIT_REPORT: `${BASE_URL}/reports/edit`,
+  PUBLISH_REPORT: `${BASE_URL}/reports/publish`,
+  UNPUBLISH_REPORT: `${BASE_URL}/reports/unpublish`,
+  DELETE_REPORT: `${BASE_URL}/reports/delete`,
+
+  LOGIN: LOGIN_URL,
+
+  FAQ: `${BASE_URL}/faq`
 };
 
 module.exports = { URLS, BASE_URL };

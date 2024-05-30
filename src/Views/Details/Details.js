@@ -7,6 +7,7 @@ import {
   VscOrganization,
   VscLocation,
 } from 'react-icons/vsc';
+import { HiOutlineExclamation } from "react-icons/hi";
 import { BiBorderAll } from 'react-icons/bi';
 import { Link, useParams } from 'react-router-dom';
 import '../../styles/details.scss';
@@ -72,7 +73,9 @@ const Details = () => {
     date,
     city,
     imageUrl,
-    categories
+    categories,
+    peselVerificationRequired,
+    agreementNeeded
   } = eventData;
 
   return (
@@ -83,6 +86,16 @@ const Details = () => {
         </Link>
         <h1 id="title">{eventData[eventName]}</h1>
         <ul id="information">
+          {peselVerificationRequired && (
+              <p className='card-extra-requirements'> 
+                  <HiOutlineExclamation className='card-extra-requirements'/> {t('peselVerificationNeeded')} 
+              </p>
+          )}
+          {agreementNeeded && (
+              <p className='card-extra-requirements'> 
+                  <HiOutlineExclamation className='card-extra-requirements'/> {t('volunteerAgreementNeeded')}
+              </p>
+          )}
           <li>
             <VscBrowser id="icon" /> <strong>{t('date')}:</strong> {formatDate(date)}
           </li>
@@ -110,7 +123,7 @@ const Details = () => {
       {isInPast && 
         <div id="details_event_over" > 
           <h2 id="details_event_over_text">{t('eventIsOver')}</h2>
-          <p>{reportData ? reportData[reportText] : ""}</p>
+          <p>{(reportData && isInPast) ? reportData[reportText] : ""}</p>
         </div>
       }
 
@@ -142,7 +155,7 @@ const Details = () => {
       {!((eventData.organisationId === userOrganisation && isModerator) || isAdmin) && <div id="details_more_events">
         <h2>{t('moreEventsFromThisOrganizer')}</h2>
         <div id="details_more_events_container">
-          {organiserEvents.map(event => (
+          {organiserEvents.filter(event => new Date(event.date) > new Date()).map(event => (
             <EventCard key={event.id} event={event} id='details_more_events_item' />
           ))}
         </div>

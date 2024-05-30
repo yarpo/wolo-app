@@ -16,6 +16,10 @@ $background-color_1: #f5f5f5;
   cursor: pointer;
   overflow: hidden;
 
+  .card-extra-requirements {
+    color: grey;
+  }
+
   &:hover {
     box-shadow: 0 10px 24px 0 rgba(18, 18, 18, 0.247);
   }
