@@ -12,6 +12,7 @@ import EventsTab from '../../Components/AdminComponents/EventsTab.js';
 import CategoriesTab from '../../Components/AdminComponents/CategoriesTab.js';
 import DistrictsTab from '../../Components/AdminComponents/DistrictsTab.js';
 import CitiesTab from '../../Components/AdminComponents/CitiesTab.js';
+import FAQTab from '../../Components/AdminComponents/FAQTab.js';
 
 const AdminHomePage = () => {    
     const { t } = useTranslation();
@@ -37,6 +38,9 @@ const AdminHomePage = () => {
                 </Tabs.Item>
                 <Tabs.Item title={t('districts')} icon={HiClipboardList}>
                     <DistrictsTab />
+                </Tabs.Item>
+                <Tabs.Item title={t('help')} icon={HiClipboardList}>
+                    <FAQTab />
                 </Tabs.Item>
             </Tabs>
         </div>
