@@ -4,13 +4,12 @@ import { useTranslation } from 'react-i18next';
 import React, { useState, useEffect, useCallback } from 'react';
 import { toast } from 'react-toastify';
 import { URLS } from '../../../config.js';
-import fetchUserRoles from '../../../Utils/fetchUserRoles.js';
 import { Link } from 'react-router-dom';
-import fetchUserId from '../../../Utils/fetchUserId.js';
-import fetchUserShifts from '../../../Utils/fetchUserShifts.js';
+import fetchUser from '../../../Utils/fetchUser.js'; 
 import postRequest from '../../../Utils/postRequest.js';
 import Confirmation from '../../../Components/Popups/Confirmation.js';
 import { Card } from "flowbite-react";
+import { HiOutlineExclamation } from "react-icons/hi";
 import formatTime from '../../../Utils/formatTime.js';
 
 const ShiftCard = ({ shift, city, isInPast }) => {
@@ -29,19 +28,16 @@ const ShiftCard = ({ shift, city, isInPast }) => {
 
     const [confirmPhone, setConfirmPhone] = useState(false);
     const [confirmLeave, setConfirmLeave] = useState(false);
-  
-    useEffect(() => {
-        const fetchUserData = async () => {
-        const userRoles = await fetchUserRoles();
-        setRoles(userRoles);
-        const userId = await fetchUserId();
-        setId(userId);
-        const userShifts = await fetchUserShifts(userId);
-        setUserShifts(userShifts);
-        };
 
-        fetchUserData();
-    }, []);
+    useEffect(() => {
+        fetchUser().then(data => {
+          if (data) {
+            setRoles(data.roles);
+            setId(data.id);
+            setUserShifts(data.shifts.map(shift => shift.id))
+          }
+        })
+      }, []);
   
     const handleUserConfirmation = async (confirmation) => {
         setUserConfirmed(confirmation);
@@ -81,6 +77,11 @@ const ShiftCard = ({ shift, city, isInPast }) => {
                     <p><strong>{shift.district}, {city}</strong></p>
                     <p><strong> {shift.street} {shift.homeNum}</strong></p>
                     <p>{shift[shiftDirections]}</p>
+                    {shift.requiredMinAge && shift.requiredMinAge > 0 && (
+                        <p className='card-extra-requirements'> 
+                            <HiOutlineExclamation className='card-extra-requirements'/> {t('ageRestrictions')}: {shift.requiredMinAge}
+                        </p>
+                    )}
                 </span>
                 {!isInPast && <form onSubmit={(e) => e.preventDefault()}>
                     {canSignIn && !isFull && !userShifts.includes(shiftId) && <button type="button"  onClick={() => setConfirmPhone(true)} id="sign-in" > {t('joinShift')} </button>}

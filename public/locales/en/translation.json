@@ -150,6 +150,8 @@
   
   "cities": "Cities",
 
+  "cancelEvent": "Do You want to cancel event: ",
+  "acceptCancelEvent": "Yes, cancel the event",
   "peselVerified": "PESEL verified",
   "agreementSigned": "Agreement signed",
   "isAdult": "Adult",
@@ -171,5 +173,39 @@
   "userDataChangedSucess": "Successfully changed personal information",
   "userDataChangedFail": "Something went wrong. Please try again later",
 
-  "defaultImageForEvent": "Default image for event"
+  "organiserSettings": "Organisation Settings",
+  "logoUrl": "Logo URL",
+  "organisationDataEditedSuccess": "Your organisation was successfully edited",
+  "organisationDataEditedFail": "There was a problem editing organisation. Please try again later",
+  "city": "City",
+
+
+  "name": "Name",
+
+  "defaultImageForEvent": "Default image for event",
+
+  "report": "Report",
+  "reports": "Reports",
+  "publish": "Publish",
+  "unpublish": "Unpublish",
+  "event": "Event",
+  "addReport": "Add report",
+  "add": "Add",
+  "publishReport": "Publish report",
+  "reportAddedSuccess": "Report added",
+  "reportAddedFail": "There was a problem adding a report",
+  "thisIsYourPublicReport": "This is your public report.",
+  "reportUpdatedSuccessfully": "Report status was updated successfully",
+  "reportUpdatedFailed": "There was a problem updating a report. Please try again later",
+  "deleteReport": "Would you like to delete this report?",
+  "reportDeleteSuccess": "Report deleted successfully",
+  "reportDeleteFail": "There was a problem deleting report. Please try again later",
+  "reportPL": "Report in polish language",
+  "reportEN": "Report in english language",
+  "reportUA": "Report in ukrainian language",
+  "reportRU": "Report in russian language",
+  "reportEditedSuccess": "Report edited successfully",
+  "reportEditedFail": "There was a problem editing report. Please try again later"
+
 }
+
