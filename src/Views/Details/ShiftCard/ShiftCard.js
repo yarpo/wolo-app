@@ -53,6 +53,8 @@ const ShiftCard = ({ shift, city, isInPast }) => {
             const params = new URLSearchParams();
             params.append('user', id);
             params.append('shift', shift.shiftId);
+            params.append('reserve', isFull);
+
     
             try {
                 if (!userShifts.includes(shiftId)) {
@@ -121,8 +123,12 @@ const ShiftCard = ({ shift, city, isInPast }) => {
                             openModal={confirmLeave}
                             setOpenModal={setConfirmLeave}
                         />
-                    {canSignIn && !isAdmin && !isModerator && isFull &&
-                        <p>Reserve list</p>
+                    {canSignIn && !isAdmin && !userShifts.includes(shiftId) && isFull &&
+                        <p className='card-extra-requirements'> 
+                            <HiOutlineExclamation className='card-extra-requirements'/> {t('fullShift')}
+                            <button type="button"  onClick={() => setConfirmPhone(true)} id="sign-in" > {t('joinShift')} </button>
+                            <button type="button"  onClick={() => setConfirmLeave(true)} id="sign-out">{t('leaveReserveList')} </button>
+                        </p>
                     }
                     {!canSignIn && !isAdmin && !isModerator && <p id="sign_in_section_error">{t('volunteersRestricedFunctionality')}. <Link to="/login">{t('logInToday')}</Link></p>}
                 </form>}
