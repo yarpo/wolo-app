@@ -33,9 +33,12 @@ const URLS = {
 
   DELETE_USER: `${BASE_URL}/users/delete`,
   DELETE_ORGANISATION: `${BASE_URL}/organisations/disapprove`,
+
+  DELETE_EVENT: `${BASE_URL}/events/admin/delete`,
   DELETE_CATEGORY: `${BASE_URL}/categories/delete`,
   DELETE_DISTRICT: `${BASE_URL}/districts/delete`,
   DELETE_CITY: `${BASE_URL}/cities/delete`,
+
   
   USERS_WITH_NO_ROLES: `${BASE_URL}/users/volunteers`,
   THEY_NEED_YOU: `${BASE_URL}/events/need`,

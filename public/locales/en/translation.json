@@ -171,6 +171,9 @@
   "userDataChangedSucess": "Successfully changed personal information",
   "userDataChangedFail": "Something went wrong. Please try again later",
 
+
+  "name": "Name",
+
   "defaultImageForEvent": "Default image for event",
 
   "report": "Report",
@@ -195,4 +198,5 @@
   "reportRU": "Report in russian language",
   "reportEditedSuccess": "Report edited successfully",
   "reportEditedFail": "There was a problem editing report. Please try again later"
+
 }
