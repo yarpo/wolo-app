@@ -39,8 +39,8 @@ function EditCategory({ onAccept, onClose, cityData }) {
     }
 
     const handleAgree = () => {
-        // const districtNames = filteredDistricts.map(district => district.name);
-        onAccept({id: cityData.id, name, districts: cityData.districts});
+        const districtNames = filteredDistricts.map(district => district.name);
+        onAccept({id: cityData.id, name, districts: districtNames});
         setOpenModal(false);
     };
 

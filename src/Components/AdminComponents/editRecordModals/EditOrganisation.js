@@ -66,16 +66,18 @@ function EditCategory({ onAccept, onClose, organisationData }) {
 
     return (
         <>
-        <Modal show={openModal} size="md" popup onClose={handleClose} initialFocus='firstname'>
+        <Modal show={openModal} size="lg" popup onClose={handleClose} initialFocus='firstname'>
             <Modal.Header />
             <Modal.Body>
             <div className="space-y-6">
                 <h3 className="text-xl font-medium text-gray-900 dark:text-white">Edit Organisation</h3>
                 <div>
+                <div className="max-w-md">
                 <div className="mb-2 block">
                     <Label htmlFor="name" value="Name" />
                 </div>
                 <TextInput id="name" value={name} onChange={e => setName(e.target.value)} />
+                </div>
                 </div>
                 <div className="max-w-md">
                     <div className="mb-2 block">

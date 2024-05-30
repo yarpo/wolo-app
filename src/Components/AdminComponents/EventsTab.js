@@ -7,9 +7,16 @@ import fetchData from '../../Utils/fetchData';
 
 import { Table } from "flowbite-react";
 
+import EditEvent from './editRecordModals/EditEvent';
+import putRequest from '../../Utils/putRequest.js';
+
+
+
 const EventsTab = () => {
     const [events, setEvents] = useState([]);
     const [openIndex, setOpenIndex] = useState(null);
+    const [openEditModal, setEditOpenModal] = useState(false);
+    const [eventToEdit, setEventToEdit] = useState(null);
 
     useEffect(() => {
         fetchData(URLS.EVENTS, setEvents);
@@ -36,6 +43,16 @@ const EventsTab = () => {
         setOpenIndex(openIndex === index ? null : index);
     };
 
+    const handleModalClose = () => {
+        setEditOpenModal(false);
+    };
+
+    const handleEdit = (data) => {
+        putRequest(`${URLS.EDIT_DISTRICT}`, localStorage.getItem('token'), data, "Event was changed successfully", "Failed to change Event's data");
+        setEventToEdit(null);
+    };
+    
+
     return (
         <div className="overflow-x-auto">
             <Table striped>
@@ -46,6 +63,7 @@ const EventsTab = () => {
                     <Table.HeadCell>Categories</Table.HeadCell>
                     <Table.HeadCell>City</Table.HeadCell>
                     <Table.HeadCell>More</Table.HeadCell>
+                    <Table.HeadCell>Edit</Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
                     {events.map((event, index) => (
@@ -66,6 +84,10 @@ const EventsTab = () => {
                                         {openIndex === index ? <VscChevronUp /> : <VscChevronDown />}
                                         <span className="dropdown-label">Details</span>
                                     </button>
+                                </Table.Cell>
+                                <Table.Cell>{/* edit row */}
+                                {openEditModal && eventToEdit === event && <EditEvent onAccept={handleEdit} onClose={handleModalClose} eventData={event} />}
+                                <button className="edit-button" onClick={() =>{ setEditOpenModal(true);setEventToEdit(event);}}> Edit </button>
                                 </Table.Cell>
                             </Table.Row>
                             {openIndex === index && (
