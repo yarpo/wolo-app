@@ -84,14 +84,16 @@ const EventsTab = () => {
 
     return (
         <div className="overflow-x-auto">
-            <div className="admin-panel-search-bar">
-                <TextInput
-                    type="text"
-                    placeholder="Search events"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    icon={HiOutlineSearch}
-                />
+            <div className='admin-panel-add-search-group'>
+                <div className="admin-panel-search-bar">
+                    <TextInput
+                        type="text"
+                        placeholder="Search users"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        icon={HiOutlineSearch}
+                    />
+                </div>
             </div>
             <Table hoverable>
                 <Table.Head>

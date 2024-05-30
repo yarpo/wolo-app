@@ -7,7 +7,7 @@ import '../../styles/admin-home-page.scss';
 
 import { URLS } from '../../config';
 import fetchData from '../../Utils/fetchData';
-import { HiTrash } from "react-icons/hi";
+import { HiTrash, HiOutlinePlus } from "react-icons/hi";
 
 import { Table } from "flowbite-react";
 import Confirmation from '../Popups/Confirmation';
@@ -81,16 +81,18 @@ const FAQTab = () => {
 
     return (
         <div className="overflow-x-auto">
-            <div className="admin-panel-search-bar">
-                <TextInput
-                    type="text"
-                    placeholder="Search questions"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    icon={HiOutlineSearch}
-                />
+            <div className='admin-panel-add-search-group'>
+                <div className="admin-panel-search-bar">
+                    <TextInput
+                        type="text"
+                        placeholder="Search users"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        icon={HiOutlineSearch}
+                    />
+                </div>
+                <button className="admin-panel-add" onClick={() => setOpenModal(true)}><HiOutlinePlus /></button>
             </div>
-            <button className="confirm_button" onClick={() => setOpenModal(true)}> Add </button>
             {openModal && <AddFAQ onAccept={handleModalAccept} onClose={handleModalClose} />}
             <Table hoverable>
                 <Table.Head>
