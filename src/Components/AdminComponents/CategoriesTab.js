@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import '../../styles/admin-home-page.scss';
+import { HiOutlineSearch } from "react-icons/hi";
 
 import { URLS } from '../../config';
-import { Table } from "flowbite-react";
+import { Table, TextInput } from "flowbite-react";
 
 import AddCategory from './addRecordModals/AddCategory';
 import Confirmation from '../Popups/Confirmation';
@@ -25,9 +26,25 @@ const CategoriesTab = () => {
     const [openEditModal, setEditOpenModal] = useState(false);
     const [categoryToEdit, setCategoryToEdit] = useState(null);
 
+    const [filteredCategories, setFilteredCategories] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
+
     useEffect(() => {
-        fetchData(URLS.CATEGORIES, setCategories);
+        fetchData(URLS.CATEGORIES, (data) => {
+            setCategories(data);
+            setFilteredCategories(data);
+        });
     }, []);
+
+    useEffect(() => {
+        if (searchQuery === '') {
+            setFilteredCategories(categories);
+        } else {
+            setFilteredCategories(categories.filter(category =>
+                category.name.toLowerCase().includes(searchQuery.toLowerCase())
+            ));
+        }
+    }, [searchQuery, categories]);
 
     const handleModalAccept = (data) => {
         setOpenModal(false);
@@ -68,6 +85,15 @@ const CategoriesTab = () => {
 
     return (
         <div className="overflow-x-auto">
+            <div className="admin-panel-search-bar">
+                <TextInput
+                    type="text"
+                    placeholder="Search categories"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    icon={HiOutlineSearch}
+                />
+            </div>
             <button className="confirm_button" onClick={() => setOpenModal(true)}> Add </button>
             {openModal && <AddCategory onAccept={handleModalAccept} onClose={handleModalClose} />}
             <Table striped>
@@ -78,7 +104,7 @@ const CategoriesTab = () => {
                     <Table.HeadCell>Delete</Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
-                    {categories.map((category, index) => (
+                    {filteredCategories.map((category, index) => (
                         <Table.Row key={index} className="bg-white dark:border-gray-700 dark:bg-gray-800">
                             <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                                 {category.id}

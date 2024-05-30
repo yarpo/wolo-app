@@ -205,7 +205,12 @@
   "reportUA": "Report in ukrainian language",
   "reportRU": "Report in russian language",
   "reportEditedSuccess": "Report edited successfully",
-  "reportEditedFail": "There was a problem editing report. Please try again later"
+  "reportEditedFail": "There was a problem editing report. Please try again later",
 
+  "help": "Help",
+  "question": "Question",
+  "answer": "Answer",
+  "addFAQSuccess": "New help question added successfully",
+  "addFAQFail": "There was a problem creating new question. Please try again later"
 }
 

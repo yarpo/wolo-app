@@ -61,8 +61,9 @@ const URLS = {
   UNPUBLISH_REPORT: `${BASE_URL}/reports/unpublish`,
   DELETE_REPORT: `${BASE_URL}/reports/delete`,
 
-  FAQ: `${BASE_URL}/faq`
-
+  FAQ: `${BASE_URL}/faq`,
+  DELETE_FAQ: `${BASE_URL}/faq/delete`,
+  ADD_FAQ: `${BASE_URL}/faq/add`
 };
 
 module.exports = { URLS, BASE_URL };

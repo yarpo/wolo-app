@@ -205,6 +205,11 @@
   "reportUA": "Raport w języku ukraińskim",
   "reportRU": "Raport w języku rosyjskim",
   "reportEditedSuccess": "Raport został pomyślnie edytowany",
-  "reportEditedFail": "Wystąpił problem z edycją raportu. Proszę spróbować ponownie później"
-
+  "reportEditedFail": "Wystąpił problem z edycją raportu. Proszę spróbować ponownie później",
+  
+  "help": "Pomoc",
+  "question": "Pytanie",
+  "answer": "Odpowiedź",
+  "addFAQSuccess": "Nowe pytanie pomocy zostało pomyślnie dodane",
+  "addFAQFail": "Wystąpił problem podczas tworzenia nowego pytania. Proszę spróbować ponownie później"
 }
