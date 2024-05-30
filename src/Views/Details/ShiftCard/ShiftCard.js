@@ -39,7 +39,6 @@ const ShiftCard = ({ shift, city, isInPast }) => {
           if (data) {
             setRoles(data.roles);
             setId(data.id);
-            //setUserShifts(data.shifts.map(shift => shift.id));
 
             if(id){
                 fetchDataWithAuth(`${URLS.USER_EVENTS_CURRENT}`, setUserShifts, localStorage.getItem('token'));
@@ -49,9 +48,6 @@ const ShiftCard = ({ shift, city, isInPast }) => {
         })
       }, [id]);
 
-      console.log("rezerwa", userShiftsReserve.map(shift => shift.shiftId))
-      console.log("zwykla", userShifts.map(shift => shift.shiftId))
-  
     const handleUserConfirmation = async (confirmation) => {
         setUserConfirmed(confirmation);
     };
