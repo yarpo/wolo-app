@@ -205,6 +205,11 @@
   "reportUA": "Raport w języku ukraińskim",
   "reportRU": "Raport w języku rosyjskim",
   "reportEditedSuccess": "Raport został pomyślnie edytowany",
-  "reportEditedFail": "Wystąpił problem z edycją raportu. Proszę spróbować ponownie później"
+  "reportEditedFail": "Wystąpił problem z edycją raportu. Proszę spróbować ponownie później",
 
+  "fullShift": "Ta zmiana jest pełna. Możesz dołączyć do listy rezerwowej",
+  "joinReserveList": "Dołącz do listy rezerwowej",
+  "leaveReserveList": "Opuść listę rezerwową",
+  "noReserveEvents": "Nie jesteś na żadnych listach rezerwowych",
+  "yourEventsReserve": "Twoja lista rezerwowa"
 }
