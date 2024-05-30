@@ -148,6 +148,7 @@ const EventsTab = () => {
                                 <Table.Cell>{/* edit row */}
                                 {openEditModal && eventToEdit === event && <EditEvent onAccept={handleEdit} onClose={handleModalClose} eventData={event} />}
                                 <button className="edit-button" onClick={() =>{ setEditOpenModal(true);setEventToEdit(event);}}> Edit </button>
+                                </Table.Cell>
                                 <Table.Cell>
                                     {event.date > format(new Date(), 'yyyy-MM-dd') ?
                                     <button
