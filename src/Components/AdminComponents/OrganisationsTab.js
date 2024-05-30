@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { VscChevronDown, VscChevronUp } from 'react-icons/vsc';
+import { HiOutlineSearch } from "react-icons/hi";
 import { useTranslation } from 'react-i18next';
-import { Table } from "flowbite-react";
+import { Table, TextInput } from "flowbite-react";
 import fetchDataWithAuth from '../../Utils/fetchDataWithAuth.js';
 import postRequestWithJson from '../../Utils/postRequestWithJson.js';
 import Confirmation from '../Popups/Confirmation.js';
@@ -13,6 +14,7 @@ import postRequest from '../../Utils/postRequest.js';
 
 const OrganisationsTab = () => {
     const { t } = useTranslation();
+    const organisationDescription = `description${localStorage.getItem('i18nextLng').toUpperCase()}`;
     const [organisations, setOrganisations] = useState([]);
     const [openModal, setOpenModal] = useState(false);
     const [openIndex, setOpenIndex] = useState(null);
@@ -20,9 +22,27 @@ const OrganisationsTab = () => {
     const [userConfirmed, setUserConfirmed] = useState(false);
     const [organisationToDelete, setOrganisationToDelete] = useState(null);
 
+    const [filteredOrganisations, setFilteredOrganisations] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
+
     useEffect(() => {
-        fetchDataWithAuth(URLS.ORGANISATIONS_ADMIN, setOrganisations, localStorage.getItem('token'));
+        fetchDataWithAuth(URLS.ORGANISATIONS_ADMIN, (data) => {
+            setOrganisations(data);
+            setFilteredOrganisations(data);
+        }, localStorage.getItem('token'));
     }, []);
+
+    useEffect(() => {
+        if (searchQuery === '') {
+            setFilteredOrganisations(organisations);
+        } else {
+            setFilteredOrganisations(organisations.filter(organisation =>
+                organisation.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                organisation.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                organisation.phoneNumber.toLowerCase().includes(searchQuery.toLowerCase())
+            ));
+        }
+    }, [searchQuery, organisations]);
 
     const handleModalAccept = (data) => {
         setOpenModal(false);
@@ -61,6 +81,15 @@ const OrganisationsTab = () => {
 
     return (
         <div className="overflow-x-auto">
+            <div className="admin-panel-search-bar">
+                <TextInput
+                    type="text"
+                    placeholder="Search organisations"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    icon={HiOutlineSearch}
+                />
+            </div>
             <button className="confirm_button" onClick={() => setOpenModal(true)}> Add </button>
             {openModal && <AddOrganisation onAccept={handleModalAccept} onClose={handleModalClose} />}
             <Confirmation
@@ -82,7 +111,7 @@ const OrganisationsTab = () => {
                     <Table.HeadCell>Delete</Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
-                    {organisations.map((organisation, index) => (
+                    {filteredOrganisations.map((organisation, index) => (
                         <React.Fragment key={index}>
                             <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
                                 <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
@@ -137,7 +166,7 @@ const OrganisationsTab = () => {
                                     <Table.Cell colSpan="8">
                                         <div className="dropdown-content">
                                             <p><strong>Organisation Logo URL:</strong> {organisation.logoUrl}</p>
-                                            <p><strong>Organisation Description:</strong> {organisation.description}</p>
+                                            <p><strong>Organisation Description:</strong> {organisation[organisationDescription]}</p>
                                         </div>
                                     </Table.Cell>
                                 </Table.Row>
