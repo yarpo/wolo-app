@@ -193,7 +193,7 @@ const OrganisationsTab = () => {
                                                         <p><strong>Approved: </strong>{organisation.approved ? <HiCheck /> : <HiOutlineX />}</p>
                                                     </div>
                                                 </div>
-                                                <div className="grid-container-2">
+                                                <div className="grid-container">
                                                     <div className="grid-item">
                                                         <p><strong>Logo URL: </strong>{organisation.logoUrl}</p>
                                                     </div>

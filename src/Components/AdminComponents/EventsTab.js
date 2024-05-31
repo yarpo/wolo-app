@@ -2,13 +2,14 @@ import { useTranslation } from 'react-i18next';
 import React, { useState, useEffect } from 'react';
 import { VscChevronDown, VscChevronUp } from 'react-icons/vsc';
 import { HiOutlineSearch } from "react-icons/hi";
-import { TextInput } from "flowbite-react";
+import { TextInput, Card } from "flowbite-react";
 import '../../styles/admin-home-page.scss';
 import { format } from 'date-fns';
+import formatDate from '../../Utils/formatDate';
 
 import { URLS } from '../../config';
 import fetchData from '../../Utils/fetchData';
-import { HiTrash } from "react-icons/hi";
+import { HiTrash, HiCheck, HiOutlineX } from "react-icons/hi";
 
 import { Table } from "flowbite-react";
 import Confirmation from '../Popups/Confirmation';
@@ -45,18 +46,18 @@ const EventsTab = () => {
 
     const renderShiftDetails = (shifts) => {
         return shifts.map((shift, index) => (
-            <div key={index}>
-                <hr />
-                <p><strong>Shift {index + 1}:</strong></p>
-                <p><strong>Date:</strong> {shift.date}</p>
-                <p><strong>Time:</strong> {shift.startTime} - {shift.endTime}</p>
-                <p><strong>Capacity:</strong> {shift.capacity}</p>
-                <p><strong>Leader Required:</strong> {shift.isLeaderRequired ? 'YES' : 'NO'}</p>
-                <p><strong>Minimum Age:</strong> {shift.requiredMinAge ? shift.requiredMinAge : '-'}</p>
-                <p><strong>Location:</strong> {shift.shiftDirections ? shift.shiftDirections : '-'}</p>
-                <p><strong>Address:</strong> {shift.street}, {shift.homeNum}</p>
-                <p><strong>District ID:</strong> {shift.districtId}</p>
-            </div>
+            <Card className='admin-panel-shift-card-entry' key={index}>
+                <div>
+                    <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                        Shift {index + 1}:
+                    </h5>
+                    <p><strong>Time:</strong> {shift.startTime} - {shift.endTime}</p>
+                    <p><strong>Capacity:</strong> {shift.capacity}</p>
+                    <p><strong>Minimum Age:</strong> {shift.requiredMinAge ? shift.requiredMinAge : <HiOutlineX />}</p>
+                    <p><strong>Address directions:</strong> {shift.shiftDirections ? shift.shiftDirections : 'None'}</p>
+                    <p><strong>Address:</strong> {shift.street} {shift.homeNum} {shift.district}</p>
+                </div>
+            </Card>
         ));
     };
 
@@ -157,20 +158,49 @@ const EventsTab = () => {
                                 </Table.Cell>
                             </Table.Row>
                             {openIndex === index && (
-                                <tr>
-                                    <td colSpan="7">
-                                        <div className="dropdown-content">
-                                            <p><strong>{t('name')} - Polski:</strong> {event.namePL}</p>
-                                            <p><strong>{t('name')} - English:</strong> {event.nameEN}</p>
-                                            <p><strong>{t('name')} - Українська:</strong> {event.nameUA}</p>
-                                            <p><strong>{t('name')} - Русский:</strong> {event.nameRU}</p>
-                                            <hr />
-                                            <p><strong>Image URL:</strong> {event.imageUrl}</p>
-                                            <p><strong>Requires Pesel verification:</strong> {event.peselVerificationRequired ? 'YES' : 'NO'}</p>
-                                            <div>{renderShiftDetails(event.shifts)}</div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <Table.Cell colSpan="8">
+                                    <div className="dropdown-content">
+                                        <Card>
+                                            <div className="card-content">
+                                                <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">
+                                                    {event[eventName]}
+                                                </h5>
+                                                <div className="grid-container">
+                                                    <p><strong>Name - Polski: </strong>{event.namePL}</p>
+                                                    <p><strong>Name - English: </strong>{event.nameEN}</p>
+                                                    <p><strong>Name - Ukrainian: </strong>{event.nameUA}</p>
+                                                    <p><strong>Name - Russian: </strong>{event.nameRU}</p>
+                                                </div>
+                                                <div className="grid-container">
+                                                    <p><strong>Description - Polski: </strong>{event.descriptionPL}</p>
+                                                    <p><strong>Description - English: </strong>{event.descriptionEN}</p>
+                                                    <p><strong>Description - Ukrainian: </strong>{event.descriptionUA}</p>
+                                                    <p><strong>Description - Russian: </strong>{event.descriptionRU}</p>
+                                                </div>
+                                                <div className="grid-container-2">
+                                                    <div className="grid-item">
+                                                        <p><strong>City: </strong>{event.city}</p>
+                                                    </div>
+                                                    <div className="grid-item">
+                                                        <p><strong>Date: </strong>{formatDate(event.date)}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="grid-container-2">
+                                                    <div className="grid-item">
+                                                        <p><strong>Pesel Verification: </strong>{event.peselVerification ? <HiCheck /> : <HiOutlineX />}</p>
+                                                    </div>
+                                                    <div className="grid-item">
+                                                        <p><strong>Agreement Signed: </strong>{event.agreementSigned ? <HiCheck /> : <HiOutlineX />}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="grid-container">
+                                                    <p><strong>Image URL: </strong>{event.imageUrl}</p>
+                                                </div>
+                                                <div className='admin-panel-shift-card'>{renderShiftDetails(event.shifts)}</div>
+                                            </div>
+                                        </Card>
+                                    </div>
+                                </Table.Cell>
                             )}
                         </React.Fragment>
                     ))}
