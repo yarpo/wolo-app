@@ -26,7 +26,7 @@ const MailForgotPassword = () => {
             };
 
             console.log(data)
-            putRequestNoAuth(URLS.FORGOT_PASSWORD, data, t('resetPasswordSuccess'), t('resetPasswordFail'))
+            putRequestNoAuth(URLS.FORGOT_PASSWORD, data, t('mailResetPasswordSuccess'), t('somethingWentWrong'))
         } else {
             toast.error("Invalid email");
         }

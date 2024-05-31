@@ -12,7 +12,6 @@ const putRequestNoAuth = async (url, data, success, error, redirect) => {
     
     if (response.ok) {
         toast.success(`${success}`);
-        window.location.reload();
         if(redirect !== undefined){
         window.location.href = redirect;
         }

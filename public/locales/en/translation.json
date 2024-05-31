@@ -201,5 +201,8 @@
   "createNewPassword": "Create new password",
   "passwordResetTip": "Make sure to use strong password - include capital letters, numbers and special characters",
   "changePassword": "Change",
-  "sendEmail": "Send email"
+  "sendEmail": "Send email",
+  "somethingWentWrong": "Something went wrong, please try again later",
+  "mailResetPasswordSuccess": "An email to reset your password has been sent to your inbox. Click on the link to complete resetting your password",
+  "resetPasswordSuccess": "Password successfully changed. You can now log in with your new password"
 }

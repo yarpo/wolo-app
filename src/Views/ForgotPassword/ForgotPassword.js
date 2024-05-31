@@ -34,7 +34,7 @@ const ForgotPassword = () => {
             };
 
             console.log(data)
-            putRequestNoAuth(URLS.SET_PASSWORD, data, t('resetPasswordSuccess'), t('resetPasswordFail'))
+            putRequestNoAuth(URLS.SET_PASSWORD, data, t('resetPasswordSuccess'), t('somethingWentWrong'))
         } else {
             toast.error("Passwords don't match");
         }

@@ -201,5 +201,8 @@
   "createNewPassword": "Utwórz nowe hasło",
   "passwordResetTip": "Upewnij się, że używasz silnego hasła - zawierającego wielkie litery, cyfry i znaki specjalne",
   "changePassword": "Zmień",
-  "sendEmail": "Wyślij e-mail"
+  "sendEmail": "Wyślij e-mail",
+  "somethingWentWrong": "Coś poszło nie tak, spróbuj ponownie później",
+  "mailResetPasswordSuccess": "E-mail do zresetowania hasła został wysłany na Twoją skrzynkę pocztową. Kliknij na link, aby dokończyć resetowanie hasła",
+  "resetPasswordSuccess": "Hasło zostało pomyślnie zmienione. Teraz możesz zalogować się przy użyciu nowego hasła"
 }
