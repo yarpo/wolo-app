@@ -123,7 +123,7 @@ const OrganisationsTab = () => {
                                 <Table.Cell>{organisation.email}</Table.Cell>
                                 <Table.Cell>{organisation.phoneNumber}</Table.Cell>
                                 <Table.Cell>{organisation.street} {organisation.homeNum}</Table.Cell>
-                                <Table.Cell>{organisation.approved ? "Yes" : "No"}</Table.Cell>
+                                <Table.Cell>{organisation.approved ? <HiCheck /> : <HiOutlineX />}</Table.Cell>
                                 <Table.Cell>
                                     <button
                                         className="details-toggle"
