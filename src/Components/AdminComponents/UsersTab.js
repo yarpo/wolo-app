@@ -4,8 +4,8 @@ import { VscChevronDown, VscChevronUp } from 'react-icons/vsc';
 import { HiOutlineSearch } from "react-icons/hi";
 import '../../styles/admin-home-page.scss';
 import { URLS } from '../../config';
-import { HiTrash, HiOutlinePlus  } from "react-icons/hi";
-import { Table, TextInput } from "flowbite-react";
+import { HiTrash, HiOutlinePlus, HiCheck, HiOutlineX} from "react-icons/hi";
+import { Table, TextInput, Card } from "flowbite-react";
 
 import AddUser from './addRecordModals/AddUser.js';
 import Confirmation from '../Popups/Confirmation.js';
@@ -156,15 +156,44 @@ const UsersTab = () => {
                                 </Table.Cell>
                             </Table.Row>
                             {openIndex === index && (
-                                <Table.Row>
-                                    <Table.Cell colSpan="8">
-                                        <div className="dropdown-content">
-                                        <p><strong>Is adult: </strong>{user.adult ? 'YES' : 'NO'}</p>
-                                        <p><strong>Agreement Signed: </strong>{user.agreementSigned ? 'YES' : 'NO'}</p>
-                                        <p><strong>PESEL Verified: </strong>{user.peselVerified ? 'YES' : 'NO'}</p>
-                                        </div>
-                                    </Table.Cell>
-                                </Table.Row>
+                                <Table.Cell colSpan="8">
+                                    <div className="dropdown-content">
+                                        <Card>
+                                            <div className="card-content">
+                                                <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">
+                                                    {user.firstName} {user.lastName}
+                                                </h5>
+                                                <div className="grid-container-2">
+                                                    <div className="grid-item">
+                                                        <p><strong>Email: </strong>{user.email}</p>
+                                                    </div>
+                                                    <div className="grid-item">
+                                                        <p><strong>Phone: </strong>{user.phoneNumber}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="grid-container-2">
+                                                    <div className="grid-item">
+                                                        <p><strong>Organisation: </strong>{user.organisationName ? user.organisationName : 'None'}</p>
+                                                    </div>
+                                                    <div className="grid-item">
+                                                        <p><strong>Roles: </strong>{user.roles.join(', ')}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="grid-container-3">
+                                                    <div className="grid-item">
+                                                        <p><strong>Is adult: </strong>{user.adult ? <HiCheck /> : <HiOutlineX />}</p>
+                                                    </div>
+                                                    <div className="grid-item">
+                                                        <p><strong>Agreement Signed: </strong>{user.agreementSigned ? <HiCheck /> : <HiOutlineX />}</p>
+                                                    </div>
+                                                    <div className="grid-item">
+                                                        <p><strong>PESEL Verified: </strong>{user.peselVerified ? <HiCheck /> : <HiOutlineX />}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </Card>
+                                    </div>
+                                </Table.Cell>
                             )}
                         </React.Fragment>
                     ))}
