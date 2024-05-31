@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { VscChevronDown, VscChevronUp } from 'react-icons/vsc';
 import { HiOutlineSearch } from "react-icons/hi";
 import { useTranslation } from 'react-i18next';
-import { Table, TextInput } from "flowbite-react";
+import { Table, TextInput, Card } from "flowbite-react";
 import fetchDataWithAuth from '../../Utils/fetchDataWithAuth.js';
 import postRequestWithJson from '../../Utils/postRequestWithJson.js';
 import Confirmation from '../Popups/Confirmation.js';
 import { URLS } from '../../config';
-import { HiTrash, HiOutlinePlus } from "react-icons/hi";
+import { HiTrash, HiOutlinePlus, HiCheck, HiOutlineX } from "react-icons/hi";
 
 import '../../styles/admin-home-page.scss';
 import AddOrganisation from './addRecordModals/AddOrganisation.js';
@@ -15,7 +15,6 @@ import postRequest from '../../Utils/postRequest.js';
 
 const OrganisationsTab = () => {
     const { t } = useTranslation();
-    const organisationDescription = `description${localStorage.getItem('i18nextLng').toUpperCase()}`;
     const [organisations, setOrganisations] = useState([]);
     const [openModal, setOpenModal] = useState(false);
     const [openIndex, setOpenIndex] = useState(null);
@@ -165,14 +164,44 @@ const OrganisationsTab = () => {
                                 </Table.Cell>
                             </Table.Row>
                             {openIndex === index && (
-                                <Table.Row>
-                                    <Table.Cell colSpan="8">
-                                        <div className="dropdown-content">
-                                            <p><strong>Organisation Logo URL:</strong> {organisation.logoUrl}</p>
-                                            <p><strong>Organisation Description:</strong> {organisation[organisationDescription]}</p>
-                                        </div>
-                                    </Table.Cell>
-                                </Table.Row>
+                                <Table.Cell colSpan="8">
+                                    <div className="dropdown-content">
+                                        <Card>
+                                            <div className="card-content">
+                                                <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">
+                                                    {organisation.name}
+                                                </h5>
+                                                <div className="grid-container-2">
+                                                    <p><strong>Description - Polski: </strong>{organisation.descriptionPL}</p>
+                                                    <p><strong>Description - English: </strong>{organisation.descriptionEN}</p>
+                                                    <p><strong>Description - Ukrainian: </strong>{organisation.descriptionUA}</p>
+                                                    <p><strong>Description - Russian: </strong>{organisation.descriptionRU}</p>
+                                                </div>
+                                                <div className="grid-container-2">
+                                                    <div className="grid-item">
+                                                        <p><strong>Email: </strong>{organisation.email}</p>
+                                                    </div>
+                                                    <div className="grid-item">
+                                                        <p><strong>Phone: </strong>{organisation.phoneNumber}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="grid-container-2">
+                                                    <div className="grid-item">
+                                                        <p><strong>Address: </strong>{organisation.street} {organisation.homeNum}</p>
+                                                    </div>
+                                                    <div className="grid-item">
+                                                        <p><strong>Approved: </strong>{organisation.approved ? <HiCheck /> : <HiOutlineX />}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="grid-container-2">
+                                                    <div className="grid-item">
+                                                        <p><strong>Logo URL: </strong>{organisation.logoUrl}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </Card>
+                                    </div>
+                                </Table.Cell>
                             )}
                         </React.Fragment>
                     ))}
