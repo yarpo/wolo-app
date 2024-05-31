@@ -194,5 +194,12 @@
   "reportUA": "Raport w języku ukraińskim",
   "reportRU": "Raport w języku rosyjskim",
   "reportEditedSuccess": "Raport został pomyślnie edytowany",
-  "reportEditedFail": "Wystąpił problem z edycją raportu. Proszę spróbować ponownie później"
+  "reportEditedFail": "Wystąpił problem z edycją raportu. Proszę spróbować ponownie później",
+
+  "resetPassword": "Zresetuj hasło",
+  "forgotPasswordTip": "Proszę podać adres e-mail, aby zresetować hasło",
+  "createNewPassword": "Utwórz nowe hasło",
+  "passwordResetTip": "Upewnij się, że używasz silnego hasła - zawierającego wielkie litery, cyfry i znaki specjalne",
+  "changePassword": "Zmień",
+  "sendEmail": "Wyślij e-mail"
 }
