@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import React, { useState, useEffect } from 'react';
 import { VscChevronDown, VscChevronUp } from 'react-icons/vsc';
 import { HiOutlineSearch } from "react-icons/hi";
-import { TextInput } from "flowbite-react";
+import { TextInput, Card } from "flowbite-react";
 import '../../styles/admin-home-page.scss';
 
 import { URLS } from '../../config';
@@ -151,20 +151,29 @@ const FAQTab = () => {
                                 </Table.Cell>
                             </Table.Row>
                             {openIndex === index && (
-                                <tr>
-                                    <td colSpan="7">
-                                        <div className="dropdown-content">
-                                            <p><strong>{t('question')} - Polski:</strong> {question.questionPL}</p>
-                                            <p><strong>{t('question')} - English:</strong> {question.questionEN}</p>
-                                            <p><strong>{t('question')} - Українська:</strong> {question.questionUA}</p>
-                                            <p><strong>{t('question')} - Русский:</strong> {question.questionRU}</p>
-                                            <p><strong>{t('answer')} - Polski:</strong> {question.answerPL}</p>
-                                            <p><strong>{t('answer')} - English:</strong> {question.answerEN}</p>
-                                            <p><strong>{t('answer')} - Українська:</strong> {question.answerUA}</p>
-                                            <p><strong>{t('answer')} - Русский:</strong> {question.answerRU}</p>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <Table.Cell colSpan="8">
+                                    <div className="dropdown-content">
+                                        <Card>
+                                            <div className="card-content">
+                                                <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">
+                                                    {question[questionName]}
+                                                </h5>
+                                                <div className="grid-container">
+                                                    <p><strong>{t('question')} - Polski:</strong> {question.questionPL}</p>
+                                                    <p><strong>{t('question')} - English:</strong> {question.questionEN}</p>
+                                                    <p><strong>{t('question')} - Українська:</strong> {question.questionUA}</p>
+                                                    <p><strong>{t('question')} - Русский:</strong> {question.questionRU}</p>
+                                                </div>
+                                                <div className="grid-container">
+                                                    <p><strong>{t('answer')} - Polski:</strong> {question.answerPL}</p>
+                                                    <p><strong>{t('answer')} - English:</strong> {question.answerEN}</p>
+                                                    <p><strong>{t('answer')} - Українська:</strong> {question.answerUA}</p>
+                                                    <p><strong>{t('answer')} - Русский:</strong> {question.answerRU}</p>
+                                                </div>
+                                            </div>
+                                        </Card>
+                                    </div>
+                                </Table.Cell>
                             )}
                         </React.Fragment>
                     ))}
