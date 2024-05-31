@@ -151,6 +151,8 @@
 
   "cities": "Miasta",
 
+  "cancelEvent": "Czy na pewno chcesz anulować wydarzenie: ",
+  "acceptCancelEvent": "Tak, anuluj wydarzenie",
   "peselVerified": "PESEL zweryfikowany",
   "agreementSigned": "Umowa podpisana",
   "isAdult": "Pełnoletni",
@@ -173,6 +175,15 @@
 
   "defaultImageForEvent": "Obrazek główny do wydarzenia",
 
+
+  "organiserSettings": "Ustawienia organizacji",
+  "logoUrl": "URL logo",
+  "organisationDataEditedSuccess": "Twoja organizacja została pomyślnie zaktualizowana",
+  "organisationDataEditedFail": "Wystąpił problem z edytowaniem organizacji. Proszę spróbować ponownie później",
+  "city": "Miasto",
+
+  "name": "Name",
+  
   "report": "Raport",
   "reports": "Raporty",
   "publish": "Opublikować",
@@ -205,5 +216,11 @@
   "somethingWentWrong": "Coś poszło nie tak, spróbuj ponownie później",
   "mailResetPasswordSuccess": "E-mail do zresetowania hasła został wysłany na Twoją skrzynkę pocztową. Kliknij na link, aby dokończyć resetowanie hasła",
   "resetPasswordSuccess": "Hasło zostało pomyślnie zmienione. Teraz możesz zalogować się przy użyciu nowego hasła",
-  "passwordsHaveToMatch": "Hasła muszą się zgadzać"
+  "passwordsHaveToMatch": "Hasła muszą się zgadzać",
+  
+  "help": "Pomoc",
+  "question": "Pytanie",
+  "answer": "Odpowiedź",
+  "addFAQSuccess": "Nowe pytanie pomocy zostało pomyślnie dodane",
+  "addFAQFail": "Wystąpił problem podczas tworzenia nowego pytania. Proszę spróbować ponownie później"
 }

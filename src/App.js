@@ -17,26 +17,27 @@ import TheyNeedYouEvents from './Views/TheyNeedYou/TheyNeedYou.js';
 import Navbar from './Components/Navbar/Navbar';
 import ReportPage from './Views/Reports/Reports.js';
 import { FiltersProvider } from './Components/Filters/FiltersContext';
-import fetchUserRoles from './Utils/fetchUserRoles.js';
+import fetchUser from './Utils/fetchUser.js';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import Settings from './Views/Settings/Settings.js';
+import OrganiserSettings from './Views/OrganiserSettings/OrganiserSettings.js';
 import ForVolunteers from './Views/ForVolunteers/ForVolunteers.js';
 import ForgotPassword from './Views/ForgotPassword/ForgotPassword.js';
 import MailForgotPassword from './Views/ForgotPassword/MailForgotPassword.js';
 
 function App() {
   const [role, setRole] = useState(null);
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
-  const [token, setToken] = useState(localStorage.getItem('token'));
+  const [, setUser] = useState(JSON.parse(localStorage.getItem('user')));
+  const [, setToken] = useState(localStorage.getItem('token'));
 
   useEffect(() => {
-    if (token) {
-      fetchUserRoles()
-        .then(roles => setRole(roles))
-        .catch(error => console.error('Error: No information about the user', error));
-    }
-  }, [token, user]);
+    fetchUser().then(data => {
+      if (data) {
+        setRole(data.roles);
+      }
+    })
+  }, []);
 
   return (
     <>
@@ -58,6 +59,7 @@ function App() {
             <Route path="/forgot-password" element={<MailForgotPassword />} />
             {role && role.includes('MODERATOR') && <Route path="/reports" element={<ReportPage />} />}
             {role && role.includes('MODERATOR') && <Route path="/organiserHomePage" element={<OrganiserHomePage />} />}
+            {role && role.includes('MODERATOR') && <Route path="/organiserSettings" element={<OrganiserSettings />} />}
             {role && role.includes('ADMIN') && <Route path="/adminHomePage" element={<AdminHomePage />} />}
             {role && role.includes('USER') && <Route path="/volunteerHomePage" element={<VolunteerHomePage />} />}
             {role && role.includes('MODERATOR') && <Route path="/createEvent" element={<OrganiserCreateEvent />} />}

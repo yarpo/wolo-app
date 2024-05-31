@@ -4,60 +4,57 @@ import { VscChevronDown, VscChevronUp } from 'react-icons/vsc';
 import { HiOutlineSearch } from "react-icons/hi";
 import { TextInput } from "flowbite-react";
 import '../../styles/admin-home-page.scss';
-import { format } from 'date-fns';
 
 import { URLS } from '../../config';
 import fetchData from '../../Utils/fetchData';
 
 import { Table } from "flowbite-react";
 import Confirmation from '../Popups/Confirmation';
+import AddFAQ from './addRecordModals/AddFAQ';
 import deleteRequest from '../../Utils/deleteRequest';
+import postRequestWithJson from '../../Utils/postRequestWithJson';
 
-const EventsTab = () => {
+const FAQTab = () => {
     const { t } = useTranslation();
-    const eventName = `name${localStorage.getItem('i18nextLng').toUpperCase()}`;
-    const [events, setEvents] = useState([]);
-    const [filteredEvents, setFilteredEvents] = useState([]);
     const [openIndex, setOpenIndex] = useState(null);
+    const [openModal, setOpenModal] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [userConfirmed, setUserConfirmed] = useState(false);
-    const [eventToDelete, setEventToDelete] = useState(null);
+    const [questionToDelete, setQuestionToDelete] = useState(null);
+    const [questions, setQuestions] = useState([]);
+    const [filteredQuestions, setFilteredQuestions] = useState([]);
+    const questionName = t(`question${localStorage.getItem('i18nextLng').toUpperCase()}`);
+    const answerName = t(`answer${localStorage.getItem('i18nextLng').toUpperCase()}`);
 
     useEffect(() => {
-        fetchData(URLS.EVENTS, (data) => {
-            setEvents(data);
-            setFilteredEvents(data);
+        fetchData(URLS.FAQ, (data) => {
+            setQuestions(data);
+            setFilteredQuestions(data);
         });
     }, []);
 
     useEffect(() => {
         if (searchQuery === '') {
-            setFilteredEvents(events);
+            setFilteredQuestions(questions);
         } else {
-            setFilteredEvents(events.filter(event =>
-                event[eventName].toLowerCase().includes(searchQuery.toLowerCase()) ||
-                event.organisation.toLowerCase().includes(searchQuery.toLowerCase())
+            setFilteredQuestions(questions.filter(question =>
+                question[questionName].toLowerCase().includes(searchQuery.toLowerCase()) ||
+                question[answerName].toLowerCase().includes(searchQuery.toLowerCase())
             ));
         }
-    }, [searchQuery, events]);
+    }, [searchQuery, questions]);
 
-    const renderShiftDetails = (shifts) => {
-        return shifts.map((shift, index) => (
-            <div key={index}>
-                <hr />
-                <p><strong>Shift {index + 1}:</strong></p>
-                <p><strong>Date:</strong> {shift.date}</p>
-                <p><strong>Time:</strong> {shift.startTime} - {shift.endTime}</p>
-                <p><strong>Capacity:</strong> {shift.capacity}</p>
-                <p><strong>Leader Required:</strong> {shift.isLeaderRequired ? 'YES' : 'NO'}</p>
-                <p><strong>Minimum Age:</strong> {shift.requiredMinAge ? shift.requiredMinAge : '-'}</p>
-                <p><strong>Location:</strong> {shift.shiftDirections ? shift.shiftDirections : '-'}</p>
-                <p><strong>Address:</strong> {shift.street}, {shift.homeNum}</p>
-                <p><strong>District ID:</strong> {shift.districtId}</p>
-            </div>
-        ));
+    const handleModalAccept = (data) => {
+        setOpenModal(false);
+
+        postRequestWithJson(`${URLS.ADD_FAQ}?language=${localStorage.getItem('i18nextLng').toLocaleUpperCase()}`, 
+                                localStorage.getItem('token'), data, t('addFAQSuccess'), t('addFAQFail'));
     };
+
+    const handleModalClose = () => {
+        setOpenModal(false);
+    }
 
     const toggleDetails = (index) => {
         setOpenIndex(openIndex === index ? null : index);
@@ -76,8 +73,8 @@ const EventsTab = () => {
     }, [userConfirmed]); 
 
     const handleDelete = () => {
-        deleteRequest(`${URLS.DELETE_EVENT}/${eventToDelete}`, localStorage.getItem('token'), "Deleted", "Fail")
-        setEventToDelete(null);
+        deleteRequest(`${URLS.DELETE_FAQ}/${questionToDelete}`, localStorage.getItem('token'), "Deleted", "Fail")
+        setQuestionToDelete(null);
         setConfirmDelete(false);
     };
 
@@ -86,33 +83,31 @@ const EventsTab = () => {
             <div className="admin-panel-search-bar">
                 <TextInput
                     type="text"
-                    placeholder="Search events"
+                    placeholder="Search questions"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     icon={HiOutlineSearch}
                 />
             </div>
+            <button className="confirm_button" onClick={() => setOpenModal(true)}> Add </button>
+            {openModal && <AddFAQ onAccept={handleModalAccept} onClose={handleModalClose} />}
             <Table striped>
                 <Table.Head>
                     <Table.HeadCell>ID</Table.HeadCell>
-                    <Table.HeadCell>Name</Table.HeadCell>
-                    <Table.HeadCell>Organisation</Table.HeadCell>
-                    <Table.HeadCell>{t('categories')}</Table.HeadCell>
-                    <Table.HeadCell>City</Table.HeadCell>
+                    <Table.HeadCell>{t('question')}</Table.HeadCell>
+                    <Table.HeadCell>{t('answer')}</Table.HeadCell>
                     <Table.HeadCell>More</Table.HeadCell>
                     <Table.HeadCell>{t('delete')}</Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
-                    {filteredEvents.map((event, index) => (
+                    {filteredQuestions.map((question, index) => (
                         <React.Fragment key={index}>
                             <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
                                 <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                                    {event.id}
+                                    {question.id}
                                 </Table.Cell>
-                                <Table.Cell>{event[eventName]}</Table.Cell>
-                                <Table.Cell>{event.organisation}</Table.Cell>
-                                <Table.Cell>{event.categories.map((category, index) => index === event.categories.length - 1 ? category : category + ", ")}</Table.Cell>
-                                <Table.Cell>{event.city}</Table.Cell>
+                                <Table.Cell>{question[questionName]}</Table.Cell>
+                                <Table.Cell>{question[answerName]}</Table.Cell>
                                 <Table.Cell>
                                     <button
                                         className="details-toggle"
@@ -123,16 +118,15 @@ const EventsTab = () => {
                                     </button>
                                 </Table.Cell>
                                 <Table.Cell>
-                                    {event.date > format(new Date(), 'yyyy-MM-dd') ?
                                     <button
                                         className="delete-button"
                                         onClick={() => {
                                             setConfirmDelete(true);
-                                            setEventToDelete(event.id);
+                                            setQuestionToDelete(question.id);
                                         }}
                                     >
                                         <span>Delete</span>
-                                    </button> : <p>Past event</p>}
+                                    </button>
                                     <Confirmation
                                         id="sign-off"
                                         buttonName="Delete"
@@ -146,7 +140,7 @@ const EventsTab = () => {
                                         }}
                                         onDeny={() => {
                                             setConfirmDelete(false);
-                                            setEventToDelete(null);
+                                            setQuestionToDelete(null);
                                         }}
                                         openModal={confirmDelete}
                                         setOpenModal={setConfirmDelete}
@@ -157,14 +151,14 @@ const EventsTab = () => {
                                 <tr>
                                     <td colSpan="7">
                                         <div className="dropdown-content">
-                                            <p><strong>{t('name')} - Polski:</strong> {event.namePL}</p>
-                                            <p><strong>{t('name')} - English:</strong> {event.nameEN}</p>
-                                            <p><strong>{t('name')} - Українська:</strong> {event.nameUA}</p>
-                                            <p><strong>{t('name')} - Русский:</strong> {event.nameRU}</p>
-                                            <hr />
-                                            <p><strong>Image URL:</strong> {event.imageUrl}</p>
-                                            <p><strong>Requires Pesel verification:</strong> {event.peselVerificationRequired ? 'YES' : 'NO'}</p>
-                                            <div>{renderShiftDetails(event.shifts)}</div>
+                                            <p><strong>{t('question')} - Polski:</strong> {question.questionPL}</p>
+                                            <p><strong>{t('question')} - English:</strong> {question.questionEN}</p>
+                                            <p><strong>{t('question')} - Українська:</strong> {question.questionUA}</p>
+                                            <p><strong>{t('question')} - Русский:</strong> {question.questionRU}</p>
+                                            <p><strong>{t('answer')} - Polski:</strong> {question.answerPL}</p>
+                                            <p><strong>{t('answer')} - English:</strong> {question.answerEN}</p>
+                                            <p><strong>{t('answer')} - Українська:</strong> {question.answerUA}</p>
+                                            <p><strong>{t('answer')} - Русский:</strong> {question.answerRU}</p>
                                         </div>
                                     </td>
                                 </tr>
@@ -177,4 +171,4 @@ const EventsTab = () => {
     );
 };
 
-export default EventsTab;
+export default FAQTab;

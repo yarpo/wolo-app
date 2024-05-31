@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import '../../styles/hero.scss';
-import fetchUserRoles from '../../Utils/fetchUserRoles.js';
+import fetchUser from '../../Utils/fetchUser';
 
 const WelcomingBanner = ({ isOrganizerPage, organisationName }) => {
     const { t } = useTranslation();
@@ -11,13 +11,12 @@ const WelcomingBanner = ({ isOrganizerPage, organisationName }) => {
     const isModerator = roles && roles.includes('MODERATOR');
 
     useEffect(() => {
-        const fetchUserData = async () => {
-          const userRoles = await fetchUserRoles();
-          setRoles(userRoles);
-        };
-    
-        fetchUserData();
-      }, []);
+        fetchUser().then(data => {
+            if (data) {
+            setRoles(data.roles);
+            }
+        })
+    }, []);
     
 
     return (
