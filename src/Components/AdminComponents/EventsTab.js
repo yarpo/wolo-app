@@ -126,7 +126,7 @@ const EventsTab = () => {
                                         <span className="dropdown-label"></span>
                                     </button>
                                 </Table.Cell>
-                                <Table.Cell>
+                                <Table.Cell className="table-cell-action">
                                     {event.date > format(new Date(), 'yyyy-MM-dd') ?
                                     <button
                                         className="delete-button"

@@ -101,7 +101,7 @@ const CategoriesTab = () => {
                                 {category.id}
                             </Table.Cell>
                             <Table.Cell>{category.name}</Table.Cell>
-                            <Table.Cell>
+                            <Table.Cell className="table-cell-action">
                                 <button
                                     className="delete-button"
                                     onClick={() => {

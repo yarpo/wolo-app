@@ -132,6 +132,22 @@
         gap: 0.5rem; 
     }
 
+    .table-cell-action {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 0.5rem; 
+    }
+    
+    .delete-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+    }
+
     .admin-panel-shift-card {
         margin: 20px;
         display: flex;

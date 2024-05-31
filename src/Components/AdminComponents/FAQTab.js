@@ -120,7 +120,7 @@ const FAQTab = () => {
                                         <span className="dropdown-label"></span>
                                     </button>
                                 </Table.Cell>
-                                <Table.Cell>
+                                <Table.Cell className="table-cell-action">
                                     <button
                                         className="delete-button"
                                         onClick={() => {
