@@ -204,5 +204,6 @@
   "sendEmail": "Send email",
   "somethingWentWrong": "Something went wrong, please try again later",
   "mailResetPasswordSuccess": "An email to reset your password has been sent to your inbox. Click on the link to complete resetting your password",
-  "resetPasswordSuccess": "Password successfully changed. You can now log in with your new password"
+  "resetPasswordSuccess": "Password successfully changed. You can now log in with your new password",
+  "passwordsHaveToMatch": "Passwords must match"
 }

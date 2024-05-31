@@ -204,5 +204,6 @@
   "sendEmail": "Wyślij e-mail",
   "somethingWentWrong": "Coś poszło nie tak, spróbuj ponownie później",
   "mailResetPasswordSuccess": "E-mail do zresetowania hasła został wysłany na Twoją skrzynkę pocztową. Kliknij na link, aby dokończyć resetowanie hasła",
-  "resetPasswordSuccess": "Hasło zostało pomyślnie zmienione. Teraz możesz zalogować się przy użyciu nowego hasła"
+  "resetPasswordSuccess": "Hasło zostało pomyślnie zmienione. Teraz możesz zalogować się przy użyciu nowego hasła",
+  "passwordsHaveToMatch": "Hasła muszą się zgadzać"
 }
