@@ -49,6 +49,8 @@ const URLS = {
   DELETE_REPORT: `${BASE_URL}/reports/delete`,
 
   LOGIN: LOGIN_URL,
+  SET_PASSWORD: `${BASE_URL}/auth/set-password`,
+  FORGOT_PASSWORD: `${BASE_URL}/auth/forgot-password`,
 
   FAQ: `${BASE_URL}/faq`
 };

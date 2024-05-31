@@ -6,8 +6,10 @@ import { useLocation } from 'react-router-dom';
 import { Card, Label, TextInput } from "flowbite-react";
 import '../../styles/reset-password.scss';
 import { toast } from 'react-toastify';
-//import putRequest from '../../Utils/putRequest';
-//import { URLS } from '../../config';
+import putRequestNoAuth from '../../Utils/putRequestNoAuth';
+import { URLS } from '../../config';
+import {VscArrowLeft} from 'react-icons/vsc';
+import { Link } from 'react-router-dom';
 
 const ForgotPassword = () => {
     const { t } = useTranslation();
@@ -32,32 +34,45 @@ const ForgotPassword = () => {
             };
 
             console.log(data)
-            //putRequest(URLS.RESET_PASSWORD, localStorage.getItem('token'), data, t('resetPasswordSuccess'), t('resetPasswordFail'))
+            putRequestNoAuth(URLS.SET_PASSWORD, data, t('resetPasswordSuccess'), t('resetPasswordFail'))
         } else {
             toast.error("Passwords don't match");
         }
     }
 
     return (
-        <div className="reset-password-container">
-            <Card>
-                <h2>{t('resetPassword')}</h2>
-                <form className="flex max-w-md flex-col gap-4" onSubmit={handlePasswordChange}>
-                    <div>
-                        <div className="mb-2 block">
-                            <Label htmlFor="new-password" value="New password" />
+        <div className='reset-password'>
+            <Link to="/login" id="back">
+                <VscArrowLeft id="back_arrow" /> {t('back')}
+            </Link>
+            <div className="reset-password-container">
+                <Card className='reset-password-card'>
+                    <h2>{t('createNewPassword')}</h2>
+                    <p className='reset-password-tip'> 
+                        {t('passwordResetTip')}
+                    </p>
+                    <form className="flex max-w-md flex-col gap-4" onSubmit={handlePasswordChange}>
+                        <div>
+                            <div className="mb-2 block">
+                                <Label htmlFor="new-password" value="New password" />
+                            </div>
+                            <TextInput id="new-password" ref={newPasswordInputRef} type="password" required />
                         </div>
-                        <TextInput id="new-password" ref={newPasswordInputRef} type="password" required />
-                    </div>
-                    <div>
-                        <div className="mb-2 block">
-                            <Label htmlFor="new-password-confirm" value="Confirm new password" />
+                        <div>
+                            <div className="mb-2 block">
+                                <Label htmlFor="new-password-confirm" value="Confirm new password" />
+                            </div>
+                            <TextInput id="new-password-confirm" ref={confirmNewPasswordInputRef} type="password" required />
                         </div>
-                        <TextInput id="new-password-confirm" ref={confirmNewPasswordInputRef} type="password" required />
-                    </div>
-                    <button type="submit" className='confirm_button'>{t('submit')}</button>
-                </form>
-            </Card>
+                        <div className='reset-password-buttons'>
+                            <button type="submit" className='confirm_button' id='reset-password-btn'>{t('changePassword')}</button>
+                            <Link to="/login" id="back">
+                                <button className='white_button' id='reset-password-btn'>{t('cancelLeave')}</button>
+                            </Link>
+                        </div>
+                    </form>
+                </Card>
+            </div>
         </div>
     );
 };
