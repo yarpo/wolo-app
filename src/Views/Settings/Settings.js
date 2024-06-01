@@ -212,7 +212,7 @@ const Settings = () => {
                         {t('edit')}
                     </button>
                 )}
-                <Link to='/resetPassword'>
+                <Link to='/change-password'>
                     <button className="white_button">
                         {t('resetPassword')}
                     </button>

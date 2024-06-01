@@ -54,13 +54,13 @@ const ForgotPassword = () => {
                     <form className="flex max-w-md flex-col gap-4" onSubmit={handlePasswordChange}>
                         <div>
                             <div className="mb-2 block">
-                                <Label htmlFor="new-password" value="New password" />
+                                <Label htmlFor="new-password" value={t('newPassword')} />
                             </div>
                             <TextInput id="new-password" ref={newPasswordInputRef} type="password" required />
                         </div>
                         <div>
                             <div className="mb-2 block">
-                                <Label htmlFor="new-password-confirm" value="Confirm new password" />
+                                <Label htmlFor="new-password-confirm" value={t('confirmPassword')} />
                             </div>
                             <TextInput id="new-password-confirm" ref={confirmNewPasswordInputRef} type="password" required />
                         </div>

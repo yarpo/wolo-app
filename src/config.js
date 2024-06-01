@@ -55,7 +55,7 @@ const URLS = {
   UNPUBLISH_REPORT: `${BASE_URL}/reports/unpublish`,
   DELETE_REPORT: `${BASE_URL}/reports/delete`,
 
-  RESET_PASSWORD: `${BASE_URL}/check-password`,
+  RESET_PASSWORD: `${BASE_URL}/auth/change-password`,
   SET_PASSWORD: `${BASE_URL}/auth/set-password`,
   FORGOT_PASSWORD: `${BASE_URL}/auth/forgot-password`,
 
