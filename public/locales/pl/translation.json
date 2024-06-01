@@ -206,6 +206,17 @@
   "reportRU": "Raport w języku rosyjskim",
   "reportEditedSuccess": "Raport został pomyślnie edytowany",
   "reportEditedFail": "Wystąpił problem z edycją raportu. Proszę spróbować ponownie później",
+
+  "resetPassword": "Zresetuj hasło",
+  "forgotPasswordTip": "Proszę podać adres e-mail, aby zresetować hasło",
+  "createNewPassword": "Utwórz nowe hasło",
+  "passwordResetTip": "Upewnij się, że używasz silnego hasła - zawierającego wielkie litery, cyfry i znaki specjalne",
+  "changePassword": "Zmień",
+  "sendEmail": "Wyślij e-mail",
+  "somethingWentWrong": "Coś poszło nie tak, spróbuj ponownie później",
+  "mailResetPasswordSuccess": "E-mail do zresetowania hasła został wysłany na Twoją skrzynkę pocztową. Kliknij na link, aby dokończyć resetowanie hasła",
+  "resetPasswordSuccess": "Hasło zostało pomyślnie zmienione. Teraz możesz zalogować się przy użyciu nowego hasła",
+  "passwordsHaveToMatch": "Hasła muszą się zgadzać",
   
   "help": "Pomoc",
   "question": "Pytanie",
