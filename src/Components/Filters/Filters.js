@@ -7,7 +7,6 @@ import fetchData from '../../Utils/fetchData.js';
 import { URLS } from '../../config.js';
 
 const Filters = ({ setFilteredEvents }) => {
-
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const { filters, setFilters } = useFiltersContext();
@@ -16,6 +15,8 @@ const Filters = ({ setFilteredEvents }) => {
   const [districts, setDistricts] = useState([]);
   const [cities, setCities] = useState([]);
   const [organizations, setOrganizations] = useState([]);
+  const [selectedCity, setSelectedCity] = useState(null);
+  const [filteredDistricts, setFilteredDistricts] = useState([]);
 
   useEffect(() => {
     fetchData(URLS.EVENTS, setApiResponse);
@@ -30,7 +31,6 @@ const Filters = ({ setFilteredEvents }) => {
 
   useEffect(() => {
     const filteredEvents = apiResponse.filter((event) => {
-
       const isMatchingTag = filters.chosenTags.some((tag) =>
         tag === event.organisation ||
         event.categories.some(category => category === tag) ||
@@ -92,6 +92,21 @@ const Filters = ({ setFilteredEvents }) => {
     }
   };
 
+  const handleCityChange = (event) => {
+    const newSelectedCity = Number(event.target.value);
+    setSelectedCity(newSelectedCity);
+  };
+
+  useEffect(() => {
+    const selectedCityObject = cities.find(city => city.id === selectedCity);
+    if (selectedCityObject) {
+      const newFilteredDistricts = districts.filter(district => district.cityName === selectedCityObject.name);
+      setFilteredDistricts(newFilteredDistricts);
+    } else {
+      setFilteredDistricts([]);
+    }
+  }, [selectedCity, cities, districts]);
+
   const handleResetFilters = () => {
     setFilters({
       chosenTags: [],
@@ -102,6 +117,7 @@ const Filters = ({ setFilteredEvents }) => {
       hideFullyBookedEvents: false,
       selectedAge: '',
     });
+    setSelectedCity(null);
   };
 
   if (apiResponse.length === 0) {
@@ -121,23 +137,23 @@ const Filters = ({ setFilteredEvents }) => {
               placeholderText={t('date')}
             />
             {[
-              { label: t('location'), options: cities.map((city) => city.name) },
-              { label: t('district'), options: districts.map((district) => district.name) }, 
-              { label: t('category'), options: categories.map((category) => category.name) },
-              { label: t('organisations'), options: organizations.map((organization) => organization.name) },
+              { label: t('location'), options: cities.map((city) => ({ id: city.id, name: city.name })), handleChange: handleCityChange },
+              { label: t('district'), options: filteredDistricts.map((district) => ({ id: district.id, name: district.name })) },
+              { label: t('category'), options: categories.map((category) => ({ id: category.id, name: category.name })) },
+              { label: t('organisations'), options: organizations.map((organization) => ({ id: organization.id, name: organization.name })) },
               { label: t('ageRestrictions'), options: [...new Set(apiResponse.flatMap((event) => event.shifts.map((shift) => shift.requiredMinAge)))] },
             ].map((filter, index) => (
               <select
                 key={index}
                 id="selectInput"
-                onChange={handleTagChange}
+                onChange={filter.handleChange ? filter.handleChange : handleTagChange}
                 value=""
                 disabled={!isOpen}
               >
                 <option value="" disabled>{filter.label}</option>
                 {filter.options.map((option, index) => (
-                  <option key={index} value={option}>
-                    {option}
+                  <option key={index} value={option.id ? option.id : option}>
+                    {option.name ? option.name : option}
                   </option>
                 ))}
               </select>
