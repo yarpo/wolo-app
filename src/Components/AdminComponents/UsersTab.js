@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { VscChevronDown, VscChevronUp } from 'react-icons/vsc';
-import { HiOutlineSearch } from "react-icons/hi";
+import { HiOutlineSearch, HiTrash, HiOutlinePlus, HiCheck, HiOutlineX } from "react-icons/hi";
 import '../../styles/admin-home-page.scss';
 import { URLS } from '../../config';
-import { HiTrash, HiOutlinePlus, HiCheck, HiOutlineX} from "react-icons/hi";
 import { Table, TextInput, Card } from "flowbite-react";
 
 import AddUser from './addRecordModals/AddUser.js';
@@ -23,6 +22,7 @@ const UsersTab = () => {
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [userConfirmed, setUserConfirmed] = useState(false);
     const [userToDelete, setUserToDelete] = useState(null);
+    const [userFullNameToDelete, setUserFullNameToDelete] = useState(''); // New state for user's full name
 
     const [filteredUsers, setFilteredUsers] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
@@ -76,7 +76,12 @@ const UsersTab = () => {
         setUserToDelete(null);
         setConfirmDelete(false);
     };
-    
+
+    const handleDeleteRequest = (user) => {
+        setConfirmDelete(true);
+        setUserToDelete(user.id);
+        setUserFullNameToDelete(`${user.firstName} ${user.lastName}`);
+    };
 
     return (
         <div className="overflow-x-auto">
@@ -84,7 +89,7 @@ const UsersTab = () => {
                 <div className="admin-panel-search-bar">
                     <TextInput
                         type="text"
-                        placeholder="Search users"
+                        placeholder={t('searchUsers')}
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         icon={HiOutlineSearch}
@@ -95,12 +100,12 @@ const UsersTab = () => {
             {openModal && <AddUser onAccept={handleModalAccept} onClose={handleModalClose} />}
             <Table hoverable>
                 <Table.Head>
-                    <Table.HeadCell>ID</Table.HeadCell>
-                    <Table.HeadCell>User Name</Table.HeadCell>
-                    <Table.HeadCell>User Email</Table.HeadCell>
-                    <Table.HeadCell>User Phone</Table.HeadCell>
-                    <Table.HeadCell>User roles</Table.HeadCell>
-                    <Table.HeadCell>Organisation Moderator</Table.HeadCell>
+                    <Table.HeadCell>{t('id')}</Table.HeadCell>
+                    <Table.HeadCell>{t('name')}</Table.HeadCell>
+                    <Table.HeadCell>{t('email')}</Table.HeadCell>
+                    <Table.HeadCell>{t('phoneNumber')}</Table.HeadCell>
+                    <Table.HeadCell>{t('roles')}</Table.HeadCell>
+                    <Table.HeadCell>{t('moderator')}</Table.HeadCell>
                     <Table.HeadCell></Table.HeadCell>
                     <Table.HeadCell></Table.HeadCell>
                 </Table.Head>
@@ -128,17 +133,14 @@ const UsersTab = () => {
                                 <Table.Cell className="table-cell-action">
                                     <button
                                         className="delete-button"
-                                        onClick={() => {
-                                            setConfirmDelete(true);
-                                            setUserToDelete(user.id);
-                                        }}
+                                        onClick={() => handleDeleteRequest(user)} 
                                     >
                                         <span><HiTrash /></span>
                                     </button>
                                     <Confirmation
                                         id="sign-off"
-                                        buttonName={t('delete')}
-                                        title={t('delete') + "?"}
+                                        buttonName={t('doYouWantToDelete')}
+                                        title={t('doYouWantToDelete') + ": " + userFullNameToDelete + "?"} 
                                         accept={t('delete')}
                                         deny={t('discard')}
                                         styleId="sign-in"
@@ -165,29 +167,29 @@ const UsersTab = () => {
                                                 </h5>
                                                 <div className="grid-container-2">
                                                     <div className="grid-item">
-                                                        <p><strong>Email: </strong>{user.email}</p>
+                                                        <p><strong>{t('email')}: </strong>{user.email}</p>
                                                     </div>
                                                     <div className="grid-item">
-                                                        <p><strong>Phone: </strong>{user.phoneNumber}</p>
+                                                        <p><strong>{t('phoneNumber')}: </strong>{user.phoneNumber}</p>
                                                     </div>
                                                 </div>
                                                 <div className="grid-container-2">
                                                     <div className="grid-item">
-                                                        <p><strong>Organisation: </strong>{user.organisationName ? user.organisationName : 'None'}</p>
+                                                        <p><strong>{t('moderator')}: </strong>{user.organisationName ? user.organisationName : 'None'}</p>
                                                     </div>
                                                     <div className="grid-item">
-                                                        <p><strong>Roles: </strong>{user.roles.join(', ')}</p>
+                                                        <p><strong>{t('roles')}: </strong>{user.roles.join(', ')}</p>
                                                     </div>
                                                 </div>
                                                 <div className="grid-container-3">
                                                     <div className="grid-item">
-                                                        <p><strong>Is adult: </strong>{user.adult ? <HiCheck /> : <HiOutlineX />}</p>
+                                                        <p><strong>{t('isAdult')}: </strong>{user.adult ? <HiCheck /> : <HiOutlineX />}</p>
                                                     </div>
                                                     <div className="grid-item">
-                                                        <p><strong>Agreement Signed: </strong>{user.agreementSigned ? <HiCheck /> : <HiOutlineX />}</p>
+                                                        <p><strong>{t('agreementSigned')}: </strong>{user.agreementSigned ? <HiCheck /> : <HiOutlineX />}</p>
                                                     </div>
                                                     <div className="grid-item">
-                                                        <p><strong>PESEL Verified: </strong>{user.peselVerified ? <HiCheck /> : <HiOutlineX />}</p>
+                                                        <p><strong>{t('peselVerified')}: </strong>{user.peselVerified ? <HiCheck /> : <HiOutlineX />}</p>
                                                     </div>
                                                 </div>
                                             </div>
