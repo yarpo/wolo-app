@@ -2,11 +2,12 @@ import { useTranslation } from 'react-i18next';
 import React, { useState, useEffect } from 'react';
 import { VscChevronDown, VscChevronUp } from 'react-icons/vsc';
 import { HiOutlineSearch } from "react-icons/hi";
-import { TextInput } from "flowbite-react";
+import { TextInput, Card } from "flowbite-react";
 import '../../styles/admin-home-page.scss';
 
 import { URLS } from '../../config';
 import fetchData from '../../Utils/fetchData';
+import { HiTrash, HiOutlinePlus } from "react-icons/hi";
 
 import { Table } from "flowbite-react";
 import Confirmation from '../Popups/Confirmation';
@@ -80,24 +81,26 @@ const FAQTab = () => {
 
     return (
         <div className="overflow-x-auto">
-            <div className="admin-panel-search-bar">
-                <TextInput
-                    type="text"
-                    placeholder="Search questions"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    icon={HiOutlineSearch}
-                />
+            <div className='admin-panel-add-search-group'>
+                <div className="admin-panel-search-bar">
+                    <TextInput
+                        type="text"
+                        placeholder="Search users"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        icon={HiOutlineSearch}
+                    />
+                </div>
+                <button className="admin-panel-add" onClick={() => setOpenModal(true)}><HiOutlinePlus /></button>
             </div>
-            <button className="confirm_button" onClick={() => setOpenModal(true)}> Add </button>
             {openModal && <AddFAQ onAccept={handleModalAccept} onClose={handleModalClose} />}
-            <Table striped>
+            <Table hoverable>
                 <Table.Head>
                     <Table.HeadCell>ID</Table.HeadCell>
                     <Table.HeadCell>{t('question')}</Table.HeadCell>
                     <Table.HeadCell>{t('answer')}</Table.HeadCell>
-                    <Table.HeadCell>More</Table.HeadCell>
-                    <Table.HeadCell>{t('delete')}</Table.HeadCell>
+                    <Table.HeadCell></Table.HeadCell>
+                    <Table.HeadCell></Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
                     {filteredQuestions.map((question, index) => (
@@ -114,10 +117,10 @@ const FAQTab = () => {
                                         onClick={() => toggleDetails(index)}
                                     >
                                         {openIndex === index ? <VscChevronUp /> : <VscChevronDown />}
-                                        <span className="dropdown-label">Details</span>
+                                        <span className="dropdown-label"></span>
                                     </button>
                                 </Table.Cell>
-                                <Table.Cell>
+                                <Table.Cell className="table-cell-action">
                                     <button
                                         className="delete-button"
                                         onClick={() => {
@@ -125,7 +128,7 @@ const FAQTab = () => {
                                             setQuestionToDelete(question.id);
                                         }}
                                     >
-                                        <span>Delete</span>
+                                        <span><HiTrash /></span>
                                     </button>
                                     <Confirmation
                                         id="sign-off"
@@ -148,20 +151,29 @@ const FAQTab = () => {
                                 </Table.Cell>
                             </Table.Row>
                             {openIndex === index && (
-                                <tr>
-                                    <td colSpan="7">
-                                        <div className="dropdown-content">
-                                            <p><strong>{t('question')} - Polski:</strong> {question.questionPL}</p>
-                                            <p><strong>{t('question')} - English:</strong> {question.questionEN}</p>
-                                            <p><strong>{t('question')} - Українська:</strong> {question.questionUA}</p>
-                                            <p><strong>{t('question')} - Русский:</strong> {question.questionRU}</p>
-                                            <p><strong>{t('answer')} - Polski:</strong> {question.answerPL}</p>
-                                            <p><strong>{t('answer')} - English:</strong> {question.answerEN}</p>
-                                            <p><strong>{t('answer')} - Українська:</strong> {question.answerUA}</p>
-                                            <p><strong>{t('answer')} - Русский:</strong> {question.answerRU}</p>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <Table.Cell colSpan="8">
+                                    <div className="dropdown-content">
+                                        <Card>
+                                            <div className="card-content">
+                                                <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">
+                                                    {question[questionName]}
+                                                </h5>
+                                                <div className="grid-container">
+                                                    <p><strong>{t('question')} - Polski:</strong> {question.questionPL}</p>
+                                                    <p><strong>{t('question')} - English:</strong> {question.questionEN}</p>
+                                                    <p><strong>{t('question')} - Українська:</strong> {question.questionUA}</p>
+                                                    <p><strong>{t('question')} - Русский:</strong> {question.questionRU}</p>
+                                                </div>
+                                                <div className="grid-container">
+                                                    <p><strong>{t('answer')} - Polski:</strong> {question.answerPL}</p>
+                                                    <p><strong>{t('answer')} - English:</strong> {question.answerEN}</p>
+                                                    <p><strong>{t('answer')} - Українська:</strong> {question.answerUA}</p>
+                                                    <p><strong>{t('answer')} - Русский:</strong> {question.answerRU}</p>
+                                                </div>
+                                            </div>
+                                        </Card>
+                                    </div>
+                                </Table.Cell>
                             )}
                         </React.Fragment>
                     ))}

@@ -4,6 +4,7 @@ import '../../styles/admin-home-page.scss';
 import { HiOutlineSearch } from "react-icons/hi";
 
 import { URLS } from '../../config';
+import { HiTrash, HiOutlinePlus } from "react-icons/hi";
 import { Table, TextInput } from "flowbite-react";
 
 import AddCategory from './addRecordModals/AddCategory';
@@ -74,22 +75,24 @@ const CategoriesTab = () => {
 
     return (
         <div className="overflow-x-auto">
-            <div className="admin-panel-search-bar">
-                <TextInput
-                    type="text"
-                    placeholder="Search categories"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    icon={HiOutlineSearch}
-                />
+            <div className='admin-panel-add-search-group'>
+                <div className="admin-panel-search-bar">
+                    <TextInput
+                        type="text"
+                        placeholder="Search users"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        icon={HiOutlineSearch}
+                    />
+                </div>
+                <button className="admin-panel-add" onClick={() => setOpenModal(true)}><HiOutlinePlus /></button>
             </div>
-            <button className="confirm_button" onClick={() => setOpenModal(true)}> Add </button>
             {openModal && <AddCategory onAccept={handleModalAccept} onClose={handleModalClose} />}
-            <Table striped>
+            <Table hoverable>
                 <Table.Head>
                     <Table.HeadCell>ID</Table.HeadCell>
                     <Table.HeadCell>Category Name</Table.HeadCell>
-                    <Table.HeadCell>Delete</Table.HeadCell>
+                    <Table.HeadCell></Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
                     {filteredCategories.map((category, index) => (
@@ -98,7 +101,7 @@ const CategoriesTab = () => {
                                 {category.id}
                             </Table.Cell>
                             <Table.Cell>{category.name}</Table.Cell>
-                            <Table.Cell>
+                            <Table.Cell className="table-cell-action">
                                 <button
                                     className="delete-button"
                                     onClick={() => {
@@ -106,7 +109,7 @@ const CategoriesTab = () => {
                                         setCategoryToDelete(category.id);
                                     }}
                                 >
-                                    <span>Delete</span>
+                                    <span><HiTrash /></span>
                                 </button>
                                 <Confirmation
                                     id="sign-off"

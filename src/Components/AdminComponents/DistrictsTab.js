@@ -6,6 +6,7 @@ import { HiOutlineSearch } from "react-icons/hi";
 import { URLS } from '../../config';
 import fetchData  from  '../../Utils/fetchData';
 import { Table, TextInput } from "flowbite-react";
+import { HiOutlinePlus  } from "react-icons/hi";
 
 import AddDistrict from './addRecordModals/AddDistricts';
 import postRequestWithJson from '../../Utils/postRequestWithJson';
@@ -47,18 +48,20 @@ const DistrictsTab = () => {
 
     return (
         <div className="overflow-x-auto">
-            <div className="admin-panel-search-bar">
-                <TextInput
-                    type="text"
-                    placeholder="Search distrcts"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    icon={HiOutlineSearch}
-                />
+            <div className='admin-panel-add-search-group'>
+                <div className="admin-panel-search-bar">
+                    <TextInput
+                        type="text"
+                        placeholder="Search users"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        icon={HiOutlineSearch}
+                    />
+                </div>
+                <button className="admin-panel-add" onClick={() => setOpenModal(true)}><HiOutlinePlus /></button>
             </div>
-            <button className="confirm_button" onClick={() => setOpenModal(true)}> Add </button>
             {openModal && <AddDistrict onAccept={handleModalAccept} onClose={handleModalClose} />}
-            <Table striped>
+            <Table hoverable>
                 <Table.Head>
                     <Table.HeadCell>ID</Table.HeadCell>
                     <Table.HeadCell>District Name</Table.HeadCell>
