@@ -99,12 +99,14 @@ const Details = () => {
                     <p>{reportData ? reportData[reportText] : ""}</p>
                 </div>
             )}
-            <div id='column'>
-                <p className="details_shifts_text"><strong>{t('shifts')}:</strong></p>
-                <div className='details_shift_card_wrapper'>
-                    {eventData.shifts.sort((a, b) => new Date(a.shiftId) - new Date(b.shiftId)).map(shift => (
-                        <ShiftCard key={shift.id} shift={shift} city={city} isInPast={isInPast} />
-                    ))}
+                <div id='column'>
+                    <p className="details_shifts_text"><strong>{t('shifts')}:</strong></p>
+                    <div className='details_shift_card_container'>
+                        <div className='details_shift_card_wrapper'>
+                        {eventData.shifts.sort((a, b) => new Date(a.shiftId) - new Date(b.shiftId)).map(shift => (
+                            <ShiftCard key={shift.id} shift={shift} city={city} isInPast={isInPast} className='details_shift_card_item' />
+                        ))}
+                    </div>
                 </div>
                 <MapComponent addresses={addresses} />
             </div>
