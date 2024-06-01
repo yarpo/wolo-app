@@ -14,6 +14,7 @@ const Filters = ({ setFilteredEvents }) => {
   const [apiResponse, setApiResponse] = useState([]);
   const [categories, setCategories] = useState([]);
   const [districts, setDistricts] = useState([]);
+  const [cities, setCities] = useState([]);
   const [organizations, setOrganizations] = useState([]);
 
   useEffect(() => {
@@ -23,35 +24,37 @@ const Filters = ({ setFilteredEvents }) => {
   useEffect(() => {
     fetchData(URLS.CATEGORIES, setCategories);
     fetchData(URLS.DISTRICTS, setDistricts);
+    fetchData(URLS.CITIES, setCities);
     fetchData(URLS.ORGANISATIONS, setOrganizations);
   }, []);
 
   useEffect(() => {
-   const filteredEvents = apiResponse.filter((event) => {
+    const filteredEvents = apiResponse.filter((event) => {
 
-    const isMatchingTag = filters.chosenTags.some((tag) =>
-      tag === event.organisation ||
-      event.categories.some(category => category === tag) ||
-      event.shifts[0].district === tag ||
-      event.shifts[0].requiredMinAge.toString() === tag
-    );
+      const isMatchingTag = filters.chosenTags.some((tag) =>
+        tag === event.organisation ||
+        event.categories.some(category => category === tag) ||
+        event.shifts[0].district === tag ||
+        event.shifts[0].requiredMinAge.toString() === tag ||
+        event.city === tag
+      );
 
-    const isMatchingDate =
-      filters.selectedDate === null || new Date(event.date) >= filters.selectedDate;
+      const isMatchingDate =
+        filters.selectedDate === null || new Date(event.date) >= filters.selectedDate;
 
-    const isMatchingVerification =
-      !filters.requiresVerification || event.peselVerificationRequired === false;
+      const isMatchingVerification =
+        !filters.requiresVerification || event.peselVerificationRequired === false;
 
-    const isMatchingBooking =
-      !filters.hideFullyBookedEvents || event.shifts[0].registeredUsers < event.shifts[0].capacity;
+      const isMatchingBooking =
+        !filters.hideFullyBookedEvents || event.shifts[0].registeredUsers < event.shifts[0].capacity;
 
-    return (
-      (filters.chosenTags.length === 0 || isMatchingTag) &&
-      isMatchingDate &&
-      isMatchingVerification &&
-      isMatchingBooking
-    );
-  });
+      return (
+        (filters.chosenTags.length === 0 || isMatchingTag) &&
+        isMatchingDate &&
+        isMatchingVerification &&
+        isMatchingBooking
+      );
+    });
 
     setFilteredEvents(filteredEvents);
   }, [filters, setFilteredEvents, apiResponse]);
@@ -118,7 +121,8 @@ const Filters = ({ setFilteredEvents }) => {
               placeholderText={t('date')}
             />
             {[
-              { label: t('location'), options: districts.map((district) => district.name) },
+              { label: t('location'), options: cities.map((city) => city.name) },
+              { label: t('district'), options: districts.map((district) => district.name) }, 
               { label: t('category'), options: categories.map((category) => category.name) },
               { label: t('organisations'), options: organizations.map((organization) => organization.name) },
               { label: t('ageRestrictions'), options: [...new Set(apiResponse.flatMap((event) => event.shifts.map((shift) => shift.requiredMinAge)))] },
@@ -130,9 +134,7 @@ const Filters = ({ setFilteredEvents }) => {
                 value=""
                 disabled={!isOpen}
               >
-                <option value="" disabled selected>
-                  {filter.label}
-                </option>
+                <option value="" disabled>{filter.label}</option>
                 {filter.options.map((option, index) => (
                   <option key={index} value={option}>
                     {option}
