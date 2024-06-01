@@ -25,6 +25,7 @@ const EventsTab = () => {
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [userConfirmed, setUserConfirmed] = useState(false);
     const [eventToDelete, setEventToDelete] = useState(null);
+    const [eventNameToDelete, setEventNameToDelete] = useState(''); 
 
     useEffect(() => {
         fetchData(URLS.EVENTS, (data) => {
@@ -49,13 +50,13 @@ const EventsTab = () => {
             <Card className='admin-panel-shift-card-entry' key={index}>
                 <div>
                     <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                        Shift {index + 1}:
+                        {t('shift')} {index + 1}:
                     </h5>
-                    <p><strong>Time:</strong> {shift.startTime} - {shift.endTime}</p>
-                    <p><strong>Capacity:</strong> {shift.capacity}</p>
-                    <p><strong>Minimum Age:</strong> {shift.requiredMinAge ? shift.requiredMinAge : <HiOutlineX />}</p>
-                    <p><strong>Address directions:</strong> {shift.shiftDirections ? shift.shiftDirections : 'None'}</p>
-                    <p><strong>Address:</strong> {shift.street} {shift.homeNum} {shift.district}</p>
+                    <p><strong>{t('time')}:</strong> {shift.startTime} - {shift.endTime}</p>
+                    <p><strong>{t('capacity')}:</strong> {shift.capacity}</p>
+                    <p><strong>{t('minAgeRequired')}:</strong> {shift.requiredMinAge ? shift.requiredMinAge : <HiOutlineX />}</p>
+                    <p><strong>{t('address')}:</strong> {shift.street} {shift.homeNum} {shift.district}</p>
+                    <p><strong>{t('addressDirections')}:</strong> {shift.shiftDirections ? shift.shiftDirections : t('none')}</p>
                 </div>
             </Card>
         ));
@@ -83,13 +84,19 @@ const EventsTab = () => {
         setConfirmDelete(false);
     };
 
+    const handleDeleteRequest = (event) => {
+        setConfirmDelete(true);
+        setEventToDelete(event.id);
+        setEventNameToDelete(event[eventName]); 
+    };
+
     return (
         <div className="overflow-x-auto">
             <div className='admin-panel-add-search-group'>
                 <div className="admin-panel-search-bar">
                     <TextInput
                         type="text"
-                        placeholder="Search users"
+                        placeholder={t('searchEvents')}
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         icon={HiOutlineSearch}
@@ -98,11 +105,11 @@ const EventsTab = () => {
             </div>
             <Table hoverable>
                 <Table.Head>
-                    <Table.HeadCell>ID</Table.HeadCell>
-                    <Table.HeadCell>Name</Table.HeadCell>
-                    <Table.HeadCell>Organisation</Table.HeadCell>
+                    <Table.HeadCell>{t('id')}</Table.HeadCell>
+                    <Table.HeadCell>{t('name')}</Table.HeadCell>
+                    <Table.HeadCell>{t('organisation')}</Table.HeadCell>
                     <Table.HeadCell>{t('categories')}</Table.HeadCell>
-                    <Table.HeadCell>City</Table.HeadCell>
+                    <Table.HeadCell>{t('city')}</Table.HeadCell>
                     <Table.HeadCell></Table.HeadCell>
                     <Table.HeadCell></Table.HeadCell>
                 </Table.Head>
@@ -130,19 +137,16 @@ const EventsTab = () => {
                                     {event.date > format(new Date(), 'yyyy-MM-dd') ?
                                     <button
                                         className="delete-button"
-                                        onClick={() => {
-                                            setConfirmDelete(true);
-                                            setEventToDelete(event.id);
-                                        }}
+                                        onClick={() => handleDeleteRequest(event)} 
                                     >
                                         <span><HiTrash /></span>
                                     </button> : ' '}
                                     <Confirmation
                                         id="sign-off"
                                         buttonName="Delete"
-                                        title="Czy usunąć"
-                                        accept="Tak, usuń"
-                                        deny="Anuluj"
+                                        title={t('doYouWantToDelete') + ": " + eventNameToDelete + "?"} 
+                                        accept={t('delete')}
+                                        deny={t('discard')}
                                         styleId="sign-in"
                                         onAgree={() => {
                                             handleUserConfirmation(true);
@@ -166,35 +170,35 @@ const EventsTab = () => {
                                                     {event[eventName]}
                                                 </h5>
                                                 <div className="grid-container">
-                                                    <p><strong>Name - Polski: </strong>{event.namePL}</p>
-                                                    <p><strong>Name - English: </strong>{event.nameEN}</p>
-                                                    <p><strong>Name - Ukrainian: </strong>{event.nameUA}</p>
-                                                    <p><strong>Name - Russian: </strong>{event.nameRU}</p>
+                                                    <p><strong>{t('name')} - {t('polish')}: </strong>{event.namePL}</p>
+                                                    <p><strong>{t('name')} - {t('english')}: </strong>{event.nameEN}</p>
+                                                    <p><strong>{t('name')} - {t('ukrainian')}: </strong>{event.nameUA}</p>
+                                                    <p><strong>{t('name')} - {t('russian')}: </strong>{event.nameRU}</p>
                                                 </div>
                                                 <div className="grid-container">
-                                                    <p><strong>Description - Polski: </strong>{event.descriptionPL}</p>
-                                                    <p><strong>Description - English: </strong>{event.descriptionEN}</p>
-                                                    <p><strong>Description - Ukrainian: </strong>{event.descriptionUA}</p>
-                                                    <p><strong>Description - Russian: </strong>{event.descriptionRU}</p>
+                                                    <p><strong>{t('description')} - {t('polish')}: </strong>{event.descriptionPL}</p>
+                                                    <p><strong>{t('description')} - {t('english')}: </strong>{event.descriptionEN}</p>
+                                                    <p><strong>{t('description')} - {t('ukrainian')}: </strong>{event.descriptionUA}</p>
+                                                    <p><strong>{t('description')} - {t('russian')}: </strong>{event.descriptionRU}</p>
                                                 </div>
                                                 <div className="grid-container-2">
                                                     <div className="grid-item">
-                                                        <p><strong>City: </strong>{event.city}</p>
+                                                        <p><strong>{t('city')}: </strong>{event.city}</p>
                                                     </div>
                                                     <div className="grid-item">
-                                                        <p><strong>Date: </strong>{formatDate(event.date)}</p>
+                                                        <p><strong>{t('date')}: </strong>{formatDate(event.date)}</p>
                                                     </div>
                                                 </div>
                                                 <div className="grid-container-2">
                                                     <div className="grid-item">
-                                                        <p><strong>Pesel Verification: </strong>{event.peselVerification ? <HiCheck /> : <HiOutlineX />}</p>
+                                                        <p><strong>{t('peselVerified')}: </strong>{event.peselVerification ? <HiCheck /> : <HiOutlineX />}</p>
                                                     </div>
                                                     <div className="grid-item">
-                                                        <p><strong>Agreement Signed: </strong>{event.agreementSigned ? <HiCheck /> : <HiOutlineX />}</p>
+                                                        <p><strong>{t('agreementSigned')}: </strong>{event.agreementSigned ? <HiCheck /> : <HiOutlineX />}</p>
                                                     </div>
                                                 </div>
                                                 <div className="grid-container">
-                                                    <p><strong>Image URL: </strong>{event.imageUrl}</p>
+                                                    <p><strong>{t('imageUrl')}: </strong>{event.imageUrl}</p>
                                                 </div>
                                                 <div className='admin-panel-shift-card'>{renderShiftDetails(event.shifts)}</div>
                                             </div>

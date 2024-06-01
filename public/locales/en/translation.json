@@ -178,10 +178,6 @@
   "organisationDataEditedSuccess": "Your organisation was successfully edited",
   "organisationDataEditedFail": "There was a problem editing organisation. Please try again later",
   "city": "City",
-
-
-  "name": "Name",
-
   "defaultImageForEvent": "Default image for event",
 
   "report": "Report",
@@ -222,6 +218,30 @@
   "question": "Question",
   "answer": "Answer",
   "addFAQSuccess": "New help question added successfully",
-  "addFAQFail": "There was a problem creating new question. Please try again later"
+  "addFAQFail": "There was a problem creating new question. Please try again later",
+
+  "searchUsers": "Search users",
+  "searchOrganisations": "Search organisations",
+  "searchEvents": "Search events",
+  "searchCategories": "Search categories",
+  "searchCities": "Search cities",
+  "searchDistricts": "Search districts",
+  "searchQuestions": "Search questions",
+
+  "english": "English",
+  "polish": "Polish",
+  "ukrainian": "Ukrainian",
+  "russian": "Russian",
+
+  "id": "Id",
+  "name": "Name",
+  "moderator": "Moderator",
+  "doYouWantToDelete": "Would You like to delete",
+  "organisation": "Organisation",
+  "active": "Active",
+  "minAgeRequired": "Minimum age",
+  "capacity": "Capacity",
+  "addressDirections": "Address directions",
+  "imageUrl": "Image Url"
 }
 

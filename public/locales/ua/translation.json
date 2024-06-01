@@ -179,9 +179,7 @@
     "organisationDataEditedSuccess": "Вашу організацію успішно оновлено",
     "organisationDataEditedFail": "Виникла проблема з редагуванням організації. Будь ласка, спробуйте пізніше",
     "city": "Місто",
-
-    "name": "Name",
-  
+    
     "defaultImageForEvent": "Зображення за замовчуванням для події",
 
     "report": "Звіт",
@@ -222,5 +220,29 @@
     "question": "Питання",
     "answer": "Відповідь",
     "addFAQSuccess": "Нове питання допомоги успішно додано",
-    "addFAQFail": "Виникла проблема при створенні нового питання. Будь ласка, спробуйте пізніше"
+    "addFAQFail": "Виникла проблема при створенні нового питання. Будь ласка, спробуйте пізніше",
+
+    "searchUsers": "Пошук користувачів",
+    "searchOrganisations": "Пошук організацій",
+    "searchEvents": "Пошук подій",
+    "searchCategories": "Пошук категорій",
+    "searchCities": "Пошук міст",
+    "searchDistricts": "Пошук районів",
+    "searchQuestions": "Пошук питань",
+  
+    "english": "Англійська",
+    "polish": "Польська",
+    "ukrainian": "Українська",
+    "russian": "Російська",
+  
+    "id": "Id",
+    "name": "Назва",
+    "moderator": "Модератор",
+    "doYouWantToDelete": "Ви хочете видалити",
+    "organisation": "Організація",
+    "active": "Активний",
+    "minAgeRequired": "Мінімальний вік",
+    "capacity": "Місткість",
+    "addressDirections": "Напрямки адреси",
+    "imageUrl": "URL зображення"
 }

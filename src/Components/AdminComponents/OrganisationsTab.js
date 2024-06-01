@@ -21,6 +21,7 @@ const OrganisationsTab = () => {
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [userConfirmed, setUserConfirmed] = useState(false);
     const [organisationToDelete, setOrganisationToDelete] = useState(null);
+    const [organisationNameToDelete, setOrganisationNameToDelete] = useState('');
 
     const [filteredOrganisations, setFilteredOrganisations] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
@@ -60,7 +61,6 @@ const OrganisationsTab = () => {
 
     const handleUserConfirmation = async (confirmation) => {
         setUserConfirmed(confirmation);
-
     };
 
     useEffect(() => {
@@ -79,13 +79,19 @@ const OrganisationsTab = () => {
         setConfirmDelete(false);
     };
 
+    const handleDeleteRequest = (organisation) => {
+        setConfirmDelete(true);
+        setOrganisationToDelete(organisation.id);
+        setOrganisationNameToDelete(organisation.name);
+    };
+
     return (
         <div className="overflow-x-auto">
             <div className='admin-panel-add-search-group'>
                 <div className="admin-panel-search-bar">
                     <TextInput
                         type="text"
-                        placeholder="Search users"
+                        placeholder={t('searchOrganisations')}
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         icon={HiOutlineSearch}
@@ -94,21 +100,14 @@ const OrganisationsTab = () => {
                 <button className="admin-panel-add" onClick={() => setOpenModal(true)}><HiOutlinePlus /></button>
             </div>
             {openModal && <AddOrganisation onAccept={handleModalAccept} onClose={handleModalClose} />}
-            <Confirmation
-                title="Delete Organisation"
-                message="Are you sure you want to delete this organisation?"
-                onConfirm={handleDelete}
-                onCancel={() => setConfirmDelete(false)}
-                isOpen={confirmDelete}
-            />
             <Table hoverable>
                 <Table.Head>
-                    <Table.HeadCell>ID</Table.HeadCell>
-                    <Table.HeadCell>Organisation Name</Table.HeadCell>
-                    <Table.HeadCell>Organisation Email</Table.HeadCell>
-                    <Table.HeadCell>Organisation Phone</Table.HeadCell>
-                    <Table.HeadCell>Organisation Address</Table.HeadCell>
-                    <Table.HeadCell>Organisation Status</Table.HeadCell>
+                    <Table.HeadCell>{t('id')}</Table.HeadCell>
+                    <Table.HeadCell>{t('organisation')}</Table.HeadCell>
+                    <Table.HeadCell>{t('email')}</Table.HeadCell>
+                    <Table.HeadCell>{t('phoneNumber')}</Table.HeadCell>
+                    <Table.HeadCell>{t('address')}</Table.HeadCell>
+                    <Table.HeadCell>{t('active')}</Table.HeadCell>
                     <Table.HeadCell></Table.HeadCell>
                     <Table.HeadCell></Table.HeadCell>
                 </Table.Head>
@@ -136,19 +135,16 @@ const OrganisationsTab = () => {
                                 <Table.Cell className="table-cell-action">
                                     <button
                                         className="delete-button"
-                                        onClick={() => {
-                                            setConfirmDelete(true);
-                                            setOrganisationToDelete(organisation.id);
-                                        }}
+                                        onClick={() => handleDeleteRequest(organisation)} 
                                     >
                                         <span><HiTrash /></span>
                                     </button>
                                     <Confirmation
                                         id="sign-off"
                                         buttonName="Delete"
-                                        title="Czy usunąć"
-                                        accept="Tak, usuń"
-                                        deny="Anuluj"
+                                        title={t('doYouWantToDelete') + ": " + organisationNameToDelete + "?"} 
+                                        accept={t('delete')}
+                                        deny={t('discard')}
                                         styleId="sign-in"
                                         onAgree={() => {
                                             handleUserConfirmation(true);
@@ -172,30 +168,30 @@ const OrganisationsTab = () => {
                                                     {organisation.name}
                                                 </h5>
                                                 <div className="grid-container-2">
-                                                    <p><strong>Description - Polski: </strong>{organisation.descriptionPL}</p>
-                                                    <p><strong>Description - English: </strong>{organisation.descriptionEN}</p>
-                                                    <p><strong>Description - Ukrainian: </strong>{organisation.descriptionUA}</p>
-                                                    <p><strong>Description - Russian: </strong>{organisation.descriptionRU}</p>
+                                                    <p><strong>{t('description')} - {t('polish')}: </strong>{organisation.descriptionPL}</p>
+                                                    <p><strong>{t('description')} - {t('english')}: </strong>{organisation.descriptionEN}</p>
+                                                    <p><strong>{t('description')} - {t('ukrainian')}: </strong>{organisation.descriptionUA}</p>
+                                                    <p><strong>{t('description')} - {t('russian')}: </strong>{organisation.descriptionRU}</p>
                                                 </div>
                                                 <div className="grid-container-2">
                                                     <div className="grid-item">
-                                                        <p><strong>Email: </strong>{organisation.email}</p>
+                                                        <p><strong>{t('email')}: </strong>{organisation.email}</p>
                                                     </div>
                                                     <div className="grid-item">
-                                                        <p><strong>Phone: </strong>{organisation.phoneNumber}</p>
+                                                        <p><strong>{t('phoneNumber')}: </strong>{organisation.phoneNumber}</p>
                                                     </div>
                                                 </div>
                                                 <div className="grid-container-2">
                                                     <div className="grid-item">
-                                                        <p><strong>Address: </strong>{organisation.street} {organisation.homeNum}</p>
+                                                        <p><strong>{t('address')}: </strong>{organisation.street} {organisation.homeNum}</p>
                                                     </div>
                                                     <div className="grid-item">
-                                                        <p><strong>Approved: </strong>{organisation.approved ? <HiCheck /> : <HiOutlineX />}</p>
+                                                        <p><strong>{t('active')}: </strong>{organisation.approved ? <HiCheck /> : <HiOutlineX />}</p>
                                                     </div>
                                                 </div>
                                                 <div className="grid-container">
                                                     <div className="grid-item">
-                                                        <p><strong>Logo URL: </strong>{organisation.logoUrl}</p>
+                                                        <p><strong>{t('logoUrl')}: </strong>{organisation.logoUrl}</p>
                                                     </div>
                                                 </div>
                                             </div>

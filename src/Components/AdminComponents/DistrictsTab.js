@@ -52,7 +52,7 @@ const DistrictsTab = () => {
                 <div className="admin-panel-search-bar">
                     <TextInput
                         type="text"
-                        placeholder="Search users"
+                        placeholder={t('searchDistricts')}
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         icon={HiOutlineSearch}
@@ -63,9 +63,9 @@ const DistrictsTab = () => {
             {openModal && <AddDistrict onAccept={handleModalAccept} onClose={handleModalClose} />}
             <Table hoverable>
                 <Table.Head>
-                    <Table.HeadCell>ID</Table.HeadCell>
-                    <Table.HeadCell>District Name</Table.HeadCell>
-                    <Table.HeadCell>City Name</Table.HeadCell>
+                    <Table.HeadCell>{t('id')}</Table.HeadCell>
+                    <Table.HeadCell>{t('name')}</Table.HeadCell>
+                    <Table.HeadCell>{t('city')}</Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
                     {filteredDstricts.map((district, index) => (

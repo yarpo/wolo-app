@@ -23,10 +23,11 @@ const FAQTab = () => {
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [userConfirmed, setUserConfirmed] = useState(false);
     const [questionToDelete, setQuestionToDelete] = useState(null);
+    const [questionTextToDelete, setQuestionTextToDelete] = useState('');
     const [questions, setQuestions] = useState([]);
     const [filteredQuestions, setFilteredQuestions] = useState([]);
-    const questionName = t(`question${localStorage.getItem('i18nextLng').toUpperCase()}`);
-    const answerName = t(`answer${localStorage.getItem('i18nextLng').toUpperCase()}`);
+    const questionName = `question${localStorage.getItem('i18nextLng').toUpperCase()}`;
+    const answerName = `answer${localStorage.getItem('i18nextLng').toUpperCase()}`;
 
     useEffect(() => {
         fetchData(URLS.FAQ, (data) => {
@@ -63,20 +64,25 @@ const FAQTab = () => {
 
     const handleUserConfirmation = async (confirmation) => {
         setUserConfirmed(confirmation);
-
     };
 
     useEffect(() => {
         if (userConfirmed !== false) {
             setUserConfirmed(false);
-            handleDelete()
+            handleDelete();
         }
-    }, [userConfirmed]); 
+    }, [userConfirmed]);
 
     const handleDelete = () => {
-        deleteRequest(`${URLS.DELETE_FAQ}/${questionToDelete}`, localStorage.getItem('token'), "Deleted", "Fail")
+        deleteRequest(`${URLS.DELETE_FAQ}/${questionToDelete}`, localStorage.getItem('token'), "Deleted", "Fail");
         setQuestionToDelete(null);
         setConfirmDelete(false);
+    };
+
+    const handleDeleteRequest = (question) => {
+        setConfirmDelete(true);
+        setQuestionToDelete(question.id);
+        setQuestionTextToDelete(question[questionName]);
     };
 
     return (
@@ -85,7 +91,7 @@ const FAQTab = () => {
                 <div className="admin-panel-search-bar">
                     <TextInput
                         type="text"
-                        placeholder="Search users"
+                        placeholder={t('searchQuestions')}
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         icon={HiOutlineSearch}
@@ -96,7 +102,7 @@ const FAQTab = () => {
             {openModal && <AddFAQ onAccept={handleModalAccept} onClose={handleModalClose} />}
             <Table hoverable>
                 <Table.Head>
-                    <Table.HeadCell>ID</Table.HeadCell>
+                    <Table.HeadCell>{t('id')}</Table.HeadCell>
                     <Table.HeadCell>{t('question')}</Table.HeadCell>
                     <Table.HeadCell>{t('answer')}</Table.HeadCell>
                     <Table.HeadCell></Table.HeadCell>
@@ -123,19 +129,16 @@ const FAQTab = () => {
                                 <Table.Cell className="table-cell-action">
                                     <button
                                         className="delete-button"
-                                        onClick={() => {
-                                            setConfirmDelete(true);
-                                            setQuestionToDelete(question.id);
-                                        }}
+                                        onClick={() => handleDeleteRequest(question)}
                                     >
                                         <span><HiTrash /></span>
                                     </button>
                                     <Confirmation
                                         id="sign-off"
-                                        buttonName="Delete"
-                                        title="Czy usunąć"
-                                        accept="Tak, usuń"
-                                        deny="Anuluj"
+                                        buttonName={t('delete')}
+                                        title={t('doYouWantToDelete') + ": " + questionTextToDelete + " ?"} 
+                                        accept={t('delete')}
+                                        deny={t('discard')}
                                         styleId="sign-in"
                                         onAgree={() => {
                                             handleUserConfirmation(true);
@@ -159,16 +162,16 @@ const FAQTab = () => {
                                                     {question[questionName]}
                                                 </h5>
                                                 <div className="grid-container">
-                                                    <p><strong>{t('question')} - Polski:</strong> {question.questionPL}</p>
-                                                    <p><strong>{t('question')} - English:</strong> {question.questionEN}</p>
-                                                    <p><strong>{t('question')} - Українська:</strong> {question.questionUA}</p>
-                                                    <p><strong>{t('question')} - Русский:</strong> {question.questionRU}</p>
+                                                    <p><strong>{t('question')} - {t('polish')}:</strong> {question.questionPL}</p>
+                                                    <p><strong>{t('question')} - {t('english')}:</strong> {question.questionEN}</p>
+                                                    <p><strong>{t('question')} - {t('ukrainian')}:</strong> {question.questionUA}</p>
+                                                    <p><strong>{t('question')} - {t('russian')}:</strong> {question.questionRU}</p>
                                                 </div>
                                                 <div className="grid-container">
-                                                    <p><strong>{t('answer')} - Polski:</strong> {question.answerPL}</p>
-                                                    <p><strong>{t('answer')} - English:</strong> {question.answerEN}</p>
-                                                    <p><strong>{t('answer')} - Українська:</strong> {question.answerUA}</p>
-                                                    <p><strong>{t('answer')} - Русский:</strong> {question.answerRU}</p>
+                                                    <p><strong>{t('answer')} - {t('polish')}:</strong> {question.answerPL}</p>
+                                                    <p><strong>{t('answer')} - {t('english')}:</strong> {question.answerEN}</p>
+                                                    <p><strong>{t('answer')} - {t('ukrainian')}:</strong> {question.answerUA}</p>
+                                                    <p><strong>{t('answer')} - {t('russian')}:</strong> {question.answerRU}</p>
                                                 </div>
                                             </div>
                                         </Card>
