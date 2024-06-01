@@ -183,7 +183,6 @@
     "organisationDataEditedSuccess": "Ваша организация была успешно обновлена",
     "organisationDataEditedFail": "Произошла ошибка при редактировании организации. Пожалуйста, попробуйте позже",
     "city": "Город",
-    "name": "Name",
   
     "defaultImageForEvent": "Изображение по умолчанию для события",
 
@@ -225,5 +224,29 @@
     "question": "Вопрос",
     "answer": "Ответ",
     "addFAQSuccess": "Новый вопрос помощи успешно добавлен",
-    "addFAQFail": "Возникла проблема при создании нового вопроса. Пожалуйста, попробуйте позже"
+    "addFAQFail": "Возникла проблема при создании нового вопроса. Пожалуйста, попробуйте позже",
+
+    "searchUsers": "Поиск пользователей",
+    "searchOrganisations": "Поиск организаций",
+    "searchEvents": "Поиск событий",
+    "searchCategories": "Поиск категорий",
+    "searchCities": "Поиск городов",
+    "searchDistricts": "Поиск районов",
+    "searchQuestions": "Поиск вопросов",
+  
+    "english": "Английский",
+    "polish": "Польский",
+    "ukrainian": "Украинский",
+    "russian": "Русский",
+  
+    "id": "Id",
+    "name": "Название",
+    "moderator": "Модератор",
+    "doYouWantToDelete": "Вы хотите удалить",
+    "organisation": "Организация",
+    "active": "Активный",
+    "minAgeRequired": "Минимальный возраст",
+    "capacity": "Вместимость",
+    "addressDirections": "Направления адреса",
+    "imageUrl": "URL изображения"
 }
