@@ -7,7 +7,6 @@ import fetchData from '../../Utils/fetchData.js';
 import { URLS } from '../../config.js';
 
 const Filters = ({ setFilteredEvents }) => {
-
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const { filters, setFilters } = useFiltersContext();
@@ -30,12 +29,11 @@ const Filters = ({ setFilteredEvents }) => {
 
   useEffect(() => {
     const filteredEvents = apiResponse.filter((event) => {
-
-      const isMatchingTag = filters.chosenTags.some((tag) =>
+      const isMatchingTag = filters.chosenTags.every((tag) =>
         tag === event.organisation ||
-        event.categories.some(category => category === tag) ||
-        event.shifts[0].district === tag ||
-        event.shifts[0].requiredMinAge.toString() === tag ||
+        event.categories.includes(tag) ||
+        event.shifts.some(shift => shift.district === tag) ||
+        event.shifts.some(shift => shift.requiredMinAge.toString() === tag) ||
         event.city === tag
       );
 
@@ -43,15 +41,19 @@ const Filters = ({ setFilteredEvents }) => {
         filters.selectedDate === null || new Date(event.date) >= filters.selectedDate;
 
       const isMatchingVerification =
-        !filters.requiresVerification || event.peselVerificationRequired === false;
+        !filters.agreementNeeded || event.agreementNeeded === true;
+
+      const isMatchingPeselVerification =
+        !filters.peselVerificationRequired || event.peselVerificationRequired === true;
 
       const isMatchingBooking =
-        !filters.hideFullyBookedEvents || event.shifts[0].registeredUsers < event.shifts[0].capacity;
+        !filters.hideFullyBookedEvents || event.shifts.some(shift => shift.registeredUsers < shift.capacity);
 
       return (
         (filters.chosenTags.length === 0 || isMatchingTag) &&
         isMatchingDate &&
         isMatchingVerification &&
+        isMatchingPeselVerification &&
         isMatchingBooking
       );
     });
@@ -97,8 +99,9 @@ const Filters = ({ setFilteredEvents }) => {
       chosenTags: [],
       chosenLocation: '',
       chosenOrganisation: '',
-      selectedDate: new Date(),
+      selectedDate: null,
       requiresVerification: false,
+      peselVerificationRequired: false,
       hideFullyBookedEvents: false,
       selectedAge: '',
     });
@@ -153,6 +156,17 @@ const Filters = ({ setFilteredEvents }) => {
                 className="checkbox-round"
                 name="requiresVerification"
                 checked={filters.requiresVerification}
+                onChange={handleCheckboxChange}
+                disabled={!isOpen}
+              />
+            </label>
+            <label className="select-boolean">
+              {t('noPeselVerificationRequired')}
+              <input
+                type="checkbox"
+                className="checkbox-round"
+                name="peselVerificationRequired"
+                checked={filters.peselVerificationRequired}
                 onChange={handleCheckboxChange}
                 disabled={!isOpen}
               />
