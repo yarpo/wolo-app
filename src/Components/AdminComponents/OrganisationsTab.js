@@ -21,7 +21,7 @@ const OrganisationsTab = () => {
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [userConfirmed, setUserConfirmed] = useState(false);
     const [organisationToDelete, setOrganisationToDelete] = useState(null);
-    const [organisationNameToDelete, setOrganisationNameToDelete] = useState(''); // New state for organisation's name
+    const [organisationNameToDelete, setOrganisationNameToDelete] = useState('');
 
     const [filteredOrganisations, setFilteredOrganisations] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');

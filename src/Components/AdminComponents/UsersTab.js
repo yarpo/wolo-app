@@ -22,7 +22,7 @@ const UsersTab = () => {
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [userConfirmed, setUserConfirmed] = useState(false);
     const [userToDelete, setUserToDelete] = useState(null);
-    const [userFullNameToDelete, setUserFullNameToDelete] = useState(''); // New state for user's full name
+    const [userFullNameToDelete, setUserFullNameToDelete] = useState('');
 
     const [filteredUsers, setFilteredUsers] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
