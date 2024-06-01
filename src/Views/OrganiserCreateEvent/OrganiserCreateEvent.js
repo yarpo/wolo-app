@@ -64,8 +64,8 @@ const OrganiserCreateEvent = () => {
       districtId: null
     }],
     cityId: selectedCity ,
-    isPeselVerificationRequired: false,
-    isAgreementNeeded: false
+    peselVerificationRequired: false,
+    agreementNeeded: false
   };
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
@@ -139,13 +139,13 @@ const OrganiserCreateEvent = () => {
 
                 <div className="organiser-create-event-two-columns">
                   <div className="organiser-create-event-two-columns-item">
-                    <Label htmlFor="isPeselVerificationRequired" value="Is PESEL Verification Required?" />{" "}
-                    <Field as={Checkbox} id="isPeselVerificationRequired" name="isPeselVerificationRequired" />
+                    <Label htmlFor="peselVerificationRequired" value="Is PESEL Verification Required?" />{" "}
+                    <Field as={Checkbox} id="peselVerificationRequired" name="peselVerificationRequired" />
                   </div>
                   
                   <div className="organiser-create-event-two-columns-item">
-                    <Label htmlFor="isAgreementNeeded" value="Is Agreement Needed?" />{" "}
-                    <Field as={Checkbox} id="isAgreementNeeded" name="isAgreementNeeded" />
+                    <Label htmlFor="agreementNeeded" value="Is Agreement Needed?" />{" "}
+                    <Field as={Checkbox} id="agreementNeeded" name="agreementNeeded" />
                   </div>
                 </div>
                 <FieldArray name="shifts" className="organiser-create-event-grid">
