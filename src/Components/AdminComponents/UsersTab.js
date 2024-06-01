@@ -175,7 +175,7 @@ const UsersTab = () => {
                                                 </div>
                                                 <div className="grid-container-2">
                                                     <div className="grid-item">
-                                                        <p><strong>{t('moderator')}: </strong>{user.organisationName ? user.organisationName : 'None'}</p>
+                                                        <p><strong>{t('moderator')}: </strong>{user.organisationName ? user.organisationName : t('none')}</p>
                                                     </div>
                                                     <div className="grid-item">
                                                         <p><strong>{t('roles')}: </strong>{user.roles.join(', ')}</p>
