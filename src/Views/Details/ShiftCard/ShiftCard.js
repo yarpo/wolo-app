@@ -25,7 +25,7 @@ const ShiftCard = ({ shift, city, isInPast }) => {
     const [userShiftsReserve, setUserShiftsReserve] = useState([]);
     const isModerator = roles && roles.includes('MODERATOR');
     const isAdmin = roles && roles.includes('ADMIN');
-    const isFull = shift.registeredUsers === shift.capacity;
+    const isFull = shift.registeredUsers >= shift.capacity;
     const [userConfirmed, setUserConfirmed] = useState(false);
 
     const [confirmPhone, setConfirmPhone] = useState(false);
