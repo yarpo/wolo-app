@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { VscChevronDown, VscChevronUp } from 'react-icons/vsc';
+import { HiOutlineSearch } from "react-icons/hi";
 import '../../styles/admin-home-page.scss';
 import { URLS } from '../../config';
-import { Table } from "flowbite-react";
+import { HiTrash, HiOutlinePlus, HiCheck, HiOutlineX} from "react-icons/hi";
+import { Table, TextInput, Card } from "flowbite-react";
 
 import AddUser from './addRecordModals/AddUser.js';
 import Confirmation from '../Popups/Confirmation.js';
@@ -22,9 +24,27 @@ const UsersTab = () => {
     const [userConfirmed, setUserConfirmed] = useState(false);
     const [userToDelete, setUserToDelete] = useState(null);
 
+    const [filteredUsers, setFilteredUsers] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
+
     useEffect(() => {
-        fetchDataWithAuth(URLS.USERS, setUsers, token)
+        fetchDataWithAuth(URLS.USERS, (data) => {
+            setUsers(data);
+            setFilteredUsers(data)
+        }, token)
     }, [token]);
+
+    useEffect(() => {
+        if (searchQuery === '') {
+            setFilteredUsers(users);
+        } else {
+            setFilteredUsers(users.filter(user =>
+                user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                user.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                user.lastName.toLowerCase().includes(searchQuery.toLowerCase())
+            ));
+        }
+    }, [searchQuery, users]);
 
     const handleModalAccept = (data) => {
         setOpenModal(false);
@@ -60,9 +80,20 @@ const UsersTab = () => {
 
     return (
         <div className="overflow-x-auto">
-            <button className="confirm_button" onClick={() => setOpenModal(true)}> Add </button>
+            <div className='admin-panel-add-search-group'>
+                <div className="admin-panel-search-bar">
+                    <TextInput
+                        type="text"
+                        placeholder="Search users"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        icon={HiOutlineSearch}
+                    />
+                </div>
+                <button className="admin-panel-add" onClick={() => setOpenModal(true)}><HiOutlinePlus /></button>
+            </div>
             {openModal && <AddUser onAccept={handleModalAccept} onClose={handleModalClose} />}
-            <Table striped>
+            <Table hoverable>
                 <Table.Head>
                     <Table.HeadCell>ID</Table.HeadCell>
                     <Table.HeadCell>User Name</Table.HeadCell>
@@ -70,11 +101,11 @@ const UsersTab = () => {
                     <Table.HeadCell>User Phone</Table.HeadCell>
                     <Table.HeadCell>User roles</Table.HeadCell>
                     <Table.HeadCell>Organisation Moderator</Table.HeadCell>
-                    <Table.HeadCell>More</Table.HeadCell>
-                    <Table.HeadCell>Delete</Table.HeadCell>
+                    <Table.HeadCell></Table.HeadCell>
+                    <Table.HeadCell></Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
-                    {users.map((user, index) => (
+                    {filteredUsers.map((user, index) => (
                         <React.Fragment key={index}>
                             <Table.Row key={index} className="bg-white dark:border-gray-700 dark:bg-gray-800">
                                 <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
@@ -91,10 +122,10 @@ const UsersTab = () => {
                                         onClick={() => toggleDetails(index)}
                                     >
                                         {openIndex === index ? <VscChevronUp /> : <VscChevronDown />}
-                                        <span className="dropdown-label">Details</span>
+                                        <span className="dropdown-label"></span>
                                     </button>
                                 </Table.Cell>
-                                <Table.Cell>
+                                <Table.Cell className="table-cell-action">
                                     <button
                                         className="delete-button"
                                         onClick={() => {
@@ -102,7 +133,7 @@ const UsersTab = () => {
                                             setUserToDelete(user.id);
                                         }}
                                     >
-                                        <span>Delete</span>
+                                        <span><HiTrash /></span>
                                     </button>
                                     <Confirmation
                                         id="sign-off"
@@ -125,15 +156,44 @@ const UsersTab = () => {
                                 </Table.Cell>
                             </Table.Row>
                             {openIndex === index && (
-                                <Table.Row>
-                                    <Table.Cell colSpan="8">
-                                        <div className="dropdown-content">
-                                        <p><strong>Is adult: </strong>{user.adult ? 'YES' : 'NO'}</p>
-                                        <p><strong>Agreement Signed: </strong>{user.agreementSigned ? 'YES' : 'NO'}</p>
-                                        <p><strong>PESEL Verified: </strong>{user.peselVerified ? 'YES' : 'NO'}</p>
-                                        </div>
-                                    </Table.Cell>
-                                </Table.Row>
+                                <Table.Cell colSpan="8">
+                                    <div className="dropdown-content">
+                                        <Card>
+                                            <div className="card-content">
+                                                <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">
+                                                    {user.firstName} {user.lastName}
+                                                </h5>
+                                                <div className="grid-container-2">
+                                                    <div className="grid-item">
+                                                        <p><strong>Email: </strong>{user.email}</p>
+                                                    </div>
+                                                    <div className="grid-item">
+                                                        <p><strong>Phone: </strong>{user.phoneNumber}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="grid-container-2">
+                                                    <div className="grid-item">
+                                                        <p><strong>Organisation: </strong>{user.organisationName ? user.organisationName : 'None'}</p>
+                                                    </div>
+                                                    <div className="grid-item">
+                                                        <p><strong>Roles: </strong>{user.roles.join(', ')}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="grid-container-3">
+                                                    <div className="grid-item">
+                                                        <p><strong>Is adult: </strong>{user.adult ? <HiCheck /> : <HiOutlineX />}</p>
+                                                    </div>
+                                                    <div className="grid-item">
+                                                        <p><strong>Agreement Signed: </strong>{user.agreementSigned ? <HiCheck /> : <HiOutlineX />}</p>
+                                                    </div>
+                                                    <div className="grid-item">
+                                                        <p><strong>PESEL Verified: </strong>{user.peselVerified ? <HiCheck /> : <HiOutlineX />}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </Card>
+                                    </div>
+                                </Table.Cell>
                             )}
                         </React.Fragment>
                     ))}

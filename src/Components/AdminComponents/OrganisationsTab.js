@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { VscChevronDown, VscChevronUp } from 'react-icons/vsc';
+import { HiOutlineSearch } from "react-icons/hi";
 import { useTranslation } from 'react-i18next';
-import { Table } from "flowbite-react";
+import { Table, TextInput, Card } from "flowbite-react";
 import fetchDataWithAuth from '../../Utils/fetchDataWithAuth.js';
 import postRequestWithJson from '../../Utils/postRequestWithJson.js';
 import Confirmation from '../Popups/Confirmation.js';
 import { URLS } from '../../config';
+import { HiTrash, HiOutlinePlus, HiCheck, HiOutlineX } from "react-icons/hi";
 
 import '../../styles/admin-home-page.scss';
 import AddOrganisation from './addRecordModals/AddOrganisation.js';
@@ -20,9 +22,27 @@ const OrganisationsTab = () => {
     const [userConfirmed, setUserConfirmed] = useState(false);
     const [organisationToDelete, setOrganisationToDelete] = useState(null);
 
+    const [filteredOrganisations, setFilteredOrganisations] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
+
     useEffect(() => {
-        fetchDataWithAuth(URLS.ORGANISATIONS_ADMIN, setOrganisations, localStorage.getItem('token'));
+        fetchDataWithAuth(URLS.ORGANISATIONS_ADMIN, (data) => {
+            setOrganisations(data);
+            setFilteredOrganisations(data);
+        }, localStorage.getItem('token'));
     }, []);
+
+    useEffect(() => {
+        if (searchQuery === '') {
+            setFilteredOrganisations(organisations);
+        } else {
+            setFilteredOrganisations(organisations.filter(organisation =>
+                organisation.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                organisation.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                organisation.phoneNumber.toLowerCase().includes(searchQuery.toLowerCase())
+            ));
+        }
+    }, [searchQuery, organisations]);
 
     const handleModalAccept = (data) => {
         setOpenModal(false);
@@ -61,7 +81,18 @@ const OrganisationsTab = () => {
 
     return (
         <div className="overflow-x-auto">
-            <button className="confirm_button" onClick={() => setOpenModal(true)}> Add </button>
+            <div className='admin-panel-add-search-group'>
+                <div className="admin-panel-search-bar">
+                    <TextInput
+                        type="text"
+                        placeholder="Search users"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        icon={HiOutlineSearch}
+                    />
+                </div>
+                <button className="admin-panel-add" onClick={() => setOpenModal(true)}><HiOutlinePlus /></button>
+            </div>
             {openModal && <AddOrganisation onAccept={handleModalAccept} onClose={handleModalClose} />}
             <Confirmation
                 title="Delete Organisation"
@@ -70,7 +101,7 @@ const OrganisationsTab = () => {
                 onCancel={() => setConfirmDelete(false)}
                 isOpen={confirmDelete}
             />
-            <Table striped>
+            <Table hoverable>
                 <Table.Head>
                     <Table.HeadCell>ID</Table.HeadCell>
                     <Table.HeadCell>Organisation Name</Table.HeadCell>
@@ -78,11 +109,11 @@ const OrganisationsTab = () => {
                     <Table.HeadCell>Organisation Phone</Table.HeadCell>
                     <Table.HeadCell>Organisation Address</Table.HeadCell>
                     <Table.HeadCell>Organisation Status</Table.HeadCell>
-                    <Table.HeadCell>More</Table.HeadCell>
-                    <Table.HeadCell>Delete</Table.HeadCell>
+                    <Table.HeadCell></Table.HeadCell>
+                    <Table.HeadCell></Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
-                    {organisations.map((organisation, index) => (
+                    {filteredOrganisations.map((organisation, index) => (
                         <React.Fragment key={index}>
                             <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
                                 <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
@@ -92,17 +123,17 @@ const OrganisationsTab = () => {
                                 <Table.Cell>{organisation.email}</Table.Cell>
                                 <Table.Cell>{organisation.phoneNumber}</Table.Cell>
                                 <Table.Cell>{organisation.street} {organisation.homeNum}</Table.Cell>
-                                <Table.Cell>{organisation.approved ? "Yes" : "No"}</Table.Cell>
+                                <Table.Cell>{organisation.approved ? <HiCheck /> : <HiOutlineX />}</Table.Cell>
                                 <Table.Cell>
                                     <button
                                         className="details-toggle"
                                         onClick={() => toggleDetails(index)}
                                     >
                                         {openIndex === index ? <VscChevronUp /> : <VscChevronDown />}
-                                        <span className="dropdown-label">Details</span>
+                                        <span className="dropdown-label"></span>
                                     </button>
                                 </Table.Cell>
-                                <Table.Cell>
+                                <Table.Cell className="table-cell-action">
                                     <button
                                         className="delete-button"
                                         onClick={() => {
@@ -110,7 +141,7 @@ const OrganisationsTab = () => {
                                             setOrganisationToDelete(organisation.id);
                                         }}
                                     >
-                                        <span>Delete</span>
+                                        <span><HiTrash /></span>
                                     </button>
                                     <Confirmation
                                         id="sign-off"
@@ -133,14 +164,44 @@ const OrganisationsTab = () => {
                                 </Table.Cell>
                             </Table.Row>
                             {openIndex === index && (
-                                <Table.Row>
-                                    <Table.Cell colSpan="8">
-                                        <div className="dropdown-content">
-                                            <p><strong>Organisation Logo URL:</strong> {organisation.logoUrl}</p>
-                                            <p><strong>Organisation Description:</strong> {organisation.description}</p>
-                                        </div>
-                                    </Table.Cell>
-                                </Table.Row>
+                                <Table.Cell colSpan="8">
+                                    <div className="dropdown-content">
+                                        <Card>
+                                            <div className="card-content">
+                                                <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">
+                                                    {organisation.name}
+                                                </h5>
+                                                <div className="grid-container-2">
+                                                    <p><strong>Description - Polski: </strong>{organisation.descriptionPL}</p>
+                                                    <p><strong>Description - English: </strong>{organisation.descriptionEN}</p>
+                                                    <p><strong>Description - Ukrainian: </strong>{organisation.descriptionUA}</p>
+                                                    <p><strong>Description - Russian: </strong>{organisation.descriptionRU}</p>
+                                                </div>
+                                                <div className="grid-container-2">
+                                                    <div className="grid-item">
+                                                        <p><strong>Email: </strong>{organisation.email}</p>
+                                                    </div>
+                                                    <div className="grid-item">
+                                                        <p><strong>Phone: </strong>{organisation.phoneNumber}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="grid-container-2">
+                                                    <div className="grid-item">
+                                                        <p><strong>Address: </strong>{organisation.street} {organisation.homeNum}</p>
+                                                    </div>
+                                                    <div className="grid-item">
+                                                        <p><strong>Approved: </strong>{organisation.approved ? <HiCheck /> : <HiOutlineX />}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="grid-container">
+                                                    <div className="grid-item">
+                                                        <p><strong>Logo URL: </strong>{organisation.logoUrl}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </Card>
+                                    </div>
+                                </Table.Cell>
                             )}
                         </React.Fragment>
                     ))}

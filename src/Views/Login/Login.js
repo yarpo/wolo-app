@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../../styles/login.scss';
 import { URLS } from '../../config.js';
-import fetchUserId from '../../Utils/fetchUserId.js';
+import fetchUser from '../../Utils/fetchUser.js';
 import { TextInput } from 'flowbite-react'; 
 import { HiMail, HiEye, HiEyeOff } from 'react-icons/hi';
 
@@ -19,8 +19,8 @@ const Login = ({ setToken, setUser }) => {
   const toggleShowPassword = () => setShowPassword(!showPassword);
 
   const fetchUserData = async () => {
-    const userId = await fetchUserId();
-    setId(userId);
+    const user = await fetchUser();
+    setId(user.id);
   };
 
   const handleLogin = async (values) => {
@@ -144,7 +144,7 @@ const Login = ({ setToken, setUser }) => {
             />
           </div>
             {errors.password && touched.password && <span className="error">{errors.password}</span>}
-            <Link className="login-form_forgot-password">{t('forgotPassword')}</Link>
+            <Link to="/forgot-password" className="login-form_forgot-password">{t('forgotPassword')}</Link>
             <div className="checkbox-container">
               <input
                 onClick={toggleShowPassword}

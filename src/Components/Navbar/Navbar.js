@@ -5,7 +5,7 @@ import '../../styles/navbar.scss';
 import logo from '../../images/logo.svg';
 import { RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri';
 import { FaRegUserCircle } from 'react-icons/fa';
-import fetchUserRoles from '../../Utils/fetchUserRoles.js';
+import fetchUser from '../../Utils/fetchUser';
 
 const Navbar = () => {
   const [role, setRole] = useState(null);
@@ -17,12 +17,11 @@ const Navbar = () => {
   const dropdownRef = useRef(null);
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      const role = await fetchUserRoles();
-      setRole(role);
-    }
-
-    fetchUserData();
+    fetchUser().then(data => {
+      if (data) {
+        setRole(data.roles);
+      }
+    })
   }, []);
 
   useEffect(() => {
@@ -76,7 +75,7 @@ function handleLogout() {
             <Link to="/calendar">{t('calendar')}</Link>
           </li>
           <li>
-            <Link to="/volunteers">{t('forVolunteers')}</Link>
+            <Link to="/forVolunteers">{t('forVolunteers')}</Link>
           </li>
           <li>
             <Link to="/needyou">{t('theyNeedYou')}</Link>
@@ -115,6 +114,7 @@ function handleLogout() {
                     {role && role.includes('ADMIN') && <li id="navbar-dropdown-li"><Link to='/adminHomePage'>{t('adminPage')}</Link></li>}
                     {role && role.includes('MODERATOR') && <li id="navbar-dropdown-li"><Link to='/organiserHomePage'>{t('organiserPage')}</Link></li>}
                     <li id="navbar-dropdown-li"><Link to="/settings">{t('settings')}</Link></li>
+                    {role && role.includes('MODERATOR') && <li id="navbar-dropdown-li"><Link to='/organiserSettings'>{t('organiserSettings')}</Link></li>}
                     <li id="navbar-dropdown-li">
                       <button onClick={handleLogout}>{t('logout')}</button>
                     </li>

@@ -33,14 +33,21 @@ const URLS = {
 
   DELETE_USER: `${BASE_URL}/users/delete`,
   DELETE_ORGANISATION: `${BASE_URL}/organisations/disapprove`,
+
+  DELETE_EVENT: `${BASE_URL}/events/admin/delete`,
   DELETE_CATEGORY: `${BASE_URL}/categories/delete`,
   DELETE_DISTRICT: `${BASE_URL}/districts/delete`,
   DELETE_CITY: `${BASE_URL}/cities/delete`,
+
   
   USERS_WITH_NO_ROLES: `${BASE_URL}/users/volunteers`,
   THEY_NEED_YOU: `${BASE_URL}/events/need`,
 
   PUBLIC_RAPORT: `${BASE_URL}/reports/public`,
+
+  LOGIN: LOGIN_URL,
+  ORGANISATION_EDIT: `${BASE_URL}/organisations/edit`,
+
   REPORTS: `${BASE_URL}/reports/all`,
   ADD_REPORT: `${BASE_URL}/reports/add`,
   EDIT_REPORT: `${BASE_URL}/reports/edit`,
@@ -48,9 +55,13 @@ const URLS = {
   UNPUBLISH_REPORT: `${BASE_URL}/reports/unpublish`,
   DELETE_REPORT: `${BASE_URL}/reports/delete`,
 
-  LOGIN: LOGIN_URL,
+  RESET_PASSWORD: `${BASE_URL}/check-password`,
+  SET_PASSWORD: `${BASE_URL}/auth/set-password`,
+  FORGOT_PASSWORD: `${BASE_URL}/auth/forgot-password`,
 
-  RESET_PASSWORD: `${BASE_URL}/check-password`
+  FAQ: `${BASE_URL}/faq`,
+  DELETE_FAQ: `${BASE_URL}/faq/delete`,
+  ADD_FAQ: `${BASE_URL}/faq/add`
 };
 
 module.exports = { URLS, BASE_URL };
