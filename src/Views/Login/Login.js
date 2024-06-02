@@ -144,7 +144,7 @@ const Login = ({ setToken, setUser }) => {
             />
           </div>
             {errors.password && touched.password && <span className="error">{errors.password}</span>}
-            <Link className="login-form_forgot-password">{t('forgotPassword')}</Link>
+            <Link to="/forgot-password" className="login-form_forgot-password">{t('forgotPassword')}</Link>
             <div className="checkbox-container">
               <input
                 onClick={toggleShowPassword}

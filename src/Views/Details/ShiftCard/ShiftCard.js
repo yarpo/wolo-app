@@ -79,20 +79,20 @@ const ShiftCard = ({ shift, city, isInPast }) => {
     }, [userConfirmed, handleEventInteract]); 
 
     return (
-        <div className="card">
-            <Card className="max-w-sm">
-                <span className="font-normal text-gray-700 dark:text-gray-400">
-                    <p><strong>{t('time')}:</strong> {formatTime(shift.startTime)} - {formatTime(shift.endTime)}</p>
-                    <p><strong>{t('volunteers')}:</strong> {shift.registeredUsers} / {shift.capacity}</p>
-                    <p><strong>{shift.district}, {city}</strong></p>
-                    <p><strong> {shift.street} {shift.homeNum}</strong></p>
-                    <p>{shift[shiftDirections]}</p>
-                    {shift.requiredMinAge && shift.requiredMinAge > 0 && (
-                        <p className='card-extra-requirements'> 
-                            <HiOutlineExclamation className='card-extra-requirements'/> {t('ageRestrictions')}: {shift.requiredMinAge}
-                        </p>
-                    )}
-                </span>
+        <Card className="shift_card">
+            <span className="font-normal text-gray-700 dark:text-gray-400">
+                <p><strong>{t('time')}:</strong> {formatTime(shift.startTime)} - {formatTime(shift.endTime)}</p>
+                <p><strong>{t('volunteers')}:</strong> {shift.registeredUsers} / {shift.capacity}</p>
+                <p><strong>{shift.district}, {city}</strong></p>
+                <p><strong> {shift.street} {shift.homeNum}</strong></p>
+                <p>{shift[shiftDirections]}</p>
+                {shift.requiredMinAge && shift.requiredMinAge > 0 && (
+                    <p className='card-extra-requirements'> 
+                        <HiOutlineExclamation className='card-extra-requirements'/> {t('ageRestrictions')}: {shift.requiredMinAge}
+                    </p>
+                )}
+            </span>
+            <div className='shift_card_buttons'>
                 {!isInPast && <form onSubmit={(e) => e.preventDefault()}>
                     {canSignIn && !isFull && !isSignedIn && <button type="button"  onClick={() => setConfirmPhone(true)} id="sign-in" > {t('joinShift')} </button>}
                     <Confirmation id="sign-in"
@@ -135,8 +135,8 @@ const ShiftCard = ({ shift, city, isInPast }) => {
                     }
                     {!canSignIn && !isAdmin && !isModerator && <p id="sign_in_section_error">{t('volunteersRestricedFunctionality')}. <Link to="/login">{t('logInToday')}</Link></p>}
                 </form>}
-            </Card>
-        </div>
+            </div>
+        </Card>
     );
 };
 

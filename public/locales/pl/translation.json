@@ -181,8 +181,6 @@
   "organisationDataEditedSuccess": "Twoja organizacja została pomyślnie zaktualizowana",
   "organisationDataEditedFail": "Wystąpił problem z edytowaniem organizacji. Proszę spróbować ponownie później",
   "city": "Miasto",
-
-  "name": "Name",
   
   "report": "Raport",
   "reports": "Raporty",
@@ -211,5 +209,47 @@
   "joinReserveList": "Dołącz do listy rezerwowej",
   "leaveReserveList": "Opuść listę rezerwową",
   "noReserveEvents": "Nie jesteś na żadnych listach rezerwowych",
-  "yourEventsReserve": "Twoja lista rezerwowa"
+  "yourEventsReserve": "Twoja lista rezerwowa",
+  "resetPassword": "Zresetuj hasło",
+  "forgotPasswordTip": "Proszę podać adres e-mail, aby zresetować hasło",
+  "createNewPassword": "Utwórz nowe hasło",
+  "passwordResetTip": "Upewnij się, że używasz silnego hasła - zawierającego wielkie litery, cyfry i znaki specjalne",
+  "changePassword": "Zmień",
+  "sendEmail": "Wyślij e-mail",
+  "somethingWentWrong": "Coś poszło nie tak, spróbuj ponownie później",
+  "mailResetPasswordSuccess": "E-mail do zresetowania hasła został wysłany na Twoją skrzynkę pocztową. Kliknij na link, aby dokończyć resetowanie hasła",
+  "resetPasswordSuccess": "Hasło zostało pomyślnie zmienione. Teraz możesz zalogować się przy użyciu nowego hasła",
+  "passwordsHaveToMatch": "Hasła muszą się zgadzać",
+  "oldPassword": "Aktualne hasło",
+  "newPassword": "Nowe hasło",
+  
+  "help": "Pomoc",
+  "question": "Pytanie",
+  "answer": "Odpowiedź",
+  "addFAQSuccess": "Nowe pytanie pomocy zostało pomyślnie dodane",
+  "addFAQFail": "Wystąpił problem podczas tworzenia nowego pytania. Proszę spróbować ponownie później",
+
+  "searchUsers": "Szukaj użytkowników",
+  "searchOrganisations": "Szukaj organizacji",
+  "searchEvents": "Szukaj wydarzeń",
+  "searchCategories": "Szukaj kategorii",
+  "searchCities": "Szukaj miast",
+  "searchDistricts": "Szukaj dzielnic",
+  "searchQuestions": "Szukaj pytań",
+
+  "english": "Angielski",
+  "polish": "Polski",
+  "ukrainian": "Ukraiński",
+  "russian": "Rosyjski",
+
+  "id": "Id",
+  "name": "Nazwa",
+  "moderator": "Moderator",
+  "doYouWantToDelete": "Czy chcesz usunąć",
+  "organisation": "Organizacja",
+  "active": "Aktywny",
+  "minAgeRequired": "Wymagany minimalny wiek",
+  "capacity": "Pojemność",
+  "addressDirections": "Kierunki adresu",
+  "imageUrl": "URL obrazu"
 }

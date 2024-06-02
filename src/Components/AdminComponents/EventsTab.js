@@ -2,12 +2,14 @@ import { useTranslation } from 'react-i18next';
 import React, { useState, useEffect } from 'react';
 import { VscChevronDown, VscChevronUp } from 'react-icons/vsc';
 import { HiOutlineSearch } from "react-icons/hi";
-import { TextInput } from "flowbite-react";
+import { TextInput, Card } from "flowbite-react";
 import '../../styles/admin-home-page.scss';
 import { format } from 'date-fns';
+import formatDate from '../../Utils/formatDate';
 
 import { URLS } from '../../config';
 import fetchData from '../../Utils/fetchData';
+import { HiTrash, HiCheck, HiOutlineX } from "react-icons/hi";
 
 import { Table } from "flowbite-react";
 import Confirmation from '../Popups/Confirmation';
@@ -23,6 +25,7 @@ const EventsTab = () => {
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [userConfirmed, setUserConfirmed] = useState(false);
     const [eventToDelete, setEventToDelete] = useState(null);
+    const [eventNameToDelete, setEventNameToDelete] = useState(''); 
 
     useEffect(() => {
         fetchData(URLS.EVENTS, (data) => {
@@ -44,18 +47,18 @@ const EventsTab = () => {
 
     const renderShiftDetails = (shifts) => {
         return shifts.map((shift, index) => (
-            <div key={index}>
-                <hr />
-                <p><strong>Shift {index + 1}:</strong></p>
-                <p><strong>Date:</strong> {shift.date}</p>
-                <p><strong>Time:</strong> {shift.startTime} - {shift.endTime}</p>
-                <p><strong>Capacity:</strong> {shift.capacity}</p>
-                <p><strong>Leader Required:</strong> {shift.isLeaderRequired ? 'YES' : 'NO'}</p>
-                <p><strong>Minimum Age:</strong> {shift.requiredMinAge ? shift.requiredMinAge : '-'}</p>
-                <p><strong>Location:</strong> {shift.shiftDirections ? shift.shiftDirections : '-'}</p>
-                <p><strong>Address:</strong> {shift.street}, {shift.homeNum}</p>
-                <p><strong>District ID:</strong> {shift.districtId}</p>
-            </div>
+            <Card className='admin-panel-shift-card-entry' key={index}>
+                <div>
+                    <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                        {t('shift')} {index + 1}:
+                    </h5>
+                    <p><strong>{t('time')}:</strong> {shift.startTime} - {shift.endTime}</p>
+                    <p><strong>{t('capacity')}:</strong> {shift.capacity}</p>
+                    <p><strong>{t('minAgeRequired')}:</strong> {shift.requiredMinAge ? shift.requiredMinAge : <HiOutlineX />}</p>
+                    <p><strong>{t('address')}:</strong> {shift.street} {shift.homeNum} {shift.district}</p>
+                    <p><strong>{t('addressDirections')}:</strong> {shift.shiftDirections ? shift.shiftDirections : t('none')}</p>
+                </div>
+            </Card>
         ));
     };
 
@@ -81,26 +84,34 @@ const EventsTab = () => {
         setConfirmDelete(false);
     };
 
+    const handleDeleteRequest = (event) => {
+        setConfirmDelete(true);
+        setEventToDelete(event.id);
+        setEventNameToDelete(event[eventName]); 
+    };
+
     return (
         <div className="overflow-x-auto">
-            <div className="admin-panel-search-bar">
-                <TextInput
-                    type="text"
-                    placeholder="Search events"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    icon={HiOutlineSearch}
-                />
+            <div className='admin-panel-add-search-group'>
+                <div className="admin-panel-search-bar">
+                    <TextInput
+                        type="text"
+                        placeholder={t('searchEvents')}
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        icon={HiOutlineSearch}
+                    />
+                </div>
             </div>
-            <Table striped>
+            <Table hoverable>
                 <Table.Head>
-                    <Table.HeadCell>ID</Table.HeadCell>
-                    <Table.HeadCell>Name</Table.HeadCell>
-                    <Table.HeadCell>Organisation</Table.HeadCell>
+                    <Table.HeadCell>{t('id')}</Table.HeadCell>
+                    <Table.HeadCell>{t('name')}</Table.HeadCell>
+                    <Table.HeadCell>{t('organisation')}</Table.HeadCell>
                     <Table.HeadCell>{t('categories')}</Table.HeadCell>
-                    <Table.HeadCell>City</Table.HeadCell>
-                    <Table.HeadCell>More</Table.HeadCell>
-                    <Table.HeadCell>{t('delete')}</Table.HeadCell>
+                    <Table.HeadCell>{t('city')}</Table.HeadCell>
+                    <Table.HeadCell></Table.HeadCell>
+                    <Table.HeadCell></Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
                     {filteredEvents.map((event, index) => (
@@ -119,26 +130,23 @@ const EventsTab = () => {
                                         onClick={() => toggleDetails(index)}
                                     >
                                         {openIndex === index ? <VscChevronUp /> : <VscChevronDown />}
-                                        <span className="dropdown-label">Details</span>
+                                        <span className="dropdown-label"></span>
                                     </button>
                                 </Table.Cell>
-                                <Table.Cell>
+                                <Table.Cell className="table-cell-action">
                                     {event.date > format(new Date(), 'yyyy-MM-dd') ?
                                     <button
                                         className="delete-button"
-                                        onClick={() => {
-                                            setConfirmDelete(true);
-                                            setEventToDelete(event.id);
-                                        }}
+                                        onClick={() => handleDeleteRequest(event)} 
                                     >
-                                        <span>Delete</span>
-                                    </button> : <p>Past event</p>}
+                                        <span><HiTrash /></span>
+                                    </button> : ' '}
                                     <Confirmation
                                         id="sign-off"
                                         buttonName="Delete"
-                                        title="Czy usunąć"
-                                        accept="Tak, usuń"
-                                        deny="Anuluj"
+                                        title={t('doYouWantToDelete') + ": " + eventNameToDelete + "?"} 
+                                        accept={t('delete')}
+                                        deny={t('discard')}
                                         styleId="sign-in"
                                         onAgree={() => {
                                             handleUserConfirmation(true);
@@ -154,20 +162,49 @@ const EventsTab = () => {
                                 </Table.Cell>
                             </Table.Row>
                             {openIndex === index && (
-                                <tr>
-                                    <td colSpan="7">
-                                        <div className="dropdown-content">
-                                            <p><strong>{t('name')} - Polski:</strong> {event.namePL}</p>
-                                            <p><strong>{t('name')} - English:</strong> {event.nameEN}</p>
-                                            <p><strong>{t('name')} - Українська:</strong> {event.nameUA}</p>
-                                            <p><strong>{t('name')} - Русский:</strong> {event.nameRU}</p>
-                                            <hr />
-                                            <p><strong>Image URL:</strong> {event.imageUrl}</p>
-                                            <p><strong>Requires Pesel verification:</strong> {event.peselVerificationRequired ? 'YES' : 'NO'}</p>
-                                            <div>{renderShiftDetails(event.shifts)}</div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <Table.Cell colSpan="8">
+                                    <div className="dropdown-content">
+                                        <Card>
+                                            <div className="card-content">
+                                                <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">
+                                                    {event[eventName]}
+                                                </h5>
+                                                <div className="grid-container">
+                                                    <p><strong>{t('name')} - {t('polish')}: </strong>{event.namePL}</p>
+                                                    <p><strong>{t('name')} - {t('english')}: </strong>{event.nameEN}</p>
+                                                    <p><strong>{t('name')} - {t('ukrainian')}: </strong>{event.nameUA}</p>
+                                                    <p><strong>{t('name')} - {t('russian')}: </strong>{event.nameRU}</p>
+                                                </div>
+                                                <div className="grid-container">
+                                                    <p><strong>{t('description')} - {t('polish')}: </strong>{event.descriptionPL}</p>
+                                                    <p><strong>{t('description')} - {t('english')}: </strong>{event.descriptionEN}</p>
+                                                    <p><strong>{t('description')} - {t('ukrainian')}: </strong>{event.descriptionUA}</p>
+                                                    <p><strong>{t('description')} - {t('russian')}: </strong>{event.descriptionRU}</p>
+                                                </div>
+                                                <div className="grid-container-2">
+                                                    <div className="grid-item">
+                                                        <p><strong>{t('city')}: </strong>{event.city}</p>
+                                                    </div>
+                                                    <div className="grid-item">
+                                                        <p><strong>{t('date')}: </strong>{formatDate(event.date)}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="grid-container-2">
+                                                    <div className="grid-item">
+                                                        <p><strong>{t('peselVerified')}: </strong>{event.peselVerification ? <HiCheck /> : <HiOutlineX />}</p>
+                                                    </div>
+                                                    <div className="grid-item">
+                                                        <p><strong>{t('agreementSigned')}: </strong>{event.agreementSigned ? <HiCheck /> : <HiOutlineX />}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="grid-container">
+                                                    <p><strong>{t('imageUrl')}: </strong>{event.imageUrl}</p>
+                                                </div>
+                                                <div className='admin-panel-shift-card'>{renderShiftDetails(event.shifts)}</div>
+                                            </div>
+                                        </Card>
+                                    </div>
+                                </Table.Cell>
                             )}
                         </React.Fragment>
                     ))}
