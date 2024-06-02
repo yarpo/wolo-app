@@ -4,7 +4,7 @@ import '../../styles/admin-home-page.scss';
 import { HiOutlineSearch } from "react-icons/hi";
 
 import { URLS } from '../../config';
-import fetchData  from  '../../Utils/fetchData';
+import fetchDataWithAuth  from  '../../Utils/fetchDataWithAuth.js';
 import { Table, TextInput } from "flowbite-react";
 import { HiOutlinePlus, HiTrash, HiCheck, HiOutlineX } from "react-icons/hi";
 import Confirmation from '../Popups/Confirmation.js';
@@ -27,10 +27,10 @@ const CitiesTab = () => {
     const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
-        fetchData(URLS.CITIES, (data) => {
+        fetchDataWithAuth(URLS.CITIES, (data) => {
             setCities(data);
             setFilteredCities(data);
-        });
+        }, localStorage.getItem('token'));
     }, []);
 
     useEffect(() => {
@@ -46,13 +46,12 @@ const CitiesTab = () => {
     const handleModalAccept = (data) => {
         setOpenModal(false);
 
-        postRequestWithJson(URLS.ADD_CITIES, localStorage.getItem('token'), data, t('addCitySuccess'), t('addCityFail'));
+        postRequestWithJson(URLS.CITIES_ADMIN, localStorage.getItem('token'), data, t('addCitySuccess'), t('addCityFail'));
     };
 
     const handleModalClose = () => {
         setOpenModal(false);
-    }
-
+    };
     
     const handleUserConfirmation = async (confirmation) => {
         setUserConfirmed(confirmation);
@@ -66,10 +65,8 @@ const CitiesTab = () => {
     }, [userConfirmed]); 
 
     const handleDelete = () => {
-        const params = new URLSearchParams();
-        params.append('id', cityToDelete);
         console.log("Delete confirmed", cityToDelete);
-        deleteRequest(`${URLS.DELETE_CITY}/${cityToDelete}`, localStorage.getItem('token'), "Deleted", "Fail")
+        deleteRequest(`${URLS.DELETE_CITY}/${cityToDelete}`, localStorage.getItem('token'), t('cityDeleteSuccess'), t('somethingWentWrong'))
         setCityToDelete(null);
         setConfirmDelete(false);
     };
@@ -113,12 +110,12 @@ const CitiesTab = () => {
                             <Table.Cell>{city.districts.join(', ')}</Table.Cell>
                             <Table.Cell>{!city.old ? <HiCheck /> : <HiOutlineX />}</Table.Cell>
                             <Table.Cell className="table-cell-action">
-                                <button
+                                {!city.old ? <button
                                     className="delete-button"
                                     onClick={() => handleDeleteRequest(city)} 
                                 >
                                     <span><HiTrash /></span>
-                                </button>
+                                </button> : " "}
                                 <Confirmation
                                     id="sign-off"
                                     buttonName="Delete"

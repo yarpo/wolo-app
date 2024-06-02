@@ -244,6 +244,9 @@
   "minAgeRequired": "Minimum age",
   "capacity": "Capacity",
   "addressDirections": "Address directions",
-  "imageUrl": "Image Url"
+  "imageUrl": "Image Url",
+
+  "cityDeleteSuccess": "City was deacitvated",
+  "districtDeleteSuccess": "District was deleted"
 }
 

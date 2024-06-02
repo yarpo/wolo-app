@@ -4,25 +4,33 @@ import '../../styles/admin-home-page.scss';
 import { HiOutlineSearch } from "react-icons/hi";
 
 import { URLS } from '../../config';
-import fetchData  from  '../../Utils/fetchData';
+import fetchDataWithAuth  from  '../../Utils/fetchDataWithAuth.js';
 import { Table, TextInput } from "flowbite-react";
-import { HiOutlinePlus  } from "react-icons/hi";
+import { HiOutlinePlus, HiTrash, HiCheck, HiOutlineX } from "react-icons/hi";
+import Confirmation from '../Popups/Confirmation.js';
 
 import AddDistrict from './addRecordModals/AddDistricts';
 import postRequestWithJson from '../../Utils/postRequestWithJson';
+import deleteRequest from '../../Utils/deleteRequest.js';
 
 const DistrictsTab = () => {
     const { t } = useTranslation();
     const [districts, setDistricts] = useState([]);
     const [openModal, setOpenModal] = useState(false);
+
+    const [confirmDelete, setConfirmDelete] = useState(false);
+    const [userConfirmed, setUserConfirmed] = useState(false);
+    const [districtToDelete, setDistrictToDelete] = useState(null);
+    const [districtNameToDelete, setDistrictNameToDelete] = useState('');
+
     const [filteredDstricts, setFilteredDistricts] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
-        fetchData(URLS.DISTRICTS, (data) => {
+        fetchDataWithAuth(URLS.DISTRICTS_ADMIN, (data) => {
             setDistricts(data);
             setFilteredDistricts(data);
-        });
+        }, localStorage.getItem('token'));
     }, []);
 
     useEffect(() => {
@@ -44,7 +52,31 @@ const DistrictsTab = () => {
 
     const handleModalClose = () => {
         setOpenModal(false);
-    }
+    };
+    
+    const handleUserConfirmation = async (confirmation) => {
+        setUserConfirmed(confirmation);
+    };
+
+    useEffect(() => {
+        if (userConfirmed !== false) {
+            setUserConfirmed(false);
+            handleDelete()
+        }
+    }, [userConfirmed]); 
+
+    const handleDelete = () => {
+        console.log("Delete confirmed", districtToDelete);
+        deleteRequest(`${URLS.DELETE_DISTRICT}/${districtToDelete}`, localStorage.getItem('token'), t('districtDeleteSuccess'), t('somethingWentWrong'))
+        setDistrictToDelete(null);
+        setConfirmDelete(false);
+    };
+
+    const handleDeleteRequest = (district) => {
+        setConfirmDelete(true);
+        setDistrictToDelete(district.id);
+        setDistrictNameToDelete(district.name);
+    };
 
     return (
         <div className="overflow-x-auto">
@@ -66,6 +98,8 @@ const DistrictsTab = () => {
                     <Table.HeadCell>{t('id')}</Table.HeadCell>
                     <Table.HeadCell>{t('name')}</Table.HeadCell>
                     <Table.HeadCell>{t('city')}</Table.HeadCell>
+                    <Table.HeadCell>{t('active')}</Table.HeadCell>
+                    <Table.HeadCell></Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
                     {filteredDstricts.map((district, index) => (
@@ -75,6 +109,33 @@ const DistrictsTab = () => {
                             </Table.Cell>
                             <Table.Cell>{district.name}</Table.Cell>
                             <Table.Cell>{district.cityName}</Table.Cell>
+                            <Table.Cell>{!district.old ? <HiCheck /> : <HiOutlineX />}</Table.Cell>
+                            <Table.Cell className="table-cell-action">
+                                {!district.old ? <button
+                                    className="delete-button"
+                                    onClick={() => handleDeleteRequest(district)} 
+                                >
+                                    <span><HiTrash /></span>
+                                </button> : " "}
+                                <Confirmation
+                                    id="sign-off"
+                                    buttonName="Delete"
+                                    title={t('doYouWantToDelete') + ": " + districtNameToDelete + "?"} 
+                                    accept={t('delete')}
+                                    deny={t('discard')}
+                                    styleId="sign-in"
+                                    onAgree={() => {
+                                        handleUserConfirmation(true);
+                                        setConfirmDelete(false);
+                                    }}
+                                    onDeny={() => {
+                                        setConfirmDelete(false);
+                                        setDistrictNameToDelete(null);
+                                    }}
+                                    openModal={confirmDelete}
+                                    setOpenModal={setConfirmDelete}
+                                />
+                            </Table.Cell>
                         </Table.Row>
                     ))}
                 </Table.Body>
