@@ -20,6 +20,7 @@ import { FiltersProvider } from './Components/Filters/FiltersContext';
 import fetchUser from './Utils/fetchUser.js';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
+import ResetPassword from './Views/ResetPassword/ResetPassword.js';
 import Settings from './Views/Settings/Settings.js';
 import OrganiserSettings from './Views/OrganiserSettings/OrganiserSettings.js';
 import ForVolunteers from './Views/ForVolunteers/ForVolunteers.js';
@@ -53,7 +54,8 @@ function App() {
             <Route path="/settings" element={<Settings />} />
             <Route path="/login" element={<Login  setToken={setToken} setUser={setUser}  />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/needyou" element={<TheyNeedYouEvents />} />
+            <Route path="/change-password" element={<ResetPassword />} />
+            <Route path="/needYou" element={<TheyNeedYouEvents />} />
             <Route path="/forVolunteers" element={<ForVolunteers />} />
             <Route path="/reset-password" element={<ForgotPassword />} />
             <Route path="/forgot-password" element={<MailForgotPassword />} />
