@@ -6,15 +6,22 @@ import { HiOutlineSearch } from "react-icons/hi";
 import { URLS } from '../../config';
 import fetchData  from  '../../Utils/fetchData';
 import { Table, TextInput } from "flowbite-react";
-import { HiOutlinePlus  } from "react-icons/hi";
+import { HiOutlinePlus, HiTrash, HiCheck, HiOutlineX } from "react-icons/hi";
+import Confirmation from '../Popups/Confirmation.js';
 
 import AddCity from './addRecordModals/AddCity.js';
 import postRequestWithJson from '../../Utils/postRequestWithJson';
+import deleteRequest from '../../Utils/deleteRequest.js';
 
 const CitiesTab = () => {
     const { t } = useTranslation();
     const [cities, setCities] = useState([]);
     const [openModal, setOpenModal] = useState(false);
+
+    const [confirmDelete, setConfirmDelete] = useState(false);
+    const [userConfirmed, setUserConfirmed] = useState(false);
+    const [cityToDelete, setCityToDelete] = useState(null);
+    const [cityNameToDelete, setCityNameToDelete] = useState('');
 
     const [filteredCities, setFilteredCities] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
@@ -46,6 +53,33 @@ const CitiesTab = () => {
         setOpenModal(false);
     }
 
+    
+    const handleUserConfirmation = async (confirmation) => {
+        setUserConfirmed(confirmation);
+    };
+
+    useEffect(() => {
+        if (userConfirmed !== false) {
+            setUserConfirmed(false);
+            handleDelete()
+        }
+    }, [userConfirmed]); 
+
+    const handleDelete = () => {
+        const params = new URLSearchParams();
+        params.append('id', cityToDelete);
+        console.log("Delete confirmed", cityToDelete);
+        deleteRequest(`${URLS.DELETE_CITY}/${cityToDelete}`, localStorage.getItem('token'), "Deleted", "Fail")
+        setCityToDelete(null);
+        setConfirmDelete(false);
+    };
+
+    const handleDeleteRequest = (city) => {
+        setConfirmDelete(true);
+        setCityToDelete(city.id);
+        setCityNameToDelete(city.name);
+    };
+
     return (
         <div className="overflow-x-auto">
             <div className='admin-panel-add-search-group'>
@@ -66,6 +100,8 @@ const CitiesTab = () => {
                     <Table.HeadCell>{t('id')}</Table.HeadCell>
                     <Table.HeadCell>{t('name')}</Table.HeadCell>
                     <Table.HeadCell>{t('districts')}</Table.HeadCell>
+                    <Table.HeadCell>{t('active')}</Table.HeadCell>
+                    <Table.HeadCell></Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
                     {filteredCities.map((city, index) => (
@@ -75,6 +111,33 @@ const CitiesTab = () => {
                             </Table.Cell>
                             <Table.Cell>{city.name}</Table.Cell>
                             <Table.Cell>{city.districts.join(', ')}</Table.Cell>
+                            <Table.Cell>{!city.old ? <HiCheck /> : <HiOutlineX />}</Table.Cell>
+                            <Table.Cell className="table-cell-action">
+                                <button
+                                    className="delete-button"
+                                    onClick={() => handleDeleteRequest(city)} 
+                                >
+                                    <span><HiTrash /></span>
+                                </button>
+                                <Confirmation
+                                    id="sign-off"
+                                    buttonName="Delete"
+                                    title={t('doYouWantToDelete') + ": " + cityNameToDelete + "?"} 
+                                    accept={t('delete')}
+                                    deny={t('discard')}
+                                    styleId="sign-in"
+                                    onAgree={() => {
+                                        handleUserConfirmation(true);
+                                        setConfirmDelete(false);
+                                    }}
+                                    onDeny={() => {
+                                        setConfirmDelete(false);
+                                        setCityNameToDelete(null);
+                                    }}
+                                    openModal={confirmDelete}
+                                    setOpenModal={setConfirmDelete}
+                                />
+                            </Table.Cell>
                         </Table.Row>
                     ))}
                 </Table.Body>
