@@ -27,7 +27,7 @@ const CitiesTab = () => {
     const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
-        fetchDataWithAuth(URLS.CITIES, (data) => {
+        fetchDataWithAuth(URLS.CITIES_ADMIN, (data) => {
             setCities(data);
             setFilteredCities(data);
         }, localStorage.getItem('token'));
