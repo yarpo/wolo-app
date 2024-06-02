@@ -51,7 +51,7 @@ const Details = () => {
     if (!eventData) return <div>{t('loading')}...</div>;
 
     const {
-        organisationName, date, city, imageUrl, categories, peselVerificationRequired, agreementNeeded
+        organisationName, date, city, imageUrl, categories, isPeselVerificationRequired, isAgreementNeeded
     } = eventData;
 
     const addresses = eventData.shifts.map(shift => ({
@@ -73,12 +73,12 @@ const Details = () => {
                 </Link>
                 <h1 id="title">{eventData[eventName]}</h1>
                 <ul id="information">
-                    {peselVerificationRequired && (
+                    {isPeselVerificationRequired && (
                         <p className='card-extra-requirements'>
                             <HiOutlineExclamation className='card-extra-requirements' /> {t('peselVerificationNeeded')}
                         </p>
                     )}
-                    {agreementNeeded && (
+                    {isAgreementNeeded && (
                         <p className='card-extra-requirements'>
                             <HiOutlineExclamation className='card-extra-requirements' /> {t('volunteerAgreementNeeded')}
                         </p>
