@@ -2,15 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import '../../styles/admin-home-page.scss';
 import { HiOutlineSearch } from "react-icons/hi";
-
 import { URLS } from '../../config';
 import { HiTrash, HiOutlinePlus } from "react-icons/hi";
 import { Table, TextInput } from "flowbite-react";
-
 import AddCategory from './addRecordModals/AddCategory';
 import Confirmation from '../Popups/Confirmation';
-
-import fetchData  from  '../../Utils/fetchData.js';
+import fetchData from '../../Utils/fetchData.js';
 import postRequestWithJson from '../../Utils/postRequestWithJson';
 import deleteRequest from '../../Utils/deleteRequest.js';
 
@@ -21,6 +18,7 @@ const CategoriesTab = () => {
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [userConfirmed, setUserConfirmed] = useState(false);
     const [categoryToDelete, setCategoryToDelete] = useState(null);
+    const [categoryNameToDelete, setCategoryNameToDelete] = useState('');
 
     const [filteredCategories, setFilteredCategories] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
@@ -44,7 +42,6 @@ const CategoriesTab = () => {
 
     const handleModalAccept = (data) => {
         setOpenModal(false);
-
         postRequestWithJson(URLS.ADD_CATEGORIES, localStorage.getItem('token'), data, t('addCategorySuccess'), t('addCategoryFail'));
     };
 
@@ -54,23 +51,27 @@ const CategoriesTab = () => {
 
     const handleUserConfirmation = async (confirmation) => {
         setUserConfirmed(confirmation);
-
     };
 
     useEffect(() => {
         if (userConfirmed !== false) {
             setUserConfirmed(false);
-            handleDelete()
+            handleDelete();
         }
-    }, [userConfirmed]); 
+    }, [userConfirmed]);
 
     const handleDelete = () => {
         const params = new URLSearchParams();
         params.append('id', categoryToDelete);
-        console.log("Delete confirmed", categoryToDelete);
-        deleteRequest(`${URLS.DELETE_CATEGORY}/${categoryToDelete}`, localStorage.getItem('token'), "Deleted", "Fail")
+        deleteRequest(`${URLS.DELETE_CATEGORY}/${categoryToDelete}`, localStorage.getItem('token'), "Deleted", "Fail");
         setCategoryToDelete(null);
         setConfirmDelete(false);
+    };
+
+    const handleDeleteRequest = (category) => {
+        setConfirmDelete(true);
+        setCategoryToDelete(category.id);
+        setCategoryNameToDelete(category.name);
     };
 
     return (
@@ -79,7 +80,7 @@ const CategoriesTab = () => {
                 <div className="admin-panel-search-bar">
                     <TextInput
                         type="text"
-                        placeholder="Search users"
+                        placeholder={t('searchCategories')}
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         icon={HiOutlineSearch}
@@ -90,8 +91,8 @@ const CategoriesTab = () => {
             {openModal && <AddCategory onAccept={handleModalAccept} onClose={handleModalClose} />}
             <Table hoverable>
                 <Table.Head>
-                    <Table.HeadCell>ID</Table.HeadCell>
-                    <Table.HeadCell>Category Name</Table.HeadCell>
+                    <Table.HeadCell>{t('id')}</Table.HeadCell>
+                    <Table.HeadCell>{t('name')}</Table.HeadCell>
                     <Table.HeadCell></Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
@@ -104,19 +105,16 @@ const CategoriesTab = () => {
                             <Table.Cell className="table-cell-action">
                                 <button
                                     className="delete-button"
-                                    onClick={() => {
-                                        setConfirmDelete(true);
-                                        setCategoryToDelete(category.id);
-                                    }}
+                                    onClick={() => handleDeleteRequest(category)}
                                 >
                                     <span><HiTrash /></span>
                                 </button>
                                 <Confirmation
                                     id="sign-off"
                                     buttonName={t('delete')}
-                                    title={t('delete') + "?"}
-                                    accept={t('delete')}
-                                    deny={t('discard')}
+                                    title={t('doYouWantToDelete') + ": " + categoryNameToDelete + "?"} 
+                                        accept={t('delete')}
+                                        deny={t('discard')}
                                     styleId="sign-in"
                                     onAgree={() => {
                                         handleUserConfirmation(true);
@@ -135,7 +133,7 @@ const CategoriesTab = () => {
                 </Table.Body>
             </Table>
         </div>
-    )
+    );
 };
 
 export default CategoriesTab;

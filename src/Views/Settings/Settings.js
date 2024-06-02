@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import '../../styles/settings.scss';
 import fetchUser from '../../Utils/fetchUser';
 import putRequest from '../../Utils/putRequest';
@@ -212,6 +212,11 @@ const Settings = () => {
                         {t('edit')}
                     </button>
                 )}
+                <Link to='/change-password'>
+                    <button className="white_button">
+                        {t('resetPassword')}
+                    </button>
+                </Link>
                 <button className="settings_delete_button" onClick={() => setConfirmDelete(true)}> {t('deactivateAccount')} </button>
                 <Confirmation id="sign-off"
                     buttonName="Delete"
