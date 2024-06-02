@@ -45,6 +45,7 @@ const URLS = {
   EDIT_DISTRICT: `${BASE_URL}/districts/edit`,
   EDIT_CATEGORY: `${BASE_URL}/categories/edit`,
   EDIT_FAQ: `${BASE_URL}/faq/edit`,
+  EDIT_EVENT: `${BASE_URL}/events/admin/edit`,
 
   
   USERS_WITH_NO_ROLES: `${BASE_URL}/users/volunteers`,
