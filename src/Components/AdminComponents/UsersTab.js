@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { VscChevronDown, VscChevronUp } from 'react-icons/vsc';
-import { HiOutlineSearch, HiTrash, HiOutlinePlus, HiCheck, HiOutlineX } from "react-icons/hi";
+import { HiOutlineSearch, HiTrash, HiOutlinePlus, HiCheck, HiOutlineX, HiArrowSmRight, HiArrowSmLeft } from "react-icons/hi";
+import ReactPaginate from 'react-paginate';
 import '../../styles/admin-home-page.scss';
 import { URLS } from '../../config';
 import { Table, TextInput, Card } from "flowbite-react";
@@ -26,6 +27,9 @@ const UsersTab = () => {
 
     const [filteredUsers, setFilteredUsers] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
+
+    const [currentPage, setCurrentPage] = useState(0);
+    const usersPerPage = 10;
 
     useEffect(() => {
         fetchDataWithAuth(URLS.USERS, (data) => {
@@ -83,6 +87,14 @@ const UsersTab = () => {
         setUserFullNameToDelete(`${user.firstName} ${user.lastName}`);
     };
 
+    const handlePageClick = (event) => {
+        setCurrentPage(event.selected);
+    };
+
+    const offset = currentPage * usersPerPage;
+    const currentUsers = filteredUsers.slice(offset, offset + usersPerPage);
+    const pageCount = Math.ceil(filteredUsers.length / usersPerPage);
+
     return (
         <div className="overflow-x-auto">
             <div className='admin-panel-add-search-group'>
@@ -110,7 +122,7 @@ const UsersTab = () => {
                     <Table.HeadCell></Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
-                    {filteredUsers.map((user, index) => (
+                    {currentUsers.map((user, index) => (
                         <React.Fragment key={index}>
                             <Table.Row key={index} className="bg-white dark:border-gray-700 dark:bg-gray-800">
                                 <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
@@ -201,6 +213,18 @@ const UsersTab = () => {
                     ))}
                 </Table.Body>
             </Table>
+            <ReactPaginate
+                previousLabel={<HiArrowSmLeft />}
+                nextLabel={<HiArrowSmRight />}
+                pageCount={pageCount}
+                onPageChange={handlePageClick}
+                pageClassName={'pagination__page'}
+                containerClassName={'pagination'}
+                previousLinkClassName={'pagination__link'}
+                nextLinkClassName={'pagination__link'}
+                disabledClassName={'pagination__link--disabled'}
+                activeClassName={'pagination__link--active'}
+            />
         </div>
     )
 };
