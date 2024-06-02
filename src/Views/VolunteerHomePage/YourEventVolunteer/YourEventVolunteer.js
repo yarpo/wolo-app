@@ -39,7 +39,6 @@ const YourEventVolunteer = ({shiftId, eventId, userId, shift, isArchived, isRese
     const handleLeaveEvent = useCallback(() => {
         if (userConfirmed) {  
             const params = new URLSearchParams();
-            params.append('user', userId);
             params.append('shift', shiftId);
 
             try {

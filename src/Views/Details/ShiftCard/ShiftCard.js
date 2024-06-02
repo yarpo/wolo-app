@@ -31,8 +31,8 @@ const ShiftCard = ({ shift, city, isInPast }) => {
     const [confirmPhone, setConfirmPhone] = useState(false);
     const [confirmLeave, setConfirmLeave] = useState(false);
 
-    const isSignedIn = userShifts.map(shift => shift.shiftId).includes(shiftId);
-    const isSignedInReserve = userShiftsReserve.map(shift => shift.shiftId).includes(shiftId);
+    const isSignedIn = userShifts.length > 0 ? userShifts.map(shift => shift.shiftId).includes(shiftId) : [];
+    const isSignedInReserve = userShiftsReserve.length > 0 ? userShiftsReserve.map(shift => shift.shiftId).includes(shiftId) : [];
 
     useEffect(() => {
         fetchUser().then(data => {
@@ -59,7 +59,7 @@ const ShiftCard = ({ shift, city, isInPast }) => {
 
     
             try {
-                if (!isSignedIn) {
+                if (!isSignedIn && !isSignedInReserve) {
                     params.append('reserve', isFull);
                     postRequest(URLS.JOIN, token, params, t('joinShiftSuccess'), t('joinShiftError'));
                 } else {
