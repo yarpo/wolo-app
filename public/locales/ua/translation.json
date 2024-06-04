@@ -251,5 +251,8 @@
     "minAgeRequired": "Мінімальний вік",
     "capacity": "Місткість",
     "addressDirections": "Напрямки адреси",
-    "imageUrl": "URL зображення"
+    "imageUrl": "URL зображення",
+
+    "cityDeleteSuccess": "Місто було деактивовано",
+    "districtDeleteSuccess": "Район був видалений"
 }

@@ -251,5 +251,8 @@
   "minAgeRequired": "Wymagany minimalny wiek",
   "capacity": "Pojemność",
   "addressDirections": "Kierunki adresu",
-  "imageUrl": "URL obrazu"
+  "imageUrl": "URL obrazu",
+
+  "cityDeleteSuccess": "Miasto zostało dezaktywowane",
+  "districtDeleteSuccess": "Dzielnica została usunięta"
 }

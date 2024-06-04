@@ -255,5 +255,8 @@
     "minAgeRequired": "Минимальный возраст",
     "capacity": "Вместимость",
     "addressDirections": "Направления адреса",
-    "imageUrl": "URL изображения"
+    "imageUrl": "URL изображения",
+
+    "cityDeleteSuccess": "Город был деактивирован",
+    "districtDeleteSuccess": "Район был удален"
 }
