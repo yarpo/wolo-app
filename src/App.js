@@ -26,6 +26,7 @@ import OrganiserSettings from './Views/OrganiserSettings/OrganiserSettings.js';
 import ForVolunteers from './Views/ForVolunteers/ForVolunteers.js';
 import ForgotPassword from './Views/ForgotPassword/ForgotPassword.js';
 import MailForgotPassword from './Views/ForgotPassword/MailForgotPassword.js';
+import CalendarView from './Views/Calendar/Calendar.js';
 
 function App() {
   const [role, setRole] = useState(null);
@@ -59,6 +60,7 @@ function App() {
             <Route path="/forVolunteers" element={<ForVolunteers />} />
             <Route path="/reset-password" element={<ForgotPassword />} />
             <Route path="/forgot-password" element={<MailForgotPassword />} />
+            <Route path="/calendar" element={<CalendarView />} />
             {role && role.includes('MODERATOR') && <Route path="/reports" element={<ReportPage />} />}
             {role && role.includes('MODERATOR') && <Route path="/organiserHomePage" element={<OrganiserHomePage />} />}
             {role && role.includes('MODERATOR') && <Route path="/organiserSettings" element={<OrganiserSettings />} />}

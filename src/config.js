@@ -19,6 +19,7 @@ const URLS = {
   USER_EVENTS_CURRENT: `${BASE_URL}/users/shifts/current`,
   USER_EVENTS_PAST: `${BASE_URL}/users/shifts/past`,
   USER_EVENTS_RESERVE: `${BASE_URL}/users/shifts/reserve`,
+  USER_EVENTS: `${BASE_URL}/users/events`,
   ORGANISATIONS_EVENTS_CURRENT: `${BASE_URL}/organisations/events/current`,
   ORGANISATIONS_EVENTS_PAST: `${BASE_URL}/organisations/events/past`,
   DETAILS: `${CLIENT_URL}/details`,
