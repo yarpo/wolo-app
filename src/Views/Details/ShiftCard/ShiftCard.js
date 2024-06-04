@@ -11,6 +11,7 @@ import Confirmation from '../../../Components/Popups/Confirmation.js';
 import { Card } from "flowbite-react";
 import { HiOutlineExclamation } from "react-icons/hi";
 import formatTime from '../../../Utils/formatTime.js';
+import fetchDataWithAuth from '../../../Utils/fetchDataWithAuth.js';
 
 const ShiftCard = ({ shift, city, isInPast }) => {
     const { t } = useTranslation();
@@ -21,24 +22,32 @@ const ShiftCard = ({ shift, city, isInPast }) => {
     const canSignIn = roles && roles.includes('USER');
     const token = localStorage.getItem('token');
     const [userShifts, setUserShifts] = useState([]);
+    const [userShiftsReserve, setUserShiftsReserve] = useState([]);
     const isModerator = roles && roles.includes('MODERATOR');
     const isAdmin = roles && roles.includes('ADMIN');
-    const isFull = shift.registeredUsers === shift.capacity;
+    const isFull = shift.registeredUsers >= shift.capacity;
     const [userConfirmed, setUserConfirmed] = useState(false);
 
     const [confirmPhone, setConfirmPhone] = useState(false);
     const [confirmLeave, setConfirmLeave] = useState(false);
+
+    const isSignedIn = userShifts.length > 0 ? userShifts.map(shift => shift.shiftId).includes(shiftId) : false;
+    const isSignedInReserve = userShiftsReserve.length > 0 ? userShiftsReserve.map(shift => shift.shiftId).includes(shiftId) : false;
 
     useEffect(() => {
         fetchUser().then(data => {
           if (data) {
             setRoles(data.roles);
             setId(data.id);
-            setUserShifts(data.shifts.map(shift => shift.id))
+
+            if(id){
+                fetchDataWithAuth(`${URLS.USER_EVENTS_CURRENT}`, setUserShifts, localStorage.getItem('token'));
+                fetchDataWithAuth(`${URLS.USER_EVENTS_RESERVE}`, setUserShiftsReserve, localStorage.getItem('token'));
+            }
           }
         })
-      }, []);
-  
+      }, [id]);
+
     const handleUserConfirmation = async (confirmation) => {
         setUserConfirmed(confirmation);
     };
@@ -46,11 +55,12 @@ const ShiftCard = ({ shift, city, isInPast }) => {
     const handleEventInteract = useCallback(() => {
         if (userConfirmed) {  
             const params = new URLSearchParams();
-            params.append('user', id);
             params.append('shift', shift.shiftId);
+
     
             try {
-                if (!userShifts.includes(shiftId)) {
+                if (!isSignedIn && !isSignedInReserve) {
+                    params.append('reserve', isFull);
                     postRequest(URLS.JOIN, token, params, t('joinShiftSuccess'), t('joinShiftError'));
                 } else {
                     postRequest(URLS.REFUSE, token, params, t('leaveShiftSuccess'), t('leaveShiftError'));
@@ -59,7 +69,7 @@ const ShiftCard = ({ shift, city, isInPast }) => {
                 toast.error( t('unknownError') );
             }
         }
-    }, [id, shiftId, userShifts, token, shift, userConfirmed, t]);
+    }, [token, shift, userConfirmed, t, isFull, isSignedIn]);
     
     useEffect(() => {
         if (userConfirmed !== false) {
@@ -84,7 +94,7 @@ const ShiftCard = ({ shift, city, isInPast }) => {
             </span>
             <div className='shift_card_buttons'>
                 {!isInPast && <form onSubmit={(e) => e.preventDefault()}>
-                    {canSignIn && !isFull && !userShifts.includes(shiftId) && <button type="button"  onClick={() => setConfirmPhone(true)} id="sign-in" > {t('joinShift')} </button>}
+                    {canSignIn && !isFull && !isSignedIn && <button type="button"  onClick={() => setConfirmPhone(true)} id="sign-in" > {t('joinShift')} </button>}
                     <Confirmation id="sign-in"
                         buttonName={t('joinShift')}
                             title={t('phoneConfirmation')}
@@ -100,7 +110,7 @@ const ShiftCard = ({ shift, city, isInPast }) => {
                             openModal={confirmPhone}
                             setOpenModal={setConfirmPhone}
                         />
-                    {canSignIn && userShifts.includes(shiftId) && <button type="button"  onClick={() => setConfirmLeave(true)} id="sign-out">{t('leaveShift')} </button>}               
+                    {canSignIn && isSignedIn && <button type="button"  onClick={() => setConfirmLeave(true)} id="sign-out">{t('leaveShift')} </button>}               
                     <Confirmation id="sign-off"
                         buttonName={t('leaveShift')}
                             title={t('leaveShiftConfirmation')}
@@ -116,6 +126,13 @@ const ShiftCard = ({ shift, city, isInPast }) => {
                             openModal={confirmLeave}
                             setOpenModal={setConfirmLeave}
                         />
+                    {canSignIn && !isAdmin && !isSignedIn && isFull &&
+                        <p className='card-extra-requirements'> 
+                            <HiOutlineExclamation className='card-extra-requirements'/> {t('fullShift')}
+                            {!isSignedInReserve && <button type="button"  onClick={() => setConfirmPhone(true)} id="sign-in" > {t('joinReserveList')} </button>}
+                            {isSignedInReserve && <button type="button"  onClick={() => setConfirmLeave(true)} id="sign-out">{t('leaveReserveList')} </button>}
+                        </p>
+                    }
                     {!canSignIn && !isAdmin && !isModerator && <p id="sign_in_section_error">{t('volunteersRestricedFunctionality')}. <Link to="/login">{t('logInToday')}</Link></p>}
                 </form>}
             </div>

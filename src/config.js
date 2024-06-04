@@ -18,6 +18,7 @@ const URLS = {
   EVENT_USERS_PDF: `${BASE_URL}/events/users/pdf`,
   USER_EVENTS_CURRENT: `${BASE_URL}/users/shifts/current`,
   USER_EVENTS_PAST: `${BASE_URL}/users/shifts/past`,
+  USER_EVENTS_RESERVE: `${BASE_URL}/users/shifts/reserve`,
   ORGANISATIONS_EVENTS_CURRENT: `${BASE_URL}/organisations/events/current`,
   ORGANISATIONS_EVENTS_PAST: `${BASE_URL}/organisations/events/past`,
   DETAILS: `${CLIENT_URL}/details`,
