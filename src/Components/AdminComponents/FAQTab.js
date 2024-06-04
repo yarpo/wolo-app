@@ -109,7 +109,9 @@ const FAQTab = () => {
                     <Table.HeadCell></Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
-                    {filteredQuestions.map((question, index) => (
+                    {filteredQuestions
+                        .sort((a, b) => a.id - b.id)
+                        .map((question, index) => (
                         <React.Fragment key={index}>
                             <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
                                 <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
