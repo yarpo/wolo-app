@@ -203,6 +203,11 @@
   "reportEditedSuccess": "Report edited successfully",
   "reportEditedFail": "There was a problem editing report. Please try again later",
 
+  "fullShift": "This shift is full. You can join reserve list",
+  "joinReserveList": "Join reserve list",
+  "leaveReserveList": "Leave reserve list",
+  "noReserveEvents": "You are not any reserve lists",
+  "yourEventsReserve": "Your Reserve List",
   "resetPassword": "Reset password",
   "forgotPasswordTip": "Please enter your email address to reset your password",
   "createNewPassword": "Create new password",

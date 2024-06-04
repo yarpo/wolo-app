@@ -13,6 +13,7 @@ const VolunteerHomePage = () => {
     const { t } = useTranslation();
     const [userEventsCurrent, setUserEventsCurrent] = useState([]);
     const [userEventsPast, setUserEventsPast] = useState([]);
+    const [userEventsReserve, setUserEventsReserve] = useState([]);
     const [userId, setUserId] = useState(null);
 
     useEffect(() => {
@@ -22,6 +23,7 @@ const VolunteerHomePage = () => {
                 setUserId(userData.id);
                 fetchDataWithAuth(`${URLS.USER_EVENTS_CURRENT}`, setUserEventsCurrent, localStorage.getItem('token'));
                 fetchDataWithAuth(`${URLS.USER_EVENTS_PAST}`, setUserEventsPast, localStorage.getItem('token'));
+                fetchDataWithAuth(`${URLS.USER_EVENTS_RESERVE}`, setUserEventsReserve, localStorage.getItem('token'));
             }
         };
 
@@ -49,6 +51,24 @@ const VolunteerHomePage = () => {
                         ))
                     )}
                 </div>
+            <div id="volunteer_home_page_your_events">
+                <h2>{t('yourEventsReserve')} </h2>
+                <br />
+                {userEventsReserve.length === 0 ? (
+                    <p id="volunteer_home_page_text">{t('noReserveEvents')}</p>
+                ) : (
+                    userEventsReserve.map((shift) => (
+                        <YourEventVolunteer
+                        key={shift.shiftId}
+                        shiftId={shift.shiftId}
+                        eventId={shift.eventId}
+                        userId={userId}
+                        shift={shift}
+                        isArchived={false}
+                        isReserve={true} />
+                        ))
+                    )}
+            </div>
             <div id="volunteer_home_page_your_events">
                 <h2>{t('yourPastEvents')}</h2>
                 <br />

@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import formatDate from '../../../Utils/formatDate.js';
 import formatTime from '../../../Utils/formatTime.js';
 
-const YourEventVolunteer = ({shiftId, eventId, userId, shift, isArchived}) => {
+const YourEventVolunteer = ({shiftId, eventId, userId, shift, isArchived, isReserve}) => {
     const { t } = useTranslation();
     const eventName = `eventName${localStorage.getItem('i18nextLng').toUpperCase()}`;
     const token = localStorage.getItem('token');
@@ -39,7 +39,6 @@ const YourEventVolunteer = ({shiftId, eventId, userId, shift, isArchived}) => {
     const handleLeaveEvent = useCallback(() => {
         if (userConfirmed) {  
             const params = new URLSearchParams();
-            params.append('user', userId);
             params.append('shift', shiftId);
 
             try {
@@ -76,7 +75,8 @@ const YourEventVolunteer = ({shiftId, eventId, userId, shift, isArchived}) => {
                 {shift.street} {shift.homeNum}, {shift.city}
             </div>
 
-            {!isArchived && <Button type="button" size="xl" onClick={() => setConfirmLeave(true)} id="your_event_volunteer_event_sign_off_button"> {t('leaveShift')} </Button>}         
+            {!isArchived && !isReserve && <Button type="button" size="xl" onClick={() => setConfirmLeave(true)} id="your_event_volunteer_event_sign_off_button"> {t('leaveShift')} </Button>}         
+            {!isArchived && isReserve && <Button type="button" size="xl" onClick={() => setConfirmLeave(true)} id="your_event_volunteer_event_sign_off_button"> {t('leaveShift')} </Button>}         
                 <Confirmation id="sign-in"
                     buttonName={t('logIn')}
                         title={t('leaveShiftConfirmation')}
