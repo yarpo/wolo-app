@@ -24,6 +24,7 @@
     "react-native": "^0.74.2",
     "react-native-big-calendar": "^4.13.0",
     "react-native-web": "^0.19.12",
+    "react-paginate": "^8.2.0",
     "react-router-dom": "^6.11.2",
     "react-test-renderer": "^18.2.0",
     "react-toastify": "^10.0.4",

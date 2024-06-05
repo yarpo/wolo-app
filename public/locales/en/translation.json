@@ -250,7 +250,7 @@
   "capacity": "Capacity",
   "addressDirections": "Address directions",
   "imageUrl": "Image Url",
-
+  
   "january": "January",
   "february": "February",
   "march": "March",
@@ -275,6 +275,9 @@
   "nextMonth": "Next Month",
   "previousMonth": "Previous Month",
   "yourCalendar": "Your Calendar",
-  "calendarTip": "Navigate through your scheduled events effortlessly. Events you're confirmed for are highlighted in blue, your reserved ones are marked in orange, and past events are displayed with a subtle grey background."
+  "calendarTip": "Navigate through your scheduled events effortlessly. Events you're confirmed for are highlighted in blue, your reserved ones are marked in orange, and past events are displayed with a subtle grey background.",
+  
+  "cityDeleteSuccess": "City was deacitvated",
+  "districtDeleteSuccess": "District was deleted"
 }
 

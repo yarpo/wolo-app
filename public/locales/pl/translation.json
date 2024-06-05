@@ -275,5 +275,8 @@
   "nextMonth": "Następny miesiąc",
   "previousMonth": "Poprzedni miesiąc",
   "yourCalendar": "Twój kalendarz",
-  "calendarTip": "Przeglądaj swoje zaplanowane wydarzenia bez wysiłku. Wydarzenia, na które jesteś zapisany, są podświetlone na niebiesko, twoja rezerwacja oznaczona jest na pomarańczowo, a przeszłe wydarzenia wyświetlane są z delikatnym szarym tłem."
+  "calendarTip": "Przeglądaj swoje zaplanowane wydarzenia bez wysiłku. Wydarzenia, na które jesteś zapisany, są podświetlone na niebiesko, twoja rezerwacja oznaczona jest na pomarańczowo, a przeszłe wydarzenia wyświetlane są z delikatnym szarym tłem.",
+  
+  "cityDeleteSuccess": "Miasto zostało dezaktywowane",
+  "districtDeleteSuccess": "Dzielnica została usunięta"
 }
