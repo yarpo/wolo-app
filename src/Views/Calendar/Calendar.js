@@ -47,26 +47,26 @@ const CalendarView = () => {
         t('december')
     ];      
 
-    const eventsFromUserShifts = userShifts.map(event => ({
+    const eventsFromUserShifts = userShifts.length > 0 ? userShifts.map(event => ({
         title: event[eventName],
         start: new Date(event.date + 'T' + event.startTime),
         end: new Date(event.date + 'T' + event.endTime),
         color: '#3769cb'
-    }));
+    })) : [];
 
-    const eventsFromUserShiftsPast = userShiftsPast.map(event => ({
+    const eventsFromUserShiftsPast = userShiftsPast.length > 0 ? userShiftsPast.map(event => ({
         title: event[eventName],
         start: new Date(event.date + 'T' + event.startTime),
         end: new Date(event.date + 'T' + event.endTime),
         color: '#414754'
-    }));
+    })) : [];
 
-    const eventsFromUserShiftsReserve = userShiftsReserve.map(event => ({
+    const eventsFromUserShiftsReserve = userShiftsReserve.length > 0 ? userShiftsReserve.map(event => ({
         title: event[eventName],
         start: new Date(event.date + 'T' + event.startTime),
         end: new Date(event.date + 'T' + event.endTime),
         color: '#fbcc71',
-    }));
+    })) : [];
 
     const events = [...eventsFromUserShifts, ...eventsFromUserShiftsReserve, ...eventsFromUserShiftsPast];
 
