@@ -7,7 +7,8 @@ import fetchDataWithAuth from '../../Utils/fetchDataWithAuth.js';
 import postRequestWithJson from '../../Utils/postRequestWithJson.js';
 import Confirmation from '../Popups/Confirmation.js';
 import { URLS } from '../../config';
-import { HiTrash, HiOutlinePlus, HiCheck, HiOutlineX } from "react-icons/hi";
+import { HiTrash, HiOutlinePlus, HiCheck, HiOutlineX, HiArrowSmRight, HiArrowSmLeft } from "react-icons/hi";
+import ReactPaginate from 'react-paginate';
 
 import '../../styles/admin-home-page.scss';
 import AddOrganisation from './addRecordModals/AddOrganisation.js';
@@ -25,6 +26,9 @@ const OrganisationsTab = () => {
 
     const [filteredOrganisations, setFilteredOrganisations] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
+
+    const [currentPage, setCurrentPage] = useState(0);
+    const organisationsPerPage = 10;
 
     useEffect(() => {
         fetchDataWithAuth(URLS.ORGANISATIONS_ADMIN, (data) => {
@@ -85,6 +89,15 @@ const OrganisationsTab = () => {
         setOrganisationNameToDelete(organisation.name);
     };
 
+    const handlePageClick = (event) => {
+        setCurrentPage(event.selected);
+    };
+
+    const offset = currentPage * organisationsPerPage;
+    const currentOrganisations = filteredOrganisations.sort((a, b) => a.id - b.id).slice(offset, offset + organisationsPerPage);
+    const pageCount = Math.ceil(filteredOrganisations.length / organisationsPerPage);
+
+
     return (
         <div className="overflow-x-auto">
             <div className='admin-panel-add-search-group'>
@@ -112,13 +125,12 @@ const OrganisationsTab = () => {
                     <Table.HeadCell></Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
-                    {filteredOrganisations
-                        .sort((a, b) => a.id - b.id)
+                    {currentOrganisations
                         .map((organisation, index) => (
                         <React.Fragment key={index}>
                             <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
                                 <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                                    {index + 1}
+                                    {organisation.id}
                                 </Table.Cell>
                                 <Table.Cell>{organisation.name}</Table.Cell>
                                 <Table.Cell>{organisation.email}</Table.Cell>
@@ -205,6 +217,18 @@ const OrganisationsTab = () => {
                     ))}
                 </Table.Body>
             </Table>
+            <ReactPaginate
+                previousLabel={<HiArrowSmLeft />}
+                nextLabel={<HiArrowSmRight />}
+                pageCount={pageCount}
+                onPageChange={handlePageClick}
+                pageClassName={'pagination__page'}
+                containerClassName={'pagination'}
+                previousLinkClassName={'pagination__link'}
+                nextLinkClassName={'pagination__link'}
+                disabledClassName={'pagination__link--disabled'}
+                activeClassName={'pagination__link--active'}
+            />
         </div>
     );
 };
