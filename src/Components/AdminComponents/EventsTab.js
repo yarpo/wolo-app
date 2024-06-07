@@ -6,10 +6,11 @@ import { TextInput, Card } from "flowbite-react";
 import '../../styles/admin-home-page.scss';
 import { format } from 'date-fns';
 import formatDate from '../../Utils/formatDate';
+import ReactPaginate from 'react-paginate';
 
 import { URLS } from '../../config';
 import fetchData from '../../Utils/fetchData';
-import { HiTrash, HiCheck, HiOutlineX } from "react-icons/hi";
+import { HiTrash, HiCheck, HiOutlineX, HiArrowSmRight, HiArrowSmLeft } from "react-icons/hi";
 
 import { Table } from "flowbite-react";
 import Confirmation from '../Popups/Confirmation';
@@ -26,6 +27,9 @@ const EventsTab = () => {
     const [userConfirmed, setUserConfirmed] = useState(false);
     const [eventToDelete, setEventToDelete] = useState(null);
     const [eventNameToDelete, setEventNameToDelete] = useState(''); 
+
+    const [currentPage, setCurrentPage] = useState(0);
+    const eventsPerPage = 10;
 
     useEffect(() => {
         fetchData(URLS.EVENTS, (data) => {
@@ -90,6 +94,14 @@ const EventsTab = () => {
         setEventNameToDelete(event[eventName]); 
     };
 
+    const handlePageClick = (event) => {
+        setCurrentPage(event.selected);
+    };
+
+    const offset = currentPage * eventsPerPage;
+    const currentEvents = filteredEvents.sort((a, b) => a.id - b.id).slice(offset, offset + eventsPerPage);
+    const pageCount = Math.ceil(filteredEvents.length / eventsPerPage);
+
     return (
         <div className="overflow-x-auto">
             <div className='admin-panel-add-search-group'>
@@ -114,8 +126,7 @@ const EventsTab = () => {
                     <Table.HeadCell></Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
-                    {filteredEvents
-                        .sort((a, b) => a.id - b.id)
+                    {currentEvents
                         .map((event, index) => (
                         <React.Fragment key={index}>
                             <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
@@ -212,6 +223,18 @@ const EventsTab = () => {
                     ))}
                 </Table.Body>
             </Table>
+            <ReactPaginate
+                previousLabel={<HiArrowSmLeft />}
+                nextLabel={<HiArrowSmRight />}
+                pageCount={pageCount}
+                onPageChange={handlePageClick}
+                pageClassName={'pagination__page'}
+                containerClassName={'pagination'}
+                previousLinkClassName={'pagination__link'}
+                nextLinkClassName={'pagination__link'}
+                disabledClassName={'pagination__link--disabled'}
+                activeClassName={'pagination__link--active'}
+            />
         </div>
     );
 };
