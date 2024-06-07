@@ -1,63 +1,150 @@
 "use client";
 
-import { Label, Modal, TextInput, Textarea, Checkbox , Select, Datepicker} from "flowbite-react";
+import {
+	Label,
+	Modal,
+	TextInput,
+	Textarea,
+	Checkbox,
+	Select,
+	Datepicker,
+} from "flowbite-react";
 import { useState, useEffect } from "react";
 import { URLS } from "../../../config";
 import { HiGlobeAlt } from "react-icons/hi";
 import fetchData from "../../../Utils/fetchData";
 import EditShift from "./EditShift";
-import { FieldArray, Formik } from 'formik';
 
 function EditEvent({ onAccept, onClose, eventData }) {
 	const [openModal, setOpenModal] = useState(true);
+
 	const [namePL, setNamePL] = useState(eventData.namePL);
 	const [nameEN, setNameEN] = useState(eventData.nameEN);
 	const [nameRU, setNameRU] = useState(eventData.nameRU);
 	const [nameUA, setNameUA] = useState(eventData.nameUA);
 
-	const [descriptionPL, setDescriptionPL] = useState(eventData.descriptionPL);
-	const [descriptionEN, setDescriptionEN] = useState(eventData.descriptionEN);
-	const [descriptionRU, setDescriptionRU] = useState(eventData.descriptionRU);
-	const [descriptionUA, setDescriptionUA] = useState(eventData.descriptionUA);
+	const [descriptionPL, setDescriptionPL] = useState(null);
+	const [descriptionEN, setDescriptionEN] = useState(null);
+	const [descriptionRU, setDescriptionRU] = useState(null);
+	const [descriptionUA, setDescriptionUA] = useState(null);
 
 	const [categories, setCategories] = useState([]);
-	const [selectedCategories, setSelectedCategories] = useState(eventData.categories);
+	const [selectedCategories, setSelectedCategories] = useState(
+		eventData.categories
+	);
 
-	const [peselVerificationRequired, setPeselVerificationRequired] = useState(eventData.peselVerificationRequired);
-	const [agreementNeeded, setAgreementNeeded] = useState(eventData.agreementNeeded);
+	const [isPeselVerificationRequired, setIsPeselVerificationRequired] = useState(
+		eventData.peselVerificationRequired
+	);
+	const [agreementNeeded, setAgreementNeeded] = useState(
+		eventData.agreementNeeded
+	);
 
 	const [cities, setCities] = useState([]);
-	const [cityId, setCityId] = useState(eventData.city);
+	const cityMap = Object.fromEntries(
+		cities.map((city) => [city.id, city.name])
+	);
+	const cityMapName = Object.fromEntries(
+		cities.map((city) => [city.name, city.id])
+	);
+	const [cityId, setCityId] = useState(null);
+
 	const [imageUrl, setImageUrl] = useState(eventData.imageUrl);
-	const [date, setDate] = useState(eventData.date.split('-').reverse().join('/'));
-	const [shifts] = useState(eventData.shifts);
+	const [date, setDate] = useState(
+		eventData.date.split("-").reverse().join("/")
+	);
 
-
-
+	const formattedShifts = eventData.shifts.map(shift => {
+		const [startHour, startMinute, startSecond] = shift.startTime.split(":");
+		const [endHour, endMinute, endSecond] = shift.endTime.split(":");
 	
+		return {
+			...shift,
+			startTime: {
+				hour: parseInt(startHour, 10),
+				minute: parseInt(startMinute, 10),
+				second: parseInt(startSecond, 10),
+				nano: 0
+			},
+			endTime: {
+				hour: parseInt(endHour, 10),
+				minute: parseInt(endMinute, 10),
+				second: parseInt(endSecond, 10),
+				nano: 0
+			}
+		};
+	});
+	
+	const [shifts, setShifts] = useState(formattedShifts);
+	const [event, setEvent] = useState([]);
+	const [districts, setDistricts] = useState([]);
+	const [filteredDistricts, setFilteredDistricts] = useState([]);
 
 	useEffect(() => {
 		fetchData(URLS.CATEGORIES, setCategories);
 		fetchData(URLS.CITIES, setCities);
-		
-	}, []);
+		fetchData(`${URLS.EVENTS}/${eventData.id}`, setEvent);
+		fetchData(URLS.DISTRICTS, setDistricts);
+	}, [eventData.id]);
+
+	const modifyShifts = (action, index, field, value) => {
+		if (action === "add") {
+			setShifts([...shifts, index]);
+		} else if (action === "remove") {
+			setShifts(shifts.filter((_, i) => i !== index));
+		} else if (action === "update") {
+			setShifts(
+				shifts.map((shift, i) =>
+					i === index ? { ...shift, [field]: value } : shift
+				)
+			);
+		}
+	};
+
 	useEffect(() => {
-		const newSelectedCategories = categories.filter(
-			(category) => eventData.categories.includes(category.name)
+		const newSelectedCategories = categories.filter((category) =>
+			eventData.categories.includes(category.name)
 		);
 		setSelectedCategories(newSelectedCategories);
+		if (event) {
+			setDescriptionEN(event.descriptionEN);
+			setDescriptionPL(event.descriptionPL);
+			setDescriptionRU(event.descriptionRU);
+			setDescriptionUA(event.descriptionUA);
+		}
+	}, [categories, eventData.categories, event]);
 
-	}, [categories, eventData.categories]);
+	useEffect(() => {
+		setCityId(cityMapName[eventData.city]);
+	}, [cities]);
 
+	useEffect(() => {
+		if (cityId) {
+			const cityName = cityMap[cityId];
+			const newFilteredDistricts = districts.filter(
+				(district) => district.cityName === cityName
+			);
+			setFilteredDistricts(newFilteredDistricts);
+		}
+	}, [cityId]);
 
 	const handleCheckChange = (e, categoryId) => {
-		const category = categories.find(c => c.id === categoryId);
+		const category = categories.find((c) => c.id === categoryId);
 		if (category) {
 			if (e.target.checked) {
 				setSelectedCategories([...selectedCategories, category]);
 			} else {
-				setSelectedCategories(selectedCategories.filter(c => c.id !== categoryId));
+				setSelectedCategories(
+					selectedCategories.filter((c) => c.id !== categoryId)
+				);
 			}
+		}
+	};
+
+	const handleCityChange = (e) => {
+		const newCityId = e.target.value;
+		for (let i = 0; i < shifts.length; i++) {
+			modifyShifts("update", i, "city",cityMap[newCityId]);
 		}
 	};
 
@@ -67,7 +154,9 @@ function EditEvent({ onAccept, onClose, eventData }) {
 	};
 
 	const handleAgree = () => {
-		const selectedCategoryIds = selectedCategories.map(category => category.id);
+		const selectedCategoryIds = selectedCategories.map(
+			(category) => category.id
+		);
 		onAccept({
 			id: eventData.id,
 			namePL,
@@ -78,14 +167,14 @@ function EditEvent({ onAccept, onClose, eventData }) {
 			descriptionEN,
 			descriptionRU,
 			descriptionUA,
-            organisationId: eventData.organisationId,
-            categories: selectedCategoryIds,
-            peselVerificationRequired,
-            agreementNeeded,
-            imageUrl,
-            date: date.split('/').reverse().join('-'),
+			organisationId: eventData.organisationId,
+			categories: selectedCategoryIds,
+			isPeselVerificationRequired,
+			agreementNeeded,
+			imageUrl,
+			date: date.split("/").reverse().join("-"),
 			cityId,
-            shifts:eventData.shifts
+			shifts,
 		});
 		setOpenModal(false);
 	};
@@ -207,8 +296,22 @@ function EditEvent({ onAccept, onClose, eventData }) {
 						{/*date*/}
 						<div className="mb-2 block">
 							<Label htmlFor="date" value="Date" />
-						</div>	
-						<Datepicker value={date} title="Date of the Event" onSelectedDateChanged={(newDate) =>setDate(newDate.toLocaleDateString('en-GB', { month: '2-digit', day: '2-digit', year: 'numeric' }))}  id="date"  name="date" />
+						</div>
+						<Datepicker
+							value={date}
+							title="Date of the Event"
+							onSelectedDateChanged={(newDate) =>
+								setDate(
+									newDate.toLocaleDateString("en-GB", {
+										month: "2-digit",
+										day: "2-digit",
+										year: "numeric",
+									})
+								)
+							}
+							id="date"
+							name="date"
+						/>
 						{/* city */}
 						<div className="max-w-2xl">
 							<div className="mb-2 block">
@@ -217,7 +320,10 @@ function EditEvent({ onAccept, onClose, eventData }) {
 							<Select
 								id="city"
 								value={cityId}
-								onChange={(e) => setCityId(e.target.value)}
+								onChange={(e) => {
+									setCityId(e.target.value);
+									handleCityChange(e);
+								}}
 							>
 								{cities.map((city) => (
 									<option key={city.id} value={city.id}>
@@ -227,11 +333,10 @@ function EditEvent({ onAccept, onClose, eventData }) {
 							</Select>
 						</div>
 
-
 						{/* category */}
 						<div className="mb-2 block">
-								<Label htmlFor="categories" value="Categories" />
-							</div>
+							<Label htmlFor="categories" value="Categories" />
+						</div>
 
 						<div
 							className="flex flex-col items-start gap-2 justify-start"
@@ -258,7 +363,9 @@ function EditEvent({ onAccept, onClose, eventData }) {
 									<Checkbox
 										key={category.id}
 										value={category.id}
-										checked={selectedCategories.some(c => c.id === category.id)}
+										checked={selectedCategories.some(
+											(c) => c.id === category.id
+										)}
 										onChange={(e) => handleCheckChange(e, category.id)}
 										label={category.name}
 										id={`category-${category.id}`}
@@ -273,8 +380,10 @@ function EditEvent({ onAccept, onClose, eventData }) {
 						<div className="flex items-center gap-2">
 							<Checkbox
 								id="peselVerificationRequired"
-								checked={peselVerificationRequired}
-								onChange={() => setPeselVerificationRequired(!peselVerificationRequired)}
+								checked={isPeselVerificationRequired}
+								onChange={() =>
+									setIsPeselVerificationRequired(!isPeselVerificationRequired)
+								}
 							/>
 							<Label htmlFor="peselVerificationRequired" className="flex">
 								Pesel verification required
@@ -291,12 +400,13 @@ function EditEvent({ onAccept, onClose, eventData }) {
 								Agreement Needed
 							</Label>
 						</div>
-							{/* shifts */}
-							<Formik initialValues={{ shifts: eventData.shifts }}>
-							<FieldArray name="shifts">
-								<EditShift shifts={shifts} />
-							</FieldArray>
-							</Formik>
+						{/* shifts */}
+						<EditShift
+							shifts={shifts}
+							districts={filteredDistricts}
+							modifyShifts={modifyShifts}
+						/>
+
 						<div className="w-full">
 							<button className="confirm_button" onClick={handleAgree}>
 								Save
