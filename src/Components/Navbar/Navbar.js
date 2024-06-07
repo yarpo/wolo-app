@@ -75,10 +75,10 @@ function handleLogout() {
             <Link to="/calendar">{t('calendar')}</Link>
           </li>
           <li>
-            <Link to="/forVolunteers">{t('forVolunteers')}</Link>
+            <Link to="/for-volunteers">{t('forVolunteers')}</Link>
           </li>
           <li>
-            <Link to="/needyou">{t('theyNeedYou')}</Link>
+            <Link to="/they-need-you">{t('theyNeedYou')}</Link>
           </li>
           <li>
             <select
@@ -110,11 +110,11 @@ function handleLogout() {
                 </button>
                 {showDropdown && (
                   <ul ref={dropdownRef} className="navbar-dropdown-menu">
-                    {role && role.includes('USER') && <li id="navbar-dropdown-li"><Link to='/volunteerHomePage'>{t('volunteerPage')}</Link></li>}
-                    {role && role.includes('ADMIN') && <li id="navbar-dropdown-li"><Link to='/adminHomePage'>{t('adminPage')}</Link></li>}
-                    {role && role.includes('MODERATOR') && <li id="navbar-dropdown-li"><Link to='/organiserHomePage'>{t('organiserPage')}</Link></li>}
+                    {role && role.includes('USER') && <li id="navbar-dropdown-li"><Link to='/volunteer-home-page'>{t('volunteerPage')}</Link></li>}
+                    {role && role.includes('ADMIN') && <li id="navbar-dropdown-li"><Link to='/admin-home-page'>{t('adminPage')}</Link></li>}
+                    {role && role.includes('MODERATOR') && <li id="navbar-dropdown-li"><Link to='/organisation-home-page'>{t('organiserPage')}</Link></li>}
                     <li id="navbar-dropdown-li"><Link to="/settings">{t('settings')}</Link></li>
-                    {role && role.includes('MODERATOR') && <li id="navbar-dropdown-li"><Link to='/organiserSettings'>{t('organiserSettings')}</Link></li>}
+                    {role && role.includes('MODERATOR') && <li id="navbar-dropdown-li"><Link to='/organisation-setting'>{t('organiserSettings')}</Link></li>}
                     <li id="navbar-dropdown-li">
                       <button onClick={handleLogout}>{t('logout')}</button>
                     </li>
