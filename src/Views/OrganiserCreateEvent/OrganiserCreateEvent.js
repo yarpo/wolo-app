@@ -22,6 +22,19 @@ const validationSchema = Yup.object().shape({
   date: Yup.date()
     .min(new Date(), 'Date cannot be in the past')
     .required('Date is required'),
+  categories: Yup.array()
+    .min(1, 'At least one category is required')
+    .required('Category is required'),
+  cityId: Yup.number()
+    .required('City is required')
+    .min(1, 'City is required'),
+  shifts: Yup.array().of(
+    Yup.object().shape({
+      districtId: Yup.number()
+        .required('District is required')
+        .min(1, 'District is required'),
+    })
+  ),
 });
 
 const OrganiserCreateEvent = () => {
@@ -200,29 +213,21 @@ const OrganiserCreateEvent = () => {
                         </Label>
                       </div>
                     ))}
+                    <ErrorMessage name="categories" component="div" className="text-red-500" />
                   </div>
 
                   <div className="organiser-create-event-two-columns-item">
                     <Label htmlFor="cityId" value="City" />
-                    <Field as={Select} id="cityId" name="cityId" onChange={handleCityChange} >
+                    <Field as={Select} id="cityId" name="cityId" onChange={handleCityChange} color={errors.cityId && touched.cityId ? 'failure' : undefined}>
+                      <option value="">Select city</option>
                       {cities.map(city => (
                         <option key={city.id} value={city.id}>{city.name}</option>
                       ))}
                     </Field>
+                    <ErrorMessage name="cityId" component="div" className="text-red-500" />
                   </div>
                 </div>
 
-                <div className="organiser-create-event-two-columns">
-                  <div className="organiser-create-event-two-columns-item">
-                    <Label htmlFor="peselVerificationRequired" value="Is PESEL Verification Required?" />{" "}
-                    <Field as={Checkbox} id="peselVerificationRequired" name="peselVerificationRequired" />
-                  </div>
-
-                  <div className="organiser-create-event-two-columns-item">
-                    <Label htmlFor="agreementNeeded" value="Is Agreement Needed?" />{" "}
-                    <Field as={Checkbox} id="agreementNeeded" name="agreementNeeded" />
-                  </div>
-                </div>
                 <FieldArray name="shifts" className="organiser-create-event-grid">
                   {({ remove, push }) => (
                     <div>
@@ -257,11 +262,13 @@ const OrganiserCreateEvent = () => {
                               <Field as={TextInput} id={`shifts.${index}.homeNum`} type="text" name={`shifts.${index}.homeNum`} />
 
                               <Label htmlFor={`shifts.${index}.districtId`} value="District" />
-                              <Field as={Select} id={`shifts.${index}.districtId`} name={`shifts.${index}.districtId`}>
+                              <Field as={Select} id={`shifts.${index}.districtId`} name={`shifts.${index}.districtId`} color={errors.shifts && errors.shifts[index] && errors.shifts[index].districtId && touched.shifts && touched.shifts[index] && touched.shifts[index].districtId ? 'failure' : undefined}>
+                                <option value="">Select district</option>
                                 {filteredDistricts.map(district => (
                                   <option key={district.id} value={district.id}>{district.name}</option>
                                 ))}
                               </Field>
+                              <ErrorMessage name={`shifts.${index}.districtId`} component="div" className="text-red-500" />
                             </div>
                             <div className="col">
                               <button type="button" onClick={() => remove(index)} className='white_button'>Remove Shift</button>
