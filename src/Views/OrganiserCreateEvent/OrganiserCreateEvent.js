@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-import { Checkbox, Label, Textarea, TextInput, Select } from 'flowbite-react';
+import { Checkbox, Label, Textarea, TextInput, Select, Card } from 'flowbite-react';
 import { Formik, Field, Form, FieldArray, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import fetchData from '../../Utils/fetchData.js';
 import { URLS, BASE_URL } from '../../config';
 import '../../styles/organiser-create-event.scss';
-import { Card } from "flowbite-react";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string()
@@ -34,12 +33,11 @@ const OrganiserCreateEvent = () => {
   const [districts, setDistricts] = useState([]);
   const [selectedCity, setSelectedCity] = useState(null);
   const [filteredDistricts, setFilteredDistricts] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
 
   useEffect(() => {
     fetchData(URLS.CATEGORIES, setCategories);
-    fetchData(URLS.CITIES, (data) => {
-      setCities(data);
-    });
+    fetchData(URLS.CITIES, setCities);
     fetchData(URLS.DISTRICTS, setDistricts);
   }, []);
 
@@ -57,7 +55,20 @@ const OrganiserCreateEvent = () => {
       setFilteredDistricts([]);
     }
   }, [selectedCity, cities, districts]);
-  
+
+  const handleCheckChange = (e, categoryId) => {
+    const category = categories.find((c) => c.id === categoryId);
+    if (category) {
+      if (e.target.checked) {
+        setSelectedCategories([...selectedCategories, category]);
+      } else {
+        setSelectedCategories(
+          selectedCategories.filter((c) => c.id !== categoryId)
+        );
+      }
+    }
+  };
+
   const initialValues = {
     name: '',
     organisationId: user.organisationId,
@@ -84,11 +95,11 @@ const OrganiserCreateEvent = () => {
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     setSubmitting(true);
 
-    values.categories = Array.from(values.categories);
+    values.categories = selectedCategories.map(category => category.id);
 
     values.cityId = parseInt(selectedCity);
     for (let i = 0; i < values.shifts.length; i++) {
-      values.shifts[i].districtId = parseInt(values.shifts[i].districtId)
+      values.shifts[i].districtId = parseInt(values.shifts[i].districtId);
     }
 
     const response = await fetch(`${BASE_URL}/events/add?language=${localStorage.getItem('i18nextLng').toLocaleUpperCase()}`, {
@@ -115,87 +126,104 @@ const OrganiserCreateEvent = () => {
       <Card>
         <div className="flex flex-col gap-4">
           <h1>{t('createEvent')}</h1>
-            <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
-              {({ isSubmitting, values, errors, touched }) => (
-                <Form className="organiser-create-event-event-data">
-                  <div className="mb-2 block">
-                    <Label htmlFor="name" value="Event Title" />
+          <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
+            {({ isSubmitting, values, errors, touched }) => (
+              <Form className="organiser-create-event-event-data">
+                <div className="mb-2 block">
+                  <Label htmlFor="name" value="Event Title" />
+                </div>
+                <Field
+                  as={TextInput}
+                  id="name"
+                  type="text"
+                  sizing="md"
+                  name="name"
+                  color={errors.name && touched.name ? 'failure' : undefined}
+                />
+                <ErrorMessage name="name" component="div" className="text-red-500" />
+
+                <div className="mb-2 block">
+                  <Label htmlFor="description" value="Description" />
+                </div>
+                <Field
+                  as={Textarea}
+                  id="description"
+                  sizing="md"
+                  name="description"
+                  color={errors.description && touched.description ? 'failure' : undefined}
+                />
+                <ErrorMessage name="description" component="div" className="text-red-500" />
+
+                <Label htmlFor="imageUrl" value="Image URL" />
+                <Field
+                  as={TextInput}
+                  id="imageUrl"
+                  type="text"
+                  sizing="md"
+                  name="imageUrl"
+                  color={errors.imageUrl && touched.imageUrl ? 'failure' : undefined}
+                />
+                <ErrorMessage name="imageUrl" component="div" className="text-red-500" />
+
+                <Label htmlFor="date" value="Date" />
+                <Field
+                  as={TextInput}
+                  id="date"
+                  type="date"
+                  name="date"
+                  color={errors.date && touched.date ? 'failure' : undefined}
+                />
+                <ErrorMessage name="date" component="div" className="text-red-500" />
+
+                <div className="organiser-create-event-two-columns">
+                  <div className="organiser-create-event-two-columns-item">
+                    <Label htmlFor="categories" value="Category" />
+                    {categories.map((category, index) => (
+                      <div
+                        key={category.id}
+                        className="flex items-center w-full"
+                        style={{
+                          backgroundColor: index % 2 === 0 ? "#f8f8f8" : "#f0f0f0",
+                          padding: index % 2 === 0 ? 0 : 10,
+                          paddingLeft: 10,
+                        }}
+                      >
+                        <Checkbox
+                          value={category.id}
+                          checked={selectedCategories.some(c => c.id === category.id)}
+                          onChange={(e) => handleCheckChange(e, category.id)}
+                          label={category.name}
+                          id={`category-${category.id}`}
+                        />
+                        <Label htmlFor={`category-${category.id}`} className="ml-2">
+                          {category.name}
+                        </Label>
+                      </div>
+                    ))}
                   </div>
-                  <Field
-                    as={TextInput}
-                    id="name"
-                    type="text"
-                    sizing="md"
-                    name="name"
-                    color={errors.name && touched.name ? 'failure' : undefined}
-                  />
-                  <ErrorMessage name="name" component="div" className="text-red-500" />
-                  
-                  <div className="mb-2 block">
-                    <Label htmlFor="description" value="Description" />
+
+                  <div className="organiser-create-event-two-columns-item">
+                    <Label htmlFor="cityId" value="City" />
+                    <Field as={Select} id="cityId" name="cityId" onChange={handleCityChange} >
+                      {cities.map(city => (
+                        <option key={city.id} value={city.id}>{city.name}</option>
+                      ))}
+                    </Field>
                   </div>
-                  <Field
-                    as={Textarea}
-                    id="description"
-                    sizing="md"
-                    name="description"
-                    color={errors.description && touched.description ? 'failure' : undefined}
-                  />
-                  <ErrorMessage name="description" component="div" className="text-red-500" />
+                </div>
 
-                  <Label htmlFor="imageUrl" value="Image URL" />
-                  <Field
-                    as={TextInput}
-                    id="imageUrl"
-                    type="text"
-                    sizing="md"
-                    name="imageUrl"
-                    color={errors.imageUrl && touched.imageUrl ? 'failure' : undefined}
-                  />
-                  <ErrorMessage name="imageUrl" component="div" className="text-red-500" />
-
-                  <Label htmlFor="date" value="Date" />
-                  <Field
-                    as={TextInput}
-                    id="date"
-                    type="date"
-                    name="date"
-                    color={errors.date && touched.date ? 'failure' : undefined}
-                  />
-                  <ErrorMessage name="date" component="div" className="text-red-500" />
-
-                  <div className="organiser-create-event-two-columns">
-                    <div className="organiser-create-event-two-columns-item">
-                      <Label htmlFor="categories" value="Category" />
-                      <Field as={Select} id="categories" name="categories">
-                        {categories.map(category => (
-                          <option key={category.id} value={category.id}>{category.name}</option>
-                        ))}
-                      </Field>
-                    </div>
-
-                    <div className="organiser-create-event-two-columns-item">
-                      <Label htmlFor="cityId" value="City" />
-                      <Field as={Select} id="cityId" name="cityId" onChange={handleCityChange} >
-                        {cities.map(city => (
-                          <option key={city.id} value={city.id}>{city.name}</option>
-                        ))}
-                      </Field>
-                    </div>
+                <div className="organiser-create-event-two-columns">
+                  <div className="organiser-create-event-two-columns-item">
+                    <Label htmlFor="peselVerificationRequired" value="Is PESEL Verification Required?" />{" "}
+                    <Field as={Checkbox} id="peselVerificationRequired" name="peselVerificationRequired" />
                   </div>
 
-                  <div className="organiser-create-event-two-columns">
-                    <div className="organiser-create-event-two-columns-item">
-                      <Label htmlFor="peselVerificationRequired" value="Is PESEL Verification Required?" />{" "}
-                      <Field as={Checkbox} id="peselVerificationRequired" name="peselVerificationRequired" />
-                    </div>
-                    
-                    <div className="organiser-create-event-two-columns-item">
-                      <Label htmlFor="agreementNeeded" value="Is Agreement Needed?" />{" "}
-                      <Field as={Checkbox} id="agreementNeeded" name="agreementNeeded" />
-                    </div>
+                  <div className="organiser-create-event-two-columns-item">
+                    <Label htmlFor="agreementNeeded" value="Is Agreement Needed?" />{" "}
+                    <Field as={Checkbox} id="agreementNeeded" name="agreementNeeded" />
                   </div>
-                  <FieldArray name="shifts" className="organiser-create-event-grid">
+                </div>
+                <FieldArray name="shifts" className="organiser-create-event-grid">
                   {({ remove, push }) => (
                     <div>
                       {values.shifts.map((shift, index) => (
@@ -256,13 +284,13 @@ const OrganiserCreateEvent = () => {
                     </div>
                   )}
                 </FieldArray>
-                  <div className='organiser-create-event-submit-button-wrapper'>
-                    <button type="submit" className='confirm_button' disabled={isSubmitting}>Submit</button>
-                  </div>
-                </Form>
-              )}
-            </Formik>
-          </div>
+                <div className='organiser-create-event-submit-button-wrapper'>
+                  <button type="submit" className='confirm_button' disabled={isSubmitting}>Submit</button>
+                </div>
+              </Form>
+            )}
+          </Formik>
+        </div>
       </Card>
     </div>
   );
