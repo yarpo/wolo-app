@@ -1,13 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-import { Checkbox, Label,  Textarea, TextInput, Select } from 'flowbite-react';
-import { Formik, Field, Form, FieldArray  } from 'formik';
+import { Checkbox, Label, Textarea, TextInput, Select } from 'flowbite-react';
+import { Formik, Field, Form, FieldArray, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 import fetchData from '../../Utils/fetchData.js';
 import { URLS, BASE_URL } from '../../config';
 import '../../styles/organiser-create-event.scss';
 import { Card } from "flowbite-react";
 
+const validationSchema = Yup.object().shape({
+  name: Yup.string()
+    .min(5, 'Name is too short')
+    .max(50, 'Name is too long')
+    .required('Name is required'),
+  // Dodaj inne pola walidacji tutaj
+});
 
 const OrganiserCreateEvent = () => {
   const { t } = useTranslation();
@@ -18,7 +26,6 @@ const OrganiserCreateEvent = () => {
   const [districts, setDistricts] = useState([]);
   const [selectedCity, setSelectedCity] = useState(null);
   const [filteredDistricts, setFilteredDistricts] = useState([]);
-
 
   useEffect(() => {
     fetchData(URLS.CATEGORIES, setCategories);
@@ -32,7 +39,6 @@ const OrganiserCreateEvent = () => {
     const newSelectedCity = Number(event.target.value);
     setSelectedCity(newSelectedCity);
     console.log(selectedCity);
-
   };
 
   useEffect(() => {
@@ -63,7 +69,7 @@ const OrganiserCreateEvent = () => {
       homeNum: '',
       districtId: null
     }],
-    cityId: selectedCity ,
+    cityId: selectedCity,
     peselVerificationRequired: false,
     agreementNeeded: false
   };
@@ -98,124 +104,135 @@ const OrganiserCreateEvent = () => {
   };
 
   return (
-  <div id="organiser-create-event-container" className="flex justify-center items-center" style={{ minHeight: 'calc(100vh)' }}>
-    <Card>
-      <div className="flex flex-col gap-4">
-        <h1>{t('createEvent')}</h1>
-          <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-            {({ isSubmitting, values }) => (
-              <Form className="organiser-create-event-event-data">
-                <Label htmlFor="name" value="Event Title" />
-                <Field as={TextInput} id="name" type="text" sizing="md" name="name" />
+    <div id="organiser-create-event-container" className="flex justify-center items-center" style={{ minHeight: 'calc(100vh)' }}>
+      <Card>
+        <div className="flex flex-col gap-4">
+          <h1>{t('createEvent')}</h1>
+            <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
+              {({ isSubmitting, values, errors, touched }) => (
+                <Form className="organiser-create-event-event-data">
+                  <div className="mb-2 block">
+                    <Label htmlFor="name" value="Event Title" />
+                  </div>
+                  <Field
+                    as={TextInput}
+                    id="name"
+                    type="text"
+                    sizing="md"
+                    name="name"
+                    color={errors.name && touched.name ? 'failure' : undefined}
+                  />
+                  <ErrorMessage name="name" component="div" className="text-red-500" />
+                  
+                  <Label htmlFor="description" value="Description" />
+                  <Field as={Textarea} id="description" sizing="md" name="description" />
 
-                <Label htmlFor="description" value="Description" />
-                <Field as={Textarea} id="description" sizing="md" name="description" />
+                  <Label htmlFor="imageUrl" value="Image URL" />
+                  <Field as={TextInput} id="imageUrl" type="text" sizing="md" name="imageUrl" />
 
-                <Label htmlFor="imageUrl" value="Image URL" />
-                <Field as={TextInput} id="imageUrl" type="text" sizing="md" name="imageUrl" />
+                  <Label htmlFor="date" value="Date" />
+                  <Field as={TextInput} id="date" type="date" name="date" />
 
-                <Label htmlFor="date" value="Date" />
-                <Field as={TextInput} id="date" type="date" name="date" />
-
-                <div className="organiser-create-event-two-columns">
-                  <div className="organiser-create-event-two-columns-item">
-                    <Label htmlFor="categoryId" value="Category" />
+                  <div className="organiser-create-event-two-columns">
+                    <div className="organiser-create-event-two-columns-item">
+                      <Label htmlFor="categories" value="Category" />
                       <Field as={Select} id="categories" name="categories">
                         {categories.map(category => (
                           <option key={category.id} value={category.id}>{category.name}</option>
                         ))}
                       </Field>
+                    </div>
+
+                    <div className="organiser-create-event-two-columns-item">
+                      <Label htmlFor="cityId" value="City" />
+                      <Field as={Select} id="cityId" name="cityId" onChange={handleCityChange} >
+                        {cities.map(city => (
+                          <option key={city.id} value={city.id}>{city.name}</option>
+                        ))}
+                      </Field>
+                    </div>
                   </div>
 
-                  <div className="organiser-create-event-two-columns-item">
-                    <Label htmlFor="cityId" value="City" />
-                    <Field as={Select} id="cityId" name="cityId" onChange={handleCityChange} >
-                      {cities.map(city => (
-                        <option key={city.id} value={city.id}>{city.name}</option>
-                      ))}
-                    </Field>
+                  <div className="organiser-create-event-two-columns">
+                    <div className="organiser-create-event-two-columns-item">
+                      <Label htmlFor="peselVerificationRequired" value="Is PESEL Verification Required?" />{" "}
+                      <Field as={Checkbox} id="peselVerificationRequired" name="peselVerificationRequired" />
+                    </div>
+                    
+                    <div className="organiser-create-event-two-columns-item">
+                      <Label htmlFor="agreementNeeded" value="Is Agreement Needed?" />{" "}
+                      <Field as={Checkbox} id="agreementNeeded" name="agreementNeeded" />
+                    </div>
                   </div>
-                </div>
-
-                <div className="organiser-create-event-two-columns">
-                  <div className="organiser-create-event-two-columns-item">
-                    <Label htmlFor="peselVerificationRequired" value="Is PESEL Verification Required?" />{" "}
-                    <Field as={Checkbox} id="peselVerificationRequired" name="peselVerificationRequired" />
-                  </div>
-                  
-                  <div className="organiser-create-event-two-columns-item">
-                    <Label htmlFor="agreementNeeded" value="Is Agreement Needed?" />{" "}
-                    <Field as={Checkbox} id="agreementNeeded" name="agreementNeeded" />
-                  </div>
-                </div>
-                <FieldArray name="shifts" className="organiser-create-event-grid">
-                {({ remove, push }) => (
-                  <div>
+                  <FieldArray name="shifts" className="organiser-create-event-grid">
+                  {({ remove, push }) => (
+                    <div>
                       {values.shifts.map((shift, index) => (
-                          <div className="organiser-create-event-row" key={index}>
-                            <Card>
-                              <h2>{t('shift')}</h2>
-                              <div className="col">
-                                <Label htmlFor={`shifts.${index}.startTime`} value="Start Time" />
-                                <Field as={TextInput} id={`shifts.${index}.startTime`} type="time" name={`shifts.${index}.startTime`} />
+                        <div className="organiser-create-event-row" key={index}>
+                          <Card>
+                            <h2>{t('shift')}</h2>
+                            <div className="col">
+                              <Label htmlFor={`shifts.${index}.startTime`} value="Start Time" />
+                              <Field as={TextInput} id={`shifts.${index}.startTime`} type="time" name={`shifts.${index}.startTime`} />
 
-                                <Label htmlFor={`shifts.${index}.endTime`} value="End Time" />
-                                <Field as={TextInput} id={`shifts.${index}.endTime`} type="time" name={`shifts.${index}.endTime`} />
+                              <Label htmlFor={`shifts.${index}.endTime`} value="End Time" />
+                              <Field as={TextInput} id={`shifts.${index}.endTime`} type="time" name={`shifts.${index}.endTime`} />
 
-                                <Label htmlFor={`shifts.${index}.capacity`} value="Capacity" />
-                                <Field as={TextInput} id={`shifts.${index}.capacity`} type="number" min='1' name={`shifts.${index}.capacity`} />
+                              <Label htmlFor={`shifts.${index}.capacity`} value="Capacity" />
+                              <Field as={TextInput} id={`shifts.${index}.capacity`} type="number" min='1' name={`shifts.${index}.capacity`} />
 
-                                <Label htmlFor={`shifts.${index}.isLeaderRequired`} value="Is Leader Required?" />
-                                <Field as={Checkbox} id={`shifts.${index}.isLeaderRequired`} name={`shifts.${index}.isLeaderRequired`} /> 
-                                <br />
+                              <Label htmlFor={`shifts.${index}.isLeaderRequired`} value="Is Leader Required?" />
+                              <Field as={Checkbox} id={`shifts.${index}.isLeaderRequired`} name={`shifts.${index}.isLeaderRequired`} /> 
+                              <br />
 
-                                <Label htmlFor={`shifts.${index}.requiredMinAge`} value="Required Minimum Age" />
-                                <Field as={TextInput} id={`shifts.${index}.requiredMinAge`} type="text" name={`shifts.${index}.requiredMinAge`} />
+                              <Label htmlFor={`shifts.${index}.requiredMinAge`} value="Required Minimum Age" />
+                              <Field as={TextInput} id={`shifts.${index}.requiredMinAge`} type="text" name={`shifts.${index}.requiredMinAge`} />
 
-                                <Label htmlFor={`shifts.${index}.shiftDirections`} value="Shift Directions" />
-                                <Field as={TextInput} id={`shifts.${index}.shiftDirections`} type="text" name={`shifts.${index}.shiftDirections`} />
+                              <Label htmlFor={`shifts.${index}.shiftDirections`} value="Shift Directions" />
+                              <Field as={TextInput} id={`shifts.${index}.shiftDirections`} type="text" name={`shifts.${index}.shiftDirections`} />
 
-                                <Label htmlFor={`shifts.${index}.street`} value="Street" />
-                                <Field as={TextInput} id={`shifts.${index}.street`} type="text" name={`shifts.${index}.street`} />
+                              <Label htmlFor={`shifts.${index}.street`} value="Street" />
+                              <Field as={TextInput} id={`shifts.${index}.street`} type="text" name={`shifts.${index}.street`} />
 
-                                <Label htmlFor={`shifts.${index}.homeNum`} value="Home Number" />
-                                <Field as={TextInput} id={`shifts.${index}.homeNum`} type="text" name={`shifts.${index}.homeNum`} />
+                              <Label htmlFor={`shifts.${index}.homeNum`} value="Home Number" />
+                              <Field as={TextInput} id={`shifts.${index}.homeNum`} type="text" name={`shifts.${index}.homeNum`} />
 
-                                <Label htmlFor={`shifts.${index}.districtId`} value="District" />
-                                <Field as={Select} id={`shifts.${index}.districtId`} name={`shifts.${index}.districtId`}>
-                                  {filteredDistricts.map(district => (
-                                     <option key={district.id} value={district.id}>{district.name}</option>
-                                  ))}
-                                </Field>
-                              </div>
-                              <div className="col">
-                                <button type="button" onClick={() => remove(index)} className='white_button' >Remove Shift</button>
-                              </div>
-                            </Card>
+                              <Label htmlFor={`shifts.${index}.districtId`} value="District" />
+                              <Field as={Select} id={`shifts.${index}.districtId`} name={`shifts.${index}.districtId`}>
+                                {filteredDistricts.map(district => (
+                                  <option key={district.id} value={district.id}>{district.name}</option>
+                                ))}
+                              </Field>
+                            </div>
+                            <div className="col">
+                              <button type="button" onClick={() => remove(index)} className='white_button'>Remove Shift</button>
+                            </div>
+                          </Card>
                         </div>
-                    ))}
-                    <button type="button" className='confirm_button' onClick={() => push({
-                                                                startTime: '', 
-                                                                endTime: '', 
-                                                                capacity: '', 
-                                                                isLeaderRequired: false, 
-                                                                requiredMinAge: '', 
-                                                                shiftDirections: '', 
-                                                                street: '', 
-                                                                homeNum: '', 
-                                                                districtId: '' })}>
-                        Add Shift</button>
+                      ))}
+                      <button type="button" className='confirm_button' onClick={() => push({
+                        startTime: '', 
+                        endTime: '', 
+                        capacity: '', 
+                        isLeaderRequired: false, 
+                        requiredMinAge: '', 
+                        shiftDirections: '', 
+                        street: '', 
+                        homeNum: '', 
+                        districtId: '' })}>
+                        Add Shift
+                      </button>
+                    </div>
+                  )}
+                </FieldArray>
+                  <div className='organiser-create-event-submit-button-wrapper'>
+                    <button type="submit" className='confirm_button' disabled={isSubmitting}>Submit</button>
                   </div>
-                )}
-              </FieldArray>
-                <div className='organiser-create-event-submit-button-wrapper'>
-                  <button type="submit" className='confirm_button' disabled={isSubmitting}>Submit</button>
-                </div>
-              </Form>
-            )}
-          </Formik>
-        </div>
-    </Card>
+                </Form>
+              )}
+            </Formik>
+          </div>
+      </Card>
     </div>
   );
 }
