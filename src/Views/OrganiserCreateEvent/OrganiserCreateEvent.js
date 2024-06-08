@@ -230,6 +230,18 @@ const OrganiserCreateEvent = () => {
                   </div>
                 </div>
 
+                <div className="organiser-create-event-two-columns">
+                  <div className="organiser-create-event-two-columns-item">
+                    <Label htmlFor="peselVerificationRequired" value={t('noPeselVerificationRequired')} />{" "}
+                    <Field as={Checkbox} id="peselVerificationRequired" name="peselVerificationRequired" />
+                  </div>
+                  
+                  <div className="organiser-create-event-two-columns-item">
+                    <Label htmlFor="agreementNeeded" value={t('noVolunteerVerificationRequired')} />{" "}
+                    <Field as={Checkbox} id="agreementNeeded" name="agreementNeeded" />
+                  </div>
+                </div>
+
                 <FieldArray name="shifts" className="organiser-create-event-grid">
                   {({ remove, push }) => (
                     <div>
