@@ -46,7 +46,6 @@ const OrganiserCreateEvent = () => {
   const handleCityChange = (event) => {
     const newSelectedCity = Number(event.target.value);
     setSelectedCity(newSelectedCity);
-    console.log(selectedCity);
   };
 
   useEffect(() => {
