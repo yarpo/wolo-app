@@ -44,7 +44,7 @@ const ReportPage = () => {
 
     return (
         <div className='report_page_container'>
-            <Link to="/organiserHomePage" id="back">
+            <Link to="/organisation-home-page" id="back">
                 <VscArrowLeft id="back_arrow" /> {t('back')}
             </Link>
             <div className='report_page_header_container'>

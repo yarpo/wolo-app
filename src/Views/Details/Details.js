@@ -85,7 +85,7 @@ const Details = () => {
                     )}
                     <li><VscBrowser id="icon" /> <strong>{t('date')}:</strong> {formatDate(date)}</li>
                     <li><BiBorderAll id="icon" /> <strong>{t('category')}:</strong> {categories.join(", ")}</li>
-                    <li><VscOrganization id="icon" /> <strong>{t('organizer')}:</strong> <Link to={`/organiser?organisationId=${eventData.organisationId}`}>{organisationName}</Link></li>
+                    <li><VscOrganization id="icon" /> <strong>{t('organizer')}:</strong> <Link to={`/organisation?organisationId=${eventData.organisationId}`}>{organisationName}</Link></li>
                     <li><VscLocation id="icon" /> <strong>{t('location')}:</strong> {city}</li>
                 </ul>
             </div>

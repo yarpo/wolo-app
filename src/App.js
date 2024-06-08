@@ -51,22 +51,22 @@ function App() {
             <Route path="/" element={<Hero />} />
             <Route path="/events" element={<AllEvents />} />
             <Route path="/details/:id" element={<Details />} />
-            <Route path="/organiser" element={<Organiser />} />
+            <Route path="/organisation" element={<Organiser />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/login" element={<Login  setToken={setToken} setUser={setUser}  />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/change-password" element={<ResetPassword />} />
-            <Route path="/needYou" element={<TheyNeedYouEvents />} />
-            <Route path="/forVolunteers" element={<ForVolunteers />} />
+            <Route path="/they-need-you" element={<TheyNeedYouEvents />} />
+            <Route path="/for-volunteers" element={<ForVolunteers />} />
             <Route path="/reset-password" element={<ForgotPassword />} />
             <Route path="/forgot-password" element={<MailForgotPassword />} />
             <Route path="/calendar" element={<CalendarView />} />
             {role && role.includes('MODERATOR') && <Route path="/reports" element={<ReportPage />} />}
-            {role && role.includes('MODERATOR') && <Route path="/organiserHomePage" element={<OrganiserHomePage />} />}
-            {role && role.includes('MODERATOR') && <Route path="/organiserSettings" element={<OrganiserSettings />} />}
-            {role && role.includes('ADMIN') && <Route path="/adminHomePage" element={<AdminHomePage />} />}
-            {role && role.includes('USER') && <Route path="/volunteerHomePage" element={<VolunteerHomePage />} />}
-            {role && role.includes('MODERATOR') && <Route path="/createEvent" element={<OrganiserCreateEvent />} />}
+            {role && role.includes('MODERATOR') && <Route path="/organisation-home-page" element={<OrganiserHomePage />} />}
+            {role && role.includes('MODERATOR') && <Route path="/organisation-settings" element={<OrganiserSettings />} />}
+            {role && role.includes('ADMIN') && <Route path="/admin-home-page" element={<AdminHomePage />} />}
+            {role && role.includes('USER') && <Route path="/volunteer-home-page" element={<VolunteerHomePage />} />}
+            {role && role.includes('MODERATOR') && <Route path="/create-event" element={<OrganiserCreateEvent />} />}
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </FiltersProvider>
