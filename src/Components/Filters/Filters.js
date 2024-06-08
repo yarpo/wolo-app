@@ -18,7 +18,7 @@ const Filters = ({ setFilteredEvents }) => {
 
   useEffect(() => {
     fetchData(URLS.EVENTS, setApiResponse);
-  }, [filters, categories]);
+  }, [filters]);
 
   useEffect(() => {
     fetchData(URLS.CATEGORIES, setCategories);
@@ -29,7 +29,7 @@ const Filters = ({ setFilteredEvents }) => {
 
   useEffect(() => {
     const filteredEvents = apiResponse.filter((event) => {
-      const isMatchingTag = filters.chosenTags.every((tag) =>
+      const isMatchingTag = filters.chosenTags.length === 0 || filters.chosenTags.some((tag) =>
         tag === event.organisation ||
         event.categories.includes(tag) ||
         event.shifts.some(shift => shift.district === tag) ||
@@ -38,19 +38,19 @@ const Filters = ({ setFilteredEvents }) => {
       );
 
       const isMatchingDate =
-        filters.selectedDate === null || new Date(event.date) >= filters.selectedDate;
+        !filters.selectedDate || new Date(event.date) >= filters.selectedDate;
 
       const isMatchingVerification =
-        !filters.agreementNeeded || event.agreementNeeded === true;
+        !filters.requiresVerification || event.isAgreementNeeded;
 
       const isMatchingPeselVerification =
-        !filters.peselVerificationRequired || event.peselVerificationRequired === true;
+        !filters.peselVerificationRequired || event.isPeselVerificationRequired;
 
       const isMatchingBooking =
         !filters.hideFullyBookedEvents || event.shifts.some(shift => shift.registeredUsers < shift.capacity);
 
       return (
-        (filters.chosenTags.length === 0 || isMatchingTag) &&
+        isMatchingTag &&
         isMatchingDate &&
         isMatchingVerification &&
         isMatchingPeselVerification &&
@@ -97,13 +97,10 @@ const Filters = ({ setFilteredEvents }) => {
   const handleResetFilters = () => {
     setFilters({
       chosenTags: [],
-      chosenLocation: '',
-      chosenOrganisation: '',
       selectedDate: null,
       requiresVerification: false,
       peselVerificationRequired: false,
       hideFullyBookedEvents: false,
-      selectedAge: '',
     });
   };
 
@@ -125,7 +122,7 @@ const Filters = ({ setFilteredEvents }) => {
             />
             {[
               { label: t('location'), options: cities.map((city) => city.name) },
-              { label: t('district'), options: districts.map((district) => district.name) }, 
+              { label: t('district'), options: districts.map((district) => district.name) },
               { label: t('category'), options: categories.map((category) => category.name) },
               { label: t('organisations'), options: organizations.map((organization) => organization.name) },
               { label: t('ageRestrictions'), options: [...new Set(apiResponse.flatMap((event) => event.shifts.map((shift) => shift.requiredMinAge)))] },
