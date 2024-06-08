@@ -1,12 +1,14 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import '../../styles/admin-home-page.scss';
 import { HiOutlineSearch } from "react-icons/hi";
+
 import { URLS } from '../../config';
-import fetchDataWithAuth from '../../Utils/fetchDataWithAuth.js';
+import fetchDataWithAuth  from  '../../Utils/fetchDataWithAuth.js';
 import { Table, TextInput } from "flowbite-react";
 import { HiOutlinePlus, HiTrash, HiCheck, HiOutlineX } from "react-icons/hi";
 import Confirmation from '../Popups/Confirmation.js';
+
 import AddCity from './addRecordModals/AddCity.js';
 import postRequestWithJson from '../../Utils/postRequestWithJson';
 import deleteRequest from '../../Utils/deleteRequest.js';
@@ -15,10 +17,12 @@ const CitiesTab = () => {
     const { t } = useTranslation();
     const [cities, setCities] = useState([]);
     const [openModal, setOpenModal] = useState(false);
+
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [userConfirmed, setUserConfirmed] = useState(false);
     const [cityToDelete, setCityToDelete] = useState(null);
     const [cityNameToDelete, setCityNameToDelete] = useState('');
+
     const [filteredCities, setFilteredCities] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
 
@@ -41,20 +45,14 @@ const CitiesTab = () => {
 
     const handleModalAccept = (data) => {
         setOpenModal(false);
+
         postRequestWithJson(URLS.CITIES_ADMIN, localStorage.getItem('token'), data, t('addCitySuccess'), t('addCityFail'));
     };
 
     const handleModalClose = () => {
         setOpenModal(false);
     };
-
-    const handleDelete = useCallback(() => {
-        console.log("Delete confirmed", cityToDelete);
-        deleteRequest(`${URLS.DELETE_CITY}/${cityToDelete}`, localStorage.getItem('token'), t('cityDeleteSuccess'), t('somethingWentWrong'));
-        setCityToDelete(null);
-        setConfirmDelete(false);
-    }, [cityToDelete, t]);
-
+    
     const handleUserConfirmation = async (confirmation) => {
         setUserConfirmed(confirmation);
     };
@@ -62,9 +60,16 @@ const CitiesTab = () => {
     useEffect(() => {
         if (userConfirmed !== false) {
             setUserConfirmed(false);
-            handleDelete();
+            handleDelete()
         }
-    }, [userConfirmed, handleDelete]);
+    }, [userConfirmed]); 
+
+    const handleDelete = () => {
+        console.log("Delete confirmed", cityToDelete);
+        deleteRequest(`${URLS.DELETE_CITY}/${cityToDelete}`, localStorage.getItem('token'), t('cityDeleteSuccess'), t('somethingWentWrong'))
+        setCityToDelete(null);
+        setConfirmDelete(false);
+    };
 
     const handleDeleteRequest = (city) => {
         setConfirmDelete(true);
@@ -137,7 +142,7 @@ const CitiesTab = () => {
                 </Table.Body>
             </Table>
         </div>
-    );
+    )
 };
 
 export default CitiesTab;
