@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import '../../styles/admin-home-page.scss';
 import { HiOutlineSearch } from "react-icons/hi";
@@ -53,6 +53,14 @@ const CategoriesTab = () => {
         setOpenModal(false);
     };
 
+    const handleDelete = useCallback(() => {
+        const params = new URLSearchParams();
+        params.append('id', categoryToDelete);
+        deleteRequest(`${URLS.DELETE_CATEGORY}/${categoryToDelete}`, localStorage.getItem('token'), "Deleted", "Fail");
+        setCategoryToDelete(null);
+        setConfirmDelete(false);
+    }, [categoryToDelete]);
+
     const handleUserConfirmation = async (confirmation) => {
         setUserConfirmed(confirmation);
     };
@@ -62,15 +70,7 @@ const CategoriesTab = () => {
             setUserConfirmed(false);
             handleDelete();
         }
-    }, [userConfirmed]);
-
-    const handleDelete = () => {
-        const params = new URLSearchParams();
-        params.append('id', categoryToDelete);
-        deleteRequest(`${URLS.DELETE_CATEGORY}/${categoryToDelete}`, localStorage.getItem('token'), "Deleted", "Fail");
-        setCategoryToDelete(null);
-        setConfirmDelete(false);
-    };
+    }, [userConfirmed, handleDelete]); 
 
     const handleDeleteRequest = (category) => {
         setConfirmDelete(true);
