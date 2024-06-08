@@ -6,8 +6,9 @@ import { HiOutlineSearch } from "react-icons/hi";
 import { URLS } from '../../config';
 import fetchDataWithAuth  from  '../../Utils/fetchDataWithAuth.js';
 import { Table, TextInput } from "flowbite-react";
-import { HiOutlinePlus, HiTrash, HiCheck, HiOutlineX } from "react-icons/hi";
+import { HiOutlinePlus, HiTrash, HiCheck, HiOutlineX, HiArrowSmRight, HiArrowSmLeft } from "react-icons/hi";
 import Confirmation from '../Popups/Confirmation.js';
+import ReactPaginate from 'react-paginate';
 
 import AddDistrict from './addRecordModals/AddDistricts';
 import postRequestWithJson from '../../Utils/postRequestWithJson';
@@ -25,6 +26,9 @@ const DistrictsTab = () => {
 
     const [filteredDstricts, setFilteredDistricts] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
+
+    const [currentPage, setCurrentPage] = useState(0);
+    const districtsPerPage = 10;
 
     useEffect(() => {
         fetchDataWithAuth(URLS.DISTRICTS_ADMIN, (data) => {
@@ -78,6 +82,15 @@ const DistrictsTab = () => {
         setDistrictNameToDelete(district.name);
     };
 
+    const handlePageClick = (event) => {
+        setCurrentPage(event.selected);
+    };
+
+    const offset = currentPage * districtsPerPage;
+    const currentDistricts = filteredDstricts.sort((a, b) => a.id - b.id).slice(offset, offset + districtsPerPage);
+    const pageCount = Math.ceil(filteredDstricts.length / districtsPerPage);
+
+
     return (
         <div className="overflow-x-auto">
             <div className='admin-panel-add-search-group'>
@@ -102,8 +115,7 @@ const DistrictsTab = () => {
                     <Table.HeadCell></Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
-                    {filteredDstricts
-                        .sort((a, b) => a.id - b.id)
+                    {currentDistricts
                         .map((district, index) => (
                         <Table.Row key={index} className="bg-white dark:border-gray-700 dark:bg-gray-800">
                             <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
@@ -142,6 +154,18 @@ const DistrictsTab = () => {
                     ))}
                 </Table.Body>
             </Table>
+            <ReactPaginate
+                previousLabel={<HiArrowSmLeft />}
+                nextLabel={<HiArrowSmRight />}
+                pageCount={pageCount}
+                onPageChange={handlePageClick}
+                pageClassName={'pagination__page'}
+                containerClassName={'pagination'}
+                previousLinkClassName={'pagination__link'}
+                nextLinkClassName={'pagination__link'}
+                disabledClassName={'pagination__link--disabled'}
+                activeClassName={'pagination__link--active'}
+            />
         </div>
     )
 };
