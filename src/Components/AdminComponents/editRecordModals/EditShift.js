@@ -2,11 +2,9 @@ import React from 'react';
 import { Label, Card, TextInput, Select } from "flowbite-react";
 
 const EditShift = ({ shifts, districts, modifyShifts }) => {
-
-const districtMap = Object.fromEntries(
-	districts.map((district) => [district.name, district.id])
-);
-
+	const districtMapName = Object.fromEntries(
+		districts.map((d) => [d.name, d.id])
+	);
 const formatTime = (time) => {
     let hours, minutes;
     if (typeof time === 'string') {
@@ -14,6 +12,7 @@ const formatTime = (time) => {
     } 
     return `${hours}:${minutes}`;
 }
+console.log(shifts[0]);
 	
 	return (
 	
@@ -155,7 +154,7 @@ const formatTime = (time) => {
 							<div className="col">
 						<Label htmlFor={`shifts.${index}.districtId`} value="District" />						
 									<Select id={`shifts.${index}.districtId`} name={`shifts.${index}.districtId`}
-									value={districtMap[shift.district]} 
+									value={districtMapName[shift.district]} 
 									onChange={(e) => modifyShifts('update', index, 'districtId', e.target.value)}>
 									{districts.map(district => (
 										<option key={district.id} value={district.id}>{district.name}</option>

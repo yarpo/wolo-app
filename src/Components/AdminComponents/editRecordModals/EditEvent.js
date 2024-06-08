@@ -14,6 +14,7 @@ import { URLS } from "../../../config";
 import { HiGlobeAlt } from "react-icons/hi";
 import fetchData from "../../../Utils/fetchData";
 import EditShift from "./EditShift";
+import fetchDataWithAuth from "../../../Utils/fetchDataWithAuth";
 
 function EditEvent({ onAccept, onClose, eventData }) {
 	const [openModal, setOpenModal] = useState(true);
@@ -49,28 +50,54 @@ function EditEvent({ onAccept, onClose, eventData }) {
 	);
 	const [cityId, setCityId] = useState(null);
 
+
+	const [organisations, setOrganisations] = useState([]);
+	const organisationMapName = Object.fromEntries(
+		organisations.map((o) => [o.name, o.id])
+	);
+	const [organisationId, setOrganisationId] = useState(null);
+
 	const [imageUrl, setImageUrl] = useState(eventData.imageUrl);
 	const [date, setDate] = useState(
 		eventData.date.split("-").reverse().join("/")
 	);
 
+	const [districts, setDistricts] = useState([]);
+	const [filteredDistricts, setFilteredDistricts] = useState([]);
+
+	const districtMapName = Object.fromEntries(
+		districts.map((d) => [d.name, d.id])
+	);
 	const formattedShifts = eventData.shifts.map(shift => {
+		const districtId = districtMapName[shift.district];
 		return {
 			...shift,
 			id: shift.shiftId,
+			districtId: districtId,
 			isLeaderRequired: false,
 		};
 	});
 	const [shifts, setShifts] = useState(formattedShifts);
 	const [event, setEvent] = useState([]);
-	const [districts, setDistricts] = useState([]);
-	const [filteredDistricts, setFilteredDistricts] = useState([]);
 
 	useEffect(() => {
 		fetchData(URLS.CATEGORIES, setCategories);
 		fetchData(URLS.CITIES, setCities);
 		fetchData(`${URLS.EVENTS}/${eventData.id}`, setEvent);
-		fetchData(URLS.DISTRICTS, setDistricts);
+		fetchDataWithAuth(
+			URLS.DISTRICTS_ADMIN,
+			(data) => {
+				setDistricts(data);
+			},
+			localStorage.getItem("token")
+		);
+		fetchDataWithAuth(
+			URLS.ORGANISATIONS_ADMIN,
+			(data) => {
+				setOrganisations(data);
+			},
+			localStorage.getItem("token")
+		);
 	}, [eventData.id]);
 
 	const modifyShifts = (action, index, field, value) => {
@@ -105,6 +132,10 @@ function EditEvent({ onAccept, onClose, eventData }) {
 	useEffect(() => {
 		setCityId(cityMapName[eventData.city]);
 	}, [cities]);
+
+	useEffect(() => {
+		setOrganisationId(organisationMapName[eventData.organisation]) 
+	}, [organisations]);	
 
 	useEffect(() => {
 		if (cityId) {
@@ -145,6 +176,9 @@ function EditEvent({ onAccept, onClose, eventData }) {
 		const selectedCategoryIds = selectedCategories.map(
 			(category) => category.id
 		);
+		console.log(organisations)
+		console.log(organisationId);
+		console.log(formattedShifts);
 		onAccept({
 			id: eventData.id,
 			namePL,
@@ -155,7 +189,7 @@ function EditEvent({ onAccept, onClose, eventData }) {
 			descriptionEN,
 			descriptionRU,
 			descriptionUA,
-			organisationId: 1,
+			organisationId,
 			categories: selectedCategoryIds,
 			isPeselVerificationRequired,
 			isAgreementNeeded,
