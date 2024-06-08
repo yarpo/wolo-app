@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import '../../styles/admin-home-page.scss';
 import { HiOutlineSearch } from "react-icons/hi";
-
 import { URLS } from '../../config';
-import fetchDataWithAuth  from  '../../Utils/fetchDataWithAuth.js';
+import fetchDataWithAuth from '../../Utils/fetchDataWithAuth.js';
 import { Table, TextInput } from "flowbite-react";
 import { HiOutlinePlus, HiTrash, HiCheck, HiOutlineX } from "react-icons/hi";
 import Confirmation from '../Popups/Confirmation.js';
-
 import AddDistrict from './addRecordModals/AddDistricts';
 import postRequestWithJson from '../../Utils/postRequestWithJson';
 import deleteRequest from '../../Utils/deleteRequest.js';
@@ -17,13 +15,11 @@ const DistrictsTab = () => {
     const { t } = useTranslation();
     const [districts, setDistricts] = useState([]);
     const [openModal, setOpenModal] = useState(false);
-
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [userConfirmed, setUserConfirmed] = useState(false);
     const [districtToDelete, setDistrictToDelete] = useState(null);
     const [districtNameToDelete, setDistrictNameToDelete] = useState('');
-
-    const [filteredDstricts, setFilteredDistricts] = useState([]);
+    const [filteredDistricts, setFilteredDistricts] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
@@ -46,14 +42,20 @@ const DistrictsTab = () => {
 
     const handleModalAccept = (data) => {
         setOpenModal(false);
-
-        postRequestWithJson(URLS.ADD_DISTRICTS, localStorage.getItem('token'), data, t('addDistrctSuccess'), t('addDistrictFail'));
+        postRequestWithJson(URLS.ADD_DISTRICTS, localStorage.getItem('token'), data, t('addDistrictSuccess'), t('addDistrictFail'));
     };
 
     const handleModalClose = () => {
         setOpenModal(false);
     };
-    
+
+    const handleDelete = useCallback(() => {
+        console.log("Delete confirmed", districtToDelete);
+        deleteRequest(`${URLS.DELETE_DISTRICT}/${districtToDelete}`, localStorage.getItem('token'), t('districtDeleteSuccess'), t('somethingWentWrong'));
+        setDistrictToDelete(null);
+        setConfirmDelete(false);
+    }, [districtToDelete, t]);
+
     const handleUserConfirmation = async (confirmation) => {
         setUserConfirmed(confirmation);
     };
@@ -61,16 +63,9 @@ const DistrictsTab = () => {
     useEffect(() => {
         if (userConfirmed !== false) {
             setUserConfirmed(false);
-            handleDelete()
+            handleDelete();
         }
-    }, [userConfirmed]); 
-
-    const handleDelete = () => {
-        console.log("Delete confirmed", districtToDelete);
-        deleteRequest(`${URLS.DELETE_DISTRICT}/${districtToDelete}`, localStorage.getItem('token'), t('districtDeleteSuccess'), t('somethingWentWrong'))
-        setDistrictToDelete(null);
-        setConfirmDelete(false);
-    };
+    }, [userConfirmed, handleDelete]);
 
     const handleDeleteRequest = (district) => {
         setConfirmDelete(true);
@@ -102,7 +97,7 @@ const DistrictsTab = () => {
                     <Table.HeadCell></Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
-                    {filteredDstricts
+                    {filteredDistricts
                         .sort((a, b) => a.id - b.id)
                         .map((district, index) => (
                         <Table.Row key={index} className="bg-white dark:border-gray-700 dark:bg-gray-800">
