@@ -42,7 +42,7 @@ const validationSchema = Yup.object().shape({
         .min(1, 'Capacity must be at least 1')
         .required('Capacity is required'),
       requiredMinAge: Yup.number()
-        .min(1, 'Required minimum age cannot be negative')
+        .min(0, 'Required minimum age cannot be negative')
         .required('Required minimum age is required'),
       shiftDirections: Yup.string()
         .required('Shift directions are required'),
@@ -104,9 +104,9 @@ const OrganiserCreateEvent = () => {
       shiftDirections: '',
       street: '',
       homeNum: '',
-      districtId: null
+      districtId: '',
     }],
-    cityId: selectedCity,
+    cityId: '',
     peselVerificationRequired: false,
     agreementNeeded: false
   };
@@ -139,7 +139,7 @@ const OrganiserCreateEvent = () => {
         <div className="flex flex-col gap-4">
           <h1>{t('createEvent')}</h1>
           <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
-            {({ isSubmitting, values, errors, touched }) => (
+            {({ isSubmitting, values, errors, touched, setFieldValue }) => (
               <Form className="organiser-create-event-event-data">
                 <div className="mb-2 block">
                   <Label htmlFor="name" value="Event Title" />
@@ -217,7 +217,10 @@ const OrganiserCreateEvent = () => {
 
                   <div className="organiser-create-event-two-columns-item">
                     <Label htmlFor="cityId" value="City" />
-                    <Field as={Select} id="cityId" name="cityId" onChange={handleCityChange} color={errors.cityId && touched.cityId ? 'failure' : undefined}>
+                    <Field as={Select} id="cityId" name="cityId" value={values.cityId || ''} onChange={(e) => {
+                      handleCityChange(e);
+                      setFieldValue("cityId", e.target.value);
+                    }} color={errors.cityId && touched.cityId ? 'failure' : undefined}>
                       <option value="">Select city</option>
                       {cities.map(city => (
                         <option key={city.id} value={city.id}>{city.name}</option>
@@ -264,7 +267,7 @@ const OrganiserCreateEvent = () => {
                               <ErrorMessage name={`shifts.${index}.homeNum`} component="div" className="text-red-500" />
 
                               <Label htmlFor={`shifts.${index}.districtId`} value="District" />
-                              <Field as={Select} id={`shifts.${index}.districtId`} name={`shifts.${index}.districtId`} color={errors.shifts && errors.shifts[index] && errors.shifts[index].districtId && touched.shifts && touched.shifts[index] && touched.shifts[index].districtId ? 'failure' : undefined}>
+                              <Field as={Select} id={`shifts.${index}.districtId`} name={`shifts.${index}.districtId`} value={shift.districtId || ''} onChange={(e) => setFieldValue(`shifts.${index}.districtId`, e.target.value)} color={errors.shifts && errors.shifts[index] && errors.shifts[index].districtId && touched.shifts && touched.shifts[index] && touched.shifts[index].districtId ? 'failure' : undefined}>
                                 <option value="">Select district</option>
                                 {filteredDistricts.map(district => (
                                   <option key={district.id} value={district.id}>{district.name}</option>
