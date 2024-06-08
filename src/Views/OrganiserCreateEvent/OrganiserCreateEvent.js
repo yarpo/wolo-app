@@ -38,6 +38,18 @@ const validationSchema = Yup.object().shape({
           const { startTime } = this.parent;
           return startTime && value > startTime;
         }),
+      capacity: Yup.number()
+        .min(1, 'Capacity must be at least 1')
+        .required('Capacity is required'),
+      requiredMinAge: Yup.number()
+        .min(1, 'Required minimum age cannot be negative')
+        .required('Required minimum age is required'),
+      shiftDirections: Yup.string()
+        .required('Shift directions are required'),
+      street: Yup.string()
+        .required('Street is required'),
+      homeNum: Yup.string()
+        .required('Home number is required'),
       districtId: Yup.number()
         .required('District is required')
         .min(1, 'District is required'),
@@ -127,7 +139,7 @@ const OrganiserCreateEvent = () => {
         <div className="flex flex-col gap-4">
           <h1>{t('createEvent')}</h1>
           <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
-            {({ isSubmitting, values, errors, touched}) => (
+            {({ isSubmitting, values, errors, touched }) => (
               <Form className="organiser-create-event-event-data">
                 <div className="mb-2 block">
                   <Label htmlFor="name" value="Event Title" />
@@ -232,23 +244,24 @@ const OrganiserCreateEvent = () => {
                               <ErrorMessage name={`shifts.${index}.endTime`} component="div" className="text-red-500" />
 
                               <Label htmlFor={`shifts.${index}.capacity`} value="Capacity" />
-                              <Field as={TextInput} id={`shifts.${index}.capacity`} type="number" min='1' name={`shifts.${index}.capacity`} />
-
-                              <Label htmlFor={`shifts.${index}.isLeaderRequired`} value="Is Leader Required?" />
-                              <Field as={Checkbox} id={`shifts.${index}.isLeaderRequired`} name={`shifts.${index}.isLeaderRequired`} /> 
-                              <br />
+                              <Field as={TextInput} id={`shifts.${index}.capacity`} type="number" min='1' name={`shifts.${index}.capacity`} color={errors.shifts && errors.shifts[index] && errors.shifts[index].capacity && touched.shifts && touched.shifts[index] && touched.shifts[index].capacity ? 'failure' : undefined} />
+                              <ErrorMessage name={`shifts.${index}.capacity`} component="div" className="text-red-500" />
 
                               <Label htmlFor={`shifts.${index}.requiredMinAge`} value="Required Minimum Age" />
-                              <Field as={TextInput} id={`shifts.${index}.requiredMinAge`} type="text" name={`shifts.${index}.requiredMinAge`} />
+                              <Field as={TextInput} id={`shifts.${index}.requiredMinAge`} type="number" min='0' name={`shifts.${index}.requiredMinAge`} color={errors.shifts && errors.shifts[index] && errors.shifts[index].requiredMinAge && touched.shifts && touched.shifts[index] && touched.shifts[index].requiredMinAge ? 'failure' : undefined} />
+                              <ErrorMessage name={`shifts.${index}.requiredMinAge`} component="div" className="text-red-500" />
 
                               <Label htmlFor={`shifts.${index}.shiftDirections`} value="Shift Directions" />
-                              <Field as={TextInput} id={`shifts.${index}.shiftDirections`} type="text" name={`shifts.${index}.shiftDirections`} />
+                              <Field as={TextInput} id={`shifts.${index}.shiftDirections`} type="text" name={`shifts.${index}.shiftDirections`} color={errors.shifts && errors.shifts[index] && errors.shifts[index].shiftDirections && touched.shifts && touched.shifts[index] && touched.shifts[index].shiftDirections ? 'failure' : undefined} />
+                              <ErrorMessage name={`shifts.${index}.shiftDirections`} component="div" className="text-red-500" />
 
                               <Label htmlFor={`shifts.${index}.street`} value="Street" />
-                              <Field as={TextInput} id={`shifts.${index}.street`} type="text" name={`shifts.${index}.street`} />
+                              <Field as={TextInput} id={`shifts.${index}.street`} type="text" name={`shifts.${index}.street`} color={errors.shifts && errors.shifts[index] && errors.shifts[index].street && touched.shifts && touched.shifts[index] && touched.shifts[index].street ? 'failure' : undefined} />
+                              <ErrorMessage name={`shifts.${index}.street`} component="div" className="text-red-500" />
 
                               <Label htmlFor={`shifts.${index}.homeNum`} value="Home Number" />
-                              <Field as={TextInput} id={`shifts.${index}.homeNum`} type="text" name={`shifts.${index}.homeNum`} />
+                              <Field as={TextInput} id={`shifts.${index}.homeNum`} type="text" name={`shifts.${index}.homeNum`} color={errors.shifts && errors.shifts[index] && errors.shifts[index].homeNum && touched.shifts && touched.shifts[index] && touched.shifts[index].homeNum ? 'failure' : undefined} />
+                              <ErrorMessage name={`shifts.${index}.homeNum`} component="div" className="text-red-500" />
 
                               <Label htmlFor={`shifts.${index}.districtId`} value="District" />
                               <Field as={Select} id={`shifts.${index}.districtId`} name={`shifts.${index}.districtId`} color={errors.shifts && errors.shifts[index] && errors.shifts[index].districtId && touched.shifts && touched.shifts[index] && touched.shifts[index].districtId ? 'failure' : undefined}>
