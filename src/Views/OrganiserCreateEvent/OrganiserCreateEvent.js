@@ -30,6 +30,14 @@ const validationSchema = Yup.object().shape({
     .min(1, 'City is required'),
   shifts: Yup.array().of(
     Yup.object().shape({
+      startTime: Yup.string()
+        .required('Start time is required'),
+      endTime: Yup.string()
+        .required('End time is required')
+        .test('is-greater', 'End time must be later than start time', function (value) {
+          const { startTime } = this.parent;
+          return startTime && value > startTime;
+        }),
       districtId: Yup.number()
         .required('District is required')
         .min(1, 'District is required'),
@@ -119,7 +127,7 @@ const OrganiserCreateEvent = () => {
         <div className="flex flex-col gap-4">
           <h1>{t('createEvent')}</h1>
           <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
-            {({ isSubmitting, values, errors, touched }) => (
+            {({ isSubmitting, values, errors, touched}) => (
               <Form className="organiser-create-event-event-data">
                 <div className="mb-2 block">
                   <Label htmlFor="name" value="Event Title" />
@@ -216,10 +224,12 @@ const OrganiserCreateEvent = () => {
                             <h2>{t('shift')}</h2>
                             <div className="col">
                               <Label htmlFor={`shifts.${index}.startTime`} value="Start Time" />
-                              <Field as={TextInput} id={`shifts.${index}.startTime`} type="time" name={`shifts.${index}.startTime`} />
+                              <Field as={TextInput} id={`shifts.${index}.startTime`} type="time" name={`shifts.${index}.startTime`} color={errors.shifts && errors.shifts[index] && errors.shifts[index].startTime && touched.shifts && touched.shifts[index] && touched.shifts[index].startTime ? 'failure' : undefined} />
+                              <ErrorMessage name={`shifts.${index}.startTime`} component="div" className="text-red-500" />
 
                               <Label htmlFor={`shifts.${index}.endTime`} value="End Time" />
-                              <Field as={TextInput} id={`shifts.${index}.endTime`} type="time" name={`shifts.${index}.endTime`} />
+                              <Field as={TextInput} id={`shifts.${index}.endTime`} type="time" name={`shifts.${index}.endTime`} color={errors.shifts && errors.shifts[index] && errors.shifts[index].endTime && touched.shifts && touched.shifts[index] && touched.shifts[index].endTime ? 'failure' : undefined} />
+                              <ErrorMessage name={`shifts.${index}.endTime`} component="div" className="text-red-500" />
 
                               <Label htmlFor={`shifts.${index}.capacity`} value="Capacity" />
                               <Field as={TextInput} id={`shifts.${index}.capacity`} type="number" min='1' name={`shifts.${index}.capacity`} />
