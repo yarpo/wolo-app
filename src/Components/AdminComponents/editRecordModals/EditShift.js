@@ -1,8 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { Label, Card, TextInput, Select } from "flowbite-react";
 
 const EditShift = ({ shifts, districts, modifyShifts }) => {
-	const newShift = useState(null);
 
 const districtMap = Object.fromEntries(
 	districts.map((district) => [district.name, district.id])
@@ -164,16 +163,9 @@ const formatTime = (time) => {
 						</Select>
 						</div>
 					</div>
-					<div className="col">
-						<button type="button" onClick={() => modifyShifts('remove', index)} className="white_button">
-							Remove Shift
-						</button>
-					</div>
 				</Card>
 			</div>
 		))}
-		<button type="button" className='confirm_button'   onClick={() => modifyShifts('add', newShift)}>
-        Add Shift</button>
 
 	</div>
 	);
