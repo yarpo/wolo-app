@@ -113,7 +113,6 @@ const DistrictsTab = () => {
                 <Table.Body className="divide-y">
                     {filteredDistricts
                         .sort((a, b) => a.id - b.id)
-                    {currentDistricts
                         .map((district, index) => (
                         <Table.Row key={index} className="bg-white dark:border-gray-700 dark:bg-gray-800">
                             <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
