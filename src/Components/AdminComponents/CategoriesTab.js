@@ -3,10 +3,11 @@ import { useTranslation } from 'react-i18next';
 import '../../styles/admin-home-page.scss';
 import { HiOutlineSearch } from "react-icons/hi";
 import { URLS } from '../../config';
-import { HiTrash, HiOutlinePlus } from "react-icons/hi";
+import { HiTrash, HiOutlinePlus, HiArrowSmRight, HiArrowSmLeft } from "react-icons/hi";
 import { Table, TextInput } from "flowbite-react";
 import AddCategory from './addRecordModals/AddCategory';
 import Confirmation from '../Popups/Confirmation';
+import ReactPaginate from 'react-paginate';
 import fetchData from '../../Utils/fetchData.js';
 import postRequestWithJson from '../../Utils/postRequestWithJson';
 import deleteRequest from '../../Utils/deleteRequest.js';
@@ -22,6 +23,9 @@ const CategoriesTab = () => {
 
     const [filteredCategories, setFilteredCategories] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
+
+    const [currentPage, setCurrentPage] = useState(0);
+    const categoriesPerPage = 10;
 
     useEffect(() => {
         fetchData(URLS.CATEGORIES, (data) => {
@@ -74,6 +78,14 @@ const CategoriesTab = () => {
         setCategoryNameToDelete(category.name);
     };
 
+    const handlePageClick = (event) => {
+        setCurrentPage(event.selected);
+    };
+
+    const offset = currentPage * categoriesPerPage;
+    const currentCategories = filteredCategories.sort((a, b) => a.id - b.id).slice(offset, offset + categoriesPerPage);
+    const pageCount = Math.ceil(filteredCategories.length / categoriesPerPage);
+
     return (
         <div className="overflow-x-auto">
             <div className='admin-panel-add-search-group'>
@@ -96,8 +108,7 @@ const CategoriesTab = () => {
                     <Table.HeadCell></Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
-                    {filteredCategories
-                        .sort((a, b) => a.id - b.id)
+                    {currentCategories
                         .map((category, index) => (
                         <Table.Row key={index} className="bg-white dark:border-gray-700 dark:bg-gray-800">
                             <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
@@ -134,6 +145,18 @@ const CategoriesTab = () => {
                     ))}
                 </Table.Body>
             </Table>
+            <ReactPaginate
+                previousLabel={<HiArrowSmLeft />}
+                nextLabel={<HiArrowSmRight />}
+                pageCount={pageCount}
+                onPageChange={handlePageClick}
+                pageClassName={'pagination__page'}
+                containerClassName={'pagination'}
+                previousLinkClassName={'pagination__link'}
+                nextLinkClassName={'pagination__link'}
+                disabledClassName={'pagination__link--disabled'}
+                activeClassName={'pagination__link--active'}
+            />
         </div>
     );
 };

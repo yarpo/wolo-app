@@ -7,7 +7,8 @@ import '../../styles/admin-home-page.scss';
 
 import { URLS } from '../../config';
 import fetchData from '../../Utils/fetchData';
-import { HiTrash, HiOutlinePlus } from "react-icons/hi";
+import { HiTrash, HiOutlinePlus, HiArrowSmRight, HiArrowSmLeft } from "react-icons/hi";
+import ReactPaginate from 'react-paginate';
 
 import { Table } from "flowbite-react";
 import Confirmation from '../Popups/Confirmation';
@@ -28,6 +29,9 @@ const FAQTab = () => {
     const [filteredQuestions, setFilteredQuestions] = useState([]);
     const questionName = `question${localStorage.getItem('i18nextLng').toUpperCase()}`;
     const answerName = `answer${localStorage.getItem('i18nextLng').toUpperCase()}`;
+
+    const [currentPage, setCurrentPage] = useState(0);
+    const questionsPerPage = 10;
 
     useEffect(() => {
         fetchData(URLS.FAQ, (data) => {
@@ -85,6 +89,15 @@ const FAQTab = () => {
         setQuestionTextToDelete(question[questionName]);
     };
 
+    const handlePageClick = (event) => {
+        setCurrentPage(event.selected);
+    };
+
+    const offset = currentPage * questionsPerPage;
+    const currentQuestions = filteredQuestions.sort((a, b) => a.id - b.id).slice(offset, offset + questionsPerPage);
+    const pageCount = Math.ceil(filteredQuestions.length / questionsPerPage);
+
+
     return (
         <div className="overflow-x-auto">
             <div className='admin-panel-add-search-group'>
@@ -109,8 +122,7 @@ const FAQTab = () => {
                     <Table.HeadCell></Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
-                    {filteredQuestions
-                        .sort((a, b) => a.id - b.id)
+                    {currentQuestions
                         .map((question, index) => (
                         <React.Fragment key={index}>
                             <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
@@ -184,6 +196,18 @@ const FAQTab = () => {
                     ))}
                 </Table.Body>
             </Table>
+            <ReactPaginate
+                previousLabel={<HiArrowSmLeft />}
+                nextLabel={<HiArrowSmRight />}
+                pageCount={pageCount}
+                onPageChange={handlePageClick}
+                pageClassName={'pagination__page'}
+                containerClassName={'pagination'}
+                previousLinkClassName={'pagination__link'}
+                nextLinkClassName={'pagination__link'}
+                disabledClassName={'pagination__link--disabled'}
+                activeClassName={'pagination__link--active'}
+            />
         </div>
     );
 };
