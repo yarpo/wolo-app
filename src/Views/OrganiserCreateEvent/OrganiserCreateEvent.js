@@ -46,7 +46,6 @@ const OrganiserCreateEvent = () => {
   const [districts, setDistricts] = useState([]);
   const [selectedCity, setSelectedCity] = useState(null);
   const [filteredDistricts, setFilteredDistricts] = useState([]);
-  const [selectedCategories, setSelectedCategories] = useState([]);
 
   useEffect(() => {
     fetchData(URLS.CATEGORIES, setCategories);
@@ -68,19 +67,6 @@ const OrganiserCreateEvent = () => {
       setFilteredDistricts([]);
     }
   }, [selectedCity, cities, districts]);
-
-  const handleCheckChange = (e, categoryId) => {
-    const category = categories.find((c) => c.id === categoryId);
-    if (category) {
-      if (e.target.checked) {
-        setSelectedCategories([...selectedCategories, category]);
-      } else {
-        setSelectedCategories(
-          selectedCategories.filter((c) => c.id !== categoryId)
-        );
-      }
-    }
-  };
 
   const initialValues = {
     name: '',
@@ -107,13 +93,6 @@ const OrganiserCreateEvent = () => {
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     setSubmitting(true);
-
-    values.categories = selectedCategories.map(category => category.id);
-
-    values.cityId = parseInt(selectedCity);
-    for (let i = 0; i < values.shifts.length; i++) {
-      values.shifts[i].districtId = parseInt(values.shifts[i].districtId);
-    }
 
     const response = await fetch(`${BASE_URL}/events/add?language=${localStorage.getItem('i18nextLng').toLocaleUpperCase()}`, {
       method: 'POST',
@@ -201,11 +180,11 @@ const OrganiserCreateEvent = () => {
                           paddingLeft: 10,
                         }}
                       >
-                        <Checkbox
-                          value={category.id}
-                          checked={selectedCategories.some(c => c.id === category.id)}
-                          onChange={(e) => handleCheckChange(e, category.id)}
-                          label={category.name}
+                        <Field
+                          type="checkbox"
+                          name="categories"
+                          value={category.id.toString()}
+                          as={Checkbox}
                           id={`category-${category.id}`}
                         />
                         <Label htmlFor={`category-${category.id}`} className="ml-2">
