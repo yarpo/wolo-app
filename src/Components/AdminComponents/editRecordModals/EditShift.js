@@ -2,31 +2,17 @@ import React, {useState} from 'react';
 import { Label, Card, TextInput, Select } from "flowbite-react";
 
 const EditShift = ({ shifts, districts, modifyShifts }) => {
-	const newShift = useState({
-    startTime: '', 
-    endTime: '', 
-    capacity: '', 
-    isLeaderRequired: false, 
-    requiredMinAge: '', 
-    shiftDirections: '', 
-    street: '', 
-    homeNum: '', 
-    districtId: '' 
-});
+	const newShift = useState(null);
 
 const districtMap = Object.fromEntries(
 	districts.map((district) => [district.name, district.id])
 );
 
-
 const formatTime = (time) => {
     let hours, minutes;
     if (typeof time === 'string') {
         [hours, minutes] = time.split(":");
-    } else if (typeof time === 'object') {
-        hours = time.hour.toString().padStart(2, '0');
-        minutes = time.minute.toString().padStart(2, '0');
-    }
+    } 
     return `${hours}:${minutes}`;
 }
 	
@@ -47,14 +33,7 @@ const formatTime = (time) => {
 								<TextInput
 									value={formatTime(shift.startTime)}
 									onChange={(e) => {
-										const [hour, minute] = e.target.value.split(":");
-										const timeObject = {
-											hour: parseInt(hour, 10),
-											minute: parseInt(minute, 10),
-											second: 0,
-											nano: 0
-										};
-										modifyShifts('update', index, 'startTime', timeObject);
+										modifyShifts('update', index, 'startTime', e.target.value.toString()+':00');
 									}}
 									id={`shifts.${index}.startTime`}
 									type="time"
@@ -66,14 +45,7 @@ const formatTime = (time) => {
 								<TextInput
 									value={formatTime(shift.endTime)}
 									onChange={(e) => {
-										const [hour, minute] = e.target.value.split(":");
-										const timeObject = {
-											hour: parseInt(hour, 10),
-											minute: parseInt(minute, 10),
-											second: 0,
-											nano: 0
-										};
-										modifyShifts('update', index, 'endTime', timeObject);
+										modifyShifts('update', index, 'endTime', e.target.value.toString()+':00');
 									}}
 									id={`shifts.${index}.endTime`}
 									type="time"

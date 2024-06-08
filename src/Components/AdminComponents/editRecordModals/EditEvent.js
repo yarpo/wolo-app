@@ -34,10 +34,10 @@ function EditEvent({ onAccept, onClose, eventData }) {
 	);
 
 	const [isPeselVerificationRequired, setIsPeselVerificationRequired] = useState(
-		eventData.peselVerificationRequired
+		eventData.isPeselVerificationRequired
 	);
-	const [agreementNeeded, setAgreementNeeded] = useState(
-		eventData.agreementNeeded
+	const [isAgreementNeeded, setIsAgreementNeeded] = useState(
+		eventData.isAgreementNeeded
 	);
 
 	const [cities, setCities] = useState([]);
@@ -55,26 +55,12 @@ function EditEvent({ onAccept, onClose, eventData }) {
 	);
 
 	const formattedShifts = eventData.shifts.map(shift => {
-		const [startHour, startMinute, startSecond] = shift.startTime.split(":");
-		const [endHour, endMinute, endSecond] = shift.endTime.split(":");
-	
 		return {
 			...shift,
-			startTime: {
-				hour: parseInt(startHour, 10),
-				minute: parseInt(startMinute, 10),
-				second: parseInt(startSecond, 10),
-				nano: 0
-			},
-			endTime: {
-				hour: parseInt(endHour, 10),
-				minute: parseInt(endMinute, 10),
-				second: parseInt(endSecond, 10),
-				nano: 0
-			}
+			id: shift.shiftId,
+			isLeaderRequired: false,
 		};
 	});
-	
 	const [shifts, setShifts] = useState(formattedShifts);
 	const [event, setEvent] = useState([]);
 	const [districts, setDistricts] = useState([]);
@@ -89,7 +75,9 @@ function EditEvent({ onAccept, onClose, eventData }) {
 
 	const modifyShifts = (action, index, field, value) => {
 		if (action === "add") {
+			console.log(index);
 			setShifts([...shifts, index]);
+			console.log(shifts);
 		} else if (action === "remove") {
 			setShifts(shifts.filter((_, i) => i !== index));
 		} else if (action === "update") {
@@ -167,14 +155,15 @@ function EditEvent({ onAccept, onClose, eventData }) {
 			descriptionEN,
 			descriptionRU,
 			descriptionUA,
-			organisationId: eventData.organisationId,
+			organisationId: 1,
 			categories: selectedCategoryIds,
 			isPeselVerificationRequired,
-			agreementNeeded,
+			isAgreementNeeded,
 			imageUrl,
 			date: date.split("/").reverse().join("-"),
 			cityId,
 			shifts,
+			mailSend: true
 		});
 		setOpenModal(false);
 	};
@@ -382,8 +371,10 @@ function EditEvent({ onAccept, onClose, eventData }) {
 								id="peselVerificationRequired"
 								checked={isPeselVerificationRequired}
 								onChange={() =>
+
 									setIsPeselVerificationRequired(!isPeselVerificationRequired)
 								}
+								
 							/>
 							<Label htmlFor="peselVerificationRequired" className="flex">
 								Pesel verification required
@@ -392,9 +383,9 @@ function EditEvent({ onAccept, onClose, eventData }) {
 
 						<div className="flex items-center gap-2">
 							<Checkbox
-								id="agreementNeeded"
-								checked={agreementNeeded}
-								onChange={() => setAgreementNeeded(!agreementNeeded)}
+								id="isAgreementNeeded"
+								checked={isAgreementNeeded}
+								onChange={() => setIsAgreementNeeded(!isAgreementNeeded)}
 							/>
 							<Label htmlFor="agreementNeeded" className="flex">
 								Agreement Needed
