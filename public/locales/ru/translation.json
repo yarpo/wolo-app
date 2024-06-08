@@ -283,5 +283,39 @@
     "calendarTip": "Просматривайте свои запланированные мероприятия без усилий. События, на которые вы подтверждены, выделены синим цветом, ваши зарезервированные события помечены оранжевым, а прошлые события отображаются с тонким серым фоном.",
   
     "cityDeleteSuccess": "Город был деактивирован",
-    "districtDeleteSuccess": "Район был удален"
+    "districtDeleteSuccess": "Район был удален",
+
+    "startTime": "Время начала",
+    "endTime": "Время окончания",
+    "shiftDirections": "Направления смены",
+    "street": "Улица",
+    "homeNum": "Номер дома",
+    "selectCity": "Выберите город",
+    "submit": "Подтвердить",
+    "removeShift": "Удалить смену",
+
+    "validationErrors": {
+        "nameTooShort": "Имя слишком короткое",
+        "nameTooLong": "Имя слишком длинное",
+        "nameRequired": "Имя обязательно",
+        "descriptionTooShort": "Описание слишком короткое",
+        "descriptionTooLong": "Описание слишком длинное",
+        "descriptionRequired": "Описание обязательно",
+        "invalidUrl": "Неверный формат URL",
+        "pastDate": "Дата не может быть в прошлом",
+        "dateRequired": "Дата обязательна",
+        "categoryRequired": "Требуется по крайней мере одна категория",
+        "cityRequired": "Город обязателен",
+        "startTimeRequired": "Время начала обязательно",
+        "endTimeRequired": "Время окончания обязательно",
+        "endTimeMustBeLater": "Время окончания должно быть позже времени начала",
+        "capacityTooLow": "Вместимость должна быть не менее 1",
+        "capacityRequired": "Вместимость обязательна",
+        "minAgeNegative": "Минимальный возраст не может быть отрицательным",
+        "minAgeRequired": "Минимальный возраст обязателен",
+        "shiftDirectionsRequired": "Направления смены обязательны",
+        "streetRequired": "Улица обязательна",
+        "homeNumRequired": "Номер дома обязателен",
+        "districtRequired": "Район обязателен"
+   }
 }

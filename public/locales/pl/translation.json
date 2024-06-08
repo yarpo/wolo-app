@@ -279,5 +279,39 @@
   "calendarTip": "Przeglądaj swoje zaplanowane wydarzenia bez wysiłku. Wydarzenia, na które jesteś zapisany, są podświetlone na niebiesko, twoja rezerwacja oznaczona jest na pomarańczowo, a przeszłe wydarzenia wyświetlane są z delikatnym szarym tłem.",
   
   "cityDeleteSuccess": "Miasto zostało dezaktywowane",
-  "districtDeleteSuccess": "Dzielnica została usunięta"
+  "districtDeleteSuccess": "Dzielnica została usunięta",
+
+  "startTime": "Czas rozpoczęcia",
+  "endTime": "Czas zakończenia",
+  "shiftDirections": "Kierunki zmiany",
+  "street": "Ulica",
+  "homeNum": "Numer domu",
+  "selectCity": "Wybierz miasto",
+  "submit": "Zatwierdź",
+  "removeShift": "Usuń zmianę",
+
+  "validationErrors": {
+    "nameTooShort": "Nazwa jest zbyt krótka",
+    "nameTooLong": "Nazwa jest zbyt długa",
+    "nameRequired": "Nazwa jest wymagana",
+    "descriptionTooShort": "Opis jest zbyt krótki",
+    "descriptionTooLong": "Opis jest zbyt długi",
+    "descriptionRequired": "Opis jest wymagany",
+    "invalidUrl": "Nieprawidłowy format URL",
+    "pastDate": "Data nie może być w przeszłości",
+    "dateRequired": "Data jest wymagana",
+    "categoryRequired": "Co najmniej jedna kategoria jest wymagana",
+    "cityRequired": "Miasto jest wymagane",
+    "startTimeRequired": "Czas rozpoczęcia jest wymagany",
+    "endTimeRequired": "Czas zakończenia jest wymagany",
+    "endTimeMustBeLater": "Czas zakończenia musi być późniejszy niż czas rozpoczęcia",
+    "capacityTooLow": "Pojemność musi wynosić co najmniej 1",
+    "capacityRequired": "Pojemność jest wymagana",
+    "minAgeNegative": "Wymagany minimalny wiek nie może być ujemny",
+    "minAgeRequired": "Wymagany minimalny wiek jest wymagany",
+    "shiftDirectionsRequired": "Kierunki zmiany są wymagane",
+    "streetRequired": "Ulica jest wymagana",
+    "homeNumRequired": "Numer domu jest wymagany",
+    "districtRequired": "Dzielnica jest wymagana"
+  }
 }
