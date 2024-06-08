@@ -14,11 +14,11 @@ const Hero = () => {
     const { t } = useTranslation();
     const { filters, setFilters } = useFiltersContext();
     const [selectedLocation, setSelectedLocation] = useState("");
-    const [locations, setLocations] = useState([]);
+    const [cities, setCities] = useState([]);
     const [selectedDate, setSelectedDate] = useState(null);
 
     useEffect(() => {
-        fetchData(URLS.DISTRICTS, setLocations);
+        fetchData(URLS.CITIES, setCities); 
     }, []);
 
     const handleDateChange = (date) => {
@@ -64,10 +64,10 @@ const Hero = () => {
                         value={selectedLocation}
                         onChange={handleLocationChange}
                     >
-                        <option value="" disabled>{t('location')}</option>
-                        {locations.map((location, index) => (
-                            <option key={index} value={location.name}>
-                                {location.name}
+                        <option value="" disabled>{t('city')}</option>
+                        {cities.map((city, index) => (
+                            <option key={index} value={city.name}>
+                                {city.name}
                             </option>
                         ))}
                     </select>
