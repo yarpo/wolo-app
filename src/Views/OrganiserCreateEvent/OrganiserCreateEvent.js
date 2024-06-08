@@ -11,10 +11,18 @@ import { Card } from "flowbite-react";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string()
-    .min(5, 'Name is too short')
+    .min(2, 'Name is too short')
     .max(50, 'Name is too long')
     .required('Name is required'),
-  // Dodaj inne pola walidacji tutaj
+  description: Yup.string()
+    .min(10, 'Description is too short')
+    .max(1000, 'Description is too long')
+    .required('Description is required'),
+  imageUrl: Yup.string()
+    .url('Invalid URL format'),
+  date: Yup.date()
+    .min(new Date(), 'Date cannot be in the past')
+    .required('Date is required'),
 });
 
 const OrganiserCreateEvent = () => {
@@ -124,14 +132,38 @@ const OrganiserCreateEvent = () => {
                   />
                   <ErrorMessage name="name" component="div" className="text-red-500" />
                   
-                  <Label htmlFor="description" value="Description" />
-                  <Field as={Textarea} id="description" sizing="md" name="description" />
+                  <div className="mb-2 block">
+                    <Label htmlFor="description" value="Description" />
+                  </div>
+                  <Field
+                    as={Textarea}
+                    id="description"
+                    sizing="md"
+                    name="description"
+                    color={errors.description && touched.description ? 'failure' : undefined}
+                  />
+                  <ErrorMessage name="description" component="div" className="text-red-500" />
 
                   <Label htmlFor="imageUrl" value="Image URL" />
-                  <Field as={TextInput} id="imageUrl" type="text" sizing="md" name="imageUrl" />
+                  <Field
+                    as={TextInput}
+                    id="imageUrl"
+                    type="text"
+                    sizing="md"
+                    name="imageUrl"
+                    color={errors.imageUrl && touched.imageUrl ? 'failure' : undefined}
+                  />
+                  <ErrorMessage name="imageUrl" component="div" className="text-red-500" />
 
                   <Label htmlFor="date" value="Date" />
-                  <Field as={TextInput} id="date" type="date" name="date" />
+                  <Field
+                    as={TextInput}
+                    id="date"
+                    type="date"
+                    name="date"
+                    color={errors.date && touched.date ? 'failure' : undefined}
+                  />
+                  <ErrorMessage name="date" component="div" className="text-red-500" />
 
                   <div className="organiser-create-event-two-columns">
                     <div className="organiser-create-event-two-columns-item">
