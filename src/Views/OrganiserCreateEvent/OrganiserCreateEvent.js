@@ -8,55 +8,6 @@ import fetchData from '../../Utils/fetchData.js';
 import { URLS, BASE_URL } from '../../config';
 import '../../styles/organiser-create-event.scss';
 
-const validationSchema = Yup.object().shape({
-  name: Yup.string()
-    .min(2, 'Name is too short')
-    .max(50, 'Name is too long')
-    .required('Name is required'),
-  description: Yup.string()
-    .min(10, 'Description is too short')
-    .max(1000, 'Description is too long')
-    .required('Description is required'),
-  imageUrl: Yup.string()
-    .url('Invalid URL format'),
-  date: Yup.date()
-    .min(new Date(), 'Date cannot be in the past')
-    .required('Date is required'),
-  categories: Yup.array()
-    .min(1, 'At least one category is required')
-    .required('Category is required'),
-  cityId: Yup.number()
-    .required('City is required')
-    .min(1, 'City is required'),
-  shifts: Yup.array().of(
-    Yup.object().shape({
-      startTime: Yup.string()
-        .required('Start time is required'),
-      endTime: Yup.string()
-        .required('End time is required')
-        .test('is-greater', 'End time must be later than start time', function (value) {
-          const { startTime } = this.parent;
-          return startTime && value > startTime;
-        }),
-      capacity: Yup.number()
-        .min(1, 'Capacity must be at least 1')
-        .required('Capacity is required'),
-      requiredMinAge: Yup.number()
-        .min(0, 'Required minimum age cannot be negative')
-        .required('Required minimum age is required'),
-      shiftDirections: Yup.string()
-        .required('Shift directions are required'),
-      street: Yup.string()
-        .required('Street is required'),
-      homeNum: Yup.string()
-        .required('Home number is required'),
-      districtId: Yup.number()
-        .required('District is required')
-        .min(1, 'District is required'),
-    })
-  ),
-});
-
 const OrganiserCreateEvent = () => {
   const { t } = useTranslation();
   const user = JSON.parse(localStorage.getItem('user'));
@@ -87,6 +38,55 @@ const OrganiserCreateEvent = () => {
       setFilteredDistricts([]);
     }
   }, [selectedCity, cities, districts]);
+
+  const validationSchema = Yup.object().shape({
+    name: Yup.string()
+      .min(2, t('validationErrors.nameTooShort'))
+      .max(50, t('validationErrors.nameTooLong'))
+      .required(t('validationErrors.nameRequired')),
+    description: Yup.string()
+      .min(10, t('validationErrors.descriptionTooShort'))
+      .max(1000, t('validationErrors.descriptionTooLong'))
+      .required(t('validationErrors.descriptionRequired')),
+    imageUrl: Yup.string()
+      .url(t('validationErrors.invalidUrl')),
+    date: Yup.date()
+      .min(new Date(), t('validationErrors.pastDate'))
+      .required(t('validationErrors.dateRequired')),
+    categories: Yup.array()
+      .min(1, t('validationErrors.categoryRequired'))
+      .required(t('validationErrors.categoryRequired')),
+    cityId: Yup.number()
+      .required(t('validationErrors.cityRequired'))
+      .min(1, t('validationErrors.cityRequired')),
+    shifts: Yup.array().of(
+      Yup.object().shape({
+        startTime: Yup.string()
+          .required(t('validationErrors.startTimeRequired')),
+        endTime: Yup.string()
+          .required(t('validationErrors.endTimeRequired'))
+          .test('is-greater', t('validationErrors.endTimeMustBeLater'), function (value) {
+            const { startTime } = this.parent;
+            return startTime && value > startTime;
+          }),
+        capacity: Yup.number()
+          .min(1, t('validationErrors.capacityTooLow'))
+          .required(t('validationErrors.capacityRequired')),
+        requiredMinAge: Yup.number()
+          .min(0, t('validationErrors.minAgeNegative'))
+          .required(t('validationErrors.minAgeRequired')),
+        shiftDirections: Yup.string()
+          .required(t('validationErrors.shiftDirectionsRequired')),
+        street: Yup.string()
+          .required(t('validationErrors.streetRequired')),
+        homeNum: Yup.string()
+          .required(t('validationErrors.homeNumRequired')),
+        districtId: Yup.number()
+          .required(t('validationErrors.districtRequired'))
+          .min(1, t('validationErrors.districtRequired')),
+      })
+    ),
+  });
 
   const initialValues = {
     name: '',
@@ -124,10 +124,10 @@ const OrganiserCreateEvent = () => {
     });
 
     if (response.ok) {
-      toast.success('Event added successfully');
+      toast.success(t('addEventSuccess'));
       resetForm();
     } else {
-      toast.error('Failed to add event');
+      toast.error(t('addEventFail'));
     }
 
     setSubmitting(false);
@@ -142,7 +142,7 @@ const OrganiserCreateEvent = () => {
             {({ isSubmitting, values, errors, touched, setFieldValue }) => (
               <Form className="organiser-create-event-event-data">
                 <div className="mb-2 block">
-                  <Label htmlFor="name" value="Event Title" />
+                  <Label htmlFor="name" value={t('title')} />
                 </div>
                 <Field
                   as={TextInput}
@@ -155,7 +155,7 @@ const OrganiserCreateEvent = () => {
                 <ErrorMessage name="name" component="div" className="text-red-500" />
 
                 <div className="mb-2 block">
-                  <Label htmlFor="description" value="Description" />
+                  <Label htmlFor="description" value={t('description')} />
                 </div>
                 <Field
                   as={Textarea}
@@ -166,7 +166,7 @@ const OrganiserCreateEvent = () => {
                 />
                 <ErrorMessage name="description" component="div" className="text-red-500" />
 
-                <Label htmlFor="imageUrl" value="Image URL" />
+                <Label htmlFor="imageUrl" value={t('imageURL')} />
                 <Field
                   as={TextInput}
                   id="imageUrl"
@@ -177,7 +177,7 @@ const OrganiserCreateEvent = () => {
                 />
                 <ErrorMessage name="imageUrl" component="div" className="text-red-500" />
 
-                <Label htmlFor="date" value="Date" />
+                <Label htmlFor="date" value={t('date')} />
                 <Field
                   as={TextInput}
                   id="date"
@@ -189,7 +189,7 @@ const OrganiserCreateEvent = () => {
 
                 <div className="organiser-create-event-two-columns">
                   <div className="organiser-create-event-two-columns-item">
-                    <Label htmlFor="categories" value="Category" />
+                    <Label htmlFor="categories" value={t('category')} />
                     {categories.map((category, index) => (
                       <div
                         key={category.id}
@@ -216,12 +216,12 @@ const OrganiserCreateEvent = () => {
                   </div>
 
                   <div className="organiser-create-event-two-columns-item">
-                    <Label htmlFor="cityId" value="City" />
+                    <Label htmlFor="cityId" value={t('city')} />
                     <Field as={Select} id="cityId" name="cityId" value={values.cityId || ''} onChange={(e) => {
                       handleCityChange(e);
                       setFieldValue("cityId", e.target.value);
                     }} color={errors.cityId && touched.cityId ? 'failure' : undefined}>
-                      <option value="">Select city</option>
+                      <option value="">{t('selectCity')}</option>
                       {cities.map(city => (
                         <option key={city.id} value={city.id}>{city.name}</option>
                       ))}
@@ -238,37 +238,37 @@ const OrganiserCreateEvent = () => {
                           <Card>
                             <h2>{t('shift')}</h2>
                             <div className="col">
-                              <Label htmlFor={`shifts.${index}.startTime`} value="Start Time" />
+                              <Label htmlFor={`shifts.${index}.startTime`} value={t('startTime')} />
                               <Field as={TextInput} id={`shifts.${index}.startTime`} type="time" name={`shifts.${index}.startTime`} color={errors.shifts && errors.shifts[index] && errors.shifts[index].startTime && touched.shifts && touched.shifts[index] && touched.shifts[index].startTime ? 'failure' : undefined} />
                               <ErrorMessage name={`shifts.${index}.startTime`} component="div" className="text-red-500" />
 
-                              <Label htmlFor={`shifts.${index}.endTime`} value="End Time" />
+                              <Label htmlFor={`shifts.${index}.endTime`} value={t('endTime')} />
                               <Field as={TextInput} id={`shifts.${index}.endTime`} type="time" name={`shifts.${index}.endTime`} color={errors.shifts && errors.shifts[index] && errors.shifts[index].endTime && touched.shifts && touched.shifts[index] && touched.shifts[index].endTime ? 'failure' : undefined} />
                               <ErrorMessage name={`shifts.${index}.endTime`} component="div" className="text-red-500" />
 
-                              <Label htmlFor={`shifts.${index}.capacity`} value="Capacity" />
+                              <Label htmlFor={`shifts.${index}.capacity`} value={t('capacity')} />
                               <Field as={TextInput} id={`shifts.${index}.capacity`} type="number" min='1' name={`shifts.${index}.capacity`} color={errors.shifts && errors.shifts[index] && errors.shifts[index].capacity && touched.shifts && touched.shifts[index] && touched.shifts[index].capacity ? 'failure' : undefined} />
                               <ErrorMessage name={`shifts.${index}.capacity`} component="div" className="text-red-500" />
 
-                              <Label htmlFor={`shifts.${index}.requiredMinAge`} value="Required Minimum Age" />
+                              <Label htmlFor={`shifts.${index}.requiredMinAge`} value={t('minimumAgeRequired')} />
                               <Field as={TextInput} id={`shifts.${index}.requiredMinAge`} type="number" min='0' name={`shifts.${index}.requiredMinAge`} color={errors.shifts && errors.shifts[index] && errors.shifts[index].requiredMinAge && touched.shifts && touched.shifts[index] && touched.shifts[index].requiredMinAge ? 'failure' : undefined} />
                               <ErrorMessage name={`shifts.${index}.requiredMinAge`} component="div" className="text-red-500" />
 
-                              <Label htmlFor={`shifts.${index}.shiftDirections`} value="Shift Directions" />
+                              <Label htmlFor={`shifts.${index}.shiftDirections`} value={t('shiftDirections')} />
                               <Field as={TextInput} id={`shifts.${index}.shiftDirections`} type="text" name={`shifts.${index}.shiftDirections`} color={errors.shifts && errors.shifts[index] && errors.shifts[index].shiftDirections && touched.shifts && touched.shifts[index] && touched.shifts[index].shiftDirections ? 'failure' : undefined} />
                               <ErrorMessage name={`shifts.${index}.shiftDirections`} component="div" className="text-red-500" />
 
-                              <Label htmlFor={`shifts.${index}.street`} value="Street" />
+                              <Label htmlFor={`shifts.${index}.street`} value={t('street')} />
                               <Field as={TextInput} id={`shifts.${index}.street`} type="text" name={`shifts.${index}.street`} color={errors.shifts && errors.shifts[index] && errors.shifts[index].street && touched.shifts && touched.shifts[index] && touched.shifts[index].street ? 'failure' : undefined} />
                               <ErrorMessage name={`shifts.${index}.street`} component="div" className="text-red-500" />
 
-                              <Label htmlFor={`shifts.${index}.homeNum`} value="Home Number" />
+                              <Label htmlFor={`shifts.${index}.homeNum`} value={t('homeNum')} />
                               <Field as={TextInput} id={`shifts.${index}.homeNum`} type="text" name={`shifts.${index}.homeNum`} color={errors.shifts && errors.shifts[index] && errors.shifts[index].homeNum && touched.shifts && touched.shifts[index] && touched.shifts[index].homeNum ? 'failure' : undefined} />
                               <ErrorMessage name={`shifts.${index}.homeNum`} component="div" className="text-red-500" />
 
-                              <Label htmlFor={`shifts.${index}.districtId`} value="District" />
+                              <Label htmlFor={`shifts.${index}.districtId`} value={t('district')} />
                               <Field as={Select} id={`shifts.${index}.districtId`} name={`shifts.${index}.districtId`} value={shift.districtId || ''} onChange={(e) => setFieldValue(`shifts.${index}.districtId`, e.target.value)} color={errors.shifts && errors.shifts[index] && errors.shifts[index].districtId && touched.shifts && touched.shifts[index] && touched.shifts[index].districtId ? 'failure' : undefined}>
-                                <option value="">Select district</option>
+                                <option value="">{t('selectDistrict')}</option>
                                 {filteredDistricts.map(district => (
                                   <option key={district.id} value={district.id}>{district.name}</option>
                                 ))}
@@ -276,7 +276,7 @@ const OrganiserCreateEvent = () => {
                               <ErrorMessage name={`shifts.${index}.districtId`} component="div" className="text-red-500" />
                             </div>
                             <div className="col">
-                              <button type="button" onClick={() => remove(index)} className='white_button'>Remove Shift</button>
+                              <button type="button" onClick={() => remove(index)} className='white_button'>{t('removeShift')}</button>
                             </div>
                           </Card>
                         </div>
@@ -291,13 +291,13 @@ const OrganiserCreateEvent = () => {
                         street: '', 
                         homeNum: '', 
                         districtId: '' })}>
-                        Add Shift
+                        {t('addShift')}
                       </button>
                     </div>
                   )}
                 </FieldArray>
                 <div className='organiser-create-event-submit-button-wrapper'>
-                  <button type="submit" className='confirm_button' disabled={isSubmitting}>Submit</button>
+                  <button type="submit" className='confirm_button' disabled={isSubmitting}>{t('submit')}</button>
                 </div>
               </Form>
             )}

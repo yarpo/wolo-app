@@ -279,5 +279,39 @@
     "calendarTip": "Легко переглядайте ваші заплановані події. Події, на які ви підтверджені, позначені синім кольором, ваші зарезервовані події мають помаранчеве позначення, а минулі події відображаються з невиразним сірим фоном.",
   
     "cityDeleteSuccess": "Місто було деактивовано",
-    "districtDeleteSuccess": "Район був видалений"
+    "districtDeleteSuccess": "Район був видалений",
+
+    "startTime": "Час початку",
+    "endTime": "Час закінчення",
+    "shiftDirections": "Напрямки зміни",
+    "street": "Вулиця",
+    "homeNum": "Номер будинку",
+    "selectCity": "Виберіть місто",
+    "submit": "Підтвердити",
+    "removeShift": "Видалити зміну",
+
+    "validationErrors": {
+        "nameTooShort": "Назва занадто коротка",
+        "nameTooLong": "Назва занадто довга",
+        "nameRequired": "Назва є обов'язковою",
+        "descriptionTooShort": "Опис занадто короткий",
+        "descriptionTooLong": "Опис занадто довгий",
+        "descriptionRequired": "Опис є обов'язковим",
+        "invalidUrl": "Недійсний формат URL",
+        "pastDate": "Дата не може бути в минулому",
+        "dateRequired": "Дата є обов'язковою",
+        "categoryRequired": "Потрібна принаймні одна категорія",
+        "cityRequired": "Місто є обов'язковим",
+        "startTimeRequired": "Час початку є обов'язковим",
+        "endTimeRequired": "Час закінчення є обов'язковим",
+        "endTimeMustBeLater": "Час закінчення повинен бути пізніше часу початку",
+        "capacityTooLow": "Ємність повинна бути не менше 1",
+        "capacityRequired": "Ємність є обов'язковою",
+        "minAgeNegative": "Мінімальний вік не може бути негативним",
+        "minAgeRequired": "Мінімальний вік є обов'язковим",
+        "shiftDirectionsRequired": "Напрямки зміни є обов'язковими",
+        "streetRequired": "Вулиця є обов'язковою",
+        "homeNumRequired": "Номер будинку є обов'язковим",
+        "districtRequired": "Район є обов'язковим"
+    }
 }
