@@ -2,13 +2,14 @@
 import { useEffect } from "react";
 
 import { Label, Modal, TextInput, Textarea, Select } from "flowbite-react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { HiMail, HiPhone, HiHome, HiGlobeAlt } from "react-icons/hi";
 
 import { URLS } from "../../../config";
 
 import fetchData from "../../../Utils/fetchData";
 import fetchDataWithAuth from "../../../Utils/fetchDataWithAuth";
+
 function EditCategory({ onAccept, onClose, organisationData }) {
 	const [openModal, setOpenModal] = useState(true);
 	const [districts, setDistricts] = useState([]);
@@ -35,19 +36,48 @@ function EditCategory({ onAccept, onClose, organisationData }) {
 	const [districtId, setDistrictId] = useState(organisationData.districtId);
 	const [cityId, setCityId] = useState(organisationData.cityId);
 	const [logoUrl, setLogoUrl] = useState(organisationData.logoUrl);
-
+	const [moderatorId, setModeratorId] = useState(null);
+	const [currentModeratorId, setCurrentModeratorId] = useState(null);
+	const [users, setUsers] = useState([]);
+	const [usersAvailable, setUsersAvailable] = useState([]);
+	const [allUsers, setAllUsers] = useState([]);
+	const userAddedRef = useRef(false);
+	
 	useEffect(() => {
 		const token = localStorage.getItem("token");
-
 		fetchData(URLS.DISTRICTS, setDistricts);
 		fetchDataWithAuth(URLS.CITIES, setCities, token);
-		console.log(cityId);
+		fetchDataWithAuth(URLS.USERS, setAllUsers, token);
+		fetchDataWithAuth(URLS.USERS_WITH_NO_ROLES, setUsers, token);
 	}, []);
+
+	useEffect(() => {
+		if (userAddedRef.current === false && allUsers.length > 0 && users.length > 0 && moderatorId != null) {
+			const user = allUsers.find(user => user.id === moderatorId);
+			setUsersAvailable(users);
+			if (user && !users.some(u => u.id === user.id)) {
+				setUsersAvailable(prevUsers => [...prevUsers, user]);
+				userAddedRef.current = true;
+			}
+		}
+	
+	}, [allUsers, organisationData.id, users, moderatorId]);
+
+	useEffect(() => {
+		const user = allUsers.find(
+			(user) => user.organisationId === organisationData.id
+		);
+		if (user) {
+			setCurrentModeratorId(user.id);
+			setModeratorId(user.id);
+		}else{
+			setUsersAvailable(users);
+		}
+	}, [allUsers, users, organisationData.id]);
 
 	const handleCityChange = (organisation) => {
 		const newSelectedCity = Number(organisation.target.value);
 		setCityId(newSelectedCity);
-		console.log("ZMIANA", newSelectedCity);
 	};
 
 	useEffect(() => {
@@ -62,13 +92,15 @@ function EditCategory({ onAccept, onClose, organisationData }) {
 		}
 	}, [cityId, cities, districts]);
 
+
 	const handleClose = () => {
 		setOpenModal(false);
 		onClose();
+		userAddedRef.current = false; 
 	};
-
 	const handleAgree = () => {
 		onAccept({
+			id: organisationData.id,
 			name,
 			descriptionPL,
 			descriptionEN,
@@ -79,8 +111,10 @@ function EditCategory({ onAccept, onClose, organisationData }) {
 			street,
 			homeNum,
 			districtId,
+			moderatorId,
 			cityId,
 			logoUrl,
+			currentModeratorId,
 		});
 		setOpenModal(false);
 	};
@@ -228,6 +262,23 @@ function EditCategory({ onAccept, onClose, organisationData }) {
 								{filteredDistricts.map((district) => (
 									<option key={district.id} value={district.id}>
 										{district.name}
+									</option>
+								))}
+							</Select>
+						</div>
+						{/*Organisation moderator*/}
+						<div className="max-w-md">
+							<div className="mb-2 block">
+								<Label htmlFor="moderator" value="Moderator" />
+							</div>
+							<Select
+								id="moderator"
+								value={moderatorId}
+								onChange={(e) => setModeratorId(e.target.value)}
+							>
+								{usersAvailable.map((user) => (
+									<option key={user.id} value={user.id}>
+										{user.email}
 									</option>
 								))}
 							</Select>

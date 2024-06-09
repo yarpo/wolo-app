@@ -11,6 +11,7 @@ import { URLS } from "../../config";
 import "../../styles/admin-home-page.scss";
 import AddOrganisation from "./addRecordModals/AddOrganisation.js";
 import postRequest from "../../Utils/postRequest.js";
+import postRequestEditModerator from "../../Utils/postRequestEditModerator.js";
 import putRequest from "../../Utils/putRequest.js";
 import EditOrganisation from "./editRecordModals/EditOrganisation.js";
 
@@ -112,13 +113,49 @@ const OrganisationsTab = () => {
 		setConfirmDelete(false);
 	};
 	const handleEdit = (data) => {
-		putRequest(
-			`${URLS.ORGANISATIONS}/admin/${organisationToEdit.id}/edit`,
-			localStorage.getItem("token"),
-			data,
-			"Organisation was changed successfully",
-			"Failed to change Organisation's data"
-		);
+		const paramsRevoke = new URLSearchParams( );
+		const paramsAssign = new URLSearchParams();
+		paramsAssign.append("user", data.moderatorId);
+		paramsAssign.append("organisation", data.id);
+
+		if (data.currentModeratorId) {
+			paramsRevoke.append("user", data.currentModeratorId);
+			postRequestEditModerator(
+				`${URLS.USER_REVOKE}`,
+				localStorage.getItem("token"),
+				paramsRevoke,
+				postRequestEditModerator(
+					`${URLS.USER_ASSIGN}`,
+					localStorage.getItem("token"),
+					paramsAssign,
+					putRequest(
+						`${URLS.ORGANISATIONS}/admin/${organisationToEdit.id}/edit`,
+						localStorage.getItem("token"),
+						data,
+						"Organisation was changed successfully",
+						"Failed to change Organisation's data"
+					),
+					"There was a problem with assigning moderator's role"
+				),
+				"There was a problem with revoking moderator's role"
+			);
+		}else{
+			postRequestEditModerator(
+				`${URLS.USER_ASSIGN}`,
+				localStorage.getItem("token"),
+				paramsAssign,
+				putRequest(
+					`${URLS.ORGANISATIONS}/admin/${organisationToEdit.id}/edit`,
+					localStorage.getItem("token"),
+					data,
+					"Organisation was changed successfully",
+					"Failed to change Organisation's data"
+				),
+				"There was a problem with assigning moderator's role"
+			);
+		}
+		
+		console.log(data);
 		setOrganisationToEdit(null);
 	};
 

@@ -17,6 +17,7 @@ import EditShift from "./EditShift";
 import fetchDataWithAuth from "../../../Utils/fetchDataWithAuth";
 
 function EditEvent({ onAccept, onClose, eventData }) {
+	const [event, setEvent] = useState([]);
 	const [openModal, setOpenModal] = useState(true);
 
 	const [namePL, setNamePL] = useState(eventData.namePL);
@@ -42,19 +43,10 @@ function EditEvent({ onAccept, onClose, eventData }) {
 	);
 
 	const [cities, setCities] = useState([]);
-	const cityMap = Object.fromEntries(
-		cities.map((city) => [city.id, city.name])
-	);
-	const cityMapName = Object.fromEntries(
-		cities.map((city) => [city.name, city.id])
-	);
 	const [cityId, setCityId] = useState(null);
 
 
 	const [organisations, setOrganisations] = useState([]);
-	const organisationMapName = Object.fromEntries(
-		organisations.map((o) => [o.name, o.id])
-	);
 	const [organisationId, setOrganisationId] = useState(null);
 
 	const [imageUrl, setImageUrl] = useState(eventData.imageUrl);
@@ -64,26 +56,22 @@ function EditEvent({ onAccept, onClose, eventData }) {
 
 	const [districts, setDistricts] = useState([]);
 	const [filteredDistricts, setFilteredDistricts] = useState([]);
-
 	const districtMapName = Object.fromEntries(
 		districts.map((d) => [d.name, d.id])
 	);
-	const formattedShifts = eventData.shifts.map(shift => {
-		const districtId = districtMapName[shift.district];
-		return {
-			...shift,
-			id: shift.shiftId,
-			districtId: districtId,
-			isLeaderRequired: false,
-		};
-	});
-	const [shifts, setShifts] = useState(formattedShifts);
-	const [event, setEvent] = useState([]);
+
+
+	const [fetchedShifts, setFetchedShifts] = useState([]);
+	const [shifts, setShifts] = useState([]);
+	const [isShiftsSet, setIsShiftsSet] = useState(false);
 
 	useEffect(() => {
 		fetchData(URLS.CATEGORIES, setCategories);
 		fetchData(URLS.CITIES, setCities);
-		fetchData(`${URLS.EVENTS}/${eventData.id}`, setEvent);
+		fetchData(`${URLS.EVENTS}/${eventData.id}`, (data) => {
+			setEvent(data);
+			setFetchedShifts(data.shifts);  // Set fetched shifts here
+		});
 		fetchDataWithAuth(
 			URLS.DISTRICTS_ADMIN,
 			(data) => {
@@ -100,21 +88,40 @@ function EditEvent({ onAccept, onClose, eventData }) {
 		);
 	}, [eventData.id]);
 
+	useEffect(() => {
+		if (!isShiftsSet && fetchedShifts.length > 0 && districts.length > 0) {
+			const formattedShifts = fetchedShifts.map(shift => {
+				const districtId = districtMapName[shift.district];
+				return {
+					...shift,
+					id: shift.shiftId,
+					districtId: districtId,
+					isLeaderRequired: false,
+				};
+			});
+			console.log("formattedShifts", formattedShifts);
+			setShifts(formattedShifts);
+			setIsShiftsSet(true);
+		}
+	}, [fetchedShifts, districts, districtMapName, isShiftsSet]);
+
+	
 	const modifyShifts = (action, index, field, value) => {
 		if (action === "add") {
-			console.log(index);
-			setShifts([...shifts, index]);
-			console.log(shifts);
+			setShifts([...shifts, value]);
 		} else if (action === "remove") {
 			setShifts(shifts.filter((_, i) => i !== index));
 		} else if (action === "update") {
-			setShifts(
-				shifts.map((shift, i) =>
-					i === index ? { ...shift, [field]: value } : shift
-				)
-			);
+			const newShifts = [...shifts];
+			newShifts[index] = { ...newShifts[index], [field]: value };
+			setShifts(newShifts);
+			console.log("newShifts", newShifts);
+			console.log("shifts", shifts);
 		}
 	};
+	
+
+
 
 	useEffect(() => {
 		const newSelectedCategories = categories.filter((category) =>
@@ -130,22 +137,30 @@ function EditEvent({ onAccept, onClose, eventData }) {
 	}, [categories, eventData.categories, event]);
 
 	useEffect(() => {
+		const cityMapName = Object.fromEntries(
+			cities.map((city) => [city.name, city.id])
+		);
 		setCityId(cityMapName[eventData.city]);
-	}, [cities]);
+	}, [cities, eventData.city]);
 
 	useEffect(() => {
+		const organisationMapName = Object.fromEntries(
+			organisations.map((o) => [o.name, o.id])
+		);
 		setOrganisationId(organisationMapName[eventData.organisation]) 
-	}, [organisations]);	
+	}, [organisations, eventData.organisation]);	
 
 	useEffect(() => {
-		if (cityId) {
+			const cityMap = Object.fromEntries(
+				cities.map((city) => [city.id, city.name])
+			);
 			const cityName = cityMap[cityId];
 			const newFilteredDistricts = districts.filter(
 				(district) => district.cityName === cityName
 			);
 			setFilteredDistricts(newFilteredDistricts);
-		}
-	}, [cityId]);
+		
+	}, [cityId, districts, cities]);
 
 	const handleCheckChange = (e, categoryId) => {
 		const category = categories.find((c) => c.id === categoryId);
@@ -161,6 +176,9 @@ function EditEvent({ onAccept, onClose, eventData }) {
 	};
 
 	const handleCityChange = (e) => {
+		const cityMap = Object.fromEntries(
+			cities.map((city) => [city.id, city.name])
+		);
 		const newCityId = e.target.value;
 		for (let i = 0; i < shifts.length; i++) {
 			modifyShifts("update", i, "city",cityMap[newCityId]);
@@ -176,9 +194,6 @@ function EditEvent({ onAccept, onClose, eventData }) {
 		const selectedCategoryIds = selectedCategories.map(
 			(category) => category.id
 		);
-		console.log(organisations)
-		console.log(organisationId);
-		console.log(formattedShifts);
 		onAccept({
 			id: eventData.id,
 			namePL,

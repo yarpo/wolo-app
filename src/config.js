@@ -47,6 +47,8 @@ const URLS = {
   EDIT_FAQ: `${BASE_URL}/faq/edit`,
   EDIT_EVENT: `${BASE_URL}/events/admin/edit`,
 
+  USER_REVOKE: `${BASE_URL}/users/revoke`,
+  USER_ASSIGN: `${BASE_URL}/users/assign`,
   
   USERS_WITH_NO_ROLES: `${BASE_URL}/users/volunteers`,
   THEY_NEED_YOU: `${BASE_URL}/events/need`,
