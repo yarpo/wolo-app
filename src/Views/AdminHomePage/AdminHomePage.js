@@ -3,8 +3,14 @@ import { useTranslation } from 'react-i18next';
 import '../../styles/admin-home-page.scss';
 
 import { Tabs } from "flowbite-react";
-import { HiAdjustments, HiClipboardList, HiUserCircle } from "react-icons/hi";
-import { MdDashboard } from "react-icons/md";
+import { HiUserCircle, 
+        HiLibrary, 
+        HiQuestionMarkCircle, 
+        HiPencilAlt, 
+        HiUserGroup, 
+        HiHome, 
+        HiLightBulb, 
+        HiFolderOpen } from "react-icons/hi";
 
 import UsersTab from '../../Components/AdminComponents/UsersTab.js';
 import OrganisationsTab from '../../Components/AdminComponents/OrganisationsTab.js';
@@ -19,27 +25,27 @@ const AdminHomePage = () => {
 
     return (
         <div className='admin_home_page_container'>
-            <h1 className='admin_home_page_text'>{t('administratorPanel')}</h1>
+            <h1 className='admin_home_page_text'><HiPencilAlt /> {t('administratorPanel')}</h1>
             <Tabs aria-label="Default tabs" style="default">
                 <Tabs.Item active title={t('users')} icon={HiUserCircle}>
                     <UsersTab />
                 </Tabs.Item>
-                <Tabs.Item title={t('organisations')} icon={MdDashboard}>
+                <Tabs.Item title={t('organisations')} icon={HiUserGroup}>
                     <OrganisationsTab />
                 </Tabs.Item>
-                <Tabs.Item title={t('events')} icon={HiAdjustments}>
+                <Tabs.Item title={t('events')} icon={HiLightBulb}>
                     <EventsTab />
                 </Tabs.Item>
-                <Tabs.Item title={t('categories')} icon={HiClipboardList}> 
+                <Tabs.Item title={t('categories')} icon={HiFolderOpen}> 
                     <CategoriesTab />
                 </Tabs.Item>
-                <Tabs.Item title={t('cities')} icon={HiClipboardList}>
+                <Tabs.Item title={t('cities')} icon={HiLibrary }>
                     <CitiesTab />
                 </Tabs.Item>
-                <Tabs.Item title={t('districts')} icon={HiClipboardList}>
+                <Tabs.Item title={t('districts')} icon={HiHome }>
                     <DistrictsTab />
                 </Tabs.Item>
-                <Tabs.Item title={t('help')} icon={HiClipboardList}>
+                <Tabs.Item title={t('help')} icon={HiQuestionMarkCircle}>
                     <FAQTab />
                 </Tabs.Item>
             </Tabs>

@@ -18,6 +18,8 @@ const URLS = {
   EVENT_USERS_PDF: `${BASE_URL}/events/users/pdf`,
   USER_EVENTS_CURRENT: `${BASE_URL}/users/shifts/current`,
   USER_EVENTS_PAST: `${BASE_URL}/users/shifts/past`,
+  USER_EVENTS_RESERVE: `${BASE_URL}/users/shifts/reserve`,
+  USER_EVENTS: `${BASE_URL}/users/events`,
   ORGANISATIONS_EVENTS_CURRENT: `${BASE_URL}/organisations/events/current`,
   ORGANISATIONS_EVENTS_PAST: `${BASE_URL}/organisations/events/past`,
   DETAILS: `${CLIENT_URL}/details`,
@@ -64,6 +66,10 @@ const URLS = {
   PUBLISH_REPORT: `${BASE_URL}/reports/publish`,
   UNPUBLISH_REPORT: `${BASE_URL}/reports/unpublish`,
   DELETE_REPORT: `${BASE_URL}/reports/delete`,
+
+  RESET_PASSWORD: `${BASE_URL}/auth/change-password`,
+  SET_PASSWORD: `${BASE_URL}/auth/set-password`,
+  FORGOT_PASSWORD: `${BASE_URL}/auth/forgot-password`,
 
   FAQ: `${BASE_URL}/faq`,
   DELETE_FAQ: `${BASE_URL}/faq/delete`,

@@ -19,46 +19,59 @@ const Login = ({ setToken, setUser }) => {
   const toggleShowPassword = () => setShowPassword(!showPassword);
 
   const fetchUserData = async () => {
-    const user = await fetchUser();
-    setId(user.id);
+    try {
+      const user = await fetchUser();
+      if (user && user.id) {
+        setId(user.id);
+      } else {
+        console.warn('User data is null or undefined');
+      }
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+    }
   };
 
   const handleLogin = async (values) => {
-    const response = await fetch(URLS.AUTHENTICATE, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(values)
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      localStorage.setItem('token', data.accessToken);
-      setToken(data.accessToken);
-      setUser(data.user );
-      
-      if (values.rememberMe) {
-        localStorage.setItem('rememberMe', values.email);
-        localStorage.setItem('password', values.password);
-      } else {
-        localStorage.removeItem('rememberMe');
-        localStorage.removeItem('password');
-      }
-
-      const userResponse = await fetch(URLS.USER, {
+    try {
+      const response = await fetch(URLS.AUTHENTICATE, {
+        method: 'POST',
         headers: {
-          'Authorization': `Bearer ${data.accessToken}`
-        }
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(values)
       });
-      const userData = await userResponse.json();
-      localStorage.setItem('user', JSON.stringify(userData));
-      setUser(userData);
-      
-      navigate('/');
-      window.location.reload();
-    } else {
-      toast.error('Failed to login. Please check your credentials.');
+
+      if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem('token', data.accessToken);
+        setToken(data.accessToken);
+        setUser(data.user );
+
+        if (values.rememberMe) {
+          localStorage.setItem('rememberMe', values.email);
+          localStorage.setItem('password', values.password);
+        } else {
+          localStorage.removeItem('rememberMe');
+          localStorage.removeItem('password');
+        }
+
+        const userResponse = await fetch(URLS.USER, {
+          headers: {
+            'Authorization': `Bearer ${data.accessToken}`
+          }
+        });
+        const userData = await userResponse.json();
+        localStorage.setItem('user', JSON.stringify(userData));
+        setUser(userData);
+
+        navigate('/');
+        window.location.reload();
+      } else {
+        toast.error('Failed to login. Please check your credentials.');
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+      toast.error('An error occurred during login. Please try again.');
     }
   };
 
@@ -67,7 +80,7 @@ const Login = ({ setToken, setUser }) => {
   }, []);
 
   useEffect(() => {
-    if (id !== null) {
+    if (id) {
       navigate('/events');
     }
   }, [id, navigate]);
@@ -88,14 +101,14 @@ const Login = ({ setToken, setUser }) => {
         validate={values => {
           const errors = {};
           if (!values.email) {
-            errors.email = t('field')  + ' "' + t('email') + '" ' + t('required');
+            errors.email = `${t('field')} "${t('email')}" ${t('required')}`;
           } else if (
             !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
           ) {
             errors.email = t('invalidEmail');
           }
           if (!values.password) {
-            errors.password = t('field')  + ' "' + t('password') + '" ' + t('required'); 
+            errors.password = `${t('field')} "${t('password')}" ${t('required')}`;
           }
           return errors;
         }}
@@ -127,24 +140,23 @@ const Login = ({ setToken, setUser }) => {
                 required 
               />
             </div>
-            {errors.email && touched.email && <span className="error">{errors.email} </span>}
+            {errors.email && touched.email && <span className="error">{errors.email}</span>}
             <br />
-          <div className="max-w-md">
-            <TextInput 
-              id="password1"
-              placeholder={t('password')}
-              type={showPassword ? "text" : "password"}
-              name="password"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.password}
-              required
-              icon={showPassword ? HiEyeOff : HiEye}
-              iconClick={toggleShowPassword}
-            />
-          </div>
+            <div className="max-w-md">
+              <TextInput 
+                id="password1"
+                placeholder={t('password')}
+                type={showPassword ? "text" : "password"}
+                name="password"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.password}
+                required
+                icon={showPassword ? HiEyeOff : HiEye}
+              />
+            </div>
             {errors.password && touched.password && <span className="error">{errors.password}</span>}
-            <Link className="login-form_forgot-password">{t('forgotPassword')}</Link>
+            <Link to="/forgot-password" className="login-form_forgot-password">{t('forgotPassword')}</Link>
             <div className="checkbox-container">
               <input
                 onClick={toggleShowPassword}

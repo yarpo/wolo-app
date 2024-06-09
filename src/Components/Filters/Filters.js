@@ -7,51 +7,56 @@ import fetchData from '../../Utils/fetchData.js';
 import { URLS } from '../../config.js';
 
 const Filters = ({ setFilteredEvents }) => {
-
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const { filters, setFilters } = useFiltersContext();
   const [apiResponse, setApiResponse] = useState([]);
   const [categories, setCategories] = useState([]);
   const [districts, setDistricts] = useState([]);
+  const [cities, setCities] = useState([]);
   const [organizations, setOrganizations] = useState([]);
 
   useEffect(() => {
     fetchData(URLS.EVENTS, setApiResponse);
-  }, [filters, categories]);
+  }, [filters]);
 
   useEffect(() => {
     fetchData(URLS.CATEGORIES, setCategories);
     fetchData(URLS.DISTRICTS, setDistricts);
+    fetchData(URLS.CITIES, setCities);
     fetchData(URLS.ORGANISATIONS, setOrganizations);
   }, []);
 
   useEffect(() => {
-   const filteredEvents = apiResponse.filter((event) => {
+    const filteredEvents = apiResponse.filter((event) => {
+      const isMatchingTag = filters.chosenTags.length === 0 || filters.chosenTags.some((tag) =>
+        tag === event.organisation ||
+        event.categories.includes(tag) ||
+        event.shifts.some(shift => shift.district === tag) ||
+        event.shifts.some(shift => shift.requiredMinAge.toString() === tag) ||
+        event.city === tag
+      );
 
-    const isMatchingTag = filters.chosenTags.some((tag) =>
-      tag === event.organisation ||
-      event.categories.some(category => category === tag) ||
-      event.shifts[0].district === tag ||
-      event.shifts[0].requiredMinAge.toString() === tag
-    );
+      const isMatchingDate =
+        !filters.selectedDate || new Date(event.date) >= filters.selectedDate;
 
-    const isMatchingDate =
-      filters.selectedDate === null || new Date(event.date) >= filters.selectedDate;
+      const isMatchingVerification =
+        !filters.requiresVerification || event.isAgreementNeeded;
 
-    const isMatchingVerification =
-      !filters.requiresVerification || event.peselVerificationRequired === false;
+      const isMatchingPeselVerification =
+        !filters.peselVerificationRequired || event.isPeselVerificationRequired;
 
-    const isMatchingBooking =
-      !filters.hideFullyBookedEvents || event.shifts[0].registeredUsers < event.shifts[0].capacity;
+      const isMatchingBooking =
+        !filters.hideFullyBookedEvents || event.shifts.some(shift => shift.registeredUsers < shift.capacity);
 
-    return (
-      (filters.chosenTags.length === 0 || isMatchingTag) &&
-      isMatchingDate &&
-      isMatchingVerification &&
-      isMatchingBooking
-    );
-  });
+      return (
+        isMatchingTag &&
+        isMatchingDate &&
+        isMatchingVerification &&
+        isMatchingPeselVerification &&
+        isMatchingBooking
+      );
+    });
 
     setFilteredEvents(filteredEvents);
   }, [filters, setFilteredEvents, apiResponse]);
@@ -92,12 +97,10 @@ const Filters = ({ setFilteredEvents }) => {
   const handleResetFilters = () => {
     setFilters({
       chosenTags: [],
-      chosenLocation: '',
-      chosenOrganisation: '',
-      selectedDate: new Date(),
+      selectedDate: null,
       requiresVerification: false,
+      peselVerificationRequired: false,
       hideFullyBookedEvents: false,
-      selectedAge: '',
     });
   };
 
@@ -118,7 +121,8 @@ const Filters = ({ setFilteredEvents }) => {
               placeholderText={t('date')}
             />
             {[
-              { label: t('location'), options: districts.map((district) => district.name) },
+              { label: t('location'), options: cities.map((city) => city.name) },
+              { label: t('district'), options: districts.map((district) => district.name) },
               { label: t('category'), options: categories.map((category) => category.name) },
               { label: t('organisations'), options: organizations.map((organization) => organization.name) },
               { label: t('ageRestrictions'), options: [...new Set(apiResponse.flatMap((event) => event.shifts.map((shift) => shift.requiredMinAge)))] },
@@ -130,9 +134,7 @@ const Filters = ({ setFilteredEvents }) => {
                 value=""
                 disabled={!isOpen}
               >
-                <option value="" disabled selected>
-                  {filter.label}
-                </option>
+                <option value="" disabled>{filter.label}</option>
                 {filter.options.map((option, index) => (
                   <option key={index} value={option}>
                     {option}
@@ -151,6 +153,17 @@ const Filters = ({ setFilteredEvents }) => {
                 className="checkbox-round"
                 name="requiresVerification"
                 checked={filters.requiresVerification}
+                onChange={handleCheckboxChange}
+                disabled={!isOpen}
+              />
+            </label>
+            <label className="select-boolean">
+              {t('noPeselVerificationRequired')}
+              <input
+                type="checkbox"
+                className="checkbox-round"
+                name="peselVerificationRequired"
+                checked={filters.peselVerificationRequired}
                 onChange={handleCheckboxChange}
                 disabled={!isOpen}
               />

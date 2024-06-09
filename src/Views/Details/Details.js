@@ -51,7 +51,7 @@ const Details = () => {
     if (!eventData) return <div>{t('loading')}...</div>;
 
     const {
-        organisationName, date, city, imageUrl, categories, peselVerificationRequired, agreementNeeded
+        organisationName, date, city, imageUrl, categories, isPeselVerificationRequired, isAgreementNeeded
     } = eventData;
 
     const addresses = eventData.shifts.map(shift => ({
@@ -73,19 +73,19 @@ const Details = () => {
                 </Link>
                 <h1 id="title">{eventData[eventName]}</h1>
                 <ul id="information">
-                    {peselVerificationRequired && (
+                    {isPeselVerificationRequired && (
                         <p className='card-extra-requirements'>
                             <HiOutlineExclamation className='card-extra-requirements' /> {t('peselVerificationNeeded')}
                         </p>
                     )}
-                    {agreementNeeded && (
+                    {isAgreementNeeded && (
                         <p className='card-extra-requirements'>
                             <HiOutlineExclamation className='card-extra-requirements' /> {t('volunteerAgreementNeeded')}
                         </p>
                     )}
                     <li><VscBrowser id="icon" /> <strong>{t('date')}:</strong> {formatDate(date)}</li>
                     <li><BiBorderAll id="icon" /> <strong>{t('category')}:</strong> {categories.join(", ")}</li>
-                    <li><VscOrganization id="icon" /> <strong>{t('organizer')}:</strong> <Link to={`/organiser?organisationId=${eventData.organisationId}`}>{organisationName}</Link></li>
+                    <li><VscOrganization id="icon" /> <strong>{t('organizer')}:</strong> <Link to={`/organisation?organisationId=${eventData.organisationId}`}>{organisationName}</Link></li>
                     <li><VscLocation id="icon" /> <strong>{t('location')}:</strong> {city}</li>
                 </ul>
             </div>
@@ -99,12 +99,14 @@ const Details = () => {
                     <p>{reportData ? reportData[reportText] : ""}</p>
                 </div>
             )}
-            <div id='column'>
-                <p className="details_shifts_text"><strong>{t('shifts')}:</strong></p>
-                <div className='details_shift_card_wrapper'>
-                    {eventData.shifts.sort((a, b) => new Date(a.shiftId) - new Date(b.shiftId)).map(shift => (
-                        <ShiftCard key={shift.id} shift={shift} city={city} isInPast={isInPast} />
-                    ))}
+                <div id='column'>
+                    <p className="details_shifts_text"><strong>{t('shifts')}:</strong></p>
+                    <div className='details_shift_card_container'>
+                        <div className='details_shift_card_wrapper'>
+                        {eventData.shifts.sort((a, b) => new Date(a.shiftId) - new Date(b.shiftId)).map(shift => (
+                            <ShiftCard key={shift.id} shift={shift} city={city} isInPast={isInPast} className='details_shift_card_item' />
+                        ))}
+                    </div>
                 </div>
                 <MapComponent addresses={addresses} />
             </div>

@@ -34,7 +34,7 @@ const OrganiserHomePage = () => {
             </div>
             <div id="button_div">
                 <form>
-                    <Link to="/createEvent">
+                    <Link to="/create-event">
                         <div id="button_create_event">
                             {t('createNewEvent')}
                         </div>
