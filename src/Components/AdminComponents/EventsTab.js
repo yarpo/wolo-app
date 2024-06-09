@@ -9,7 +9,7 @@ import formatDate from '../../Utils/formatDate';
 import ReactPaginate from 'react-paginate';
 import { URLS } from '../../config';
 import fetchData from '../../Utils/fetchData';
-import { HiTrash, HiCheck, HiOutlineX, HiArrowSmRight, HiArrowSmLeft } from "react-icons/hi";
+import { HiTrash, HiCheck, HiOutlineX, HiArrowSmRight, HiArrowSmLeft, HiPencilAlt} from "react-icons/hi";
 
 import { Table } from "flowbite-react";
 import Confirmation from "../Popups/Confirmation";
@@ -30,8 +30,8 @@ const EventsTab = () => {
     const [userConfirmed, setUserConfirmed] = useState(false);
     const [eventToDelete, setEventToDelete] = useState(null);
     const [eventNameToDelete, setEventNameToDelete] = useState(''); 
-	  const [openEditModal, setEditOpenModal] = useState(false);
-	  const [eventToEdit, setEventToEdit] = useState(null);
+    const [openEditModal, setEditOpenModal] = useState(false);
+    const [eventToEdit, setEventToEdit] = useState(null);
     const [currentPage, setCurrentPage] = useState(0);
     const eventsPerPage = 10;
 
@@ -166,7 +166,6 @@ const EventsTab = () => {
                                     </button>
                                 </Table.Cell>
                                 <Table.Cell>
-                                  {/* edit row */}
                                   {openEditModal && eventToEdit === event && (
                                     <EditEvent
                                       onAccept={handleEdit}
@@ -174,16 +173,17 @@ const EventsTab = () => {
                                       eventData={event}
                                     />
                                   )}
-                                 {event.date > format(new Date(), "yyyy-MM-dd") ? (
-                                  <button
+                              {event.date > format(new Date(), 'yyyy-MM-dd') ?
+                               <button
                                     className="edit-button"
                                     onClick={() => {
-                                      setEditOpenModal(true);
-                                      setEventToEdit(event);
-                                    }}
-                                  >Edit            
-                                  </button>
-                                  ) : (<p></p>))}
+                                            setEditOpenModal(true);
+                                            setEventToEdit(event);
+                                        }
+                                    } 
+                                >
+                                    <span><HiPencilAlt /></span>
+                                </button> : " "}
                                 </Table.Cell>
                                 <Table.Cell className="table-cell-action">
                                     {event.date > format(new Date(), 'yyyy-MM-dd') ?

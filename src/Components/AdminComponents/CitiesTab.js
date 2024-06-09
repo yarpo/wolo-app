@@ -5,7 +5,7 @@ import { HiOutlineSearch } from "react-icons/hi";
 import { URLS } from '../../config';
 import fetchDataWithAuth from '../../Utils/fetchDataWithAuth.js';
 import { Table, TextInput } from "flowbite-react";
-import { HiOutlinePlus, HiTrash, HiCheck, HiOutlineX, HiArrowSmRight, HiArrowSmLeft } from "react-icons/hi";
+import { HiOutlinePlus, HiTrash, HiCheck, HiOutlineX, HiArrowSmRight, HiArrowSmLeft, HiPencilAlt } from "react-icons/hi";
 import Confirmation from '../Popups/Confirmation.js';
 import ReactPaginate from 'react-paginate';
 import AddCity from './addRecordModals/AddCity.js';
@@ -19,8 +19,8 @@ const CitiesTab = () => {
     const { t } = useTranslation();
     const [cities, setCities] = useState([]);
     const [openModal, setOpenModal] = useState(false);
-  	const [openEditModal, setEditOpenModal] = useState(false);
-  	const [cityToEdit, setCityToEdit] = useState(null);
+    const [openEditModal, setEditOpenModal] = useState(false);
+    const [cityToEdit, setCityToEdit] = useState(null);
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [userConfirmed, setUserConfirmed] = useState(false);
     const [cityToDelete, setCityToDelete] = useState(null);
@@ -58,7 +58,7 @@ const CitiesTab = () => {
 
     const handleModalClose = () => {
         setOpenModal(false);
-      	setEditOpenModal(false);
+        setEditOpenModal(false);
     };
 
     const handleDelete = useCallback(() => {
@@ -140,7 +140,6 @@ const CitiesTab = () => {
                             <Table.Cell>{city.districts.join(', ')}</Table.Cell>
                             <Table.Cell>{!city.old ? <HiCheck /> : <HiOutlineX />}</Table.Cell>
                             <Table.Cell>
-                              {/* edit row */}
                               {openEditModal && cityToEdit === city && (
                                 <EditCity
                                   onAccept={handleEdit}
@@ -148,16 +147,16 @@ const CitiesTab = () => {
                                   cityData={city}
                                 />
                               )}
-                              <button
-                                className="edit-button"
-                                onClick={() => {
-                                  setEditOpenModal(true);
-                                  setCityToEdit(city);
-                                }}
-                              >
-                                {" "}
-                                Edit{" "}
-                              </button>
+                              {!city.old ? <button
+                                    className="edit-button"
+                                    onClick={() => {
+                                            setEditOpenModal(true);
+                                            setCityToEdit(city);
+                                        }
+                                    } 
+                                >
+                                    <span><HiPencilAlt /></span>
+                                </button> : " "}
                             </Table.Cell>
                             <Table.Cell className="table-cell-action">
                                 {!city.old ? <button

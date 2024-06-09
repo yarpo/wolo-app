@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import '../../styles/admin-home-page.scss';
 import { HiOutlineSearch } from "react-icons/hi";
 import { URLS } from '../../config';
-import { HiTrash, HiOutlinePlus, HiArrowSmRight, HiArrowSmLeft } from "react-icons/hi";
+import { HiTrash, HiOutlinePlus, HiArrowSmRight, HiArrowSmLeft, HiPencilAlt} from "react-icons/hi";
 import { Table, TextInput } from "flowbite-react";
 import AddCategory from './addRecordModals/AddCategory';
 import Confirmation from '../Popups/Confirmation';
@@ -21,8 +21,8 @@ const CategoriesTab = () => {
     const [openModal, setOpenModal] = useState(false);
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [userConfirmed, setUserConfirmed] = useState(false);
-  	const [openEditModal, setEditOpenModal] = useState(false);
-	  const [categoryToEdit, setCategoryToEdit] = useState(null);
+    const [openEditModal, setEditOpenModal] = useState(false);
+	const [categoryToEdit, setCategoryToEdit] = useState(null);
     const [categoryToDelete, setCategoryToDelete] = useState(null);
     const [categoryNameToDelete, setCategoryNameToDelete] = useState('');
 
@@ -83,7 +83,7 @@ const CategoriesTab = () => {
         setCategoryToDelete(category.id);
         setCategoryNameToDelete(category.name);
     };
-  	const handleEdit = (data) => {
+    const handleEdit = (data) => {
       putRequest(
         `${URLS.EDIT_CATEGORY}`,
         localStorage.getItem("token"),
@@ -133,7 +133,6 @@ const CategoriesTab = () => {
                             </Table.Cell>
                             <Table.Cell>{category.name}</Table.Cell>
                             <Table.Cell>
-                              {/* edit row */}
                               {openEditModal && categoryToEdit === category && (
                                 <EditCategory
                                   onAccept={handleEdit}
@@ -142,15 +141,15 @@ const CategoriesTab = () => {
                                 />
                               )}
                               <button
-                                className="edit-button"
-                                onClick={() => {
-                                  setEditOpenModal(true);
-                                  setCategoryToEdit(category);
-                                }}
-                              >
-                                {" "}
-                                Edit{" "}
-                              </button>
+                                    className="edit-button"
+                                    onClick={() => {
+                                            setEditOpenModal(true);
+                                            setCategoryToEdit(category);
+                                        }
+                                    } 
+                                >
+                                    <span><HiPencilAlt /></span>
+                                </button>
                             </Table.Cell>
                             <Table.Cell className="table-cell-action">
                                 <button

@@ -7,7 +7,7 @@ import fetchDataWithAuth from '../../Utils/fetchDataWithAuth.js';
 import postRequestWithJson from '../../Utils/postRequestWithJson.js';
 import Confirmation from '../Popups/Confirmation.js';
 import { URLS } from '../../config';
-import { HiTrash, HiOutlinePlus, HiCheck, HiOutlineX, HiArrowSmRight, HiArrowSmLeft } from "react-icons/hi";
+import { HiTrash, HiOutlinePlus, HiCheck, HiOutlineX, HiArrowSmRight, HiArrowSmLeft, HiPencilAlt } from "react-icons/hi";
 import ReactPaginate from 'react-paginate';
 
 import "../../styles/admin-home-page.scss";
@@ -22,8 +22,8 @@ const OrganisationsTab = () => {
     const { t } = useTranslation();
     const [organisations, setOrganisations] = useState([]);
     const [openModal, setOpenModal] = useState(false);
-  	const [openEditModal, setEditOpenModal] = useState(false);
-	  const [organisationToEdit, setOrganisationToEdit] = useState(null);
+    const [openEditModal, setEditOpenModal] = useState(false);
+    const [organisationToEdit, setOrganisationToEdit] = useState(null);
     const [openIndex, setOpenIndex] = useState(null);
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [userConfirmed, setUserConfirmed] = useState(false);
@@ -91,6 +91,13 @@ const OrganisationsTab = () => {
     const handleUserConfirmation = async (confirmation) => {
         setUserConfirmed(confirmation);
     };
+
+	useEffect(() => {
+		if (userConfirmed !== false) {
+			setUserConfirmed(false);
+			handleDelete();
+		}
+	}, [userConfirmed]);
 
 	const handleDelete = () => {
 		const params = new URLSearchParams();
@@ -218,7 +225,6 @@ const OrganisationsTab = () => {
                                     </button>
                                 </Table.Cell>
                                 <Table.Cell>
-                                  {/* edit row */}
                                   {openEditModal && organisationToEdit === organisation && (
                                     <EditOrganisation
                                       onAccept={handleEdit}
@@ -226,16 +232,16 @@ const OrganisationsTab = () => {
                                       organisationData={organisation}
                                     />
                                   )}
-                                  <button
-                                    className="edit-button"
-                                    onClick={() => {
-                                      setEditOpenModal(true);
-                                      setOrganisationToEdit(organisation);
-                                    }}
-                                  >
-                                    {" "}
-                                    Edit{" "}
-                                  </button>
+                                    <button
+                                        className="edit-button"
+                                            onClick={() => {
+                                                setEditOpenModal(true);
+                                                setOrganisationToEdit(organisation);
+                                            }
+                                        } 
+                                    >
+                                        <span><HiPencilAlt /></span>
+                                    </button>
                                 </Table.Cell>
                                 <Table.Cell className="table-cell-action">
                                     <button

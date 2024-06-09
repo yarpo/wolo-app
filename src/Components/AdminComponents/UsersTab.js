@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { VscChevronDown, VscChevronUp } from 'react-icons/vsc';
-import { HiOutlineSearch, HiTrash, HiOutlinePlus, HiCheck, HiOutlineX, HiArrowSmRight, HiArrowSmLeft } from "react-icons/hi";
+import { HiOutlineSearch, HiTrash, HiOutlinePlus, HiCheck, HiOutlineX, HiArrowSmRight, HiArrowSmLeft, HiPencilAlt } from "react-icons/hi";
 import ReactPaginate from 'react-paginate';
 import '../../styles/admin-home-page.scss';
 import { URLS } from '../../config';
@@ -148,6 +148,7 @@ const UsersTab = () => {
                     <Table.HeadCell>{t('moderator')}</Table.HeadCell>
                     <Table.HeadCell></Table.HeadCell>
                     <Table.HeadCell></Table.HeadCell>
+                    <Table.HeadCell></Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
                     {currentUsers
@@ -172,7 +173,6 @@ const UsersTab = () => {
                                     </button>
                                 </Table.Cell>
                                 <Table.Cell>
-                                  {/* edit row */}
                                   {openEditModal && userToEdit === user && (
                                     <EditUser
                                       onAccept={handleEdit}
@@ -183,13 +183,13 @@ const UsersTab = () => {
                                   <button
                                     className="edit-button"
                                     onClick={() => {
-                                      setEditOpenModal(true);
-                                      setUserToEdit(user);
-                                    }}
-                                  >
-                                    {" "}
-                                    Edit{" "}
-                                  </button>
+                                            setEditOpenModal(true);
+                                            setUserToEdit(user);
+                                        }
+                                    } 
+                                >
+                                    <span><HiPencilAlt /></span>
+                                </button>
                                 </Table.Cell>
                                 <Table.Cell className="table-cell-action">
                                     <button

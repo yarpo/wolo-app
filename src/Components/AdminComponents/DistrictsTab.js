@@ -5,7 +5,7 @@ import { HiOutlineSearch } from "react-icons/hi";
 import { URLS } from '../../config';
 import fetchDataWithAuth from '../../Utils/fetchDataWithAuth.js';
 import { Table, TextInput } from "flowbite-react";
-import { HiOutlinePlus, HiTrash, HiCheck, HiOutlineX, HiArrowSmRight, HiArrowSmLeft } from "react-icons/hi";
+import { HiOutlinePlus, HiTrash, HiCheck, HiOutlineX, HiArrowSmRight, HiArrowSmLeft, HiPencilAlt } from "react-icons/hi";
 import Confirmation from '../Popups/Confirmation.js';
 import ReactPaginate from 'react-paginate';
 import AddDistrict from './addRecordModals/AddDistricts';
@@ -19,8 +19,8 @@ const DistrictsTab = () => {
     const { t } = useTranslation();
     const [districts, setDistricts] = useState([]);
     const [openModal, setOpenModal] = useState(false);
-  	const [openEditModal, setEditOpenModal] = useState(false);
-	  const [districtToEdit, setDistrictToEdit] = useState(null);
+    const [openEditModal, setEditOpenModal] = useState(false);
+    const [districtToEdit, setDistrictToEdit] = useState(null);
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [userConfirmed, setUserConfirmed] = useState(false);
     const [districtToDelete, setDistrictToDelete] = useState(null);
@@ -37,12 +37,18 @@ const DistrictsTab = () => {
             setFilteredDistricts(data);
         }, localStorage.getItem('token'));
     }, []);
+    
     useEffect(() => {
-      fetchData(URLS.DISTRICTS, (data) => {
-        setDistricts(data);
-        setFilteredDistricts(data);
-      });
-    }, []);
+        if (searchQuery === '') {
+            setFilteredDistricts(districts);
+        } else {
+            setFilteredDistricts(districts.filter(district =>
+                district.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                district.cityName.toLowerCase().includes(searchQuery.toLowerCase())
+            ));
+        }
+    }, [searchQuery, districts]);
+
 
     const handleModalAccept = (data) => {
         setOpenModal(false);
@@ -119,7 +125,7 @@ const DistrictsTab = () => {
                     <Table.HeadCell>{t('name')}</Table.HeadCell>
                     <Table.HeadCell>{t('city')}</Table.HeadCell>
                     <Table.HeadCell>{t('active')}</Table.HeadCell>
-
+                    <Table.HeadCell></Table.HeadCell>
                     <Table.HeadCell></Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
@@ -133,24 +139,24 @@ const DistrictsTab = () => {
                             <Table.Cell>{district.cityName}</Table.Cell>
                             <Table.Cell>{!district.old ? <HiCheck /> : <HiOutlineX />}</Table.Cell>
                             <Table.Cell>
-                              {/* edit row */}
                               {openEditModal && districtToEdit === district && (
                                 <EditDistrict
-                                  onAccept={handleEdit}
-                                  onClose={handleModalClose}
-                                  districtData={district}
+                                    onAccept={handleEdit}
+                                    onClose={handleModalClose}
+                                    districtData={district}
                                 />
                               )}
-                              <button
-                                className="edit-button"
-                                onClick={() => {
-                                  setEditOpenModal(true);
-                                  setDistrictToEdit(district);
-                                }}
-                              >
-                                {" "}
-                                Edit{" "}
-                              </button>
+                               {!district.old ? <button
+                                    className="edit-button"
+                                    onClick={() => {
+                                        setEditOpenModal(true);
+                                        setDistrictToEdit(district);
+                                        }
+                                    } 
+                                >
+                                    <span><HiPencilAlt /></span>
+                                
+                                </button> : " "}
                             </Table.Cell>
                             <Table.Cell className="table-cell-action">
                                 {!district.old ? <button

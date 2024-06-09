@@ -7,7 +7,7 @@ import '../../styles/admin-home-page.scss';
 
 import { URLS } from '../../config';
 import fetchData from '../../Utils/fetchData';
-import { HiTrash, HiOutlinePlus, HiArrowSmRight, HiArrowSmLeft } from "react-icons/hi";
+import { HiTrash, HiOutlinePlus, HiArrowSmRight, HiArrowSmLeft, HiPencilAlt } from "react-icons/hi";
 import ReactPaginate from 'react-paginate';
 
 import { Table } from "flowbite-react";
@@ -65,7 +65,7 @@ const FAQTab = () => {
 
     const handleModalClose = () => {
         setOpenModal(false);
-      	setEditOpenModal(false);
+        setEditOpenModal(false);
     }
 
     const toggleDetails = (index) => {
@@ -159,7 +159,6 @@ const FAQTab = () => {
                                     </button>
                                 </Table.Cell>
                                 <Table.Cell>
-                                  {/* edit row */}
                                   {openEditModal && questionToEdit === question && (
                                     <EditFAQ
                                       onAccept={handleEdit}
@@ -167,16 +166,16 @@ const FAQTab = () => {
                                       questionData={question}
                                     />
                                   )}
-                                  <button
-                                    className="edit-button"
-                                    onClick={() => {
-                                      setEditOpenModal(true);
-                                      setQuestionToEdit(question);
-                                    }}
-                                  >
-                                    {" "}
-                                    Edit{" "}
-                                  </button>
+                                    <button
+                                        className="edit-button"
+                                        onClick={() => {
+                                                setEditOpenModal(true);
+                                               setQuestionToEdit(question);
+                                            }
+                                        } 
+                                   >
+                                    <span><HiPencilAlt /></span>
+                                    </button>
                                 </Table.Cell>
                                 <Table.Cell className="table-cell-action">
                                     <button
