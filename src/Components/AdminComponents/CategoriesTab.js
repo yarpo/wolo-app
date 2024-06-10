@@ -3,21 +3,26 @@ import { useTranslation } from 'react-i18next';
 import '../../styles/admin-home-page.scss';
 import { HiOutlineSearch } from "react-icons/hi";
 import { URLS } from '../../config';
-import { HiTrash, HiOutlinePlus, HiArrowSmRight, HiArrowSmLeft } from "react-icons/hi";
+import { HiTrash, HiOutlinePlus, HiArrowSmRight, HiArrowSmLeft, HiPencilAlt} from "react-icons/hi";
 import { Table, TextInput } from "flowbite-react";
 import AddCategory from './addRecordModals/AddCategory';
 import Confirmation from '../Popups/Confirmation';
 import ReactPaginate from 'react-paginate';
 import fetchData from '../../Utils/fetchData.js';
+import putRequest from "../../Utils/putRequest.js";
+import EditCategory from "./editRecordModals/EditCategory.js";
 import postRequestWithJson from '../../Utils/postRequestWithJson';
 import deleteRequest from '../../Utils/deleteRequest.js';
 
 const CategoriesTab = () => {
+  
     const { t } = useTranslation();
     const [categories, setCategories] = useState([]);
     const [openModal, setOpenModal] = useState(false);
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [userConfirmed, setUserConfirmed] = useState(false);
+    const [openEditModal, setEditOpenModal] = useState(false);
+	const [categoryToEdit, setCategoryToEdit] = useState(null);
     const [categoryToDelete, setCategoryToDelete] = useState(null);
     const [categoryNameToDelete, setCategoryNameToDelete] = useState('');
 
@@ -51,6 +56,7 @@ const CategoriesTab = () => {
 
     const handleModalClose = () => {
         setOpenModal(false);
+        setEditOpenModal(false);
     };
 
     const handleDelete = useCallback(() => {
@@ -76,6 +82,16 @@ const CategoriesTab = () => {
         setConfirmDelete(true);
         setCategoryToDelete(category.id);
         setCategoryNameToDelete(category.name);
+    };
+    const handleEdit = (data) => {
+      putRequest(
+        `${URLS.EDIT_CATEGORY}`,
+        localStorage.getItem("token"),
+        data,
+        "Category was changed successfully",
+        "Failed to change the category"
+      );
+      setCategoryToEdit(null);
     };
 
     const handlePageClick = (event) => {
@@ -106,6 +122,7 @@ const CategoriesTab = () => {
                     <Table.HeadCell>{t('id')}</Table.HeadCell>
                     <Table.HeadCell>{t('name')}</Table.HeadCell>
                     <Table.HeadCell></Table.HeadCell>
+                    <Table.HeadCell></Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
                     {currentCategories
@@ -115,6 +132,25 @@ const CategoriesTab = () => {
                                 {category.id}
                             </Table.Cell>
                             <Table.Cell>{category.name}</Table.Cell>
+                            <Table.Cell>
+                              {openEditModal && categoryToEdit === category && (
+                                <EditCategory
+                                  onAccept={handleEdit}
+                                  onClose={handleModalClose}
+                                  categoryData={category}
+                                />
+                              )}
+                              <button
+                                    className="edit-button"
+                                    onClick={() => {
+                                            setEditOpenModal(true);
+                                            setCategoryToEdit(category);
+                                        }
+                                    } 
+                                >
+                                    <span><HiPencilAlt /></span>
+                                </button>
+                            </Table.Cell>
                             <Table.Cell className="table-cell-action">
                                 <button
                                     className="delete-button"

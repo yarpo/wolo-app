@@ -1,22 +1,25 @@
-import { useTranslation } from 'react-i18next';
-import React, { useState, useEffect } from 'react';
-import { VscChevronDown, VscChevronUp } from 'react-icons/vsc';
+import { useTranslation } from "react-i18next";
+import React, { useState, useEffect } from "react";
+import { VscChevronDown, VscChevronUp } from "react-icons/vsc";
 import { HiOutlineSearch } from "react-icons/hi";
 import { TextInput, Card } from "flowbite-react";
 import '../../styles/admin-home-page.scss';
 import { format } from 'date-fns';
 import formatDate from '../../Utils/formatDate';
 import ReactPaginate from 'react-paginate';
-
 import { URLS } from '../../config';
 import fetchData from '../../Utils/fetchData';
-import { HiTrash, HiCheck, HiOutlineX, HiArrowSmRight, HiArrowSmLeft } from "react-icons/hi";
+import { HiTrash, HiCheck, HiOutlineX, HiArrowSmRight, HiArrowSmLeft, HiPencilAlt} from "react-icons/hi";
 
 import { Table } from "flowbite-react";
-import Confirmation from '../Popups/Confirmation';
-import deleteRequest from '../../Utils/deleteRequest';
+import Confirmation from "../Popups/Confirmation";
+import deleteRequest from "../../Utils/deleteRequest";
+
+import EditEvent from "./editRecordModals/EditEvent";
+import putRequest from "../../Utils/putRequest.js";
 
 const EventsTab = () => {
+  
     const { t } = useTranslation();
     const eventName = `name${localStorage.getItem('i18nextLng').toUpperCase()}`;
     const [events, setEvents] = useState([]);
@@ -27,7 +30,8 @@ const EventsTab = () => {
     const [userConfirmed, setUserConfirmed] = useState(false);
     const [eventToDelete, setEventToDelete] = useState(null);
     const [eventNameToDelete, setEventNameToDelete] = useState(''); 
-
+    const [openEditModal, setEditOpenModal] = useState(false);
+    const [eventToEdit, setEventToEdit] = useState(null);
     const [currentPage, setCurrentPage] = useState(0);
     const eventsPerPage = 10;
 
@@ -82,6 +86,10 @@ const EventsTab = () => {
         }
     }, [userConfirmed]); 
 
+    const handleModalClose = () => {
+        setEditOpenModal(false);
+    };
+
     const handleDelete = () => {
         deleteRequest(`${URLS.DELETE_EVENT}/${eventToDelete}`, localStorage.getItem('token'), "Deleted", "Fail")
         setEventToDelete(null);
@@ -92,6 +100,16 @@ const EventsTab = () => {
         setConfirmDelete(true);
         setEventToDelete(event.id);
         setEventNameToDelete(event[eventName]); 
+    };
+    const handleEdit = (data) => {
+      putRequest(
+        `${URLS.EDIT_EVENT}/${eventToEdit.id}`,
+        localStorage.getItem("token"),
+        data,
+        "Event was changed successfully",
+        "Failed to change Event's data"
+      );
+      setEventToEdit(null);
     };
 
     const handlePageClick = (event) => {
@@ -124,6 +142,7 @@ const EventsTab = () => {
                     <Table.HeadCell>{t('city')}</Table.HeadCell>
                     <Table.HeadCell></Table.HeadCell>
                     <Table.HeadCell></Table.HeadCell>
+                    <Table.HeadCell></Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
                     {currentEvents
@@ -145,6 +164,26 @@ const EventsTab = () => {
                                         {openIndex === index ? <VscChevronUp /> : <VscChevronDown />}
                                         <span className="dropdown-label"></span>
                                     </button>
+                                </Table.Cell>
+                                <Table.Cell>
+                                  {openEditModal && eventToEdit === event && (
+                                    <EditEvent
+                                      onAccept={handleEdit}
+                                      onClose={handleModalClose}
+                                      eventData={event}
+                                    />
+                                  )}
+                              {event.date > format(new Date(), 'yyyy-MM-dd') ?
+                               <button
+                                    className="edit-button"
+                                    onClick={() => {
+                                            setEditOpenModal(true);
+                                            setEventToEdit(event);
+                                        }
+                                    } 
+                                >
+                                    <span><HiPencilAlt /></span>
+                                </button> : " "}
                                 </Table.Cell>
                                 <Table.Cell className="table-cell-action">
                                     {event.date > format(new Date(), 'yyyy-MM-dd') ?

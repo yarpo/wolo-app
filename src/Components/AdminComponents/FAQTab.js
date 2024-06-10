@@ -1,25 +1,30 @@
-import { useTranslation } from 'react-i18next';
-import React, { useState, useEffect } from 'react';
-import { VscChevronDown, VscChevronUp } from 'react-icons/vsc';
+import { useTranslation } from "react-i18next";
+import React, { useState, useEffect } from "react";
+import { VscChevronDown, VscChevronUp } from "react-icons/vsc";
 import { HiOutlineSearch } from "react-icons/hi";
 import { TextInput, Card } from "flowbite-react";
 import '../../styles/admin-home-page.scss';
 
 import { URLS } from '../../config';
 import fetchData from '../../Utils/fetchData';
-import { HiTrash, HiOutlinePlus, HiArrowSmRight, HiArrowSmLeft } from "react-icons/hi";
+import { HiTrash, HiOutlinePlus, HiArrowSmRight, HiArrowSmLeft, HiPencilAlt } from "react-icons/hi";
 import ReactPaginate from 'react-paginate';
 
 import { Table } from "flowbite-react";
-import Confirmation from '../Popups/Confirmation';
-import AddFAQ from './addRecordModals/AddFAQ';
-import deleteRequest from '../../Utils/deleteRequest';
-import postRequestWithJson from '../../Utils/postRequestWithJson';
+import Confirmation from "../Popups/Confirmation";
+import AddFAQ from "./addRecordModals/AddFAQ";
+import deleteRequest from "../../Utils/deleteRequest";
+import postRequestWithJson from "../../Utils/postRequestWithJson";
+import EditFAQ from "./editRecordModals/EditFAQ";
+import putRequest from "../../Utils/putRequest.js";
 
 const FAQTab = () => {
+
     const { t } = useTranslation();
     const [openIndex, setOpenIndex] = useState(null);
     const [openModal, setOpenModal] = useState(false);
+    const [openEditModal, setEditOpenModal] = useState(false);
+    const [questionToEdit, setQuestionToEdit] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [userConfirmed, setUserConfirmed] = useState(false);
@@ -60,6 +65,7 @@ const FAQTab = () => {
 
     const handleModalClose = () => {
         setOpenModal(false);
+        setEditOpenModal(false);
     }
 
     const toggleDetails = (index) => {
@@ -87,6 +93,17 @@ const FAQTab = () => {
         setConfirmDelete(true);
         setQuestionToDelete(question.id);
         setQuestionTextToDelete(question[questionName]);
+    };
+
+    const handleEdit = (data) => {
+      putRequest(
+        `${URLS.EDIT_FAQ}`,
+        localStorage.getItem("token"),
+        data,
+        "FAQ was changed successfully",
+        "Failed to change FAQ"
+      );
+      setQuestionToEdit(null);
     };
 
     const handlePageClick = (event) => {
@@ -120,6 +137,7 @@ const FAQTab = () => {
                     <Table.HeadCell>{t('answer')}</Table.HeadCell>
                     <Table.HeadCell></Table.HeadCell>
                     <Table.HeadCell></Table.HeadCell>
+                    <Table.HeadCell></Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
                     {currentQuestions
@@ -138,6 +156,25 @@ const FAQTab = () => {
                                     >
                                         {openIndex === index ? <VscChevronUp /> : <VscChevronDown />}
                                         <span className="dropdown-label"></span>
+                                    </button>
+                                </Table.Cell>
+                                <Table.Cell>
+                                  {openEditModal && questionToEdit === question && (
+                                    <EditFAQ
+                                      onAccept={handleEdit}
+                                      onClose={handleModalClose}
+                                      questionData={question}
+                                    />
+                                  )}
+                                    <button
+                                        className="edit-button"
+                                        onClick={() => {
+                                                setEditOpenModal(true);
+                                               setQuestionToEdit(question);
+                                            }
+                                        } 
+                                   >
+                                    <span><HiPencilAlt /></span>
                                     </button>
                                 </Table.Cell>
                                 <Table.Cell className="table-cell-action">
@@ -210,6 +247,7 @@ const FAQTab = () => {
             />
         </div>
     );
+
 };
 
 export default FAQTab;

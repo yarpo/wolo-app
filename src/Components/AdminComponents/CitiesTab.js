@@ -5,18 +5,22 @@ import { HiOutlineSearch } from "react-icons/hi";
 import { URLS } from '../../config';
 import fetchDataWithAuth from '../../Utils/fetchDataWithAuth.js';
 import { Table, TextInput } from "flowbite-react";
-import { HiOutlinePlus, HiTrash, HiCheck, HiOutlineX, HiArrowSmRight, HiArrowSmLeft } from "react-icons/hi";
+import { HiOutlinePlus, HiTrash, HiCheck, HiOutlineX, HiArrowSmRight, HiArrowSmLeft, HiPencilAlt } from "react-icons/hi";
 import Confirmation from '../Popups/Confirmation.js';
 import ReactPaginate from 'react-paginate';
-
 import AddCity from './addRecordModals/AddCity.js';
 import postRequestWithJson from '../../Utils/postRequestWithJson';
+import EditCity from "./editRecordModals/EditCity.js";
+import putRequest from "../../Utils/putRequest.js";
 import deleteRequest from '../../Utils/deleteRequest.js';
 
 const CitiesTab = () => {
+  
     const { t } = useTranslation();
     const [cities, setCities] = useState([]);
     const [openModal, setOpenModal] = useState(false);
+    const [openEditModal, setEditOpenModal] = useState(false);
+    const [cityToEdit, setCityToEdit] = useState(null);
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [userConfirmed, setUserConfirmed] = useState(false);
     const [cityToDelete, setCityToDelete] = useState(null);
@@ -34,14 +38,17 @@ const CitiesTab = () => {
         }, localStorage.getItem('token'));
     }, []);
 
+
     useEffect(() => {
-        if (searchQuery === '') {
-            setFilteredCities(cities);
-        } else {
-            setFilteredCities(cities.filter(city =>
-                city.name.toLowerCase().includes(searchQuery.toLowerCase())
-            ));
-        }
+      if (searchQuery === "") {
+        setFilteredCities(cities);
+      } else {
+        setFilteredCities(
+          cities.filter((city) =>
+            city.name.toLowerCase().includes(searchQuery.toLowerCase())
+          )
+        );
+      }
     }, [searchQuery, cities]);
 
     const handleModalAccept = (data) => {
@@ -51,6 +58,7 @@ const CitiesTab = () => {
 
     const handleModalClose = () => {
         setOpenModal(false);
+        setEditOpenModal(false);
     };
 
     const handleDelete = useCallback(() => {
@@ -70,6 +78,17 @@ const CitiesTab = () => {
             handleDelete();
         }
     }, [userConfirmed, handleDelete]);
+
+    const handleEdit = (data) => {
+      putRequest(
+        `${URLS.EDIT_CITY}`,
+        localStorage.getItem("token"),
+        data,
+        "City was changed successfully",
+        "Failed to change city's details: One of selected districts belongs to an already existing event.\n You cannot remove it."
+      );
+      setCityToEdit(null);
+    };
 
     const handleDeleteRequest = (city) => {
         setConfirmDelete(true);
@@ -108,6 +127,7 @@ const CitiesTab = () => {
                     <Table.HeadCell>{t('districts')}</Table.HeadCell>
                     <Table.HeadCell>{t('active')}</Table.HeadCell>
                     <Table.HeadCell></Table.HeadCell>
+                    <Table.HeadCell></Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
                     {currentCities
@@ -119,6 +139,25 @@ const CitiesTab = () => {
                             <Table.Cell>{city.name}</Table.Cell>
                             <Table.Cell>{city.districts.join(', ')}</Table.Cell>
                             <Table.Cell>{!city.old ? <HiCheck /> : <HiOutlineX />}</Table.Cell>
+                            <Table.Cell>
+                              {openEditModal && cityToEdit === city && (
+                                <EditCity
+                                  onAccept={handleEdit}
+                                  onClose={handleModalClose}
+                                  cityData={city}
+                                />
+                              )}
+                              {!city.old ? <button
+                                    className="edit-button"
+                                    onClick={() => {
+                                            setEditOpenModal(true);
+                                            setCityToEdit(city);
+                                        }
+                                    } 
+                                >
+                                    <span><HiPencilAlt /></span>
+                                </button> : " "}
+                            </Table.Cell>
                             <Table.Cell className="table-cell-action">
                                 {!city.old ? <button
                                     className="delete-button"

@@ -5,18 +5,22 @@ import { HiOutlineSearch } from "react-icons/hi";
 import { URLS } from '../../config';
 import fetchDataWithAuth from '../../Utils/fetchDataWithAuth.js';
 import { Table, TextInput } from "flowbite-react";
-import { HiOutlinePlus, HiTrash, HiCheck, HiOutlineX, HiArrowSmRight, HiArrowSmLeft } from "react-icons/hi";
+import { HiOutlinePlus, HiTrash, HiCheck, HiOutlineX, HiArrowSmRight, HiArrowSmLeft, HiPencilAlt } from "react-icons/hi";
 import Confirmation from '../Popups/Confirmation.js';
 import ReactPaginate from 'react-paginate';
-
 import AddDistrict from './addRecordModals/AddDistricts';
 import postRequestWithJson from '../../Utils/postRequestWithJson';
+import EditDistrict from "./editRecordModals/EditDistrict";
+import putRequest from "../../Utils/putRequest.js";
 import deleteRequest from '../../Utils/deleteRequest.js';
 
 const DistrictsTab = () => {
+  
     const { t } = useTranslation();
     const [districts, setDistricts] = useState([]);
     const [openModal, setOpenModal] = useState(false);
+    const [openEditModal, setEditOpenModal] = useState(false);
+    const [districtToEdit, setDistrictToEdit] = useState(null);
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [userConfirmed, setUserConfirmed] = useState(false);
     const [districtToDelete, setDistrictToDelete] = useState(null);
@@ -33,7 +37,7 @@ const DistrictsTab = () => {
             setFilteredDistricts(data);
         }, localStorage.getItem('token'));
     }, []);
-
+    
     useEffect(() => {
         if (searchQuery === '') {
             setFilteredDistricts(districts);
@@ -45,6 +49,7 @@ const DistrictsTab = () => {
         }
     }, [searchQuery, districts]);
 
+
     const handleModalAccept = (data) => {
         setOpenModal(false);
         postRequestWithJson(URLS.ADD_DISTRICTS, localStorage.getItem('token'), data, t('addDistrictSuccess'), t('addDistrictFail'));
@@ -52,6 +57,18 @@ const DistrictsTab = () => {
 
     const handleModalClose = () => {
         setOpenModal(false);
+        setEditOpenModal(false);
+    };
+	
+    const handleEdit = (data) => {
+      putRequest(
+        `${URLS.EDIT_DISTRICT}`,
+        localStorage.getItem("token"),
+        data,
+        "District was changed successfully",
+        "Failed to change District's data"
+      );
+      setDistrictToEdit(null);
     };
 
     const handleDelete = useCallback(() => {
@@ -109,6 +126,7 @@ const DistrictsTab = () => {
                     <Table.HeadCell>{t('city')}</Table.HeadCell>
                     <Table.HeadCell>{t('active')}</Table.HeadCell>
                     <Table.HeadCell></Table.HeadCell>
+                    <Table.HeadCell></Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
                     {currentDistricts
@@ -120,6 +138,26 @@ const DistrictsTab = () => {
                             <Table.Cell>{district.name}</Table.Cell>
                             <Table.Cell>{district.cityName}</Table.Cell>
                             <Table.Cell>{!district.old ? <HiCheck /> : <HiOutlineX />}</Table.Cell>
+                            <Table.Cell>
+                              {openEditModal && districtToEdit === district && (
+                                <EditDistrict
+                                    onAccept={handleEdit}
+                                    onClose={handleModalClose}
+                                    districtData={district}
+                                />
+                              )}
+                               {!district.old ? <button
+                                    className="edit-button"
+                                    onClick={() => {
+                                        setEditOpenModal(true);
+                                        setDistrictToEdit(district);
+                                        }
+                                    } 
+                                >
+                                    <span><HiPencilAlt /></span>
+                                
+                                </button> : " "}
+                            </Table.Cell>
                             <Table.Cell className="table-cell-action">
                                 {!district.old ? <button
                                     className="delete-button"

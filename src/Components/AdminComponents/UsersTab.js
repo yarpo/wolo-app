@@ -1,23 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { VscChevronDown, VscChevronUp } from 'react-icons/vsc';
-import { HiOutlineSearch, HiTrash, HiOutlinePlus, HiCheck, HiOutlineX, HiArrowSmRight, HiArrowSmLeft } from "react-icons/hi";
+import { HiOutlineSearch, HiTrash, HiOutlinePlus, HiCheck, HiOutlineX, HiArrowSmRight, HiArrowSmLeft, HiPencilAlt } from "react-icons/hi";
 import ReactPaginate from 'react-paginate';
 import '../../styles/admin-home-page.scss';
 import { URLS } from '../../config';
 import { Table, TextInput, Card } from "flowbite-react";
 
-import AddUser from './addRecordModals/AddUser.js';
-import Confirmation from '../Popups/Confirmation.js';
+import AddUser from "./addRecordModals/AddUser.js";
+import EditUser from "./editRecordModals/EditUser.js";
+import Confirmation from "../Popups/Confirmation.js";
 
-import postRequestWithJson from '../../Utils/postRequestWithJson.js';
-import fetchDataWithAuth from '../../Utils/fetchDataWithAuth.js';
-import deleteRequest from '../../Utils/deleteRequest.js';
+import postRequestWithJson from "../../Utils/postRequestWithJson.js";
+import fetchDataWithAuth from "../../Utils/fetchDataWithAuth.js";
+import deleteRequest from "../../Utils/deleteRequest.js";
+import putRequest from "../../Utils/putRequest.js";
 
 const UsersTab = () => {
+
     const { t } = useTranslation();
     const [users, setUsers] = useState([]);
     const [openModal, setOpenModal] = useState(false);
+    const [openEditModal, setEditOpenModal] = useState(false);
+    const [userToEdit, setUserToEdit] = useState(null);
     const token = localStorage.getItem('token');
     const [openIndex, setOpenIndex] = useState(null);
     const [confirmDelete, setConfirmDelete] = useState(false);
@@ -25,8 +30,8 @@ const UsersTab = () => {
     const [userToDelete, setUserToDelete] = useState(null);
     const [userFullNameToDelete, setUserFullNameToDelete] = useState('');
 
-    const [filteredUsers, setFilteredUsers] = useState([]);
-    const [searchQuery, setSearchQuery] = useState('');
+	const [filteredUsers, setFilteredUsers] = useState([]);
+	const [searchQuery, setSearchQuery] = useState("");
 
     const [currentPage, setCurrentPage] = useState(0);
     const usersPerPage = 10;
@@ -38,42 +43,54 @@ const UsersTab = () => {
         }, token)
     }, [token]);
 
-    useEffect(() => {
-        if (searchQuery === '') {
-            setFilteredUsers(users);
-        } else {
-            setFilteredUsers(users.filter(user =>
-                user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                user.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                user.lastName.toLowerCase().includes(searchQuery.toLowerCase())
-            ));
-        }
-    }, [searchQuery, users]);
 
-    const handleModalAccept = (data) => {
-        setOpenModal(false);
-        console.log(data)
-        postRequestWithJson(URLS.REGISTER, localStorage.getItem('token'), data, t('addUserSuccess'), t('addUserFail'));
-    };
+	useEffect(() => {
+		if (searchQuery === "") {
+			setFilteredUsers(users);
+		} else {
+			setFilteredUsers(
+				users.filter(
+					(user) =>
+						user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+						user.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+						user.lastName.toLowerCase().includes(searchQuery.toLowerCase())
+				)
+			);
+		}
+	}, [searchQuery, users]);
 
-    const handleModalClose = () => {
-        setOpenModal(false);
-    };
+	const handleModalAccept = (data) => {
+		setOpenModal(false);
+		console.log(data);
+		postRequestWithJson(
+			URLS.REGISTER,
+			localStorage.getItem("token"),
+			data,
+			t("addUserSuccess"),
+			t("addUserFail")
+		);
+	};
 
-    const toggleDetails = (index) => {
-        setOpenIndex(openIndex === index ? null : index);
-    };
+	const handleModalClose = () => {
+		setOpenModal(false);
+		setEditOpenModal(false);
+	};
 
-    const handleUserConfirmation = async (confirmation) => {
-        setUserConfirmed(confirmation);
-    };
+	const toggleDetails = (index) => {
+		setOpenIndex(openIndex === index ? null : index);
+	};
 
-    useEffect(() => {
-        if (userConfirmed !== false) {
-            setUserConfirmed(false);
-            handleDelete()
-        }
-    }, [userConfirmed]); 
+	const handleUserConfirmation = async (confirmation) => {
+		setUserConfirmed(confirmation);
+	};
+
+	useEffect(() => {
+		if (userConfirmed !== false) {
+			setUserConfirmed(false);
+			handleDelete();
+		}
+	}, [userConfirmed]);
+
 
     const handleDelete = () => {
         deleteRequest(`${URLS.DELETE_USER}/${userToDelete}`, localStorage.getItem('token'), "Deleted", "Fail")
@@ -85,6 +102,17 @@ const UsersTab = () => {
         setConfirmDelete(true);
         setUserToDelete(user.id);
         setUserFullNameToDelete(`${user.firstName} ${user.lastName}`);
+    };
+
+    const handleEdit = (data) => {
+      putRequest(
+        `${URLS.USERS}/${userToEdit.id}/edit`,
+        localStorage.getItem("token"),
+        data,
+        "User was changed successfully",
+        "Failed to change user's credentials"
+      );
+      setUserToEdit(null);
     };
 
     const handlePageClick = (event) => {
@@ -120,6 +148,7 @@ const UsersTab = () => {
                     <Table.HeadCell>{t('moderator')}</Table.HeadCell>
                     <Table.HeadCell></Table.HeadCell>
                     <Table.HeadCell></Table.HeadCell>
+                    <Table.HeadCell></Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
                     {currentUsers
@@ -142,6 +171,25 @@ const UsersTab = () => {
                                         {openIndex === index ? <VscChevronUp /> : <VscChevronDown />}
                                         <span className="dropdown-label"></span>
                                     </button>
+                                </Table.Cell>
+                                <Table.Cell>
+                                  {openEditModal && userToEdit === user && (
+                                    <EditUser
+                                      onAccept={handleEdit}
+                                      onClose={handleModalClose}
+                                      userData={user}
+                                    />
+                                  )}
+                                  <button
+                                    className="edit-button"
+                                    onClick={() => {
+                                            setEditOpenModal(true);
+                                            setUserToEdit(user);
+                                        }
+                                    } 
+                                >
+                                    <span><HiPencilAlt /></span>
+                                </button>
                                 </Table.Cell>
                                 <Table.Cell className="table-cell-action">
                                     <button

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { VscChevronDown, VscChevronUp } from 'react-icons/vsc';
+import React, { useState, useEffect } from "react";
+import { VscChevronDown, VscChevronUp } from "react-icons/vsc";
 import { HiOutlineSearch } from "react-icons/hi";
 import { useTranslation } from 'react-i18next';
 import { Table, TextInput, Card } from "flowbite-react";
@@ -7,17 +7,23 @@ import fetchDataWithAuth from '../../Utils/fetchDataWithAuth.js';
 import postRequestWithJson from '../../Utils/postRequestWithJson.js';
 import Confirmation from '../Popups/Confirmation.js';
 import { URLS } from '../../config';
-import { HiTrash, HiOutlinePlus, HiCheck, HiOutlineX, HiArrowSmRight, HiArrowSmLeft } from "react-icons/hi";
+import { HiTrash, HiOutlinePlus, HiCheck, HiOutlineX, HiArrowSmRight, HiArrowSmLeft, HiPencilAlt } from "react-icons/hi";
 import ReactPaginate from 'react-paginate';
 
-import '../../styles/admin-home-page.scss';
-import AddOrganisation from './addRecordModals/AddOrganisation.js';
-import postRequest from '../../Utils/postRequest.js';
+import "../../styles/admin-home-page.scss";
+import AddOrganisation from "./addRecordModals/AddOrganisation.js";
+import postRequest from "../../Utils/postRequest.js";
+import postRequestEditModerator from "../../Utils/postRequestEditModerator.js";
+import putRequest from "../../Utils/putRequest.js";
+import EditOrganisation from "./editRecordModals/EditOrganisation.js";
 
 const OrganisationsTab = () => {
+
     const { t } = useTranslation();
     const [organisations, setOrganisations] = useState([]);
     const [openModal, setOpenModal] = useState(false);
+    const [openEditModal, setEditOpenModal] = useState(false);
+    const [organisationToEdit, setOrganisationToEdit] = useState(null);
     const [openIndex, setOpenIndex] = useState(null);
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [userConfirmed, setUserConfirmed] = useState(false);
@@ -25,7 +31,7 @@ const OrganisationsTab = () => {
     const [organisationNameToDelete, setOrganisationNameToDelete] = useState('');
 
     const [filteredOrganisations, setFilteredOrganisations] = useState([]);
-    const [searchQuery, setSearchQuery] = useState('');
+    const [searchQuery, setSearchQuery] = useState("");
 
     const [currentPage, setCurrentPage] = useState(0);
     const organisationsPerPage = 10;
@@ -37,51 +43,122 @@ const OrganisationsTab = () => {
         }, localStorage.getItem('token'));
     }, []);
 
-    useEffect(() => {
-        if (searchQuery === '') {
-            setFilteredOrganisations(organisations);
-        } else {
-            setFilteredOrganisations(organisations.filter(organisation =>
-                organisation.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                organisation.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                organisation.phoneNumber.toLowerCase().includes(searchQuery.toLowerCase())
-            ));
-        }
-    }, [searchQuery, organisations]);
 
-    const handleModalAccept = (data) => {
-        setOpenModal(false);
-        console.log(data)
-        postRequestWithJson(`${URLS.ADD_ORGANISATION}?language=${localStorage.getItem('i18nextLng').toLocaleUpperCase()}`, localStorage.getItem('token'), data, t('addOrganisationSuccess'), t('addOrganisationFail'));
-    };
+	useEffect(() => {
+		if (searchQuery === "") {
+			setFilteredOrganisations(organisations);
+		} else {
+			setFilteredOrganisations(
+				organisations.filter(
+					(organisation) =>
+						organisation.name
+							.toLowerCase()
+							.includes(searchQuery.toLowerCase()) ||
+						organisation.email
+							.toLowerCase()
+							.includes(searchQuery.toLowerCase()) ||
+						organisation.phoneNumber
+							.toLowerCase()
+							.includes(searchQuery.toLowerCase())
+				)
+			);
+		}
+	}, [searchQuery, organisations]);
 
-    const handleModalClose = () => {
-        setOpenModal(false);
-    };
+	const handleModalAccept = (data) => {
+		setOpenModal(false);
+		console.log(data);
+		postRequestWithJson(
+			`${URLS.ADD_ORGANISATION}?language=${localStorage
+				.getItem("i18nextLng")
+				.toLocaleUpperCase()}`,
+			localStorage.getItem("token"),
+			data,
+			t("addOrganisationSuccess"),
+			t("addOrganisationFail")
+		);
+	};
 
-    const toggleDetails = (index) => {
-        setOpenIndex(openIndex === index ? null : index);
-    };
+	const handleModalClose = () => {
+		setOpenModal(false);
+		setEditOpenModal(false);
+	};
+
+	const toggleDetails = (index) => {
+		setOpenIndex(openIndex === index ? null : index);
+	};
 
     const handleUserConfirmation = async (confirmation) => {
         setUserConfirmed(confirmation);
     };
 
-    useEffect(() => {
-        if (userConfirmed !== false) {
-            setUserConfirmed(false);
-            handleDelete()
-        }
-    }, [userConfirmed]); 
+	useEffect(() => {
+		if (userConfirmed !== false) {
+			setUserConfirmed(false);
+			handleDelete();
+		}
+	}, [userConfirmed]);
 
-    const handleDelete = () => {
-        const params = new URLSearchParams();
-        params.append('id', organisationToDelete);
-        console.log("Delete confirmed", organisationToDelete);
-        postRequest(`${URLS.DELETE_ORGANISATION}`, localStorage.getItem('token'), params, "Deleted", "Fail")
-        setOrganisationToDelete(null);
-        setConfirmDelete(false);
-    };
+	const handleDelete = () => {
+		const params = new URLSearchParams();
+		params.append("id", organisationToDelete);
+		console.log("Delete confirmed", organisationToDelete);
+		postRequest(
+			`${URLS.DELETE_ORGANISATION}`,
+			localStorage.getItem("token"),
+			params,
+			"Deleted",
+			"Fail"
+		);
+		setOrganisationToDelete(null);
+		setConfirmDelete(false);
+	};
+	const handleEdit = (data) => {
+		const paramsRevoke = new URLSearchParams( );
+		const paramsAssign = new URLSearchParams();
+		paramsAssign.append("user", data.moderatorId);
+		paramsAssign.append("organisation", data.id);
+
+		if (data.currentModeratorId) {
+			paramsRevoke.append("user", data.currentModeratorId);
+			postRequestEditModerator(
+				`${URLS.USER_REVOKE}`,
+				localStorage.getItem("token"),
+				paramsRevoke,
+				postRequestEditModerator(
+					`${URLS.USER_ASSIGN}`,
+					localStorage.getItem("token"),
+					paramsAssign,
+					putRequest(
+						`${URLS.ORGANISATIONS}/admin/${organisationToEdit.id}/edit`,
+						localStorage.getItem("token"),
+						data,
+						"Organisation was changed successfully",
+						"Failed to change Organisation's data"
+					),
+					"There was a problem with assigning moderator's role"
+				),
+				"There was a problem with revoking moderator's role"
+			);
+		}else{
+			postRequestEditModerator(
+				`${URLS.USER_ASSIGN}`,
+				localStorage.getItem("token"),
+				paramsAssign,
+				putRequest(
+					`${URLS.ORGANISATIONS}/admin/${organisationToEdit.id}/edit`,
+					localStorage.getItem("token"),
+					data,
+					"Organisation was changed successfully",
+					"Failed to change Organisation's data"
+				),
+				"There was a problem with assigning moderator's role"
+			);
+		}
+		
+		console.log(data);
+		setOrganisationToEdit(null);
+	};
 
     const handleDeleteRequest = (organisation) => {
         setConfirmDelete(true);
@@ -123,6 +200,7 @@ const OrganisationsTab = () => {
                     <Table.HeadCell>{t('active')}</Table.HeadCell>
                     <Table.HeadCell></Table.HeadCell>
                     <Table.HeadCell></Table.HeadCell>
+                    <Table.HeadCell></Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
                     {currentOrganisations
@@ -144,6 +222,25 @@ const OrganisationsTab = () => {
                                     >
                                         {openIndex === index ? <VscChevronUp /> : <VscChevronDown />}
                                         <span className="dropdown-label"></span>
+                                    </button>
+                                </Table.Cell>
+                                <Table.Cell>
+                                  {openEditModal && organisationToEdit === organisation && (
+                                    <EditOrganisation
+                                      onAccept={handleEdit}
+                                      onClose={handleModalClose}
+                                      organisationData={organisation}
+                                    />
+                                  )}
+                                    <button
+                                        className="edit-button"
+                                            onClick={() => {
+                                                setEditOpenModal(true);
+                                                setOrganisationToEdit(organisation);
+                                            }
+                                        } 
+                                    >
+                                        <span><HiPencilAlt /></span>
                                     </button>
                                 </Table.Cell>
                                 <Table.Cell className="table-cell-action">
@@ -231,6 +328,7 @@ const OrganisationsTab = () => {
             />
         </div>
     );
+
 };
 
 export default OrganisationsTab;
