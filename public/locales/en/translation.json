@@ -97,6 +97,7 @@
   "yourEvents": "Your Events",
   "yourPastEvents": "Your Past Events",
   "resetFilters": "Reset Filters",
+  "shiftOverlapWarning": "You have another shift at this time",
 
   "createEvent": "Create Event",
   "inputsAreRequired": "Inputs marked with * are required",

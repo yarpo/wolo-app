@@ -100,6 +100,7 @@
     "yourEvents": "Ваші події",
     "yourPastEvents": "Ваші минулі події",
     "resetFilters": "Скинути фільтри",
+    "shiftOverlapWarning": "Ви маєте іншу зміну в цей час",
 
     "createEvent": "Створити подію",
     "inputsAreRequired": "Поля, позначені *, є обов’язковими до заповнення",

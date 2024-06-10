@@ -98,6 +98,7 @@
   "yourEvents": "Twoje Wydarzenia",
   "yourPastEvents": "Twoje Przeszłe Wydarzenia",
   "resetFilters": "Resetuj filtry",
+  "shiftOverlapWarning": "Masz już inny dyżur w tym czasie",
 
   "createEvent": "Utwórz Wydarzenie",
   "inputsAreRequired": "Pola zaznaczone * są wymagane",
