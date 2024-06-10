@@ -1,7 +1,5 @@
-"use client";
-
-import { useTranslation } from 'react-i18next';
 import React, { useState, useEffect, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { URLS } from '../../../config.js';
 import { Link } from 'react-router-dom';
@@ -27,37 +25,50 @@ const ShiftCard = ({ shift, city, isInPast }) => {
     const isAdmin = roles && roles.includes('ADMIN');
     const isFull = shift.registeredUsers >= shift.capacity;
     const [userConfirmed, setUserConfirmed] = useState(false);
-
     const [confirmPhone, setConfirmPhone] = useState(false);
     const [confirmLeave, setConfirmLeave] = useState(false);
+    const [overlappingShift, setOverlappingShift] = useState(false);
 
     const isSignedIn = userShifts.length > 0 ? userShifts.map(shift => shift.shiftId).includes(shiftId) : false;
     const isSignedInReserve = userShiftsReserve.length > 0 ? userShiftsReserve.map(shift => shift.shiftId).includes(shiftId) : false;
 
     useEffect(() => {
         fetchUser().then(data => {
-          if (data) {
-            setRoles(data.roles);
-            setId(data.id);
+            if (data) {
+                setRoles(data.roles);
+                setId(data.id);
 
-            if(id){
-                fetchDataWithAuth(`${URLS.USER_EVENTS_CURRENT}`, setUserShifts, localStorage.getItem('token'));
-                fetchDataWithAuth(`${URLS.USER_EVENTS_RESERVE}`, setUserShiftsReserve, localStorage.getItem('token'));
+                if (id) {
+                    fetchDataWithAuth(`${URLS.USER_EVENTS_CURRENT}`, setUserShifts, localStorage.getItem('token'));
+                    fetchDataWithAuth(`${URLS.USER_EVENTS_RESERVE}`, setUserShiftsReserve, localStorage.getItem('token'));
+                }
             }
-          }
-        })
-      }, [id]);
+        });
+    }, [id]);
+
+    useEffect(() => {
+        if (userShifts.length > 0) {
+            const overlapping = userShifts.some(userShift => {
+                const userShiftDate = new Date(userShift.date);
+                const shiftDate = new Date(shift.date);
+                return userShiftDate.toDateString() === shiftDate.toDateString() && (
+                    (userShift.startTime < shift.endTime && userShift.startTime >= shift.startTime) ||
+                    (userShift.endTime > shift.startTime && userShift.endTime <= shift.endTime)
+                );
+            });
+            setOverlappingShift(overlapping);
+        }
+    }, [userShifts, shift]);
 
     const handleUserConfirmation = async (confirmation) => {
         setUserConfirmed(confirmation);
     };
-    
+
     const handleEventInteract = useCallback(() => {
         if (userConfirmed) {  
             const params = new URLSearchParams();
             params.append('shift', shift.shiftId);
 
-    
             try {
                 if (!isSignedIn && !isSignedInReserve) {
                     params.append('reserve', isFull);
@@ -66,11 +77,11 @@ const ShiftCard = ({ shift, city, isInPast }) => {
                     postRequest(URLS.REFUSE, token, params, t('leaveShiftSuccess'), t('leaveShiftError'));
                 }
             } catch (error) {
-                toast.error( t('unknownError') );
+                toast.error(t('unknownError'));
             }
         }
     }, [token, shift, userConfirmed, t, isFull, isSignedIn]);
-    
+
     useEffect(() => {
         if (userConfirmed !== false) {
             handleEventInteract();
@@ -94,7 +105,12 @@ const ShiftCard = ({ shift, city, isInPast }) => {
             </span>
             <div className='shift_card_buttons'>
                 {!isInPast && <form onSubmit={(e) => e.preventDefault()}>
-                    {canSignIn && !isFull && !isSignedIn && <button type="button"  onClick={() => setConfirmPhone(true)} id="sign-in" > {t('joinShift')} </button>}
+                    {overlappingShift && (
+                        <p className='card-extra-requirements'>
+                            <HiOutlineExclamation className='card-extra-requirements'/> {t('shiftOverlapWarning')}
+                        </p>
+                    )}
+                    {canSignIn && !isFull && !isSignedIn && !overlappingShift && <button type="button"  onClick={() => setConfirmPhone(true)} id="sign-in" > {t('joinShift')} </button>}
                     <Confirmation id="sign-in"
                         buttonName={t('joinShift')}
                             title={t('phoneConfirmation')}
@@ -102,11 +118,11 @@ const ShiftCard = ({ shift, city, isInPast }) => {
                             deny={t('declineConfirmation')}
                             styleId="sign-in"
                             onAgree={() => {
-                                handleUserConfirmation(true)
-                                handleEventInteract()
-                                setConfirmPhone(false)}}
-                            onDeny={() => 
-                                setConfirmPhone(false)}
+                                handleUserConfirmation(true);
+                                handleEventInteract();
+                                setConfirmPhone(false);
+                            }}
+                            onDeny={() => setConfirmPhone(false)}
                             openModal={confirmPhone}
                             setOpenModal={setConfirmPhone}
                         />
@@ -118,11 +134,11 @@ const ShiftCard = ({ shift, city, isInPast }) => {
                             deny={t('cancelLeave')} 
                             styleId="sign-out"
                             onAgree={() => {
-                                handleUserConfirmation(true)
-                                handleEventInteract()
-                                setConfirmLeave(false)}}
-                            onDeny={() => 
-                                setConfirmLeave(false)}
+                                handleUserConfirmation(true);
+                                handleEventInteract();
+                                setConfirmLeave(false);
+                            }}
+                            onDeny={() => setConfirmLeave(false)}
                             openModal={confirmLeave}
                             setOpenModal={setConfirmLeave}
                         />
