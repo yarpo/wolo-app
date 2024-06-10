@@ -104,7 +104,7 @@ const Details = () => {
                     <div className='details_shift_card_container'>
                         <div className='details_shift_card_wrapper'>
                         {eventData.shifts.sort((a, b) => new Date(a.shiftId) - new Date(b.shiftId)).map(shift => (
-                            <ShiftCard key={shift.id} shift={shift} city={city} isInPast={isInPast} className='details_shift_card_item' />
+                            <ShiftCard key={shift.shiftId} shift={shift} city={city} isInPast={isInPast} className='details_shift_card_item' />
                         ))}
                     </div>
                 </div>
