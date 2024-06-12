@@ -21,6 +21,22 @@
             background-color: $color-4-red-hover;
         }
     }
+    #organiser_event_list_button{
+        color: #2b6cb0;
+        background-color: white;
+        border: 3px solid #3769cb;
+        width: 120px;
+        font-weight: 500;
+        border-radius: .375rem;
+        font-size: .875rem;
+        padding: .625rem 1.25rem;
+        text-align: center;
+        margin-right: .5rem;
+        margin-bottom: .5rem;
+        &:hover {
+            background-color: #e7e7e7;
+        }
+    }
 
     .column:first-child {
         width: 35vw;
@@ -30,6 +46,12 @@
         width: 18vw;
         margin: 1px;
         padding: 10px;
+    }
+    .column_buttons{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 10px;
     }
 
     .column:nth-child(n+4){

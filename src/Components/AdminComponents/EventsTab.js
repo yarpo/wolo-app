@@ -103,7 +103,7 @@ const EventsTab = () => {
     };
     const handleEdit = (data) => {
       putRequest(
-        `${URLS.EDIT_EVENT}/${eventToEdit.id}`,
+        `${URLS.EDIT_EVENT_ADMIN}/${eventToEdit.id}`,
         localStorage.getItem("token"),
         data,
         "Event was changed successfully",
