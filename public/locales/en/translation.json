@@ -314,5 +314,9 @@
       "streetRequired": "Street is required",
       "homeNumRequired": "Home number is required",
       "districtRequired": "District is required"
-    }
+    },
+
+  "confirm": "Confirm",
+  "checkYourEmail": "To complete your registration check your mail box.",
+  "registrationInProgress": "Your registration is almost done"
 }

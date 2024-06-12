@@ -27,6 +27,7 @@ import ForVolunteers from './Views/ForVolunteers/ForVolunteers.js';
 import ForgotPassword from './Views/ForgotPassword/ForgotPassword.js';
 import MailForgotPassword from './Views/ForgotPassword/MailForgotPassword.js';
 import CalendarView from './Views/Calendar/Calendar.js';
+import CheckEmail from './Views/RegisterInfoViews/CheckEmail.js';
 
 function App() {
   const [role, setRole] = useState(null);
@@ -61,6 +62,7 @@ function App() {
             <Route path="/reset-password" element={<ForgotPassword />} />
             <Route path="/forgot-password" element={<MailForgotPassword />} />
             <Route path="/calendar" element={<CalendarView />} />
+            <Route path="/registration-in-progress" element={<CheckEmail />} />
             {role && role.includes('MODERATOR') && <Route path="/reports" element={<ReportPage />} />}
             {role && role.includes('MODERATOR') && <Route path="/organisation-home-page" element={<OrganiserHomePage />} />}
             {role && role.includes('MODERATOR') && <Route path="/organisation-settings" element={<OrganiserSettings />} />}

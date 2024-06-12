@@ -41,7 +41,6 @@ const URLS = {
   DELETE_DISTRICT: `${BASE_URL}/districts/delete`,
   DELETE_CITY: `${BASE_URL}/cities/delete`,
 
-
   EDIT_USER: `${BASE_URL}/users/edit`,
   EDIT_CITY: `${BASE_URL}/cities/edit`,
   EDIT_DISTRICT: `${BASE_URL}/districts/edit`,
@@ -73,7 +72,9 @@ const URLS = {
 
   FAQ: `${BASE_URL}/faq`,
   DELETE_FAQ: `${BASE_URL}/faq/delete`,
-  ADD_FAQ: `${BASE_URL}/faq/add`
+  ADD_FAQ: `${BASE_URL}/faq/add`,
+
+  REGISTRATION_IN_PROGRESS: `/registration-in-progress`
 };
 
 module.exports = { URLS, BASE_URL };
