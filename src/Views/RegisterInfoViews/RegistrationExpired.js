@@ -21,8 +21,8 @@ const RegistartionExpired = () => {
                         {t('thisLinkHasExpired')}
                     </p>
                     <div className='registration-buttons'>
-                        <Link to="/login" id="back">
-                            <button className='confirm_button'>{t('login')}</button>
+                        <Link to="/signup" id="back">
+                            <button className='confirm_button'>{t('registerNow')}</button>
                         </Link>
                     </div>
                 </Card>
