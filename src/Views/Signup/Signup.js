@@ -5,7 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import '../../styles/signup.scss';
 import { URLS } from '../../config.js';
 import fetchUser from '../../Utils/fetchUser.js';
-import postRequestWithJson from '../../Utils/postRequestWithJson.js';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -40,9 +41,30 @@ const Signup = () => {
     termsAndConditions: false,
   };
 
-const handleRegister = async (values) => {
-    postRequestWithJson(URLS.REGISTER, '', values, t('registerSuccess'), t('registerError'), URLS.LOGIN);
-};
+// const handleRegister = async (values) => {
+//     postRequestWithJson(URLS.REGISTER, '', values, t('registerSuccess'), t('registerError'), URLS.LOGIN);
+    
+// };
+
+  const handleRegister = async (values) => {
+    try {
+      const response = await fetch(URLS.REGISTER, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      });
+
+      if (response.ok) {
+        navigate(URLS.REGISTRATION_IN_PROGRESS);
+      } else {
+        toast.error(t('registerError'));
+      }
+    } catch (error) {
+      toast.error(t('registerError'));
+    }
+  };
 
 console.log(handleRegister);
 

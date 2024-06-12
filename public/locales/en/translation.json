@@ -314,5 +314,17 @@
       "streetRequired": "Street is required",
       "homeNumRequired": "Home number is required",
       "districtRequired": "District is required"
-    }
+    },
+
+  "confirm": "Confirm",
+  "checkYourEmail": "To complete your registration, please check your email inbox.",
+  "registrationInProgress": "Your registration is nearly complete.",
+  "registrationCompleted": "Your registration is complete.",
+  "youCanNowLogIn": "You can now log in.",
+  "login": "Log in",
+  "registrationExpired": "Registration has expired.",
+  "thisLinkHasExpired": "This link has expired. Click here to resend an email.",
+  "resendMail": "Resend email",
+  "confirmRegistration": "To confirm your registration, please click this button.",
+  "completeRegistartion": "Complete registration"
 }

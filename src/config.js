@@ -41,7 +41,6 @@ const URLS = {
   DELETE_DISTRICT: `${BASE_URL}/districts/delete`,
   DELETE_CITY: `${BASE_URL}/cities/delete`,
 
-
   EDIT_USER: `${BASE_URL}/users/edit`,
   EDIT_CITY: `${BASE_URL}/cities/edit`,
   EDIT_DISTRICT: `${BASE_URL}/districts/edit`,
@@ -73,7 +72,13 @@ const URLS = {
 
   FAQ: `${BASE_URL}/faq`,
   DELETE_FAQ: `${BASE_URL}/faq/delete`,
-  ADD_FAQ: `${BASE_URL}/faq/add`
+  ADD_FAQ: `${BASE_URL}/faq/add`,
+
+  REGISTRATION_IN_PROGRESS: `/registration-in-progress`,
+  REGISTER_SUCCES: `/registration-success`,
+  REGISTER_FAIL: `/registration-expired`,
+  REGISTER_CONFIRM: `${BASE_URL}/auth/verify-account`,
+  RESEND_MAIL: `${BASE_URL}/auth/regenerate-otp`
 };
 
 module.exports = { URLS, BASE_URL };
