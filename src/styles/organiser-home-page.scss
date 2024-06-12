@@ -20,6 +20,25 @@
         padding-bottom: 20px;
     }
 
+    #containerHero_hero,
+    #subtext_hero {
+        flex-grow: 1;
+        text-align: center;
+        background-color: $color-1-blue-transparent;
+    }
+    
+    #containerHero_hero h1 {
+        color: white;
+    }
+
+    #subtext_hero h2 {
+        color: white;
+    }
+
+    #subtext_hero h2 a:hover {
+        color: $color-2-orange;
+    }
+
     #button_div {
         padding-top: 10px;
         margin-top: -50px;
