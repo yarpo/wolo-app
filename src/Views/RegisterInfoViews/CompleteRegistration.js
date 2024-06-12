@@ -34,7 +34,8 @@ const CompleteRegistration = () => {
     
             if (response.ok) {
                 const responseBody = await response.text();
-                if (responseBody.toUpperCase === 'OK') {
+                console.log(responseBody)
+                if (responseBody === 'OK') {
                     navigate(URLS.REGISTER_SUCCES);
                 } else {
                     navigate(`${URLS.REGISTER_FAIL}?email=${email}`);
