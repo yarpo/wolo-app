@@ -114,8 +114,8 @@ const Filters = ({ setFilteredEvents }) => {
       {isOpen && (
         <>
         <button className="filters-reset-button" onClick={handleResetFilters}><HiX /> {t('resetAllFilters')}</button>
-          <div id="options">
-            <div id='selectInput'>
+          <div id="options" >
+            <div className='datePickerDiv'>
               <DatePicker
                 id="datePicker"
                 selected={filters.selectedDate}
