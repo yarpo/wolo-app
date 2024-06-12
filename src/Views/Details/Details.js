@@ -62,8 +62,8 @@ const Details = () => {
     }));
 
     const isModerator = roles.includes('MODERATOR');
-    const isAdmin = roles.includes('ADMIN');
-    const isAuthorised = (eventData.organisationId === userOrganisation && isModerator) || isAdmin;
+    const isAuthorised = (eventData.organisationId === userOrganisation && isModerator);
+    const thereAreEvents = (organiserEvents.filter(event => new Date(event.date) > new Date()).length > 0 ? 1 : 0);
 
     return (
         <div className="details_container">
@@ -101,18 +101,16 @@ const Details = () => {
             )}
                 <div id='column'>
                     <p className="details_shifts_text"><strong>{t('shifts')}:</strong></p>
-                    <div className='details_shift_card_container'>
-                        <div className='details_shift_card_wrapper'>
+                    <div className='details_shift_card_wrapper'>
                         {eventData.shifts.sort((a, b) => new Date(a.shiftId) - new Date(b.shiftId)).map(shift => (
-                            <ShiftCard key={shift.shiftId} shift={shift} city={city} isInPast={isInPast} className='details_shift_card_item' />
+                            <ShiftCard key={shift.id} shift={shift} city={city} isInPast={isInPast} />
                         ))}
                     </div>
-                </div>
                 <MapComponent addresses={addresses} />
             </div>
-            {!isAuthorised && (
+            {!isAuthorised &&  (
                 <div id="details_more_events">
-                    <h2>{t('moreEventsFromThisOrganizer')}</h2>
+                    { thereAreEvents ? <h2>{t('moreEventsFromThisOrganizer')}</h2> : "" }
                     <div id="details_more_events_container">
                         {organiserEvents.filter(event => new Date(event.date) > new Date()).map(event => (
                             <EventCard key={event.id} event={event} id='details_more_events_item' />

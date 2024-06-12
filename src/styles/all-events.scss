@@ -1,7 +1,7 @@
 @import './common.scss';
 
 #container {
-  padding-top: 65px;
+  padding-top: 50px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -33,67 +33,63 @@
 }
 #selectInput {
   float: left;
-  padding: 10px;
   height: 50px;
-  width: 23%;
+  width: 31%;
   min-width: 175px;
-  padding: 20px;
   background-color: $color-backgroud;
   cursor: pointer;
   padding: 5px 5px 5px 15px;
   border-radius: 5px;
   border: 0px;
   font-size: 16px;
+}
+.datePickerDiv{
+  float: left;
+  min-width: 175px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 0px;
+  font-size: 16px;
+  width: 31%;
 }
 #datePicker {
   float: left;
-  padding: 10px;
   height: 50px;
-  width: 23%;
-  min-width: 175px;
-  padding: 20px;
   background-color: $color-backgroud;
   cursor: pointer;
-  padding: 5px 5px 5px 15px;
   border-radius: 5px;
   border: 0px;
   font-size: 16px;
+  padding-right: 30px ;
   width: 100%;
 }
+
 .react-datepicker-wrapper {
+  box-sizing: border-box;
   min-width: 175px;
-  width: 23%;
+  width: 100%;
 }
-.checkbox-round {
-  width: 20px;
-  height: 20px;
-  background-color: $color-backgroud;
-  border-radius: 50%;
-  aspect-ratio: 1;
-  vertical-align: middle;
-  border: 1px solid #ddd;
-  appearance: none;
-  -webkit-appearance: none;
-  outline: none;
-  cursor: pointer;
-  &:checked {
-    background-color: $color-2-orange;
-    border: 3px solid white;
-  }
-}
+
 .chosen-tags-container {
   display: flex;
   flex-wrap: wrap;
   padding-top: 20px;
 }
+
 .checkbox-container {
   display: flex;
   flex-wrap: wrap;
-  padding-top: 20px;
+  padding-top: 7px;
   input {
     margin: 0.5px 0 0 5px;
   }
+
+  .checkbox-filters{
+    margin-top: 5px;
+    margin-right: 20px;
+  }
 }
+
 .chosen-tags {
   display: flex;
   width: auto;
@@ -103,52 +99,32 @@
   padding: 5px 5px 5px 15px;
   border-radius: 20px;
 }
+
 .select-boolean {
   display: flex;
   width: auto;
-  background-color: $color-3-yellow;  
   cursor: pointer;
   margin: 5px;
   padding: 5px 5px 5px 15px;
-  border-radius: 20px;
-  background-color: $color-backgroud;
   height: fit-content;
   padding-top: 9px;
 }
+
 .filters-reset-button{
   height: 50px;
-  width: 23%;
-  min-width: 175px;
-  background-color:  rgba(243, 80, 80, 0.836);
+  width: 200px;
   cursor: pointer;
-  border-radius: 5px;
-  border: 0px;
-  font-size: 16px;
-  &:hover {
-    background-color: darken(rgba(243, 80, 80, 0.836), 10%);
-  }
+  float: right;
+  margin-right: 50px;
+  margin-bottom: 10px;
 }
+
 #toggle-filters {
   color: $color-1-blue;
   cursor: pointer;
   background-color: transparent;
   border: none;
-  margin-bottom: 15px;
-}
-
-#filters-reset-filters-button{
-  float: right;
-  border: none;
-  background-color: $color-4-red;
-  border-radius: 5px;
-  padding: 5px 20px;
-  margin: 20px 0px;
-  height: fit-content;
-  cursor: pointer;
-}
-
-#filters-reset-filters-button:hover {
-  background-color: $color-4-red-hover;
+  margin-bottom: 35px;
 }
 
 .icon {

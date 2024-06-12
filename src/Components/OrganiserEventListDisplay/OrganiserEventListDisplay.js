@@ -55,7 +55,7 @@ const OrganiserEventListDisplay = ({ event, isArchived }) => {
                 <strong>{t('edit')}</strong>
             </div>}
             {!isArchived && 
-                <button className="column" id="organiser_event_list_delete_button" onClick={() => setConfirmDelete(true)}><strong>{t('delete')}</strong></button>
+                <button className="column" id="organiser_event_list_delete_button" onClick={() => setConfirmDelete(true)}>{t('delete')}</button>
             }
             <Confirmation id="sign-off"
                     title={t('cancelEvent') + event[eventName] + "?"}

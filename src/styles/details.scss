@@ -111,7 +111,7 @@
 
   .shift_card {
     border-radius: 7px;
-    min-width: 300px;
+    width: 300px;
     min-height: 300px;
     margin: 15px;
     overflow-y: auto;
@@ -121,19 +121,10 @@
     }
   }
 
-  .details_shift_card_container{
-    width: 80vw;
-
-    .details_shift_card_wrapper {
-      display: flex;
-      flex-direction: row;
-      overflow-x: auto;
-    }
-
-    .details_shift_card_item {
-      flex: 1;
-      min-width: 200px;
-    }
+  .details_shift_card_wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
   }
 
   #details_more_events {
@@ -142,7 +133,7 @@
 
     #details_more_events_container {
       display: flex;
-      overflow-x: scroll;
+      overflow-x: auto;
 
       #details_more_events_item {
         flex: 1;
@@ -166,6 +157,8 @@
   #sign-out {
     @extend #sign-in;
     background-color: $color-4-red;
+    color: white;
+    font-weight: bold;
   }
 }
 

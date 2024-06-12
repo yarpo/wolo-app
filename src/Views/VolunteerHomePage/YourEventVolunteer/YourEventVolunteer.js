@@ -75,8 +75,8 @@ const YourEventVolunteer = ({shiftId, eventId, userId, shift, isArchived, isRese
                 {shift.street} {shift.homeNum}, {shift.city}
             </div>
 
-            {!isArchived && !isReserve && <Button type="button" size="xl" onClick={() => setConfirmLeave(true)} id="your_event_volunteer_event_sign_off_button"> {t('leaveShift')} </Button>}         
-            {!isArchived && isReserve && <Button type="button" size="xl" onClick={() => setConfirmLeave(true)} id="your_event_volunteer_event_sign_off_button"> {t('leaveShift')} </Button>}         
+            {!isArchived && !isReserve && <Button type="button" size="xl" style={{color: 'white'}} onClick={() => setConfirmLeave(true)} id="your_event_volunteer_event_sign_off_button"> <strong style={{color:'white'}}>{t('leaveShift')}</strong> </Button>}         
+            {!isArchived && isReserve && <Button type="button" size="xl" style={{color: 'white'}} onClick={() => setConfirmLeave(true)} id="your_event_volunteer_event_sign_off_button"> <strong style={{color:'white'}}>{t('leaveShift')} </strong></Button>}         
                 <Confirmation id="sign-in"
                     buttonName={t('logIn')}
                         title={t('leaveShiftConfirmation')}

@@ -7,8 +7,8 @@ $color-1-blue-hover: #2753a9;
 $color-2-orange: #fbcc71;
 $color-2-orange-hover: #c8a45b;
 $color-3-yellow: #fbf79c;
-$color-4-red: #e96262;
-$color-4-red-hover: #c94646;
+$color-4-red: #c5070e;
+$color-4-red-hover: #991116;
 
 // fonts
 $font-family-default: 'Open Sans', sans-serif;
@@ -38,6 +38,7 @@ a {
 
 .confirm_button {
   color: white;
+  font-weight: bold;
   background-color: #3769cb;
   font-weight: 500;
   border-radius: .375rem;

@@ -5,6 +5,7 @@ import DatePicker from 'react-datepicker';
 import { useFiltersContext } from './FiltersContext';
 import fetchData from '../../Utils/fetchData.js';
 import { URLS } from '../../config.js';
+import { HiX } from "react-icons/hi";
 
 const Filters = ({ setFilteredEvents }) => {
   const { t } = useTranslation();
@@ -112,14 +113,17 @@ const Filters = ({ setFilteredEvents }) => {
     <div id="filters">
       {isOpen && (
         <>
-          <div id="options">
-            <DatePicker
-              id="datePicker"
-              selected={filters.selectedDate}
-              onChange={handleDateChange}
-              dateFormat="dd/MM/yyyy"
-              placeholderText={t('date')}
-            />
+        <button className="filters-reset-button" onClick={handleResetFilters}><HiX /> {t('resetAllFilters')}</button>
+          <div id="options" >
+            <div className='datePickerDiv'>
+              <DatePicker
+                id="datePicker"
+                selected={filters.selectedDate}
+                onChange={handleDateChange}
+                dateFormat="dd/MM/yyyy"
+                placeholderText={t('date')}
+              />
+            </div>
             {[
               { label: t('location'), options: cities.map((city) => city.name) },
               { label: t('district'), options: districts.map((district) => district.name) },
@@ -142,7 +146,6 @@ const Filters = ({ setFilteredEvents }) => {
                 ))}
               </select>
             ))}
-            <button className="filters-reset-button" onClick={handleResetFilters}>{t('resetAllFilters')}</button>
             <br />
           </div>
           <div className="checkbox-container">
@@ -150,7 +153,7 @@ const Filters = ({ setFilteredEvents }) => {
               {t('noVolunteerVerificationRequired')}
               <input
                 type="checkbox"
-                className="checkbox-round"
+                className="checkbox-filters"
                 name="requiresVerification"
                 checked={filters.requiresVerification}
                 onChange={handleCheckboxChange}
@@ -161,7 +164,7 @@ const Filters = ({ setFilteredEvents }) => {
               {t('noPeselVerificationRequired')}
               <input
                 type="checkbox"
-                className="checkbox-round"
+                className="checkbox-filters"
                 name="peselVerificationRequired"
                 checked={filters.peselVerificationRequired}
                 onChange={handleCheckboxChange}
@@ -172,7 +175,7 @@ const Filters = ({ setFilteredEvents }) => {
               {t('hideFullyBookedEvents')}
               <input
                 type="checkbox"
-                className="checkbox-round"
+                className="checkbox-filters"
                 id="booked"
                 name="hideFullyBookedEvents"
                 checked={filters.hideFullyBookedEvents}
@@ -190,7 +193,6 @@ const Filters = ({ setFilteredEvents }) => {
           </ul>
         </>
       )}
-      <br />
       <button id="toggle-filters" onClick={handleToggle} onKeyDown={handleKeyDown}>
         {isOpen ? (
           <>
