@@ -4,28 +4,28 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Card } from "flowbite-react";
 import '../../styles/registration.scss';
+import { HiCheck } from "react-icons/hi";
 import { useLocation, useNavigate } from 'react-router-dom';
-import { HiX } from "react-icons/hi";
-import { toast } from 'react-toastify';
 import { URLS } from '../../config';
-import 'react-toastify/dist/ReactToastify.css';
 
 
-const RegistartionExpired = () => {
+const CompleteRegistration = () => {
     const { t } = useTranslation();
     const navigate = useNavigate();
 
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const email = searchParams.get('email');
+    const otp = searchParams.get('otp');
 
-    const resendMail = async () => {
+    const handleRegisterComplete = async () => {
         const params = new URLSearchParams({
             email: email, 
-        });
+            otp: otp
+          });
     
         try {
-            const response = await fetch(`${URLS.RESEND_MAIL}?${params.toString()}`, {
+            const response = await fetch(`${URLS.REGISTER_CONFIRM}?${params.toString()}`, {
                 method: 'PUT',
                 headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -35,13 +35,14 @@ const RegistartionExpired = () => {
             if (response.ok) {
                 const responseBody = await response.text();
                 if (responseBody.toUpperCase === 'OK') {
-                    navigate(URLS.REGISTRATION_IN_PROGRESS);
+                    navigate(URLS.REGISTER_SUCCES);
                 } else {
-                    toast.error(t('somethingWentWrong'));
+                    navigate(`${URLS.REGISTER_FAIL}?email=${email}`);
                 }
             }
         } catch (error) {
-            toast.error(t('somethingWentWrong'));
+                console.error('Error:', error);
+                navigate('/*');
         }
     }
 
@@ -49,13 +50,13 @@ const RegistartionExpired = () => {
         <div className='registration'>
             <div className="registration-container">
                 <Card className='registration-card'>
-                    <HiX className='registration-svg' />
-                    <h2>{t('registrationExpired')} </h2>
+                    <HiCheck className='registration-svg' />
+                    <h2>{t('registrationInProgress')} </h2>
                     <p className='registration-tip'> 
-                        {t('thisLinkHasExpired')}
+                        {t('confirmRegistration')}
                     </p>
                     <div className='registration-buttons'>
-                        <button className='confirm_button' onClick={resendMail}>{t('resendMail')}</button>
+                        <button className='confirm_button' onClick={handleRegisterComplete}>{t('completeRegistartion')}</button>
                     </div>
                 </Card>
             </div>
@@ -63,4 +64,4 @@ const RegistartionExpired = () => {
     );
 };
 
-export default RegistartionExpired;
+export default CompleteRegistration;

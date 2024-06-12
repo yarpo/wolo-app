@@ -74,7 +74,11 @@ const URLS = {
   DELETE_FAQ: `${BASE_URL}/faq/delete`,
   ADD_FAQ: `${BASE_URL}/faq/add`,
 
-  REGISTRATION_IN_PROGRESS: `/registration-in-progress`
+  REGISTRATION_IN_PROGRESS: `/registration-in-progress`,
+  REGISTER_SUCCES: `/registration-success`,
+  REGISTER_FAIL: `/registration-expired`,
+  REGISTER_CONFIRM: `${BASE_URL}/auth/verify-account`,
+  RESEND_MAIL: `${BASE_URL}/regenerate-otp`
 };
 
 module.exports = { URLS, BASE_URL };
