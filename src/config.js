@@ -78,7 +78,7 @@ const URLS = {
   REGISTER_SUCCES: `/registration-success`,
   REGISTER_FAIL: `/registration-expired`,
   REGISTER_CONFIRM: `${BASE_URL}/auth/verify-account`,
-  RESEND_MAIL: `${BASE_URL}/regenerate-otp`
+  RESEND_MAIL: `${BASE_URL}/auth/regenerate-otp`
 };
 
 module.exports = { URLS, BASE_URL };
