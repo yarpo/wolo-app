@@ -1,6 +1,6 @@
 "use client";
 import { useEffect } from 'react';
-
+import { useTranslation } from 'react-i18next';
 import { Label, Modal, TextInput, Textarea, Select  } from "flowbite-react";
 import { useRef, useState } from "react";
 import { HiMail, HiPhone, HiHome, HiGlobeAlt } from "react-icons/hi";
@@ -11,10 +11,13 @@ import fetchData from "../../../Utils/fetchData";
 import fetchDataWithAuth from '../../../Utils/fetchDataWithAuth';
 
 function AddOrganisation({ onAccept, onClose }) {
+    const { t } = useTranslation();
     const [openModal, setOpenModal] = useState(true);
     const [districts, setDistricts] = useState([]);
     const [cities, setCities] = useState([]);
     const [users, setUsers] = useState([]);
+    const [filteredDistricts, setFilteredDistricts] = useState([]);
+    const [selectedCity, setSelectedCity] = useState(null);
 
     const nameInputRef = useRef(null);
     const descriptionInputRef = useRef(null);
@@ -34,6 +37,21 @@ function AddOrganisation({ onAccept, onClose }) {
         fetchDataWithAuth(URLS.CITIES, setCities, token)
         fetchDataWithAuth(URLS.USERS_WITH_NO_ROLES, setUsers, token)
     }, []);
+
+    const handleCityChange = (event) => {
+        const newSelectedCity = Number(event.target.value);
+        setSelectedCity(newSelectedCity);
+      };
+
+    useEffect(() => {
+        const selectedCityObject = cities.find(city => city.id === selectedCity);
+        if (selectedCityObject) {
+          const newFilteredDistricts = districts.filter(district => district.cityName === selectedCityObject.name);
+          setFilteredDistricts(newFilteredDistricts);
+        } else {
+          setFilteredDistricts([]);
+        }
+      }, [selectedCity, cities, districts]);
 
     const handleClose = () => {
         setOpenModal(false);
@@ -103,7 +121,10 @@ function AddOrganisation({ onAccept, onClose }) {
                     <div className="mb-2 block">
                         <Label htmlFor="city" value="City" />
                     </div>
-                    <Select id="city" ref={cityInputRef} required>
+                    <Select id="city" ref={cityInputRef} onChange={(e) => {
+                      handleCityChange(e);
+                    }} required>
+                        <option value="">{t('selectCity')}</option>
                         {cities.map((city) => (
                             <option key={city.id} value={city.id}>
                                 {city.name}
@@ -116,10 +137,8 @@ function AddOrganisation({ onAccept, onClose }) {
                         <Label htmlFor="distrct" value="District" />
                     </div>
                     <Select id="district" ref={districtInputRef} required>
-                        {districts.map((district) => (
-                            <option key={district.id} value={district.id}>
-                                {district.name}
-                            </option>
+                        {filteredDistricts.map(district => (
+                            <option key={district.id} value={district.id}>{district.name}</option>
                         ))}
                     </Select>
                 </div>
