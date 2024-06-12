@@ -318,5 +318,8 @@
 
   "confirm": "Confirm",
   "checkYourEmail": "To complete your registration check your mail box.",
-  "registrationInProgress": "Your registration is almost done"
+  "registrationInProgress": "Your registration is almost done",
+  "registrationCompleted": "Your registartion is completed",
+  "youCanNowLogIn": "You can now log in",
+  "login": "Log in"
 }
