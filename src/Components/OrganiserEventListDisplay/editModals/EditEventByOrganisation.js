@@ -13,10 +13,11 @@ import { useState, useEffect } from "react";
 import { URLS } from "../../../config";
 import { HiGlobeAlt } from "react-icons/hi";
 import fetchData from "../../../Utils/fetchData";
-import EditShift from "./EditShift";
-import fetchDataWithAuth from "../../../Utils/fetchDataWithAuth";
+import EditShiftByOrganisation from "./EditShiftByOrganisation";
+import fetchUser from '../../../Utils/fetchUser';
 
-function EditEvent({ onAccept, onClose, eventData }) {
+function EditEventByOrganisation({ onAccept, onClose, eventData }) {
+	const [organisationId, setOrganisationId] = useState(null);
 	const [event, setEvent] = useState([]);
 	const [openModal, setOpenModal] = useState(true);
 
@@ -45,10 +46,6 @@ function EditEvent({ onAccept, onClose, eventData }) {
 	const [cities, setCities] = useState([]);
 	const [cityId, setCityId] = useState(null);
 
-
-	const [organisations, setOrganisations] = useState([]);
-	const [organisationId, setOrganisationId] = useState(null);
-
 	const [imageUrl, setImageUrl] = useState(eventData.imageUrl);
 	const [date, setDate] = useState(
 		eventData.date.split("-").reverse().join("/")
@@ -68,23 +65,18 @@ function EditEvent({ onAccept, onClose, eventData }) {
 	useEffect(() => {
 		fetchData(URLS.CATEGORIES, setCategories);
 		fetchData(URLS.CITIES, setCities);
+		fetchUser().then(data => {
+			setOrganisationId(data.organisationId);	
+		})
 		fetchData(`${URLS.EVENTS}/${eventData.id}`, (data) => {
 			setEvent(data);
-			setFetchedShifts(data.shifts); 
+			setFetchedShifts(data.shifts);  
 		});
-		fetchDataWithAuth(
-			URLS.DISTRICTS_ADMIN,
+		fetchData(
+			URLS.DISTRICTS,
 			(data) => {
 				setDistricts(data);
 			},
-			localStorage.getItem("token")
-		);
-		fetchDataWithAuth(
-			URLS.ORGANISATIONS_ADMIN,
-			(data) => {
-				setOrganisations(data);
-			},
-			localStorage.getItem("token")
 		);
 	}, [eventData.id]);
 
@@ -121,8 +113,6 @@ function EditEvent({ onAccept, onClose, eventData }) {
 	};
 	
 
-
-
 	useEffect(() => {
 		const newSelectedCategories = categories.filter((category) =>
 			eventData.categories.includes(category.name)
@@ -142,13 +132,6 @@ function EditEvent({ onAccept, onClose, eventData }) {
 		);
 		setCityId(cityMapName[eventData.city]);
 	}, [cities, eventData.city]);
-
-	useEffect(() => {
-		const organisationMapName = Object.fromEntries(
-			organisations.map((o) => [o.name, o.id])
-		);
-		setOrganisationId(organisationMapName[eventData.organisation]) 
-	}, [organisations, eventData.organisation]);	
 
 	useEffect(() => {
 			const cityMap = Object.fromEntries(
@@ -441,7 +424,7 @@ function EditEvent({ onAccept, onClose, eventData }) {
 							</Label>
 						</div>
 						{/* shifts */}
-						<EditShift
+						<EditShiftByOrganisation
 							shifts={shifts}
 							districts={filteredDistricts}
 							modifyShifts={modifyShifts}
@@ -462,4 +445,4 @@ function EditEvent({ onAccept, onClose, eventData }) {
 	);
 }
 
-export default EditEvent;
+export default EditEventByOrganisation;
