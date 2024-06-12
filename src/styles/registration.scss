@@ -1,0 +1,42 @@
+.registration {
+margin: 80px 10vw 20px 10vw;
+
+    .registration-container {
+        padding-top: 65px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        .registration-card {
+            width: 40vw;
+            margin: auto;
+            padding: 20px;
+            background-color: #f2f2f2;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+
+            .registration-svg {
+                height: 40px;
+                width: 40px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .registration-tip {
+                color: grey;
+            }
+
+            .registration-buttons {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+            }
+        }
+    }
+}

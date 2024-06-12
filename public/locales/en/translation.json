@@ -321,5 +321,7 @@
   "registrationInProgress": "Your registration is almost done",
   "registrationCompleted": "Your registartion is completed",
   "youCanNowLogIn": "You can now log in",
-  "login": "Log in"
+  "login": "Log in",
+  "registrationExpired": "Registration expired",
+  "thisLinkHasExpired": "This link has expired. Please register again"
 }
