@@ -117,6 +117,10 @@ nav {
   display: flex;
   align-items: center;
   justify-content: right;
+
+  .language-select-language{
+    text-align: center;
+  }
   
   li {
     list-style: none;

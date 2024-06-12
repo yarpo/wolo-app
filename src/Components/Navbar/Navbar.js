@@ -71,9 +71,9 @@ function handleLogout() {
           <li>
             <Link to="/events">{t('allEvents')}</Link>
           </li>
-          <li>
+          {role && role.includes('USER') && <li>
             <Link to="/calendar">{t('calendar')}</Link>
-          </li>
+          </li>}
           <li>
             <Link to="/for-volunteers">{t('forVolunteers')}</Link>
           </li>
@@ -87,10 +87,10 @@ function handleLogout() {
               defaultValue={i18n.language}
               data-testid="languages-select"
             >
-              <option value="en">English</option>
-              <option value="pl">Polski</option>
-              <option value="ua">Українська</option>
-              <option value="ru">Русский</option>
+              <option value="en" className='language-select-language'>English</option>
+              <option value="pl" className='language-select-language'>Polski</option>
+              <option value="ua" className='language-select-language'>Українська</option>
+              <option value="ru" className='language-select-language'>Русский</option>
             </select>
           </li>
           <li className="navbar-dropdown">
@@ -114,7 +114,7 @@ function handleLogout() {
                     {role && role.includes('ADMIN') && <li id="navbar-dropdown-li"><Link to='/admin-home-page'>{t('adminPage')}</Link></li>}
                     {role && role.includes('MODERATOR') && <li id="navbar-dropdown-li"><Link to='/organisation-home-page'>{t('organiserPage')}</Link></li>}
                     <li id="navbar-dropdown-li"><Link to="/settings">{t('settings')}</Link></li>
-                    {role && role.includes('MODERATOR') && <li id="navbar-dropdown-li"><Link to='/organisation-setting'>{t('organiserSettings')}</Link></li>}
+                    {role && role.includes('MODERATOR') && <li id="navbar-dropdown-li"><Link to='/organisation-settings'>{t('organiserSettings')}</Link></li>}
                     <li id="navbar-dropdown-li">
                       <button onClick={handleLogout}>{t('logout')}</button>
                     </li>
