@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState } from 'react';
 
 const FiltersContext = createContext();
@@ -8,8 +7,9 @@ export const useFiltersContext = () => {
 };
 
 export const FiltersProvider = ({ children }) => {
+  const today = new Date();
   const [filters, setFilters] = useState({
-    selectedDate: null,
+    selectedDate: today,
     chosenTags: [],
     requiresVerification: false,
     peselVerificationRequired: false,
