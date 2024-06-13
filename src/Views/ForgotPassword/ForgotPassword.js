@@ -5,7 +5,7 @@ import { Card, Label, TextInput } from "flowbite-react";
 import '../../styles/reset-password.scss';
 import { toast } from 'react-toastify';
 import putRequestNoAuth from '../../Utils/putRequestNoAuth';
-import passwordValidator from '../../Utils/passwordValidator';
+import passwordValidator from '../../Utils/passwordValidation.js';
 import { URLS } from '../../config';
 import { VscArrowLeft } from 'react-icons/vsc';
 import { Link } from 'react-router-dom';

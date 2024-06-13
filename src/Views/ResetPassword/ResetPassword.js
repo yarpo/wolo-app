@@ -4,7 +4,7 @@ import { Card, Label, TextInput } from "flowbite-react";
 import '../../styles/reset-password.scss';
 import { toast } from 'react-toastify';
 import putRequest from '../../Utils/putRequest';
-import passwordValidator from '../../Utils/passwordValidator';
+import passwordValidator from '../../Utils/passwordValidation.js';
 import { URLS } from '../../config';
 import { Link } from 'react-router-dom';
 import { VscArrowLeft } from 'react-icons/vsc';
