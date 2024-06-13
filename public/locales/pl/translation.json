@@ -315,6 +315,15 @@
     "homeNumRequired": "Numer domu jest wymagany",
     "districtRequired": "Dzielnica jest wymagana"
   },
+
+  "passwordErrors": {
+    "minLength": "Hasło musi mieć co najmniej 8 znaków",
+    "lowercase": "Hasło musi zawierać co najmniej jedną małą literę",
+    "uppercase": "Hasło musi zawierać co najmniej jedną wielką literę",
+    "number": "Hasło musi zawierać co najmniej jedną cyfrę",
+    "specialCharacter": "Hasło musi zawierać co najmniej jeden znak specjalny"
+  },
+
 "newCategory": "Dodaj nową kategorię",
 "placeholderCategory": "Nowa kategoria",
 
