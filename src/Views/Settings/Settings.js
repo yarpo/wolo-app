@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, Link } from 'react-router-dom';
 import '../../styles/settings.scss';
@@ -88,17 +88,9 @@ const Settings = () => {
 
     const handleUserConfirmation = async (confirmation) => {
         setUserConfirmed(confirmation);
-
     };
 
-    useEffect(() => {
-        if (userConfirmed !== false) {
-            setUserConfirmed(false);
-            handleDelete()
-        }
-    }, [userConfirmed]); 
-
-    const handleDelete = () => {
+    const handleDelete = useCallback(() => {
         console.log(`${URLS.DELETE_USER}/${userData.id}`);
         if (userData.organisationName == null) {
             deleteRequest(`${URLS.DELETE_USER}/${userData.id}`, localStorage.getItem('token'), t('deleteAccountSuccess'), t('deleteAccountFail'));
@@ -108,8 +100,15 @@ const Settings = () => {
             navigate('/login');
         } else {
             toast.error(t('deleteAccountFail'));
-        }        
-    };
+        }
+    }, [userData, t, navigate]);
+
+    useEffect(() => {
+        if (userConfirmed !== false) {
+            setUserConfirmed(false);
+            handleDelete();
+        }
+    }, [userConfirmed, handleDelete]); 
 
     return (
         <div className="settings-page">
@@ -224,8 +223,9 @@ const Settings = () => {
                     accept={t('confirmAccountDelete')}
                     deny={t('discard')}
                     onAgree={() => {
-                        handleUserConfirmation(true)
-                        setConfirmDelete(false)}}
+                        handleUserConfirmation(true);
+                        setConfirmDelete(false);
+                    }}
                     onDeny={() => 
                         setConfirmDelete(false)}
                     openModal={confirmDelete}
