@@ -115,7 +115,7 @@ const ShiftCard = ({ shift, city, isInPast }) => {
                 toast.error(t('unknownError'));
             }
         }
-    }, [token, shift, userConfirmed, t, isFull, isSignedIn, overlappingShift, userShifts]);
+    }, [token, shift, userConfirmed, t, isFull, isSignedIn, overlappingShift, userShifts, isSignedInReserve]);
 
     useEffect(() => {
         if (userConfirmed !== false) {

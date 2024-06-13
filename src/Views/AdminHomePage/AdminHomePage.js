@@ -1,17 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import '../../styles/admin-home-page.scss';
-
 import { Tabs } from "flowbite-react";
-import { HiUserCircle, 
-        HiLibrary, 
-        HiQuestionMarkCircle, 
-        HiPencilAlt, 
-        HiUserGroup, 
-        HiHome, 
-        HiLightBulb, 
-        HiFolderOpen } from "react-icons/hi";
-
+import { HiUserCircle, HiLibrary, HiQuestionMarkCircle, HiPencilAlt, HiUserGroup, HiHome, HiLightBulb, HiFolderOpen } from "react-icons/hi";
 import UsersTab from '../../Components/AdminComponents/UsersTab.js';
 import OrganisationsTab from '../../Components/AdminComponents/OrganisationsTab.js';
 import EventsTab from '../../Components/AdminComponents/EventsTab.js';
@@ -26,7 +17,7 @@ const AdminHomePage = () => {
     return (
         <div className='admin_home_page_container'>
             <h1 className='admin_home_page_text'><HiPencilAlt /> {t('administratorPanel')}</h1>
-            <Tabs aria-label="Default tabs" style="default">
+            <Tabs aria-label="Default tabs" className="default-tabs">
                 <Tabs.Item active title={t('users')} icon={HiUserCircle}>
                     <UsersTab />
                 </Tabs.Item>
@@ -50,7 +41,7 @@ const AdminHomePage = () => {
                 </Tabs.Item>
             </Tabs>
         </div>
-    )
+    );
 };
 
 export default AdminHomePage;

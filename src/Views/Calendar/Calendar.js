@@ -96,7 +96,7 @@ const CalendarView = () => {
         <div className='calendar-page-container'>
             <div className='calendar-header'>
                 <h1 className='calendar-page-text'><HiCalendar /> {t('yourCalendar')}</h1>
-                <Tooltip content={t('calendarTip')} style="light" placement="bottom" className='calendar-page-tooltip'>
+                <Tooltip content={t('calendarTip')} style={{ style: "light" }} placement="bottom" className='calendar-page-tooltip'>
                     <HiQuestionMarkCircle  className='calendar-page-help-svg' />
                 </Tooltip>
             </div>

@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { VscChevronDown, VscChevronUp } from "react-icons/vsc";
 import { HiOutlineSearch } from "react-icons/hi";
 import { TextInput, Card } from "flowbite-react";
@@ -51,7 +51,7 @@ const EventsTab = () => {
                 event.organisation.toLowerCase().includes(searchQuery.toLowerCase())
             ));
         }
-    }, [searchQuery, events]);
+    }, [searchQuery, events, eventName]);
 
     const renderShiftDetails = (shifts) => {
         return shifts.map((shift, index) => (
@@ -74,26 +74,25 @@ const EventsTab = () => {
         setOpenIndex(openIndex === index ? null : index);
     };
 
+    const handleDelete = useCallback(() => {
+        deleteRequest(`${URLS.DELETE_EVENT}/${eventToDelete}`, localStorage.getItem('token'), "Deleted", "Fail");
+        setEventToDelete(null);
+        setConfirmDelete(false);
+    }, [eventToDelete]);
+
     const handleUserConfirmation = async (confirmation) => {
         setUserConfirmed(confirmation);
-
     };
 
     useEffect(() => {
         if (userConfirmed !== false) {
             setUserConfirmed(false);
-            handleDelete()
+            handleDelete();
         }
-    }, [userConfirmed]); 
+    }, [userConfirmed, handleDelete]);
 
     const handleModalClose = () => {
         setEditOpenModal(false);
-    };
-
-    const handleDelete = () => {
-        deleteRequest(`${URLS.DELETE_EVENT}/${eventToDelete}`, localStorage.getItem('token'), "Deleted", "Fail")
-        setEventToDelete(null);
-        setConfirmDelete(false);
     };
 
     const handleDeleteRequest = (event) => {
@@ -101,15 +100,16 @@ const EventsTab = () => {
         setEventToDelete(event.id);
         setEventNameToDelete(event[eventName]); 
     };
+
     const handleEdit = (data) => {
-      putRequest(
-        `${URLS.EDIT_EVENT_ADMIN}/${eventToEdit.id}`,
-        localStorage.getItem("token"),
-        data,
-        "Event was changed successfully",
-        "Failed to change Event's data"
-      );
-      setEventToEdit(null);
+        putRequest(
+            `${URLS.EDIT_EVENT_ADMIN}/${eventToEdit.id}`,
+            localStorage.getItem("token"),
+            data,
+            "Event was changed successfully",
+            "Failed to change Event's data"
+        );
+        setEventToEdit(null);
     };
 
     const handlePageClick = (event) => {
@@ -166,33 +166,32 @@ const EventsTab = () => {
                                     </button>
                                 </Table.Cell>
                                 <Table.Cell>
-                                  {openEditModal && eventToEdit === event && (
-                                    <EditEvent
-                                      onAccept={handleEdit}
-                                      onClose={handleModalClose}
-                                      eventData={event}
-                                    />
-                                  )}
-                              {event.date > format(new Date(), 'yyyy-MM-dd') ?
-                               <button
-                                    className="edit-button"
-                                    onClick={() => {
-                                            setEditOpenModal(true);
-                                            setEventToEdit(event);
-                                        }
-                                    } 
-                                >
-                                    <span><HiPencilAlt /></span>
-                                </button> : " "}
+                                    {openEditModal && eventToEdit === event && (
+                                        <EditEvent
+                                            onAccept={handleEdit}
+                                            onClose={handleModalClose}
+                                            eventData={event}
+                                        />
+                                    )}
+                                    {event.date > format(new Date(), 'yyyy-MM-dd') ?
+                                        <button
+                                            className="edit-button"
+                                            onClick={() => {
+                                                setEditOpenModal(true);
+                                                setEventToEdit(event);
+                                            }} 
+                                        >
+                                            <span><HiPencilAlt /></span>
+                                        </button> : " "}
                                 </Table.Cell>
                                 <Table.Cell className="table-cell-action">
                                     {event.date > format(new Date(), 'yyyy-MM-dd') ?
-                                    <button
-                                        className="delete-button"
-                                        onClick={() => handleDeleteRequest(event)} 
-                                    >
-                                        <span><HiTrash /></span>
-                                    </button> : ' '}
+                                        <button
+                                            className="delete-button"
+                                            onClick={() => handleDeleteRequest(event)} 
+                                        >
+                                            <span><HiTrash /></span>
+                                        </button> : ' '}
                                     <Confirmation
                                         id="sign-off"
                                         buttonName="Delete"

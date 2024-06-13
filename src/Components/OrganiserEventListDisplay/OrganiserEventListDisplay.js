@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import '../../styles/organiser-event-list-display.scss';
 import formatDate from '../../Utils/formatDate.js';
 import { Link } from 'react-router-dom';
@@ -16,23 +16,22 @@ const OrganiserEventListDisplay = ({ event, isArchived }) => {
     const [userConfirmed, setUserConfirmed] = useState(false);
     const [openEditModal, setOpenEditModal] = useState(false);
 
+    const handleDelete = useCallback(() => {
+        console.log(`${URLS.DELETE_EVENT}/${event.id}`);
+        deleteRequest(`${URLS.DELETE_EVENT}/${event.id}`, localStorage.getItem('token'), "sukces", "Nie sukces");
+        setConfirmDelete(false);
+    }, [event.id]);
+
     const handleUserConfirmation = async (confirmation) => {
         setUserConfirmed(confirmation);
-
     };
 
     useEffect(() => {
         if (userConfirmed !== false) {
             setUserConfirmed(false);
-            handleDelete()
+            handleDelete();
         }
-    }, [userConfirmed]); 
-
-    const handleDelete = () => {
-        console.log(`${URLS.DELETE_EVENT}/${event.id}`);
-        deleteRequest(`${URLS.DELETE_EVENT}/${event.id}`, localStorage.getItem('token'), "sukces", "Nie sukces")
-        setConfirmDelete(false);
-    };
+    }, [userConfirmed, handleDelete]);
 
     const handleEdit = (data) => {
         setOpenEditModal(false);
@@ -42,13 +41,12 @@ const OrganiserEventListDisplay = ({ event, isArchived }) => {
             data,
             "Event was changed successfully",
             "Failed to change Event's data"
-          );
-
+        );
     };
 
     const handleModalClose = () => {
         setOpenEditModal(false);
-    }
+    };
     
     return (
         <div className='organiser_event_list_display_content'>
@@ -64,39 +62,40 @@ const OrganiserEventListDisplay = ({ event, isArchived }) => {
                 {event.city}
             </div>
             <form className="column">
-                <Link to={`/reports?event=${event.id}` }>
+                <Link to={`/reports?event=${event.id}`}>
                     <div id="organiser_event_list_button">
-                        <strong >{t('reports')}</strong>
+                        <strong>{t('reports')}</strong>
                     </div>
                 </Link>
             </form>
             {openEditModal && (
-                                    <EditEventByOrganisation
-                                      onAccept={handleEdit}
-                                      onClose={handleModalClose}
-                                      eventData={event}
-                                    />
-                                  )}
+                <EditEventByOrganisation
+                    onAccept={handleEdit}
+                    onClose={handleModalClose}
+                    eventData={event}
+                />
+            )}
             {!isArchived && <div className="column">
                 <button className="column" id="organiser_event_list_button" onClick={() => setOpenEditModal(true)}><strong>{t('edit')}</strong></button>
             </div>}
             {!isArchived && 
                 <button className="column" id="organiser_event_list_delete_button" onClick={() => setConfirmDelete(true)}>{t('delete')}</button>
             }
-            <Confirmation id="sign-off"
-                    title={t('cancelEvent') + event[eventName] + "?"}
-                    accept={t('acceptCancelEvent')}
-                    deny={t('discard')}
-                    onAgree={() => {
-                        handleUserConfirmation(true)
-                        setConfirmDelete(false)}}
-                    onDeny={() => 
-                        setConfirmDelete(false)}
-                    openModal={confirmDelete}
-                    setOpenModal={setConfirmDelete}
-                />
+            <Confirmation 
+                id="sign-off"
+                title={t('cancelEvent') + event[eventName] + "?"}
+                accept={t('acceptCancelEvent')}
+                deny={t('discard')}
+                onAgree={() => {
+                    handleUserConfirmation(true);
+                    setConfirmDelete(false);
+                }}
+                onDeny={() => setConfirmDelete(false)}
+                openModal={confirmDelete}
+                setOpenModal={setConfirmDelete}
+            />
         </div>
-    )
+    );
 };
 
 export default OrganiserEventListDisplay;

@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback} from "react";
 import { VscChevronDown, VscChevronUp } from "react-icons/vsc";
 import { HiOutlineSearch } from "react-icons/hi";
 import { TextInput, Card } from "flowbite-react";
@@ -54,7 +54,7 @@ const FAQTab = () => {
                 question[answerName].toLowerCase().includes(searchQuery.toLowerCase())
             ));
         }
-    }, [searchQuery, questions]);
+    }, [searchQuery, questions, questionName, answerName]);
 
     const handleModalAccept = (data) => {
         setOpenModal(false);
@@ -76,18 +76,18 @@ const FAQTab = () => {
         setUserConfirmed(confirmation);
     };
 
+    const handleDelete = useCallback(() => {
+        deleteRequest(`${URLS.DELETE_FAQ}/${questionToDelete}`, localStorage.getItem('token'), "Deleted", "Fail");
+        setQuestionToDelete(null);
+        setConfirmDelete(false);
+    }, [questionToDelete]);
+
     useEffect(() => {
         if (userConfirmed !== false) {
             setUserConfirmed(false);
             handleDelete();
         }
-    }, [userConfirmed]);
-
-    const handleDelete = () => {
-        deleteRequest(`${URLS.DELETE_FAQ}/${questionToDelete}`, localStorage.getItem('token'), "Deleted", "Fail");
-        setQuestionToDelete(null);
-        setConfirmDelete(false);
-    };
+    }, [userConfirmed, handleDelete]);
 
     const handleDeleteRequest = (question) => {
         setConfirmDelete(true);
@@ -113,7 +113,6 @@ const FAQTab = () => {
     const offset = currentPage * questionsPerPage;
     const currentQuestions = filteredQuestions.sort((a, b) => a.id - b.id).slice(offset, offset + questionsPerPage);
     const pageCount = Math.ceil(filteredQuestions.length / questionsPerPage);
-
 
     return (
         <div className="overflow-x-auto">

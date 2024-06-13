@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { VscChevronDown, VscChevronUp } from "react-icons/vsc";
 import { HiOutlineSearch } from "react-icons/hi";
 import { useTranslation } from 'react-i18next';
@@ -92,27 +92,29 @@ const OrganisationsTab = () => {
         setUserConfirmed(confirmation);
     };
 
-	useEffect(() => {
-		if (userConfirmed !== false) {
-			setUserConfirmed(false);
-			handleDelete();
-		}
-	}, [userConfirmed]);
+    const handleDelete = useCallback(() => {
+        const params = new URLSearchParams();
+        params.append("id", organisationToDelete);
+        console.log("Delete confirmed", organisationToDelete);
+        postRequest(
+            `${URLS.DELETE_ORGANISATION}`,
+            localStorage.getItem("token"),
+            params,
+            "Deleted",
+            "Fail"
+        );
+        setOrganisationToDelete(null);
+        setConfirmDelete(false);
+    }, [organisationToDelete]);
 
-	const handleDelete = () => {
-		const params = new URLSearchParams();
-		params.append("id", organisationToDelete);
-		console.log("Delete confirmed", organisationToDelete);
-		postRequest(
-			`${URLS.DELETE_ORGANISATION}`,
-			localStorage.getItem("token"),
-			params,
-			"Deleted",
-			"Fail"
-		);
-		setOrganisationToDelete(null);
-		setConfirmDelete(false);
-	};
+    useEffect(() => {
+        if (userConfirmed !== false) {
+            setUserConfirmed(false);
+            handleDelete();
+        }
+    }, [userConfirmed, handleDelete]);
+
+
 	const handleEdit = (data) => {
 		const paramsRevoke = new URLSearchParams( );
 		const paramsAssign = new URLSearchParams();
