@@ -314,5 +314,64 @@
     "streetRequired": "Ulica jest wymagana",
     "homeNumRequired": "Numer domu jest wymagany",
     "districtRequired": "Dzielnica jest wymagana"
-  }
+  },
+"newCategory": "Dodaj nową kategorię",
+"placeholderCategory": "Nowa kategoria",
+
+"newCity": "Dodaj nowe miasto",
+"placeholderCity": "Nowe miasto",
+
+"newDistrict": "Dodaj nowy dystrykt",
+"placeholderDistrict": "Nowy dystrykt",
+
+"newFAQ": "Dodaj nowe pytanie i odpowiedź",
+"placeholderAnswer":"Nowe pytanie",
+"placeholderQuestion":"Nowa odpowiedź",
+
+"newOrganisation": "Dodaj nową oganizację",
+"placeholderOgranisationDescription": "Opisz czym zajmuje się organizacja",
+"newUser": "Stwórz nowego użytkownika",
+
+"editCategory": "Edytuj kategorie",
+"editCity": "Edytuj miasto",
+"editDistrict": "Edytuj dystrykt",
+"editEvent": "Edytuj wydarzenie",
+"editOrganisation": "Edytuj organizacje",
+"editUser":"Edytuj użytkownika",
+"deselectToRemoveFromCity": "odznacz aby usunąć dzielnicę z miasta",
+
+"namePL": "Nazwa w języku polskim",
+"nameEN": "Nazwa w języku angielskim",
+"nameUA": "Nazwa w języku ukraińskim",
+"nameRU": "Nazwa w języku rosyjskim",
+
+"descriptionPL": "Opis w języku polskim",
+"descriptionEN": "Opis w języku angielskim",
+"descriptionUA": "Opis w języku ukraińskim",
+"descriptionRU": "Opis w języku rosyjskim",
+
+"dateOfEvent": "Data wydarzenia",
+
+
+"shiftDirectionPL": "Wskazówki dojazdu w języku polskim",
+"shiftDirectionEN": "Wskazówki dojazdu w języku angielskim",
+"shiftDirectionRU": "Wskazówki dojazdu w języku rosyjskim",
+"shiftDirectionUA": "Wskazówki dojazdu w języku ukraińskim",
+
+"questionPL": "Pytanie w języku polskim",
+"questionEN": "Pytanie w języku angielskim",
+"questionRU": "Pytanie w języku rosyjskim",
+"questionUA": "Pytanie w języku ukraińskim",
+
+"answerPL": "Odpowiedź w języku polskim",
+"answerEN": "Odpowiedź w języku angielskim",
+"answerRU": "Odpowiedź w języku rosyjskim",
+"answerUA": "Odpowiedź w języku ukraińskim",
+
+"editFAQ": "Edytuj pytania i odpowiedzi",
+
+
+"optional": "opcjonalnie",
+"save": "Zapisz",
+"cancel": "Anuluj"
 }

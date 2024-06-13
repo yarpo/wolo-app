@@ -2,8 +2,10 @@
 import { Label, Modal, TextInput, Checkbox  } from "flowbite-react";
 import { useRef, useState } from "react";
 import { HiMail, HiPhone } from "react-icons/hi";
+import { useTranslation } from "react-i18next";
 
 function AddUser({ onAccept, onClose }) {
+    const { t } = useTranslation();
     const [openModal, setOpenModal] = useState(true);
     const [isAdultChecked, setIsAdultChecked] = useState(false);
 
@@ -36,46 +38,46 @@ function AddUser({ onAccept, onClose }) {
             <Modal.Header />
             <Modal.Body>
             <div className="space-y-6">
-                <h3 className="text-xl font-medium text-gray-900 dark:text-white">Create new organisation</h3>
+                <h3 className="text-xl font-medium text-gray-900 dark:text-white">{t('newUser')}</h3>
                 <div>
                 <div className="mb-2 block">
-                    <Label htmlFor="firstname" value="FirstName" />
+                    <Label htmlFor="firstname" value={t('firstName')} />
                 </div>
                 <TextInput id="firstname" ref={firstNameInputRef} placeholder="Jan" required />
                 </div>
                 <div>
                 <div className="mb-2 block">
-                    <Label htmlFor="lastname" value="LastName" />
+                    <Label htmlFor="lastname" value={t("lastName")} />
                 </div>
                 <TextInput id="lastname" ref={lastNameInputRef} placeholder="Kowalski" required />
                 </div>
                 <div className="max-w-md">
                     <div className="mb-2 block">
-                        <Label htmlFor="email" value="Email" />
+                        <Label htmlFor="email" value={t('email')} />
                     </div>
                     <TextInput id="email" ref={emailInputRef} type="email" icon={HiMail} placeholder="wolo@app.com" required />
                 </div>
                 <div className="max-w-md">
                     <div className="mb-2 block">
-                        <Label htmlFor="phone" value="Phone number" />
+                        <Label htmlFor="phone" value={t('phoneNumber')} />
                     </div>
                     <TextInput id="phone" ref={phoneInputRef} type="phone" icon={HiPhone} placeholder="123 456 789" required />
                 </div>
                 <div>
                     <div className="mb-2 block">
-                    <Label htmlFor="password" value="Password" />
+                    <Label htmlFor="password" value={t('password')} />
                     </div>
                     <TextInput id="password" ref={passwordInputRef} type="password" required />
                 </div>
                 <div className="flex items-center gap-2">
                     <Checkbox id="adult" checked={isAdultChecked} onChange={() => setIsAdultChecked(!isAdultChecked)} />
                     <Label htmlFor="adult" className="flex">
-                     Is adult
+                     {t('isAdult')}
                     </Label>
                 </div>
                 <div className="w-full">
-                    <button className="confirm_button" onClick={handleAgree}>Accept</button>
-                    <button className="cancel_button" onClick={handleClose}>Decline</button>
+                    <button className="confirm_button" onClick={handleAgree}>{t('save')}</button>
+                    <button className="cancel_button" onClick={handleClose}>{t('cancel')}</button>
                 </div>
             </div>
             </Modal.Body>

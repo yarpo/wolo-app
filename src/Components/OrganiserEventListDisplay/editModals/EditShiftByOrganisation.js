@@ -1,8 +1,9 @@
 import React from 'react';
 import { Label, Card, TextInput, Select } from "flowbite-react";
+import { useTranslation } from "react-i18next";
 
 const EditShift = ({ shifts, districts, modifyShifts }) => {
-
+    const { t } = useTranslation();
     const formatTime = (time) => {
         let hours, minutes;
         if (typeof time === 'string') {
@@ -16,11 +17,11 @@ const EditShift = ({ shifts, districts, modifyShifts }) => {
             {shifts.map((shift, index) => (
                 <div className="organiser-create-event-row" key={index}>
                     <Card>
-                        <h2>shift</h2>
+                        <h2>{t('shift')}</h2>
                         <div className="col">
                             <div className="flex items-center gap-2">
                                 <div className="col">
-                                    <Label htmlFor={`shifts.${index}.startTime`} value="Start Time" />
+                                    <Label htmlFor={`shifts.${index}.startTime`} value={t('startTime')} />
                                     <TextInput
                                         value={formatTime(shift.startTime)}
                                         onChange={(e) => {
@@ -32,7 +33,7 @@ const EditShift = ({ shifts, districts, modifyShifts }) => {
                                     />
                                 </div>
                                 <div className="col">
-                                    <Label htmlFor={`shifts.${index}.endTime`} value="End Time" />
+                                    <Label htmlFor={`shifts.${index}.endTime`} value={t('endTime')} />
                                     <TextInput
                                         value={formatTime(shift.endTime)}
                                         onChange={(e) => {
@@ -45,7 +46,7 @@ const EditShift = ({ shifts, districts, modifyShifts }) => {
                                 </div>
                             </div>
                             <div className="col">
-                                <Label htmlFor={`shifts.${index}.capacity`} value="Capacity" />
+                                <Label htmlFor={`shifts.${index}.capacity`} value={t('capacity')} />
                                 <TextInput
                                     value={shift.capacity}
                                     onChange={(e) => modifyShifts('update', index, 'capacity', e.target.value)}
@@ -55,7 +56,7 @@ const EditShift = ({ shifts, districts, modifyShifts }) => {
                                 />
                             </div>
                             <div className="col">
-                                <Label htmlFor={`shifts.${index}.requiredMinAge`} value="Required Minimum Age" />
+                                <Label htmlFor={`shifts.${index}.requiredMinAge`} value={t('ageRestrictions')} />
                                 <TextInput
                                     value={shift.requiredMinAge}
                                     onChange={(e) => modifyShifts('update', index, 'requiredMinAge', e.target.value)}
@@ -65,7 +66,7 @@ const EditShift = ({ shifts, districts, modifyShifts }) => {
                                 />
                             </div>
                             <div className="col">
-                                <Label htmlFor={`shifts.${index}.shiftDirectionsEN`} value="Shift Directions EN" />
+                                <Label htmlFor={`shifts.${index}.shiftDirectionsEN`} value={t('shiftDirectionEN')} />
                                 <TextInput
                                     value={shift.shiftDirectionsEN}
                                     onChange={(e) => modifyShifts('update', index, 'shiftDirectionsEN', e.target.value)}
@@ -75,7 +76,7 @@ const EditShift = ({ shifts, districts, modifyShifts }) => {
                                 />
                             </div>
                             <div className="col">
-                                <Label htmlFor={`shifts.${index}.shiftDirectionsPL`} value="Shift Directions PL" />
+                                <Label htmlFor={`shifts.${index}.shiftDirectionsPL`} value={t('shiftDirectionPL')} />
                                 <TextInput
                                     value={shift.shiftDirectionsPL}
                                     onChange={(e) => modifyShifts('update', index, 'shiftDirectionsPL', e.target.value)}
@@ -85,7 +86,7 @@ const EditShift = ({ shifts, districts, modifyShifts }) => {
                                 />
                             </div>
                             <div className="col">
-                                <Label htmlFor={`shifts.${index}.shiftDirectionsRU`} value="Shift Directions RU" />
+                                <Label htmlFor={`shifts.${index}.shiftDirectionsRU`} value={t('shiftDirectionRU')} />
                                 <TextInput
                                     value={shift.shiftDirectionsRU}
                                     onChange={(e) => modifyShifts('update', index, 'shiftDirectionsRU', e.target.value)}
@@ -105,7 +106,7 @@ const EditShift = ({ shifts, districts, modifyShifts }) => {
                                 />
                             </div>
                             <div className="col">
-                                <Label htmlFor={`shifts.${index}.street`} value="Street" />
+                                <Label htmlFor={`shifts.${index}.street`} value={t('shiftDirectionUA')} />
                                 <TextInput
                                     value={shift.street}
                                     onChange={(e) => modifyShifts('update', index, 'street', e.target.value)}
@@ -115,7 +116,7 @@ const EditShift = ({ shifts, districts, modifyShifts }) => {
                                 />
                             </div>
                             <div className="col">
-                                <Label htmlFor={`shifts.${index}.homeNum`} value="Home Number" />
+                                <Label htmlFor={`shifts.${index}.homeNum`} value={t('homeNum')} />
                                 <TextInput
                                     value={shift.homeNum}
                                     onChange={(e) => modifyShifts('update', index, 'homeNum', e.target.value)}
@@ -125,7 +126,7 @@ const EditShift = ({ shifts, districts, modifyShifts }) => {
                                 />
                             </div>
                             <div className="col">
-                                <Label htmlFor={`shifts.${index}.districtId`} value="District" />						
+                                <Label htmlFor={`shifts.${index}.districtId`} value={t('district')} />						
                                 <Select
                                     id={`shifts.${index}.districtId`}
                                     name={`shifts.${index}.districtId`}

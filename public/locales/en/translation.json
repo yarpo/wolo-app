@@ -326,5 +326,64 @@
   "thisLinkHasExpired": "This link has expired. Click here to resend an email.",
   "resendMail": "Resend email",
   "confirmRegistration": "To confirm your registration, please click this button.",
-  "completeRegistartion": "Complete registration"
+  "completeRegistartion": "Complete registration",
+
+
+  "newCategory": "Add new category",
+  "placeholderCategory": "New category",
+
+  "newCity": "Add new city",
+  "placeholderCity": "New city",
+
+  "newDistrict": "Add new district",
+  "placeholderDistrict": "New district",
+
+  "newFAQ": "Add new question and answer",
+  "placeholderAnswer": "New question",
+  "placeholderQuestion": "New answer",
+
+  "newOrganisation": "Add new organisation",
+  "placeholderOgranisationDescription": "Describe what the organisation does",
+  "newUser": "Create new user",
+
+  "editCategory": "Edit category",
+  "editCity": "Edit city",
+  "editDistrict": "Edit district",
+  "editEvent": "Edit event",
+  "editOrganisation": "Edit organisation",
+  "editUser": "Edit user",
+  "deselectToRemoveFromCity": "Deselect to remove district from city",
+
+  "namePL": "Name in Polish",
+  "nameEN": "Name in English",
+  "nameUA": "Name in Ukrainian",
+  "nameRU": "Name in Russian",
+
+  "descriptionPL": "Description in Polish",
+  "descriptionEN": "Description in English",
+  "descriptionUA": "Description in Ukrainian",
+  "descriptionRU": "Description in Russian",
+
+  "dateOfEvent": "Date of event",
+
+  "shiftDirectionPL": "Directions in Polish",
+  "shiftDirectionEN": "Directions in English",
+  "shiftDirectionRU": "Directions in Russian",
+  "shiftDirectionUA": "Directions in Ukrainian",
+
+  "questionPL": "Question in Polish",
+  "questionEN": "Question in English",
+  "questionRU": "Question in Russian",
+  "questionUA": "Question in Ukrainian",
+
+  "answerPL": "Answer in Polish",
+  "answerEN": "Answer in English",
+  "answerRU": "Answer in Russian",
+  "answerUA": "Answer in Ukrainian",
+
+  "editFAQ": "Edit questions and answers",
+
+  "optional": "optional",
+  "save": "Save",
+  "cancel": "Cancel"
 }

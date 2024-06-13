@@ -80,28 +80,28 @@ function AddOrganisation({ onAccept, onClose }) {
             <Modal.Header />
             <Modal.Body>
             <div className="space-y-6">
-                <h3 className="text-xl font-medium text-gray-900 dark:text-white">Create new organisation</h3>
+                <h3 className="text-xl font-medium text-gray-900 dark:text-white">{t('newOrganisation')}</h3>
                 <div>
                 <div className="mb-2 block">
-                    <Label htmlFor="name" value="Name" />
+                    <Label htmlFor="name" value={t('name')} />
                 </div>
-                <TextInput id="name" ref={nameInputRef} placeholder="Fundacja WoloApp" required />
+                <TextInput id="name" ref={nameInputRef} placeholder="Woloapp" required />
                 </div>
                 <div className="max-w-md">
                     <div className="mb-2 block">
-                        <Label htmlFor="description" value="Organisation's description" />
+                        <Label htmlFor="description" value={t('description')} />
                     </div>
-                    <Textarea id="description" ref={descriptionInputRef} placeholder="To jest fundacja wspierająca wolontariuszy." required rows={4} />
+                    <Textarea id="description" ref={descriptionInputRef} placeholder={t("placeholderOgranisationDescription")} required rows={4} />
                 </div>
                 <div className="max-w-md">
                     <div className="mb-2 block">
-                        <Label htmlFor="email" value="Email" />
+                        <Label htmlFor="email" value={t('email')}/>
                     </div>
                     <TextInput id="email" ref={emailInputRef} type="email" icon={HiMail} placeholder="wolo@app.com" required />
                 </div>
                 <div className="max-w-md">
                     <div className="mb-2 block">
-                        <Label htmlFor="phone" value="Phone number" />
+                        <Label htmlFor="phone" value={t('phoneNumber')} />
                     </div>
                     <TextInput id="phone" ref={phoneInputRef} type="phone" icon={HiPhone} placeholder="123 456 789" required />
                 </div>
@@ -119,7 +119,7 @@ function AddOrganisation({ onAccept, onClose }) {
                 </div>
                 <div className="max-w-md">
                     <div className="mb-2 block">
-                        <Label htmlFor="city" value="City" />
+                        <Label htmlFor="city" value={t('city')} />
                     </div>
                     <Select id="city" ref={cityInputRef} onChange={(e) => {
                       handleCityChange(e);
@@ -134,7 +134,7 @@ function AddOrganisation({ onAccept, onClose }) {
                 </div>
                 <div className="max-w-md">
                     <div className="mb-2 block">
-                        <Label htmlFor="distrct" value="District" />
+                        <Label htmlFor="distrct" value={t('district')} />
                     </div>
                     <Select id="district" ref={districtInputRef} required>
                         {filteredDistricts.map(district => (
@@ -144,7 +144,7 @@ function AddOrganisation({ onAccept, onClose }) {
                 </div>
                 <div className="max-w-md">
                     <div className="mb-2 block">
-                        <Label htmlFor="moderator" value="Moderator" />
+                        <Label htmlFor="moderator" value={t('moderator')} />
                     </div>
                     <Select id="moderator" ref={moderatorInputRef} required>
                         {users.map((user) => (
@@ -156,13 +156,13 @@ function AddOrganisation({ onAccept, onClose }) {
                 </div>
                 <div className="max-w-md">
                     <div className="mb-2 block">
-                        <Label htmlFor="url" value="Logo URL (optional)" />
+                        <Label htmlFor="url" value={t('logoUrl')+" ("+t('optional')+')'} />
                     </div>
                     <TextInput id="url" ref={urlInputRef} type="url" icon={HiGlobeAlt } placeholder="woloapp.com/logo.png" required />
                 </div>
                 <div className="w-full">
-                    <button className="confirm_button" onClick={handleAgree}>Accept</button>
-                    <button className="cancel_button" onClick={handleClose}>Decline</button>
+                    <button className="confirm_button" onClick={handleAgree}>{t('save')}</button>
+                    <button className="cancel_button" onClick={handleClose}>{t('cancel')}</button>
                 </div>
             </div>
             </Modal.Body>

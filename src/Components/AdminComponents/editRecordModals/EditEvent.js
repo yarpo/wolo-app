@@ -15,8 +15,10 @@ import { HiGlobeAlt } from "react-icons/hi";
 import fetchData from "../../../Utils/fetchData";
 import EditShift from "./EditShift";
 import fetchDataWithAuth from "../../../Utils/fetchDataWithAuth";
+import { useTranslation } from "react-i18next";
 
 function EditEvent({ onAccept, onClose, eventData }) {
+	const { t } = useTranslation();
 	const [event, setEvent] = useState([]);
 	const [openModal, setOpenModal] = useState(true);
 
@@ -230,13 +232,13 @@ function EditEvent({ onAccept, onClose, eventData }) {
 				<Modal.Body>
 					<div className="space-y-6">
 						<h3 className="text-xl font-medium text-gray-900 dark:text-white">
-							Edit Event
+							{t('editEvent')}
 						</h3>
 						{/* names */}
 
 						<div>
 							<div className="mb-2 block">
-								<Label htmlFor="nameEN" value="Name EN" />
+								<Label htmlFor="nameEN" value={t('nameEN')} />
 							</div>
 							<TextInput
 								id="nameEN"
@@ -247,7 +249,7 @@ function EditEvent({ onAccept, onClose, eventData }) {
 
 						<div>
 							<div className="mb-2 block">
-								<Label htmlFor="namePL" value="Name PL" />
+								<Label htmlFor="namePL" value={t('namePL')} />
 							</div>
 							<TextInput
 								id="namePL"
@@ -258,7 +260,7 @@ function EditEvent({ onAccept, onClose, eventData }) {
 
 						<div>
 							<div className="mb-2 block">
-								<Label htmlFor="nameRU" value="Name RU" />
+								<Label htmlFor="nameRU" value={t('nameRU')} />
 							</div>
 							<TextInput
 								id="nameRU"
@@ -269,7 +271,7 @@ function EditEvent({ onAccept, onClose, eventData }) {
 
 						<div>
 							<div className="mb-2 block">
-								<Label htmlFor="nameUA" value="Name UA" />
+								<Label htmlFor="nameUA" value={t('nameUA')} />
 							</div>
 							<TextInput
 								id="nameUA"
@@ -281,7 +283,7 @@ function EditEvent({ onAccept, onClose, eventData }) {
 						{/* descriptions */}
 
 						<div className="mb-2 block">
-							<Label htmlFor="descriptionEN" value="Description EN" />
+							<Label htmlFor="descriptionEN" value={t('descriptionEN')} />
 						</div>
 						<Textarea
 							id="descriptionEN"
@@ -291,7 +293,7 @@ function EditEvent({ onAccept, onClose, eventData }) {
 						/>
 
 						<div className="mb-2 block">
-							<Label htmlFor="descriptionPL" value="Description PL" />
+							<Label htmlFor="descriptionPL" value={t('descriptionPL')} />
 						</div>
 						<Textarea
 							id="descriptionPL"
@@ -301,7 +303,7 @@ function EditEvent({ onAccept, onClose, eventData }) {
 						/>
 
 						<div className="mb-2 block">
-							<Label htmlFor="descriptionRU" value="Description RU" />
+							<Label htmlFor="descriptionRU" value={t('descriptionRU')}/>
 						</div>
 						<Textarea
 							id="descriptionRU"
@@ -311,7 +313,7 @@ function EditEvent({ onAccept, onClose, eventData }) {
 						/>
 
 						<div className="mb-2 block">
-							<Label htmlFor="descriptionUA" value="Description UA" />
+							<Label htmlFor="descriptionUA" value={t('descriptionUA')} />
 						</div>
 						<Textarea
 							id="descriptionUA"
@@ -322,7 +324,7 @@ function EditEvent({ onAccept, onClose, eventData }) {
 						{/*imageURL*/}
 						<div>
 							<div className="mb-2 block">
-								<Label htmlFor="imageUrl" value="image URL" />
+								<Label htmlFor="imageUrl" value={t('imageUrl')} />
 							</div>
 							<TextInput
 								id="imageURL"
@@ -333,11 +335,11 @@ function EditEvent({ onAccept, onClose, eventData }) {
 						</div>
 						{/*date*/}
 						<div className="mb-2 block">
-							<Label htmlFor="date" value="Date" />
+							<Label htmlFor="date" value={t('date')} />
 						</div>
 						<Datepicker
 							value={date}
-							title="Date of the Event"
+							title={t('dateOfEvent')}
 							onSelectedDateChanged={(newDate) =>
 								setDate(
 									newDate.toLocaleDateString("en-GB", {
@@ -353,7 +355,7 @@ function EditEvent({ onAccept, onClose, eventData }) {
 						{/* city */}
 						<div className="max-w-2xl">
 							<div className="mb-2 block">
-								<Label htmlFor="city" value="City" />
+								<Label htmlFor="city" value={t('city')} />
 							</div>
 							<Select
 								id="city"
@@ -373,7 +375,7 @@ function EditEvent({ onAccept, onClose, eventData }) {
 
 						{/* category */}
 						<div className="mb-2 block">
-							<Label htmlFor="categories" value="Categories" />
+							<Label htmlFor="categories" value={t('categories')} />
 						</div>
 
 						<div
@@ -426,7 +428,7 @@ function EditEvent({ onAccept, onClose, eventData }) {
 								
 							/>
 							<Label htmlFor="peselVerificationRequired" className="flex">
-								Pesel verification required
+								{t('peselVerificationNeeded')}
 							</Label>
 						</div>
 
@@ -437,7 +439,7 @@ function EditEvent({ onAccept, onClose, eventData }) {
 								onChange={() => setIsAgreementNeeded(!isAgreementNeeded)}
 							/>
 							<Label htmlFor="agreementNeeded" className="flex">
-								Agreement Needed
+								{t('volunteerAgreementNeeded')}
 							</Label>
 						</div>
 						{/* shifts */}
@@ -449,10 +451,10 @@ function EditEvent({ onAccept, onClose, eventData }) {
 
 						<div className="w-full">
 							<button className="confirm_button" onClick={handleAgree}>
-								Save
+								{t('save')}
 							</button>
 							<button className="cancel_button" onClick={handleClose}>
-								Cancel
+								{t('cancel')}
 							</button>
 						</div>
 					</div>

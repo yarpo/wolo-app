@@ -6,10 +6,12 @@ import { useEffect } from "react";
 import { URLS } from "../../../config";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useTranslation } from "react-i18next";
 
 import fetchData from "../../../Utils/fetchData";
 
 function EditCategory({ onAccept, onClose, cityData }) {
+	const { t } = useTranslation();
 	const [openModal, setOpenModal] = useState(true);
 	const [name, setName] = useState(cityData.name);
 	const [districts, setDistricts] = useState([]);
@@ -68,11 +70,11 @@ function EditCategory({ onAccept, onClose, cityData }) {
 				<Modal.Body>
 					<div className="space-y-6">
 						<h3 className="text-xl font-medium text-gray-900 dark:text-white">
-							Edit City{" "}
+							{t('editCity')}
 						</h3>
 						<div>
 							<div className="mb-2 block">
-								<Label htmlFor="firstname" value="Name" />
+								<Label htmlFor="firstname" value={t('name')} />
 							</div>
 							<TextInput
 								id="firstname"
@@ -85,7 +87,7 @@ function EditCategory({ onAccept, onClose, cityData }) {
 						<div className="mb-2 block">
 							<Label
 								htmlFor="distrct"
-								value="Districts (deselect to remove district from city)"
+								value={t("district") + " (" + t("deselectToRemoveFromCity") + ")"}
 							/>
 						</div>
 						<div
@@ -129,10 +131,10 @@ function EditCategory({ onAccept, onClose, cityData }) {
 					</div>
 					<div className="w-full">
 						<button className="confirm_button" onClick={handleAgree}>
-							Save
+							{t('save')}
 						</button>
 						<button className="cancel_button" onClick={handleClose}>
-							Cancel
+							{t('cancel')}
 						</button>
 					</div>
 				</Modal.Body>
