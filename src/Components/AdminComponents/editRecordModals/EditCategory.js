@@ -2,8 +2,10 @@
 
 import { Label, Modal, TextInput } from "flowbite-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 function EditCategory({ onAccept, onClose, categoryData }) {
+	const { t } = useTranslation();
 	const [openModal, setOpenModal] = useState(true);
 	const [name, setName] = useState(categoryData.name);
 
@@ -30,11 +32,11 @@ function EditCategory({ onAccept, onClose, categoryData }) {
 				<Modal.Body>
 					<div className="space-y-6">
 						<h3 className="text-xl font-medium text-gray-900 dark:text-white">
-							Edit Category
+							{t('editCategory')}
 						</h3>
 						<div>
 							<div className="mb-2 block">
-								<Label htmlFor="name" value="Name" />
+								<Label htmlFor="name" value={t('name')} />
 							</div>
 							<TextInput
 								id="name"
@@ -46,10 +48,10 @@ function EditCategory({ onAccept, onClose, categoryData }) {
 
 						<div className="w-full">
 							<button className="confirm_button" onClick={handleAgree}>
-								Save
+								{t('save')}
 							</button>
 							<button className="cancel_button" onClick={handleClose}>
-								Cancel
+								{t('cancel')}
 							</button>
 						</div>
 					</div>

@@ -314,5 +314,62 @@
         "streetRequired": "Вулиця є обов'язковою",
         "homeNumRequired": "Номер будинку є обов'язковим",
         "districtRequired": "Район є обов'язковим"
-    }
+    },
+    "newCategory": "Додати нову категорію",
+    "placeholderCategory": "Нова категорія",
+  
+    "newCity": "Додати нове місто",
+    "placeholderCity": "Нове місто",
+  
+    "newDistrict": "Додати новий район",
+    "placeholderDistrict": "Новий район",
+  
+    "newFAQ": "Додати нове питання та відповідь",
+    "placeholderAnswer": "Нове питання",
+    "placeholderQuestion": "Нова відповідь",
+  
+    "newOrganisation": "Додати нову організацію",
+    "placeholderOgranisationDescription": "Опишіть, чим займається організація",
+    "newUser": "Створити нового користувача",
+  
+    "editCategory": "Редагувати категорію",
+    "editCity": "Редагувати місто",
+    "editDistrict": "Редагувати район",
+    "editEvent": "Редагувати подію",
+    "editOrganisation": "Редагувати організацію",
+    "editUser": "Редагувати користувача",
+    "deselectToRemoveFromCity": "Зніміть виділення, щоб видалити район з міста",
+  
+    "namePL": "Назва польською мовою",
+    "nameEN": "Назва англійською мовою",
+    "nameUA": "Назва українською мовою",
+    "nameRU": "Назва російською мовою",
+  
+    "descriptionPL": "Опис польською мовою",
+    "descriptionEN": "Опис англійською мовою",
+    "descriptionUA": "Опис українською мовою",
+    "descriptionRU": "Опис російською мовою",
+  
+    "dateOfEvent": "Дата події",
+  
+    "shiftDirectionPL": "Вказівки польською мовою",
+    "shiftDirectionEN": "Вказівки англійською мовою",
+    "shiftDirectionRU": "Вказівки російською мовою",
+    "shiftDirectionUA": "Вказівки українською мовою",
+  
+    "questionPL": "Питання польською мовою",
+    "questionEN": "Питання англійською мовою",
+    "questionRU": "Питання російською мовою",
+    "questionUA": "Питання українською мовою",
+  
+    "answerPL": "Відповідь польською мовою",
+    "answerEN": "Відповідь англійською мовою",
+    "answerRU": "Відповідь російською мовою",
+    "answerUA": "Відповідь українською мовою",
+
+    "editFAQ": "Редагувати питання та відповіді",
+  
+    "optional": "необов'язково",
+    "save": "Зберегти",
+    "cancel": "Скасувати"
 }

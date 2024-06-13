@@ -316,5 +316,64 @@
         "streetRequired": "Улица обязательна",
         "homeNumRequired": "Номер дома обязателен",
         "districtRequired": "Район обязателен"
-   }
+   },
+
+   "newCategory": "Добавить новую категорию",
+  "placeholderCategory": "Новая категория",
+
+  "newCity": "Добавить новый город",
+  "placeholderCity": "Новый город",
+
+  "newDistrict": "Добавить новый район",
+  "placeholderDistrict": "Новый район",
+
+  "newFAQ": "Добавить новый вопрос и ответ",
+  "placeholderAnswer": "Новый вопрос",
+  "placeholderQuestion": "Новый ответ",
+
+  "newOrganisation": "Добавить новую организацию",
+  "placeholderOgranisationDescription": "Опишите, чем занимается организация",
+  "newUser": "Создать нового пользователя",
+
+  "editCategory": "Редактировать категорию",
+  "editCity": "Редактировать город",
+  "editDistrict": "Редактировать район",
+  "editEvent": "Редактировать событие",
+  "editOrganisation": "Редактировать организацию",
+  "editUser": "Редактировать пользователя",
+  "deselectToRemoveFromCity": "Снимите выделение, чтобы удалить район из города",
+
+  "namePL": "Название на польском",
+  "nameEN": "Название на английском",
+  "nameUA": "Название на украинском",
+  "nameRU": "Название на русском",
+
+  "descriptionPL": "Описание на польском",
+  "descriptionEN": "Описание на английском",
+  "descriptionUA": "Описание на украинском",
+  "descriptionRU": "Описание на русском",
+
+  "dateOfEvent": "Дата события",
+
+  "shiftDirectionPL": "Направления на польском",
+  "shiftDirectionEN": "Направления на английском",
+  "shiftDirectionRU": "Направления на русском",
+  "shiftDirectionUA": "Направления на украинском",
+
+  "questionPL": "Вопрос на польском",
+  "questionEN": "Вопрос на английском",
+  "questionRU": "Вопрос на русском",
+  "questionUA": "Вопрос на украинском",
+
+  "answerPL": "Ответ на польском",
+  "answerEN": "Ответ на английском",
+  "answerRU": "Ответ на русском",
+  "answerUA": "Ответ на украинском",
+
+  "editFAQ": "Редактировать вопросы и ответы",
+
+  "optional": "необязательно",
+  "save": "Сохранить",
+  "cancel": "Отмена"
+
 }

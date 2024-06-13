@@ -9,8 +9,10 @@ import { URLS } from "../../../config";
 
 import fetchData from "../../../Utils/fetchData";
 import fetchDataWithAuth from "../../../Utils/fetchDataWithAuth";
+import { useTranslation } from "react-i18next";
 
 function EditCategory({ onAccept, onClose, organisationData }) {
+	const { t } = useTranslation();
 	const [openModal, setOpenModal] = useState(true);
 	const [districts, setDistricts] = useState([]);
 	const [cities, setCities] = useState([]);
@@ -132,12 +134,12 @@ function EditCategory({ onAccept, onClose, organisationData }) {
 				<Modal.Body>
 					<div className="space-y-6">
 						<h3 className="text-xl font-medium text-gray-900 dark:text-white">
-							Edit Organisation
+							{t('editOrganisation')}
 						</h3>
 						<div>
 							<div className="max-w-md">
 								<div className="mb-2 block">
-									<Label htmlFor="name" value="Name" />
+									<Label htmlFor="name" value={t('name')} />
 								</div>
 								<TextInput
 									id="name"
@@ -148,7 +150,7 @@ function EditCategory({ onAccept, onClose, organisationData }) {
 						</div>
 						<div className="max-w-md">
 							<div className="mb-2 block">
-								<Label htmlFor="descriptionEN" value="Description EN" />
+								<Label htmlFor="descriptionEN" value={t('descriptionEN')} />
 							</div>
 							<Textarea
 								id="descriptionEN"
@@ -159,7 +161,7 @@ function EditCategory({ onAccept, onClose, organisationData }) {
 						</div>
 						<div className="max-w-md">
 							<div className="mb-2 block">
-								<Label htmlFor="descriptionPL" value="Description PL" />
+								<Label htmlFor="descriptionPL" value={t('descriptionPL')}/>
 							</div>
 							<Textarea
 								id="descriptionPL"
@@ -170,7 +172,7 @@ function EditCategory({ onAccept, onClose, organisationData }) {
 						</div>
 						<div className="max-w-md">
 							<div className="mb-2 block">
-								<Label htmlFor="descriptionRU" value="Description RU" />
+								<Label htmlFor="descriptionRU" value={t('descriptionRU')} />
 							</div>
 							<Textarea
 								id="descriptionRU"
@@ -181,7 +183,7 @@ function EditCategory({ onAccept, onClose, organisationData }) {
 						</div>
 						<div className="max-w-md">
 							<div className="mb-2 block">
-								<Label htmlFor="descriptionUA" value="Description UA" />
+								<Label htmlFor="descriptionUA" value={t('descriptionUA')} />
 							</div>
 							<Textarea
 								id="descriptionUA"
@@ -192,7 +194,7 @@ function EditCategory({ onAccept, onClose, organisationData }) {
 						</div>
 						<div className="max-w-md">
 							<div className="mb-2 block">
-								<Label htmlFor="email" value="Email" />
+								<Label htmlFor="email" value={t('email')} />
 							</div>
 							<TextInput
 								id="email"
@@ -204,7 +206,7 @@ function EditCategory({ onAccept, onClose, organisationData }) {
 						</div>
 						<div className="max-w-md">
 							<div className="mb-2 block">
-								<Label htmlFor="phone" value="Phone number" />
+								<Label htmlFor="phone" value={t('phoneNumber')} />
 							</div>
 							<TextInput
 								id="phone"
@@ -216,7 +218,7 @@ function EditCategory({ onAccept, onClose, organisationData }) {
 						</div>
 						<div className="max-w-md">
 							<div className="mb-2 block">
-								<Label htmlFor="street" value="Street address" />
+								<Label htmlFor="street" value={t('street')} />
 							</div>
 							<TextInput
 								id="street"
@@ -228,7 +230,7 @@ function EditCategory({ onAccept, onClose, organisationData }) {
 						</div>
 						<div className="max-w-md">
 							<div className="mb-2 block">
-								<Label htmlFor="homeNum" value="Address Number" />
+								<Label htmlFor="homeNum" value={t("homeNum")} />
 							</div>
 							<TextInput
 								id="homeNum"
@@ -240,7 +242,7 @@ function EditCategory({ onAccept, onClose, organisationData }) {
 						</div>
 						<div className="max-w-md">
 							<div className="mb-2 block">
-								<Label htmlFor="city" value="City" />
+								<Label htmlFor="city" value={t('city')} />
 							</div>
 							<Select id="city" value={cityId} onChange={handleCityChange}>
 								{cities.map((city) => (
@@ -252,7 +254,7 @@ function EditCategory({ onAccept, onClose, organisationData }) {
 						</div>
 						<div className="max-w-md">
 							<div className="mb-2 block">
-								<Label htmlFor="distrct" value="District" />
+								<Label htmlFor="distrct" value={t('district')} />
 							</div>
 							<Select
 								id="district"
@@ -269,7 +271,7 @@ function EditCategory({ onAccept, onClose, organisationData }) {
 						{/*Organisation moderator*/}
 						<div className="max-w-md">
 							<div className="mb-2 block">
-								<Label htmlFor="moderator" value="Moderator" />
+								<Label htmlFor="moderator" value={t('moderator')} />
 							</div>
 							<Select
 								id="moderator"
@@ -285,7 +287,7 @@ function EditCategory({ onAccept, onClose, organisationData }) {
 						</div>
 						<div className="max-w-md">
 							<div className="mb-2 block">
-								<Label htmlFor="url" value="Logo URL" />
+								<Label htmlFor="url" value={t('logoUrl')} />
 							</div>
 							<TextInput
 								id="url"
@@ -297,10 +299,10 @@ function EditCategory({ onAccept, onClose, organisationData }) {
 						</div>
 						<div className="w-full">
 							<button className="confirm_button" onClick={handleAgree}>
-								Save
+								{t('save')}
 							</button>
 							<button className="cancel_button" onClick={handleClose}>
-								Cancel
+								{t('cancel')}
 							</button>
 						</div>
 					</div>

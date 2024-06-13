@@ -32,11 +32,11 @@ function AddCity({ onAccept, onClose }) {
                     <div className="mb-2 block">
                         <Label htmlFor="name" value={t('name')} />
                     </div>
-                    <TextInput id="name" ref={nameInputRef} placeholder="Wolo"required />
+                    <TextInput id="name" ref={nameInputRef} placeholder={t('placeholderCity')} required />
                 </div>
                 <div className="w-full">
-                    <button className="confirm_button" onClick={handleAgree}>Accept</button>
-                    <button className="cancel_button" onClick={handleClose}>Decline</button>
+                    <button className="confirm_button" onClick={handleAgree}>{t('save')}</button>
+                    <button className="cancel_button" onClick={handleClose}>{t('cancel')}</button>
                 </div>
             </div>
             </Modal.Body>

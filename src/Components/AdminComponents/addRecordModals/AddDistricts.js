@@ -44,7 +44,7 @@ function AddDistrict({ onAccept, onClose }) {
                 <div className="mb-2 block">
                     <Label htmlFor="name" value={t('name')} />
                 </div>
-                <TextInput id="name" ref={nameInputRef} placeholder="Dzielica WoloApp" required />
+                <TextInput id="name" ref={nameInputRef} placeholder={t('placeholderDistrict')} required />
                 </div>
                 <div className="max-w-md">
                     <div className="mb-2 block">

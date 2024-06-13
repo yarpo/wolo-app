@@ -35,13 +35,13 @@ function AddFAQ({ onAccept, onClose }) {
                     <div className="mb-2 block">
                         <Label htmlFor="question" value={t('question')} />
                     </div>
-                    <TextInput id="question" ref={questionInputRef} placeholder="New question" required />
+                    <TextInput id="question" ref={questionInputRef} placeholder={t('placeholderQuestion')} required />
                 </div>
                 <div>
                     <div className="mb-2 block">
                         <Label htmlFor="answer" value={t('answer')} />
                     </div>
-                    <TextInput id="answer" ref={answerInputRef} placeholder="New answer" required />
+                    <TextInput id="answer" ref={answerInputRef} placeholder={t('placeholderAnswer')} required />
                 </div>
                 <div className="w-full">
                     <button className="confirm_button" onClick={handleAgree}>{t('save')}</button>

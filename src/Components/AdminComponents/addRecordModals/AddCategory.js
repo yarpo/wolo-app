@@ -32,7 +32,7 @@ function AddCategory({ onAccept, onClose }) {
                     <div className="mb-2 block">
                         <Label htmlFor="name" value={t('name')} />
                     </div>
-                    <TextInput id="name" ref={nameInputRef} placeholder="WoloKategoria" required />
+                    <TextInput id="name" ref={nameInputRef} placeholder={t("placeholderCategory")} required />
                 </div>
                 <div className="w-full">
                     <button className="confirm_button" onClick={handleAgree}>{t("save")}</button>

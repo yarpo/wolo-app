@@ -2,8 +2,10 @@
 
 import { Label, Modal, TextInput } from "flowbite-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 function EditFAQ({ onAccept, onClose, questionData }) {
+	const { t } = useTranslation();
 	const [openModal, setOpenModal] = useState(true);
 	const [questionPL, setQuestionPL] = useState(questionData.questionPL);
 	const [questionEN, setQuestionEN] = useState(questionData.questionEN);
@@ -48,11 +50,11 @@ function EditFAQ({ onAccept, onClose, questionData }) {
 				<Modal.Body>
 					<div className="space-y-6">
 						<h3 className="text-xl font-medium text-gray-900 dark:text-white">
-							Edit FAQ
+							{t('editFAQ')}
 						</h3>
 						<div>
 							<div className="mb-2 block">
-								<Label htmlFor="questionEN" value="Question EN" />
+								<Label htmlFor="questionEN" value={t('questionEN')} />
 							</div>
 							<TextInput
 								id="questionEN"
@@ -62,7 +64,7 @@ function EditFAQ({ onAccept, onClose, questionData }) {
 						</div>
 						<div>
 							<div className="mb-2 block">
-								<Label htmlFor="questionPL" value="Question PL" />
+								<Label htmlFor="questionPL" value={t('questionPL')}  />
 							</div>
 							<TextInput
 								id="questionPL"
@@ -72,7 +74,7 @@ function EditFAQ({ onAccept, onClose, questionData }) {
 						</div>
 						<div>
 							<div className="mb-2 block">
-								<Label htmlFor="questionRU" value="Question RU" />
+								<Label htmlFor="questionRU" value={t('questionRU')}  />
 							</div>
 							<TextInput
 								id="questionRU"
@@ -82,7 +84,7 @@ function EditFAQ({ onAccept, onClose, questionData }) {
 						</div>
 						<div>
 							<div className="mb-2 block">
-								<Label htmlFor="questionUA" value="Question UA" />
+								<Label htmlFor="questionUA" value={t('questionUA')}  />
 							</div>
 							<TextInput
 								id="questionUA"
@@ -93,7 +95,7 @@ function EditFAQ({ onAccept, onClose, questionData }) {
 
 						<div>
 							<div className="mb-2 block">
-								<Label htmlFor="answerEN" value="Answer EN" />
+								<Label htmlFor="answerEN" value={t('answerEN')}  />
 							</div>
 							<TextInput
 								id="answerEN"
@@ -103,7 +105,7 @@ function EditFAQ({ onAccept, onClose, questionData }) {
 						</div>
 						<div>
 							<div className="mb-2 block">
-								<Label htmlFor="answerPL" value="Answer PL" />
+								<Label htmlFor="answerPL" value={t('answerPL')}  />
 							</div>
 							<TextInput
 								id="answerPL"
@@ -113,7 +115,7 @@ function EditFAQ({ onAccept, onClose, questionData }) {
 						</div>
 						<div>
 							<div className="mb-2 block">
-								<Label htmlFor="answerRU" value="Answer RU" />
+								<Label htmlFor="answerRU" value={t('answerRU')}  />
 							</div>
 							<TextInput
 								id="answerRU"
@@ -123,7 +125,7 @@ function EditFAQ({ onAccept, onClose, questionData }) {
 						</div>
 						<div>
 							<div className="mb-2 block">
-								<Label htmlFor="answerUA" value="Answer UA" />
+								<Label htmlFor="answerUA" value={t('answerUA')} />
 							</div>
 							<TextInput
 								id="answerUA"
@@ -134,10 +136,10 @@ function EditFAQ({ onAccept, onClose, questionData }) {
 
 						<div className="w-full">
 							<button className="confirm_button" onClick={handleAgree}>
-								Save
+								{t('save')}
 							</button>
 							<button className="cancel_button" onClick={handleClose}>
-								Cancel
+								{t('cancel')}
 							</button>
 						</div>
 					</div>
