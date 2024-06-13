@@ -9,8 +9,8 @@ import { HiX } from "react-icons/hi";
 
 const Filters = ({ setFilteredEvents }) => {
   const { t } = useTranslation();
-  const [isOpen, setIsOpen] = useState(false);
   const { filters, setFilters } = useFiltersContext();
+  const [isOpen, setIsOpen] = useState(false);
   const [apiResponse, setApiResponse] = useState([]);
   const [categories, setCategories] = useState([]);
   const [districts, setDistricts] = useState([]);
@@ -96,9 +96,10 @@ const Filters = ({ setFilteredEvents }) => {
   };
 
   const handleResetFilters = () => {
+    const today = new Date();
     setFilters({
       chosenTags: [],
-      selectedDate: null,
+      selectedDate: today,
       requiresVerification: false,
       peselVerificationRequired: false,
       hideFullyBookedEvents: false,
