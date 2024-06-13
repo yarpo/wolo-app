@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import formatDate from '../../../Utils/formatDate.js';
 import formatTime from '../../../Utils/formatTime.js';
 
-const YourEventVolunteer = ({shiftId, eventId, userId, shift, isArchived, isReserve}) => {
+const YourEventVolunteer = ({shiftId, eventId, shift, isArchived, isReserve}) => {
     const { t } = useTranslation();
     const eventName = `eventName${localStorage.getItem('i18nextLng').toUpperCase()}`;
     const token = localStorage.getItem('token');
@@ -47,7 +47,7 @@ const YourEventVolunteer = ({shiftId, eventId, userId, shift, isArchived, isRese
                 toast.error( t('unknownError') );
             }
         }
-    }, [userId, shiftId, token, userConfirmed, t]);
+    }, [ shiftId, token, userConfirmed, t]);
     
     useEffect(() => {
         if (userConfirmed !== false) {
