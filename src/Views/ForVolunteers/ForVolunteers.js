@@ -8,24 +8,30 @@ import { Accordion } from "flowbite-react";
 import { useTranslation } from 'react-i18next';
 
 const ForVolunteers = () => {
-    const { t } = useTranslation();
+    const { i18n } = useTranslation();
     const [questions, setQuestions] = useState([]);
-    const questionName = t(`question${localStorage.getItem('i18nextLng').toUpperCase()}`);
-    const answerName = t(`answer${localStorage.getItem('i18nextLng').toUpperCase()}`);
+
+    const languageCode = localStorage.getItem('i18nextLng') || 'en';
+    const questionKey = `question${languageCode.toUpperCase()}`;
+    const answerKey = `answer${languageCode.toUpperCase()}`;
 
     useEffect(() => {
         fetchData(URLS.FAQ, setQuestions);
     }, []);
+
+    useEffect(() => {
+        i18n.changeLanguage(languageCode); 
+    }, [languageCode, i18n]);
 
     return (
         <div id="container">
             <Accordion className='faq-accordion'>
                 {questions.map((entry, index) => (
                     <Accordion.Panel key={index}>
-                        <Accordion.Title>{entry[questionName]}</Accordion.Title>
+                        <Accordion.Title>{entry[questionKey]}</Accordion.Title>
                         <Accordion.Content>
                             <p className="mb-2 text-gray-500 dark:text-gray-400">
-                                {entry[answerName]}
+                                {entry[answerKey]}
                             </p>
                         </Accordion.Content>
                     </Accordion.Panel>
