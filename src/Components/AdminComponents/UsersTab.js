@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { VscChevronDown, VscChevronUp } from 'react-icons/vsc';
 import { HiOutlineSearch, HiTrash, HiOutlinePlus, HiCheck, HiOutlineX, HiArrowSmRight, HiArrowSmLeft, HiPencilAlt } from "react-icons/hi";
@@ -6,18 +6,15 @@ import ReactPaginate from 'react-paginate';
 import '../../styles/admin-home-page.scss';
 import { URLS } from '../../config';
 import { Table, TextInput, Card } from "flowbite-react";
-
 import AddUser from "./addRecordModals/AddUser.js";
 import EditUser from "./editRecordModals/EditUser.js";
 import Confirmation from "../Popups/Confirmation.js";
-
 import postRequestWithJson from "../../Utils/postRequestWithJson.js";
 import fetchDataWithAuth from "../../Utils/fetchDataWithAuth.js";
 import deleteRequest from "../../Utils/deleteRequest.js";
 import putRequest from "../../Utils/putRequest.js";
 
 const UsersTab = () => {
-
     const { t } = useTranslation();
     const [users, setUsers] = useState([]);
     const [openModal, setOpenModal] = useState(false);
@@ -29,74 +26,69 @@ const UsersTab = () => {
     const [userConfirmed, setUserConfirmed] = useState(false);
     const [userToDelete, setUserToDelete] = useState(null);
     const [userFullNameToDelete, setUserFullNameToDelete] = useState('');
-
-	const [filteredUsers, setFilteredUsers] = useState([]);
-	const [searchQuery, setSearchQuery] = useState("");
-
+    const [filteredUsers, setFilteredUsers] = useState([]);
+    const [searchQuery, setSearchQuery] = useState("");
     const [currentPage, setCurrentPage] = useState(0);
     const usersPerPage = 10;
 
     useEffect(() => {
         fetchDataWithAuth(URLS.USERS, (data) => {
             setUsers(data);
-            setFilteredUsers(data)
-        }, token)
+            setFilteredUsers(data);
+        }, token);
     }, [token]);
 
+    useEffect(() => {
+        if (searchQuery === "") {
+            setFilteredUsers(users);
+        } else {
+            setFilteredUsers(
+                users.filter(
+                    (user) =>
+                        user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                        user.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                        user.lastName.toLowerCase().includes(searchQuery.toLowerCase())
+                )
+            );
+        }
+    }, [searchQuery, users]);
 
-	useEffect(() => {
-		if (searchQuery === "") {
-			setFilteredUsers(users);
-		} else {
-			setFilteredUsers(
-				users.filter(
-					(user) =>
-						user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-						user.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-						user.lastName.toLowerCase().includes(searchQuery.toLowerCase())
-				)
-			);
-		}
-	}, [searchQuery, users]);
+    const handleModalAccept = (data) => {
+        setOpenModal(false);
+        postRequestWithJson(
+            URLS.REGISTER,
+            localStorage.getItem("token"),
+            data,
+            t("addUserSuccess"),
+            t("addUserFail")
+        );
+    };
 
-	const handleModalAccept = (data) => {
-		setOpenModal(false);
-		console.log(data);
-		postRequestWithJson(
-			URLS.REGISTER,
-			localStorage.getItem("token"),
-			data,
-			t("addUserSuccess"),
-			t("addUserFail")
-		);
-	};
+    const handleModalClose = () => {
+        setOpenModal(false);
+        setEditOpenModal(false);
+    };
 
-	const handleModalClose = () => {
-		setOpenModal(false);
-		setEditOpenModal(false);
-	};
+    const toggleDetails = (index) => {
+        setOpenIndex(openIndex === index ? null : index);
+    };
 
-	const toggleDetails = (index) => {
-		setOpenIndex(openIndex === index ? null : index);
-	};
+    const handleUserConfirmation = async (confirmation) => {
+        setUserConfirmed(confirmation);
+    };
 
-	const handleUserConfirmation = async (confirmation) => {
-		setUserConfirmed(confirmation);
-	};
-
-	useEffect(() => {
-		if (userConfirmed !== false) {
-			setUserConfirmed(false);
-			handleDelete();
-		}
-	}, [userConfirmed]);
-
-
-    const handleDelete = () => {
-        deleteRequest(`${URLS.DELETE_USER}/${userToDelete}`, localStorage.getItem('token'), "Deleted", "Fail")
+    const handleDelete = useCallback(() => {
+        deleteRequest(`${URLS.DELETE_USER}/${userToDelete}`, localStorage.getItem('token'), "Deleted", "Fail");
         setUserToDelete(null);
         setConfirmDelete(false);
-    };
+    }, [userToDelete]);
+
+    useEffect(() => {
+        if (userConfirmed) {
+            setUserConfirmed(false);
+            handleDelete();
+        }
+    }, [userConfirmed, handleDelete]);
 
     const handleDeleteRequest = (user) => {
         setConfirmDelete(true);
@@ -105,14 +97,14 @@ const UsersTab = () => {
     };
 
     const handleEdit = (data) => {
-      putRequest(
-        `${URLS.USERS}/${userToEdit.id}/edit`,
-        localStorage.getItem("token"),
-        data,
-        "User was changed successfully",
-        "Failed to change user's credentials"
-      );
-      setUserToEdit(null);
+        putRequest(
+            `${URLS.USERS}/${userToEdit.id}/edit`,
+            localStorage.getItem("token"),
+            data,
+            "User was changed successfully",
+            "Failed to change user's credentials"
+        );
+        setUserToEdit(null);
     };
 
     const handlePageClick = (event) => {
@@ -151,8 +143,7 @@ const UsersTab = () => {
                     <Table.HeadCell></Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
-                    {currentUsers
-                        .map((user, index) => (
+                    {currentUsers.map((user, index) => (
                         <React.Fragment key={index}>
                             <Table.Row key={index} className="bg-white dark:border-gray-700 dark:bg-gray-800">
                                 <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
@@ -173,35 +164,34 @@ const UsersTab = () => {
                                     </button>
                                 </Table.Cell>
                                 <Table.Cell>
-                                  {openEditModal && userToEdit === user && (
-                                    <EditUser
-                                      onAccept={handleEdit}
-                                      onClose={handleModalClose}
-                                      userData={user}
-                                    />
-                                  )}
-                                  <button
-                                    className="edit-button"
-                                    onClick={() => {
+                                    {openEditModal && userToEdit === user && (
+                                        <EditUser
+                                            onAccept={handleEdit}
+                                            onClose={handleModalClose}
+                                            userData={user}
+                                        />
+                                    )}
+                                    <button
+                                        className="edit-button"
+                                        onClick={() => {
                                             setEditOpenModal(true);
                                             setUserToEdit(user);
-                                        }
-                                    } 
-                                >
-                                    <span><HiPencilAlt /></span>
-                                </button>
+                                        }}
+                                    >
+                                        <span><HiPencilAlt /></span>
+                                    </button>
                                 </Table.Cell>
                                 <Table.Cell className="table-cell-action">
                                     <button
                                         className="delete-button"
-                                        onClick={() => handleDeleteRequest(user)} 
+                                        onClick={() => handleDeleteRequest(user)}
                                     >
                                         <span><HiTrash /></span>
                                     </button>
                                     <Confirmation
                                         id="sign-off"
                                         buttonName={t('doYouWantToDelete')}
-                                        title={t('doYouWantToDelete') + ": " + userFullNameToDelete + "?"} 
+                                        title={t('doYouWantToDelete') + ": " + userFullNameToDelete + "?"}
                                         accept={t('delete')}
                                         deny={t('discard')}
                                         styleId="sign-in"
@@ -275,7 +265,7 @@ const UsersTab = () => {
                 activeClassName={'pagination__link--active'}
             />
         </div>
-    )
+    );
 };
 
 export default UsersTab;
