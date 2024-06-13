@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { VscChevronDown, VscChevronUp } from 'react-icons/vsc';
 import { HiOutlineSearch, HiTrash, HiOutlinePlus, HiCheck, HiOutlineX, HiArrowSmRight, HiArrowSmLeft, HiPencilAlt } from "react-icons/hi";
@@ -84,18 +84,19 @@ const UsersTab = () => {
 		setUserConfirmed(confirmation);
 	};
 
-    const handleDelete = useCallback(() => {
-        deleteRequest(`${URLS.DELETE_USER}/${userToDelete}`, localStorage.getItem('token'), "Deleted", "Fail");
+	useEffect(() => {
+		if (userConfirmed !== false) {
+			setUserConfirmed(false);
+			handleDelete();
+		}
+	}, [userConfirmed]);
+
+
+    const handleDelete = () => {
+        deleteRequest(`${URLS.DELETE_USER}/${userToDelete}`, localStorage.getItem('token'), "Deleted", "Fail")
         setUserToDelete(null);
         setConfirmDelete(false);
-    }, [userToDelete]);
-
-    useEffect(() => {
-        if (userConfirmed !== false) {
-            setUserConfirmed(false);
-            handleDelete();
-        }
-    }, [userConfirmed, handleDelete]);
+    };
 
     const handleDeleteRequest = (user) => {
         setConfirmDelete(true);

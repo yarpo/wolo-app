@@ -26,7 +26,7 @@ const AdminHomePage = () => {
     return (
         <div className='admin_home_page_container'>
             <h1 className='admin_home_page_text'><HiPencilAlt /> {t('administratorPanel')}</h1>
-            <Tabs aria-label="Default tabs" style={{ style: "default" }}>
+            <Tabs aria-label="Default tabs" style="default">
                 <Tabs.Item active title={t('users')} icon={HiUserCircle}>
                     <UsersTab />
                 </Tabs.Item>
