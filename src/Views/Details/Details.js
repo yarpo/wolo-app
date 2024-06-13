@@ -99,13 +99,13 @@ const Details = () => {
                     <p>{reportData ? reportData[reportText] : ""}</p>
                 </div>
             )}
-                <div id='column'>
-                    <p className="details_shifts_text"><strong>{t('shifts')}:</strong></p>
-                    <div className='details_shift_card_wrapper'>
-                        {eventData.shifts.sort((a, b) => new Date(a.shiftId) - new Date(b.shiftId)).map(shift => (
-                            <ShiftCard key={shift.id} shift={shift} city={city} isInPast={isInPast} />
-                        ))}
-                    </div>
+            <div id='column'>
+                <p className="details_shifts_text"><strong>{t('shifts')}:</strong></p>
+                <div className='details_shift_card_wrapper'>
+                    {eventData.shifts.sort((a, b) => new Date(a.shiftId) - new Date(b.shiftId)).map((shift, index) => (
+                        <ShiftCard key={shift.id || index} shift={shift} city={city} isInPast={isInPast} />
+                    ))}
+                </div>
                 <MapComponent addresses={addresses} />
             </div>
             {!isAuthorised &&  (
