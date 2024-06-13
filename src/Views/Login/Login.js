@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Formik, Field } from 'formik';
 import { Link, useNavigate } from 'react-router-dom';
@@ -31,7 +31,7 @@ const Login = ({ setToken, setUser }) => {
     }
   };
 
-  const handleLogin = async (values) => {
+  const handleLogin = useCallback(async (values) => {
     try {
       const response = await fetch(URLS.AUTHENTICATE, {
         method: 'POST',
@@ -45,7 +45,7 @@ const Login = ({ setToken, setUser }) => {
         const data = await response.json();
         localStorage.setItem('token', data.accessToken);
         setToken(data.accessToken);
-        setUser(data.user );
+        setUser(data.user);
 
         if (values.rememberMe) {
           localStorage.setItem('rememberMe', values.email);
@@ -73,7 +73,7 @@ const Login = ({ setToken, setUser }) => {
       console.error('Error during login:', error);
       toast.error('An error occurred during login. Please try again.');
     }
-  };
+  }, [navigate, setToken, setUser]);
 
   useEffect(() => {
     fetchUserData();
@@ -92,7 +92,7 @@ const Login = ({ setToken, setUser }) => {
     if (rememberMe && password) {
       handleLogin({ email: rememberMe, password: password });
     }
-  }, []);
+  }, [handleLogin]);
 
   return (
     <div className="login-form">

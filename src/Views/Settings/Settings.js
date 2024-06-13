@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, Link } from 'react-router-dom';
 import '../../styles/settings.scss';
@@ -91,14 +91,7 @@ const Settings = () => {
 
     };
 
-    useEffect(() => {
-        if (userConfirmed !== false) {
-            setUserConfirmed(false);
-            handleDelete()
-        }
-    }, [userConfirmed]); 
-
-    const handleDelete = () => {
+    const handleDelete = useCallback(() => {
         console.log(`${URLS.DELETE_USER}/${userData.id}`);
         if (userData.organisationName == null) {
             deleteRequest(`${URLS.DELETE_USER}/${userData.id}`, localStorage.getItem('token'), t('deleteAccountSuccess'), t('deleteAccountFail'));
@@ -109,7 +102,14 @@ const Settings = () => {
         } else {
             toast.error(t('deleteAccountFail'));
         }        
-    };
+    }, [navigate, t, userData.id, userData.organisationName]);
+
+    useEffect(() => {
+        if (userConfirmed !== false) {
+            setUserConfirmed(false);
+            handleDelete();
+        }
+    }, [userConfirmed, handleDelete]);
 
     return (
         <div className="settings-page">
