@@ -1,4 +1,22 @@
 {
+  "termsOfService": "Warunki korzystania z usługi",
+  "termsOfServiceContent": {
+    "acceptanceOfTerms": "Akceptacja warunków: Korzystając z naszej aplikacji internetowej, zgadzasz się na przestrzeganie tych Warunków korzystania z usługi oraz naszej Polityki prywatności. Jeśli nie zgadzasz się z tymi warunkami, prosimy nie korzystać z aplikacji.",
+    "useOfService": "Korzystanie z usługi: Musisz mieć co najmniej 13 lat, aby korzystać z usługi. Zgadzasz się korzystać z aplikacji wyłącznie w celach zgodnych z prawem i zgodnie z tymi warunkami.",
+    "accountRegistration": "Rejestracja konta: Aby uzyskać dostęp do niektórych funkcji, może być konieczne zarejestrowanie konta. Zgadzasz się podać dokładne informacje i aktualizować te informacje. Jesteś odpowiedzialny za zachowanie poufności swojego konta i hasła.",
+    "userContent": "Treści użytkowników: Jesteś odpowiedzialny za wszelkie treści, które przesyłasz, publikujesz lub udostępniasz za pośrednictwem aplikacji. Zgadzasz się nie publikować treści, które są nielegalne, szkodliwe lub naruszają prawa innych osób.",
+    "prohibitedConduct": {
+      "intro": "Zabronione działania: Zgadzasz się nie angażować w żadne z następujących zabronionych działań:",
+      "item1": "Korzystanie z usługi w celach niezgodnych z prawem lub promowanie nielegalnych działań.",
+      "item2": "Próby zakłócania lub naruszania integralności lub bezpieczeństwa aplikacji.",
+      "item3": "Korzystanie z usługi do przesyłania spamu, złośliwego oprogramowania lub innych szkodliwych treści."
+    },
+    "termination": "Zakończenie: Zastrzegamy sobie prawo do zawieszenia lub zakończenia dostępu do aplikacji według naszego wyłącznego uznania, bez powiadomienia, za działania, które według nas naruszają te warunki lub są szkodliwe dla innych użytkowników.",
+    "intellectualProperty": "Własność intelektualna: Wszystkie treści i materiały w aplikacji są własnością twórców aplikacji lub ich licencjodawców. Zgadzasz się nie kopiować, nie dystrybuować ani nie tworzyć prac pochodnych na podstawie tych treści bez naszej zgody.",
+    "disclaimerOfWarranties": "Wyłączenie gwarancji: Usługa jest świadczona \"tak jak jest\" bez jakichkolwiek gwarancji, wyraźnych lub dorozumianych. Nie gwarantujemy, że aplikacja będzie działać bez przerw lub błędów.",
+    "limitationOfLiability": "Ograniczenie odpowiedzialności: W żadnym wypadku nie ponosimy odpowiedzialności za jakiekolwiek pośrednie, przypadkowe, specjalne, wynikowe lub karne szkody wynikające z korzystania z aplikacji.",
+    "changesToTerms": "Zmiany w warunkach: Zastrzegamy sobie prawo do modyfikacji tych Warunków korzystania z usługi w dowolnym czasie. Dalsze korzystanie z aplikacji oznacza akceptację nowych warunków."
+  },
   "hello": "Witaj",
   "allEvents": "Wszystkie wydarzenia",
   "calendar": "Kalendarz",
@@ -315,6 +333,19 @@
     "homeNumRequired": "Numer domu jest wymagany",
     "districtRequired": "Dzielnica jest wymagana"
   },
+
+"confirm": "Potwierdź",
+"checkYourEmail": "Aby zakończyć rejestrację, sprawdź swoją skrzynkę e-mail.",
+"registrationInProgress": "Twoja rejestracja jest prawie zakończona.",
+"registrationCompleted": "Twoja rejestracja została zakończona.",
+"youCanNowLogIn": "Możesz teraz się zalogować.",
+"login": "Zaloguj się",
+"registrationExpired": "Rejestracja wygasła.",
+"thisLinkHasExpired": "Ten link wygasł. Kliknij tutaj, aby wysłać ponownie e-mail.",
+"resendMail": "Wyślij ponownie e-mail",
+"confirmRegistration": "Aby potwierdzić rejestrację, kliknij ten przycisk.",
+"completeRegistartion": "Zakończ rejestrację",
+
 "newCategory": "Dodaj nową kategorię",
 "placeholderCategory": "Nowa kategoria",
 
@@ -373,5 +404,6 @@
 
 "optional": "opcjonalnie",
 "save": "Zapisz",
-"cancel": "Anuluj"
+"cancel": "Anuluj",
+"showContactInformation": "Pokaż dane kontaktowe"
 }
