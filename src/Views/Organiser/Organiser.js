@@ -78,7 +78,7 @@ const Organiser = () => {
           <ul id="information">
             {!showContactInfo && (
               <li>
-                <button className="confirm_button" onClick={handleShowContactInfo}>Show contact information</button>
+                <button className="confirm_button" onClick={handleShowContactInfo}>{t('showContactInformation')}</button>
               </li>
             )}
             {showContactInfo && (

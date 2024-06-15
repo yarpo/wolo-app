@@ -402,5 +402,6 @@
 
   "optional": "optional",
   "save": "Save",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "showContactInformation": "Show contact information"
 }
