@@ -103,6 +103,12 @@
     width: 100%;
   }
 
+  .details-organisaton {
+    color: $color-1-blue !important;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
   iframe {
     width: 60%;
     height: 45vh;

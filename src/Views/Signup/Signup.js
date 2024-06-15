@@ -162,7 +162,7 @@ console.log(handleRegister);
 
               <label htmlFor="termsAndConditions">
                 <Field type="checkbox" name="termsAndConditions" />
-                {t('agreeTerms')}
+                {t('agreeTerms')} - <Link to="/terms-of-service" className="signup_terms">{t('termsOfService')}</Link>
               </label>
             </div>
             <br/>
