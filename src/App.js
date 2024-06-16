@@ -31,6 +31,7 @@ import CheckEmail from './Views/RegisterInfoViews/CheckEmail.js';
 import RegistartionSuccess from './Views/RegisterInfoViews/RegistrationSuccess.js';
 import RegistartionExpired from './Views/RegisterInfoViews/RegistrationExpired.js';
 import CompleteRegistration from './Views/RegisterInfoViews/CompleteRegistration.js';
+import TermsOfService from './Views/TermsOfService/TermsOfService.js';
 
 function App() {
   const [role, setRole] = useState(null);
@@ -69,6 +70,7 @@ function App() {
             <Route path="/registration-success" element={<RegistartionSuccess />} />
             <Route path="/registration-expired" element={<RegistartionExpired />} />
             <Route path="/verify-account" element={<CompleteRegistration />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
             {role && role.includes('MODERATOR') && <Route path="/reports" element={<ReportPage />} />}
             {role && role.includes('MODERATOR') && <Route path="/organisation-home-page" element={<OrganiserHomePage />} />}
             {role && role.includes('MODERATOR') && <Route path="/organisation-settings" element={<OrganiserSettings />} />}

@@ -1,4 +1,22 @@
 {
+  "termsOfService": "Terms of service",
+  "termsOfServiceContent": {
+    "acceptanceOfTerms": "Acceptance of Terms: By accessing or using our web application, you agree to be bound by these Terms of Service and our Privacy Policy. If you do not agree to these terms, please do not use the app.",
+    "useOfService": "Use of the Service: You must be at least 13 years old to use the service. You agree to use the app only for lawful purposes and in accordance with these terms.",
+    "accountRegistration": "Account Registration: To access certain features, you may need to register for an account. You agree to provide accurate information and to keep this information up to date. You are responsible for maintaining the confidentiality of your account and password.",
+    "userContent": "User Content: You are responsible for any content you upload, post, or otherwise make available through the app. You agree not to post content that is illegal, harmful, or violates the rights of others.",
+    "prohibitedConduct": {
+      "intro": "Prohibited Conduct: You agree not to engage in any of the following prohibited activities:",
+      "item1": "Using the service for any unlawful purpose or to promote illegal activities.",
+      "item2": "Attempting to interfere with or compromise the integrity or security of the app.",
+      "item3": "Using the service to transmit spam, malware, or other harmful content."
+    },
+    "termination": "Termination: We reserve the right to suspend or terminate your access to the app at our sole discretion, without notice, for conduct that we believe violates these terms or is harmful to other users.",
+    "intellectualProperty": "Intellectual Property: All content and materials on the app are the property of the app's creators or their licensors. You agree not to copy, distribute, or create derivative works based on this content without our permission.",
+    "disclaimerOfWarranties": "Disclaimer of Warranties: The service is provided \"as is\" without warranties of any kind, either express or implied. We do not warrant that the app will be uninterrupted or error-free.",
+    "limitationOfLiability": "Limitation of Liability: In no event shall we be liable for any indirect, incidental, special, consequential, or punitive damages arising out of your use of the app.",
+    "changesToTerms": "Changes to Terms: We reserve the right to modify these Terms of Service at any time. Your continued use of the app constitutes your acceptance of the new terms."
+  },
   "hello": "Hello",
   "allEvents": "All Events",
   "calendar": "Calendar",
@@ -336,7 +354,6 @@
   "confirmRegistration": "To confirm your registration, please click this button.",
   "completeRegistartion": "Complete registration",
 
-
   "newCategory": "Add new category",
   "placeholderCategory": "New category",
 
@@ -393,5 +410,6 @@
 
   "optional": "optional",
   "save": "Save",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "showContactInformation": "Show contact information"
 }

@@ -1,3 +1,5 @@
+@import './common.scss';
+
 .signup_div {
   display: flex;
   flex-direction: column;
@@ -54,6 +56,10 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+
+.signup_terms {
+  color: $color-1-blue;
 }
 
 .checkbox_signup-container {
