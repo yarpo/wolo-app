@@ -1,14 +1,13 @@
-"use client";
-
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { Card, Label, TextInput } from "flowbite-react";
 import '../../styles/reset-password.scss';
 import { toast } from 'react-toastify';
 import putRequestNoAuth from '../../Utils/putRequestNoAuth';
+import passwordValidator from '../../Utils/passwordValidation.js';
 import { URLS } from '../../config';
-import {VscArrowLeft} from 'react-icons/vsc';
+import { VscArrowLeft } from 'react-icons/vsc';
 import { Link } from 'react-router-dom';
 
 const ForgotPassword = () => {
@@ -17,6 +16,7 @@ const ForgotPassword = () => {
 
     const newPasswordInputRef = useRef(null);
     const confirmNewPasswordInputRef = useRef(null);
+    const [passwordErrors, setPasswordErrors] = useState([]);
 
     const searchParams = new URLSearchParams(location.search);
     const email = searchParams.get('email');
@@ -27,18 +27,23 @@ const ForgotPassword = () => {
         const newPassword = newPasswordInputRef.current?.value;
         const confirmPassword = confirmNewPasswordInputRef.current?.value;
 
+        const errors = passwordValidator(newPassword);
+        if (errors.length > 0) {
+            setPasswordErrors(errors);
+            return;
+        }
+
         if (newPassword === confirmPassword) {
             const data = {
                 email: email,
                 password: newPassword
             };
 
-            console.log(data)
-            putRequestNoAuth(URLS.SET_PASSWORD, data, t('resetPasswordSuccess'), t('somethingWentWrong'))
+            putRequestNoAuth(URLS.SET_PASSWORD, data, t('resetPasswordSuccess'), t('somethingWentWrong'));
         } else {
-            toast.error("Passwords don't match");
+            toast.error(t('passwordsHaveToMatch'));
         }
-    }
+    };
 
     return (
         <div className='reset-password'>
@@ -48,7 +53,7 @@ const ForgotPassword = () => {
             <div className="reset-password-container">
                 <Card className='reset-password-card'>
                     <h2>{t('createNewPassword')}</h2>
-                    <p className='reset-password-tip'> 
+                    <p className='reset-password-tip'>
                         {t('passwordResetTip')}
                     </p>
                     <form className="flex max-w-md flex-col gap-4" onSubmit={handlePasswordChange}>
@@ -57,6 +62,13 @@ const ForgotPassword = () => {
                                 <Label htmlFor="new-password" value={t('newPassword')} />
                             </div>
                             <TextInput id="new-password" ref={newPasswordInputRef} type="password" required />
+                            {passwordErrors.length > 0 && (
+                                <div className="error-messages">
+                                    {passwordErrors.map((error, index) => (
+                                        <p key={index} className="error">{error}</p>
+                                    ))}
+                                </div>
+                            )}
                         </div>
                         <div>
                             <div className="mb-2 block">

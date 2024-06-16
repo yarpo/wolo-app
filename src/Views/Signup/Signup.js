@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import '../../styles/signup.scss';
 import { URLS } from '../../config.js';
 import fetchUser from '../../Utils/fetchUser.js';
+import passwordValidator from '../../Utils/passwordValidation.js';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -41,11 +42,6 @@ const Signup = () => {
     termsAndConditions: false,
   };
 
-// const handleRegister = async (values) => {
-//     postRequestWithJson(URLS.REGISTER, '', values, t('registerSuccess'), t('registerError'), URLS.LOGIN);
-    
-// };
-
   const handleRegister = async (values) => {
     try {
       const response = await fetch(URLS.REGISTER, {
@@ -66,8 +62,6 @@ const Signup = () => {
     }
   };
 
-console.log(handleRegister);
-
   const validate = values => {
     const errors = {};
 
@@ -86,6 +80,11 @@ console.log(handleRegister);
 
     if (values.email && !/\S+@\S+\.\S+/.test(values.email)) {
       errors.email = t('invalidEmail');
+    }
+
+    const passwordErrors = passwordValidator(values.password);
+    if (passwordErrors.length > 0) {
+      errors.password = passwordErrors.join('. ');
     }
 
     if (values.password && values.confirmPassword && values.password !== values.confirmPassword) {
