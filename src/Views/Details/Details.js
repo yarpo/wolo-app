@@ -7,7 +7,6 @@ import { Link, useParams } from 'react-router-dom';
 import '../../styles/details.scss';
 import EventCard from '../../Components/EventCard/EventCard.js';
 import fetchData from '../../Utils/fetchData.js';
-import fetchDataWithAuth from '../../Utils/fetchDataWithAuth.js';
 import formatDate from '../../Utils/formatDate.js';
 import SignedInVolunteers from './SignedInVolunteers/SignedInVolunteers.js';
 import { URLS } from '../../config.js';
@@ -44,7 +43,7 @@ const Details = () => {
             fetchData(`${URLS.ORGANISATIONS}/${eventData.organisationId}/events`, setOrganiserEvents);
             setIsInPast(new Date(eventData.shifts[0].date) < new Date());
 
-            fetchDataWithAuth(`${URLS.PUBLIC_RAPORT}/${id}`, setReportData, localStorage.getItem('token'));
+            fetchData(`${URLS.PUBLIC_RAPORT}/${id}`, setReportData);
         }
     }, [eventData, id]);
 
